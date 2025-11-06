@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TYFYS Benefits</title>
+    <!-- Google Fonts for Material style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
       /* Simple reset */
       * {
@@ -129,6 +133,105 @@
         margin-top: 0.5rem;
         font-weight: bold;
       }
+
+      /* Material Design overrides */
+      /* Import Roboto font */
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+      body {
+        background-color: #f5f5f5;
+        color: #212121;
+        font-family: 'Roboto', sans-serif;
+      }
+      header {
+        background-color: #1976d2;
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      header h1 {
+        font-size: 1.25rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+      nav {
+        gap: 1.5rem;
+      }
+      nav a {
+        color: #e3f2fd;
+        position: relative;
+        padding: 0.5rem 0;
+        transition: color 0.2s ease;
+        text-decoration: none;
+      }
+      nav a::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #bbdefb;
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        transition: width 0.2s;
+      }
+      nav a:hover {
+        color: #fff;
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+      section {
+        max-width: 960px;
+      }
+      .card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      .card h2,
+      .card h3 {
+        font-weight: 500;
+        margin-bottom: 0.75rem;
+      }
+      button,
+      .btn {
+        background-color: #1976d2;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      button:hover,
+      .btn:hover {
+        background-color: #1565c0;
+      }
+      .calculator input {
+        border: 1px solid #cfd8dc;
+        background-color: #fafafa;
+      }
+      /* Material table styling */
+      table {
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th, td {
+        padding: 0.75rem 1rem;
+        color: #424242;
+      }
+      th {
+        background-color: #e3f2fd;
+        color: #1a237e;
+        font-weight: 500;
+      }
+      tbody tr:nth-child(odd) {
+        background-color: #fafafa;
+      }
+      tbody tr:hover {
+        background-color: #e8f0fe;
+      }
+      tbody td a.btn {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.875rem;
+      }
     </style>
     <script>
       // Combined rating calculator logic
@@ -252,12 +355,54 @@
             <tr><th>Form</th><th>Description</th><th>Download</th></tr>
           </thead>
           <tbody>
-            <tr><td>21-526EZ</td><td>Application for Disability Compensation</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">PDF</a></td></tr>
-            <tr><td>21-0781</td><td>Statement in Support of Claim for PTSD</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-0781-ARE.pdf">PDF</a></td></tr>
-            <tr><td>21-686c</td><td>Application Request to Add and/or Remove Dependents</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-686c-ARE.pdf">PDF</a></td></tr>
-            <tr><td>21-2680</td><td>Examination for Housebound Status</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-2680-ARE.pdf">PDF</a></td></tr>
-            <tr><td>21-8940</td><td>Veteran’s Application for Increased Compensation Based on Unemployability</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-8940-ARE.pdf">PDF</a></td></tr>
-            <tr><td>SF-180</td><td>Request for Military Records</td><td><a class="btn" href="https://www.archives.gov/files/standard-form-180.pdf">PDF</a></td></tr>
+            <tr>
+              <td>21-526EZ</td>
+              <td>Application for Disability Compensation</td>
+              <td>
+                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf" target="_blank">PDF</a>
+                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-526EZ-ARE.pdf" target="_blank">Fill</a>
+              </td>
+            </tr>
+            <tr>
+              <td>21-0781</td>
+              <td>Statement in Support of Claim for PTSD</td>
+              <td>
+                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-0781-ARE.pdf" target="_blank">PDF</a>
+                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-0781-ARE.pdf" target="_blank">Fill</a>
+              </td>
+            </tr>
+            <tr>
+              <td>21-686c</td>
+              <td>Application Request to Add and/or Remove Dependents</td>
+              <td>
+                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-686c-ARE.pdf" target="_blank">PDF</a>
+                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-686c-ARE.pdf" target="_blank">Fill</a>
+              </td>
+            </tr>
+            <tr>
+              <td>21-2680</td>
+              <td>Examination for Housebound Status</td>
+              <td>
+                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-2680-ARE.pdf" target="_blank">PDF</a>
+                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-2680-ARE.pdf" target="_blank">Fill</a>
+              </td>
+            </tr>
+            <tr>
+              <td>21-8940</td>
+              <td>Veteran’s Application for Increased Compensation Based on Unemployability</td>
+              <td>
+                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-8940-ARE.pdf" target="_blank">PDF</a>
+                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-8940-ARE.pdf" target="_blank">Fill</a>
+              </td>
+            </tr>
+            <tr>
+              <td>SF-180</td>
+              <td>Request for Military Records</td>
+              <td>
+                <a class="btn" href="https://www.archives.gov/files/standard-form-180.pdf" target="_blank">PDF</a>
+                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.archives.gov%2Ffiles%2Fstandard-form-180.pdf" target="_blank">Fill</a>
+              </td>
+            </tr>
           </tbody>
         </table>
       </section>
