@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TYFYS Benefits</title>
+    <style>
+      /* Simple reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        background-color: #f7f9fc;
+        color: #1f2937;
+        line-height: 1.5;
+      }
+
+      header {
+        background-color: #0f172a;
+        color: #ffffff;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      nav {
+        display: flex;
+        gap: 1rem;
+      }
+
+      nav a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+      }
+
+      nav a:hover {
+        background-color: #1e293b;
+      }
+
+      section {
+        padding: 2rem 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .card h2 {
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+      }
+
+      button, .btn {
+        display: inline-block;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        font-size: 1rem;
+      }
+
+      button:hover, .btn:hover {
+        background-color: #1e40af;
+      }
+
+      /* Simple responsive grid */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.5rem;
+      }
+
+      th, td {
+        border: 1px solid #e5e7eb;
+        padding: 0.5rem;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f3f4f6;
+      }
+
+      /* Simple calculator style */
+      .calculator label {
+        display: block;
+        margin: 0.5rem 0 0.25rem;
+      }
+
+      .calculator input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+      }
+
+      .calculator-result {
+        margin-top: 0.5rem;
+        font-weight: bold;
+      }
+    </style>
+    <script>
+      // Combined rating calculator logic
+      function calculateCombinedRating() {
+        const ratingsInput = document.getElementById('ratings');
+        const resultEl = document.getElementById('combinedResult');
+        const values = ratingsInput.value
+          .split(',')
+          .map(v => parseInt(v.trim(), 10))
+          .filter(v => !isNaN(v) && v > 0);
+        if (values.length === 0) {
+          resultEl.textContent = 'Please enter at least one rating.';
+          return;
+        }
+        // Sort descending
+        values.sort((a, b) => b - a);
+        let combined = values[0];
+        for (let i = 1; i < values.length; i++) {
+          combined = Math.round((combined + values[i] * (100 - combined) / 100) * 10) / 10;
+        }
+        // Round to nearest 10 per VA rules
+        const rounded = Math.round(combined / 10) * 10;
+        resultEl.textContent = `Combined rating: ${rounded}% (raw: ${combined.toFixed(1)}%)`;
+      }
+      // Dependents payment estimator (sample values)
+      const demoRates = {
+        2024: {
+          '100': { vet: 0, vet_spouse: 0, vet_spouse_1child: 0, add_child_under18: 0, add_child_over18_school: 0 },
+          '90': { vet: 0, vet_spouse: 0, vet_spouse_1child: 0, add_child_under18: 0, add_child_over18_school: 0 },
+          '80': { vet: 0, vet_spouse: 0, vet_spouse_1child: 0, add_child_under18: 0, add_child_over18_school: 0 }
+        }
+      };
+      function estimatePayment() {
+        const rating = document.getElementById('ratingSelect').value;
+        const dependents = parseInt(document.getElementById('numDependents').value, 10);
+        const year = document.getElementById('rateYear').value;
+        const result = document.getElementById('paymentResult');
+        const rates = demoRates[year] && demoRates[year][rating];
+        if (!rates) {
+          result.textContent = 'Rates not available for selected year/rating.';
+          return;
+        }
+        // For demo, base amount is zero; user can edit rates in script or via Tools later.
+        let amount = rates.vet;
+        if (dependents > 0) {
+          amount += rates.vet_spouse;
+          if (dependents > 1) {
+            amount += rates.vet_spouse_1child;
+            if (dependents > 2) {
+              amount += (dependents - 2) * rates.add_child_under18;
+            }
+          }
+        }
+        result.textContent = `Estimated monthly payment: $${amount.toFixed(2)}`;
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>TYFYS Benefits</h1>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#claims">Claims</a>
+        <a href="#documents">Documents</a>
+        <a href="#forms">Forms</a>
+        <a href="#tools">Tools</a>
+        <a href="#inbox">Inbox</a>
+        <a href="#more">More</a>
+      </nav>
+    </header>
+    <main>
+      <section id="home">
+        <h2>Welcome</h2>
+        <div class="card">
+          <h3>Your Claim</h3>
+          <p>Status: <strong>In review</strong></p>
+          <p>Next step: Upload civilian ortho notes</p>
+          <button onclick="alert('This would show your timeline in a full app')">View timeline</button>
+          <button style="margin-left:1rem;" onclick="alert('Help request sent!')">Ask for Help</button>
+        </div>
+        <div class="card">
+          <h3>Continue your packet</h3>
+          <p>Selected conditions: 0 of 5</p>
+          <button onclick="alert('This would open the claim builder wizard')">Open Claim Builder</button>
+        </div>
+      </section>
+      <section id="claims">
+        <h2>Claims &amp; Appeals</h2>
+        <p>This section would show your claim timeline, milestones, decisions and let you upload evidence directly to the VA.</p>
+      </section>
+      <section id="documents">
+        <h2>Documents</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Start DBQ Minis</h3>
+            <p>Guided mini questionnaires to prepare Disability Benefits Questionnaires.</p>
+            <button onclick="alert('DBQ Minis wizard coming soon')">Begin</button>
+          </div>
+          <div class="card">
+            <h3>SF-180 Helper</h3>
+            <p>Request your Service Treatment Records (STRs) via Standard Form 180.</p>
+            <button onclick="alert('SF-180 helper coming soon')">Open helper</button>
+          </div>
+          <div class="card">
+            <h3>Upload Civilian Records</h3>
+            <p>Securely upload documents from outside providers.</p>
+            <button onclick="alert('Upload feature coming soon')">Upload</button>
+          </div>
+          <div class="card">
+            <h3>Export Packet</h3>
+            <p>Generate a ready-to-file PDF of your claim packet.</p>
+            <button onclick="alert('Packet export coming soon')">Export PDF</button>
+          </div>
+        </div>
+      </section>
+      <section id="forms">
+        <h2>Common VA Forms</h2>
+        <p>Download blank forms directly from the VA.</p>
+        <table>
+          <thead>
+            <tr><th>Form</th><th>Description</th><th>Download</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>21-526EZ</td><td>Application for Disability Compensation</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">PDF</a></td></tr>
+            <tr><td>21-0781</td><td>Statement in Support of Claim for PTSD</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-0781-ARE.pdf">PDF</a></td></tr>
+            <tr><td>21-686c</td><td>Application Request to Add and/or Remove Dependents</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-686c-ARE.pdf">PDF</a></td></tr>
+            <tr><td>21-2680</td><td>Examination for Housebound Status</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-2680-ARE.pdf">PDF</a></td></tr>
+            <tr><td>21-8940</td><td>Veteran’s Application for Increased Compensation Based on Unemployability</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-8940-ARE.pdf">PDF</a></td></tr>
+            <tr><td>SF-180</td><td>Request for Military Records</td><td><a class="btn" href="https://www.archives.gov/files/standard-form-180.pdf">PDF</a></td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="tools">
+        <h2>Tools</h2>
+        <div class="card calculator">
+          <h3>Combined Rating Calculator</h3>
+          <label for="ratings">Enter disability ratings separated by commas (e.g. 50, 30, 20):</label>
+          <input id="ratings" type="text" placeholder="50, 30, 20" />
+          <button style="margin-top:0.5rem;" onclick="calculateCombinedRating()">Calculate</button>
+          <div id="combinedResult" class="calculator-result"></div>
+        </div>
+        <div class="card calculator">
+          <h3>Dependents &amp; Payment Estimator</h3>
+          <label for="rateYear">Year:</label>
+          <select id="rateYear">
+            <option value="2024">2024</option>
+          </select>
+          <label for="ratingSelect">Rating:</label>
+          <select id="ratingSelect">
+            <option value="100">100%</option>
+            <option value="90">90%</option>
+            <option value="80">80%</option>
+          </select>
+          <label for="numDependents">Number of dependents (spouse + children):</label>
+          <input id="numDependents" type="number" min="0" value="0" />
+          <button style="margin-top:0.5rem;" onclick="estimatePayment()">Estimate</button>
+          <div id="paymentResult" class="calculator-result"></div>
+          <p style="font-size: 0.85rem; color: #6b7280;">Note: Rates shown are placeholders. You can update the rate table in the script.</p>
+        </div>
+      </section>
+      <section id="inbox">
+        <h2>Inbox</h2>
+        <p>Your secure messages, reminders and updates will appear here.</p>
+      </section>
+      <section id="more">
+        <h2>More</h2>
+        <ul style="list-style: disc; margin-left: 1rem;">
+          <li>VA Letters</li>
+          <li>Payments &amp; Direct Deposit</li>
+          <li>Find VA Facility</li>
+          <li>Veterans Crisis Line: <a href="tel:988">988</a></li>
+          <li>Settings &amp; Profile</li>
+        </ul>
+        <p style="margin-top:1rem; font-size: 0.85rem; color: #6b7280;">TYFYS is not a VSO or law firm. We do not prepare or submit VA claims. We help coordinate medical evidence and organization for veterans.</p>
+      </section>
+    </main>
+  </body>
+</html>
