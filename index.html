@@ -211,8 +211,8 @@
         </div>
         <div class="card">
           <h3>Continue your packet</h3>
-          <p>Selected conditions: 0 of 5</p>
-          <button onclick="alert('This would open the claim builder wizard')">Open Claim Builder</button>
+          <p>Selected conditions: <span id="selectedConditionsText">0 of 5</span></p>
+          <button onclick="openClaimBuilder()">Open Claim Builder</button>
         </div>
       </section>
       <section id="claims">
@@ -272,21 +272,21 @@
         </div>
         <div class="card calculator">
           <h3>Dependents &amp; Payment Estimator</h3>
-          <label for="rateYear">Year:</label>
-          <select id="rateYear">
-            <option value="2024">2024</option>
-          </select>
           <label for="ratingSelect">Rating:</label>
           <select id="ratingSelect">
-            <option value="100">100%</option>
-            <option value="90">90%</option>
+            <option value="70">70%</option>
             <option value="80">80%</option>
+            <option value="90">90%</option>
+            <option value="100">100%</option>
           </select>
-          <label for="numDependents">Number of dependents (spouse + children):</label>
-          <input id="numDependents" type="number" min="0" value="0" />
+          <label><input type="checkbox" id="spouseCheck"> Have a spouse?</label>
+          <label for="numUnder18">Children under 18:</label>
+          <input id="numUnder18" type="number" min="0" value="0" />
+          <label for="numOver18">Children 18–23 (school):</label>
+          <input id="numOver18" type="number" min="0" value="0" />
           <button style="margin-top:0.5rem;" onclick="estimatePayment()">Estimate</button>
           <div id="paymentResult" class="calculator-result"></div>
-          <p style="font-size: 0.85rem; color: #6b7280;">Note: Rates shown are placeholders. You can update the rate table in the script.</p>
+          <p style="font-size: 0.85rem; color: #6b7280;">Rates effective Dec 1 2024. See VA tables for details.</p>
         </div>
       </section>
       <section id="inbox">
@@ -305,5 +305,138 @@
         <p style="margin-top:1rem; font-size: 0.85rem; color: #6b7280;">TYFYS is not a VSO or law firm. We do not prepare or submit VA claims. We help coordinate medical evidence and organization for veterans.</p>
       </section>
     </main>
+  
+    <!-- Claim Builder Modal -->
+    <div id="claimBuilderModal" style="display:none; position: fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.4); z-index: 1000; overflow:auto;">
+      <div class="card" style="max-width: 500px; margin: 5% auto; padding: 1.5rem; background:#ffffff; border-radius: 8px; position: relative;">
+        <h3>Claim Builder</h3>
+        <p>Add up to 5 conditions for your claim.</p>
+        <div style="margin-bottom: 0.5rem;">
+          <input id="conditionInput" type="text" placeholder="Enter condition" style="width: 70%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 4px;" />
+          <button class="btn" onclick="addCondition()" style="margin-left: 0.5rem;">Add</button>
+        </div>
+        <ul id="conditionList" style="list-style: disc; margin-left: 1rem; margin-bottom: 1rem;"></ul>
+        <div style="text-align: right;">
+          <button class="btn" onclick="closeClaimBuilder()">Close</button>
+        </div>
+      </div>
+    </div>
+    <script>
+    // 2025 VA compensation rates and estimators
+    const rates2025 = {
+        70: {
+          alone: 1759.19,
+          spouse: 1908.19,
+          spouseChild: 2018.19,
+          firstChild: 1858.19,
+          addChildUnder18: 74.0,
+          addChildOver18: 239.0
+        },
+        80: {
+          alone: 2044.89,
+          spouse: 2214.89,
+          spouseChild: 2340.89,
+          firstChild: 2158.89,
+          addChildUnder18: 84.0,
+          addChildOver18: 274.0
+        },
+        90: {
+          alone: 2297.96,
+          spouse: 2489.96,
+          spouseChild: 2630.96,
+          firstChild: 2425.96,
+          addChildUnder18: 95.0,
+          addChildOver18: 308.0
+        },
+        100: {
+          alone: 3831.30,
+          spouse: 4044.91,
+          spouseChild: 4201.35,
+          firstChild: 3974.15,
+          addChildUnder18: 106.14,
+          addChildOver18: 342.85
+        }
+      };
+    function estimatePayment() {
+        const rating = parseInt(document.getElementById('ratingSelect').value, 10);
+        const hasSpouse = document.getElementById('spouseCheck').checked;
+        const numUnder18 = parseInt(document.getElementById('numUnder18').value, 10) || 0;
+        const numOver18 = parseInt(document.getElementById('numOver18').value, 10) || 0;
+        const r = rates2025[rating];
+        const result = document.getElementById('paymentResult');
+        if (!r) {
+          result.textContent = 'Rates not available for the selected rating.';
+          return;
+        }
+        const totalChildren = numUnder18 + numOver18;
+        let amount;
+        if (hasSpouse) {
+          if (totalChildren > 0) {
+            amount = r.spouseChild;
+          } else {
+            amount = r.spouse;
+          }
+        } else {
+          if (totalChildren > 0) {
+            amount = r.firstChild;
+          } else {
+            amount = r.alone;
+          }
+        }
+        if (totalChildren > 0) {
+          let remainingUnder18 = numUnder18;
+          let remainingOver18 = numOver18;
+          if (remainingUnder18 > 0) {
+            remainingUnder18 -= 1;
+          } else if (remainingOver18 > 0) {
+            remainingOver18 -= 1;
+          }
+          amount += remainingUnder18 * r.addChildUnder18;
+          amount += remainingOver18 * r.addChildOver18;
+        }
+        result.textContent = `Estimated monthly payment: $${amount.toFixed(2)}`;
+      }
+    // Claim builder functions
+    const selectedConditions = [];
+    function openClaimBuilder() {
+      document.getElementById('claimBuilderModal').style.display = 'block';
+      updateConditionList();
+    }
+    function closeClaimBuilder() {
+      document.getElementById('claimBuilderModal').style.display = 'none';
+    }
+    function addCondition() {
+      const input = document.getElementById('conditionInput');
+      const condition = input.value.trim();
+      if (condition && selectedConditions.length < 5) {
+        selectedConditions.push(condition);
+        input.value = '';
+        updateConditionList();
+      }
+    }
+    function removeCondition(index) {
+      selectedConditions.splice(index, 1);
+      updateConditionList();
+    }
+    function updateConditionList() {
+      const list = document.getElementById('conditionList');
+      list.innerHTML = '';
+      selectedConditions.forEach((cond, idx) => {
+        const li = document.createElement('li');
+        li.textContent = cond;
+        const btn = document.createElement('button');
+        btn.textContent = 'Remove';
+        btn.className = 'btn';
+        btn.style.marginLeft = '0.5rem';
+        btn.onclick = () => removeCondition(idx);
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+      const progress = document.getElementById('selectedConditionsText');
+      if (progress) {
+        progress.textContent = `${selectedConditions.length} of 5`;
+      }
+    }
+    </script>
   </body>
 </html>
