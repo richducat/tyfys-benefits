@@ -9,6 +9,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+      /*
+       * Custom properties make it easy to adjust the look and feel of the
+       * application in one place. You can tweak these values to quickly
+       * iterate on color and spacing without hunting through the style sheet.
+       */
+      :root {
+        --color-primary: #1976d2; /* vibrant blue inspired by Google Material */
+        --color-primary-dark: #1565c0;
+        --color-on-primary: #ffffff;
+        --color-surface: #ffffff;
+        --color-background: #f5f8fe;
+        --color-text: #212121;
+        --color-muted: #546e7a;
+        --border-radius: 8px;
+        --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
       /* Simple reset */
       * {
         box-sizing: border-box;
@@ -18,79 +34,105 @@
       }
 
       body {
-        background-color: #f7f9fc;
-        color: #1f2937;
-        line-height: 1.5;
+        background-color: var(--color-background);
+        color: var(--color-text);
+        line-height: 1.6;
+        font-family: 'Roboto', Arial, Helvetica, sans-serif;
       }
 
       header {
-        background-color: #0f172a;
-        color: #ffffff;
-        padding: 1rem;
+        background-color: var(--color-primary);
+        color: var(--color-on-primary);
+        padding: 0.75rem 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
         position: sticky;
         top: 0;
         z-index: 10;
+        box-shadow: var(--card-shadow);
       }
 
       header h1 {
-        font-size: 1.5rem;
-        font-weight: bold;
+        font-size: 1.25rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        margin-left: 0.25rem;
       }
 
       nav {
         display: flex;
-        gap: 1rem;
+        gap: 1.5rem;
       }
 
       nav a {
-        color: #cbd5e1;
+        color: rgba(255, 255, 255, 0.9);
         text-decoration: none;
         font-weight: 500;
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        transition: background-color 0.2s ease;
+        padding-bottom: 0.25rem;
+        position: relative;
+        transition: color 0.2s ease;
+      }
+
+      /* underline animation on hover */
+      nav a::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.7);
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        transition: width 0.2s;
       }
 
       nav a:hover {
-        background-color: #1e293b;
+        color: var(--color-on-primary);
+      }
+
+      nav a:hover::after {
+        width: 100%;
       }
 
       section {
-        padding: 2rem 1rem;
-        max-width: 900px;
+        padding: 1.5rem 1rem;
+        max-width: 960px;
         margin: 0 auto;
       }
 
       .card {
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 1rem;
+        background-color: var(--color-surface);
+        border-radius: var(--border-radius);
+        padding: 1.25rem;
         margin-bottom: 1rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        box-shadow: var(--card-shadow);
       }
 
       .card h2 {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         font-size: 1.25rem;
+        font-weight: 500;
+        color: var(--color-primary-dark);
       }
 
       button, .btn {
         display: inline-block;
-        background-color: #2563eb;
-        color: white;
+        background-color: var(--color-primary);
+        color: var(--color-on-primary);
         border: none;
         padding: 0.5rem 1rem;
         border-radius: 4px;
         cursor: pointer;
         transition: background-color 0.2s ease;
-        font-size: 1rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
       }
 
       button:hover, .btn:hover {
-        background-color: #1e40af;
+        background-color: var(--color-primary-dark);
       }
 
       /* Simple responsive grid */
@@ -104,16 +146,27 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 0.5rem;
+        border-radius: var(--border-radius);
+        overflow: hidden;
       }
 
       th, td {
-        border: 1px solid #e5e7eb;
-        padding: 0.5rem;
+        padding: 0.75rem 1rem;
         text-align: left;
       }
 
       th {
-        background-color: #f3f4f6;
+        background-color: #e3f2fd;
+        color: #1a237e;
+        font-weight: 500;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: #fafafa;
+      }
+
+      tbody tr:hover {
+        background-color: #e8f0fe;
       }
 
       /* Simple calculator style */
@@ -125,13 +178,15 @@
       .calculator input {
         width: 100%;
         padding: 0.5rem;
-        border: 1px solid #d1d5db;
+        border: 1px solid #cfd8dc;
         border-radius: 4px;
+        background-color: #fafafa;
       }
 
       .calculator-result {
-        margin-top: 0.5rem;
-        font-weight: bold;
+        margin-top: 0.75rem;
+        font-weight: 500;
+        color: var(--color-primary-dark);
       }
 
       /* Material Design overrides */
@@ -272,10 +327,21 @@
           position: absolute;
           right: 1rem;
           top: 60px;
-          background: #ffffff;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+          background: var(--color-surface);
+          box-shadow: var(--card-shadow);
           padding: 1rem;
+          border-radius: var(--border-radius);
           z-index: 999;
+        }
+
+        /* When the mobile menu is open, adjust link colors to match the surface */
+        header nav a {
+          color: var(--color-text);
+          padding: 0.5rem 0;
+        }
+
+        header nav a::after {
+          background: var(--color-primary);
         }
         header nav.show {
           display: flex;
