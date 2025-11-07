@@ -14,7 +14,7 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: 'Roboto', Arial, Helvetica, sans-serif;
       }
 
       body {
@@ -232,6 +232,58 @@
         padding: 0.25rem 0.75rem;
         font-size: 0.875rem;
       }
+
+      /* Responsive header and navigation */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 1rem 2rem;
+      }
+
+      header .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      header .logo img {
+        height: 40px;
+        width: auto;
+      }
+
+      header nav {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .menu-toggle {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      @media (max-width: 768px) {
+        header nav {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          right: 1rem;
+          top: 60px;
+          background: #ffffff;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+          padding: 1rem;
+          z-index: 999;
+        }
+        header nav.show {
+          display: flex;
+        }
+        .menu-toggle {
+          display: block;
+        }
+      }
     </style>
     <script>
       // Combined rating calculator logic
@@ -291,8 +343,15 @@
   </head>
   <body>
     <header>
-      <h1>TYFYS Benefits</h1>
-      <nav>
+      <!-- Logo and brand -->
+      <div class="logo">
+        <img src="logo.png" alt="Thank You for Your Service Logo" />
+        <h1>TYFYS Benefits</h1>
+      </div>
+      <!-- Mobile menu toggle -->
+      <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+      <!-- Navigation links -->
+      <nav id="navLinks">
         <a href="#home">Home</a>
         <a href="#claims">Claims</a>
         <a href="#documents">Documents</a>
@@ -355,54 +414,12 @@
             <tr><th>Form</th><th>Description</th><th>Download</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>21-526EZ</td>
-              <td>Application for Disability Compensation</td>
-              <td>
-                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf" target="_blank">PDF</a>
-                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-526EZ-ARE.pdf" target="_blank">Fill</a>
-              </td>
-            </tr>
-            <tr>
-              <td>21-0781</td>
-              <td>Statement in Support of Claim for PTSD</td>
-              <td>
-                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-0781-ARE.pdf" target="_blank">PDF</a>
-                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-0781-ARE.pdf" target="_blank">Fill</a>
-              </td>
-            </tr>
-            <tr>
-              <td>21-686c</td>
-              <td>Application Request to Add and/or Remove Dependents</td>
-              <td>
-                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-686c-ARE.pdf" target="_blank">PDF</a>
-                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-686c-ARE.pdf" target="_blank">Fill</a>
-              </td>
-            </tr>
-            <tr>
-              <td>21-2680</td>
-              <td>Examination for Housebound Status</td>
-              <td>
-                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-2680-ARE.pdf" target="_blank">PDF</a>
-                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-2680-ARE.pdf" target="_blank">Fill</a>
-              </td>
-            </tr>
-            <tr>
-              <td>21-8940</td>
-              <td>Veteran’s Application for Increased Compensation Based on Unemployability</td>
-              <td>
-                <a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-8940-ARE.pdf" target="_blank">PDF</a>
-                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.vba.va.gov%2Fpubs%2Fforms%2FVBA-21-8940-ARE.pdf" target="_blank">Fill</a>
-              </td>
-            </tr>
-            <tr>
-              <td>SF-180</td>
-              <td>Request for Military Records</td>
-              <td>
-                <a class="btn" href="https://www.archives.gov/files/standard-form-180.pdf" target="_blank">PDF</a>
-                <a class="btn" href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https%3A%2F%2Fwww.archives.gov%2Ffiles%2Fstandard-form-180.pdf" target="_blank">Fill</a>
-              </td>
-            </tr>
+            <tr><td>21-526EZ</td><td>Application for Disability Compensation</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">PDF</a></td></tr>
+            <tr><td>21-0781</td><td>Statement in Support of Claim for PTSD</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-0781-ARE.pdf">PDF</a></td></tr>
+            <tr><td>21-686c</td><td>Application Request to Add and/or Remove Dependents</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-686c-ARE.pdf">PDF</a></td></tr>
+            <tr><td>21-2680</td><td>Examination for Housebound Status</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-2680-ARE.pdf">PDF</a></td></tr>
+            <tr><td>21-8940</td><td>Veteran’s Application for Increased Compensation Based on Unemployability</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-8940-ARE.pdf">PDF</a></td></tr>
+            <tr><td>SF-180</td><td>Request for Military Records</td><td><a class="btn" href="https://www.archives.gov/files/standard-form-180.pdf">PDF</a></td></tr>
           </tbody>
         </table>
       </section>
@@ -580,6 +597,14 @@
       const progress = document.getElementById('selectedConditionsText');
       if (progress) {
         progress.textContent = `${selectedConditions.length} of 5`;
+      }
+    }
+
+    // Toggle mobile navigation menu visibility
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      if (nav) {
+        nav.classList.toggle('show');
       }
     }
     </script>
