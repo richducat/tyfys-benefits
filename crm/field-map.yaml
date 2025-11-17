@@ -1,0 +1,86 @@
+# Zoho-safe CRM layout and module plan for TYFYS self-serve app
+
+leads:
+  layout: "Self-Serve App Lead"
+  fields:
+    - name: Source
+      value: TYFYS App
+    - name: EligibilityScore
+    - name: PrefContact
+    - name: Timezone
+    - name: ITFStatus
+    - name: TalkToSpecialist
+
+Deals:
+  pipeline: "TYFYS App Pipeline"
+  stages:
+    - Welcome
+    - Offer
+    - Contract Signed
+    - DD214/ITF
+    - Records
+    - Intake
+    - MDBQs
+    - Provider
+    - Evidence Packet
+    - Ready to Submit
+  fields:
+    - TrackerStage
+    - SubTasksComplete
+    - ContractSignedOn
+    - DepositStatus
+    - ITFConfirmedOn
+    - RecordsChecklist
+    - MDBQChecklist
+    - ProviderStatus
+    - EvidencePacketId
+
+custom_modules:
+  - name: "TYFYS App Case"
+    relation: Deal
+    fields:
+      - TrackerState
+      - StagePercent
+      - Blockers
+      - EvidenceScore
+  - name: "TYFYS App Activity"
+    relation: Contact
+    fields:
+      - CallOutcome
+      - Objection
+      - NextStep
+      - NotesQualityCheck
+  - name: "Evidence Packet"
+    relation: Deal
+    fields:
+      - IncludedDocs
+      - CompletenessScore
+      - UpdatedOn
+  - name: "MDBQ Response"
+    relation: Contact
+    fields:
+      - Condition
+      - SubmittedOn
+      - PDF
+      - CompletenessFlags
+  - name: "Provider Appointment"
+    relation: Deal
+    fields:
+      - ApptType
+      - ScheduledAt
+      - Attended
+      - Notes
+
+webhooks:
+  - path: /api/webhooks/zoho-sign
+    triggers: [document.completed]
+  - path: /api/webhooks/zoho-forms
+    triggers: [form.submitted]
+
+blueprints:
+  - name: Records to Intake
+    condition: ITFConfirmedOn is not null and DD214Status == 'Received'
+  - name: MDBQs to Provider
+    condition: all required condition MDBQs marked complete
+  - name: Provider to Evidence
+    condition: all appointments attended
