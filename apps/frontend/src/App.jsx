@@ -108,6 +108,84 @@ export default function App() {
       </div>
 
       <div className="section">
+        <h2>How TYFYS Works</h2>
+        <p style={{ marginTop: 0 }}>{copy.overview}</p>
+        <div className="tools-grid">
+          {copy.howItWorks.map((step) => (
+            <div key={step.title} className="tool-card">
+              <strong>{step.title}</strong>
+              <p style={{ marginTop: 8 }}>{step.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="section">
+        <h2>{copy.role.title}</h2>
+        <p style={{ marginTop: 0 }}>{copy.role.intro}</p>
+      </div>
+
+      <div className="section">
+        <h2>{copy.reasons.title}</h2>
+        <div className="tools-grid">
+          {copy.reasons.points.map((point) => (
+            <div key={point.heading} className="tool-card">
+              <strong>{point.heading}</strong>
+              <p style={{ marginTop: 8 }}>{point.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="section">
+        <div className="tracker-grid">
+          <div>
+            <h2>{copy.deliverables.title}</h2>
+            <ul className="checklist">
+              {copy.deliverables.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2>{copy.whoWeHelp.title}</h2>
+            <ul className="checklist">
+              {copy.whoWeHelp.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="section">
+        <h2>{copy.conditions.title}</h2>
+        <div className="tools-grid">
+          {copy.conditions.items.map((item) => (
+            <div key={item} className="tool-card">{item}</div>
+          ))}
+        </div>
+        <p style={{ marginTop: 12, fontWeight: 600 }}>{copy.conditions.note}</p>
+      </div>
+
+      <div className="section">
+        <h2>{copy.quotes.title}</h2>
+        <div className="tools-grid">
+          {copy.quotes.list.map((quote) => (
+            <div key={quote} className="tool-card">{quote}</div>
+          ))}
+        </div>
+      </div>
+
+      <div className="section">
+        <h2>{copy.faq.title}</h2>
+        <div className="tools-grid">
+          {copy.faq.items.map((item) => (
+            <div key={item.question} className="tool-card">
+              <strong>{item.question}</strong>
+              <p style={{ marginTop: 8 }}>{item.answer}</p>
+            </div>
+          ))}
         <div className="tracker-grid">
           <div>
             <h2>Pizza-tracker</h2>

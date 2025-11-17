@@ -1,5 +1,139 @@
 export const copy = {
   hero: {
+    title: 'You Served. Now It’s Our Turn to Support You.',
+    subtitle: 'Clear, coordinated medical documentation designed to strengthen your VA disability claim.',
+    description:
+      'TYFYS connects you with independent medical providers who understand military injuries — so you can submit a fully supported claim with confidence.',
+    pledge: 'No representation. No legal advice. No shortcuts. Just accurate medical evidence, fast.',
+    ctaPrimary: 'Start Your Intake →',
+    ctaSecondary: 'Schedule a Call',
+  },
+  overview:
+    'A simple, guided path from first call to final documentation — all in one place.',
+  howItWorks: [
+    {
+      title: '1. Discovery Call',
+      body:
+        'We start by understanding your service history, current conditions, and your goals. This helps us determine what medical evidence you may need to support your claim.'
+    },
+    {
+      title: '2. Medical Intake & Condition Review',
+      body:
+        'You complete a brief intake so our team can organize: your documented conditions; possible secondary or overlooked conditions; any missing medical history; prior ratings and diagnoses. This ensures no part of your story is missed.'
+    },
+    {
+      title: '3. Secure Document Collection',
+      body:
+        'You’ll receive access to your private Veteran Portal where you can upload DD-214, medical records, prior VA decisions, impact statements, and any documents you already have. If you need help, we walk you through the process step-by-step.'
+    },
+    {
+      title: '4. Independent Provider Appointments',
+      body:
+        'TYFYS coordinates your appointments with licensed clinicians who understand military-specific injuries, know how to document conditions clearly, and are experienced with the forms and criteria used to evaluate disabilities. These appointments are completed via telehealth or in-person depending on condition.'
+    },
+    {
+      title: '5. DBQs, Nexus Letters & Evidence Packet Preparation',
+      body:
+        'Your independent provider documents DBQs, nexus opinions (when clinically appropriate), symptom descriptions, functional impact, and supporting medical evidence. Everything is organized for you into a clean, complete evidence package.'
+    },
+    {
+      title: '6. Final Evidence Review',
+      body:
+        'Before your packet is delivered, it goes through a final quality check to ensure all conditions are documented, rationale is medically sound, no information is missing, and your documents are cohesive and ready for your claim submission.'
+    }
+  ],
+  role: {
+    title: 'Your Role in the Process',
+    intro:
+      'TYFYS is not a VSO, attorney, or law firm — and does not prepare or submit claims. You stay in full control. We simply make sure you’re walking into the process with strong, accurate, and complete medical evidence.'
+  },
+  reasons: {
+    title: 'Why Veterans Choose TYFYS',
+    points: [
+      {
+        heading: 'Independent Medical Documentation',
+        body: 'You are connected with licensed clinicians who truly understand service-related injuries — not rushed examiners.'
+      },
+      {
+        heading: 'Fast, Organized Coordination',
+        body: 'No guesswork. No bouncing between offices. You have one guided system that keeps everything moving.'
+      },
+      {
+        heading: 'Clear, Step-by-Step Experience',
+        body: 'From intake to final documentation, every step is simple and transparent.'
+      },
+      {
+        heading: 'Veteran-Centered Care',
+        body: 'You’ve earned this support. Our job is to make the process easier, faster, and less stressful — while treating you with the dignity you deserve.'
+      }
+    ]
+  },
+  deliverables: {
+    title: 'What You Receive',
+    items: [
+      'Medical Intake Review',
+      'Coordinated Provider Appointments',
+      'DBQs',
+      'Nexus Letters (when medically appropriate)',
+      'Functional Impact Statements',
+      'Document Organization & Packet Assembly',
+      'Veteran Portal Access',
+      'Timeline Tracker to monitor progress (like a “pizza tracker,” but for your medical evidence)',
+      'Everything you need to submit your own claim with confidence.'
+    ]
+  },
+  whoWeHelp: {
+    title: 'Who We Help',
+    items: [
+      'Filing for the first time',
+      'Requesting an increase',
+      'Seeking stronger evidence to support their existing conditions',
+      'Missing medical documentation',
+      'Unsure which conditions are connected',
+      'Needing clear medical rationale from a licensed provider'
+    ]
+  },
+  conditions: {
+    title: 'Commonly Documented Conditions',
+    items: [
+      'PTSD / Anxiety / Depression',
+      'Sleep Apnea',
+      'Back, Neck & Joint Conditions',
+      'Migraines & Headaches',
+      'Radiculopathy',
+      'TBI',
+      'Respiratory Conditions',
+      'IBS / GERD',
+      'Secondary Conditions',
+      'Burn Pit-related Conditions',
+      'Hearing Loss & Tinnitus'
+    ],
+    note: 'TYFYS ensures each condition is evaluated fully — including secondary pathways and overlapping symptoms.'
+  },
+  quotes: {
+    title: 'What Veterans Say',
+    list: [
+      '"TYFYS made everything simple. The doctor finally understood what I went through in service and documented it the right way. I wish I did this years ago."',
+      '"The portal and tracker were a lifesaver. I always knew what step was next and what was required."',
+      '"No pressure. No confusion. Just straight-up help and real organization."'
+    ]
+  },
+  faq: {
+    title: 'Frequently Asked Questions',
+    items: [
+      { question: 'Is TYFYS the VA or a VSO?', answer: 'No. TYFYS is a neutral medical-coordination service. We do not represent, advise, or file claims.' },
+      { question: 'Do you work with licensed medical professionals?', answer: 'Yes. All evaluations are completed by licensed, independent clinicians.' },
+      { question: 'Do you guarantee results?', answer: 'No one can guarantee outcomes. We simply ensure your medical evidence is complete, accurate, and professionally documented.' },
+      { question: 'Can you help if I already filed a claim?', answer: 'Yes — if you need additional or updated medical evidence to strengthen your packet.' },
+      { question: 'Do you handle appeals?', answer: 'We can provide the medical documentation you need, but we do not represent or manage appeal filings.' }
+    ]
+  },
+  closing: {
+    title: 'Start Your TYFYS Journey',
+    body:
+      'Your service deserves clarity, respect, and proper documentation. We’re here to help you take the next steps with confidence.',
+    ctaPrimary: 'Start Your Intake →',
+    ctaSecondary: 'Or schedule a call to learn exactly what evidence you need.'
     title: 'Your VA benefits, built the TYFYS way',
     subtitle:
       'We guide you through every gated step with clear tasks, evidence checklists, and a live tracker. We are not the VA or a VSO.',
@@ -14,6 +148,7 @@ export const copy = {
   education: [
     'How VA math works and why ITF matters',
     'What a fully developed claim requires',
+    'Why evidence-by-condition beats generic claims'
     'Why evidence-by-condition beats generic claims',
   ],
   pricing: {
