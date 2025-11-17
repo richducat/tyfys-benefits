@@ -1,0 +1,86 @@
+[
+  {
+    "id": "welcome",
+    "name": "Welcome & Eligibility Triage",
+    "description": "Confirm service history, current rating, and goals while educating on VA math, ITF, and fully developed claims.",
+    "allowsSpecialist": true,
+    "requirements": []
+  },
+  {
+    "id": "offer",
+    "name": "ROI/Offer & Secure Checkout",
+    "description": "Show projected impact, collect deposit, and trigger Zoho Sign for contract and ROI pack.",
+    "allowsSpecialist": true,
+    "requirements": ["welcome:complete"]
+  },
+  {
+    "id": "account",
+    "name": "Account Setup & Portal Orientation",
+    "description": "Create the secure account and orient the veteran to documents, timeline, and the tracker controls.",
+    "allowsSpecialist": false,
+    "requirements": ["offer:contract_signed", "offer:complete"]
+  },
+  {
+    "id": "dd214",
+    "name": "DD-214 & ITF",
+    "description": "Guide DD-214 retrieval and ITF filing with timers and checklists.",
+    "allowsSpecialist": false,
+    "requirements": ["account:complete"]
+  },
+  {
+    "id": "records",
+    "name": "Service & Medical Records Intake",
+    "description": "Request STRs, collect civilian medical records, and track missing artifacts.",
+    "allowsSpecialist": false,
+    "requirements": ["dd214:complete"]
+  },
+  {
+    "id": "intake",
+    "name": "Intake Interview (Self-guided or Live)",
+    "description": "Structured interview with optional live scheduling and enforced note quality standards.",
+    "allowsSpecialist": true,
+    "requirements": ["records:complete"]
+  },
+  {
+    "id": "mdbq",
+    "name": "MDBQs via Zoho Forms",
+    "description": "Embedded Zoho Forms, prefilled and authoritative; progress on Forms webhook only.",
+    "allowsSpecialist": false,
+    "requirements": ["intake:complete"]
+  },
+  {
+    "id": "provider",
+    "name": "Provider Scheduling",
+    "description": "Collect preferences, confirm appointments, and lock progression until attended.",
+    "allowsSpecialist": false,
+    "requirements": ["mdbq:completed"]
+  },
+  {
+    "id": "evidence",
+    "name": "Evidence Package Build",
+    "description": "Assemble signed forms, MDBQs, lay statements, STRs, and civilian records into a single packet.",
+    "allowsSpecialist": false,
+    "requirements": ["provider:attended"]
+  },
+  {
+    "id": "review",
+    "name": "Final Review & Delivery Support",
+    "description": "Validate completeness, secondary conditions, and exposures before filing guidance.",
+    "allowsSpecialist": false,
+    "requirements": ["evidence:complete"]
+  },
+  {
+    "id": "submit",
+    "name": "Submit (Veteran-led)",
+    "description": "Guide the veteran through VA.gov submission; TYFYS is not the VA or a VSO.",
+    "allowsSpecialist": true,
+    "requirements": ["review:complete"]
+  },
+  {
+    "id": "decision",
+    "name": "Decision & Follow-up",
+    "description": "Capture outcomes, surface next steps, and update CRM without altering legacy pipelines.",
+    "allowsSpecialist": false,
+    "requirements": ["submit:complete"]
+  }
+]

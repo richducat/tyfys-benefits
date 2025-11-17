@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Your VA benefits, built the TYFYS way",
+    "subtitle": "We guide you through every gated step with clear tasks, evidence checklists, and a live tracker. We are not the VA or a VSO.",
+    "ctaPrimary": "Create Demo Case",
+    "ctaSecondary": "Talk to a Specialist"
+  },
+  "badges": [
+    "Zoho-safe: separate layouts & pipeline",
+    "Evidence-first: no skipped steps",
+    "Uses Zoho Sign + Zoho Forms (no duplicates)"
+  ],
+  "education": [
+    "How VA math works and why ITF matters",
+    "What a fully developed claim requires",
+    "Why evidence-by-condition beats generic claims"
+  ],
+  "pricing": {
+    "summary": "Transparent, flat pricing used in our current playbook",
+    "tiers": [
+      { "name": "Single condition", "price": "$3,500", "detail": "For one primary condition" },
+      { "name": "Up to 5 conditions", "price": "$5,500", "detail": "Balanced for most veterans" },
+      { "name": "More than 5", "price": "Up to $8,000", "detail": "Complex cases with multiple secondaries" },
+      { "name": "Deposit", "price": "$500", "detail": "Due at contract signing via Zoho Sign" }
+    ]
+  },
+  "disclaimer": "TYFYS prepares your evidence and packet. You file your claim on VA.gov. We are not the VA or a VSO."
+}
