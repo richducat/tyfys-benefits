@@ -113,7 +113,7 @@
     .tracker { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1rem; }
 
     .status-bar { position: relative; padding: 1rem 1rem 1.2rem; }
-    .status-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.5rem; }
+    .status-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
     .status-steps li {
       text-align: center;
       background: rgba(255,255,255,0.04);
@@ -189,18 +189,17 @@
 
   <section class="hero">
     <div>
-        <h1>Veteran-first, self-serve VA benefits—no skipped steps.</h1>
-        <p>Thank You For Your Service guides you from eligibility triage to a fully developed claim, with a Domino's-style tracker, Zoho-powered contracts and MDBQs, and a "Talk to a Specialist" off-ramp at every key milestone.</p>
-        <div class="cta-row">
-          <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
-          <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
-        </div>
-        <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-          <span class="badge">Built with veterans</span>
-          <span class="badge" style="background:rgba(0,194,255,0.16); color:#8ee4ff;">Zoho-safe pipelines</span>
-          <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff;">VA-ready uploads</span>
-          <span class="badge" style="background:rgba(158,240,26,0.16); color:#c4ff4d;">No-skip checklists</span>
-        </div>
+      <h1>The fastest way to win the VA benefits you've earned.</h1>
+      <p>Thank You For Your Service combines VA.gov essentials with an easy Domino's-style tracker so you can file, follow, and finish your claim without guessing what's next.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">See tools &amp; calculators</button>
+      </div>
+      <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <span class="badge">Built with veterans</span>
+        <span class="badge" style="background:rgba(0,194,255,0.16); color:#8ee4ff;">VA-ready uploads</span>
+        <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff;">Human + AI guidance</span>
+      </div>
     </div>
     <div class="panel">
       <h2 style="margin-bottom:0.4rem;">Keep your claim moving</h2>
@@ -210,18 +209,18 @@
             <strong>Claim TY-8842</strong>
             <div style="color:#9fb3c8;">Knee &amp; lower back | Filed Mar 2025</div>
           </div>
-          <span class="badge">Evidence Package</span>
+          <span class="badge">In Review</span>
         </div>
         <div class="claim-card">
           <div>
             <strong>Claim TY-5130</strong>
             <div style="color:#9fb3c8;">Hearing loss | Filed Jan 2025</div>
           </div>
-          <span class="badge" style="background:rgba(0,194,255,0.16); color:#7ee5ff;">Intake &amp; MDBQs</span>
+          <span class="badge" style="background:rgba(0,194,255,0.16); color:#7ee5ff;">Evidence</span>
         </div>
         <div class="cta-row">
           <button class="btn btn-primary" style="flex:1;" onclick="openUpload()">Add evidence now</button>
-          <button class="btn btn-ghost" style="flex:1;" onclick="alert('We will surface provider windows and sync status to your App Pipeline stage.')">Provider scheduling</button>
+          <button class="btn btn-ghost" style="flex:1;" onclick="alert('Appointment scheduling coming soon')">Check C&amp;P availability</button>
         </div>
       </div>
     </div>
@@ -255,16 +254,16 @@
       <div class="panel">
         <h3 style="margin-top:0;">What happens next</h3>
         <div class="mini-card">
-          <h3>Welcome &amp; triage</h3>
-          <p>Confirm service history, current rating, ITF status, and eligibility score. Switch to “Talk to a Specialist” any time.</p>
+          <h3>1. Intake &amp; triage</h3>
+          <p>We gather your DD-214, confirm eligibility, and save your intent to file so the clock starts in your favor.</p>
         </div>
         <div class="mini-card">
-          <h3>Contract + MDBQs</h3>
-          <p>Secure checkout triggers Zoho Sign contracts and ROI pack; MDBQs are embedded via Zoho Forms with required pre-fills.</p>
+          <h3>2. Evidence</h3>
+          <p>We pull STRs with SF-180, help you upload civilian notes, and mirror DBQs so your story is clear.</p>
         </div>
         <div class="mini-card">
-          <h3>Evidence &amp; delivery</h3>
-          <p>Provider scheduling, evidence packet build, and final review are gated so nothing moves forward until every checklist is done.</p>
+          <h3>3. Review &amp; delivery</h3>
+          <p>We format everything the way VA expects, submit through VA.gov, and keep you posted like the Domino's tracker.</p>
         </div>
       </div>
     </div>
@@ -306,24 +305,19 @@
         <h3>Packet prep</h3>
         <div class="cards">
           <div class="mini-card">
-            <h3>Evidence by condition</h3>
-            <p>Interactive checklists by condition category and rating criteria so you know what the VA expects.</p>
-            <button class="btn btn-ghost" onclick="alert('Condition-specific checklist coming from your slide content')">View guidance</button>
+            <h3>DBQ minis</h3>
+            <p>Short prompts that match VA DBQs so your doctor or VSO sees exactly what to sign.</p>
+            <button class="btn btn-ghost" onclick="alert('DBQ minis launching soon')">Start</button>
           </div>
           <div class="mini-card">
-            <h3>Occupation &amp; era navigator</h3>
-            <p>Choose your MOS/rate to see common primary &amp; secondary conditions, exposures, and recommended evaluations.</p>
-            <button class="btn btn-ghost" onclick="alert('Occupation/era explorer launching soon')">Explore</button>
+            <h3>SF-180 helper</h3>
+            <p>Auto-fill your Service Treatment Records request and send it to the right archive.</p>
+            <button class="btn btn-ghost" onclick="alert('SF-180 helper launching soon')">Request STRs</button>
           </div>
           <div class="mini-card">
             <h3>Upload civilian records</h3>
             <p>Secure vault for physician letters, imaging, and nexus opinions.</p>
             <button class="btn btn-ghost" onclick="openUpload()">Upload</button>
-          </div>
-          <div class="mini-card">
-            <h3>Objection-aware tips</h3>
-            <p>Education modules that address timing, payment plans, and myths about ratings right when you need them.</p>
-            <button class="btn btn-ghost" onclick="alert('Contextual helper will surface at drop-off points')">See how it works</button>
           </div>
         </div>
       </div>
@@ -331,27 +325,32 @@
   </section>
 
   <section class="section" id="resources">
-    <h2>Resources that mirror your blueprint</h2>
+    <h2>VA forms, ready to download</h2>
     <div class="grid">
       <div class="panel mini-card">
-        <h3>DD-214 + ITF guide</h3>
-        <p>Step-by-step retrieval links, ITF filing checklist, and an expiry countdown so you never lose your spot.</p>
-        <button class="btn btn-primary" onclick="alert('Guided DD-214 and ITF helper coming soon')">View guide</button>
+        <h3>21-526EZ</h3>
+        <p>Application for Disability Compensation.</p>
+        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">Download</a>
       </div>
       <div class="panel mini-card">
-        <h3>Us vs. common options</h3>
-        <p>Transparent education on why TYFYS builds evidence end-to-end without naming outside companies.</p>
-        <button class="btn btn-primary" onclick="alert('Value education module opens here')">Compare approaches</button>
+        <h3>21-0781</h3>
+        <p>Statement in Support of Claim for PTSD.</p>
+        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-0781-ARE.pdf">Download</a>
       </div>
       <div class="panel mini-card">
-        <h3>VA forms</h3>
-        <p>Direct downloads for the forms you use most during the tracker: 21-526EZ, 21-0781, 21-686c, 21-8940, and SF-180.</p>
-        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">Download pack</a>
+        <h3>21-686c</h3>
+        <p>Add or remove dependents.</p>
+        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-686c-ARE.pdf">Download</a>
       </div>
       <div class="panel mini-card">
-        <h3>Evidence packet checklist</h3>
-        <p>What “complete” looks like: lay statements, MDBQs, STRs, civilian records, and exposure considerations by era.</p>
-        <button class="btn btn-primary" onclick="alert('Evidence packet checklist launching soon')">See checklist</button>
+        <h3>21-8940</h3>
+        <p>Unemployability compensation.</p>
+        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-8940-ARE.pdf">Download</a>
+      </div>
+      <div class="panel mini-card">
+        <h3>SF-180</h3>
+        <p>Request military records.</p>
+        <a class="btn btn-primary" href="https://www.archives.gov/files/standard-form-180.pdf">Download</a>
       </div>
     </div>
   </section>
@@ -369,11 +368,11 @@
         veteran: 'Alex R.',
         conditions: 'Knee & lower back',
         filed: 'Mar 2025',
-        stage: 8,
+        stage: 2,
         events: [
-          { title: 'Evidence packet build', detail: 'Zoho Sign contracts + ROI saved. Pulling MDBQs, STRs, lay statements into a single packet.' },
-          { title: 'Gating enforced', detail: 'Provider attendance confirmed; checklist locked until packet completeness score is green.' },
-          { title: 'Next', detail: 'Final review guidance and VA.gov handoff will unlock after QA.' }
+          { title: 'Evidence gathering', detail: 'We pulled STRs and imported orthopedic notes from Dr. Carter.' },
+          { title: 'DBQ mini completed', detail: 'Knee DBQ draft saved. Ready for physician signature.' },
+          { title: 'Awaiting C&P scheduling', detail: 'VA will schedule your exam next.' }
         ]
       },
       {
@@ -381,11 +380,10 @@
         veteran: 'Jordan S.',
         conditions: 'Hearing loss',
         filed: 'Jan 2025',
-        stage: 6,
+        stage: 1,
         events: [
-          { title: 'Intake data synced', detail: 'Self-guided interview captured discovery-call fields and synced to CRM with note standards.' },
-          { title: 'MDBQs in progress', detail: 'Zoho Forms pre-filled with Contact + Deal IDs. We advance only when the webhook lands.' },
-          { title: 'Talk to a Specialist', detail: 'Available at this step for live intake without breaking the App Pipeline.' }
+          { title: 'Evidence requested', detail: 'SF-180 sent to NPRC for audiology STRs.' },
+          { title: 'Civilian records pending', detail: 'Upload latest audiogram to speed up review.' }
         ]
       },
       {
@@ -393,27 +391,20 @@
         veteran: 'Taylor M.',
         conditions: 'Migraines & tinnitus',
         filed: 'Feb 2025',
-        stage: 9,
+        stage: 3,
         events: [
-          { title: 'Provider scheduling', detail: 'Preferences captured; appointment attended and logged as “Attended” before moving forward.' },
-          { title: 'Evidence QA', detail: 'Reviewing exposure by era, secondary conditions, and MDBQ completeness before delivery.' },
-          { title: 'Ready to submit next', detail: 'VA.gov submission helper will unlock after packet quality gate.' }
+          { title: 'C&P complete', detail: 'Exam uploaded to VA. Reviewing for completeness.' },
+          { title: 'Quality check', detail: 'Our team is verifying all evidence before decision phase.' }
         ]
       }
     ];
 
     const steps = [
-      { label: 'Welcome & Eligibility Triage', detail: 'Service history, goals, ITF check, eligibility score' },
-      { label: 'ROI/Offer & Secure Checkout', detail: 'Projected impact + Zoho Sign contract & ROI pack' },
-      { label: 'Account Setup & Portal Orientation', detail: 'Secure login and tracker walkthrough' },
-      { label: 'DD-214 & ITF', detail: 'Guided retrieval + ITF countdown' },
-      { label: 'Service & Medical Records Intake', detail: 'SF-180 for STRs + civilian upload checklist' },
-      { label: 'Intake Interview', detail: 'Self-guided or live; notes schema-enforced' },
-      { label: 'MDBQs via Zoho Forms', detail: 'Pre-filled forms; advance only on webhook' },
-      { label: 'Provider Scheduling', detail: 'Preferences, reminders, attendance tracking' },
-      { label: 'Evidence Package Build', detail: 'Signed forms, MDBQs, lay statements compiled' },
-      { label: 'Final Review & Delivery', detail: 'Quality gate + VA.gov submission guidance' },
-      { label: 'Ready to Submit', detail: 'All gates cleared; final status tips' }
+      { label: 'Received', detail: 'Intent filed & intake complete' },
+      { label: 'Evidence', detail: 'Gathering STRs & civilian records' },
+      { label: 'Review', detail: 'C&P exams and rater review' },
+      { label: 'Decision', detail: 'Decision letter & rating math' },
+      { label: 'Delivery', detail: 'Deposits & retroactive pay updates' }
     ];
 
     function renderClaims() {
@@ -541,10 +532,9 @@
     function seedMessages() {
       const feed = document.getElementById('messageFeed');
       const messages = [
-        { title: 'Zoho Sign completed', detail: 'Your contract + ROI pack are signed. Tracker advanced to Evidence Intake automatically.', time: '2h ago' },
-        { title: 'MDBQ webhook received', detail: 'Migraine + tinnitus MDBQs from Zoho Forms attached to your deal and marked complete.', time: 'Yesterday' },
-        { title: 'Provider attended', detail: 'Orthopedic appointment marked Attended. Evidence packet gate unlocked for QA.', time: 'Apr 10' },
-        { title: 'ITF timer', detail: 'Intent to File expires in 246 days—countdown is running so you don’t lose effective date.', time: 'Apr 9' }
+        { title: 'Evidence auto-imported', detail: 'Your orthopedic visit from 04/02 was synced from Dr. Carter.', time: '2h ago' },
+        { title: 'C&P scheduled', detail: 'Audiology exam set for 05/18 at 9:00 AM. Reminder will be texted.', time: 'Yesterday' },
+        { title: 'Payment math', detail: 'Projected retro pay for TY-7704: $5,420 based on review stage.', time: 'Apr 10' }
       ];
       feed.innerHTML = '';
       messages.forEach(msg => {
