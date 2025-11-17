@@ -1,678 +1,563 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TYFYS Benefits</title>
-    <!-- Google Fonts for Material style -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-      /*
-       * Custom properties make it easy to adjust the look and feel of the
-       * application in one place. You can tweak these values to quickly
-       * iterate on color and spacing without hunting through the style sheet.
-       */
-      :root {
-        --color-primary: #1976d2; /* vibrant blue inspired by Google Material */
-        --color-primary-dark: #1565c0;
-        --color-on-primary: #ffffff;
-        --color-surface: #ffffff;
-        --color-background: #f5f8fe;
-        --color-text: #212121;
-        --color-muted: #546e7a;
-        --border-radius: 8px;
-        --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      }
-      /* Simple reset */
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: 'Roboto', Arial, Helvetica, sans-serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You For Your Service | VA Benefits Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-surface: #ffffff;
+      --color-bg: #0d1b2a;
+      --color-panel: #102542;
+      --color-primary: #00c2ff;
+      --color-primary-dark: #00a3d6;
+      --color-accent: #9ef01a;
+      --color-muted: #90a4ae;
+      --radius: 14px;
+      --shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+    }
 
-      body {
-        background-color: var(--color-background);
-        color: var(--color-text);
-        line-height: 1.6;
-        font-family: 'Roboto', Arial, Helvetica, sans-serif;
-      }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: #e2e8f0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
 
-      header {
-        background-color: var(--color-primary);
-        color: var(--color-on-primary);
-        padding: 0.75rem 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        box-shadow: var(--card-shadow);
-      }
+    a { color: inherit; text-decoration: none; }
 
-      header h1 {
-        font-size: 1.25rem;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        margin-left: 0.25rem;
-      }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(13, 27, 42, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
 
-      nav {
-        display: flex;
-        gap: 1.5rem;
-      }
+    .nav-shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+    }
 
-      nav a {
-        color: rgba(255, 255, 255, 0.9);
-        text-decoration: none;
-        font-weight: 500;
-        padding-bottom: 0.25rem;
-        position: relative;
-        transition: color 0.2s ease;
-      }
+    .brand { display: flex; align-items: center; gap: 0.75rem; }
+    .brand img { height: 42px; width: auto; }
+    .brand span { font-weight: 700; letter-spacing: 0.5px; }
 
-      /* underline animation on hover */
-      nav a::after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 2px;
-        background: rgba(255, 255, 255, 0.7);
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        transition: width 0.2s;
-      }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
 
-      nav a:hover {
-        color: var(--color-on-primary);
-      }
+    nav a { padding: 0.5rem 0.75rem; border-radius: 999px; transition: background 0.2s; }
+    nav a:hover { background: rgba(255, 255, 255, 0.06); }
 
-      nav a:hover::after {
-        width: 100%;
-      }
+    .hero {
+      max-width: 1200px;
+      margin: 2rem auto 1rem;
+      padding: 2rem 1.25rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
 
-      section {
-        padding: 1.5rem 1rem;
-        max-width: 960px;
-        margin: 0 auto;
-      }
+    .panel {
+      background: var(--color-panel);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
 
-      .card {
-        background-color: var(--color-surface);
-        border-radius: var(--border-radius);
-        padding: 1.25rem;
-        margin-bottom: 1rem;
-        box-shadow: var(--card-shadow);
-      }
+    h1 { font-size: 2.1rem; margin: 0 0 0.75rem; }
+    h2 { margin: 0 0 0.5rem; }
+    p { margin: 0 0 0.75rem; color: #cfd8e3; }
 
-      .card h2 {
-        margin-bottom: 0.75rem;
-        font-size: 1.25rem;
-        font-weight: 500;
-        color: var(--color-primary-dark);
-      }
+    .cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.1rem;
+      border-radius: 10px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.2px;
+    }
 
-      button, .btn {
-        display: inline-block;
-        background-color: var(--color-primary);
-        color: var(--color-on-primary);
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-        font-size: 0.9rem;
-        font-weight: 500;
-        letter-spacing: 0.3px;
-        text-transform: uppercase;
-      }
+    .btn-primary { background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: #04111f; box-shadow: 0 12px 20px rgba(0, 194, 255, 0.28); }
+    .btn-ghost { background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.08); }
+    .btn:hover { transform: translateY(-2px); }
 
-      button:hover, .btn:hover {
-        background-color: var(--color-primary-dark);
-      }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
 
-      /* Simple responsive grid */
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1rem;
-      }
+    .section { max-width: 1200px; margin: 0 auto 1.5rem; padding: 0 1.25rem; }
+    .section h2 { display: flex; align-items: center; gap: 0.5rem; letter-spacing: 0.4px; }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 0.5rem;
-        border-radius: var(--border-radius);
-        overflow: hidden;
-      }
+    .tracker { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1rem; }
 
-      th, td {
-        padding: 0.75rem 1rem;
-        text-align: left;
-      }
+    .status-bar { position: relative; padding: 1rem 1rem 1.2rem; }
+    .status-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.5rem; }
+    .status-steps li {
+      text-align: center;
+      background: rgba(255,255,255,0.04);
+      padding: 0.9rem 0.6rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+    .status-steps li.active {
+      background: linear-gradient(135deg, rgba(0, 194, 255, 0.18), rgba(158, 240, 26, 0.18));
+      border-color: rgba(0, 194, 255, 0.6);
+    }
+    .status-steps li span { display: block; font-size: 0.9rem; font-weight: 700; color: #fff; }
+    .status-steps li small { color: #cfd8e3; opacity: 0.8; }
 
-      th {
-        background-color: #e3f2fd;
-        color: #1a237e;
-        font-weight: 500;
-      }
+    .progress-shell { position: relative; margin-top: 1rem; height: 8px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
+    .progress-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; background: linear-gradient(90deg, var(--color-primary), var(--color-accent)); transition: width 0.4s ease; }
 
-      tbody tr:nth-child(odd) {
-        background-color: #fafafa;
-      }
+    .claim-card { display: flex; gap: 0.8rem; align-items: center; justify-content: space-between; padding: 0.9rem 1rem; background: rgba(255,255,255,0.03); border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); }
+    .claim-card strong { color: #fff; }
+    .badge { padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(158, 240, 26, 0.16); color: #c4ff4d; font-weight: 700; font-size: 0.85rem; }
 
-      tbody tr:hover {
-        background-color: #e8f0fe;
-      }
+    .timeline { border-left: 2px solid rgba(255,255,255,0.08); margin: 0; padding: 0 0 0 1.25rem; list-style: none; }
+    .timeline li { margin-bottom: 1rem; position: relative; }
+    .timeline li::before { content: ''; position: absolute; left: -1.35rem; top: 4px; width: 12px; height: 12px; background: var(--color-primary); border-radius: 50%; box-shadow: 0 0 0 4px rgba(0, 194, 255, 0.16); }
+    .timeline strong { display: block; color: #fff; margin-bottom: 0.25rem; }
 
-      /* Simple calculator style */
-      .calculator label {
-        display: block;
-        margin: 0.5rem 0 0.25rem;
-      }
+    .tool-form label { display: block; margin-bottom: 0.4rem; color: #cfd8e3; }
+    .tool-form input, .tool-form select, .tool-form textarea {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      font-size: 1rem;
+    }
 
-      .calculator input {
-        width: 100%;
-        padding: 0.5rem;
-        border: 1px solid #cfd8dc;
-        border-radius: 4px;
-        background-color: #fafafa;
-      }
+    .tool-form input:focus, .tool-form select:focus, .tool-form textarea:focus { outline: 2px solid var(--color-primary); }
 
-      .calculator-result {
-        margin-top: 0.75rem;
-        font-weight: 500;
-        color: var(--color-primary-dark);
-      }
+    .result { margin-top: 0.5rem; font-weight: 700; color: #fff; }
 
-      /* Material Design overrides */
-      /* Import Roboto font */
-      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-      body {
-        background-color: #f5f5f5;
-        color: #212121;
-        font-family: 'Roboto', sans-serif;
-      }
-      header {
-        background-color: #1976d2;
-        padding: 1rem 2rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-      header h1 {
-        font-size: 1.25rem;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-      }
-      nav {
-        gap: 1.5rem;
-      }
-      nav a {
-        color: #e3f2fd;
-        position: relative;
-        padding: 0.5rem 0;
-        transition: color 0.2s ease;
-        text-decoration: none;
-      }
-      nav a::after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 2px;
-        background: #bbdefb;
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        transition: width 0.2s;
-      }
-      nav a:hover {
-        color: #fff;
-      }
-      nav a:hover::after {
-        width: 100%;
-      }
-      section {
-        max-width: 960px;
-      }
-      .card {
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      }
-      .card h2,
-      .card h3 {
-        font-weight: 500;
-        margin-bottom: 0.75rem;
-      }
-      button,
-      .btn {
-        background-color: #1976d2;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-      button:hover,
-      .btn:hover {
-        background-color: #1565c0;
-      }
-      .calculator input {
-        border: 1px solid #cfd8dc;
-        background-color: #fafafa;
-      }
-      /* Material table styling */
-      table {
-        border-collapse: collapse;
-        border-radius: 8px;
-        overflow: hidden;
-      }
-      th, td {
-        padding: 0.75rem 1rem;
-        color: #424242;
-      }
-      th {
-        background-color: #e3f2fd;
-        color: #1a237e;
-        font-weight: 500;
-      }
-      tbody tr:nth-child(odd) {
-        background-color: #fafafa;
-      }
-      tbody tr:hover {
-        background-color: #e8f0fe;
-      }
-      tbody td a.btn {
-        padding: 0.25rem 0.75rem;
-        font-size: 0.875rem;
-      }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .mini-card { padding: 1rem; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
+    .mini-card h3 { margin: 0 0 0.35rem; }
+    .mini-card p { margin: 0 0 0.6rem; font-size: 0.95rem; color: #cfd8e3; }
 
-      /* Responsive header and navigation */
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        padding: 1rem 2rem;
-      }
+    .messages { display: grid; gap: 0.75rem; }
+    .message { padding: 0.9rem 1rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
+    .message small { color: #9fb3c8; }
 
-      header .logo {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      header .logo img {
-        /* Increase the logo height slightly for better legibility of the full logo */
-        height: 48px;
-        width: auto;
-      }
-
-      header nav {
-        display: flex;
-        gap: 1rem;
-      }
-
-      .menu-toggle {
-        display: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        user-select: none;
-      }
-
-      @media (max-width: 768px) {
-        header nav {
-          display: none;
-          flex-direction: column;
-          position: absolute;
-          right: 1rem;
-          top: 60px;
-          background: var(--color-surface);
-          box-shadow: var(--card-shadow);
-          padding: 1rem;
-          border-radius: var(--border-radius);
-          z-index: 999;
-        }
-
-        /* When the mobile menu is open, adjust link colors to match the surface */
-        header nav a {
-          color: var(--color-text);
-          padding: 0.5rem 0;
-        }
-
-        header nav a::after {
-          background: var(--color-primary);
-        }
-        header nav.show {
-          display: flex;
-        }
-        .menu-toggle {
-          display: block;
-        }
-      }
-    </style>
-    <script>
-      // Combined rating calculator logic
-      function calculateCombinedRating() {
-        const ratingsInput = document.getElementById('ratings');
-        const resultEl = document.getElementById('combinedResult');
-        const values = ratingsInput.value
-          .split(',')
-          .map(v => parseInt(v.trim(), 10))
-          .filter(v => !isNaN(v) && v > 0);
-        if (values.length === 0) {
-          resultEl.textContent = 'Please enter at least one rating.';
-          return;
-        }
-        // Sort descending
-        values.sort((a, b) => b - a);
-        let combined = values[0];
-        for (let i = 1; i < values.length; i++) {
-          combined = Math.round((combined + values[i] * (100 - combined) / 100) * 10) / 10;
-        }
-        // Round to nearest 10 per VA rules
-        const rounded = Math.round(combined / 10) * 10;
-        resultEl.textContent = `Combined rating: ${rounded}% (raw: ${combined.toFixed(1)}%)`;
-      }
-      // Dependents payment estimator (sample values)
-      const demoRates = {
-        2024: {
-          '100': { vet: 0, vet_spouse: 0, vet_spouse_1child: 0, add_child_under18: 0, add_child_over18_school: 0 },
-          '90': { vet: 0, vet_spouse: 0, vet_spouse_1child: 0, add_child_under18: 0, add_child_over18_school: 0 },
-          '80': { vet: 0, vet_spouse: 0, vet_spouse_1child: 0, add_child_under18: 0, add_child_over18_school: 0 }
-        }
-      };
-      function estimatePayment() {
-        const rating = document.getElementById('ratingSelect').value;
-        const dependents = parseInt(document.getElementById('numDependents').value, 10);
-        const year = document.getElementById('rateYear').value;
-        const result = document.getElementById('paymentResult');
-        const rates = demoRates[year] && demoRates[year][rating];
-        if (!rates) {
-          result.textContent = 'Rates not available for selected year/rating.';
-          return;
-        }
-        // For demo, base amount is zero; user can edit rates in script or via Tools later.
-        let amount = rates.vet;
-        if (dependents > 0) {
-          amount += rates.vet_spouse;
-          if (dependents > 1) {
-            amount += rates.vet_spouse_1child;
-            if (dependents > 2) {
-              amount += (dependents - 2) * rates.add_child_under18;
-            }
-          }
-        }
-        result.textContent = `Estimated monthly payment: $${amount.toFixed(2)}`;
-      }
-    </script>
-  </head>
-  <body>
-    <header>
-      <!-- Logo only -->
-      <div class="logo">
+    @media (max-width: 960px) {
+      .hero, .tracker { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-shell">
+      <div class="brand">
         <img src="logo.png" alt="Thank You For Your Service logo" />
+        <span>Thank You For Your Service</span>
       </div>
-      <!-- Mobile menu toggle -->
-      <span class="menu-toggle" onclick="toggleMenu()">☰</span>
-      <!-- Navigation links -->
-      <nav id="navLinks">
-        <a href="#home">Home</a>
-        <a href="#claims">Claims</a>
-        <a href="#documents">Documents</a>
-        <a href="#forms">Forms</a>
+      <nav>
+        <a href="#tracker">Tracker</a>
         <a href="#tools">Tools</a>
-        <a href="#inbox">Inbox</a>
-        <a href="#more">More</a>
+        <a href="#resources">Resources</a>
+        <a href="#messages">Updates</a>
       </nav>
-    </header>
-    <main>
-      <section id="home">
-        <h2>Welcome</h2>
-        <div class="card">
-          <h3>Your Claim</h3>
-          <p>Status: <strong>In review</strong></p>
-          <p>Next step: Upload civilian ortho notes</p>
-          <button onclick="alert('This would show your timeline in a full app')">View timeline</button>
-          <button style="margin-left:1rem;" onclick="alert('Help request sent!')">Ask for Help</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+        <h1>Veteran-first, self-serve VA benefits—no skipped steps.</h1>
+        <p>Thank You For Your Service guides you from eligibility triage to a fully developed claim, with a Domino's-style tracker, Zoho-powered contracts and MDBQs, and a "Talk to a Specialist" off-ramp at every key milestone.</p>
+        <div class="cta-row">
+          <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
+          <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
         </div>
-        <div class="card">
-          <h3>Continue your packet</h3>
-          <p>Selected conditions: <span id="selectedConditionsText">0 of 5</span></p>
-          <button onclick="openClaimBuilder()">Open Claim Builder</button>
+        <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+          <span class="badge">Built with veterans</span>
+          <span class="badge" style="background:rgba(0,194,255,0.16); color:#8ee4ff;">Zoho-safe pipelines</span>
+          <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff;">VA-ready uploads</span>
+          <span class="badge" style="background:rgba(158,240,26,0.16); color:#c4ff4d;">No-skip checklists</span>
         </div>
-      </section>
-      <section id="claims">
-        <h2>Claims &amp; Appeals</h2>
-        <p>This section would show your claim timeline, milestones, decisions and let you upload evidence directly to the VA.</p>
-      </section>
-      <section id="documents">
-        <h2>Documents</h2>
-        <div class="grid">
-          <div class="card">
-            <h3>Start DBQ Minis</h3>
-            <p>Guided mini questionnaires to prepare Disability Benefits Questionnaires.</p>
-            <button onclick="alert('DBQ Minis wizard coming soon')">Begin</button>
+    </div>
+    <div class="panel">
+      <h2 style="margin-bottom:0.4rem;">Keep your claim moving</h2>
+      <div class="messages">
+        <div class="claim-card">
+          <div>
+            <strong>Claim TY-8842</strong>
+            <div style="color:#9fb3c8;">Knee &amp; lower back | Filed Mar 2025</div>
           </div>
-          <div class="card">
-            <h3>SF-180 Helper</h3>
-            <p>Request your Service Treatment Records (STRs) via Standard Form 180.</p>
-            <button onclick="alert('SF-180 helper coming soon')">Open helper</button>
+          <span class="badge">Evidence Package</span>
+        </div>
+        <div class="claim-card">
+          <div>
+            <strong>Claim TY-5130</strong>
+            <div style="color:#9fb3c8;">Hearing loss | Filed Jan 2025</div>
           </div>
-          <div class="card">
-            <h3>Upload Civilian Records</h3>
-            <p>Securely upload documents from outside providers.</p>
-            <button onclick="alert('Upload feature coming soon')">Upload</button>
+          <span class="badge" style="background:rgba(0,194,255,0.16); color:#7ee5ff;">Intake &amp; MDBQs</span>
+        </div>
+        <div class="cta-row">
+          <button class="btn btn-primary" style="flex:1;" onclick="openUpload()">Add evidence now</button>
+          <button class="btn btn-ghost" style="flex:1;" onclick="alert('We will surface provider windows and sync status to your App Pipeline stage.')">Provider scheduling</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tracker">
+    <h2>Real-time claim tracker</h2>
+    <div class="tracker">
+      <div class="panel">
+        <div class="tool-form" style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem; align-items:end; margin-bottom:1rem;">
+          <div>
+            <label for="claimSelect">Claim number</label>
+            <select id="claimSelect" onchange="setActiveClaim(this.value)"></select>
           </div>
-          <div class="card">
-            <h3>Export Packet</h3>
-            <p>Generate a ready-to-file PDF of your claim packet.</p>
-            <button onclick="alert('Packet export coming soon')">Export PDF</button>
+          <div>
+            <label for="stageSelect">Jump to stage</label>
+            <select id="stageSelect" onchange="setStage(parseInt(this.value,10))"></select>
           </div>
         </div>
-      </section>
-      <section id="forms">
-        <h2>Common VA Forms</h2>
-        <p>Download blank forms directly from the VA.</p>
-        <table>
-          <thead>
-            <tr><th>Form</th><th>Description</th><th>Download</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>21-526EZ</td><td>Application for Disability Compensation</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">PDF</a></td></tr>
-            <tr><td>21-0781</td><td>Statement in Support of Claim for PTSD</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-0781-ARE.pdf">PDF</a></td></tr>
-            <tr><td>21-686c</td><td>Application Request to Add and/or Remove Dependents</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-686c-ARE.pdf">PDF</a></td></tr>
-            <tr><td>21-2680</td><td>Examination for Housebound Status</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-2680-ARE.pdf">PDF</a></td></tr>
-            <tr><td>21-8940</td><td>Veteran’s Application for Increased Compensation Based on Unemployability</td><td><a class="btn" href="https://www.vba.va.gov/pubs/forms/VBA-21-8940-ARE.pdf">PDF</a></td></tr>
-            <tr><td>SF-180</td><td>Request for Military Records</td><td><a class="btn" href="https://www.archives.gov/files/standard-form-180.pdf">PDF</a></td></tr>
-          </tbody>
-        </table>
-      </section>
-      <section id="tools">
-        <h2>Tools</h2>
-        <div class="card calculator">
-          <h3>Combined Rating Calculator</h3>
-          <label for="ratings">Enter disability ratings separated by commas (e.g. 50, 30, 20):</label>
-          <input id="ratings" type="text" placeholder="50, 30, 20" />
-          <button style="margin-top:0.5rem;" onclick="calculateCombinedRating()">Calculate</button>
-          <div id="combinedResult" class="calculator-result"></div>
+
+        <div class="status-bar">
+          <ul class="status-steps" id="stepList"></ul>
+          <div class="progress-shell">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
         </div>
-        <div class="card calculator">
-          <h3>Dependents &amp; Payment Estimator</h3>
-          <label for="ratingSelect">Rating:</label>
+
+        <ul class="timeline" id="timeline"></ul>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin-top:0;">What happens next</h3>
+        <div class="mini-card">
+          <h3>Welcome &amp; triage</h3>
+          <p>Confirm service history, current rating, ITF status, and eligibility score. Switch to “Talk to a Specialist” any time.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Contract + MDBQs</h3>
+          <p>Secure checkout triggers Zoho Sign contracts and ROI pack; MDBQs are embedded via Zoho Forms with required pre-fills.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Evidence &amp; delivery</h3>
+          <p>Provider scheduling, evidence packet build, and final review are gated so nothing moves forward until every checklist is done.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tools">
+    <h2>Built-in help from the TYFYS homepage</h2>
+    <div class="grid">
+      <div class="panel">
+        <h3>Combined rating calculator</h3>
+        <p>Use the same math as VA.gov so you know what to expect.</p>
+        <div class="tool-form">
+          <label for="ratings">Enter ratings (comma separated)</label>
+          <input id="ratings" type="text" placeholder="50, 30, 10" />
+          <button class="btn btn-primary" style="margin-top:0.5rem;" onclick="calculateCombinedRating()">Calculate</button>
+          <div id="combinedResult" class="result"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Dependents &amp; payment estimator (2025)</h3>
+        <div class="tool-form">
+          <label for="ratingSelect">Rating</label>
           <select id="ratingSelect">
             <option value="70">70%</option>
             <option value="80">80%</option>
             <option value="90">90%</option>
             <option value="100">100%</option>
           </select>
-          <label><input type="checkbox" id="spouseCheck"> Have a spouse?</label>
-          <label for="numUnder18">Children under 18:</label>
+          <label><input type="checkbox" id="spouseCheck" /> Include spouse</label>
+          <label for="numUnder18">Children under 18</label>
           <input id="numUnder18" type="number" min="0" value="0" />
-          <label for="numOver18">Children 18–23 (school):</label>
+          <label for="numOver18">Children 18–23 (in school)</label>
           <input id="numOver18" type="number" min="0" value="0" />
-          <button style="margin-top:0.5rem;" onclick="estimatePayment()">Estimate</button>
-          <div id="paymentResult" class="calculator-result"></div>
-          <p style="font-size: 0.85rem; color: #6b7280;">Rates effective Dec 1 2024. See VA tables for details.</p>
+          <button class="btn btn-primary" style="margin-top:0.5rem;" onclick="estimatePayment()">Estimate</button>
+          <div id="paymentResult" class="result"></div>
         </div>
-      </section>
-      <section id="inbox">
-        <h2>Inbox</h2>
-        <p>Your secure messages, reminders and updates will appear here.</p>
-      </section>
-      <section id="more">
-        <h2>More</h2>
-        <ul style="list-style: disc; margin-left: 1rem;">
-          <li>VA Letters</li>
-          <li>Payments &amp; Direct Deposit</li>
-          <li>Find VA Facility</li>
-          <li>Veterans Crisis Line: <a href="tel:988">988</a></li>
-          <li>Settings &amp; Profile</li>
-        </ul>
-        <p style="margin-top:1rem; font-size: 0.85rem; color: #6b7280;">TYFYS is not a VSO or law firm. We do not prepare or submit VA claims. We help coordinate medical evidence and organization for veterans.</p>
-      </section>
-    </main>
-  
-    <!-- Claim Builder Modal -->
-    <div id="claimBuilderModal" style="display:none; position: fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.4); z-index: 1000; overflow:auto;">
-      <div class="card" style="max-width: 500px; margin: 5% auto; padding: 1.5rem; background:#ffffff; border-radius: 8px; position: relative;">
-        <h3>Claim Builder</h3>
-        <p>Add up to 5 conditions for your claim.</p>
-        <div style="margin-bottom: 0.5rem;">
-          <input id="conditionInput" type="text" placeholder="Enter condition" style="width: 70%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 4px;" />
-          <button class="btn" onclick="addCondition()" style="margin-left: 0.5rem;">Add</button>
-        </div>
-        <ul id="conditionList" style="list-style: disc; margin-left: 1rem; margin-bottom: 1rem;"></ul>
-        <div style="text-align: right;">
-          <button class="btn" onclick="closeClaimBuilder()">Close</button>
+      </div>
+      <div class="panel">
+        <h3>Packet prep</h3>
+        <div class="cards">
+          <div class="mini-card">
+            <h3>Evidence by condition</h3>
+            <p>Interactive checklists by condition category and rating criteria so you know what the VA expects.</p>
+            <button class="btn btn-ghost" onclick="alert('Condition-specific checklist coming from your slide content')">View guidance</button>
+          </div>
+          <div class="mini-card">
+            <h3>Occupation &amp; era navigator</h3>
+            <p>Choose your MOS/rate to see common primary &amp; secondary conditions, exposures, and recommended evaluations.</p>
+            <button class="btn btn-ghost" onclick="alert('Occupation/era explorer launching soon')">Explore</button>
+          </div>
+          <div class="mini-card">
+            <h3>Upload civilian records</h3>
+            <p>Secure vault for physician letters, imaging, and nexus opinions.</p>
+            <button class="btn btn-ghost" onclick="openUpload()">Upload</button>
+          </div>
+          <div class="mini-card">
+            <h3>Objection-aware tips</h3>
+            <p>Education modules that address timing, payment plans, and myths about ratings right when you need them.</p>
+            <button class="btn btn-ghost" onclick="alert('Contextual helper will surface at drop-off points')">See how it works</button>
+          </div>
         </div>
       </div>
     </div>
-    <script>
-    // 2025 VA compensation rates and estimators
-    const rates2025 = {
-        70: {
-          alone: 1759.19,
-          spouse: 1908.19,
-          spouseChild: 2018.19,
-          firstChild: 1858.19,
-          addChildUnder18: 74.0,
-          addChildOver18: 239.0
-        },
-        80: {
-          alone: 2044.89,
-          spouse: 2214.89,
-          spouseChild: 2340.89,
-          firstChild: 2158.89,
-          addChildUnder18: 84.0,
-          addChildOver18: 274.0
-        },
-        90: {
-          alone: 2297.96,
-          spouse: 2489.96,
-          spouseChild: 2630.96,
-          firstChild: 2425.96,
-          addChildUnder18: 95.0,
-          addChildOver18: 308.0
-        },
-        100: {
-          alone: 3831.30,
-          spouse: 4044.91,
-          spouseChild: 4201.35,
-          firstChild: 3974.15,
-          addChildUnder18: 106.14,
-          addChildOver18: 342.85
-        }
-      };
-    function estimatePayment() {
-        const rating = parseInt(document.getElementById('ratingSelect').value, 10);
-        const hasSpouse = document.getElementById('spouseCheck').checked;
-        const numUnder18 = parseInt(document.getElementById('numUnder18').value, 10) || 0;
-        const numOver18 = parseInt(document.getElementById('numOver18').value, 10) || 0;
-        const r = rates2025[rating];
-        const result = document.getElementById('paymentResult');
-        if (!r) {
-          result.textContent = 'Rates not available for the selected rating.';
-          return;
-        }
-        const totalChildren = numUnder18 + numOver18;
-        let amount;
-        if (hasSpouse) {
-          if (totalChildren > 0) {
-            amount = r.spouseChild;
-          } else {
-            amount = r.spouse;
-          }
-        } else {
-          if (totalChildren > 0) {
-            amount = r.firstChild;
-          } else {
-            amount = r.alone;
-          }
-        }
-        if (totalChildren > 0) {
-          let remainingUnder18 = numUnder18;
-          let remainingOver18 = numOver18;
-          if (remainingUnder18 > 0) {
-            remainingUnder18 -= 1;
-          } else if (remainingOver18 > 0) {
-            remainingOver18 -= 1;
-          }
-          amount += remainingUnder18 * r.addChildUnder18;
-          amount += remainingOver18 * r.addChildOver18;
-        }
-        result.textContent = `Estimated monthly payment: $${amount.toFixed(2)}`;
+  </section>
+
+  <section class="section" id="resources">
+    <h2>Resources that mirror your blueprint</h2>
+    <div class="grid">
+      <div class="panel mini-card">
+        <h3>DD-214 + ITF guide</h3>
+        <p>Step-by-step retrieval links, ITF filing checklist, and an expiry countdown so you never lose your spot.</p>
+        <button class="btn btn-primary" onclick="alert('Guided DD-214 and ITF helper coming soon')">View guide</button>
+      </div>
+      <div class="panel mini-card">
+        <h3>Us vs. common options</h3>
+        <p>Transparent education on why TYFYS builds evidence end-to-end without naming outside companies.</p>
+        <button class="btn btn-primary" onclick="alert('Value education module opens here')">Compare approaches</button>
+      </div>
+      <div class="panel mini-card">
+        <h3>VA forms</h3>
+        <p>Direct downloads for the forms you use most during the tracker: 21-526EZ, 21-0781, 21-686c, 21-8940, and SF-180.</p>
+        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">Download pack</a>
+      </div>
+      <div class="panel mini-card">
+        <h3>Evidence packet checklist</h3>
+        <p>What “complete” looks like: lay statements, MDBQs, STRs, civilian records, and exposure considerations by era.</p>
+        <button class="btn btn-primary" onclick="alert('Evidence packet checklist launching soon')">See checklist</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="messages">
+    <h2>Updates from your TYFYS team</h2>
+    <div class="messages" id="messageFeed"></div>
+  </section>
+
+  <script>
+    // Claim data representing VA.gov milestones with a Domino's-style tracker
+    const claims = [
+      {
+        id: 'TY-8842',
+        veteran: 'Alex R.',
+        conditions: 'Knee & lower back',
+        filed: 'Mar 2025',
+        stage: 8,
+        events: [
+          { title: 'Evidence packet build', detail: 'Zoho Sign contracts + ROI saved. Pulling MDBQs, STRs, lay statements into a single packet.' },
+          { title: 'Gating enforced', detail: 'Provider attendance confirmed; checklist locked until packet completeness score is green.' },
+          { title: 'Next', detail: 'Final review guidance and VA.gov handoff will unlock after QA.' }
+        ]
+      },
+      {
+        id: 'TY-5130',
+        veteran: 'Jordan S.',
+        conditions: 'Hearing loss',
+        filed: 'Jan 2025',
+        stage: 6,
+        events: [
+          { title: 'Intake data synced', detail: 'Self-guided interview captured discovery-call fields and synced to CRM with note standards.' },
+          { title: 'MDBQs in progress', detail: 'Zoho Forms pre-filled with Contact + Deal IDs. We advance only when the webhook lands.' },
+          { title: 'Talk to a Specialist', detail: 'Available at this step for live intake without breaking the App Pipeline.' }
+        ]
+      },
+      {
+        id: 'TY-7704',
+        veteran: 'Taylor M.',
+        conditions: 'Migraines & tinnitus',
+        filed: 'Feb 2025',
+        stage: 9,
+        events: [
+          { title: 'Provider scheduling', detail: 'Preferences captured; appointment attended and logged as “Attended” before moving forward.' },
+          { title: 'Evidence QA', detail: 'Reviewing exposure by era, secondary conditions, and MDBQ completeness before delivery.' },
+          { title: 'Ready to submit next', detail: 'VA.gov submission helper will unlock after packet quality gate.' }
+        ]
       }
-    // Claim builder functions
-    const selectedConditions = [];
-    function openClaimBuilder() {
-      document.getElementById('claimBuilderModal').style.display = 'block';
-      updateConditionList();
-    }
-    function closeClaimBuilder() {
-      document.getElementById('claimBuilderModal').style.display = 'none';
-    }
-    function addCondition() {
-      const input = document.getElementById('conditionInput');
-      const condition = input.value.trim();
-      if (condition && selectedConditions.length < 5) {
-        selectedConditions.push(condition);
-        input.value = '';
-        updateConditionList();
-      }
-    }
-    function removeCondition(index) {
-      selectedConditions.splice(index, 1);
-      updateConditionList();
-    }
-    function updateConditionList() {
-      const list = document.getElementById('conditionList');
-      list.innerHTML = '';
-      selectedConditions.forEach((cond, idx) => {
-        const li = document.createElement('li');
-        li.textContent = cond;
-        const btn = document.createElement('button');
-        btn.textContent = 'Remove';
-        btn.className = 'btn';
-        btn.style.marginLeft = '0.5rem';
-        btn.onclick = () => removeCondition(idx);
-        li.appendChild(btn);
-        list.appendChild(li);
+    ];
+
+    const steps = [
+      { label: 'Welcome & Eligibility Triage', detail: 'Service history, goals, ITF check, eligibility score' },
+      { label: 'ROI/Offer & Secure Checkout', detail: 'Projected impact + Zoho Sign contract & ROI pack' },
+      { label: 'Account Setup & Portal Orientation', detail: 'Secure login and tracker walkthrough' },
+      { label: 'DD-214 & ITF', detail: 'Guided retrieval + ITF countdown' },
+      { label: 'Service & Medical Records Intake', detail: 'SF-180 for STRs + civilian upload checklist' },
+      { label: 'Intake Interview', detail: 'Self-guided or live; notes schema-enforced' },
+      { label: 'MDBQs via Zoho Forms', detail: 'Pre-filled forms; advance only on webhook' },
+      { label: 'Provider Scheduling', detail: 'Preferences, reminders, attendance tracking' },
+      { label: 'Evidence Package Build', detail: 'Signed forms, MDBQs, lay statements compiled' },
+      { label: 'Final Review & Delivery', detail: 'Quality gate + VA.gov submission guidance' },
+      { label: 'Ready to Submit', detail: 'All gates cleared; final status tips' }
+    ];
+
+    function renderClaims() {
+      const select = document.getElementById('claimSelect');
+      const stageSelect = document.getElementById('stageSelect');
+      select.innerHTML = '';
+      stageSelect.innerHTML = '';
+      claims.forEach(claim => {
+        const opt = document.createElement('option');
+        opt.value = claim.id;
+        opt.textContent = `${claim.id} — ${claim.conditions}`;
+        select.appendChild(opt);
       });
-      const progress = document.getElementById('selectedConditionsText');
-      if (progress) {
-        progress.textContent = `${selectedConditions.length} of 5`;
+      steps.forEach((step, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = `${idx + 1}. ${step.label}`;
+        stageSelect.appendChild(opt);
+      });
+    }
+
+    function setActiveClaim(id) {
+      const claim = claims.find(c => c.id === id) || claims[0];
+      if (!claim) return;
+      document.getElementById('claimSelect').value = claim.id;
+      document.getElementById('stageSelect').value = claim.stage;
+      renderSteps(claim.stage);
+      renderTimeline(claim.events);
+    }
+
+    function setStage(stageIndex) {
+      const claimId = document.getElementById('claimSelect').value;
+      const claim = claims.find(c => c.id === claimId);
+      if (claim) {
+        claim.stage = stageIndex;
+        renderSteps(stageIndex);
       }
     }
 
-    // Toggle mobile navigation menu visibility
-    function toggleMenu() {
-      const nav = document.getElementById('navLinks');
-      if (nav) {
-        nav.classList.toggle('show');
-      }
+    function renderSteps(activeIndex) {
+      const list = document.getElementById('stepList');
+      list.innerHTML = '';
+      steps.forEach((step, idx) => {
+        const li = document.createElement('li');
+        if (idx <= activeIndex) li.classList.add('active');
+        li.innerHTML = `<span>${step.label}</span><small>${step.detail}</small>`;
+        list.appendChild(li);
+      });
+      const percent = (activeIndex / (steps.length - 1)) * 100;
+      document.getElementById('progressBar').style.width = `${percent}%`;
     }
-    </script>
-  </body>
+
+    function renderTimeline(events) {
+      const timeline = document.getElementById('timeline');
+      timeline.innerHTML = '';
+      events.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${item.title}</strong><span>${item.detail}</span>`;
+        timeline.appendChild(li);
+      });
+    }
+
+    // Combined rating calculator
+    function calculateCombinedRating() {
+      const input = document.getElementById('ratings').value;
+      const values = input.split(',').map(v => parseInt(v.trim(), 10)).filter(v => !isNaN(v) && v > 0);
+      const result = document.getElementById('combinedResult');
+      if (!values.length) {
+        result.textContent = 'Add at least one rating separated by commas (e.g. 50, 30, 20).';
+        return;
+      }
+      values.sort((a, b) => b - a);
+      let combined = values[0];
+      for (let i = 1; i < values.length; i++) {
+        combined = Math.round((combined + values[i] * (100 - combined) / 100) * 10) / 10;
+      }
+      const rounded = Math.round(combined / 10) * 10;
+      result.textContent = `Combined rating: ${rounded}% (raw: ${combined.toFixed(1)}%)`;
+    }
+
+    // Dependents payment estimator based on 2025 VA tables (sample values)
+    const rates2025 = {
+      70: { alone: 1759.19, spouse: 1908.19, spouseChild: 2018.19, firstChild: 1858.19, addChildUnder18: 74.0, addChildOver18: 239.0 },
+      80: { alone: 2044.89, spouse: 2214.89, spouseChild: 2340.89, firstChild: 2158.89, addChildUnder18: 84.0, addChildOver18: 274.0 },
+      90: { alone: 2297.96, spouse: 2489.96, spouseChild: 2630.96, firstChild: 2425.96, addChildUnder18: 95.0, addChildOver18: 308.0 },
+      100: { alone: 3831.30, spouse: 4044.91, spouseChild: 4201.35, firstChild: 3974.15, addChildUnder18: 106.14, addChildOver18: 342.85 }
+    };
+
+    function estimatePayment() {
+      const rating = parseInt(document.getElementById('ratingSelect').value, 10);
+      const hasSpouse = document.getElementById('spouseCheck').checked;
+      const numUnder18 = parseInt(document.getElementById('numUnder18').value, 10) || 0;
+      const numOver18 = parseInt(document.getElementById('numOver18').value, 10) || 0;
+      const r = rates2025[rating];
+      const result = document.getElementById('paymentResult');
+      if (!r) { result.textContent = 'Rates not available for the selected rating.'; return; }
+
+      const totalChildren = numUnder18 + numOver18;
+      let amount;
+      if (hasSpouse) {
+        amount = totalChildren > 0 ? r.spouseChild : r.spouse;
+      } else {
+        amount = totalChildren > 0 ? r.firstChild : r.alone;
+      }
+
+      if (totalChildren > 0) {
+        let remainingUnder18 = numUnder18;
+        let remainingOver18 = numOver18;
+        if (remainingUnder18 > 0) {
+          remainingUnder18 -= 1;
+        } else if (remainingOver18 > 0) {
+          remainingOver18 -= 1;
+        }
+        amount += remainingUnder18 * r.addChildUnder18;
+        amount += remainingOver18 * r.addChildOver18;
+      }
+
+      result.textContent = `Estimated monthly payment: $${amount.toFixed(2)}`;
+    }
+
+    function openUpload() {
+      alert('Secure evidence uploader opens here. Drag-and-drop and VA.gov upload coming soon.');
+    }
+
+    function seedMessages() {
+      const feed = document.getElementById('messageFeed');
+      const messages = [
+        { title: 'Zoho Sign completed', detail: 'Your contract + ROI pack are signed. Tracker advanced to Evidence Intake automatically.', time: '2h ago' },
+        { title: 'MDBQ webhook received', detail: 'Migraine + tinnitus MDBQs from Zoho Forms attached to your deal and marked complete.', time: 'Yesterday' },
+        { title: 'Provider attended', detail: 'Orthopedic appointment marked Attended. Evidence packet gate unlocked for QA.', time: 'Apr 10' },
+        { title: 'ITF timer', detail: 'Intent to File expires in 246 days—countdown is running so you don’t lose effective date.', time: 'Apr 9' }
+      ];
+      feed.innerHTML = '';
+      messages.forEach(msg => {
+        const div = document.createElement('div');
+        div.className = 'message';
+        div.innerHTML = `<strong>${msg.title}</strong><p>${msg.detail}</p><small>${msg.time}</small>`;
+        feed.appendChild(div);
+      });
+    }
+
+    renderClaims();
+    setActiveClaim('TY-8842');
+    seedMessages();
+  </script>
+</body>
 </html>

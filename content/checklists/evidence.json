@@ -1,0 +1,26 @@
+{
+  "Back": [
+    "Service treatment records noting injuries or complaints",
+    "Recent imaging (MRI/X-ray)",
+    "Physical therapy notes",
+    "Lay statement describing functional limits"
+  ],
+  "Knee": [
+    "Service records of knee injury or overuse",
+    "Orthopedic exams or imaging",
+    "Range-of-motion measurements",
+    "Buddy statement on duty impact"
+  ],
+  "PTSD": [
+    "Stressors and timeline",
+    "Diagnosis from licensed provider",
+    "Therapy notes and medication history",
+    "Impact statement covering work and relationships"
+  ],
+  "Hearing": [
+    "MOS/Rate noise exposure evidence",
+    "Audiogram with thresholds",
+    "Tinnitus description",
+    "Protective equipment history"
+  ]
+}
