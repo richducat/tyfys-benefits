@@ -81,8 +81,6 @@ export default function App() {
         <div>
           <h1>{copy.hero.title}</h1>
           <p>{copy.hero.subtitle}</p>
-          <p style={{ marginTop: 8 }}>{copy.hero.description}</p>
-          <p style={{ marginTop: 8, fontWeight: 600 }}>{copy.hero.pledge}</p>
           <div className="badges">
             {copy.badges.map((badge) => (
               <span key={badge} className="badge">{badge}</span>
@@ -188,6 +186,42 @@ export default function App() {
               <p style={{ marginTop: 8 }}>{item.answer}</p>
             </div>
           ))}
+        <div className="tracker-grid">
+          <div>
+            <h2>Pizza-tracker</h2>
+            {tracker ? (
+              <div>
+                {tracker.stages.map((stage) => (
+                  <div key={stage.id} className={`stage-card ${stage.status}`}>
+                    <h4>{stage.name}</h4>
+                    <div className="stage-meta">
+                      <span>Status: {stage.status}</span>
+                      {stage.allowsSpecialist && <span>• Talk to a Specialist available</span>}
+                    </div>
+                    <p style={{ marginTop: 8 }}>{stage.description}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>Start a demo case to see the live tracker and gates.</p>
+            )}
+          </div>
+          <div>
+            <h2>Mock actions</h2>
+            <p style={{ marginTop: 0 }}>Use these to simulate Zoho Sign/Forms webhooks and provider attendance.</p>
+            <div className="tools-grid">
+              {mockActions.map((action) => (
+                <button
+                  key={action.label}
+                  className="tool-card"
+                  onClick={() => trigger(action.path, action.payload)}
+                  disabled={loading}
+                >
+                  {action.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -228,15 +262,6 @@ export default function App() {
               <small>{tier.detail}</small>
             </div>
           ))}
-        </div>
-      </div>
-
-      <div className="section" style={{ textAlign: 'center' }}>
-        <h2>{copy.closing.title}</h2>
-        <p style={{ marginTop: 0 }}>{copy.closing.body}</p>
-        <div className="actions" style={{ justifyContent: 'center' }}>
-          <button disabled>{copy.closing.ctaPrimary}</button>
-          <button className="secondary" disabled>{copy.closing.ctaSecondary}</button>
         </div>
       </div>
     </div>
