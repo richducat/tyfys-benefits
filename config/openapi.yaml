@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: TYFYS App Starter API
+  version: 0.1.0
+servers:
+  - url: http://localhost:4000
+paths:
+  /api/signup:
+    post:
+      summary: Create a demo case and tracker state
+      responses:
+        '200':
+          description: Tracker created
+  /api/tracker/{dealId}:
+    get:
+      summary: Get tracker state by deal id
+      parameters:
+        - in: path
+          name: dealId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tracker state
+  /api/contracts/{templateId}/create:
+    post:
+      summary: Create Zoho Sign document from template and return signing URL
+      parameters:
+        - in: path
+          name: templateId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Signing URL created
+  /api/webhooks/zoho-sign:
+    post:
+      summary: Handle Zoho Sign webhook and advance tracker
+      responses:
+        '200':
+          description: Tracker updated
+  /api/webhooks/zoho-forms:
+    post:
+      summary: Handle Zoho Forms webhook and advance tracker for MDBQs
+      responses:
+        '200':
+          description: Tracker updated
+  /api/appointments/{dealId}/schedule:
+    post:
+      summary: Create or update provider appointment and advance stage
+      parameters:
+        - in: path
+          name: dealId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Appointment recorded
