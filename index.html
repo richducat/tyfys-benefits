@@ -276,6 +276,10 @@
             <label for="stageSelect">Jump to stage</label>
             <select id="stageSelect" onchange="setStage(parseInt(this.value,10))"></select>
           </div>
+          <div>
+            <label for="stageSelect">Jump to stage</label>
+            <select id="stageSelect" onchange="setStage(parseInt(this.value,10))"></select>
+          </div>
         </div>
 
         <div class="status-bar">
@@ -314,6 +318,30 @@
           </div>
           <span class="badge" style="background:rgba(0,194,255,0.16); color:#7ee5ff;">Evidence</span>
         </div>
+
+        <div class="status-bar">
+          <ul class="status-steps" id="stepList"></ul>
+          <div class="progress-shell">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <ul class="timeline" id="timeline"></ul>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin-top:0;">What happens next</h3>
+        <div class="mini-card">
+          <h3>Welcome &amp; triage</h3>
+          <p>Confirm service history, current rating, ITF status, and eligibility score. Switch to “Talk to a Specialist” any time.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Contract + MDBQs</h3>
+          <p>Secure checkout triggers Zoho Sign contracts and ROI pack; MDBQs are embedded via Zoho Forms with required pre-fills.</p>
+        </div>
+        <div class="mini-card">
+          <h3>Evidence &amp; delivery</h3>
+          <p>Provider scheduling, evidence packet build, and final review are gated so nothing moves forward until every checklist is done.</p>
         <div class="cta-row">
           <button class="btn btn-primary" style="flex:1;" onclick="openUpload()">Add evidence now</button>
           <button class="btn btn-ghost" style="flex:1;" onclick="alert('Appointment scheduling coming soon')">Check C&amp;P availability</button>
@@ -322,6 +350,18 @@
     </div>
   </section>
 
+  <section class="section" id="tools">
+    <h2>Built-in help from the TYFYS homepage</h2>
+    <div class="grid">
+      <div class="panel">
+        <h3>Combined rating calculator</h3>
+        <p>Use the same math as VA.gov so you know what to expect.</p>
+        <div class="tool-form">
+          <label for="ratings">Enter ratings (comma separated)</label>
+          <input id="ratings" type="text" placeholder="50, 30, 10" />
+          <button class="btn btn-primary" style="margin-top:0.5rem;" onclick="calculateCombinedRating()">Calculate</button>
+          <div id="combinedResult" class="result"></div>
+        </div>
   <section class="section" id="tracker">
     <h2>Real-time claim tracker</h2>
     <div class="tracker">
