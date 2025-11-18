@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { copy, evidenceChecklists, trackerStages } from './data';
+import { copy, evidenceChecklists } from './data';
 
 const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000' });
 
@@ -13,20 +13,7 @@ const timeline = [
 ];
 
 export default function App() {
-  const offlineTracker = useMemo(() => {
-    const stageIndex = 3;
-    const percent = Math.round((stageIndex / (trackerStages.length - 1)) * 100);
-    return {
-      dealId: 'offline-demo',
-      stageIndex,
-      percentComplete: percent,
-      stageName: trackerStages[stageIndex].name,
-      note: 'Static preview using mock data while backend is offline.'
-    };
-  }, []);
-
-  const [tracker, setTracker] = useState(offlineTracker);
-  const [backendReady, setBackendReady] = useState(true);
+  const [tracker, setTracker] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -36,11 +23,8 @@ export default function App() {
     try {
       const { data } = await api.post('/api/signup');
       setTracker(data);
-      setBackendReady(true);
     } catch (e) {
-      setError('Could not start demo. Showing offline preview instead.');
-      setTracker(offlineTracker);
-      setBackendReady(false);
+      setError('Could not start demo.');
     } finally {
       setLoading(false);
     }
@@ -52,10 +36,6 @@ export default function App() {
   };
 
   const trigger = async (path, payload = {}) => {
-    if (!backendReady) {
-      setError('Backend is offline. Actions are disabled in preview mode.');
-      return;
-    }
     if (!tracker) return;
     setLoading(true);
     setError('');
@@ -69,7 +49,7 @@ export default function App() {
     }
   };
 
-  const mockActions = backendReady && tracker
+  const mockActions = tracker
     ? [
         { label: 'Mark Welcome complete', path: `/api/mock/${tracker.dealId}/complete`, payload: { stage: 'welcome' } },
         {
@@ -101,8 +81,6 @@ export default function App() {
         <div>
           <h1>{copy.hero.title}</h1>
           <p>{copy.hero.subtitle}</p>
-          <p style={{ marginTop: 8 }}>{copy.hero.description}</p>
-          <p style={{ marginTop: 8, fontWeight: 600 }}>{copy.hero.pledge}</p>
           <div className="badges">
             {copy.badges.map((badge) => (
               <span key={badge} className="badge">{badge}</span>
@@ -112,11 +90,6 @@ export default function App() {
             <button onClick={handleCreate} disabled={loading}> {copy.hero.ctaPrimary} </button>
             <button className="secondary" disabled> {copy.hero.ctaSecondary} </button>
           </div>
-          {!backendReady && tracker && (
-            <div className="notice">
-              Running in static preview mode. Backend actions are disabled, but the flow and copy are shown.
-            </div>
-          )}
           {error && <p style={{ color: '#ffb4b4', marginTop: 12 }}>{error}</p>}
         </div>
         <div>
@@ -125,11 +98,7 @@ export default function App() {
           <div className="progress">
             <span style={{ width: `${tracker?.percentComplete || 0}%` }}></span>
           </div>
-          <p style={{ marginTop: 8, fontWeight: 700 }}>
-            {tracker
-              ? `${tracker.percentComplete}% complete${tracker.stageName ? ` — ${tracker.stageName}` : ''}`
-              : 'Start a demo to view progress'}
-          </p>
+          <p style={{ marginTop: 8, fontWeight: 700 }}>{tracker ? `${tracker.percentComplete}% complete` : 'Start a demo to view progress'}</p>
           <ul className="timeline">
             {timeline.map((item) => (
               <li key={item}>{item}</li>
@@ -218,6 +187,43 @@ export default function App() {
             </div>
           ))}
         </div>
+        <div className="tracker-grid">
+          <div>
+            <h2>Pizza-tracker</h2>
+            {tracker ? (
+              <div>
+                {tracker.stages.map((stage) => (
+                  <div key={stage.id} className={`stage-card ${stage.status}`}>
+                    <h4>{stage.name}</h4>
+                    <div className="stage-meta">
+                      <span>Status: {stage.status}</span>
+                      {stage.allowsSpecialist && <span>• Talk to a Specialist available</span>}
+                    </div>
+                    <p style={{ marginTop: 8 }}>{stage.description}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>Start a demo case to see the live tracker and gates.</p>
+            )}
+          </div>
+          <div>
+            <h2>Mock actions</h2>
+            <p style={{ marginTop: 0 }}>Use these to simulate Zoho Sign/Forms webhooks and provider attendance.</p>
+            <div className="tools-grid">
+              {mockActions.map((action) => (
+                <button
+                  key={action.label}
+                  className="tool-card"
+                  onClick={() => trigger(action.path, action.payload)}
+                  disabled={loading}
+                >
+                  {action.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="section">
@@ -257,15 +263,6 @@ export default function App() {
               <small>{tier.detail}</small>
             </div>
           ))}
-        </div>
-      </div>
-
-      <div className="section" style={{ textAlign: 'center' }}>
-        <h2>{copy.closing.title}</h2>
-        <p style={{ marginTop: 0 }}>{copy.closing.body}</p>
-        <div className="actions" style={{ justifyContent: 'center' }}>
-          <button disabled>{copy.closing.ctaPrimary}</button>
-          <button className="secondary" disabled>{copy.closing.ctaSecondary}</button>
         </div>
       </div>
     </div>
