@@ -186,6 +186,7 @@ export default function App() {
               <p style={{ marginTop: 8 }}>{item.answer}</p>
             </div>
           ))}
+        </div>
         <div className="tracker-grid">
           <div>
             <h2>Pizza-tracker</h2>

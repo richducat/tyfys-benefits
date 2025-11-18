@@ -129,14 +129,11 @@ export const copy = {
     ]
   },
   closing: {
-    title: 'Start Your TYFYS Journey',
-    body:
-      'Your service deserves clarity, respect, and proper documentation. We’re here to help you take the next steps with confidence.',
-    ctaPrimary: 'Start Your Intake →',
-    ctaSecondary: 'Or schedule a call to learn exactly what evidence you need.'
     title: 'Your VA benefits, built the TYFYS way',
     subtitle:
       'We guide you through every gated step with clear tasks, evidence checklists, and a live tracker. We are not the VA or a VSO.',
+    body:
+      'Your service deserves clarity, respect, and proper documentation. We’re here to help you take the next steps with confidence.',
     ctaPrimary: 'Create Demo Case',
     ctaSecondary: 'Talk to a Specialist',
   },
@@ -148,7 +145,6 @@ export const copy = {
   education: [
     'How VA math works and why ITF matters',
     'What a fully developed claim requires',
-    'Why evidence-by-condition beats generic claims'
     'Why evidence-by-condition beats generic claims',
   ],
   pricing: {
