@@ -21,41 +21,7 @@
     }
 
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--color-bg);
-      color: #e2e8f0;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      line-height: 1.6;
-      min-height: 100vh;
-    }
 
-    a { color: inherit; text-decoration: none; }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(13, 27, 42, 0.85);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .nav-shell {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.9rem 1.25rem;
-    }
-
-    .brand { display: flex; align-items: center; gap: 0.75rem; }
-    .brand img { height: 42px; width: auto; }
-    .brand span { font-weight: 700; letter-spacing: 0.5px; }
-
-
-    * { box-sizing: border-box; }
     body {
       margin: 0;
       background: var(--color-bg);
@@ -123,6 +89,7 @@
     p { margin: 0 0 0.75rem; color: #cfd8e3; }
 
     .cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -149,7 +116,6 @@
 
     .status-bar { position: relative; padding: 1rem 1rem 1.2rem; }
     .status-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.5rem; }
-    .status-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
     .status-steps li {
       text-align: center;
       background: rgba(255,255,255,0.04);
@@ -170,6 +136,7 @@
 
     .claim-card { display: flex; gap: 0.8rem; align-items: center; justify-content: space-between; padding: 0.9rem 1rem; background: rgba(255,255,255,0.03); border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); }
     .claim-card strong { color: #fff; }
+
     .badge { padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(158, 240, 26, 0.16); color: #c4ff4d; font-weight: 700; font-size: 0.85rem; }
 
     .timeline { border-left: 2px solid rgba(255,255,255,0.08); margin: 0; padding: 0 0 0 1.25rem; list-style: none; }
@@ -225,18 +192,18 @@
 
   <section class="hero">
     <div>
-        <h1>Veteran-first, self-serve VA benefits—no skipped steps.</h1>
-        <p>Thank You For Your Service guides you from eligibility triage to a fully developed claim, with a Domino's-style tracker, Zoho-powered contracts and MDBQs, and a "Talk to a Specialist" off-ramp at every key milestone.</p>
-        <div class="cta-row">
-          <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
-          <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
-        </div>
-        <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-          <span class="badge">Built with veterans</span>
-          <span class="badge" style="background:rgba(0,194,255,0.16); color:#8ee4ff;">Zoho-safe pipelines</span>
-          <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff;">VA-ready uploads</span>
-          <span class="badge" style="background:rgba(158,240,26,0.16); color:#c4ff4d;">No-skip checklists</span>
-        </div>
+      <h1>Veteran-first, self-serve VA benefits—no skipped steps.</h1>
+      <p>Thank You For Your Service guides you from eligibility triage to a fully developed claim, with a Domino's-style tracker, Zoho-powered contracts and MDBQs, and a "Talk to a Specialist" off-ramp at every key milestone.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
+        <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
+      </div>
+      <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <span class="badge">Built with veterans</span>
+        <span class="badge" style="background:rgba(0,194,255,0.16); color:#8ee4ff;">Zoho-safe pipelines</span>
+        <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff;">VA-ready uploads</span>
+        <span class="badge" style="background:rgba(158,240,26,0.16); color:#c4ff4d;">No-skip checklists</span>
+      </div>
     </div>
     <div class="panel">
       <h2 style="margin-bottom:0.4rem;">Keep your claim moving</h2>
@@ -276,47 +243,6 @@
             <label for="stageSelect">Jump to stage</label>
             <select id="stageSelect" onchange="setStage(parseInt(this.value,10))"></select>
           </div>
-          <div>
-            <label for="stageSelect">Jump to stage</label>
-            <select id="stageSelect" onchange="setStage(parseInt(this.value,10))"></select>
-          </div>
-        </div>
-
-        <div class="status-bar">
-          <ul class="status-steps" id="stepList"></ul>
-          <div class="progress-shell">
-            <div class="progress-bar" id="progressBar"></div>
-          </div>
-        </div>
-
-      <h1>The fastest way to win the VA benefits you've earned.</h1>
-      <p>Thank You For Your Service combines VA.gov essentials with an easy Domino's-style tracker so you can file, follow, and finish your claim without guessing what's next.</p>
-      <div class="cta-row">
-        <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
-        <button class="btn btn-ghost" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">See tools &amp; calculators</button>
-      </div>
-      <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-        <span class="badge">Built with veterans</span>
-        <span class="badge" style="background:rgba(0,194,255,0.16); color:#8ee4ff;">VA-ready uploads</span>
-        <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff;">Human + AI guidance</span>
-      </div>
-    </div>
-    <div class="panel">
-      <h2 style="margin-bottom:0.4rem;">Keep your claim moving</h2>
-      <div class="messages">
-        <div class="claim-card">
-          <div>
-            <strong>Claim TY-8842</strong>
-            <div style="color:#9fb3c8;">Knee &amp; lower back | Filed Mar 2025</div>
-          </div>
-          <span class="badge">In Review</span>
-        </div>
-        <div class="claim-card">
-          <div>
-            <strong>Claim TY-5130</strong>
-            <div style="color:#9fb3c8;">Hearing loss | Filed Jan 2025</div>
-          </div>
-          <span class="badge" style="background:rgba(0,194,255,0.16); color:#7ee5ff;">Evidence</span>
         </div>
 
         <div class="status-bar">
@@ -342,92 +268,10 @@
         <div class="mini-card">
           <h3>Evidence &amp; delivery</h3>
           <p>Provider scheduling, evidence packet build, and final review are gated so nothing moves forward until every checklist is done.</p>
-        <div class="cta-row">
+        </div>
+        <div class="cta-row" style="margin-top:0.75rem;">
           <button class="btn btn-primary" style="flex:1;" onclick="openUpload()">Add evidence now</button>
           <button class="btn btn-ghost" style="flex:1;" onclick="alert('Appointment scheduling coming soon')">Check C&amp;P availability</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="tools">
-    <h2>Built-in help from the TYFYS homepage</h2>
-    <div class="grid">
-      <div class="panel">
-        <h3>Combined rating calculator</h3>
-        <p>Use the same math as VA.gov so you know what to expect.</p>
-        <div class="tool-form">
-          <label for="ratings">Enter ratings (comma separated)</label>
-          <input id="ratings" type="text" placeholder="50, 30, 10" />
-          <button class="btn btn-primary" style="margin-top:0.5rem;" onclick="calculateCombinedRating()">Calculate</button>
-          <div id="combinedResult" class="result"></div>
-        </div>
-  <section class="section" id="tracker">
-    <h2>Real-time claim tracker</h2>
-    <div class="tracker">
-      <div class="panel">
-        <div class="tool-form" style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem; align-items:end; margin-bottom:1rem;">
-          <div>
-            <label for="claimSelect">Claim number</label>
-            <select id="claimSelect" onchange="setActiveClaim(this.value)"></select>
-          </div>
-          <div>
-            <label for="stageSelect">Jump to stage</label>
-            <select id="stageSelect" onchange="setStage(parseInt(this.value,10))"></select>
-          </div>
-        </div>
-
-        <div class="status-bar">
-          <ul class="status-steps" id="stepList"></ul>
-          <div class="progress-shell">
-            <div class="progress-bar" id="progressBar"></div>
-          </div>
-        </div>
-
-        <ul class="timeline" id="timeline"></ul>
-      </div>
-
-      <div class="panel">
-        <h3 style="margin-top:0;">What happens next</h3>
-        <div class="mini-card">
-          <h3>Welcome &amp; triage</h3>
-          <p>Confirm service history, current rating, ITF status, and eligibility score. Switch to “Talk to a Specialist” any time.</p>
-        </div>
-        <div class="mini-card">
-          <h3>Contract + MDBQs</h3>
-          <p>Secure checkout triggers Zoho Sign contracts and ROI pack; MDBQs are embedded via Zoho Forms with required pre-fills.</p>
-        </div>
-        <div class="mini-card">
-          <h3>Evidence &amp; delivery</h3>
-          <p>Provider scheduling, evidence packet build, and final review are gated so nothing moves forward until every checklist is done.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="tools">
-    <h2>Built-in help from the TYFYS homepage</h2>
-    <div class="grid">
-      <div class="panel">
-        <h3>Combined rating calculator</h3>
-        <p>Use the same math as VA.gov so you know what to expect.</p>
-        <div class="tool-form">
-          <label for="ratings">Enter ratings (comma separated)</label>
-          <input id="ratings" type="text" placeholder="50, 30, 10" />
-          <button class="btn btn-primary" style="margin-top:0.5rem;" onclick="calculateCombinedRating()">Calculate</button>
-          <div id="combinedResult" class="result"></div>
-        </div>
-      </div>
-          <h3>1. Intake &amp; triage</h3>
-          <p>We gather your DD-214, confirm eligibility, and save your intent to file so the clock starts in your favor.</p>
-        </div>
-        <div class="mini-card">
-          <h3>2. Evidence</h3>
-          <p>We pull STRs with SF-180, help you upload civilian notes, and mirror DBQs so your story is clear.</p>
-        </div>
-        <div class="mini-card">
-          <h3>3. Review &amp; delivery</h3>
-          <p>We format everything the way VA expects, submit through VA.gov, and keep you posted like the Domino's tracker.</p>
         </div>
       </div>
     </div>
@@ -477,6 +321,8 @@
             <h3>Occupation &amp; era navigator</h3>
             <p>Choose your MOS/rate to see common primary &amp; secondary conditions, exposures, and recommended evaluations.</p>
             <button class="btn btn-ghost" onclick="alert('Occupation/era explorer launching soon')">Explore</button>
+          </div>
+          <div class="mini-card">
             <h3>DBQ minis</h3>
             <p>Short prompts that match VA DBQs so your doctor or VSO sees exactly what to sign.</p>
             <button class="btn btn-ghost" onclick="alert('DBQ minis launching soon')">Start</button>
@@ -523,6 +369,9 @@
         <h3>Evidence packet checklist</h3>
         <p>What “complete” looks like: lay statements, MDBQs, STRs, civilian records, and exposure considerations by era.</p>
         <button class="btn btn-primary" onclick="alert('Evidence packet checklist launching soon')">See checklist</button>
+      </div>
+    </div>
+
     <h2>VA forms, ready to download</h2>
     <div class="grid">
       <div class="panel mini-card">
@@ -559,11 +408,9 @@
   </section>
 
   <script>
-    // Claim data representing VA.gov milestones with a Domino's-style tracker
     const claims = [
       {
         id: 'TY-8842',
-        veteran: 'Alex R.',
         conditions: 'Knee & lower back',
         filed: 'Mar 2025',
         stage: 8,
@@ -571,32 +418,21 @@
           { title: 'Evidence packet build', detail: 'Zoho Sign contracts + ROI saved. Pulling MDBQs, STRs, lay statements into a single packet.' },
           { title: 'Gating enforced', detail: 'Provider attendance confirmed; checklist locked until packet completeness score is green.' },
           { title: 'Next', detail: 'Final review guidance and VA.gov handoff will unlock after QA.' }
-        stage: 2,
-        events: [
-          { title: 'Evidence gathering', detail: 'We pulled STRs and imported orthopedic notes from Dr. Carter.' },
-          { title: 'DBQ mini completed', detail: 'Knee DBQ draft saved. Ready for physician signature.' },
-          { title: 'Awaiting C&P scheduling', detail: 'VA will schedule your exam next.' }
         ]
       },
       {
         id: 'TY-5130',
-        veteran: 'Jordan S.',
         conditions: 'Hearing loss',
         filed: 'Jan 2025',
-        stage: 6,
+        stage: 5,
         events: [
           { title: 'Intake data synced', detail: 'Self-guided interview captured discovery-call fields and synced to CRM with note standards.' },
           { title: 'MDBQs in progress', detail: 'Zoho Forms pre-filled with Contact + Deal IDs. We advance only when the webhook lands.' },
           { title: 'Talk to a Specialist', detail: 'Available at this step for live intake without breaking the App Pipeline.' }
-        stage: 1,
-        events: [
-          { title: 'Evidence requested', detail: 'SF-180 sent to NPRC for audiology STRs.' },
-          { title: 'Civilian records pending', detail: 'Upload latest audiogram to speed up review.' }
         ]
       },
       {
         id: 'TY-7704',
-        veteran: 'Taylor M.',
         conditions: 'Migraines & tinnitus',
         filed: 'Feb 2025',
         stage: 9,
@@ -620,11 +456,6 @@
       { label: 'Evidence Package Build', detail: 'Signed forms, MDBQs, lay statements compiled' },
       { label: 'Final Review & Delivery', detail: 'Quality gate + VA.gov submission guidance' },
       { label: 'Ready to Submit', detail: 'All gates cleared; final status tips' }
-      { label: 'Received', detail: 'Intent filed & intake complete' },
-      { label: 'Evidence', detail: 'Gathering STRs & civilian records' },
-      { label: 'Review', detail: 'C&P exams and rater review' },
-      { label: 'Decision', detail: 'Decision letter & rating math' },
-      { label: 'Delivery', detail: 'Deposits & retroactive pay updates' }
     ];
 
     function renderClaims() {
@@ -687,7 +518,6 @@
       });
     }
 
-    // Combined rating calculator
     function calculateCombinedRating() {
       const input = document.getElementById('ratings').value;
       const values = input.split(',').map(v => parseInt(v.trim(), 10)).filter(v => !isNaN(v) && v > 0);
@@ -705,7 +535,6 @@
       result.textContent = `Combined rating: ${rounded}% (raw: ${combined.toFixed(1)}%)`;
     }
 
-    // Dependents payment estimator based on 2025 VA tables (sample values)
     const rates2025 = {
       70: { alone: 1759.19, spouse: 1908.19, spouseChild: 2018.19, firstChild: 1858.19, addChildUnder18: 74.0, addChildOver18: 239.0 },
       80: { alone: 2044.89, spouse: 2214.89, spouseChild: 2340.89, firstChild: 2158.89, addChildUnder18: 84.0, addChildOver18: 274.0 },
@@ -755,7 +584,7 @@
         { title: 'Zoho Sign completed', detail: 'Your contract + ROI pack are signed. Tracker advanced to Evidence Intake automatically.', time: '2h ago' },
         { title: 'MDBQ webhook received', detail: 'Migraine + tinnitus MDBQs from Zoho Forms attached to your deal and marked complete.', time: 'Yesterday' },
         { title: 'Provider attended', detail: 'Orthopedic appointment marked Attended. Evidence packet gate unlocked for QA.', time: 'Apr 10' },
-        { title: 'ITF timer', detail: 'Intent to File expires in 246 days—countdown is running so you don’t lose effective date.', time: 'Apr 9' }
+        { title: 'ITF timer', detail: 'Intent to File expires in 246 days—countdown is running so you don’t lose effective date.', time: 'Apr 9' },
         { title: 'Evidence auto-imported', detail: 'Your orthopedic visit from 04/02 was synced from Dr. Carter.', time: '2h ago' },
         { title: 'C&P scheduled', detail: 'Audiology exam set for 05/18 at 9:00 AM. Reminder will be texted.', time: 'Yesterday' },
         { title: 'Payment math', detail: 'Projected retro pay for TY-7704: $5,420 based on review stage.', time: 'Apr 10' }
