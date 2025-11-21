@@ -76,71 +76,122 @@ export default function App() {
     : [];
 
   return (
-    <div className="app-shell">
-      <div className="hero">
-        <div>
+    <div className="page">
+      <header className="topbar">
+        <div className="brand">
+          <div className="brand-mark">TYFYS</div>
+          <span className="brand-sub">Guided medical documentation</span>
+        </div>
+        <div className="top-actions">
+          <button className="ghost">{copy.hero.ctaSecondary}</button>
+          <button onClick={handleCreate} disabled={loading}>
+            {copy.hero.ctaPrimary}
+          </button>
+        </div>
+      </header>
+
+      <div className="hero-panel">
+        <div className="hero-copy">
+          <span className="pill">Evidence-first. Tracker-driven.</span>
           <h1>{copy.hero.title}</h1>
-          <p>{copy.hero.subtitle}</p>
+          <p className="lead">{copy.hero.subtitle}</p>
+          <p className="body">{copy.hero.description}</p>
           <div className="badges">
             {copy.badges.map((badge) => (
-              <span key={badge} className="badge">{badge}</span>
+              <span key={badge} className="badge">
+                {badge}
+              </span>
             ))}
           </div>
-          <div className="actions" style={{ marginTop: 14 }}>
-            <button onClick={handleCreate} disabled={loading}> {copy.hero.ctaPrimary} </button>
-            <button className="secondary" disabled> {copy.hero.ctaSecondary} </button>
+          <div className="cta-row">
+            <button onClick={handleCreate} disabled={loading}>
+              {copy.hero.ctaPrimary}
+            </button>
+            <button className="ghost" disabled>
+              {copy.hero.ctaSecondary}
+            </button>
           </div>
-          {error && <p style={{ color: '#ffb4b4', marginTop: 12 }}>{error}</p>}
+          {error && <p className="inline-error">{error}</p>}
         </div>
-        <div>
-          <h3 style={{ marginTop: 0 }}>TYFYS Tracker Snapshot</h3>
-          <p style={{ marginBottom: 12 }}>Every step is gated so nothing is skipped. Zoho Sign and Zoho Forms are the sources of truth.</p>
+        <div className="hero-card">
+          <div className="card-header">
+            <div>
+              <p className="eyebrow">Live tracker snapshot</p>
+              <h3>Every step gated and visible</h3>
+            </div>
+            <div className="progress-stat">{tracker ? `${tracker.percentComplete}%` : 'Start a demo'}</div>
+          </div>
           <div className="progress">
             <span style={{ width: `${tracker?.percentComplete || 0}%` }}></span>
           </div>
-          <p style={{ marginTop: 8, fontWeight: 700 }}>{tracker ? `${tracker.percentComplete}% complete` : 'Start a demo to view progress'}</p>
-          <ul className="timeline">
+          <p className="body" style={{ marginTop: 8 }}>
+            {tracker ? 'Synced to Zoho Sign and Zoho Forms events.' : 'Launch a demo case to watch the tracker advance.'}
+          </p>
+          <div className="timeline-grid">
             {timeline.map((item) => (
-              <li key={item}>{item}</li>
+              <div key={item} className="timeline-chip">
+                {item}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
 
-      <div className="section">
-        <h2>How TYFYS Works</h2>
-        <p style={{ marginTop: 0 }}>{copy.overview}</p>
-        <div className="tools-grid">
-          {copy.howItWorks.map((step) => (
-            <div key={step.title} className="tool-card">
-              <strong>{step.title}</strong>
-              <p style={{ marginTop: 8 }}>{step.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="section">
-        <h2>{copy.role.title}</h2>
-        <p style={{ marginTop: 0 }}>{copy.role.intro}</p>
-      </div>
-
-      <div className="section">
-        <h2>{copy.reasons.title}</h2>
-        <div className="tools-grid">
-          {copy.reasons.points.map((point) => (
-            <div key={point.heading} className="tool-card">
-              <strong>{point.heading}</strong>
-              <p style={{ marginTop: 8 }}>{point.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="section">
-        <div className="tracker-grid">
+      <section className="panel">
+        <div className="panel-heading">
           <div>
-            <h2>{copy.deliverables.title}</h2>
+            <p className="eyebrow">The TYFYS flow</p>
+            <h2>Clear, coordinated steps</h2>
+            <p className="body">{copy.overview}</p>
+          </div>
+          <div className="pill note">Evidence-first. No skipped gates.</div>
+        </div>
+        <div className="step-grid">
+          {copy.howItWorks.map((step, idx) => (
+            <div key={step.title} className="step-card">
+              <div className="step-index">{idx + 1}</div>
+              <div>
+                <strong>{step.title}</strong>
+                <p className="body" style={{ marginTop: 6 }}>
+                  {step.body}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel">
+        <div className="dual-grid">
+          <div className="text-block">
+            <p className="eyebrow">Your part</p>
+            <h2>{copy.role.title}</h2>
+            <p className="body">{copy.role.intro}</p>
+          </div>
+          <div className="text-block">
+            <p className="eyebrow">Why veterans pick TYFYS</p>
+            <h2>{copy.reasons.title}</h2>
+            <div className="tiles">
+              {copy.reasons.points.map((point) => (
+                <div key={point.heading} className="tile">
+                  <strong>{point.heading}</strong>
+                  <p className="body" style={{ marginTop: 6 }}>
+                    {point.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="panel">
+        <div className="dual-grid">
+          <div>
+            <div className="panel-heading">
+              <h2>{copy.deliverables.title}</h2>
+              <p className="body">Everything organized for a confident submission.</p>
+            </div>
             <ul className="checklist">
               {copy.deliverables.items.map((item) => (
                 <li key={item}>{item}</li>
@@ -148,7 +199,10 @@ export default function App() {
             </ul>
           </div>
           <div>
-            <h2>{copy.whoWeHelp.title}</h2>
+            <div className="panel-heading">
+              <h2>{copy.whoWeHelp.title}</h2>
+              <p className="body">Wherever you are in the process, TYFYS keeps it moving.</p>
+            </div>
             <ul className="checklist">
               {copy.whoWeHelp.items.map((item) => (
                 <li key={item}>{item}</li>
@@ -156,91 +210,129 @@ export default function App() {
             </ul>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="section">
-        <h2>{copy.conditions.title}</h2>
-        <div className="tools-grid">
+      <section className="panel">
+        <div className="panel-heading">
+          <div>
+            <p className="eyebrow">Focused conditions</p>
+            <h2>{copy.conditions.title}</h2>
+            <p className="body">{copy.conditions.note}</p>
+          </div>
+          <div className="pill note">Provider-led documentation</div>
+        </div>
+        <div className="chip-grid">
           {copy.conditions.items.map((item) => (
-            <div key={item} className="tool-card">{item}</div>
+            <span key={item} className="chip">
+              {item}
+            </span>
           ))}
         </div>
-        <p style={{ marginTop: 12, fontWeight: 600 }}>{copy.conditions.note}</p>
-      </div>
+      </section>
 
-      <div className="section">
-        <h2>{copy.quotes.title}</h2>
-        <div className="tools-grid">
+      <section className="panel">
+        <div className="panel-heading">
+          <h2>{copy.quotes.title}</h2>
+          <p className="body">Straight from veterans who used the tracker and portal.</p>
+        </div>
+        <div className="tiles three-up">
           {copy.quotes.list.map((quote) => (
-            <div key={quote} className="tool-card">{quote}</div>
-          ))}
-        </div>
-      </div>
-
-      <div className="section">
-        <h2>{copy.faq.title}</h2>
-        <div className="tools-grid">
-          {copy.faq.items.map((item) => (
-            <div key={item.question} className="tool-card">
-              <strong>{item.question}</strong>
-              <p style={{ marginTop: 8 }}>{item.answer}</p>
+            <div key={quote} className="tile">
+              {quote}
             </div>
           ))}
         </div>
-        <div className="tracker-grid">
-          <div>
-            <h2>Pizza-tracker</h2>
+      </section>
+
+      <section className="panel">
+        <div className="dual-grid align-start">
+          <div className="faq-block">
+            <div className="panel-heading">
+              <p className="eyebrow">Answers before you start</p>
+              <h2>{copy.faq.title}</h2>
+            </div>
+            <div className="accordion">
+              {copy.faq.items.map((item) => (
+                <div key={item.question} className="accordion-item">
+                  <div className="accordion-title">{item.question}</div>
+                  <p className="body">{item.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="tracker-block">
+            <div className="panel-heading">
+              <p className="eyebrow">Pizza-tracker</p>
+              <h2>Live stages</h2>
+              <p className="body">Each stage is gated and synced to Zoho Sign and Zoho Forms.</p>
+            </div>
             {tracker ? (
-              <div>
+              <div className="stage-list">
                 {tracker.stages.map((stage) => (
                   <div key={stage.id} className={`stage-card ${stage.status}`}>
-                    <h4>{stage.name}</h4>
+                    <div className="stage-top">
+                      <h4>{stage.name}</h4>
+                      <span className="status-pill">{stage.status}</span>
+                    </div>
                     <div className="stage-meta">
                       <span>Status: {stage.status}</span>
                       {stage.allowsSpecialist && <span>• Talk to a Specialist available</span>}
                     </div>
-                    <p style={{ marginTop: 8 }}>{stage.description}</p>
+                    <p className="body" style={{ marginTop: 8 }}>
+                      {stage.description}
+                    </p>
                   </div>
                 ))}
               </div>
             ) : (
-              <p>Start a demo case to see the live tracker and gates.</p>
+              <p className="body">Start a demo case to see the live tracker and gates.</p>
             )}
           </div>
-          <div>
-            <h2>Mock actions</h2>
-            <p style={{ marginTop: 0 }}>Use these to simulate Zoho Sign/Forms webhooks and provider attendance.</p>
-            <div className="tools-grid">
-              {mockActions.map((action) => (
-                <button
-                  key={action.label}
-                  className="tool-card"
-                  onClick={() => trigger(action.path, action.payload)}
-                  disabled={loading}
-                >
-                  {action.label}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
-      </div>
+      </section>
 
-      <div className="section">
-        <h2>Education modules baked in</h2>
-        <div className="tools-grid">
-          {copy.education.map((item) => (
-            <div key={item} className="tool-card">{item}</div>
+      <section className="panel">
+        <div className="panel-heading">
+          <h2>Mock actions</h2>
+          <p className="body">Simulate Zoho Sign/Forms events and provider attendance.</p>
+        </div>
+        <div className="action-grid">
+          {mockActions.map((action) => (
+            <button
+              key={action.label}
+              className="tile action"
+              onClick={() => trigger(action.path, action.payload)}
+              disabled={loading}
+            >
+              {action.label}
+            </button>
           ))}
         </div>
-        <p style={{ marginTop: 12, fontWeight: 600 }}>{copy.disclaimer}</p>
-      </div>
+      </section>
 
-      <div className="section">
-        <h2>Evidence by condition</h2>
-        <div className="tools-grid">
+      <section className="panel">
+        <div className="panel-heading">
+          <h2>Education modules baked in</h2>
+          <p className="body">Guides that keep veterans informed without slowing the process.</p>
+        </div>
+        <div className="chip-grid">
+          {copy.education.map((item) => (
+            <span key={item} className="chip">
+              {item}
+            </span>
+          ))}
+        </div>
+        <p className="body" style={{ marginTop: 12, fontWeight: 600 }}>{copy.disclaimer}</p>
+      </section>
+
+      <section className="panel">
+        <div className="panel-heading">
+          <h2>Evidence by condition</h2>
+          <p className="body">Structured checklists tailored to each condition.</p>
+        </div>
+        <div className="tiles two-up">
           {Object.entries(evidenceChecklists).map(([condition, tasks]) => (
-            <div key={condition} className="tool-card">
+            <div key={condition} className="tile">
               <strong>{condition}</strong>
               <ul className="checklist">
                 {tasks.map((task) => (
@@ -250,21 +342,23 @@ export default function App() {
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      <div className="section">
-        <h2>Pricing (transparent)</h2>
-        <p>{copy.pricing.summary}</p>
-        <div className="tools-grid">
+      <section className="panel">
+        <div className="panel-heading">
+          <h2>Pricing (transparent)</h2>
+          <p className="body">{copy.pricing.summary}</p>
+        </div>
+        <div className="tiles four-up">
           {copy.pricing.tiers.map((tier) => (
-            <div key={tier.name} className="tool-card">
+            <div key={tier.name} className="tile pricing">
               <strong>{tier.name}</strong>
-              <div>{tier.price}</div>
+              <div className="price">{tier.price}</div>
               <small>{tier.detail}</small>
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 }
