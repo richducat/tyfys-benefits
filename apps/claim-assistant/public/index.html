@@ -459,7 +459,7 @@
   <body>
     <div id="root"></div>
 
-    <script type="text/babel" data-presets="env,react">
+    <script type="text/babel">
       const { useState } = React;
 
       const initialForm = {
@@ -1394,14 +1394,10 @@
           setErrors({});
         };
 
-        const apiBase = window.location.pathname.startsWith('/claim-assistant')
-          ? '/claim-assistant'
-          : '';
-
         const handleGeneratePdf = async () => {
           try {
             setIsGenerating(true);
-            const res = await fetch(`${apiBase}/generate-pdf`, {
+            const res = await fetch("/generate-pdf", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(form),
