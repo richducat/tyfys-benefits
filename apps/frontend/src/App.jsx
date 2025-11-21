@@ -16,6 +16,7 @@ export default function App() {
   const [tracker, setTracker] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const claimAssistantUrl = import.meta.env.VITE_CLAIM_ASSISTANT_URL || 'http://localhost:4100';
 
   const handleCreate = async () => {
     setLoading(true);
@@ -83,6 +84,14 @@ export default function App() {
           <span className="brand-sub">Guided medical documentation</span>
         </div>
         <div className="top-actions">
+          <a
+            className="button-link ghost"
+            href={claimAssistantUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            21-526EZ Form Filler
+          </a>
           <button className="ghost">{copy.hero.ctaSecondary}</button>
           <button onClick={handleCreate} disabled={loading}>
             {copy.hero.ctaPrimary}

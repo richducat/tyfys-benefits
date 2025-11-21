@@ -62,6 +62,7 @@ body {
   gap: 10px;
 }
 
+a.button-link,
 button {
   border: none;
   cursor: pointer;
@@ -69,15 +70,21 @@ button {
   font-size: 15px;
   border-radius: 10px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-button:not(.ghost) {
+button:not(.ghost),
+.button-link.primary {
   background: #1a6bff;
   color: white;
   padding: 10px 14px;
   box-shadow: 0 12px 30px rgba(26, 107, 255, 0.22);
 }
 
+.button-link.ghost,
 button.ghost {
   background: white;
   color: #1a6bff;
@@ -91,7 +98,8 @@ button:disabled {
   box-shadow: none;
 }
 
-button:not(:disabled):hover {
+button:not(:disabled):hover,
+.button-link:hover {
   transform: translateY(-1px);
 }
 
