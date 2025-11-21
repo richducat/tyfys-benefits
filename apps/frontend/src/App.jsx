@@ -16,7 +16,7 @@ export default function App() {
   const [tracker, setTracker] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const claimAssistantUrl = import.meta.env.VITE_CLAIM_ASSISTANT_URL || '/claim-assistant';
+  const claimAssistantUrl = import.meta.env.VITE_CLAIM_ASSISTANT_URL || 'http://localhost:4100';
 
   const handleCreate = async () => {
     setLoading(true);
