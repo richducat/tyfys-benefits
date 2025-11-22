@@ -395,9 +395,7 @@
 
       const optionLabel = (id, value) => {
         const step = quizSteps.find((q) => q.id === id);
-        if (!step) return 'Not provided';
-        const match = (step.options || []).find((opt) => opt.value === value);
-        return match ? match.label : 'Not provided';
+        return step?.options.find((opt) => opt.value === value)?.label || 'Not provided';
       };
 
       function Progress({ step, total }) {
@@ -440,12 +438,12 @@
             <h2 className="question-title">{step.title}</h2>
             <div className="muted">{step.helper}</div>
             {!isContactStep && (
-              <React.Fragment>
+              <>
                 <OptionGrid step={step} value={value} onSelect={onSelect} />
                 <div className="muted" style={{ fontSize: '0.9rem' }}>
                   Tap an option to continue. You can change answers anytime.
                 </div>
-              </React.Fragment>
+              </>
             )}
             {isContactStep && (
               <div className="input-row">
@@ -627,7 +625,7 @@
               )}
 
               {stage === 'quiz' && (
-                <React.Fragment>
+                <>
                   <Progress step={stepIndex} total={totalSteps} />
                   <Question
                     step={currentStep}
@@ -644,7 +642,7 @@
                       </button>
                     </div>
                   </div>
-                </React.Fragment>
+                </>
               )}
 
               {stage === 'summary' && <Summary answers={answers} contact={contact} />}
