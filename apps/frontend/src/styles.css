@@ -469,3 +469,33 @@ button:not(:disabled):hover,
     position: static;
   }
 }
+
+.compliance-line {
+  color: #bcd4ff;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 8px 0 14px;
+}
+
+.cta-row.wrap {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.cta-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  min-width: 240px;
+}
+
+.microcopy {
+  color: #526185;
+  font-size: 13px;
+  margin-top: 10px;
+}
