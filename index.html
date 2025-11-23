@@ -223,47 +223,73 @@
 
   <section class="hero">
     <div>
-      <h1>Veteran-first, self-serve VA benefits—no skipped steps.</h1>
-      <p>Thank You For Your Service guides you from eligibility triage to a fully developed claim, with a Domino's-style tracker, Zoho-powered contracts and MDBQs, and a "Talk to a Specialist" off-ramp at every key milestone.</p>
+      <p class="badge" style="background:rgba(255,255,255,0.12); color:#e2e8f0;">Welcome back!</p>
+      <h1>Your VA disability roadmap, organized.</h1>
+      <p>Thank You For Your Service (TYFYS) helps you collect records, prepare for private medical evaluations, and build a fully developed claim evidence packet—step by step, at your pace, with a specialist available whenever you want a human check-in.</p>
+      <p style="margin:0.75rem 0 1rem; color:#cbd5e1; font-weight:600;">TYFYS is a private, Service-Disabled Veteran-Owned business. We are not the Department of Veterans Affairs (VA) or a Veterans Service Organization, and we do not file claims or appeals on your behalf. We help you organize medical evidence and documentation so you can file confidently through official VA channels or with an accredited representative of your choice.</p>
       <div class="cta-row">
         <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
         <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
-        <a class="btn btn-ghost" href="#claim-assistant">Open claim assistant</a>
+        <a class="btn btn-ghost" href="#claim-assistant">Open claim prep assistant</a>
       </div>
       <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
         <span class="badge">Built with veterans</span>
-        <span class="badge" style="background:rgba(0,194,255,0.16); color:#8ee4ff;">Zoho-safe pipelines</span>
-        <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff;">VA-ready uploads</span>
+        <span class="badge" style="background:rgba(0,194,255,0.16); color:#8ee4ff;">Secure document pipelines</span>
+        <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff;">VA-friendly formats</span>
         <span class="badge" style="background:rgba(158,240,26,0.16); color:#c4ff4d;">No-skip checklists</span>
       </div>
     </div>
     <div class="panel">
-      <h2 style="margin-bottom:0.4rem;">Keep your claim moving</h2>
-      <div class="messages">
-        <div class="claim-card">
-          <div>
-            <strong>Claim TY-8842</strong>
-            <div style="color:#9fb3c8;">Knee &amp; lower back | Filed Mar 2025</div>
-          </div>
-          <span class="badge">Evidence Package</span>
-        </div>
-        <div class="claim-card">
-          <div>
-            <strong>Claim TY-5130</strong>
-            <div style="color:#9fb3c8;">Hearing loss | Filed Jan 2025</div>
-          </div>
-          <span class="badge" style="background:rgba(0,194,255,0.16); color:#7ee5ff;">Intake &amp; MDBQs</span>
-        </div>
-        <div class="cta-row">
-          <button class="btn btn-primary" style="flex:1;" onclick="openUpload()">Add evidence now</button>
-          <button class="btn btn-ghost" style="flex:1;" onclick="alert('We will surface provider windows and sync status to your App Pipeline stage.')">Provider scheduling</button>
-        </div>
-      </div>
+      <h2 style="margin-bottom:0.4rem;">Important information</h2>
+      <ul class="messages" style="list-style:none; padding:0; margin:0; gap:0.75rem;">
+        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+          Thank You For Your Service (TYFYS) is a private, Service-Disabled Veteran-Owned business. We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization (VSO).
+        </li>
+        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+          You can always file a VA disability claim for free directly with the VA or with the help of an accredited VSO or representative.
+        </li>
+        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+          TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.
+        </li>
+        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+          Our tools are for education and organization only. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.
+        </li>
+      </ul>
     </div>
   </section>
 
+  <section class="section" id="projects">
+    <h2>Keep your claim moving</h2>
+    <p style="color:#cbd5e1; max-width:840px;">See every TYFYS project you’re working on in one place. Each card shows where you are in the TYFYS evidence-building process—not your official VA status—and what’s next on your checklist.</p>
+    <div class="grid">
+      <div class="panel mini-card">
+        <p class="badge" style="margin-top:0;">TY-8842</p>
+        <h3>Evidence packet for knee &amp; back increase</h3>
+        <p>Records uploaded. Provider appointments scheduled for next week.</p>
+        <strong>Next up:</strong> Upload imaging and add lay statements for daily impact.
+        <span class="badge" style="margin-top:0.5rem;">Evidence &amp; delivery</span>
+      </div>
+      <div class="panel mini-card">
+        <p class="badge" style="margin-top:0;">TY-7719</p>
+        <h3>New claim: migraines and sleep issues</h3>
+        <p>Service history confirmed. Mini-DBQs partially complete.</p>
+        <strong>Next up:</strong> Finish questionnaires so we can prep provider packets.
+        <span class="badge" style="margin-top:0.5rem; background:rgba(0,194,255,0.16); color:#8ee4ff;">Contract &amp; questionnaires</span>
+      </div>
+      <div class="panel mini-card">
+        <p class="badge" style="margin-top:0;">TY-6610</p>
+        <h3>Secondary claims: radiculopathy &amp; hip</h3>
+        <p>Intent to File date captured. Intake is ready to start.</p>
+        <strong>Next up:</strong> Complete your intake so we can map conditions and evidence.
+        <span class="badge" style="margin-top:0.5rem; background:rgba(158,240,26,0.16); color:#c4ff4d;">Welcome &amp; triage</span>
+      </div>
+    </div>
+    <p style="color:#9fb3c8; margin-top:0.75rem;">These stages track your TYFYS steps—intake, records, provider appointments, and packet review. For official claim status, always rely on the VA.</p>
+  </section>
+
   <section class="section" id="tracker">
-    <h2>Real-time claim tracker</h2>
+    <h2>Real-time TYFYS progress tracker</h2>
+    <p style="color:#cbd5e1; max-width:840px;">Follow your progress from “I just logged in” to “my evidence packet is ready to file.” Every stage has clear tasks, checklists, and uploads so nothing falls through the cracks.</p>
     <div class="tracker">
       <div class="panel">
         <div class="tool-form" style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem; align-items:end; margin-bottom:1rem;">
@@ -291,40 +317,42 @@
         <h3 style="margin-top:0;">What happens next</h3>
         <div class="mini-card">
           <h3>Welcome &amp; triage</h3>
-          <p>Confirm service history, current rating, ITF status, and eligibility score. Switch to “Talk to a Specialist” any time.</p>
+          <p>Confirm your service history, current rating, Intent to File status, and goals for this claim. If anything is unclear, you can switch to a live call or chat with a TYFYS specialist at any time.</p>
         </div>
         <div class="mini-card">
-          <h3>Contract + MDBQs</h3>
-          <p>Secure checkout triggers Zoho Sign contracts and ROI pack; MDBQs are embedded via Zoho Forms with required pre-fills.</p>
+          <h3>Contract &amp; medical questionnaires</h3>
+          <p>Complete your TYFYS service agreement and Release of Information, then fill out short “mini-DBQ” style questionnaires that mirror what your providers will need for their medical opinions and forms. Everything is signed and stored in your secure portal.</p>
         </div>
         <div class="mini-card">
           <h3>Evidence &amp; delivery</h3>
-          <p>Provider scheduling, evidence packet build, and final review are gated so nothing moves forward until every checklist is done.</p>
+          <p>Upload your DD-214, service treatment records, private medical records, and lay statements. TYFYS then coordinates your private provider appointments (telehealth or in-person where available) and assembles a single evidence packet you can use to file a Fully Developed Claim with the VA.</p>
         </div>
         <div class="cta-row" style="margin-top:0.75rem;">
           <button class="btn btn-primary" style="flex:1;" onclick="openUpload()">Add evidence now</button>
-          <button class="btn btn-ghost" style="flex:1;" onclick="alert('Appointment scheduling coming soon')">Check C&amp;P availability</button>
+          <button class="btn btn-ghost" style="flex:1;" onclick="alert('Appointment options coming soon')">View appointment options</button>
         </div>
+        <p style="color:#9fb3c8; margin-top:0.75rem;">This tracker shows your TYFYS milestones only and does not show official VA processing status or decisions.</p>
       </div>
     </div>
   </section>
 
   <section class="section" id="claim-assistant">
-    <h2>Claim assistant (21-526EZ)</h2>
+    <h2>Claim prep assistant (VA Form 21-526EZ)</h2>
     <div class="panel">
-      <p style="margin-top:0;">Walk through the 21-526EZ directly on this page.</p>
+      <p style="margin-top:0;">Practice the questions from VA Form 21-526EZ, organize your answers, and see which documents match each part of your claim. When you’re ready, you’ll use this information to complete and submit the official form directly with the VA or with an accredited representative.</p>
       <div class="assistant-frame">
         <iframe id="claimAssistantFrame" src="claim-assistant/index.html" title="Claim assistant" scrolling="no"></iframe>
       </div>
+      <p style="color:#9fb3c8; margin-top:0.75rem;">TYFYS does not submit forms to the VA, does not provide legal advice, and is not a substitute for an accredited representative or attorney.</p>
     </div>
   </section>
 
   <section class="section" id="tools">
-    <h2>Built-in help from the TYFYS homepage</h2>
+    <h2>Tools built into your TYFYS home base</h2>
     <div class="grid">
       <div class="panel">
         <h3>Combined rating calculator</h3>
-        <p>Use the same math as VA.gov so you know what to expect.</p>
+        <p>Estimate your potential combined rating using the same “VA math” method, so you’re not surprised when percentages don’t add up the way you expect. This is an educational estimate only—the VA makes all final rating decisions.</p>
         <div class="tool-form">
           <label for="ratings">Enter ratings (comma separated)</label>
           <input id="ratings" type="text" placeholder="50, 30, 10" />
@@ -334,6 +362,7 @@
       </div>
       <div class="panel">
         <h3>Dependents &amp; payment estimator (2025)</h3>
+        <p>See how adding a spouse and dependents could change your monthly tax-free VA compensation based on the most recent published rates. Use this as a planning tool only; your actual payments are determined by the VA.</p>
         <div class="tool-form">
           <label for="ratingSelect">Rating</label>
           <select id="ratingSelect">
@@ -356,32 +385,32 @@
         <div class="cards">
           <div class="mini-card">
             <h3>Evidence by condition</h3>
-            <p>Interactive checklists by condition category and rating criteria so you know what the VA expects.</p>
+            <p>Interactive checklists for major condition categories—musculoskeletal, mental health, respiratory, neurological, cardiovascular, and more—so you can see what types of evidence typically support stronger claims and rating increases.</p>
             <button class="btn btn-ghost" onclick="alert('Condition-specific checklist coming from your slide content')">View guidance</button>
           </div>
           <div class="mini-card">
             <h3>Occupation &amp; era navigator</h3>
-            <p>Choose your MOS/rate to see common primary &amp; secondary conditions, exposures, and recommended evaluations.</p>
+            <p>Choose your MOS, rate, and era of service to see common primary and secondary conditions, exposures, and recommended evaluations connected to your job. This is based on patterns seen across occupations, not a diagnosis.</p>
             <button class="btn btn-ghost" onclick="alert('Occupation/era explorer launching soon')">Explore</button>
           </div>
           <div class="mini-card">
             <h3>DBQ minis</h3>
-            <p>Short prompts that match VA DBQs so your doctor or VSO sees exactly what to sign.</p>
+            <p>Short, plain-English prompts that map to VA Disability Benefits Questionnaires (DBQs), so your private doctor or VSO can quickly understand what needs to be documented—without you having to speak in “VA form” language.</p>
             <button class="btn btn-ghost" onclick="alert('DBQ minis launching soon')">Start</button>
           </div>
           <div class="mini-card">
             <h3>SF-180 helper</h3>
-            <p>Auto-fill your Service Treatment Records request and send it to the right archive.</p>
+            <p>Answer a few questions and generate a ready-to-send SF-180 request to obtain your service treatment and personnel records from the right archive. You review and submit the request yourself through official government channels.</p>
             <button class="btn btn-ghost" onclick="alert('SF-180 helper launching soon')">Request STRs</button>
           </div>
           <div class="mini-card">
             <h3>Upload civilian records</h3>
-            <p>Secure vault for physician letters, imaging, and nexus opinions.</p>
+            <p>Use your secure document vault to store imaging, specialist notes, nexus opinions, and other civilian records in one place so your TYFYS team and your providers are working from the same file.</p>
             <button class="btn btn-ghost" onclick="openUpload()">Upload</button>
           </div>
           <div class="mini-card">
             <h3>Objection-aware tips</h3>
-            <p>Education modules that address timing, payment plans, and myths about ratings right when you need them.</p>
+            <p>Bite-sized education modules that answer common questions about timing, cost, rating myths, and concerns about working while rated—delivered at the stage where they’re most helpful.</p>
             <button class="btn btn-ghost" onclick="alert('Contextual helper will surface at drop-off points')">See how it works</button>
           </div>
         </div>
@@ -390,26 +419,34 @@
   </section>
 
   <section class="section" id="resources">
-    <h2>Resources that mirror your blueprint</h2>
+    <h2>Resources that follow the TYFYS blueprint</h2>
     <div class="grid">
       <div class="panel mini-card">
-        <h3>DD-214 + ITF guide</h3>
-        <p>Step-by-step retrieval links, ITF filing checklist, and an expiry countdown so you never lose your spot.</p>
+        <h3>DD-214 &amp; Intent to File guide</h3>
+        <p>Step-by-step retrieval instructions, official links, and timelines for getting your DD-214 and submitting an Intent to File (ITF) so you protect the earliest possible effective date for your benefits.</p>
         <button class="btn btn-primary" onclick="alert('Guided DD-214 and ITF helper coming soon')">View guide</button>
       </div>
       <div class="panel mini-card">
         <h3>Us vs. common options</h3>
-        <p>Transparent education on why TYFYS builds evidence end-to-end without naming outside companies.</p>
+        <p>See how TYFYS’s flat-fee, evidence-first approach compares with free Veterans Service Organizations, contingency-fee claim services, and law firms—so you can decide what kind of support, if any, you want to use alongside the free options available to you.</p>
         <button class="btn btn-primary" onclick="alert('Value education module opens here')">Compare approaches</button>
       </div>
       <div class="panel mini-card">
         <h3>VA forms</h3>
-        <p>Direct downloads for the forms you use most during the tracker: 21-526EZ, 21-0781, 21-686c, 21-8940, and SF-180.</p>
+        <p>Quick links to the VA forms you’re most likely to use while you work through your tracker: 21-526EZ, 21-0781, 21-686c, 21-8940, and SF-180. All links go directly to official VA websites.</p>
         <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">Download pack</a>
       </div>
       <div class="panel mini-card">
         <h3>Evidence packet checklist</h3>
-        <p>What “complete” looks like: lay statements, MDBQs, STRs, civilian records, and exposure considerations by era.</p>
+        <p>A high-level view of what “complete” usually looks like:</p>
+        <ul>
+          <li>DD-214 and ITF in place</li>
+          <li>Service treatment and personnel records</li>
+          <li>Private medical records and imaging</li>
+          <li>Condition-specific DBQs and medical opinions</li>
+          <li>Lay statements and impact statements</li>
+          <li>Occupation/era-based exposure evidence where relevant</li>
+        </ul>
         <button class="btn btn-primary" onclick="alert('Evidence packet checklist launching soon')">See checklist</button>
       </div>
     </div>
@@ -418,27 +455,27 @@
     <div class="grid">
       <div class="panel mini-card">
         <h3>21-526EZ</h3>
-        <p>Application for Disability Compensation.</p>
+        <p>Application for Disability Compensation (VA Form 21-526EZ). Link goes directly to the official VA form.</p>
         <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">Download</a>
       </div>
       <div class="panel mini-card">
         <h3>21-0781</h3>
-        <p>Statement in Support of Claim for PTSD.</p>
+        <p>Statement in Support of Claim for Service Connection for PTSD (VA Form 21-0781).</p>
         <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-0781-ARE.pdf">Download</a>
       </div>
       <div class="panel mini-card">
         <h3>21-686c</h3>
-        <p>Add or remove dependents.</p>
+        <p>Declaration of Status of Dependents (VA Form 21-686c).</p>
         <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-686c-ARE.pdf">Download</a>
       </div>
       <div class="panel mini-card">
         <h3>21-8940</h3>
-        <p>Unemployability compensation.</p>
+        <p>Veteran’s Application for Increased Compensation Based on Unemployability (VA Form 21-8940). TYFYS does not assist with TDIU claims, but we include this form so you have everything in one place if you choose to pursue it separately.</p>
         <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-8940-ARE.pdf">Download</a>
       </div>
       <div class="panel mini-card">
         <h3>SF-180</h3>
-        <p>Request military records.</p>
+        <p>Request Pertaining to Military Records (SF-180), used to request copies of your service records from official archives.</p>
         <a class="btn btn-primary" href="https://www.archives.gov/files/standard-form-180.pdf">Download</a>
       </div>
     </div>
@@ -446,59 +483,52 @@
 
   <section class="section" id="messages">
     <h2>Updates from your TYFYS team</h2>
+    <p style="color:#cbd5e1; max-width:840px;">Release notes, how-to videos, and plain-English explanations of changes that could affect how you build your evidence packet. We focus on education, not legal advice, so you can decide your next steps with the VA or an accredited representative you trust.</p>
     <div class="messages" id="messageFeed"></div>
   </section>
 
   <script>
-    const claims = [
-      {
-        id: 'TY-8842',
-        conditions: 'Knee & lower back',
-        filed: 'Mar 2025',
-        stage: 8,
-        events: [
-          { title: 'Evidence packet build', detail: 'Zoho Sign contracts + ROI saved. Pulling MDBQs, STRs, lay statements into a single packet.' },
-          { title: 'Gating enforced', detail: 'Provider attendance confirmed; checklist locked until packet completeness score is green.' },
-          { title: 'Next', detail: 'Final review guidance and VA.gov handoff will unlock after QA.' }
-        ]
-      },
-      {
-        id: 'TY-5130',
-        conditions: 'Hearing loss',
-        filed: 'Jan 2025',
-        stage: 5,
-        events: [
-          { title: 'Intake data synced', detail: 'Self-guided interview captured discovery-call fields and synced to CRM with note standards.' },
-          { title: 'MDBQs in progress', detail: 'Zoho Forms pre-filled with Contact + Deal IDs. We advance only when the webhook lands.' },
-          { title: 'Talk to a Specialist', detail: 'Available at this step for live intake without breaking the App Pipeline.' }
-        ]
-      },
-      {
-        id: 'TY-7704',
-        conditions: 'Migraines & tinnitus',
-        filed: 'Feb 2025',
-        stage: 9,
-        events: [
-          { title: 'Provider scheduling', detail: 'Preferences captured; appointment attended and logged as “Attended” before moving forward.' },
-          { title: 'Evidence QA', detail: 'Reviewing exposure by era, secondary conditions, and MDBQ completeness before delivery.' },
-          { title: 'Ready to submit next', detail: 'VA.gov submission helper will unlock after packet quality gate.' }
-        ]
-      }
-    ];
+      const claims = [
+        {
+          id: 'TY-8842',
+          conditions: 'Knee & lower back',
+          filed: 'Mar 2025',
+          stage: 2,
+          events: [
+            { title: 'Evidence in review', detail: 'Records uploaded and provider appointments scheduled for next week.' },
+            { title: 'What to add', detail: 'Upload imaging and add lay statements for daily impact to strengthen the packet.' },
+            { title: 'Next milestone', detail: 'Provider reports and QA will unlock your delivery-ready evidence packet.' }
+          ]
+        },
+        {
+          id: 'TY-7719',
+          conditions: 'Migraines & sleep issues',
+          filed: 'Jan 2025',
+          stage: 1,
+          events: [
+            { title: 'History confirmed', detail: 'Service history and current rating verified.' },
+            { title: 'Questionnaires in progress', detail: 'Mini-DBQs partially complete—finish so provider packets can be prepped.' },
+            { title: 'Next milestone', detail: 'Completing questionnaires unlocks appointment coordination.' }
+          ]
+        },
+        {
+          id: 'TY-6610',
+          conditions: 'Radiculopathy & hip',
+          filed: 'Feb 2025',
+          stage: 0,
+          events: [
+            { title: 'Intent to File captured', detail: 'Your ITF date is saved so your effective date is protected.' },
+            { title: 'Intake ready', detail: 'Complete intake to map primary and secondary conditions.' },
+            { title: 'Next milestone', detail: 'Upload STRs and private records to move into questionnaires.' }
+          ]
+        }
+      ];
 
-    const steps = [
-      { label: 'Welcome & Eligibility Triage', detail: 'Service history, goals, ITF check, eligibility score' },
-      { label: 'ROI/Offer & Secure Checkout', detail: 'Projected impact + Zoho Sign contract & ROI pack' },
-      { label: 'Account Setup & Portal Orientation', detail: 'Secure login and tracker walkthrough' },
-      { label: 'DD-214 & ITF', detail: 'Guided retrieval + ITF countdown' },
-      { label: 'Service & Medical Records Intake', detail: 'SF-180 for STRs + civilian upload checklist' },
-      { label: 'Intake Interview', detail: 'Self-guided or live; notes schema-enforced' },
-      { label: 'MDBQs via Zoho Forms', detail: 'Pre-filled forms; advance only on webhook' },
-      { label: 'Provider Scheduling', detail: 'Preferences, reminders, attendance tracking' },
-      { label: 'Evidence Package Build', detail: 'Signed forms, MDBQs, lay statements compiled' },
-      { label: 'Final Review & Delivery', detail: 'Quality gate + VA.gov submission guidance' },
-      { label: 'Ready to Submit', detail: 'All gates cleared; final status tips' }
-    ];
+      const steps = [
+        { label: 'Welcome & triage', detail: 'Service history, goals, Intent to File status, and current rating' },
+        { label: 'Contract & medical questionnaires', detail: 'Service agreement, ROI, and mini-DBQs for provider-ready info' },
+        { label: 'Evidence & delivery', detail: 'Upload records, coordinate providers, and package evidence to file' }
+      ];
 
     function renderClaims() {
       const select = document.getElementById('claimSelect');
@@ -643,13 +673,13 @@
     function seedMessages() {
       const feed = document.getElementById('messageFeed');
       const messages = [
-        { title: 'Zoho Sign completed', detail: 'Your contract + ROI pack are signed. Tracker advanced to Evidence Intake automatically.', time: '2h ago' },
-        { title: 'MDBQ webhook received', detail: 'Migraine + tinnitus MDBQs from Zoho Forms attached to your deal and marked complete.', time: 'Yesterday' },
-        { title: 'Provider attended', detail: 'Orthopedic appointment marked Attended. Evidence packet gate unlocked for QA.', time: 'Apr 10' },
-        { title: 'ITF timer', detail: 'Intent to File expires in 246 days—countdown is running so you don’t lose effective date.', time: 'Apr 9' },
-        { title: 'Evidence auto-imported', detail: 'Your orthopedic visit from 04/02 was synced from Dr. Carter.', time: '2h ago' },
-        { title: 'C&P scheduled', detail: 'Audiology exam set for 05/18 at 9:00 AM. Reminder will be texted.', time: 'Yesterday' },
-        { title: 'Payment math', detail: 'Projected retro pay for TY-7704: $5,420 based on review stage.', time: 'Apr 10' }
+        { title: 'Service agreement signed', detail: 'Your TYFYS contract and Release of Information are stored in your portal. Questionnaires are unlocked.', time: '2h ago' },
+        { title: 'Mini-DBQs saved', detail: 'Migraine and sleep questionnaires are 60% complete—finish them to prep provider packets.', time: 'Yesterday' },
+        { title: 'Records upload confirmed', detail: 'DD-214 and service treatment records uploaded. Imaging still needed for knee and back.', time: 'Apr 10' },
+        { title: 'Provider appointment options', detail: 'Telehealth orthopedics available next week; in-person slots open in two weeks.', time: 'Apr 9' },
+        { title: 'Intent to File reminder', detail: 'Your ITF date is set. Keep uploads moving so you’re ready to file before it expires.', time: 'Apr 9' },
+        { title: 'Evidence packet QA', detail: 'We are reviewing lay statements and provider reports before assembling your delivery-ready packet.', time: 'Apr 8' },
+        { title: 'Payment estimator tip', detail: 'Add dependents to the estimator to see how your monthly compensation could change.', time: 'Apr 8' }
       ];
       feed.innerHTML = '';
       messages.forEach(msg => {
