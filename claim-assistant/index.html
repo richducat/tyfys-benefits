@@ -195,11 +195,84 @@
         border: 1px solid var(--border);
       }
 
-      .actions {
+      .stepper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 6px 0 16px;
+      }
+
+      .stepper-headline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        font-weight: 700;
+      }
+
+      .stepper-progress {
+        height: 6px;
+        background: #e5e7eb;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .stepper-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary), #0ea5e9);
+        transition: width 0.25s ease;
+      }
+
+      .stepper-stages {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .stage-pill {
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--text-muted);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .stage-pill.active {
+        color: var(--primary);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.12);
+      }
+
+      .step {
+        display: none;
+      }
+
+      .step.active {
+        display: block;
+      }
+
+      .actions,
+      .actions-top {
         display: flex;
         justify-content: flex-end;
         gap: 10px;
         margin-top: 14px;
+      }
+
+      .actions-top {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        padding: 8px 0;
+        background: linear-gradient(180deg, #ffffff 70%, rgba(255, 255, 255, 0));
+        border-bottom: 1px solid rgba(0, 51, 102, 0.08);
+        margin-bottom: 6px;
       }
 
       .btn {
@@ -237,19 +310,35 @@
             Guided intake that mirrors your onboarding discovery questions. TYFYS does not submit claims to the VA.
           </div>
         </div>
+        <div class="stepper" aria-label="Intake progress">
+          <div class="stepper-headline">
+            <span id="stepStatus">Step 1 of 10</span>
+            <span class="helper" id="stepTitle">Basic info & contact</span>
+          </div>
+          <div class="stepper-progress" aria-hidden="true">
+            <div class="stepper-bar" id="stepperBar"></div>
+          </div>
+          <div class="stepper-stages" id="stepperStages"></div>
+        </div>
 
-        <form>
-          <div class="section-block">
-            <div class="tag">Section 1</div>
-            <h3 class="section-title">Basic info & contact</h3>
-            <p class="section-subtitle">
-              Everything needed to identify and reach you, plus timezone and spouse involvement.
-            </p>
-            <div class="form-grid">
-              <div class="field">
-                <label>Full legal name *</label>
-                <input type="text" name="Full_Name" />
-              </div>
+        <div class="actions-top" aria-label="Step controls">
+          <button type="button" class="btn btn-ghost" id="prevStepTop">Previous</button>
+          <button type="button" class="btn btn-primary" id="nextStepTop">Next section</button>
+        </div>
+
+        <form id="intakeForm">
+          <div class="step active" data-step="1" data-title="Basic info & contact">
+            <div class="section-block">
+              <div class="tag">Section 1</div>
+              <h3 class="section-title">Basic info & contact</h3>
+              <p class="section-subtitle">
+                Everything needed to identify and reach you, plus timezone and spouse involvement.
+              </p>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Full legal name *</label>
+                  <input type="text" name="Full_Name" />
+                </div>
               <div class="field">
                 <label>Preferred name</label>
                 <input type="text" name="Preferred_Name" />
@@ -323,34 +412,36 @@
                 <label>Partner name (if yes)</label>
                 <input type="text" name="Partner_Name" />
               </div>
-              <div class="field">
-                <label>Would you like them involved in future calls?</label>
-                <div class="pill-group">
-                  <label class="pill"><input type="radio" name="Partner_Involved" value="Yes" /> Yes</label>
-                  <label class="pill"><input type="radio" name="Partner_Involved" value="No" /> No</label>
+                <div class="field">
+                  <label>Would you like them involved in future calls?</label>
+                  <div class="pill-group">
+                    <label class="pill"><input type="radio" name="Partner_Involved" value="Yes" /> Yes</label>
+                    <label class="pill"><input type="radio" name="Partner_Involved" value="No" /> No</label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="section-block">
-            <div class="tag">Section 2</div>
-            <h3 class="section-title">Service history</h3>
-            <p class="section-subtitle">Branch, component, dates, and exposures.</p>
-            <div class="form-grid">
-              <div class="field">
-                <label>Branch of service *</label>
-                <select name="Branch">
-                  <option value="">Select</option>
-                  <option>Army</option>
-                  <option>Marine Corps</option>
-                  <option>Navy</option>
-                  <option>Air Force</option>
-                  <option>Space Force</option>
-                  <option>Coast Guard</option>
-                  <option>Other</option>
-                </select>
-              </div>
+          <div class="step" data-step="2" data-title="Service history">
+            <div class="section-block">
+              <div class="tag">Section 2</div>
+              <h3 class="section-title">Service history</h3>
+              <p class="section-subtitle">Branch, component, dates, and exposures.</p>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Branch of service *</label>
+                  <select name="Branch">
+                    <option value="">Select</option>
+                    <option>Army</option>
+                    <option>Marine Corps</option>
+                    <option>Navy</option>
+                    <option>Air Force</option>
+                    <option>Space Force</option>
+                    <option>Coast Guard</option>
+                    <option>Other</option>
+                  </select>
+                </div>
               <div class="field">
                 <label>Component *</label>
                 <select name="Component">
@@ -403,34 +494,36 @@
                   <label class="checkbox-pill"><input type="checkbox" name="Served_In" value="CONUS only" /> CONUS only</label>
                 </div>
               </div>
-              <div class="field">
-                <label>Known exposures</label>
-                <div class="checkbox-group">
-                  <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Burn pits" /> Burn pits</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Agent Orange / herbicides" /> Agent Orange / herbicides</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Gulf War environmental exposures" /> Gulf War environmental exposures</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Camp Lejeune water" /> Camp Lejeune water</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Chemical / biological / radiological training (CBRN)" /> Chemical / biological / radiological training (CBRN)</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Significant blast / IED exposure" /> Significant blast / IED exposure</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Other" /> Other</label>
+                <div class="field">
+                  <label>Known exposures</label>
+                  <div class="checkbox-group">
+                    <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Burn pits" /> Burn pits</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Agent Orange / herbicides" /> Agent Orange / herbicides</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Gulf War environmental exposures" /> Gulf War environmental exposures</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Camp Lejeune water" /> Camp Lejeune water</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Chemical / biological / radiological training (CBRN)" /> Chemical / biological / radiological training (CBRN)</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Significant blast / IED exposure" /> Significant blast / IED exposure</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Known_Exposures" value="Other" /> Other</label>
+                  </div>
+                  <textarea name="Known_Exposures_Other" placeholder="Other exposure details"></textarea>
                 </div>
-                <textarea name="Known_Exposures_Other" placeholder="Other exposure details"></textarea>
               </div>
             </div>
           </div>
 
-          <div class="section-block">
-            <div class="tag">Section 3</div>
-            <h3 class="section-title">VA status & claim type</h3>
-            <div class="form-grid">
-              <div class="field">
-                <label>Have you ever received a VA disability rating? *</label>
-                <div class="pill-group">
-                  <label class="pill"><input type="radio" name="Has_VA_Rating" value="Yes" /> Yes</label>
-                  <label class="pill"><input type="radio" name="Has_VA_Rating" value="No" /> No</label>
-                  <label class="pill"><input type="radio" name="Has_VA_Rating" value="Not sure" /> Not sure</label>
+          <div class="step" data-step="3" data-title="VA status & claim type">
+            <div class="section-block">
+              <div class="tag">Section 3</div>
+              <h3 class="section-title">VA status & claim type</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Have you ever received a VA disability rating? *</label>
+                  <div class="pill-group">
+                    <label class="pill"><input type="radio" name="Has_VA_Rating" value="Yes" /> Yes</label>
+                    <label class="pill"><input type="radio" name="Has_VA_Rating" value="No" /> No</label>
+                    <label class="pill"><input type="radio" name="Has_VA_Rating" value="Not sure" /> Not sure</label>
+                  </div>
                 </div>
-              </div>
               <div class="field">
                 <label>Current combined VA rating</label>
                 <select name="Current_Combined_Rating">
@@ -480,26 +573,28 @@
                   <label class="pill"><input type="radio" name="Has_VA_Gov_Account" value="Not sure" /> Not sure</label>
                 </div>
               </div>
-              <div class="field">
-                <label>Can you see or download your VA Benefit Summary online? *</label>
-                <div class="pill-group">
-                  <label class="pill"><input type="radio" name="Has_Benefit_Summary" value="Yes" /> Yes</label>
-                  <label class="pill"><input type="radio" name="Has_Benefit_Summary" value="No" /> No</label>
-                  <label class="pill"><input type="radio" name="Has_Benefit_Summary" value="Not sure" /> Not sure</label>
+                <div class="field">
+                  <label>Can you see or download your VA Benefit Summary online? *</label>
+                  <div class="pill-group">
+                    <label class="pill"><input type="radio" name="Has_Benefit_Summary" value="Yes" /> Yes</label>
+                    <label class="pill"><input type="radio" name="Has_Benefit_Summary" value="No" /> No</label>
+                    <label class="pill"><input type="radio" name="Has_Benefit_Summary" value="Not sure" /> Not sure</label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="section-block">
-            <div class="tag">Section 4</div>
-            <h3 class="section-title">Top conditions you want help with</h3>
-            <p class="section-subtitle">Capture up to five priority issues.</p>
-            <div class="form-grid">
-              <div class="field">
-                <label>Condition 1 name *</label>
-                <input type="text" name="Condition_1_Name" placeholder="Example: PTSD, Sleep apnea" />
-              </div>
+          <div class="step" data-step="4" data-title="Top conditions">
+            <div class="section-block">
+              <div class="tag">Section 4</div>
+              <h3 class="section-title">Top conditions you want help with</h3>
+              <p class="section-subtitle">Capture up to five priority issues.</p>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Condition 1 name *</label>
+                  <input type="text" name="Condition_1_Name" placeholder="Example: PTSD, Sleep apnea" />
+                </div>
               <div class="field">
                 <label>Service-connected? *</label>
                 <select name="Condition_1_Is_SC">
@@ -561,62 +656,66 @@
                 <label>Treatment history</label>
                 <textarea name="Condition_1_Treatment" placeholder="ER visits, meds, therapy, surgeries, injections, sleep study, counseling, etc."></textarea>
               </div>
-              <div class="field">
-                <label>Other issues we should know about?</label>
-                <textarea name="Other_Conditions_List"></textarea>
+                <div class="field">
+                  <label>Other issues we should know about?</label>
+                  <textarea name="Other_Conditions_List"></textarea>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="section-block">
-            <div class="tag">Section 5</div>
-            <h3 class="section-title">Sensitive / special categories</h3>
-            <div class="form-grid">
-              <div class="field">
-                <label>Have you ever experienced military sexual trauma (MST)?</label>
-                <div class="pill-group">
-                  <label class="pill"><input type="radio" name="MST_History" value="Yes" /> Yes</label>
-                  <label class="pill"><input type="radio" name="MST_History" value="No" /> No</label>
-                  <label class="pill"><input type="radio" name="MST_History" value="Prefer not to say" /> Prefer not to say</label>
+          <div class="step" data-step="5" data-title="Sensitive categories">
+            <div class="section-block">
+              <div class="tag">Section 5</div>
+              <h3 class="section-title">Sensitive / special categories</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Have you ever experienced military sexual trauma (MST)?</label>
+                  <div class="pill-group">
+                    <label class="pill"><input type="radio" name="MST_History" value="Yes" /> Yes</label>
+                    <label class="pill"><input type="radio" name="MST_History" value="No" /> No</label>
+                    <label class="pill"><input type="radio" name="MST_History" value="Prefer not to say" /> Prefer not to say</label>
+                  </div>
+                  <textarea name="MST_Summary" placeholder="Share what you’re comfortable with."></textarea>
                 </div>
-                <textarea name="MST_Summary" placeholder="Share what you’re comfortable with."></textarea>
-              </div>
-              <div class="field">
-                <label>Diagnosed with PTSD, depression, anxiety, or another mental health condition? *</label>
-                <div class="pill-group">
-                  <label class="pill"><input type="radio" name="Diagnosed_Mental_Health" value="Yes" /> Yes</label>
-                  <label class="pill"><input type="radio" name="Diagnosed_Mental_Health" value="No" /> No</label>
-                  <label class="pill"><input type="radio" name="Diagnosed_Mental_Health" value="Not sure" /> Not sure</label>
+                <div class="field">
+                  <label>Diagnosed with PTSD, depression, anxiety, or another mental health condition? *</label>
+                  <div class="pill-group">
+                    <label class="pill"><input type="radio" name="Diagnosed_Mental_Health" value="Yes" /> Yes</label>
+                    <label class="pill"><input type="radio" name="Diagnosed_Mental_Health" value="No" /> No</label>
+                    <label class="pill"><input type="radio" name="Diagnosed_Mental_Health" value="Not sure" /> Not sure</label>
+                  </div>
+                  <textarea name="Mental_Health_Details" placeholder="Which diagnosis, who diagnosed you, and when?"></textarea>
                 </div>
-                <textarea name="Mental_Health_Details" placeholder="Which diagnosis, who diagnosed you, and when?"></textarea>
-              </div>
-              <div class="field">
-                <label>History of concussion, TBI, or blast injury? *</label>
-                <div class="pill-group">
-                  <label class="pill"><input type="radio" name="TBI_History" value="Yes" /> Yes</label>
-                  <label class="pill"><input type="radio" name="TBI_History" value="No" /> No</label>
-                  <label class="pill"><input type="radio" name="TBI_History" value="Not sure" /> Not sure</label>
+                <div class="field">
+                  <label>History of concussion, TBI, or blast injury? *</label>
+                  <div class="pill-group">
+                    <label class="pill"><input type="radio" name="TBI_History" value="Yes" /> Yes</label>
+                    <label class="pill"><input type="radio" name="TBI_History" value="No" /> No</label>
+                    <label class="pill"><input type="radio" name="TBI_History" value="Not sure" /> Not sure</label>
+                  </div>
+                  <textarea name="TBI_Details" placeholder="What happened, how many times, symptoms?"></textarea>
                 </div>
-                <textarea name="TBI_Details" placeholder="What happened, how many times, symptoms?"></textarea>
               </div>
             </div>
           </div>
 
-          <div class="section-block">
-            <div class="tag">Section 6</div>
-            <h3 class="section-title">Treatment history & medical records</h3>
-            <div class="form-grid">
-              <div class="field">
-                <label>Where do you currently get most of your care? *</label>
-                <div class="checkbox-group">
-                  <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="VA hospital/clinic" /> VA hospital/clinic</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="Military treatment facility (Tricare)" /> Military treatment facility (Tricare)</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="Civilian primary care" /> Civilian primary care</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="Civilian specialist(s)" /> Civilian specialist(s)</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="ER / urgent care only" /> ER / urgent care only</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="Not in regular treatment" /> I’m not in regular treatment right now</label>
+          <div class="step" data-step="6" data-title="Treatment & records">
+            <div class="section-block">
+              <div class="tag">Section 6</div>
+              <h3 class="section-title">Treatment history & medical records</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Where do you currently get most of your care? *</label>
+                  <div class="checkbox-group">
+                    <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="VA hospital/clinic" /> VA hospital/clinic</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="Military treatment facility (Tricare)" /> Military treatment facility (Tricare)</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="Civilian primary care" /> Civilian primary care</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="Civilian specialist(s)" /> Civilian specialist(s)</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="ER / urgent care only" /> ER / urgent care only</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Primary_Care_Source" value="Not in regular treatment" /> I’m not in regular treatment right now</label>
+                  </div>
                 </div>
-              </div>
               <div class="field">
                 <label>Main doctors / clinics</label>
                 <textarea name="Current_Providers_List" placeholder="Name of clinic, city/state, and what they treat you for."></textarea>
@@ -663,22 +762,23 @@
             </div>
           </div>
 
-          <div class="section-block">
-            <div class="tag">Section 7</div>
-            <h3 class="section-title">Current work & family impact / goals</h3>
-            <div class="form-grid">
-              <div class="field">
-                <label>Employment status *</label>
-                <select name="Employment_Status">
-                  <option value="">Select</option>
-                  <option>Full-time</option>
-                  <option>Part-time</option>
-                  <option>Self-employed</option>
-                  <option>Unemployed</option>
-                  <option>Retired</option>
-                  <option>Medically retired / disabled</option>
-                </select>
-              </div>
+          <div class="step" data-step="7" data-title="Work & family impact">
+            <div class="section-block">
+              <div class="tag">Section 7</div>
+              <h3 class="section-title">Current work & family impact / goals</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Employment status *</label>
+                  <select name="Employment_Status">
+                    <option value="">Select</option>
+                    <option>Full-time</option>
+                    <option>Part-time</option>
+                    <option>Self-employed</option>
+                    <option>Unemployed</option>
+                    <option>Retired</option>
+                    <option>Medically retired / disabled</option>
+                  </select>
+                </div>
               <div class="field">
                 <label>How do your service-related issues affect your ability to work? *</label>
                 <textarea name="Work_Impact_Description"></textarea>
@@ -698,27 +798,29 @@
                   <label class="checkbox-pill"><input type="checkbox" name="Top_Goals" value="Other" /> Other</label>
                 </div>
               </div>
-              <div class="field">
-                <label>Desired overall rating (optional)</label>
-                <input type="text" name="Desired_Rating_Goal" />
+                <div class="field">
+                  <label>Desired overall rating (optional)</label>
+                  <input type="text" name="Desired_Rating_Goal" />
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="section-block">
-            <div class="tag">Section 8</div>
-            <h3 class="section-title">Conflicts, representation & fit</h3>
-            <div class="form-grid">
-              <div class="field">
-                <label>Currently working with any of the following? *</label>
-                <div class="checkbox-group">
-                  <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="VSO" /> VSO (DAV, VFW, American Legion, etc.)</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="Attorney" /> VA-accredited attorney</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="Claims agent" /> VA-accredited claims agent</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="Paid claims company" /> Paid claims company</label>
-                  <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="None" /> None of the above</label>
+          <div class="step" data-step="8" data-title="Representation fit">
+            <div class="section-block">
+              <div class="tag">Section 8</div>
+              <h3 class="section-title">Conflicts, representation & fit</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Currently working with any of the following? *</label>
+                  <div class="checkbox-group">
+                    <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="VSO" /> VSO (DAV, VFW, American Legion, etc.)</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="Attorney" /> VA-accredited attorney</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="Claims agent" /> VA-accredited claims agent</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="Paid claims company" /> Paid claims company</label>
+                    <label class="checkbox-pill"><input type="checkbox" name="Currently_Working_With" value="None" /> None of the above</label>
+                  </div>
                 </div>
-              </div>
               <div class="field">
                 <label>Only interested in working with a free VSO? *</label>
                 <div class="pill-group">
@@ -727,60 +829,144 @@
                   <label class="pill"><input type="radio" name="Wants_VSO_Only" value="Not sure" /> Not sure yet</label>
                 </div>
               </div>
-              <div class="field">
-                <label>Ever felt pressured or scammed by a VA help company?</label>
-                <div class="pill-group">
-                  <label class="pill"><input type="radio" name="Past_Bad_Experience" value="Yes" /> Yes</label>
-                  <label class="pill"><input type="radio" name="Past_Bad_Experience" value="No" /> No</label>
+                <div class="field">
+                  <label>Ever felt pressured or scammed by a VA help company?</label>
+                  <div class="pill-group">
+                    <label class="pill"><input type="radio" name="Past_Bad_Experience" value="Yes" /> Yes</label>
+                    <label class="pill"><input type="radio" name="Past_Bad_Experience" value="No" /> No</label>
+                  </div>
+                  <textarea name="Past_Bad_Experience_Details" placeholder="What happened?"></textarea>
                 </div>
-                <textarea name="Past_Bad_Experience_Details" placeholder="What happened?"></textarea>
               </div>
             </div>
           </div>
 
-          <div class="section-block">
-            <div class="tag">Section 9</div>
-            <h3 class="section-title">Scheduling & tech readiness</h3>
-            <div class="form-grid">
-              <div class="field">
-                <label>Telehealth-ready device & internet? *</label>
-                <div class="pill-group">
-                  <label class="pill"><input type="radio" name="Has_Telehealth_Tech" value="Yes" /> Yes</label>
-                  <label class="pill"><input type="radio" name="Has_Telehealth_Tech" value="Yes, but connection is spotty" /> Yes, but connection is spotty</label>
-                  <label class="pill"><input type="radio" name="Has_Telehealth_Tech" value="No" /> No</label>
+          <div class="step" data-step="9" data-title="Scheduling & tech readiness">
+            <div class="section-block">
+              <div class="tag">Section 9</div>
+              <h3 class="section-title">Scheduling & tech readiness</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Telehealth-ready device & internet? *</label>
+                  <div class="pill-group">
+                    <label class="pill"><input type="radio" name="Has_Telehealth_Tech" value="Yes" /> Yes</label>
+                    <label class="pill"><input type="radio" name="Has_Telehealth_Tech" value="Yes, but connection is spotty" /> Yes, but connection is spotty</label>
+                    <label class="pill"><input type="radio" name="Has_Telehealth_Tech" value="No" /> No</label>
+                  </div>
                 </div>
-              </div>
               <div class="field">
                 <label>Best days/times for appointments *</label>
                 <textarea name="Best_Appointment_Times" placeholder="Weekdays – mornings/afternoons/evenings; Weekends – mornings/afternoons"></textarea>
               </div>
-              <div class="field">
-                <label>Anything else we should know?</label>
-                <textarea name="Additional_Notes_From_Vet"></textarea>
+                <div class="field">
+                  <label>Anything else we should know?</label>
+                  <textarea name="Additional_Notes_From_Vet"></textarea>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="section-block">
-            <div class="tag">Section 10</div>
-            <h3 class="section-title">Final acknowledgment & next steps</h3>
-            <div class="acknowledgment">
-              <input type="checkbox" id="Final_Confirmation" name="Final_Confirmation" />
-              <label for="Final_Confirmation">
-                I confirm the information I’ve provided is true to the best of my knowledge, and I understand TYFYS will use this to decide which doctors and DBQs are the best fit for my case.
-              </label>
+          <div class="step" data-step="10" data-title="Final acknowledgment">
+            <div class="section-block">
+              <div class="tag">Section 10</div>
+              <h3 class="section-title">Final acknowledgment & next steps</h3>
+              <div class="acknowledgment">
+                <input type="checkbox" id="Final_Confirmation" name="Final_Confirmation" />
+                <label for="Final_Confirmation">
+                  I confirm the information I’ve provided is true to the best of my knowledge, and I understand TYFYS will use this to decide which doctors and DBQs are the best fit for my case.
+                </label>
+              </div>
+              <p class="section-subtitle" style="margin-top:12px;">
+                Thank you for taking the time to fill this out. Our coordination team will review your service history, current rating, and top conditions, identify which specialists and DBQs fit your case, and reach out with any missing documents to schedule your appointments.
+              </p>
             </div>
-            <p class="section-subtitle" style="margin-top:12px;">
-              Thank you for taking the time to fill this out. Our coordination team will review your service history, current rating, and top conditions, identify which specialists and DBQs fit your case, and reach out with any missing documents to schedule your appointments.
-            </p>
           </div>
 
           <div class="actions">
-            <button type="reset" class="btn btn-ghost">Reset</button>
-            <button type="button" class="btn btn-primary">Save answers</button>
+            <button type="button" class="btn btn-ghost" id="prevStep">Previous</button>
+            <button type="button" class="btn btn-primary" id="nextStep">Next section</button>
           </div>
+          <p class="helper" style="text-align:right; margin:6px 0 0;">Your answers stay on this page until you export or share them with a TYFYS specialist.</p>
         </form>
       </div>
     </div>
+    <script>
+      const steps = Array.from(document.querySelectorAll('.step'));
+      const stageContainer = document.getElementById('stepperStages');
+      const progressBar = document.getElementById('stepperBar');
+      const stepStatus = document.getElementById('stepStatus');
+      const stepTitle = document.getElementById('stepTitle');
+      const prevBtn = document.getElementById('prevStep');
+      const nextBtn = document.getElementById('nextStep');
+      const prevBtnTop = document.getElementById('prevStepTop');
+      const nextBtnTop = document.getElementById('nextStepTop');
+      let currentStep = 0;
+
+      function renderStagePills() {
+        if (!stageContainer) return;
+        stageContainer.innerHTML = '';
+        steps.forEach((step, idx) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'stage-pill';
+          btn.dataset.step = idx.toString();
+          btn.textContent = `${idx + 1}. ${step.dataset.title || 'Section'}`;
+          btn.addEventListener('click', () => showStep(idx));
+          stageContainer.appendChild(btn);
+        });
+      }
+
+      function updateStagePills() {
+        if (!stageContainer) return;
+        stageContainer.querySelectorAll('.stage-pill').forEach((pill) => {
+          const isActive = Number(pill.dataset.step) === currentStep;
+          pill.classList.toggle('active', isActive);
+        });
+      }
+
+      function showStep(index) {
+        if (!steps.length) return;
+        currentStep = Math.max(0, Math.min(index, steps.length - 1));
+        steps.forEach((step, idx) => {
+          const isActive = idx === currentStep;
+          step.classList.toggle('active', isActive);
+          step.setAttribute('aria-hidden', (!isActive).toString());
+        });
+
+        const percent = ((currentStep + 1) / steps.length) * 100;
+        if (progressBar) progressBar.style.width = `${percent}%`;
+        if (stepStatus) stepStatus.textContent = `Step ${currentStep + 1} of ${steps.length}`;
+        if (stepTitle) stepTitle.textContent = steps[currentStep].dataset.title || 'Current section';
+        const isFirst = currentStep === 0;
+        const isLast = currentStep === steps.length - 1;
+        if (prevBtn) prevBtn.disabled = isFirst;
+        if (prevBtnTop) prevBtnTop.disabled = isFirst;
+
+        const nextLabel = isLast ? 'Finish' : 'Next section';
+        if (nextBtn) nextBtn.textContent = nextLabel;
+        if (nextBtnTop) nextBtnTop.textContent = nextLabel;
+
+        updateStagePills();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function bindNavButtons() {
+        const handlers = [
+          { btn: nextBtn, delta: 1 },
+          { btn: prevBtn, delta: -1 },
+          { btn: nextBtnTop, delta: 1 },
+          { btn: prevBtnTop, delta: -1 },
+        ];
+
+        handlers.forEach(({ btn, delta }) => {
+          if (!btn) return;
+          btn.addEventListener('click', () => showStep(currentStep + delta));
+        });
+      }
+
+      renderStagePills();
+      bindNavButtons();
+      showStep(0);
+    </script>
   </body>
 </html>
