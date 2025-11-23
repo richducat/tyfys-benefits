@@ -257,8 +257,7 @@
         display: block;
       }
 
-      .actions,
-      .actions-top {
+      .actions {
         display: flex;
         justify-content: flex-end;
         gap: 10px;
@@ -319,11 +318,6 @@
             <div class="stepper-bar" id="stepperBar"></div>
           </div>
           <div class="stepper-stages" id="stepperStages"></div>
-        </div>
-
-        <div class="actions-top" aria-label="Step controls">
-          <button type="button" class="btn btn-ghost" id="prevStepTop">Previous</button>
-          <button type="button" class="btn btn-primary" id="nextStepTop">Next section</button>
         </div>
 
         <form id="intakeForm">
@@ -898,8 +892,6 @@
       const stepTitle = document.getElementById('stepTitle');
       const prevBtn = document.getElementById('prevStep');
       const nextBtn = document.getElementById('nextStep');
-      const prevBtnTop = document.getElementById('prevStepTop');
-      const nextBtnTop = document.getElementById('nextStepTop');
       let currentStep = 0;
 
       function renderStagePills() {
@@ -937,31 +929,16 @@
         if (progressBar) progressBar.style.width = `${percent}%`;
         if (stepStatus) stepStatus.textContent = `Step ${currentStep + 1} of ${steps.length}`;
         if (stepTitle) stepTitle.textContent = steps[currentStep].dataset.title || 'Current section';
-        const isFirst = currentStep === 0;
-        const isLast = currentStep === steps.length - 1;
-        if (prevBtn) prevBtn.disabled = isFirst;
-        if (prevBtnTop) prevBtnTop.disabled = isFirst;
-
-        const nextLabel = isLast ? 'Finish' : 'Next section';
-        if (nextBtn) nextBtn.textContent = nextLabel;
-        if (nextBtnTop) nextBtnTop.textContent = nextLabel;
+        if (prevBtn) prevBtn.disabled = currentStep === 0;
+        if (nextBtn) nextBtn.textContent = currentStep === steps.length - 1 ? 'Finish' : 'Next section';
 
         updateStagePills();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
       function bindNavButtons() {
-        const handlers = [
-          { btn: nextBtn, delta: 1 },
-          { btn: prevBtn, delta: -1 },
-          { btn: nextBtnTop, delta: 1 },
-          { btn: prevBtnTop, delta: -1 },
-        ];
-
-        handlers.forEach(({ btn, delta }) => {
-          if (!btn) return;
-          btn.addEventListener('click', () => showStep(currentStep + delta));
-        });
+        if (nextBtn) nextBtn.addEventListener('click', () => showStep(currentStep + 1));
+        if (prevBtn) prevBtn.addEventListener('click', () => showStep(currentStep - 1));
       }
 
       renderStagePills();
