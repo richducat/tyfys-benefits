@@ -195,64 +195,6 @@
         border: 1px solid var(--border);
       }
 
-      .stepper {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin: 6px 0 16px;
-      }
-
-      .stepper-headline {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 6px;
-        font-weight: 700;
-      }
-
-      .stepper-progress {
-        height: 6px;
-        background: #e5e7eb;
-        border-radius: 999px;
-        overflow: hidden;
-      }
-
-      .stepper-bar {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(90deg, var(--primary), #0ea5e9);
-        transition: width 0.25s ease;
-      }
-
-      .stepper-stages {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        overflow-x: auto;
-        padding-bottom: 4px;
-      }
-
-      .stage-pill {
-        border: 1px solid var(--border);
-        background: #fff;
-        color: var(--text-muted);
-        border-radius: 999px;
-        padding: 6px 12px;
-        font-weight: 700;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: all 0.15s ease;
-        white-space: nowrap;
-        flex: 0 0 auto;
-      }
-
-      .stage-pill.active {
-        color: var(--primary);
-        border-color: var(--primary);
-        box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.12);
-      }
-
       .step {
         display: none;
       }
@@ -266,16 +208,6 @@
         justify-content: flex-end;
         gap: 10px;
         margin-top: 14px;
-      }
-
-      .actions-top {
-        position: sticky;
-        top: 0;
-        z-index: 5;
-        padding: 8px 0;
-        background: linear-gradient(180deg, #ffffff 70%, rgba(255, 255, 255, 0));
-        border-bottom: 1px solid rgba(0, 51, 102, 0.08);
-        margin-bottom: 6px;
       }
 
       .btn {
@@ -309,12 +241,6 @@
         .actions {
           flex-direction: column;
         }
-
-        .actions-top {
-          position: static;
-          padding: 0 0 10px;
-          margin-bottom: 12px;
-        }
       }
     </style>
   </head>
@@ -327,24 +253,7 @@
             Guided intake that mirrors your onboarding discovery questions. TYFYS does not submit claims to the VA.
           </div>
         </div>
-        <div class="stepper" aria-label="Intake progress">
-          <div class="stepper-headline">
-            <span id="stepStatus">Step 1 of 10</span>
-            <span class="helper" id="stepTitle">Basic info & contact</span>
-          </div>
-          <div class="stepper-progress" aria-hidden="true">
-            <div class="stepper-bar" id="stepperBar"></div>
-          </div>
-          <div class="stepper-stages" id="stepperStages"></div>
-        </div>
-
         <form id="intakeForm">
-          <div class="actions-top" aria-label="Form navigation">
-            <div class="actions" style="justify-content: space-between; margin: 0;">
-              <button type="button" class="btn btn-ghost" id="prevStepTop">Previous</button>
-              <button type="button" class="btn btn-primary" id="nextStepTop">Next section</button>
-            </div>
-          </div>
           <div class="step active" data-step="1" data-title="Basic info & contact">
             <div class="section-block">
               <div class="tag">Section 1</div>
@@ -910,37 +819,9 @@
     </div>
     <script>
       const steps = Array.from(document.querySelectorAll('.step'));
-      const stageContainer = document.getElementById('stepperStages');
-      const progressBar = document.getElementById('stepperBar');
-      const stepStatus = document.getElementById('stepStatus');
-      const stepTitle = document.getElementById('stepTitle');
       const prevBtn = document.getElementById('prevStep');
       const nextBtn = document.getElementById('nextStep');
-      const prevBtnTop = document.getElementById('prevStepTop');
-      const nextBtnTop = document.getElementById('nextStepTop');
       let currentStep = 0;
-
-      function renderStagePills() {
-        if (!stageContainer) return;
-        stageContainer.innerHTML = '';
-        steps.forEach((step, idx) => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'stage-pill';
-          btn.dataset.step = idx.toString();
-          btn.textContent = `${idx + 1}. ${step.dataset.title || 'Section'}`;
-          btn.addEventListener('click', () => showStep(idx));
-          stageContainer.appendChild(btn);
-        });
-      }
-
-      function updateStagePills() {
-        if (!stageContainer) return;
-        stageContainer.querySelectorAll('.stage-pill').forEach((pill) => {
-          const isActive = Number(pill.dataset.step) === currentStep;
-          pill.classList.toggle('active', isActive);
-        });
-      }
 
       function showStep(index) {
         if (!steps.length) return;
@@ -951,27 +832,16 @@
           step.setAttribute('aria-hidden', (!isActive).toString());
         });
 
-        const percent = ((currentStep + 1) / steps.length) * 100;
-        if (progressBar) progressBar.style.width = `${percent}%`;
-        if (stepStatus) stepStatus.textContent = `Step ${currentStep + 1} of ${steps.length}`;
-        if (stepTitle) stepTitle.textContent = steps[currentStep].dataset.title || 'Current section';
         if (prevBtn) prevBtn.disabled = currentStep === 0;
         if (nextBtn) nextBtn.textContent = currentStep === steps.length - 1 ? 'Finish' : 'Next section';
-        if (prevBtnTop) prevBtnTop.disabled = currentStep === 0;
-        if (nextBtnTop) nextBtnTop.textContent = currentStep === steps.length - 1 ? 'Finish' : 'Next section';
-
-        updateStagePills();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
       function bindNavButtons() {
         if (nextBtn) nextBtn.addEventListener('click', () => showStep(currentStep + 1));
         if (prevBtn) prevBtn.addEventListener('click', () => showStep(currentStep - 1));
-        if (nextBtnTop) nextBtnTop.addEventListener('click', () => showStep(currentStep + 1));
-        if (prevBtnTop) prevBtnTop.addEventListener('click', () => showStep(currentStep - 1));
       }
 
-      renderStagePills();
       bindNavButtons();
       showStep(0);
     </script>
