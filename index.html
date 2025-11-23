@@ -183,7 +183,7 @@
     .message small { color: #9fb3c8; }
 
     .assistant-frame { margin-top: 1rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #f3f4f6; box-shadow: var(--shadow); }
-    #claimAssistantFrame { width: 100%; min-height: 1900px; border: 0; background: #f3f4f6; }
+    .assistant-frame iframe { width: 100%; min-height: 1900px; border: 0; background: #f3f4f6; }
 
     @media (max-width: 960px) {
       .hero, .tracker { grid-template-columns: 1fr; }
@@ -240,21 +240,35 @@
       </div>
     </div>
     <div class="panel">
-      <h2 style="margin-bottom:0.4rem;">Important information</h2>
-      <ul class="messages" style="list-style:none; padding:0; margin:0; gap:0.75rem;">
-        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-          Thank You For Your Service (TYFYS) is a private, Service-Disabled Veteran-Owned business. We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization (VSO).
-        </li>
-        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-          You can always file a VA disability claim for free directly with the VA or with the help of an accredited VSO or representative.
-        </li>
-        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-          TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.
-        </li>
-        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-          Our tools are for education and organization only. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.
-        </li>
-      </ul>
+      <h2 style="margin-bottom:0.4rem;">Claim prep assistant (VA Form 21-526EZ)</h2>
+      <p style="margin-top:0; color:#cbd5e1;">Practice the questions from VA Form 21-526EZ, organize your answers, and see which documents match each part of your claim. When you’re ready, you’ll use this information to complete and submit the official form directly with the VA or with an accredited representative.</p>
+      <div class="assistant-frame">
+        <iframe class="claim-assistant-frame" src="claim-assistant/index.html" title="Claim assistant" scrolling="no"></iframe>
+      </div>
+      <p style="color:#9fb3c8; margin-top:0.75rem;">TYFYS does not submit forms to the VA, does not provide legal advice, and is not a substitute for an accredited representative or attorney.</p>
+    </div>
+  </section>
+
+  <section class="section" id="important-information">
+    <h2>Important information</h2>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      <div class="panel">
+        <h3 style="margin-top:0;">Disclosures</h3>
+        <ul class="messages" style="list-style:none; padding:0; margin:0; gap:0.75rem;">
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            Thank You For Your Service (TYFYS) is a private, Service-Disabled Veteran-Owned business. We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization (VSO).
+          </li>
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            You can always file a VA disability claim for free directly with the VA or with the help of an accredited VSO or representative.
+          </li>
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.
+          </li>
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            Our tools are for education and organization only. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -341,7 +355,7 @@
     <div class="panel">
       <p style="margin-top:0;">Practice the questions from VA Form 21-526EZ, organize your answers, and see which documents match each part of your claim. When you’re ready, you’ll use this information to complete and submit the official form directly with the VA or with an accredited representative.</p>
       <div class="assistant-frame">
-        <iframe id="claimAssistantFrame" src="claim-assistant/index.html" title="Claim assistant" scrolling="no"></iframe>
+        <iframe id="claimAssistantFrame" class="claim-assistant-frame" src="claim-assistant/index.html" title="Claim assistant" scrolling="no"></iframe>
       </div>
       <p style="color:#9fb3c8; margin-top:0.75rem;">TYFYS does not submit forms to the VA, does not provide legal advice, and is not a substitute for an accredited representative or attorney.</p>
     </div>
@@ -690,10 +704,12 @@
       });
     }
 
-    function initClaimAssistantFrame() {
-      const frame = document.getElementById('claimAssistantFrame');
-      if (!frame) return;
-      const resize = () => {
+    function initClaimAssistantFrames() {
+      const frames = Array.from(document.querySelectorAll('.claim-assistant-frame'));
+      if (!frames.length) return;
+
+      const resize = (frame) => {
+        if (!frame) return;
         try {
           const doc = frame.contentDocument || frame.contentWindow?.document;
           if (doc?.body?.scrollHeight) {
@@ -704,17 +720,22 @@
         }
       };
 
-      frame.addEventListener('load', () => {
-        resize();
-        setTimeout(resize, 600);
+      frames.forEach((frame) => {
+        frame.addEventListener('load', () => {
+          resize(frame);
+          setTimeout(() => resize(frame), 600);
+        });
       });
-      window.addEventListener('resize', resize);
+
+      window.addEventListener('resize', () => {
+        frames.forEach((frame) => resize(frame));
+      });
     }
 
     renderClaims();
     setActiveClaim('TY-8842');
     seedMessages();
-    initClaimAssistantFrame();
+    initClaimAssistantFrames();
     closeNavOnSelection();
   </script>
 </body>
