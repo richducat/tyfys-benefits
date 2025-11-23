@@ -1,202 +1,216 @@
 export const copy = {
   hero: {
-    title: 'You Served. Now It’s Our Turn to Support You.',
-    subtitle: 'Clear, coordinated medical documentation designed to strengthen your VA disability claim.',
-    description:
-      'TYFYS connects you with independent medical providers who understand military injuries — so you can submit a fully supported claim with confidence.',
-    pledge: 'No representation. No legal advice. No shortcuts. Just accurate medical evidence, fast.',
-    ctaPrimary: 'Start Your Intake →',
-    ctaSecondary: 'Schedule a Call',
+    eyebrow: 'Welcome back!',
+    title: 'Your VA disability roadmap, organized.',
+    body:
+      'Thank You For Your Service (TYFYS) helps you collect records, prepare for private medical evaluations, and build a fully developed claim evidence packet—step by step, at your pace, with a specialist available whenever you want a human check-in.',
+    compliance:
+      'TYFYS is a private, Service-Disabled Veteran-Owned business. We are not the Department of Veterans Affairs (VA) or a Veterans Service Organization, and we do not file claims or appeals on your behalf. We help you organize medical evidence and documentation so you can file confidently through official VA channels or with an accredited representative of your choice.',
+    actions: [
+      {
+        label: 'Resume claim TY-8842',
+        description: 'Pick up where you left off in your current TYFYS evidence project.',
+        primary: true
+      },
+      {
+        label: 'Talk to a Specialist',
+        description: 'Schedule time with a TYFYS team member if you want help or a second set of eyes.'
+      },
+      {
+        label: 'Open claim prep assistant',
+        description: 'Walk through the questions you’ll see on VA Form 21-526EZ and get organized before you file.'
+      }
+    ],
+    pills: ['Built with veterans', 'Secure document pipelines', 'VA-friendly formats', 'No-skip checklists']
   },
-  overview:
-    'A simple, guided path from first call to final documentation — all in one place.',
-  howItWorks: [
-    {
-      title: '1. Discovery Call',
-      body:
-        'We start by understanding your service history, current conditions, and your goals. This helps us determine what medical evidence you may need to support your claim.'
-    },
-    {
-      title: '2. Medical Intake & Condition Review',
-      body:
-        'You complete a brief intake so our team can organize: your documented conditions; possible secondary or overlooked conditions; any missing medical history; prior ratings and diagnoses. This ensures no part of your story is missed.'
-    },
-    {
-      title: '3. Secure Document Collection',
-      body:
-        'You’ll receive access to your private Veteran Portal where you can upload DD-214, medical records, prior VA decisions, impact statements, and any documents you already have. If you need help, we walk you through the process step-by-step.'
-    },
-    {
-      title: '4. Independent Provider Appointments',
-      body:
-        'TYFYS coordinates your appointments with licensed clinicians who understand military-specific injuries, know how to document conditions clearly, and are experienced with the forms and criteria used to evaluate disabilities. These appointments are completed via telehealth or in-person depending on condition.'
-    },
-    {
-      title: '5. DBQs, Nexus Letters & Evidence Packet Preparation',
-      body:
-        'Your independent provider documents DBQs, nexus opinions (when clinically appropriate), symptom descriptions, functional impact, and supporting medical evidence. Everything is organized for you into a clean, complete evidence package.'
-    },
-    {
-      title: '6. Final Evidence Review',
-      body:
-        'Before your packet is delivered, it goes through a final quality check to ensure all conditions are documented, rationale is medically sound, no information is missing, and your documents are cohesive and ready for your claim submission.'
-    }
-  ],
-  role: {
-    title: 'Your Role in the Process',
-    intro:
-      'TYFYS is not a VSO, attorney, or law firm — and does not prepare or submit claims. You stay in full control. We simply make sure you’re walking into the process with strong, accurate, and complete medical evidence.'
-  },
-  reasons: {
-    title: 'Why Veterans Choose TYFYS',
-    points: [
+  keepMoving: {
+    title: 'Keep your claim moving',
+    body:
+      'See every TYFYS project you’re working on in one place. Each card shows where you are in the TYFYS evidence-building process—not your official VA status—and what’s next on your checklist.',
+    microcopy:
+      'These stages track your TYFYS steps—intake, records, provider appointments, and packet review. For official claim status, always rely on the VA.',
+    projects: [
       {
-        heading: 'Independent Medical Documentation',
-        body: 'You are connected with licensed clinicians who truly understand service-related injuries — not rushed examiners.'
+        id: 'TY-8842',
+        title: 'Evidence packet for knee & back increase',
+        stage: 'Evidence & delivery',
+        summary: 'Records uploaded. Provider appointments scheduled for next week.',
+        nextStep: 'Upload imaging and add lay statements for daily impact.'
       },
       {
-        heading: 'Fast, Organized Coordination',
-        body: 'No guesswork. No bouncing between offices. You have one guided system that keeps everything moving.'
+        id: 'TY-7719',
+        title: 'New claim: migraines and sleep issues',
+        stage: 'Contract & questionnaires',
+        summary: 'Service history confirmed. Mini-DBQs partially complete.',
+        nextStep: 'Finish questionnaires so we can prep provider packets.'
       },
       {
-        heading: 'Clear, Step-by-Step Experience',
-        body: 'From intake to final documentation, every step is simple and transparent.'
-      },
-      {
-        heading: 'Veteran-Centered Care',
-        body: 'You’ve earned this support. Our job is to make the process easier, faster, and less stressful — while treating you with the dignity you deserve.'
+        id: 'TY-6610',
+        title: 'Secondary claims: radiculopathy & hip',
+        stage: 'Welcome & triage',
+        summary: 'Intent to File date captured. Intake is ready to start.',
+        nextStep: 'Complete your intake so we can map conditions and evidence.'
       }
     ]
   },
-  deliverables: {
-    title: 'What You Receive',
-    items: [
-      'Medical Intake Review',
-      'Coordinated Provider Appointments',
-      'DBQs',
-      'Nexus Letters (when medically appropriate)',
-      'Functional Impact Statements',
-      'Document Organization & Packet Assembly',
-      'Veteran Portal Access',
-      'Timeline Tracker to monitor progress (like a “pizza tracker,” but for your medical evidence)',
-      'Everything you need to submit your own claim with confidence.'
-    ]
-  },
-  whoWeHelp: {
-    title: 'Who We Help',
-    items: [
-      'Filing for the first time',
-      'Requesting an increase',
-      'Seeking stronger evidence to support their existing conditions',
-      'Missing medical documentation',
-      'Unsure which conditions are connected',
-      'Needing clear medical rationale from a licensed provider'
-    ]
-  },
-  conditions: {
-    title: 'Commonly Documented Conditions',
-    items: [
-      'PTSD / Anxiety / Depression',
-      'Sleep Apnea',
-      'Back, Neck & Joint Conditions',
-      'Migraines & Headaches',
-      'Radiculopathy',
-      'TBI',
-      'Respiratory Conditions',
-      'IBS / GERD',
-      'Secondary Conditions',
-      'Burn Pit-related Conditions',
-      'Hearing Loss & Tinnitus'
-    ],
-    note: 'TYFYS ensures each condition is evaluated fully — including secondary pathways and overlapping symptoms.'
-  },
-  quotes: {
-    title: 'What Veterans Say',
-    list: [
-      '"TYFYS made everything simple. The doctor finally understood what I went through in service and documented it the right way. I wish I did this years ago."',
-      '"The portal and tracker were a lifesaver. I always knew what step was next and what was required."',
-      '"No pressure. No confusion. Just straight-up help and real organization."'
-    ]
-  },
-  faq: {
-    title: 'Frequently Asked Questions',
-    items: [
-      { question: 'Is TYFYS the VA or a VSO?', answer: 'No. TYFYS is a neutral medical-coordination service. We do not represent, advise, or file claims.' },
-      { question: 'Do you work with licensed medical professionals?', answer: 'Yes. All evaluations are completed by licensed, independent clinicians.' },
-      { question: 'Do you guarantee results?', answer: 'No one can guarantee outcomes. We simply ensure your medical evidence is complete, accurate, and professionally documented.' },
-      { question: 'Can you help if I already filed a claim?', answer: 'Yes — if you need additional or updated medical evidence to strengthen your packet.' },
-      { question: 'Do you handle appeals?', answer: 'We can provide the medical documentation you need, but we do not represent or manage appeal filings.' }
-    ]
-  },
-  closing: {
-    title: 'Your VA benefits, built the TYFYS way',
-    subtitle:
-      'We guide you through every gated step with clear tasks, evidence checklists, and a live tracker. We are not the VA or a VSO.',
+  tracker: {
+    title: 'Real-time TYFYS progress tracker',
     body:
-      'Your service deserves clarity, respect, and proper documentation. We’re here to help you take the next steps with confidence.',
-    ctaPrimary: 'Create Demo Case',
-    ctaSecondary: 'Talk to a Specialist',
-  },
-  badges: [
-    'Zoho-safe: separate layouts & pipeline',
-    'Evidence-first: no skipped steps',
-    'Uses Zoho Sign + Zoho Forms (no duplicates)',
-  ],
-  education: [
-    'How VA math works and why ITF matters',
-    'What a fully developed claim requires',
-    'Why evidence-by-condition beats generic claims',
-  ],
-  pricing: {
-    summary: 'Transparent, flat pricing used in our current playbook',
-    tiers: [
-      { name: 'Single condition', price: '$3,500', detail: 'For one primary condition' },
-      { name: 'Up to 5 conditions', price: '$5,500', detail: 'Balanced for most veterans' },
-      { name: 'More than 5', price: 'Up to $8,000', detail: 'Complex cases with multiple secondaries' },
-      { name: 'Deposit', price: '$500', detail: 'Due at contract signing via Zoho Sign' },
+      'Follow your progress from “I just logged in” to “my evidence packet is ready to file.” Every stage has clear tasks, checklists, and uploads so nothing falls through the cracks.',
+    stages: [
+      {
+        name: 'Welcome & triage',
+        tag: 'Stage 1',
+        description:
+          'Confirm your service history, current rating, Intent to File status, and goals for this claim. If anything is unclear, you can switch to a live call or chat with a TYFYS specialist at any time.'
+      },
+      {
+        name: 'Contract & medical questionnaires',
+        tag: 'Stage 2',
+        description:
+          'Complete your TYFYS service agreement and Release of Information, then fill out short “mini-DBQ” style questionnaires that mirror what your providers will need for their medical opinions and forms. Everything is signed and stored in your secure portal.'
+      },
+      {
+        name: 'Evidence & delivery',
+        tag: 'Stage 3',
+        description:
+          'Upload your DD-214, service treatment records, private medical records, and lay statements. TYFYS then coordinates your private provider appointments (telehealth or in-person where available) and assembles a single evidence packet you can use to file a Fully Developed Claim with the VA.'
+      }
     ],
+    ctas: {
+      addEvidence: 'Add evidence now',
+      viewAppointments: 'View appointment options'
+    },
+    note: 'This tracker shows your TYFYS milestones only and does not show official VA processing status or decisions.'
   },
-  disclaimer: 'TYFYS prepares your evidence and packet. You file your claim on VA.gov. We are not the VA or a VSO.',
+  claimAssistant: {
+    title: 'Claim prep assistant (VA Form 21-526EZ)',
+    body:
+      'Practice the questions from VA Form 21-526EZ, organize your answers, and see which documents match each part of your claim. When you’re ready, you’ll use this information to complete and submit the official form directly with the VA or with an accredited representative.',
+    disclaimer:
+      'TYFYS does not submit forms to the VA, does not provide legal advice, and is not a substitute for an accredited representative or attorney.'
+  },
+  tools: {
+    title: 'Tools built into your TYFYS home base',
+    items: [
+      {
+        title: 'Combined rating calculator',
+        body:
+          'Estimate your potential combined rating using the same “VA math” method, so you’re not surprised when percentages don’t add up the way you expect. This is an educational estimate only—the VA makes all final rating decisions.'
+      },
+      {
+        title: 'Dependents & payment estimator (2025)',
+        body:
+          'See how adding a spouse and dependents could change your monthly tax-free VA compensation based on the most recent published rates. Use this as a planning tool only; your actual payments are determined by the VA.'
+      },
+      {
+        title: 'Packet prep',
+        body:
+          'Turn “get my records together” into simple missions. We break your tasks into clear steps like “upload DD-214,” “add buddy statements,” and “attach imaging for knee and back,” with progress you can see.'
+      },
+      {
+        title: 'Evidence by condition',
+        body:
+          'Interactive checklists for major condition categories—musculoskeletal, mental health, respiratory, neurological, cardiovascular, and more—so you can see what types of evidence typically support stronger claims and rating increases.'
+      },
+      {
+        title: 'Occupation & era navigator',
+        body:
+          'Choose your MOS, rate, and era of service to see common primary and secondary conditions, exposures, and recommended evaluations connected to your job. This is based on patterns seen across occupations, not a diagnosis.'
+      },
+      {
+        title: 'DBQ minis',
+        body:
+          'Short, plain-English prompts that map to VA Disability Benefits Questionnaires (DBQs), so your private doctor or VSO can quickly understand what needs to be documented—without you having to speak in “VA form” language.'
+      },
+      {
+        title: 'SF-180 helper',
+        body:
+          'Answer a few questions and generate a ready-to-send SF-180 request to obtain your service treatment and personnel records from the right archive. You review and submit the request yourself through official government channels.'
+      },
+      {
+        title: 'Upload civilian records',
+        body:
+          'Use your secure document vault to store imaging, specialist notes, nexus opinions, and other civilian records in one place so your TYFYS team and your providers are working from the same file.'
+      },
+      {
+        title: 'Objection-aware tips',
+        body:
+          'Bite-sized education modules that answer common questions about timing, cost, rating myths, and concerns about working while rated—delivered at the stage where they’re most helpful.'
+      }
+    ]
+  },
+  resources: {
+    title: 'Resources that follow the TYFYS blueprint',
+    items: [
+      {
+        title: 'DD-214 & Intent to File guide',
+        body:
+          'Step-by-step retrieval instructions, official links, and timelines for getting your DD-214 and submitting an Intent to File (ITF) so you protect the earliest possible effective date for your benefits.'
+      },
+      {
+        title: 'TYFYS vs. common claim options',
+        body:
+          'See how TYFYS’s flat-fee, evidence-first approach compares with free Veterans Service Organizations, contingency-fee claim services, and law firms—so you can decide what kind of support, if any, you want to use alongside the free options available to you.'
+      },
+      {
+        title: 'VA forms',
+        body:
+          'Quick links to the VA forms you’re most likely to use while you work through your tracker: 21-526EZ, 21-0781, 21-686c, 21-8940, and SF-180. All links go directly to official VA websites.'
+      },
+      {
+        title: 'Evidence packet checklist',
+        body: 'A high-level view of what “complete” usually looks like:',
+        list: [
+          'DD-214 and ITF in place',
+          'Service treatment and personnel records',
+          'Private medical records and imaging',
+          'Condition-specific DBQs and medical opinions',
+          'Lay statements and impact statements',
+          'Occupation/era-based exposure evidence where relevant'
+        ]
+      }
+    ]
+  },
+  forms: {
+    title: 'VA forms, ready to download',
+    items: [
+      {
+        title: '21-526EZ',
+        body: 'Application for Disability Compensation (VA Form 21-526EZ). Link goes directly to the official VA form.'
+      },
+      {
+        title: '21-0781',
+        body: 'Statement in Support of Claim for Service Connection for PTSD (VA Form 21-0781).'
+      },
+      {
+        title: '21-686c',
+        body: 'Declaration of Status of Dependents (VA Form 21-686c).'
+      },
+      {
+        title: '21-8940',
+        body:
+          'Veteran’s Application for Increased Compensation Based on Unemployability (VA Form 21-8940). TYFYS does not assist with TDIU claims, but we include this form so you have everything in one place if you choose to pursue it separately.'
+      },
+      {
+        title: 'SF-180',
+        body:
+          'Request Pertaining to Military Records (SF-180), used to request copies of your service records from official archives.'
+      }
+    ]
+  },
+  updates: {
+    title: 'Updates from your TYFYS team',
+    body:
+      'Release notes, how-to videos, and plain-English explanations of changes that could affect how you build your evidence packet. We focus on education, not legal advice, so you can decide your next steps with the VA or an accredited representative you trust.'
+  },
+  complianceBlock: {
+    title: 'Important information',
+    bullets: [
+      'Thank You For Your Service (TYFYS) is a private, Service-Disabled Veteran-Owned business. We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization (VSO).',
+      'You can always file a VA disability claim for free directly with the VA or with the help of an accredited VSO or representative.',
+      'TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.',
+      'Our tools are for education and organization only. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.'
+    ]
+  }
 };
-
-export const evidenceChecklists = {
-  Back: [
-    'Service treatment records noting injuries or complaints',
-    'Recent imaging (MRI/X-ray)',
-    'Physical therapy notes',
-    'Lay statement describing functional limits',
-  ],
-  Knee: [
-    'Service records of knee injury or overuse',
-    'Orthopedic exams or imaging',
-    'Range-of-motion measurements',
-    'Buddy statement on duty impact',
-  ],
-  PTSD: [
-    'Stressors and timeline',
-    'Diagnosis from licensed provider',
-    'Therapy notes and medication history',
-    'Impact statement covering work and relationships',
-  ],
-  Hearing: [
-    'MOS/Rate noise exposure evidence',
-    'Audiogram with thresholds',
-    'Tinnitus description',
-    'Protective equipment history',
-  ],
-};
-
-export const trackerStages = [
-  { id: 'welcome', name: 'Welcome & Eligibility Triage' },
-  { id: 'offer', name: 'ROI/Offer & Secure Checkout' },
-  { id: 'account', name: 'Account Setup & Portal Orientation' },
-  { id: 'dd214', name: 'DD-214 & ITF' },
-  { id: 'records', name: 'Service & Medical Records Intake' },
-  { id: 'intake', name: 'Intake Interview (Self-guided or Live)' },
-  { id: 'mdbq', name: 'MDBQs via Zoho Forms' },
-  { id: 'provider', name: 'Provider Scheduling' },
-  { id: 'evidence', name: 'Evidence Package Build' },
-  { id: 'review', name: 'Final Review & Delivery Support' },
-  { id: 'submit', name: 'Submit (Veteran-led)' },
-  { id: 'decision', name: 'Decision & Follow-up' },
-];
