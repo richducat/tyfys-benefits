@@ -69,6 +69,17 @@
     nav a { padding: 0.5rem 0.75rem; border-radius: 999px; transition: background 0.2s; }
     nav a:hover { background: rgba(255, 255, 255, 0.06); }
 
+    .nav-toggle {
+      display: none;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 0.45rem 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
     .hero {
       max-width: 1200px;
       margin: 2rem auto 1rem;
@@ -171,9 +182,24 @@
     .message { padding: 0.9rem 1rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
     .message small { color: #9fb3c8; }
 
+    .assistant-frame { margin-top: 1rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #f3f4f6; box-shadow: var(--shadow); }
+    #claimAssistantFrame { width: 100%; min-height: 1900px; border: 0; background: #f3f4f6; }
+
     @media (max-width: 960px) {
       .hero, .tracker { grid-template-columns: 1fr; }
-      nav { display: none; }
+      nav {
+        display: none;
+        position: absolute;
+        right: 1.25rem;
+        top: 64px;
+        flex-direction: column;
+        background: rgba(13, 27, 42, 0.95);
+        padding: 0.5rem;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 12px;
+      }
+      nav.open { display: flex; }
+      .nav-toggle { display: inline-flex; align-items:center; gap: 0.35rem; }
     }
   </style>
 </head>
@@ -184,12 +210,13 @@
         <img src="logo.png" alt="Thank You For Your Service logo" />
         <span>Thank You For Your Service</span>
       </div>
-      <nav>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="toggleNav()">☰ Menu</button>
+      <nav id="main-nav">
         <a href="#tracker">Tracker</a>
         <a href="#tools">Tools</a>
         <a href="#resources">Resources</a>
         <a href="#messages">Updates</a>
-        <a href="/claim-assistant/">Claim assistant</a>
+        <a href="#claim-assistant">Claim assistant</a>
       </nav>
     </div>
   </header>
@@ -201,7 +228,7 @@
       <div class="cta-row">
         <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
         <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
-        <a class="btn btn-ghost" href="/claim-assistant/">Open claim assistant</a>
+        <a class="btn btn-ghost" href="#claim-assistant">Open claim assistant</a>
       </div>
       <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
         <span class="badge">Built with veterans</span>
@@ -282,14 +309,19 @@
     </div>
   </section>
 
+  <section class="section" id="claim-assistant">
+    <h2>Claim assistant (21-526EZ)</h2>
+    <div class="panel">
+      <p style="margin-top:0;">Walk through the 21-526EZ directly on this page. The assistant is embedded inline so you can complete every field without leaving tyfys.net.</p>
+      <div class="assistant-frame">
+        <iframe id="claimAssistantFrame" src="claim-assistant/index.html" title="Claim assistant" scrolling="no"></iframe>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="tools">
     <h2>Built-in help from the TYFYS homepage</h2>
     <div class="grid">
-      <div class="panel">
-        <h3>Claim assistant (21-526EZ)</h3>
-        <p>Walk through the 21-526EZ in plain language, validate key items, and download a pre-filled PDF to review before filing.</p>
-        <a class="btn btn-primary" href="/claim-assistant/">Launch the claim assistant</a>
-      </div>
       <div class="panel">
         <h3>Combined rating calculator</h3>
         <p>Use the same math as VA.gov so you know what to expect.</p>
@@ -588,6 +620,26 @@
       alert('Secure evidence uploader opens here. Drag-and-drop and VA.gov upload coming soon.');
     }
 
+    function toggleNav() {
+      const nav = document.getElementById('main-nav');
+      const toggle = document.querySelector('.nav-toggle');
+      if (!nav || !toggle) return;
+      const isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    function closeNavOnSelection() {
+      const nav = document.getElementById('main-nav');
+      if (!nav) return;
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('open');
+          const toggle = document.querySelector('.nav-toggle');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
     function seedMessages() {
       const feed = document.getElementById('messageFeed');
       const messages = [
@@ -608,9 +660,32 @@
       });
     }
 
+    function initClaimAssistantFrame() {
+      const frame = document.getElementById('claimAssistantFrame');
+      if (!frame) return;
+      const resize = () => {
+        try {
+          const doc = frame.contentDocument || frame.contentWindow?.document;
+          if (doc?.body?.scrollHeight) {
+            frame.style.height = `${doc.body.scrollHeight + 40}px`;
+          }
+        } catch (e) {
+          frame.style.height = '1900px';
+        }
+      };
+
+      frame.addEventListener('load', () => {
+        resize();
+        setTimeout(resize, 600);
+      });
+      window.addEventListener('resize', resize);
+    }
+
     renderClaims();
     setActiveClaim('TY-8842');
     seedMessages();
+    initClaimAssistantFrame();
+    closeNavOnSelection();
   </script>
 </body>
 </html>
