@@ -229,6 +229,8 @@
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
       }
 
       .stage-pill {
@@ -241,6 +243,8 @@
         font-size: 0.9rem;
         cursor: pointer;
         transition: all 0.15s ease;
+        white-space: nowrap;
+        flex: 0 0 auto;
       }
 
       .stage-pill.active {
@@ -297,6 +301,20 @@
         .card {
           padding: 20px 14px 18px;
         }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .actions {
+          flex-direction: column;
+        }
+
+        .actions-top {
+          position: static;
+          padding: 0 0 10px;
+          margin-bottom: 12px;
+        }
       }
     </style>
   </head>
@@ -321,6 +339,12 @@
         </div>
 
         <form id="intakeForm">
+          <div class="actions-top" aria-label="Form navigation">
+            <div class="actions" style="justify-content: space-between; margin: 0;">
+              <button type="button" class="btn btn-ghost" id="prevStepTop">Previous</button>
+              <button type="button" class="btn btn-primary" id="nextStepTop">Next section</button>
+            </div>
+          </div>
           <div class="step active" data-step="1" data-title="Basic info & contact">
             <div class="section-block">
               <div class="tag">Section 1</div>
@@ -892,6 +916,8 @@
       const stepTitle = document.getElementById('stepTitle');
       const prevBtn = document.getElementById('prevStep');
       const nextBtn = document.getElementById('nextStep');
+      const prevBtnTop = document.getElementById('prevStepTop');
+      const nextBtnTop = document.getElementById('nextStepTop');
       let currentStep = 0;
 
       function renderStagePills() {
@@ -931,6 +957,8 @@
         if (stepTitle) stepTitle.textContent = steps[currentStep].dataset.title || 'Current section';
         if (prevBtn) prevBtn.disabled = currentStep === 0;
         if (nextBtn) nextBtn.textContent = currentStep === steps.length - 1 ? 'Finish' : 'Next section';
+        if (prevBtnTop) prevBtnTop.disabled = currentStep === 0;
+        if (nextBtnTop) nextBtnTop.textContent = currentStep === steps.length - 1 ? 'Finish' : 'Next section';
 
         updateStagePills();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -939,6 +967,8 @@
       function bindNavButtons() {
         if (nextBtn) nextBtn.addEventListener('click', () => showStep(currentStep + 1));
         if (prevBtn) prevBtn.addEventListener('click', () => showStep(currentStep - 1));
+        if (nextBtnTop) nextBtnTop.addEventListener('click', () => showStep(currentStep + 1));
+        if (prevBtnTop) prevBtnTop.addEventListener('click', () => showStep(currentStep - 1));
       }
 
       renderStagePills();
