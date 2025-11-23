@@ -183,7 +183,30 @@
     .message small { color: #9fb3c8; }
 
     .assistant-frame { margin-top: 1rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #f3f4f6; box-shadow: var(--shadow); }
-    #claimAssistantFrame { width: 100%; min-height: 1900px; border: 0; background: #f3f4f6; }
+    .assistant-frame iframe { width: 100%; min-height: 1200px; border: 0; background: #f3f4f6; }
+
+    .intake-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr); gap: 1rem; align-items: start; }
+    .intake-progress { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+    .intake-progress .progress-shell { flex: 1; margin-top: 0; height: 8px; }
+    .intake-progress .progress-bar { height: 100%; }
+    .intake-form { display: flex; flex-direction: column; gap: 1rem; }
+    .intake-step { display: none; gap: 0.75rem; }
+    .intake-step:not(.active) { display: none !important; }
+    .intake-step.active { display: grid; }
+    .intake-step.grid-2 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .intake-step.grid-3 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .intake-step h3, .intake-step .helper { grid-column: 1 / -1; }
+    .intake-step h3 { margin: 0 0 0.35rem; }
+    .intake-step p.helper { margin: 0 0 0.75rem; color: #9fb3c8; }
+    .intake-step label { font-weight: 600; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .pill { padding: 0.35rem 0.65rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); cursor: default; }
+    .intake-nav { display: flex; justify-content: space-between; gap: 0.75rem; margin-top: 0.5rem; }
+    .intake-nav .btn { flex: 1; }
+
+    @media (max-width: 960px) {
+      .intake-grid { grid-template-columns: 1fr; }
+    }
 
     @media (max-width: 960px) {
       .hero, .tracker { grid-template-columns: 1fr; }
@@ -212,6 +235,7 @@
       </div>
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="toggleNav()">☰ Menu</button>
       <nav id="main-nav">
+        <a href="#intake">Intake</a>
         <a href="#tracker">Tracker</a>
         <a href="#tools">Tools</a>
         <a href="#resources">Resources</a>
@@ -230,7 +254,7 @@
       <div class="cta-row">
         <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
         <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
-        <a class="btn btn-ghost" href="#claim-assistant">Open claim prep assistant</a>
+        <a class="btn btn-ghost" href="#intake">Start intake</a>
       </div>
       <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
         <span class="badge">Built with veterans</span>
@@ -240,21 +264,508 @@
       </div>
     </div>
     <div class="panel">
-      <h2 style="margin-bottom:0.4rem;">Important information</h2>
-      <ul class="messages" style="list-style:none; padding:0; margin:0; gap:0.75rem;">
-        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-          Thank You For Your Service (TYFYS) is a private, Service-Disabled Veteran-Owned business. We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization (VSO).
-        </li>
-        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-          You can always file a VA disability claim for free directly with the VA or with the help of an accredited VSO or representative.
-        </li>
-        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-          TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.
-        </li>
-        <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-          Our tools are for education and organization only. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.
-        </li>
-      </ul>
+      <h2 style="margin-bottom:0.4rem;">TYFYS onboarding intake</h2>
+      <p style="margin-top:0; color:#cbd5e1;">Complete the guided TYFYS intake so we can map your service history, rating goals, and records. Every section follows the intake guide to prep you for evidence collection, provider matching, and Intent to File protection.</p>
+      <div class="cards" style="margin: 0.75rem 0 1rem;">
+        <div class="mini-card">
+          <h3 style="margin:0 0 0.35rem;">Guided onboarding</h3>
+          <p style="margin:0;">Work through 10 clear steps that capture your contact info, service history, exposures, and priorities.</p>
+        </div>
+        <div class="mini-card">
+          <h3 style="margin:0 0 0.35rem;">Evidence roadmap</h3>
+          <p style="margin:0;">Identify key records, diagnostics, and uploads we’ll need to organize your claim evidence packet.</p>
+        </div>
+        <div class="mini-card">
+          <h3 style="margin:0 0 0.35rem;">Specialist ready</h3>
+          <p style="margin:0;">Share your top conditions and scheduling preferences so a TYFYS specialist can review and assist.</p>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#intake">Start intake</a>
+        <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="intake">
+    <h2>TYFYS onboarding intake</h2>
+    <p style="color:#cbd5e1; max-width:960px;">Complete this guided intake so intake specialists have everything they need to organize your evidence, map the right providers, and keep your Intent to File protected. Each step follows the TYFYS onboarding guide.</p>
+    <div class="intake-grid">
+      <div class="panel">
+        <div class="intake-progress">
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <span class="badge" style="margin:0;">New form</span>
+            <strong id="intakeProgressLabel">Step 1 of 10</strong>
+          </div>
+          <div class="progress-shell">
+            <div class="progress-bar" id="intakeProgressBar"></div>
+          </div>
+        </div>
+
+        <form class="intake-form" id="intakeForm">
+          <div class="intake-step grid-2 active" data-step="1">
+            <h3>Section 1 – Basic Info &amp; Contact</h3>
+            <label>Full legal name (required)<input type="text" name="Full_Name" placeholder="Full legal name" required /></label>
+            <label>Preferred name (optional)<input type="text" name="Preferred_Name" placeholder="Preferred name" /></label>
+            <label>Date of birth (required)<input type="date" name="DOB" required /></label>
+            <label>Last 4 of SSN (optional)<input type="text" name="SSN_Last4" maxlength="4" pattern="[0-9]{4}" placeholder="1234" /></label>
+            <div class="grid-2" style="display:grid; gap:0.75rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+              <label>Mobile phone (required)<input type="tel" name="Mobile_Phone" required /></label>
+              <label>Email (required)<input type="email" name="Email" required /></label>
+              <label>Best contact method (required)
+                <select name="Best_Contact_Method" required>
+                  <option value="">Select</option>
+                  <option>Phone call</option>
+                  <option>Text</option>
+                  <option>Email</option>
+                  <option>Any is fine</option>
+                </select>
+              </label>
+              <label>Time zone (required)
+                <select name="Time_Zone" required>
+                  <option value="">Select your time zone</option>
+                  <option>Eastern</option>
+                  <option>Central</option>
+                  <option>Mountain</option>
+                  <option>Pacific</option>
+                  <option>Alaska</option>
+                  <option>Hawaii</option>
+                </select>
+              </label>
+            </div>
+            <div class="grid-3" style="display:grid; gap:0.75rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+              <label>Address line 1<input type="text" name="Address_Line1" required /></label>
+              <label>Address line 2<input type="text" name="Address_Line2" /></label>
+              <label>City<input type="text" name="City" required /></label>
+              <label>State<input type="text" name="State" required /></label>
+              <label>Zip<input type="text" name="Zip" required /></label>
+            </div>
+            <label>Are you married / in a long-term relationship?
+              <select name="Has_Spouse_Partner" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label>Partner name (optional)<input type="text" name="Partner_Name" placeholder="Partner name" /></label>
+            <label>Would you like them involved in future calls?
+              <select name="Partner_Involved">
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="intake-step grid-2" data-step="2">
+            <h3>Section 2 – Service History</h3>
+            <label>Branch of service
+              <select name="Branch" required>
+                <option value="">Select</option>
+                <option>Army</option>
+                <option>Marine Corps</option>
+                <option>Navy</option>
+                <option>Air Force</option>
+                <option>Space Force</option>
+                <option>Coast Guard</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label>Component
+              <select name="Component" required>
+                <option value="">Select</option>
+                <option>Active Duty</option>
+                <option>Reserve</option>
+                <option>National Guard</option>
+              </select>
+            </label>
+            <label>Service start date<input type="date" name="Service_Start_Date" required /></label>
+            <label>Service end date<input type="date" name="Service_End_Date" required title="If still serving, choose today’s date and note below." /></label>
+            <label>Character of discharge
+              <select name="Discharge_Type" required>
+                <option value="">Select</option>
+                <option>Honorable</option>
+                <option>General (Under Honorable)</option>
+                <option>Other Than Honorable</option>
+                <option>Medical</option>
+                <option>Dishonorable</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>Primary MOS / AFSC / Rating<input type="text" name="Primary_MOS" required placeholder="Primary MOS" /></label>
+            <label>Primary job title<input type="text" name="Primary_Job_Title" required placeholder="Infantry, Aviation Mechanic, Corpsman" /></label>
+            <label>Other key jobs / roles<textarea name="Secondary_MOS_Roles" rows="3" placeholder="Optional"></textarea></label>
+            <label>Deployments &amp; era
+              <select name="Served_In" multiple required size="5">
+                <option>Vietnam era</option>
+                <option>Gulf War (1990–present)</option>
+                <option>Iraq / Afghanistan / OIF / OEF</option>
+                <option>Other overseas deployments</option>
+                <option>CONUS only</option>
+              </select>
+            </label>
+            <label>Known exposures
+              <select name="Known_Exposures" multiple size="8">
+                <option>Burn pits</option>
+                <option>Agent Orange / herbicides</option>
+                <option>Gulf War environmental exposures</option>
+                <option>Camp Lejeune water</option>
+                <option>Chemical / biological / radiological training (CBRN)</option>
+                <option>Significant blast / IED exposure</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="intake-step grid-2" data-step="3">
+            <h3>Section 3 – VA Status &amp; Claim Type</h3>
+            <label>Have you ever received a VA disability rating?
+              <select name="Has_VA_Rating" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>Current combined VA rating
+              <select name="Current_Combined_Rating">
+                <option value="">Select</option>
+                <option>0</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option><option>60</option><option>70</option><option>80</option><option>90</option><option>100</option><option>Not sure</option>
+              </select>
+            </label>
+            <label>Current service-connected conditions &amp; percentages<textarea name="Current_Rated_Conditions" rows="3" placeholder="Example: Back 40%, Left sciatic nerve 10%, Tinnitus 10%, etc."></textarea></label>
+            <label>Open or pending VA claims or appeals?
+              <select name="Has_Open_Claims" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>If yes, which conditions and stage?<textarea name="Open_Claims_Details" rows="3" placeholder="Which conditions? When filed? At what stage?"></textarea></label>
+            <label>For this onboarding, what are you mainly looking for?
+              <select name="Claim_Type_Main" multiple required size="4">
+                <option>Help with new conditions I’ve never been rated for (initial)</option>
+                <option>Help increasing rating on conditions I’m already service-connected for (increase)</option>
+                <option>Help connecting secondary conditions to my current ratings</option>
+                <option>Not sure – I just know something isn’t right and I need help</option>
+              </select>
+            </label>
+            <label>Have you filed an Intent to File (ITF) in the last 12 months?
+              <select name="Has_Intent_To_File" required>
+                <option value="">Select</option>
+                <option>Yes, within the last year</option>
+                <option>Yes, more than a year ago</option>
+                <option>No</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>Intent to File date<input type="date" name="Intent_To_File_Date" /></label>
+            <label>Access to VA.gov / eBenefits account?
+              <select name="Has_VA_Gov_Account" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>Can you view/download your VA Benefit Summary online?
+              <select name="Has_Benefit_Summary" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="intake-step" data-step="4">
+            <h3>Section 4 – Top Conditions You Want Help With</h3>
+            <p class="helper">We start with your top issues to map providers and evidence. Add as many as you need below.</p>
+            <div class="grid-2" style="display:grid; gap:0.75rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+              <label>Condition name<input type="text" name="Condition_1_Name" placeholder="Example: PTSD, Sleep apnea" /></label>
+              <label>Is this already service-connected?
+                <select name="Condition_1_Is_SC">
+                  <option value="">Select</option>
+                  <option>Yes, I’m already rated for it</option>
+                  <option>No, never been rated</option>
+                  <option>Not sure</option>
+                </select>
+              </label>
+              <label>What are you hoping to do with this condition?
+                <select name="Condition_1_Goal">
+                  <option value="">Select</option>
+                  <option>New claim / first time</option>
+                  <option>Increase rating</option>
+                  <option>Connect as a secondary condition to another rating</option>
+                  <option>Not sure</option>
+                </select>
+              </label>
+              <label>How often do you deal with this issue?
+                <select name="Condition_1_Frequency">
+                  <option value="">Select</option>
+                  <option>A few times per month</option>
+                  <option>A few times per week</option>
+                  <option>Daily</option>
+                  <option>All day / constant</option>
+                </select>
+              </label>
+            </div>
+            <label>How does this impact your everyday life?
+              <textarea name="Condition_1_Functional_Impact" rows="3" placeholder="Sleep, work, family life, driving, lifting, relationships, etc."></textarea>
+            </label>
+            <label>When did this start?
+              <select name="Condition_1_Onset">
+                <option value="">Select</option>
+                <option>Started in service</option>
+                <option>Started after service but related to something from service</option>
+                <option>Started after service and may be caused by another condition</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>What event, injury, or exposure do you believe caused or worsened this?
+              <textarea name="Condition_1_Service_Event" rows="3" placeholder="Training accident, deployment incident, blast, MST, etc."></textarea>
+            </label>
+            <label>Have you been formally diagnosed?
+              <select name="Condition_1_Diagnosed">
+                <option value="">Select</option>
+                <option>Yes, by VA</option>
+                <option>Yes, by civilian doctor</option>
+                <option>No diagnosis yet</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>How have you been treated for it?
+              <textarea name="Condition_1_Treatment" rows="3" placeholder="ER visits, meds, therapy, surgeries, injections, sleep study, CPAP, counseling, etc."></textarea>
+            </label>
+            <label>Other issues we should know about?
+              <textarea name="Other_Conditions_List" rows="3" placeholder="List any other service-connected conditions or symptoms."></textarea>
+            </label>
+          </div>
+
+          <div class="intake-step" data-step="5">
+            <h3>Section 5 – Sensitive / Special Categories</h3>
+            <label>Have you ever experienced military sexual trauma (MST)?
+              <select name="MST_History">
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Prefer not to say</option>
+              </select>
+            </label>
+            <label>MST summary (optional)
+              <textarea name="MST_Summary" rows="3" placeholder="Thank you for sharing what you’re comfortable with."></textarea>
+            </label>
+            <label>Diagnosed with PTSD, depression, anxiety, or another mental health condition?
+              <select name="Diagnosed_Mental_Health" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>If yes, details
+              <textarea name="Mental_Health_Details" rows="3" placeholder="Which diagnosis, who diagnosed you, and when?"></textarea>
+            </label>
+            <label>Have you ever had a concussion, TBI, or blast injury?
+              <select name="TBI_History" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>If yes, details
+              <textarea name="TBI_Details" rows="3" placeholder="What happened, how many times, and what symptoms?"></textarea>
+            </label>
+          </div>
+
+          <div class="intake-step" data-step="6">
+            <h3>Section 6 – Treatment History &amp; Medical Records</h3>
+            <label>Where do you currently get most of your care?
+              <select name="Primary_Care_Source" multiple required size="6">
+                <option>VA hospital/clinic</option>
+                <option>Military treatment facility (Tricare)</option>
+                <option>Civilian primary care</option>
+                <option>Civilian specialist(s)</option>
+                <option>ER / urgent care only</option>
+                <option>I’m not in regular treatment right now</option>
+              </select>
+            </label>
+            <label>Main doctors/clinics
+              <textarea name="Current_Providers_List" rows="3" placeholder="Name of clinic, city/state, and what they treat you for."></textarea>
+            </label>
+            <label>Have you had any of the following?
+              <select name="Key_Diagnostics" multiple size="8">
+                <option>Sleep study (for sleep apnea)</option>
+                <option>X-rays / MRI / CT scans</option>
+                <option>Nerve tests (EMG/NCS)</option>
+                <option>Mental health evaluations / counseling</option>
+                <option>C&amp;P (Comp &amp; Pension) exams</option>
+                <option>Surgeries related to your claimed conditions</option>
+                <option>None of the above / Not sure</option>
+              </select>
+            </label>
+            <label>Digital records you have right now
+              <select name="Has_Digital_Records" multiple size="10">
+                <option>DD214</option>
+                <option>Service Treatment Records (STRs)</option>
+                <option>VA Rating Decision Letters</option>
+                <option>VA Benefit Summary Letter</option>
+                <option>VA medical records (progress notes)</option>
+                <option>Civilian medical records</option>
+                <option>Imaging (MRI, CT, X-rays) reports</option>
+                <option>Sleep study report</option>
+                <option>Past C&amp;P exam reports</option>
+                <option>None / I don’t have access</option>
+              </select>
+            </label>
+            <div class="pill-row">
+              <span class="pill">Upload DD214</span>
+              <span class="pill">Upload STRs</span>
+              <span class="pill">Upload Benefit Summary</span>
+              <span class="pill">Upload Medical Records</span>
+              <span class="pill">Upload Imaging Reports</span>
+              <span class="pill">Upload Sleep Study</span>
+            </div>
+          </div>
+
+          <div class="intake-step" data-step="7">
+            <h3>Section 7 – Current Work &amp; Family Impact / Goals</h3>
+            <label>Employment status
+              <select name="Employment_Status" required>
+                <option value="">Select</option>
+                <option>Full-time</option>
+                <option>Part-time</option>
+                <option>Self-employed</option>
+                <option>Unemployed</option>
+                <option>Retired</option>
+                <option>Medically retired / disabled</option>
+              </select>
+            </label>
+            <label>How do your service-related issues affect your ability to work?
+              <textarea name="Work_Impact_Description" rows="3"></textarea>
+            </label>
+            <label>Family &amp; daily life impact
+              <textarea name="Family_Impact_Description" rows="3" placeholder="Sleep, mood, parenting, relationships, chores, hobbies, etc."></textarea>
+            </label>
+            <label>Your top 1–2 goals with your VA rating
+              <select name="Top_Goals" multiple required size="6">
+                <option>Get financially stable / cover basic bills</option>
+                <option>Take care of my family better</option>
+                <option>Stop feeling like I’m being short-changed by the VA</option>
+                <option>Get my mental health taken seriously</option>
+                <option>Be able to cut back hours / change jobs</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label>Desired overall rating goal
+              <input type="text" name="Desired_Rating_Goal" placeholder="Example: 70%" />
+            </label>
+          </div>
+
+          <div class="intake-step" data-step="8">
+            <h3>Section 8 – Conflicts, Representation &amp; Fit</h3>
+            <label>Are you currently working with any of the following on your VA claim?
+              <select name="Currently_Working_With" multiple required size="6">
+                <option>VSO (DAV, VFW, American Legion, etc.)</option>
+                <option>VA-accredited attorney</option>
+                <option>VA-accredited claims agent</option>
+                <option>Paid claims company (REE Medical, Trajector, VA Claims Insider, etc.)</option>
+                <option>None of the above</option>
+              </select>
+            </label>
+            <label>Are you ONLY interested in working with a free VSO and not a private company like ours?
+              <select name="Wants_VSO_Only" required>
+                <option value="">Select</option>
+                <option>Yes, only free VSO</option>
+                <option>No, I’m open to using TYFYS</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+            <label>Have you ever felt pressured or scammed by a VA help company before?
+              <select name="Past_Bad_Experience">
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label>If yes, details
+              <textarea name="Past_Bad_Experience_Details" rows="3"></textarea>
+            </label>
+          </div>
+
+          <div class="intake-step" data-step="9">
+            <h3>Section 9 – Scheduling &amp; Tech Readiness</h3>
+            <label>Do you have a smartphone, tablet, or computer with camera and internet for telehealth appointments?
+              <select name="Has_Telehealth_Tech" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>Yes, but connection is spotty</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label>Best days/times for appointments
+              <textarea name="Best_Appointment_Times" rows="3" placeholder="Weekdays – mornings/afternoons/evenings; Weekends – mornings/afternoons"></textarea>
+            </label>
+            <label>Anything else we should know before we match you with doctors?
+              <textarea name="Additional_Notes_From_Vet" rows="3"></textarea>
+            </label>
+          </div>
+
+          <div class="intake-step" data-step="10">
+            <h3>Section 10 – Final Acknowledgment &amp; Next Steps</h3>
+            <label style="display:flex; gap:0.5rem; align-items:flex-start;">
+              <input type="checkbox" name="Final_Confirmation" style="width:auto; margin-top:0.25rem;" required />
+              <span>I confirm the information I’ve provided is true to the best of my knowledge, and I understand TYFYS will use this to decide which doctors and DBQs are the best fit for my case.</span>
+            </label>
+            <div class="panel" style="background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.16);">
+              <strong>Thank you for taking the time to fill this out.</strong>
+              <ul style="margin:0.5rem 0 0; padding-left:1.1rem; color:#cfd8e3;">
+                <li>Review your service history, current rating, and top conditions</li>
+                <li>Identify which specialist(s) and DBQs fit your case</li>
+                <li>Reach out with any missing documents and to schedule your intake / provider appointments</li>
+                <li>If you get new VA letters or medical records, you can upload them securely anytime.</li>
+              </ul>
+            </div>
+            <p class="helper">Submitting saves your responses for intake review. You can always add more details later.</p>
+          </div>
+
+          <div class="intake-nav">
+            <button class="btn btn-ghost" type="button" id="intakePrev">Back</button>
+            <button class="btn btn-primary" type="button" id="intakeNext">Next step</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel" id="important-information">
+        <h3 style="margin-top:0;">Important information</h3>
+        <ul class="messages" style="list-style:none; padding:0; margin:0; gap:0.75rem;">
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            Thank You For Your Service (TYFYS) is a private, Service-Disabled Veteran-Owned business. We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization (VSO).
+          </li>
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            You can always file a VA disability claim for free directly with the VA or with the help of an accredited VSO or representative.
+          </li>
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.
+          </li>
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            Our tools are for education and organization only. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="claim-assistant">
+    <h2>Claim prep assistant (VA Form 21-526EZ)</h2>
+    <div class="panel">
+      <p style="margin-top:0;">Practice the questions from VA Form 21-526EZ, organize your answers, and see which documents match each part of your claim. When you’re ready, you’ll use this information to complete and submit the official form directly with the VA or with an accredited representative.</p>
+      <div class="assistant-frame">
+        <iframe id="claimAssistantFrame" class="claim-assistant-frame" src="claim-assistant/index.html" title="Claim assistant" scrolling="no"></iframe>
+      </div>
+      <p style="color:#9fb3c8; margin-top:0.75rem;">TYFYS does not submit forms to the VA, does not provide legal advice, and is not a substitute for an accredited representative or attorney.</p>
     </div>
   </section>
 
@@ -333,17 +844,6 @@
         </div>
         <p style="color:#9fb3c8; margin-top:0.75rem;">This tracker shows your TYFYS milestones only and does not show official VA processing status or decisions.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="section" id="claim-assistant">
-    <h2>Claim prep assistant (VA Form 21-526EZ)</h2>
-    <div class="panel">
-      <p style="margin-top:0;">Practice the questions from VA Form 21-526EZ, organize your answers, and see which documents match each part of your claim. When you’re ready, you’ll use this information to complete and submit the official form directly with the VA or with an accredited representative.</p>
-      <div class="assistant-frame">
-        <iframe id="claimAssistantFrame" src="claim-assistant/index.html" title="Claim assistant" scrolling="no"></iframe>
-      </div>
-      <p style="color:#9fb3c8; margin-top:0.75rem;">TYFYS does not submit forms to the VA, does not provide legal advice, and is not a substitute for an accredited representative or attorney.</p>
     </div>
   </section>
 
@@ -690,10 +1190,12 @@
       });
     }
 
-    function initClaimAssistantFrame() {
-      const frame = document.getElementById('claimAssistantFrame');
-      if (!frame) return;
-      const resize = () => {
+    function initClaimAssistantFrames() {
+      const frames = Array.from(document.querySelectorAll('.claim-assistant-frame'));
+      if (!frames.length) return;
+
+      const resize = (frame) => {
+        if (!frame) return;
         try {
           const doc = frame.contentDocument || frame.contentWindow?.document;
           if (doc?.body?.scrollHeight) {
@@ -704,17 +1206,60 @@
         }
       };
 
-      frame.addEventListener('load', () => {
-        resize();
-        setTimeout(resize, 600);
+      frames.forEach((frame) => {
+        frame.addEventListener('load', () => {
+          resize(frame);
+          setTimeout(() => resize(frame), 600);
+        });
       });
-      window.addEventListener('resize', resize);
+
+      window.addEventListener('resize', () => {
+        frames.forEach((frame) => resize(frame));
+      });
+    }
+
+    function initIntakeForm() {
+      const steps = Array.from(document.querySelectorAll('.intake-step'));
+      const prev = document.getElementById('intakePrev');
+      const next = document.getElementById('intakeNext');
+      const label = document.getElementById('intakeProgressLabel');
+      const bar = document.getElementById('intakeProgressBar');
+      if (!steps.length || !prev || !next || !label || !bar) return;
+
+      let index = 0;
+      const total = steps.length;
+
+      const showStep = (i) => {
+        steps.forEach((step, idx) => step.classList.toggle('active', idx === i));
+        label.textContent = `Step ${i + 1} of ${total}`;
+        bar.style.width = `${((i + 1) / total) * 100}%`;
+        prev.disabled = i === 0;
+        next.textContent = i === total - 1 ? 'Finish intake' : 'Next step';
+      };
+
+      prev.addEventListener('click', () => {
+        if (index === 0) return;
+        index -= 1;
+        showStep(index);
+      });
+
+      next.addEventListener('click', () => {
+        if (index < total - 1) {
+          index += 1;
+          showStep(index);
+        } else {
+          alert('Thanks! Your intake responses have been saved for review.');
+        }
+      });
+
+      showStep(index);
     }
 
     renderClaims();
     setActiveClaim('TY-8842');
     seedMessages();
-    initClaimAssistantFrame();
+    initClaimAssistantFrames();
+    initIntakeForm();
     closeNavOnSelection();
   </script>
 </body>
