@@ -459,7 +459,7 @@
   <body>
     <div id="root"></div>
 
-    <script type="text/babel">
+    <script type="text/babel" data-presets="es2015,react">
       const { useState } = React;
 
       const initialForm = {
@@ -606,7 +606,7 @@
       function StepHeader({ stepIndex, totalSteps, title, subtitle }) {
         const percent = Math.round(((stepIndex + 1) / totalSteps) * 100);
         return (
-          <>
+          <React.Fragment>
             <div className="stepper">
               <div className="stepper-bar">
                 <div
@@ -623,7 +623,7 @@
               <h2 className="step-title">{title}</h2>
               {subtitle && <p className="step-subtitle">{subtitle}</p>}
             </div>
-          </>
+          </React.Fragment>
         );
       }
 
