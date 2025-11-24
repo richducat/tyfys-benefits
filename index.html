@@ -493,11 +493,16 @@
 
   <script>
     const assistantFrame = document.querySelector('.claim-assistant-frame');
+    const MIN_ASSISTANT_HEIGHT = 900;
+    let lastAssistantHeight = 0;
 
     function resizeAssistantFrame(height) {
       if (!assistantFrame || !height) return;
-      const paddedHeight = Math.max(Math.round(height) + 40, 900);
-      assistantFrame.style.height = `${paddedHeight}px`;
+      const targetHeight = Math.max(Math.round(height), MIN_ASSISTANT_HEIGHT);
+      if (targetHeight === lastAssistantHeight) return;
+
+      lastAssistantHeight = targetHeight;
+      assistantFrame.style.height = `${targetHeight}px`;
     }
 
     function syncAssistantFrameHeight() {
