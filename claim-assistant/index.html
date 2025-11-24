@@ -204,10 +204,15 @@
       }
 
       .actions {
+        position: sticky;
+        bottom: 0;
         display: flex;
         justify-content: flex-end;
         gap: 10px;
         margin-top: 14px;
+        padding: 12px 0 10px;
+        background: linear-gradient(180deg, rgba(249, 250, 251, 0), #f9fafb 45%, #f9fafb);
+        border-top: 1px solid rgba(15, 23, 42, 0.06);
       }
 
       .btn {
@@ -823,6 +828,15 @@
       const nextBtn = document.getElementById('nextStep');
       let currentStep = 0;
 
+      function sendHeightToParent() {
+        try {
+          const height = document.body.scrollHeight;
+          window.parent.postMessage({ type: 'claimAssistantHeight', height }, '*');
+        } catch (err) {
+          // Ignore cross-origin issues.
+        }
+      }
+
       function showStep(index) {
         if (!steps.length) return;
         currentStep = Math.max(0, Math.min(index, steps.length - 1));
@@ -835,6 +849,7 @@
         if (prevBtn) prevBtn.disabled = currentStep === 0;
         if (nextBtn) nextBtn.textContent = currentStep === steps.length - 1 ? 'Finish' : 'Next section';
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        sendHeightToParent();
       }
 
       function bindNavButtons() {
@@ -844,6 +859,8 @@
 
       bindNavButtons();
       showStep(0);
+      sendHeightToParent();
+      window.addEventListener('resize', sendHeightToParent);
     </script>
   </body>
 </html>

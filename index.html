@@ -183,7 +183,7 @@
     .message small { color: #9fb3c8; }
 
     .assistant-frame { margin-top: 1rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #f3f4f6; box-shadow: var(--shadow); }
-    .assistant-frame iframe { width: 100%; min-height: 1900px; border: 0; background: #f3f4f6; }
+    .assistant-frame iframe { width: 100%; height: 1100px; min-height: 0; border: 0; background: #f3f4f6; transition: height 0.2s ease; }
 
     @media (max-width: 960px) {
       .hero, .tracker { grid-template-columns: 1fr; }
@@ -492,9 +492,36 @@
   </section>
 
   <script>
-      const claims = [
-        {
-          id: 'TY-8842',
+    const assistantFrame = document.querySelector('.claim-assistant-frame');
+
+    function resizeAssistantFrame(height) {
+      if (!assistantFrame || !height) return;
+      const paddedHeight = Math.max(height + 40, 900);
+      assistantFrame.style.height = `${paddedHeight}px`;
+    }
+
+    window.addEventListener('message', (event) => {
+      if (!event.data || event.data.type !== 'claimAssistantHeight') return;
+      resizeAssistantFrame(event.data.height);
+    });
+
+    if (assistantFrame) {
+      assistantFrame.addEventListener('load', () => {
+        try {
+          const doc = assistantFrame.contentDocument;
+          if (doc) {
+            const height = doc.body.scrollHeight;
+            resizeAssistantFrame(height);
+          }
+        } catch (err) {
+          // Ignore cross-origin access errors.
+        }
+      });
+    }
+
+    const claims = [
+      {
+        id: 'TY-8842',
           conditions: 'Knee & lower back',
           filed: 'Mar 2025',
           stage: 2,
