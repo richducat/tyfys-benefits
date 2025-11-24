@@ -87,7 +87,7 @@
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 1.5rem;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .panel {
@@ -183,7 +183,7 @@
     .message small { color: #9fb3c8; }
 
     .assistant-frame { margin-top: 1rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #f3f4f6; box-shadow: var(--shadow); }
-    .assistant-frame iframe { width: 100%; height: 1100px; min-height: 0; border: 0; background: #f3f4f6; transition: height 0.2s ease; }
+    .assistant-frame iframe { width: 100%; min-height: 720px; border: 0; background: #f3f4f6; }
 
     @media (max-width: 960px) {
       .hero, .tracker { grid-template-columns: 1fr; }
@@ -496,8 +496,37 @@
 
     function resizeAssistantFrame(height) {
       if (!assistantFrame || !height) return;
-      const paddedHeight = Math.max(height + 40, 900);
+      const paddedHeight = Math.max(Math.round(height) + 40, 900);
       assistantFrame.style.height = `${paddedHeight}px`;
+    }
+
+    function syncAssistantFrameHeight() {
+      if (!assistantFrame) return;
+      try {
+        const doc = assistantFrame.contentDocument;
+        const docHeight = doc?.documentElement?.scrollHeight || doc?.body?.scrollHeight;
+        resizeAssistantFrame(docHeight);
+      } catch (err) {
+        // Ignore cross-origin access errors.
+      }
+    }
+
+    function bindAssistantFrameResize() {
+      if (!assistantFrame) return;
+      syncAssistantFrameHeight();
+
+      try {
+        const doc = assistantFrame.contentDocument;
+        if (doc) {
+          const observer = new ResizeObserver(syncAssistantFrameHeight);
+          observer.observe(doc.documentElement);
+          doc.addEventListener('load', syncAssistantFrameHeight, true);
+        }
+      } catch (err) {
+        // Ignore cross-origin access errors.
+      }
+
+      assistantFrame.addEventListener('load', syncAssistantFrameHeight);
     }
 
     window.addEventListener('message', (event) => {
@@ -505,19 +534,7 @@
       resizeAssistantFrame(event.data.height);
     });
 
-    if (assistantFrame) {
-      assistantFrame.addEventListener('load', () => {
-        try {
-          const doc = assistantFrame.contentDocument;
-          if (doc) {
-            const height = doc.body.scrollHeight;
-            resizeAssistantFrame(height);
-          }
-        } catch (err) {
-          // Ignore cross-origin access errors.
-        }
-      });
-    }
+    bindAssistantFrameResize();
 
     const claims = [
       {
