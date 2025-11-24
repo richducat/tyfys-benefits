@@ -69,6 +69,9 @@
     nav a { padding: 0.5rem 0.75rem; border-radius: 999px; transition: background 0.2s; }
     nav a:hover { background: rgba(255, 255, 255, 0.06); }
 
+    .footer { border-top: 1px solid rgba(255,255,255,0.08); background: rgba(13, 27, 42, 0.92); margin-top: 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 1.1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+
     .nav-toggle {
       display: none;
       background: rgba(255,255,255,0.06);
@@ -127,6 +130,8 @@
     .section h2 { display: flex; align-items: center; gap: 0.5rem; letter-spacing: 0.4px; }
 
     .tracker { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1rem; }
+
+    .updates-grid { grid-template-columns: 2fr 1fr; align-items: flex-start; }
 
     .status-bar { position: relative; padding: 1rem 1rem 1.2rem; }
     .status-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.5rem; }
@@ -187,6 +192,7 @@
 
     @media (max-width: 960px) {
       .hero, .tracker { grid-template-columns: 1fr; }
+      .updates-grid { grid-template-columns: 1fr; }
       nav {
         display: none;
         position: absolute;
@@ -227,7 +233,6 @@
       <p class="badge" style="background:rgba(255,255,255,0.12); color:#e2e8f0;">Welcome back!</p>
       <h1>Your VA disability roadmap, organized.</h1>
       <p>Thank You For Your Service (TYFYS) helps you collect records, prepare for private medical evaluations, and build a fully developed claim evidence packet—step by step, at your pace, with a specialist available whenever you want a human check-in.</p>
-      <p style="margin:0.75rem 0 1rem; color:#cbd5e1; font-weight:600;">TYFYS is a private, Service-Disabled Veteran-Owned business. We are not the Department of Veterans Affairs (VA) or a Veterans Service Organization, and we do not file claims or appeals on your behalf. We help you organize medical evidence and documentation so you can file confidently through official VA channels or with an accredited representative of your choice.</p>
       <div class="cta-row">
         <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
         <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
@@ -247,29 +252,6 @@
         <iframe class="claim-assistant-frame" src="claim-assistant/index.html" title="Claim assistant" scrolling="no"></iframe>
       </div>
       <p style="color:#9fb3c8; margin-top:0.75rem;">TYFYS does not submit forms to the VA, does not provide legal advice, and is not a substitute for an accredited representative or attorney.</p>
-    </div>
-  </section>
-
-  <section class="section" id="important-information">
-    <h2>Important information</h2>
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
-      <div class="panel">
-        <h3 style="margin-top:0;">Disclosures</h3>
-        <ul class="messages" style="list-style:none; padding:0; margin:0; gap:0.75rem;">
-          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-            Thank You For Your Service (TYFYS) is a private, Service-Disabled Veteran-Owned business. We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization (VSO).
-          </li>
-          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-            You can always file a VA disability claim for free directly with the VA or with the help of an accredited VSO or representative.
-          </li>
-          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-            TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.
-          </li>
-          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-            Our tools are for education and organization only. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.
-          </li>
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -488,8 +470,40 @@
   <section class="section" id="messages">
     <h2>Updates from your TYFYS team</h2>
     <p style="color:#cbd5e1; max-width:840px;">Release notes, how-to videos, and plain-English explanations of changes that could affect how you build your evidence packet. We focus on education, not legal advice, so you can decide your next steps with the VA or an accredited representative you trust.</p>
-    <div class="messages" id="messageFeed"></div>
+    <div class="grid updates-grid">
+      <div class="panel" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08);">
+        <h3 style="margin-top:0;">Latest updates</h3>
+        <div class="messages" id="messageFeed"></div>
+      </div>
+      <div class="panel" id="important-information" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08);">
+        <h3 style="margin-top:0;">Important information</h3>
+        <ul class="messages" style="list-style:none; padding:0; margin:0; gap:0.75rem;">
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            Thank You For Your Service (TYFYS) is a private, Service-Disabled Veteran-Owned business. We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization (VSO).
+          </li>
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            You can always file a VA disability claim for free directly with the VA or with the help of an accredited VSO or representative.
+          </li>
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.
+          </li>
+          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
+            Our tools are for education and organization only. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.
+          </li>
+        </ul>
+      </div>
+    </div>
   </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand">
+        <img src="logo.png" alt="Thank You For Your Service logo" />
+        <span>Thank You For Your Service</span>
+      </div>
+      <p style="margin:0; color:#9fb3c8;">Evidence &amp; prep for VA claims.</p>
+    </div>
+  </footer>
 
   <script>
     const assistantFrame = document.querySelector('.claim-assistant-frame');
