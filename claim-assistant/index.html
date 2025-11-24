@@ -213,6 +213,7 @@
         padding: 12px 0 10px;
         background: linear-gradient(180deg, rgba(249, 250, 251, 0), #f9fafb 45%, #f9fafb);
         border-top: 1px solid rgba(15, 23, 42, 0.06);
+        z-index: 2;
       }
 
       .btn {
@@ -232,6 +233,11 @@
       .btn-ghost {
         background: #e5e7eb;
         color: #1f2937;
+      }
+
+      .form-status {
+        text-align: right;
+        margin: 6px 0 0;
       }
 
       @media (max-width: 640px) {
@@ -816,9 +822,9 @@
 
           <div class="actions">
             <button type="button" class="btn btn-ghost" id="prevStep">Previous</button>
-            <button type="button" class="btn btn-primary" id="nextStep">Next section</button>
+            <button type="button" class="btn btn-primary" id="nextStep">Continue</button>
           </div>
-          <p class="helper" style="text-align:right; margin:6px 0 0;">Your answers stay on this page until you export or share them with a TYFYS specialist.</p>
+          <p class="helper form-status" id="formStatus">Your answers stay on this page until you export or share them with a TYFYS specialist.</p>
         </form>
       </div>
     </div>
@@ -826,6 +832,8 @@
       const steps = Array.from(document.querySelectorAll('.step'));
       const prevBtn = document.getElementById('prevStep');
       const nextBtn = document.getElementById('nextStep');
+      const form = document.getElementById('intakeForm');
+      const formStatus = document.getElementById('formStatus');
       let currentStep = 0;
 
       function sendHeightToParent() {
@@ -847,14 +855,36 @@
         });
 
         if (prevBtn) prevBtn.disabled = currentStep === 0;
-        if (nextBtn) nextBtn.textContent = currentStep === steps.length - 1 ? 'Finish' : 'Next section';
+        if (nextBtn) nextBtn.textContent = currentStep === steps.length - 1 ? 'Submit answers' : 'Continue';
         window.scrollTo({ top: 0, behavior: 'smooth' });
         sendHeightToParent();
       }
 
       function bindNavButtons() {
-        if (nextBtn) nextBtn.addEventListener('click', () => showStep(currentStep + 1));
+        if (nextBtn)
+          nextBtn.addEventListener('click', () => {
+            if (currentStep === steps.length - 1) {
+              form.requestSubmit();
+            } else {
+              showStep(currentStep + 1);
+            }
+          });
         if (prevBtn) prevBtn.addEventListener('click', () => showStep(currentStep - 1));
+      }
+
+      if (form) {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          if (nextBtn) {
+            nextBtn.disabled = true;
+            nextBtn.textContent = 'Submitted';
+          }
+          if (prevBtn) prevBtn.disabled = true;
+          if (formStatus)
+            formStatus.textContent =
+              'Thank you — your responses are ready to share with a TYFYS specialist.';
+          sendHeightToParent();
+        });
       }
 
       bindNavButtons();
