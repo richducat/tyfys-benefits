@@ -253,7 +253,7 @@
         </div>
 
         <div id="login" class="tab-content">
-          <form id="login-form" class="form-grid" action="claim-assistant/index.html" method="get">
+          <form id="login-form" class="form-grid">
             <div>
               <label for="login-email">Email</label>
               <input id="login-email" name="email" type="email" placeholder="you@example.com" required />
@@ -271,7 +271,7 @@
 
         <div id="create" class="tab-content" style="display:none;">
           <p class="tiny" style="margin-top:0;">New to Thank You For Your Service? Create your secure portal to start organizing your claim evidence and preparing for your private medical evaluations.</p>
-          <form id="create-form" class="form-grid" action="claim-assistant/index.html" method="get">
+          <form id="create-form" class="form-grid">
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:0.75rem;">
               <div>
                 <label for="first-name">First name</label>
@@ -438,7 +438,7 @@
   </div>
 
   <script>
-    const portalUrl = new URL('claim-assistant/index.html', window.location.href).href;
+    const portalUrl = './claim-assistant/index.html';
 
     function toggleNav() {
       const nav = document.getElementById('main-nav');
@@ -477,7 +477,7 @@
 
       setStatus('login-status', 'Logging you in and opening your dashboard…', 'info');
       localStorage.setItem('tyfysUserEmail', email);
-      setTimeout(() => { window.location.assign(`${portalUrl}?login=1`); }, 200);
+      setTimeout(() => { window.location.href = portalUrl; }, 300);
     }
 
     function handleCreateSubmit(event) {
@@ -498,9 +498,8 @@
       const displayName = `${first} ${last}`.trim();
       localStorage.setItem('tyfysUserName', displayName);
       localStorage.setItem('tyfysUserEmail', email);
-      sessionStorage.setItem('tyfysOnboarded', 'true');
       setStatus('create-status', 'Account created. Redirecting you to your TYFYS portal…', 'success');
-      setTimeout(() => { window.location.assign(`${portalUrl}?new=1`); }, 250);
+      setTimeout(() => { window.location.href = portalUrl; }, 500);
     }
 
     function toggleFaq(button) {
