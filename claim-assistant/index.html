@@ -938,6 +938,47 @@
         }
       }
 
+      function serializeFormData() {
+        if (!form) return {};
+        const formData = new FormData(form);
+        const data = {};
+
+        formData.forEach((value, key) => {
+          if (data[key]) {
+            if (Array.isArray(data[key])) {
+              data[key].push(value);
+            } else {
+              data[key] = [data[key], value];
+            }
+          } else {
+            data[key] = value;
+          }
+        });
+
+        return data;
+      }
+
+      function buildSubmissionPayload() {
+        const data = serializeFormData();
+        const now = new Date();
+        const goals = data.Top_Goals || [];
+
+        return {
+          submittedAt: now.toISOString(),
+          data,
+          summary: {
+            fullName: data.Full_Name || 'Veteran',
+            email: data.Email || '',
+            phone: data.Mobile_Phone || '',
+            timezone: data.Time_Zone || '',
+            primaryConditions:
+              data.Current_Conditions || data.Primary_Conditions || '',
+            secondaryConditions: data.Secondary_Conditions || '',
+            goals: Array.isArray(goals) ? goals : [goals].filter(Boolean),
+          },
+        };
+      }
+
       function showStep(index) {
         if (!steps.length) return;
         currentStep = Math.max(0, Math.min(index, steps.length - 1));
@@ -975,7 +1016,14 @@
           if (prevBtn) prevBtn.disabled = true;
           if (formStatus)
             formStatus.textContent =
-              'Thank you — your responses are ready to share with a TYFYS specialist.';
+              'Thank you — your responses are now saved to your TYFYS client portal.';
+
+          const payload = buildSubmissionPayload();
+          try {
+            window.parent.postMessage({ type: 'intakeSubmission', payload }, '*');
+          } catch (err) {
+            // Ignore parent communication errors; offline/local contexts are allowed.
+          }
           sendHeightToParent();
         });
       }

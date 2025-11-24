@@ -38,3 +38,7 @@ The frontend runs on http://localhost:5173 and connects to the backend API. Use 
 
 ## Not the VA / VSO
 All public-facing copy clarifies TYFYS is not the VA or a VSO and avoids naming outside companies in the UI.
+
+## Landing splash + intake portal
+- The `index.html` splash experience stays intact as the entry point; the embedded intake assistant posts data into the client portal/claim tracker without replacing the overlay.
+- Intake submissions are stored locally and hydrated back into the client info panel so the portal always reflects what a veteran entered on the splash page.

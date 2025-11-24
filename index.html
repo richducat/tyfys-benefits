@@ -182,6 +182,8 @@
     .mini-card { padding: 1rem; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
     .mini-card h3 { margin: 0 0 0.35rem; }
     .mini-card p { margin: 0 0 0.6rem; font-size: 0.95rem; color: #cfd8e3; }
+    .client-info-list { list-style: none; padding: 0; margin: 0.35rem 0 0; color: #cfd8e3; }
+    .client-info-list li { margin-bottom: 0.35rem; }
 
     .messages { display: grid; gap: 0.75rem; }
     .message { padding: 0.9rem 1rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
@@ -311,7 +313,12 @@
       </div>
 
       <div class="panel">
-        <h3 style="margin-top:0;">What happens next</h3>
+        <div class="mini-card" id="clientInfoCard">
+          <h3 style="margin-top:0;">Client information</h3>
+          <p id="clientInfoSummary">Submit the intake to save your details into this portal.</p>
+          <ul class="client-info-list" id="clientInfoList"></ul>
+        </div>
+        <h3 style="margin-top:1rem;">What happens next</h3>
         <div class="mini-card">
           <h3>Welcome &amp; triage</h3>
           <p>Confirm your service history, current rating, Intent to File status, and goals for this claim. If anything is unclear, you can switch to a live call or chat with a TYFYS specialist at any time.</p>
@@ -555,7 +562,7 @@
 
     bindAssistantFrameResize();
 
-    const claims = [
+    let claims = [
       {
         id: 'TY-8842',
           conditions: 'Knee & lower back',
@@ -591,7 +598,9 @@
         }
       ];
 
-      const steps = [
+    const intakeStorageKey = 'tyfys-intake-submission';
+
+    const steps = [
         { label: 'Welcome & triage', detail: 'Service history, goals, Intent to File status, and current rating' },
         { label: 'Contract & medical questionnaires', detail: 'Service agreement, ROI, and mini-DBQs for provider-ready info' },
         { label: 'Evidence & delivery', detail: 'Upload records, coordinate providers, and package evidence to file' }
@@ -655,6 +664,107 @@
         li.innerHTML = `<strong>${item.title}</strong><span>${item.detail}</span>`;
         timeline.appendChild(li);
       });
+    }
+
+    function updateClientInfo(submission) {
+      const summaryEl = document.getElementById('clientInfoSummary');
+      const listEl = document.getElementById('clientInfoList');
+      if (!summaryEl || !listEl || !submission) return;
+
+      const { summary = {}, submittedAt } = submission;
+      const submittedLabel = submittedAt ? new Date(submittedAt).toLocaleString() : 'just now';
+      summaryEl.textContent = `${summary.fullName || 'Veteran'} — submitted ${submittedLabel}`;
+      listEl.innerHTML = '';
+
+      const entries = [
+        ['Email', summary.email],
+        ['Phone', summary.phone],
+        ['Time zone', summary.timezone],
+        ['Primary conditions', summary.primaryConditions],
+        ['Secondary conditions', summary.secondaryConditions],
+        [
+          'Goals',
+          Array.isArray(summary.goals)
+            ? summary.goals.join(', ')
+            : (summary.goals || ''),
+        ],
+      ].filter(([, value]) => value && `${value}`.trim());
+
+      if (!entries.length) {
+        listEl.innerHTML = '<li>No additional details provided yet.</li>';
+        return;
+      }
+
+      entries.forEach(([label, value]) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${label}:</strong> ${value}`;
+        listEl.appendChild(li);
+      });
+    }
+
+    function upsertIntakeClaim(submission) {
+      if (!submission) return;
+      const { summary = {}, submittedAt } = submission;
+      const claimId = submission.id || submission.claimId || 'INTAKE';
+      const conditionText = summary.primaryConditions || summary.secondaryConditions || 'Custom intake';
+      const events = [
+        { title: 'Intake received', detail: `Submitted ${submittedAt ? new Date(submittedAt).toLocaleString() : 'just now'}.` },
+        {
+          title: 'Contact',
+          detail:
+            [summary.email, summary.phone].filter(Boolean).join(' · ') ||
+            'No contact details provided yet.',
+        },
+        {
+          title: 'Top goals',
+          detail:
+            (Array.isArray(summary.goals) ? summary.goals.join(', ') : summary.goals) ||
+            'Goals to be confirmed.',
+        },
+      ];
+
+      let claim = claims.find(c => c.id === claimId);
+      if (!claim) {
+        claim = { id: claimId, conditions: conditionText, filed: 'Just now', stage: 0, events };
+        claims = [claim, ...claims];
+      } else {
+        claim.conditions = conditionText || claim.conditions;
+        claim.events = events;
+        claim.stage = 0;
+        claim.filed = 'Updated';
+      }
+
+      renderClaims();
+      setActiveClaim(claim.id);
+    }
+
+    function applyIntakeSubmission(submission, options = {}) {
+      if (!submission) return null;
+      const payload = { ...submission };
+      if (!payload.id) payload.id = `INT-${Date.now().toString().slice(-6)}`;
+
+      if (!options.skipStore) {
+        try {
+          localStorage.setItem(intakeStorageKey, JSON.stringify(payload));
+        } catch (err) {
+          // Local storage may be unavailable; fail silently.
+        }
+      }
+
+      updateClientInfo(payload);
+      upsertIntakeClaim(payload);
+      return payload.id;
+    }
+
+    function restoreIntakeFromStorage() {
+      try {
+        const raw = localStorage.getItem(intakeStorageKey);
+        if (!raw) return null;
+        const saved = JSON.parse(raw);
+        return applyIntakeSubmission(saved, { skipStore: true });
+      } catch (err) {
+        return null;
+      }
     }
 
     function calculateCombinedRating() {
@@ -785,11 +895,20 @@
       });
     }
 
+    const restoredId = restoreIntakeFromStorage();
+
     renderClaims();
-    setActiveClaim('TY-8842');
+    setActiveClaim(restoredId || 'TY-8842');
     seedMessages();
     initClaimAssistantFrames();
     closeNavOnSelection();
+
+    window.addEventListener('message', (event) => {
+      const { type, payload } = event.data || {};
+      if (type === 'intakeSubmission') {
+        applyIntakeSubmission(payload);
+      }
+    });
   </script>
 </body>
 </html>
