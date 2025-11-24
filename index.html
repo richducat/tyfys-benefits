@@ -3,793 +3,516 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>Thank You For Your Service | VA Benefits Tracker</title>
+  <title>TYFYS | Secure portal access</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-surface: #ffffff;
-      --color-bg: #0d1b2a;
-      --color-panel: #102542;
-      --color-primary: #00c2ff;
-      --color-primary-dark: #00a3d6;
-      --color-accent: #9ef01a;
-      --color-muted: #90a4ae;
-      --radius: 14px;
-      --shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+      --bg: #0c1726;
+      --panel: rgba(16, 33, 56, 0.95);
+      --card: #0f213b;
+      --primary: #00c2ff;
+      --primary-dark: #0094c8;
+      --accent: #9ef01a;
+      --text: #e8f0f7;
+      --muted: #b2c0d0;
+      --radius: 16px;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      background: var(--color-bg);
-      color: #e2e8f0;
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      line-height: 1.6;
+      background: radial-gradient(circle at 20% 20%, rgba(0, 194, 255, 0.12), transparent 35%),
+                  radial-gradient(circle at 80% 0%, rgba(158, 240, 26, 0.12), transparent 40%),
+                  var(--bg);
+      color: var(--text);
       min-height: 100vh;
     }
 
     a { color: inherit; text-decoration: none; }
 
+    .overlay-shell {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      backdrop-filter: blur(6px);
+    }
+
     header {
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(13, 27, 42, 0.85);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      z-index: 20;
+      background: rgba(12, 23, 38, 0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .nav-shell {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0.9rem 1.25rem;
-    }
-
-    .brand { display: flex; align-items: center; gap: 0.75rem; }
-    .brand img { height: 42px; width: auto; }
-    .brand span { font-weight: 700; letter-spacing: 0.5px; }
-
-    nav {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 1rem;
-      font-weight: 600;
-      font-size: 0.95rem;
     }
 
-    nav a { padding: 0.5rem 0.75rem; border-radius: 999px; transition: background 0.2s; }
-    nav a:hover { background: rgba(255, 255, 255, 0.06); }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
 
-    .footer { border-top: 1px solid rgba(255,255,255,0.08); background: rgba(13, 27, 42, 0.92); margin-top: 2rem; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 1.1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-
-    .nav-toggle {
-      display: none;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #e2e8f0;
+    .brand-logo {
+      height: 44px;
+      width: 44px;
       border-radius: 10px;
-      padding: 0.45rem 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
+      background: linear-gradient(145deg, rgba(0,194,255,0.9), rgba(158,240,26,0.9));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #04111f;
+      letter-spacing: -0.5px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
     }
+
+    .brand span { display: block; line-height: 1.1; font-weight: 700; }
+    .brand small { color: var(--muted); font-weight: 600; }
+
+    nav { display: flex; align-items: center; gap: 0.75rem; font-weight: 600; }
+    nav a { padding: 0.55rem 0.9rem; border-radius: 999px; transition: background 0.2s ease, color 0.2s ease; }
+    nav a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+    .nav-toggle { display: none; }
 
     .hero {
       max-width: 1200px;
-      margin: 2rem auto 1rem;
-      padding: 2rem 1.25rem;
+      margin: 1.5rem auto 1rem;
+      padding: 1.75rem 1.25rem 0.75rem;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 1.5rem;
       align-items: flex-start;
     }
 
-    .panel {
-      background: var(--color-panel);
-      border-radius: var(--radius);
-      padding: 1.4rem;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
+    .eyebrow { color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 0.6px; font-size: 0.9rem; }
+    h1 { font-size: 2.35rem; margin: 0.3rem 0; }
+    .subhead { color: var(--muted); font-size: 1.05rem; max-width: 760px; }
 
-    h1 { font-size: 2.1rem; margin: 0 0 0.75rem; }
-    h2 { margin: 0 0 0.5rem; }
-    p { margin: 0 0 0.75rem; color: #cfd8e3; }
+    .cta-row { display: flex; gap: 0.85rem; flex-wrap: wrap; margin: 1rem 0 0.75rem; }
 
-    .cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.75rem 1.1rem;
-      border-radius: 10px;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.2s ease;
-      letter-spacing: 0.2px;
-    }
-
-    .btn-primary { background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: #04111f; box-shadow: 0 12px 20px rgba(0, 194, 255, 0.28); }
-    .btn-ghost { background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.08); }
+    .btn { border: none; cursor: pointer; border-radius: 12px; font-weight: 700; padding: 0.85rem 1.15rem; transition: transform 0.15s ease, box-shadow 0.2s ease; }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #04111f; box-shadow: 0 14px 24px rgba(0, 194, 255, 0.28); }
+    .btn-ghost { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
     .btn:hover { transform: translateY(-2px); }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .reassure { display: grid; gap: 0.45rem; margin-top: 0.5rem; color: #d7e0ec; }
+    .reassure span { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .reassure strong { color: #fff; }
+    .tiny { font-size: 0.85rem; color: var(--muted); }
 
-    .section { max-width: 1200px; margin: 0 auto 1.5rem; padding: 0 1.25rem; }
-    .section h2 { display: flex; align-items: center; gap: 0.5rem; letter-spacing: 0.4px; }
+    .card {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
 
-    .tracker { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1rem; }
-
-    .updates-grid { grid-template-columns: 2fr 1fr; align-items: flex-start; }
-
-    .status-bar { position: relative; padding: 1rem 1rem 1.2rem; }
-    .status-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.5rem; }
-    .status-steps li {
-      text-align: center;
-      background: rgba(255,255,255,0.04);
-      padding: 0.9rem 0.6rem;
+    .auth-card { position: relative; overflow: hidden; }
+    .auth-title { margin: 0 0 0.35rem; }
+    .tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem; margin-bottom: 0.75rem; }
+    .tab-btn {
+      padding: 0.75rem 0.5rem;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.08);
-      position: relative;
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
-    .status-steps li.active {
-      background: linear-gradient(135deg, rgba(0, 194, 255, 0.18), rgba(158, 240, 26, 0.18));
-      border-color: rgba(0, 194, 255, 0.6);
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 194, 255, 0.16), rgba(158, 240, 26, 0.16));
+      border-color: rgba(0, 194, 255, 0.35);
     }
-    .status-steps li span { display: block; font-size: 0.9rem; font-weight: 700; color: #fff; }
-    .status-steps li small { color: #cfd8e3; opacity: 0.8; }
 
-    .progress-shell { position: relative; margin-top: 1rem; height: 8px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
-    .progress-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; background: linear-gradient(90deg, var(--color-primary), var(--color-accent)); transition: width 0.4s ease; }
-
-    .claim-card { display: flex; gap: 0.8rem; align-items: center; justify-content: space-between; padding: 0.9rem 1rem; background: rgba(255,255,255,0.03); border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); }
-    .claim-card strong { color: #fff; }
-
-    .badge { padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(158, 240, 26, 0.16); color: #c4ff4d; font-weight: 700; font-size: 0.85rem; }
-
-    .timeline { border-left: 2px solid rgba(255,255,255,0.08); margin: 0; padding: 0 0 0 1.25rem; list-style: none; }
-    .timeline li { margin-bottom: 1rem; position: relative; }
-    .timeline li::before { content: ''; position: absolute; left: -1.35rem; top: 4px; width: 12px; height: 12px; background: var(--color-primary); border-radius: 50%; box-shadow: 0 0 0 4px rgba(0, 194, 255, 0.16); }
-    .timeline strong { display: block; color: #fff; margin-bottom: 0.25rem; }
-
-    .tool-form label { display: block; margin-bottom: 0.4rem; color: #cfd8e3; }
-    .tool-form input, .tool-form select, .tool-form textarea {
+    .form-grid { display: grid; gap: 0.9rem; }
+    label { display: block; color: var(--muted); margin-bottom: 0.25rem; font-weight: 600; }
+    input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
       width: 100%;
-      padding: 0.65rem 0.75rem;
-      border-radius: 10px;
+      padding: 0.85rem 0.75rem;
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.04);
       color: #fff;
       font-size: 1rem;
     }
+    input:focus { outline: 2px solid var(--primary); }
 
-    .tool-form input:focus, .tool-form select:focus, .tool-form textarea:focus { outline: 2px solid var(--color-primary); }
+    .checkbox { display: flex; gap: 0.6rem; align-items: flex-start; color: #d9e4ef; }
+    .checkbox input { margin-top: 0.2rem; }
 
-    .result { margin-top: 0.5rem; font-weight: 700; color: #fff; }
+    .status-message {
+      margin: -0.2rem 0 0.35rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .status-message.error { color: #ff9ca3; }
+    .status-message.success { color: #9ef01a; }
+    .status-message.info { color: var(--primary); }
 
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
-    .mini-card { padding: 1rem; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
-    .mini-card h3 { margin: 0 0 0.35rem; }
-    .mini-card p { margin: 0 0 0.6rem; font-size: 0.95rem; color: #cfd8e3; }
+    .link { color: var(--primary); font-weight: 700; }
 
-    .messages { display: grid; gap: 0.75rem; }
-    .message { padding: 0.9rem 1rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
-    .message small { color: #9fb3c8; }
+    .section {
+      max-width: 1200px;
+      margin: 1.5rem auto;
+      padding: 0 1.25rem;
+    }
+    .section h2 { margin: 0 0 0.5rem; font-size: 1.65rem; }
+    .section p { color: var(--muted); margin: 0 0 1rem; }
 
-    .assistant-frame { margin-top: 1rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #f3f4f6; box-shadow: var(--shadow); }
-    .assistant-frame iframe { width: 100%; min-height: 720px; border: 0; background: #f3f4f6; transition: height 0.2s ease; }
+    .feature-grid, .timeline-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .feature-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); padding: 1rem; border-radius: 14px; }
+    .feature-card h3 { margin: 0 0 0.35rem; }
+    .feature-card p { margin: 0; color: #d5deea; }
+
+    .steps { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .step { border: 1px solid rgba(255,255,255,0.08); padding: 1rem; border-radius: 14px; background: rgba(255,255,255,0.03); }
+    .step strong { display: block; margin-bottom: 0.3rem; }
+
+    .fit-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .list-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 1rem; border-radius: 14px; }
+    .list-box ul { margin: 0.2rem 0 0; padding-left: 1rem; color: #d5deea; line-height: 1.6; }
+
+    .faq-grid { display: grid; gap: 0.75rem; }
+    .faq { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; overflow: hidden; }
+    .faq button { width: 100%; background: none; border: none; color: #fff; text-align: left; padding: 1rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .faq-content { padding: 0 1rem 1rem; color: #d5deea; display: none; }
+    .faq.open .faq-content { display: block; }
+
+    .compliance { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 1.25rem; box-shadow: var(--shadow); }
+
+    footer { border-top: 1px solid rgba(255,255,255,0.08); background: rgba(12, 23, 38, 0.92); margin-top: 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
     @media (max-width: 960px) {
-      .hero, .tracker { grid-template-columns: 1fr; }
-      .updates-grid { grid-template-columns: 1fr; }
-      nav {
-        display: none;
-        position: absolute;
-        right: 1.25rem;
-        top: 64px;
-        flex-direction: column;
-        background: rgba(13, 27, 42, 0.95);
-        padding: 0.5rem;
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 12px;
-      }
+      .hero { grid-template-columns: 1fr; padding-top: 1rem; }
+      nav { display: none; position: absolute; right: 1.25rem; top: 60px; background: rgba(12,23,38,0.95); padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); flex-direction: column; }
       nav.open { display: flex; }
-      .nav-toggle { display: inline-flex; align-items:center; gap: 0.35rem; }
+      .nav-toggle { display: inline-flex; background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.12); padding: 0.5rem 0.85rem; border-radius: 10px; font-weight: 700; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="nav-shell">
-      <div class="brand">
-        <img src="logo.png" alt="Thank You For Your Service logo" />
-        <span>Thank You For Your Service</span>
-      </div>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="toggleNav()">☰ Menu</button>
-      <nav id="main-nav">
-        <a href="#intake">Intake</a>
-        <a href="#tracker">Tracker</a>
-        <a href="#tools">Tools</a>
-        <a href="#resources">Resources</a>
-        <a href="#messages">Updates</a>
-        <a href="#claim-assistant">Claim assistant</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div>
-      <p class="badge" style="background:rgba(255,255,255,0.12); color:#e2e8f0;">Welcome back!</p>
-      <h1>Your VA disability roadmap, organized.</h1>
-      <p>Thank You For Your Service (TYFYS) helps you collect records, prepare for private medical evaluations, and build a fully developed claim evidence packet—step by step, at your pace, with a specialist available whenever you want a human check-in.</p>
-      <div class="cta-row">
-        <button class="btn btn-primary" onclick="setActiveClaim('TY-8842')">Resume claim TY-8842</button>
-        <button class="btn btn-ghost" onclick="alert('We will route you to a TYFYS specialist and log the call in the App Pipeline.')">Talk to a Specialist</button>
-        <a class="btn btn-ghost" href="#intake">Start intake</a>
-      </div>
-      <div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-        <span class="badge">Built with veterans</span>
-        <span class="badge" style="background:rgba(0,194,255,0.16); color:#8ee4ff;">Secure document pipelines</span>
-        <span class="badge" style="background:rgba(255,255,255,0.1); color:#fff;">VA-friendly formats</span>
-        <span class="badge" style="background:rgba(158,240,26,0.16); color:#c4ff4d;">No-skip checklists</span>
-      </div>
-    </div>
-    <div class="panel" id="claim-assistant">
-      <h2 style="margin-bottom:0.4rem;">Claim prep assistant</h2>
-      <p style="margin-top:0; color:#cbd5e1;">Practice the intake questions, organize your answers, and see which documents match each part of your claim before you connect with the VA or an accredited representative.</p>
-      <div class="assistant-frame">
-        <iframe class="claim-assistant-frame" src="claim-assistant/index.html" title="Claim assistant" scrolling="no"></iframe>
-      </div>
-      <p style="color:#9fb3c8; margin-top:0.75rem;">TYFYS does not submit forms to the VA, does not provide legal advice, and is not a substitute for an accredited representative or attorney.</p>
-    </div>
-  </section>
-
-  <section class="section" id="projects">
-    <h2>Keep your claim moving</h2>
-    <p style="color:#cbd5e1; max-width:840px;">See every TYFYS project you’re working on in one place. Each card shows where you are in the TYFYS evidence-building process—not your official VA status—and what’s next on your checklist.</p>
-    <div class="grid">
-      <div class="panel mini-card">
-        <p class="badge" style="margin-top:0;">TY-8842</p>
-        <h3>Evidence packet for knee &amp; back increase</h3>
-        <p>Records uploaded. Provider appointments scheduled for next week.</p>
-        <strong>Next up:</strong> Upload imaging and add lay statements for daily impact.
-        <span class="badge" style="margin-top:0.5rem;">Evidence &amp; delivery</span>
-      </div>
-      <div class="panel mini-card">
-        <p class="badge" style="margin-top:0;">TY-7719</p>
-        <h3>New claim: migraines and sleep issues</h3>
-        <p>Service history confirmed. Mini-DBQs partially complete.</p>
-        <strong>Next up:</strong> Finish questionnaires so we can prep provider packets.
-        <span class="badge" style="margin-top:0.5rem; background:rgba(0,194,255,0.16); color:#8ee4ff;">Contract &amp; questionnaires</span>
-      </div>
-      <div class="panel mini-card">
-        <p class="badge" style="margin-top:0;">TY-6610</p>
-        <h3>Secondary claims: radiculopathy &amp; hip</h3>
-        <p>Intent to File date captured. Intake is ready to start.</p>
-        <strong>Next up:</strong> Complete your intake so we can map conditions and evidence.
-        <span class="badge" style="margin-top:0.5rem; background:rgba(158,240,26,0.16); color:#c4ff4d;">Welcome &amp; triage</span>
-      </div>
-    </div>
-    <p style="color:#9fb3c8; margin-top:0.75rem;">These stages track your TYFYS steps—intake, records, provider appointments, and packet review. For official claim status, always rely on the VA.</p>
-  </section>
-
-  <section class="section" id="tracker">
-    <h2>Real-time TYFYS progress tracker</h2>
-    <p style="color:#cbd5e1; max-width:840px;">Follow your progress from “I just logged in” to “my evidence packet is ready to file.” Every stage has clear tasks, checklists, and uploads so nothing falls through the cracks.</p>
-    <div class="tracker">
-      <div class="panel">
-        <div class="tool-form" style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem; align-items:end; margin-bottom:1rem;">
+  <div class="overlay-shell">
+    <header>
+      <div class="nav-shell">
+        <div class="brand">
+          <div class="brand-logo">TY</div>
           <div>
-            <label for="claimSelect">Claim number</label>
-            <select id="claimSelect" onchange="setActiveClaim(this.value)"></select>
+            <span>Thank You For Your Service</span>
+            <small>VA Evidence &amp; Claim Prep Portal</small>
           </div>
-          <div>
-            <label for="stageSelect">Jump to stage</label>
-            <select id="stageSelect" onchange="setStage(parseInt(this.value,10))"></select>
-          </div>
+        </div>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="toggleNav()">☰ Menu</button>
+        <nav id="main-nav">
+          <a href="#how">How it works</a>
+          <a href="#included">What’s included</a>
+          <a href="#faq">FAQs</a>
+          <a href="#auth">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero" id="auth">
+      <div>
+        <div class="eyebrow">Built by veterans, for veterans</div>
+        <h1>Get your VA disability evidence organized and ready to file.</h1>
+        <p class="subhead">Thank You For Your Service (TYFYS) helps you collect records, prepare for private medical evaluations, and build a fully developed claim evidence packet—so you can file confidently through official VA channels or with an accredited representative you trust.</p>
+        <div class="cta-row">
+          <button class="btn btn-primary" type="button" onclick="openCreateTab()">Create my TYFYS account</button>
+          <a class="btn btn-ghost" href="mailto:hello@tyfys.net">Talk to a TYFYS specialist</a>
+        </div>
+        <div class="reassure">
+          <span>• Secure, veteran‑focused portal</span>
+          <span>• Clear, no‑skip evidence checklists</span>
+          <span>• Built around your MOS, era, and conditions</span>
+        </div>
+        <p class="tiny" style="max-width:720px; margin-top:0.6rem;">TYFYS is a private, Service‑Disabled Veteran‑Owned business. We are not the U.S. Department of Veterans Affairs (VA) or a Veterans Service Organization, and we do not file claims or appeals for you. We help you organize medical evidence and documentation so you can file through official VA channels or with an accredited representative of your choice.</p>
+      </div>
+      <div class="card auth-card">
+        <p class="eyebrow" style="margin:0 0 0.3rem;">Access your TYFYS portal</p>
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="login" onclick="showTab('login')">Log in</button>
+          <button class="tab-btn" data-tab="create" onclick="showTab('create')">Create account</button>
         </div>
 
-        <div class="status-bar">
-          <ul class="status-steps" id="stepList"></ul>
-          <div class="progress-shell">
-            <div class="progress-bar" id="progressBar"></div>
-          </div>
+        <div id="login" class="tab-content">
+          <form id="login-form" class="form-grid">
+            <div>
+              <label for="login-email">Email</label>
+              <input id="login-email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+            <div>
+              <label for="login-password">Password</label>
+              <input id="login-password" name="password" type="password" placeholder="Enter password" required />
+            </div>
+            <p id="login-status" class="status-message" aria-live="polite"></p>
+            <button class="btn btn-primary" type="submit" style="width:100%;">Log in</button>
+            <a class="link" href="mailto:hello@tyfys.net?subject=Reset%20my%20TYFYS%20password">Forgot your password?</a>
+            <p class="tiny">Already working with Thank You For Your Service? Log in to pick up where you left off.</p>
+          </form>
         </div>
 
-        <ul class="timeline" id="timeline"></ul>
+        <div id="create" class="tab-content" style="display:none;">
+          <p class="tiny" style="margin-top:0;">New to Thank You For Your Service? Create your secure portal to start organizing your claim evidence and preparing for your private medical evaluations.</p>
+          <form id="create-form" class="form-grid">
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:0.75rem;">
+              <div>
+                <label for="first-name">First name</label>
+                <input id="first-name" name="firstName" type="text" placeholder="First name" required />
+              </div>
+              <div>
+                <label for="last-name">Last name</label>
+                <input id="last-name" name="lastName" type="text" placeholder="Last name" required />
+              </div>
+            </div>
+            <div>
+              <label for="create-email">Email</label>
+              <input id="create-email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+            <div>
+              <label for="phone">Mobile phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" required />
+            </div>
+            <div>
+              <label for="create-password">Create password</label>
+              <input id="create-password" name="password" type="password" placeholder="Create a password" required />
+            </div>
+            <label class="checkbox">
+              <input id="confirm-not-va" name="confirmNotVa" type="checkbox" required />
+              <span>I understand TYFYS is not the VA or a VSO and does not file my claim for me.</span>
+            </label>
+            <label class="checkbox">
+              <input id="confirm-terms" name="confirmTerms" type="checkbox" required />
+              <span>I’ve read and agree to the Terms of Use and Privacy Policy.</span>
+            </label>
+            <p id="create-status" class="status-message" aria-live="polite"></p>
+            <button class="btn btn-primary" type="submit" style="width:100%;">Create my TYFYS account</button>
+            <p class="tiny">You can always file a VA disability claim for free directly with the VA or with an accredited Veterans Service Organization or representative. TYFYS is an optional, paid evidence‑development service.</p>
+          </form>
+        </div>
       </div>
+    </section>
 
-      <div class="panel">
-        <h3 style="margin-top:0;">What happens next</h3>
-        <div class="mini-card">
-          <h3>Welcome &amp; triage</h3>
-          <p>Confirm your service history, current rating, Intent to File status, and goals for this claim. If anything is unclear, you can switch to a live call or chat with a TYFYS specialist at any time.</p>
+    <section class="section" id="included">
+      <h2>What your TYFYS portal helps you do</h2>
+      <p>Once you’re logged in, your dashboard turns the VA disability process into clear missions—so you always know what’s done, what’s next, and what evidence is still missing.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Evidence checklists by condition</h3>
+          <p>Tap into condition‑specific guidance for musculoskeletal, mental health, respiratory, neurological, cardiac, and more—so you know what medical records, imaging, and statements usually support stronger claims and rating increases.</p>
         </div>
-        <div class="mini-card">
-          <h3>Contract &amp; medical questionnaires</h3>
-          <p>Complete your TYFYS service agreement and Release of Information, then fill out short “mini-DBQ” style questionnaires that mirror what your providers will need for their medical opinions and forms. Everything is signed and stored in your secure portal.</p>
+        <div class="feature-card">
+          <h3>Occupation &amp; era insights</h3>
+          <p>Choose your MOS/rate and era of service to see common primary and secondary conditions, exposures, and recommended evaluations that often show up for that kind of service. This helps you and your providers connect the dots the VA may have missed.</p>
         </div>
-        <div class="mini-card">
-          <h3>Evidence &amp; delivery</h3>
-          <p>Upload your DD-214, service treatment records, private medical records, and lay statements. TYFYS then coordinates your private provider appointments (telehealth or in-person where available) and assembles a single evidence packet you can use to file a Fully Developed Claim with the VA.</p>
+        <div class="feature-card">
+          <h3>DD‑214 &amp; Intent to File guidance</h3>
+          <p>Step‑by‑step instructions and official links to help you request your DD‑214, gather key records, and submit an Intent to File so your effective date is protected while you build your evidence.</p>
         </div>
-        <div class="cta-row" style="margin-top:0.75rem;">
-          <button class="btn btn-primary" style="flex:1;" onclick="openUpload()">Add evidence now</button>
-          <button class="btn btn-ghost" style="flex:1;" onclick="alert('Appointment options coming soon')">View appointment options</button>
+        <div class="feature-card">
+          <h3>Private exam prep &amp; packet builder</h3>
+          <p>TYFYS coordinates with private providers (telehealth and in‑person where available) for DBQs, medical opinions, and exams that speak the VA’s language. All of it is organized into a single evidence packet you can use to file a fully developed claim.</p>
         </div>
-        <p style="color:#9fb3c8; margin-top:0.75rem;">This tracker shows your TYFYS milestones only and does not show official VA processing status or decisions.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="tools">
-    <h2>Tools built into your TYFYS home base</h2>
-    <div class="grid">
-      <div class="panel">
-        <h3>Combined rating calculator</h3>
-        <p>Estimate your potential combined rating using the same “VA math” method, so you’re not surprised when percentages don’t add up the way you expect. This is an educational estimate only—the VA makes all final rating decisions.</p>
-        <div class="tool-form">
-          <label for="ratings">Enter ratings (comma separated)</label>
-          <input id="ratings" type="text" placeholder="50, 30, 10" />
-          <button class="btn btn-primary" style="margin-top:0.5rem;" onclick="calculateCombinedRating()">Calculate</button>
-          <div id="combinedResult" class="result"></div>
+    <section class="section" id="how">
+      <h2>How TYFYS fits into your VA claim</h2>
+      <p>We don’t replace the VA or an accredited representative. We focus on evidence, so when you’re ready to file, you’re not guessing what to send—or scrambling for records at the last minute.</p>
+      <div class="steps">
+        <div class="step">
+          <strong>1. Intake &amp; goals</strong>
+          <p>Share your service history, current rating, major conditions, and what you’re trying to accomplish. Your TYFYS advocate uses this to build your roadmap.</p>
+        </div>
+        <div class="step">
+          <strong>2. Records &amp; questionnaires</strong>
+          <p>Track down your DD‑214, service treatment records, and private medical records, then complete short “mini‑DBQs” and condition‑specific questionnaires to guide your providers.</p>
+        </div>
+        <div class="step">
+          <strong>3. Private provider evaluations</strong>
+          <p>TYFYS coordinates private medical evaluations focused on VA rating criteria—covering primary and secondary conditions tied to your MOS, era, and deployment history.</p>
+        </div>
+        <div class="step">
+          <strong>4. Final evidence packet &amp; filing</strong>
+          <p>Once your documents are in, we help you assemble a clear, VA‑ready evidence packet mapped to the forms you’ll use. You then file directly with the VA or an accredited representative.</p>
         </div>
       </div>
-      <div class="panel">
-        <h3>Dependents &amp; payment estimator (2025)</h3>
-        <p>See how adding a spouse and dependents could change your monthly tax-free VA compensation based on the most recent published rates. Use this as a planning tool only; your actual payments are determined by the VA.</p>
-        <div class="tool-form">
-          <label for="ratingSelect">Rating</label>
-          <select id="ratingSelect">
-            <option value="70">70%</option>
-            <option value="80">80%</option>
-            <option value="90">90%</option>
-            <option value="100">100%</option>
-          </select>
-          <label><input type="checkbox" id="spouseCheck" /> Include spouse</label>
-          <label for="numUnder18">Children under 18</label>
-          <input id="numUnder18" type="number" min="0" value="0" />
-          <label for="numOver18">Children 18–23 (in school)</label>
-          <input id="numOver18" type="number" min="0" value="0" />
-          <button class="btn btn-primary" style="margin-top:0.5rem;" onclick="estimatePayment()">Estimate</button>
-          <div id="paymentResult" class="result"></div>
+      <div class="cta-row" style="margin-top:1rem;">
+        <button class="btn btn-primary">Create my TYFYS account</button>
+        <button class="btn btn-ghost">Start with your intake</button>
+      </div>
+    </section>
+
+    <section class="section" id="fit">
+      <h2>Is TYFYS the right fit for you?</h2>
+      <div class="fit-grid">
+        <div class="list-box">
+          <strong>TYFYS can be a good fit if…</strong>
+          <ul>
+            <li>You already have a VA rating but believe it’s too low.</li>
+            <li>You’re filing for multiple conditions and don’t want to miss secondary issues.</li>
+            <li>Your MOS, deployments, or era came with unique exposures.</li>
+            <li>You want private medical opinions and detailed DBQs—not just a quick C&amp;P exam.</li>
+          </ul>
+        </div>
+        <div class="list-box">
+          <strong>You should know…</strong>
+          <ul>
+            <li>You can always file a VA disability claim on your own or with a free accredited VSO. TYFYS is optional support.</li>
+            <li>We do not provide legal advice and do not represent you before the VA or any court.</li>
+            <li>We cannot promise a specific rating, effective date, or outcome. Those decisions are made only by the VA.</li>
+            <li>Our pricing is a flat‑fee model, agreed up front, with no percentage of your backpay taken.</li>
+          </ul>
         </div>
       </div>
-      <div class="panel">
-        <h3>Packet prep</h3>
-        <div class="cards">
-          <div class="mini-card">
-            <h3>Evidence by condition</h3>
-            <p>Interactive checklists for major condition categories—musculoskeletal, mental health, respiratory, neurological, cardiovascular, and more—so you can see what types of evidence typically support stronger claims and rating increases.</p>
-            <button class="btn btn-ghost" onclick="alert('Condition-specific checklist coming from your slide content')">View guidance</button>
-          </div>
-          <div class="mini-card">
-            <h3>Occupation &amp; era navigator</h3>
-            <p>Choose your MOS, rate, and era of service to see common primary and secondary conditions, exposures, and recommended evaluations connected to your job. This is based on patterns seen across occupations, not a diagnosis.</p>
-            <button class="btn btn-ghost" onclick="alert('Occupation/era explorer launching soon')">Explore</button>
-          </div>
-          <div class="mini-card">
-            <h3>DBQ minis</h3>
-            <p>Short, plain-English prompts that map to VA Disability Benefits Questionnaires (DBQs), so your private doctor or VSO can quickly understand what needs to be documented—without you having to speak in “VA form” language.</p>
-            <button class="btn btn-ghost" onclick="alert('DBQ minis launching soon')">Start</button>
-          </div>
-          <div class="mini-card">
-            <h3>SF-180 helper</h3>
-            <p>Answer a few questions and generate a ready-to-send SF-180 request to obtain your service treatment and personnel records from the right archive. You review and submit the request yourself through official government channels.</p>
-            <button class="btn btn-ghost" onclick="alert('SF-180 helper launching soon')">Request STRs</button>
-          </div>
-          <div class="mini-card">
-            <h3>Upload civilian records</h3>
-            <p>Use your secure document vault to store imaging, specialist notes, nexus opinions, and other civilian records in one place so your TYFYS team and your providers are working from the same file.</p>
-            <button class="btn btn-ghost" onclick="openUpload()">Upload</button>
-          </div>
-          <div class="mini-card">
-            <h3>Objection-aware tips</h3>
-            <p>Bite-sized education modules that answer common questions about timing, cost, rating myths, and concerns about working while rated—delivered at the stage where they’re most helpful.</p>
-            <button class="btn btn-ghost" onclick="alert('Contextual helper will surface at drop-off points')">See how it works</button>
-          </div>
+      <p class="tiny" style="margin-top:0.6rem;">Not sure yet? Talk to a TYFYS specialist and ask anything before you decide.</p>
+    </section>
+
+    <section class="section" id="faq">
+      <h2>Questions veterans ask us most</h2>
+      <div class="faq-grid">
+        <div class="faq">
+          <button onclick="toggleFaq(this)">Are you the VA? <span>+</span></button>
+          <div class="faq-content">No. Thank You For Your Service is a private, Service‑Disabled Veteran‑Owned business. We’re not the VA, not a government agency, and not a Veterans Service Organization. We help with evidence, organization, and preparation—not official claim decisions.</div>
+        </div>
+        <div class="faq">
+          <button onclick="toggleFaq(this)">Can I use TYFYS and still work with a VSO or accredited rep? <span>+</span></button>
+          <div class="faq-content">Absolutely. Many veterans use TYFYS to gather medical records, private exam reports, and condition‑specific evidence, then take that packet to a free VSO or other accredited representative to file. We play nicely with others.</div>
+        </div>
+        <div class="faq">
+          <button onclick="toggleFaq(this)">Do you guarantee I’ll get to 100%? <span>+</span></button>
+          <div class="faq-content">No. We’re serious about ethics and compliance, so we don’t guarantee ratings or outcomes. What we do focus on is building the strongest possible medical evidence and documentation for the VA to review. The decision is always up to the VA.</div>
+        </div>
+        <div class="faq">
+          <button onclick="toggleFaq(this)">How is TYFYS different from “results‑based” companies? <span>+</span></button>
+          <div class="faq-content">We don’t take a percentage of your backpay. Our focus is on building a comprehensive, fully developed claim evidence package using private medical evaluations and detailed documentation, for a clear flat fee. You stay in control of filing and who represents you.</div>
+        </div>
+        <div class="faq">
+          <button onclick="toggleFaq(this)">What does it cost? <span>+</span></button>
+          <div class="faq-content">Pricing depends on how many conditions and claims you’re working on. We use a straightforward flat‑fee structure, discussed with you before you sign anything—no surprise add‑ons, and no cut of your backpay. For details, schedule a quick call with a TYFYS specialist.</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="resources">
-    <h2>Resources that follow the TYFYS blueprint</h2>
-    <div class="grid">
-      <div class="panel mini-card">
-        <h3>DD-214 &amp; Intent to File guide</h3>
-        <p>Step-by-step retrieval instructions, official links, and timelines for getting your DD-214 and submitting an Intent to File (ITF) so you protect the earliest possible effective date for your benefits.</p>
-        <button class="btn btn-primary" onclick="alert('Guided DD-214 and ITF helper coming soon')">View guide</button>
-      </div>
-      <div class="panel mini-card">
-        <h3>Us vs. common options</h3>
-        <p>See how TYFYS’s flat-fee, evidence-first approach compares with free Veterans Service Organizations, contingency-fee claim services, and law firms—so you can decide what kind of support, if any, you want to use alongside the free options available to you.</p>
-        <button class="btn btn-primary" onclick="alert('Value education module opens here')">Compare approaches</button>
-      </div>
-      <div class="panel mini-card">
-        <h3>VA forms</h3>
-        <p>Quick links to the VA forms you’re most likely to use while you work through your tracker: 21-526EZ, 21-0781, 21-686c, 21-8940, and SF-180. All links go directly to official VA websites.</p>
-        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">Download pack</a>
-      </div>
-      <div class="panel mini-card">
-        <h3>Evidence packet checklist</h3>
-        <p>A high-level view of what “complete” usually looks like:</p>
-        <ul>
-          <li>DD-214 and ITF in place</li>
-          <li>Service treatment and personnel records</li>
-          <li>Private medical records and imaging</li>
-          <li>Condition-specific DBQs and medical opinions</li>
-          <li>Lay statements and impact statements</li>
-          <li>Occupation/era-based exposure evidence where relevant</li>
-        </ul>
-        <button class="btn btn-primary" onclick="alert('Evidence packet checklist launching soon')">See checklist</button>
-      </div>
-    </div>
-
-    <h2>VA forms, ready to download</h2>
-    <div class="grid">
-      <div class="panel mini-card">
-        <h3>21-526EZ</h3>
-        <p>Application for Disability Compensation (VA Form 21-526EZ). Link goes directly to the official VA form.</p>
-        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-526EZ-ARE.pdf">Download</a>
-      </div>
-      <div class="panel mini-card">
-        <h3>21-0781</h3>
-        <p>Statement in Support of Claim for Service Connection for PTSD (VA Form 21-0781).</p>
-        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-0781-ARE.pdf">Download</a>
-      </div>
-      <div class="panel mini-card">
-        <h3>21-686c</h3>
-        <p>Declaration of Status of Dependents (VA Form 21-686c).</p>
-        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-686c-ARE.pdf">Download</a>
-      </div>
-      <div class="panel mini-card">
-        <h3>21-8940</h3>
-        <p>Veteran’s Application for Increased Compensation Based on Unemployability (VA Form 21-8940). TYFYS does not assist with TDIU claims, but we include this form so you have everything in one place if you choose to pursue it separately.</p>
-        <a class="btn btn-primary" href="https://www.vba.va.gov/pubs/forms/VBA-21-8940-ARE.pdf">Download</a>
-      </div>
-      <div class="panel mini-card">
-        <h3>SF-180</h3>
-        <p>Request Pertaining to Military Records (SF-180), used to request copies of your service records from official archives.</p>
-        <a class="btn btn-primary" href="https://www.archives.gov/files/standard-form-180.pdf">Download</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="messages">
-    <h2>Updates from your TYFYS team</h2>
-    <p style="color:#cbd5e1; max-width:840px;">Release notes, how-to videos, and plain-English explanations of changes that could affect how you build your evidence packet. We focus on education, not legal advice, so you can decide your next steps with the VA or an accredited representative you trust.</p>
-    <div class="grid updates-grid">
-      <div class="panel" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08);">
-        <h3 style="margin-top:0;">Latest updates</h3>
-        <div class="messages" id="messageFeed"></div>
-      </div>
-      <div class="panel" id="important-information" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08);">
-        <h3 style="margin-top:0;">Important information</h3>
-        <ul class="messages" style="list-style:none; padding:0; margin:0; gap:0.75rem;">
-          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-            Thank You For Your Service (TYFYS) is a private, Service-Disabled Veteran-Owned business. We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization (VSO).
-          </li>
-          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-            You can always file a VA disability claim for free directly with the VA or with the help of an accredited VSO or representative.
-          </li>
-          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-            TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.
-          </li>
-          <li class="claim-card" style="display:block; background:rgba(15,23,42,0.35);">
-            Our tools are for education and organization only. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.
-          </li>
+    <section class="section">
+      <div class="compliance">
+        <strong>Important information about Thank You For Your Service (TYFYS)</strong>
+        <ul style="margin:0.5rem 0 0; padding-left:1.1rem; color:#d5deea; line-height:1.7;">
+          <li>TYFYS is a private, Service‑Disabled Veteran‑Owned business.</li>
+          <li>We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization.</li>
+          <li>You can always file a VA disability claim for free directly with the VA or with help from an accredited VSO or representative.</li>
+          <li>TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.</li>
+          <li>Our tools help you collect records, prepare for medical evaluations, and organize evidence. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.</li>
         </ul>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="brand">
-        <img src="logo.png" alt="Thank You For Your Service logo" />
-        <span>Thank You For Your Service</span>
+    <footer>
+      <div class="footer-inner">
+        <span>© 2025 Thank You For Your Service</span>
+        <div class="footer-links">
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+          <a href="https://www.va.gov" target="_blank" rel="noreferrer">VA.gov</a>
+          <a href="#auth">Portal login</a>
+        </div>
       </div>
-      <p style="margin:0; color:#9fb3c8;">Evidence &amp; prep for VA claims.</p>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
   <script>
-    const assistantFrame = document.querySelector('.claim-assistant-frame');
-    const MIN_ASSISTANT_HEIGHT = 900;
-    let lastAssistantHeight = 0;
-
-    function resizeAssistantFrame(height) {
-      if (!assistantFrame || !height) return;
-      const targetHeight = Math.max(Math.round(height), MIN_ASSISTANT_HEIGHT);
-      if (targetHeight === lastAssistantHeight) return;
-
-      lastAssistantHeight = targetHeight;
-      assistantFrame.style.height = `${targetHeight}px`;
-    }
-
-    function syncAssistantFrameHeight() {
-      if (!assistantFrame) return;
-      try {
-        const doc = assistantFrame.contentDocument;
-        const docHeight = doc?.documentElement?.scrollHeight || doc?.body?.scrollHeight;
-        resizeAssistantFrame(docHeight);
-      } catch (err) {
-        // Ignore cross-origin access errors.
-      }
-    }
-
-    function bindAssistantFrameResize() {
-      if (!assistantFrame) return;
-      syncAssistantFrameHeight();
-
-      try {
-        const doc = assistantFrame.contentDocument;
-        if (doc) {
-          const observer = new ResizeObserver(syncAssistantFrameHeight);
-          observer.observe(doc.documentElement);
-          doc.addEventListener('load', syncAssistantFrameHeight, true);
-        }
-      } catch (err) {
-        // Ignore cross-origin access errors.
-      }
-
-      assistantFrame.addEventListener('load', syncAssistantFrameHeight);
-    }
-
-    window.addEventListener('message', (event) => {
-      if (!event.data || event.data.type !== 'claimAssistantHeight') return;
-      resizeAssistantFrame(event.data.height);
-    });
-
-    bindAssistantFrameResize();
-
-    const claims = [
-      {
-        id: 'TY-8842',
-          conditions: 'Knee & lower back',
-          filed: 'Mar 2025',
-          stage: 2,
-          events: [
-            { title: 'Evidence in review', detail: 'Records uploaded and provider appointments scheduled for next week.' },
-            { title: 'What to add', detail: 'Upload imaging and add lay statements for daily impact to strengthen the packet.' },
-            { title: 'Next milestone', detail: 'Provider reports and QA will unlock your delivery-ready evidence packet.' }
-          ]
-        },
-        {
-          id: 'TY-7719',
-          conditions: 'Migraines & sleep issues',
-          filed: 'Jan 2025',
-          stage: 1,
-          events: [
-            { title: 'History confirmed', detail: 'Service history and current rating verified.' },
-            { title: 'Questionnaires in progress', detail: 'Mini-DBQs partially complete—finish so provider packets can be prepped.' },
-            { title: 'Next milestone', detail: 'Completing questionnaires unlocks appointment coordination.' }
-          ]
-        },
-        {
-          id: 'TY-6610',
-          conditions: 'Radiculopathy & hip',
-          filed: 'Feb 2025',
-          stage: 0,
-          events: [
-            { title: 'Intent to File captured', detail: 'Your ITF date is saved so your effective date is protected.' },
-            { title: 'Intake ready', detail: 'Complete intake to map primary and secondary conditions.' },
-            { title: 'Next milestone', detail: 'Upload STRs and private records to move into questionnaires.' }
-          ]
-        }
-      ];
-
-      const steps = [
-        { label: 'Welcome & triage', detail: 'Service history, goals, Intent to File status, and current rating' },
-        { label: 'Contract & medical questionnaires', detail: 'Service agreement, ROI, and mini-DBQs for provider-ready info' },
-        { label: 'Evidence & delivery', detail: 'Upload records, coordinate providers, and package evidence to file' }
-      ];
-
-    function renderClaims() {
-      const select = document.getElementById('claimSelect');
-      const stageSelect = document.getElementById('stageSelect');
-      select.innerHTML = '';
-      stageSelect.innerHTML = '';
-      claims.forEach(claim => {
-        const opt = document.createElement('option');
-        opt.value = claim.id;
-        opt.textContent = `${claim.id} — ${claim.conditions}`;
-        select.appendChild(opt);
-      });
-      steps.forEach((step, idx) => {
-        const opt = document.createElement('option');
-        opt.value = idx;
-        opt.textContent = `${idx + 1}. ${step.label}`;
-        stageSelect.appendChild(opt);
-      });
-    }
-
-    function setActiveClaim(id) {
-      const claim = claims.find(c => c.id === id) || claims[0];
-      if (!claim) return;
-      document.getElementById('claimSelect').value = claim.id;
-      document.getElementById('stageSelect').value = claim.stage;
-      renderSteps(claim.stage);
-      renderTimeline(claim.events);
-    }
-
-    function setStage(stageIndex) {
-      const claimId = document.getElementById('claimSelect').value;
-      const claim = claims.find(c => c.id === claimId);
-      if (claim) {
-        claim.stage = stageIndex;
-        renderSteps(stageIndex);
-      }
-    }
-
-    function renderSteps(activeIndex) {
-      const list = document.getElementById('stepList');
-      list.innerHTML = '';
-      steps.forEach((step, idx) => {
-        const li = document.createElement('li');
-        if (idx <= activeIndex) li.classList.add('active');
-        li.innerHTML = `<span>${step.label}</span><small>${step.detail}</small>`;
-        list.appendChild(li);
-      });
-      const percent = (activeIndex / (steps.length - 1)) * 100;
-      document.getElementById('progressBar').style.width = `${percent}%`;
-    }
-
-    function renderTimeline(events) {
-      const timeline = document.getElementById('timeline');
-      timeline.innerHTML = '';
-      events.forEach(item => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${item.title}</strong><span>${item.detail}</span>`;
-        timeline.appendChild(li);
-      });
-    }
-
-    function calculateCombinedRating() {
-      const input = document.getElementById('ratings').value;
-      const values = input.split(',').map(v => parseInt(v.trim(), 10)).filter(v => !isNaN(v) && v > 0);
-      const result = document.getElementById('combinedResult');
-      if (!values.length) {
-        result.textContent = 'Add at least one rating separated by commas (e.g. 50, 30, 20).';
-        return;
-      }
-      values.sort((a, b) => b - a);
-      let combined = values[0];
-      for (let i = 1; i < values.length; i++) {
-        combined = Math.round((combined + values[i] * (100 - combined) / 100) * 10) / 10;
-      }
-      const rounded = Math.round(combined / 10) * 10;
-      result.textContent = `Combined rating: ${rounded}% (raw: ${combined.toFixed(1)}%)`;
-    }
-
-    const rates2025 = {
-      70: { alone: 1759.19, spouse: 1908.19, spouseChild: 2018.19, firstChild: 1858.19, addChildUnder18: 74.0, addChildOver18: 239.0 },
-      80: { alone: 2044.89, spouse: 2214.89, spouseChild: 2340.89, firstChild: 2158.89, addChildUnder18: 84.0, addChildOver18: 274.0 },
-      90: { alone: 2297.96, spouse: 2489.96, spouseChild: 2630.96, firstChild: 2425.96, addChildUnder18: 95.0, addChildOver18: 308.0 },
-      100: { alone: 3831.30, spouse: 4044.91, spouseChild: 4201.35, firstChild: 3974.15, addChildUnder18: 106.14, addChildOver18: 342.85 }
-    };
-
-    function estimatePayment() {
-      const rating = parseInt(document.getElementById('ratingSelect').value, 10);
-      const hasSpouse = document.getElementById('spouseCheck').checked;
-      const numUnder18 = parseInt(document.getElementById('numUnder18').value, 10) || 0;
-      const numOver18 = parseInt(document.getElementById('numOver18').value, 10) || 0;
-      const r = rates2025[rating];
-      const result = document.getElementById('paymentResult');
-      if (!r) { result.textContent = 'Rates not available for the selected rating.'; return; }
-
-      const totalChildren = numUnder18 + numOver18;
-      let amount;
-      if (hasSpouse) {
-        amount = totalChildren > 0 ? r.spouseChild : r.spouse;
-      } else {
-        amount = totalChildren > 0 ? r.firstChild : r.alone;
-      }
-
-      if (totalChildren > 0) {
-        let remainingUnder18 = numUnder18;
-        let remainingOver18 = numOver18;
-        if (remainingUnder18 > 0) {
-          remainingUnder18 -= 1;
-        } else if (remainingOver18 > 0) {
-          remainingOver18 -= 1;
-        }
-        amount += remainingUnder18 * r.addChildUnder18;
-        amount += remainingOver18 * r.addChildOver18;
-      }
-
-      result.textContent = `Estimated monthly payment: $${amount.toFixed(2)}`;
-    }
-
-    function openUpload() {
-      alert('Secure evidence uploader opens here. Drag-and-drop and VA.gov upload coming soon.');
-    }
+    const portalUrl = './claim-assistant/index.html';
 
     function toggleNav() {
       const nav = document.getElementById('main-nav');
-      const toggle = document.querySelector('.nav-toggle');
-      if (!nav || !toggle) return;
-      const isOpen = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(isOpen));
+      nav.classList.toggle('open');
     }
 
-    function closeNavOnSelection() {
-      const nav = document.getElementById('main-nav');
-      if (!nav) return;
-      nav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          nav.classList.remove('open');
-          const toggle = document.querySelector('.nav-toggle');
-          if (toggle) toggle.setAttribute('aria-expanded', 'false');
-        });
-      });
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+      document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+      document.getElementById(tabId).style.display = 'block';
     }
 
-    function seedMessages() {
-      const feed = document.getElementById('messageFeed');
-      const messages = [
-        { title: 'Service agreement signed', detail: 'Your TYFYS contract and Release of Information are stored in your portal. Questionnaires are unlocked.', time: '2h ago' },
-        { title: 'Mini-DBQs saved', detail: 'Migraine and sleep questionnaires are 60% complete—finish them to prep provider packets.', time: 'Yesterday' },
-        { title: 'Records upload confirmed', detail: 'DD-214 and service treatment records uploaded. Imaging still needed for knee and back.', time: 'Apr 10' },
-        { title: 'Provider appointment options', detail: 'Telehealth orthopedics available next week; in-person slots open in two weeks.', time: 'Apr 9' },
-        { title: 'Intent to File reminder', detail: 'Your ITF date is set. Keep uploads moving so you’re ready to file before it expires.', time: 'Apr 9' },
-        { title: 'Evidence packet QA', detail: 'We are reviewing lay statements and provider reports before assembling your delivery-ready packet.', time: 'Apr 8' },
-        { title: 'Payment estimator tip', detail: 'Add dependents to the estimator to see how your monthly compensation could change.', time: 'Apr 8' }
-      ];
-      feed.innerHTML = '';
-      messages.forEach(msg => {
-        const div = document.createElement('div');
-        div.className = 'message';
-        div.innerHTML = `<strong>${msg.title}</strong><p>${msg.detail}</p><small>${msg.time}</small>`;
-        feed.appendChild(div);
-      });
+    function openCreateTab() {
+      showTab('create');
+      setTimeout(() => document.getElementById('first-name')?.focus(), 80);
+      document.getElementById('main-nav')?.classList.remove('open');
     }
 
-    function initClaimAssistantFrames() {
-      const frames = Array.from(document.querySelectorAll('.claim-assistant-frame'));
-      if (!frames.length) return;
-
-      const resize = (frame) => {
-        if (!frame) return;
-        try {
-          const doc = frame.contentDocument || frame.contentWindow?.document;
-          if (doc?.body?.scrollHeight) {
-            frame.style.height = `${doc.body.scrollHeight + 40}px`;
-          }
-        } catch (e) {
-          frame.style.height = '1900px';
-        }
-      };
-
-      frames.forEach((frame) => {
-        frame.addEventListener('load', () => {
-          resize(frame);
-          setTimeout(() => resize(frame), 600);
-        });
-      });
-
-      window.addEventListener('resize', () => {
-        frames.forEach((frame) => resize(frame));
-      });
+    function setStatus(elementId, message, type = 'info') {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      el.textContent = message;
+      el.className = `status-message ${type}`;
     }
 
-    renderClaims();
-    setActiveClaim('TY-8842');
-    seedMessages();
-    initClaimAssistantFrames();
-    closeNavOnSelection();
+    function handleLoginSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+
+      if (!email || !password) {
+        setStatus('login-status', 'Please enter your email and password to continue.', 'error');
+        return;
+      }
+
+      setStatus('login-status', 'Logging you in and opening your dashboard…', 'info');
+      localStorage.setItem('tyfysUserEmail', email);
+      setTimeout(() => { window.location.href = portalUrl; }, 300);
+    }
+
+    function handleCreateSubmit(event) {
+      event.preventDefault();
+      const first = document.getElementById('first-name').value.trim();
+      const last = document.getElementById('last-name').value.trim();
+      const email = document.getElementById('create-email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const password = document.getElementById('create-password').value.trim();
+      const confirmNotVa = document.getElementById('confirm-not-va').checked;
+      const confirmTerms = document.getElementById('confirm-terms').checked;
+
+      if (!first || !last || !email || !phone || !password || !confirmNotVa || !confirmTerms) {
+        setStatus('create-status', 'Please complete all fields and confirmations to create your portal.', 'error');
+        return;
+      }
+
+      const displayName = `${first} ${last}`.trim();
+      localStorage.setItem('tyfysUserName', displayName);
+      localStorage.setItem('tyfysUserEmail', email);
+      setStatus('create-status', 'Account created. Redirecting you to your TYFYS portal…', 'success');
+      setTimeout(() => { window.location.href = portalUrl; }, 500);
+    }
+
+    function toggleFaq(button) {
+      const faq = button.parentElement;
+      const open = faq.classList.contains('open');
+      document.querySelectorAll('.faq').forEach(f => f.classList.remove('open'));
+      if (!open) faq.classList.add('open');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('login-form')?.addEventListener('submit', handleLoginSubmit);
+      document.getElementById('create-form')?.addEventListener('submit', handleCreateSubmit);
+    });
   </script>
 </body>
 </html>
