@@ -1,7 +1,323 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { copy } from './data';
+import {
+  loadAccountState,
+  loadOnboardingState,
+  saveAccountState,
+  saveOnboardingState
+} from './accountStorage';
+
+const defaultAccountState = {
+  email: '',
+  password: '',
+  displayName: '',
+  phone: '',
+  loggedIn: false
+};
+
+const defaultOnboardingState = {
+  fullName: '',
+  email: '',
+  phone: '',
+  password: '',
+  contactPreference: 'Call or text',
+  notes: '',
+  completed: false
+};
+
+function OnboardingForm({ onboarding, onSubmit, saving, feedback }) {
+  const [formState, setFormState] = useState(onboarding);
+
+  useEffect(() => {
+    setFormState(onboarding);
+  }, [onboarding]);
+
+  const updateField = (field, value) => {
+    setFormState((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(formState);
+  };
+
+  return (
+    <form className="onboarding-form" onSubmit={handleSubmit}>
+      <div className="panel-heading" style={{ padding: 0 }}>
+        <div>
+          <p className="eyebrow">Contact & login</p>
+          <h3>Save your TYFYS access</h3>
+          <p className="body" style={{ color: '#415276' }}>
+            We keep this on your device so you stay logged in and can pick up claim prep without retyping details.
+          </p>
+        </div>
+        <span className="status-pill">Required</span>
+      </div>
+
+      <div className="form-grid">
+        <label className="field">
+          <span>Full name</span>
+          <input
+            type="text"
+            required
+            value={formState.fullName}
+            placeholder="Your name"
+            onChange={(event) => updateField('fullName', event.target.value)}
+          />
+        </label>
+        <label className="field">
+          <span>Email</span>
+          <input
+            type="email"
+            required
+            value={formState.email}
+            placeholder="you@service.com"
+            onChange={(event) => updateField('email', event.target.value)}
+          />
+        </label>
+        <label className="field">
+          <span>Phone</span>
+          <input
+            type="tel"
+            required
+            value={formState.phone}
+            placeholder="(555) 123-4567"
+            onChange={(event) => updateField('phone', event.target.value)}
+          />
+        </label>
+        <label className="field">
+          <span>Password (saved locally)</span>
+          <input
+            type="password"
+            required
+            value={formState.password}
+            placeholder="Create a password to store on this device"
+            onChange={(event) => updateField('password', event.target.value)}
+          />
+        </label>
+      </div>
+
+      <div className="form-grid">
+        <label className="field">
+          <span>Contact preference</span>
+          <select
+            value={formState.contactPreference}
+            onChange={(event) => updateField('contactPreference', event.target.value)}
+          >
+            <option>Call or text</option>
+            <option>Text only</option>
+            <option>Call only</option>
+            <option>Email follow-up</option>
+          </select>
+        </label>
+        <label className="field">
+          <span>Notes for your specialist (optional)</span>
+          <textarea
+            value={formState.notes}
+            placeholder="Add context about your claim goals or schedule."
+            onChange={(event) => updateField('notes', event.target.value)}
+          />
+        </label>
+      </div>
+
+      <div className="form-footer">
+        <button type="submit" disabled={saving}>
+          {saving ? 'Saving and keeping you logged in...' : 'Submit & stay logged in'}
+        </button>
+        <p className="microcopy">
+          Completing this contact step sets your login and saves onboarding details locally so returning visits remember you.
+        </p>
+        {feedback && <p className="note microcopy">{feedback}</p>}
+      </div>
+    </form>
+  );
+}
+
+function OnboardingSummary({ onboarding }) {
+  return (
+    <div className="summary-card">
+      <div className="panel-heading" style={{ padding: 0 }}>
+        <div>
+          <p className="eyebrow">Saved onboarding</p>
+          <h3>You are ready to resume</h3>
+          <p className="body" style={{ color: '#415276' }}>
+            We kept your login active and stored your latest contact details for your TYFYS specialist.
+          </p>
+        </div>
+        <span className="status-pill">Complete</span>
+      </div>
+      <ul className="checklist">
+        <li>
+          <strong>Contact:</strong> {onboarding.fullName || 'Name on file'} · {onboarding.email}
+        </li>
+        <li>
+          <strong>Phone:</strong> {onboarding.phone || 'Pending'} ({onboarding.contactPreference})
+        </li>
+        <li>
+          <strong>Secure access:</strong> Password saved for this device
+        </li>
+      </ul>
+      <p className="microcopy">Need a change? Log out to switch accounts, or update your saved info below.</p>
+    </div>
+  );
+}
+
+function AccountAccessPanel({ account, onboardingComplete, loggedIn, onLogin, onLogout }) {
+  const [loginEmail, setLoginEmail] = useState(account.email);
+  const [loginPassword, setLoginPassword] = useState('');
+  const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    setLoginEmail(account.email);
+  }, [account.email]);
+
+  const hasSavedCredentials = useMemo(
+    () => Boolean(account.email && account.password),
+    [account.email, account.password]
+  );
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    if (!hasSavedCredentials) {
+      setStatus('No saved login yet. Complete the contact step to create one.');
+      return;
+    }
+
+    if (loginEmail === account.email && loginPassword === account.password) {
+      onLogin();
+      setStatus('Welcome back—your saved TYFYS login is active.');
+      setLoginPassword('');
+    } else {
+      setStatus('Email or password does not match your saved login.');
+    }
+  };
+
+  const handleLogout = () => {
+    onLogout();
+    setStatus('You signed out. Your saved details stay on this device until you clear them.');
+    setLoginPassword('');
+  };
+
+  return (
+    <div className="account-panel">
+      <div className="panel-heading" style={{ padding: 0, marginBottom: 8 }}>
+        <div>
+          <p className="eyebrow">Account access</p>
+          <h3>{loggedIn ? 'You are signed in' : 'Use your saved login'}</h3>
+        </div>
+        {loggedIn && <span className="status-pill">Logged in</span>}
+      </div>
+
+      {loggedIn ? (
+        <div className="account-summary">
+          <p className="body" style={{ color: '#0b172a' }}>
+            Thanks, {account.displayName || 'TYFYS veteran'}. Your onboarding info stays active here.
+          </p>
+          <p className="microcopy">We remember your saved credentials on this device so you can jump straight into TYFYS.</p>
+          <div className="cta-row">
+            <button type="button" className="ghost" onClick={handleLogout}>
+              Log out
+            </button>
+          </div>
+        </div>
+      ) : (
+        <form className="login-form" onSubmit={handleLogin}>
+          <div className="form-grid">
+            <label className="field">
+              <span>Email</span>
+              <input
+                type="email"
+                value={loginEmail}
+                placeholder="you@service.com"
+                onChange={(event) => setLoginEmail(event.target.value)}
+              />
+            </label>
+            <label className="field">
+              <span>Password</span>
+              <input
+                type="password"
+                value={loginPassword}
+                placeholder="Saved password"
+                onChange={(event) => setLoginPassword(event.target.value)}
+              />
+            </label>
+          </div>
+          <div className="form-footer">
+            <button type="submit">Sign in with saved account</button>
+            <p className="microcopy">
+              {hasSavedCredentials
+                ? 'We store your credentials locally so the hero form stays hidden once you are done onboarding.'
+                : 'Complete the contact step to set up your saved login for this device.'}
+            </p>
+          </div>
+        </form>
+      )}
+
+      {status && <p className="note microcopy">{status}</p>}
+      {onboardingComplete && !loggedIn && (
+        <p className="microcopy" style={{ marginTop: 8 }}>
+          We found completed onboarding details. Sign in with your saved password to continue.
+        </p>
+      )}
+    </div>
+  );
+}
 
 export default function App() {
+  const [accountState, setAccountState] = useState(() => loadAccountState() || defaultAccountState);
+  const [onboardingState, setOnboardingState] = useState(
+    () => loadOnboardingState() || defaultOnboardingState
+  );
+  const [saving, setSaving] = useState(false);
+  const [submissionFeedback, setSubmissionFeedback] = useState('');
+
+  const onboardingComplete = onboardingState?.completed;
+  const loggedIn = accountState?.loggedIn && onboardingComplete;
+
+  useEffect(() => {
+    saveAccountState(accountState);
+  }, [accountState]);
+
+  useEffect(() => {
+    saveOnboardingState(onboardingState);
+  }, [onboardingState]);
+
+  useEffect(() => {
+    if (onboardingComplete && !accountState.loggedIn && accountState.email && accountState.password) {
+      setAccountState((prev) => ({ ...prev, loggedIn: true }));
+    }
+    // We only hydrate login on the initial mount to respect manual sign-outs.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleOnboardingSubmit = (payload) => {
+    setSubmissionFeedback('');
+    setSaving(true);
+    const completedOnboarding = {
+      ...payload,
+      completed: true
+    };
+
+    setOnboardingState(completedOnboarding);
+    setAccountState({
+      email: payload.email,
+      password: payload.password,
+      displayName: payload.fullName,
+      phone: payload.phone,
+      loggedIn: true
+    });
+    setSubmissionFeedback('Saved your login and onboarding details for this device.');
+    setSaving(false);
+  };
+
+  const handleLogin = () => {
+    setAccountState((prev) => ({ ...prev, loggedIn: true }));
+  };
+
+  const handleLogout = () => {
+    setAccountState((prev) => ({ ...prev, loggedIn: false }));
+  };
+
   return (
     <div className="page">
       <header className="topbar">
@@ -37,19 +353,24 @@ export default function App() {
             ))}
           </div>
         </div>
-        <div className="hero-card">
-          <div className="card-header">
-            <div>
-              <p className="eyebrow">Important information</p>
-              <h3>TYFYS keeps you organized</h3>
-            </div>
-            <div className="progress-stat">Evidence + prep</div>
-          </div>
-          <ul className="checklist">
-            {copy.complianceBlock.bullets.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+        <div className="hero-card" style={{ gap: 16 }}>
+          <AccountAccessPanel
+            account={accountState}
+            onboardingComplete={onboardingComplete}
+            loggedIn={loggedIn}
+            onLogin={handleLogin}
+            onLogout={handleLogout}
+          />
+          {loggedIn && onboardingComplete ? (
+            <OnboardingSummary onboarding={onboardingState} />
+          ) : (
+            <OnboardingForm
+              onboarding={onboardingState}
+              onSubmit={handleOnboardingSubmit}
+              saving={saving}
+              feedback={submissionFeedback}
+            />
+          )}
         </div>
       </div>
 
