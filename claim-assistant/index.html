@@ -927,6 +927,9 @@
       const nextBtn = document.getElementById('nextStep');
       const form = document.getElementById('intakeForm');
       const formStatus = document.getElementById('formStatus');
+      const GOOGLE_SHEETS_WEB_APP_URL =
+        window.CLAIM_ASSISTANT_GOOGLE_WEB_APP_URL ||
+        'PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
       let currentStep = 0;
 
       function sendHeightToParent() {
@@ -1006,12 +1009,37 @@
         if (prevBtn) prevBtn.addEventListener('click', () => showStep(currentStep - 1));
       }
 
+      async function sendToGoogleSheet(payload) {
+        if (
+          !GOOGLE_SHEETS_WEB_APP_URL ||
+          GOOGLE_SHEETS_WEB_APP_URL.startsWith('PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE')
+        ) {
+          console.warn('Google Sheets webhook is not configured.');
+          return { skipped: true };
+        }
+
+        const response = await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'cors',
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Google Sheets webhook returned ${response.status}`);
+        }
+
+        return response.json().catch(() => ({ ok: true }));
+      }
+
       if (form) {
-        form.addEventListener('submit', (event) => {
+        form.addEventListener('submit', async (event) => {
           event.preventDefault();
           if (nextBtn) {
             nextBtn.disabled = true;
-            nextBtn.textContent = 'Submitted';
+            nextBtn.textContent = 'Submitting…';
           }
           if (prevBtn) prevBtn.disabled = true;
           if (formStatus)
@@ -1024,7 +1052,22 @@
           } catch (err) {
             // Ignore parent communication errors; offline/local contexts are allowed.
           }
+
           sendHeightToParent();
+
+          try {
+            await sendToGoogleSheet(payload);
+            if (formStatus)
+              formStatus.textContent =
+                'Thank you — your responses are now saved and forwarded to our secure Google Sheet.';
+          } catch (err) {
+            console.error('Google Sheets submission failed', err);
+            if (formStatus)
+              formStatus.textContent =
+                'We saved your responses, but could not sync them to the Google Sheet. Please try again or contact support.';
+            if (nextBtn) nextBtn.textContent = 'Submit answers';
+            if (prevBtn) prevBtn.disabled = false;
+          }
         });
       }
 
