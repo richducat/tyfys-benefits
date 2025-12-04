@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veteran Benefits Blog | Strategies & Guides | TYFYS</title>
+    <meta name="description" content="Expert guides on increasing your VA disability rating, understanding Nexus Letters, and navigating the VA claims process.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 50: '#f0f4ff', 100: '#e0eaff', 700: '#2d4a9e', 800: '#1e3a8a', 900: '#0f172a' },
+                        gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
+                        <div class="flex flex-col">
+                            <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                            <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
+                    <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                    <a href="blog.html" class="text-navy-800 font-bold border-b-2 border-gold-500">Blog</a>
+                    <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2">
+                        Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="bg-navy-900 text-white py-20 border-b-4 border-gold-500">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold mb-6">Veteran Intel & Strategies</h1>
+            <p class="text-xl text-slate-300">
+                Straight talk on how to win your claim, debunking VA myths, and maximizing your benefits.
+            </p>
+        </div>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        
+        <!-- Category: Strategy -->
+        <div class="mb-16">
+            <div class="flex items-center gap-2 mb-8">
+                <i data-lucide="crosshair" class="h-6 w-6 text-gold-500"></i>
+                <h2 class="text-2xl font-serif font-bold text-navy-900">Winning Claim Strategies</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Post 1 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-green-600 uppercase tracking-wider">Most Popular</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post1" class="hover:text-gold-600">The "Nexus Letter": The Missing Link in Your Claim</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Why 70% of claims are denied due to "No Service Connection" and how a private medical opinion fixes it.</p>
+                        <a href="blog_posts_content.html#post1" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                <!-- Post 2 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Strategy</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post2" class="hover:text-gold-600">Fully Developed Claims vs. Standard Claims</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">How to skip the "Wait and Hope" line by submitting all your evidence upfront.</p>
+                        <a href="blog_posts_content.html#post2" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                <!-- Post 3 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Comparison</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post3" class="hover:text-gold-600">VSO vs. Private Medical Evidence</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Free VSOs are great for forms, but they can't write medical opinions. Here is the difference.</p>
+                        <a href="blog_posts_content.html#post3" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                 <!-- Post 4 -->
+                 <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Strategy</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post10" class="hover:text-gold-600">Secondary Conditions: The Path to 100%</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Stuck at 90%? You might be ignoring the "Secondary Conditions" caused by your primary disability.</p>
+                        <a href="blog_posts_content.html#post10" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                 <!-- Post 5 -->
+                 <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Education</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post11" class="hover:text-gold-600">What is a DBQ?</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Disability Benefits Questionnaires explained. Why relying on the C&P examiner to fill this out is a gamble.</p>
+                        <a href="blog_posts_content.html#post11" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                 <!-- Post 6 -->
+                 <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Strategy</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post17" class="hover:text-gold-600">VA Math Explained</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Why 50% + 50% doesn't equal 100%, and how to navigate the "Fuzzy Math" of the VA.</p>
+                        <a href="blog_posts_content.html#post17" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- Category: Myths & Finance -->
+        <div class="mb-16">
+            <div class="flex items-center gap-2 mb-8">
+                <i data-lucide="shield-alert" class="h-6 w-6 text-gold-500"></i>
+                <h2 class="text-2xl font-serif font-bold text-navy-900">Myths & Financial Facts</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Post 7 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-gold-600 uppercase tracking-wider">Myth Busting</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post4" class="hover:text-gold-600">Can I Work with a 100% Rating?</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">The truth about TDIU vs. Scheduler 100%. Yes, you can work (and make millions) if rated correctly.</p>
+                        <a href="blog_posts_content.html#post4" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                <!-- Post 8 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-red-500 uppercase tracking-wider">Urgent</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post13" class="hover:text-gold-600">The Cost of Waiting</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">You lose roughly $900-$1500 every month you wait to file. Here is the breakdown.</p>
+                        <a href="blog_posts_content.html#post13" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                <!-- Post 9 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Fees</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post8" class="hover:text-gold-600">Why We Don't Take Backpay</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Most lawyers take 33% of your check. We charge a flat fee. See why our model wins.</p>
+                        <a href="blog_posts_content.html#post8" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                 <!-- Post 10 -->
+                 <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Protection</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post9" class="hover:text-gold-600">The 5-Year Rule: Is My Rating Safe?</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">When does your rating become protected from reduction? We explain the 5, 10, and 20-year rules.</p>
+                        <a href="blog_posts_content.html#post9" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                 <!-- Post 11 -->
+                 <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Process</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post20" class="hover:text-gold-600">Intent to File</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">How to lock in your backpay date today, even if you aren't ready to submit your full evidence yet.</p>
+                        <a href="blog_posts_content.html#post20" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- Category: Specific Conditions -->
+        <div class="mb-16">
+            <div class="flex items-center gap-2 mb-8">
+                <i data-lucide="stethoscope" class="h-6 w-6 text-gold-500"></i>
+                <h2 class="text-2xl font-serif font-bold text-navy-900">Condition Guides</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Post 12 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Mental Health</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post6" class="hover:text-gold-600">PTSD Claims: Why You Need a Private Psych</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Don't rely on a 15-minute C&P exam for your mental health rating. Get a proper evaluation.</p>
+                        <a href="blog_posts_content.html#post6" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                <!-- Post 13 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Physical</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post5" class="hover:text-gold-600">Back Pain & Range of Motion</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">The VA rates back pain based on Range of Motion (ROM), not just pain levels. Know the criteria.</p>
+                        <a href="blog_posts_content.html#post5" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                <!-- Post 14 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Sleep</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post12" class="hover:text-gold-600">Sleep Apnea Secondary Connection</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">How to link Sleep Apnea to PTSD, Weight Gain, or Sinusitis for a 50% rating.</p>
+                        <a href="blog_posts_content.html#post12" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                 <!-- Post 15 -->
+                 <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Audio</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post15" class="hover:text-gold-600">Tinnitus: The Gateway Claim</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">It's only 10%, but it opens the door for Migraines, Anxiety, and Sleep Apnea claims.</p>
+                        <a href="blog_posts_content.html#post15" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                 <!-- Post 16 -->
+                 <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Neurological</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post18" class="hover:text-gold-600">Migraines & Headaches</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Often overlooked, migraines can be rated up to 50%. Learn how to log your "Prostrating Attacks".</p>
+                        <a href="blog_posts_content.html#post18" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                 <!-- Post 17 -->
+                 <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Physical</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="blog_posts_content.html#post19" class="hover:text-gold-600">Knee Pain</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Limitation of Flexion vs. Extension. Understanding the metrics the VA doctor measures.</p>
+                        <a href="blog_posts_content.html#post19" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-center">
+        <p>&copy; 2025 Thank You For Your Service. All rights reserved.</p>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
