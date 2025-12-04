@@ -10,6 +10,8 @@
   
    <!-- Fonts: Inter for UI, Merriweather for headings (trustworthy serif) -->
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+   <!-- Fonts for Mission De-Brief Terminal -->
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
   
    <!-- Lucide Icons -->
    <script src="https://unpkg.com/lucide@latest"></script>
@@ -50,6 +52,324 @@
            background-image: radial-gradient(#1e293b 1px, transparent 1px);
            background-size: 30px 30px;
        }
+
+        /* Mission De-Brief Terminal Styles */
+        .mission-files-section {
+            background-color: #f8fafc;
+            padding: 60px 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .mission-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mission-terminal {
+            width: 100%;
+            background: #0f1219;
+            color: #4ade80;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid #1e293b;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 500px;
+        }
+
+        .terminal-header {
+            background: #1e293b;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            border-bottom: 1px solid #334155;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #ef4444;
+            transition: all 0.5s ease;
+        }
+        
+        .mission-terminal.system-ready .status-dot {
+            background-color: #4ade80;
+            box-shadow: 0 0 8px #4ade80;
+            animation: blink 2s infinite;
+        }
+
+        .terminal-body {
+            display: flex;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .file-list-sidebar {
+            width: 35%;
+            background: #11151c;
+            border-right: 1px solid #1e293b;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .file-list-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .file-list-sidebar::-webkit-scrollbar-track {
+            background: #0f1219;
+        }
+        .file-list-sidebar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        .file-list-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        .sidebar-header {
+            padding: 15px;
+            font-size: 0.7rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #1e293b;
+            background: #11151c;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .file-item {
+            padding: 15px;
+            border-bottom: 1px solid #1e293b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-item:hover {
+            background: #1e293b;
+            padding-left: 20px;
+        }
+
+        .file-item.active {
+            background: #1e293b;
+            border-left: 3px solid #4ade80;
+            padding-left: 17px;
+        }
+
+        .file-icon {
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+        
+        .file-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .file-id {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .file-name {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #e2e8f0;
+        }
+        
+        .file-item.active .file-name {
+            color: #4ade80;
+        }
+
+        .display-area {
+            width: 65%;
+            position: relative;
+            background: radial-gradient(circle at center, #1a202c 0%, #0f1219 100%);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .display-area::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 5;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .decryption-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f1219;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier Prime', monospace;
+            color: #4ade80;
+            display: none;
+        }
+        
+        .decryption-overlay.active {
+            display: flex;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: #1e293b;
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            background: #4ade80;
+            transition: width 0.05s linear;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .case-header {
+            border-bottom: 1px dashed #334155;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .case-title {
+            font-size: 0.9rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .case-badge {
+            background: rgba(74, 222, 128, 0.1);
+            color: #4ade80;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            font-weight: bold;
+        }
+
+        .typewriter-text {
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            flex-grow: 1;
+        }
+
+        .signature-block {
+            margin-top: 20px;
+            border-left: 4px solid #4ade80;
+            padding-left: 15px;
+        }
+
+        .sig-name {
+            display: block;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .sig-detail {
+            display: block;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: #4ade80;
+            vertical-align: text-bottom;
+            animation: blink-cursor 0.75s step-end infinite;
+        }
+
+        @keyframes blink-cursor {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .mission-terminal {
+                height: auto;
+                min-height: 600px;
+            }
+            .terminal-body {
+                flex-direction: column;
+            }
+            .file-list-sidebar {
+                width: 100%;
+                height: 150px;
+                border-right: none;
+                border-bottom: 1px solid #1e293b;
+            }
+            .display-area {
+                width: 100%;
+                height: 400px;
+            }
+        }
    </style>
 </head>
 <body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
@@ -136,40 +456,49 @@
    </div>
 
 
-   <!-- Mission / Value Prop -->
-   <section class="py-20 bg-white">
-       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-               <div>
-                   <h2 class="font-serif text-3xl font-bold text-slate-900 mb-6">Why We Fight For You</h2>
-                   <div class="space-y-6 text-slate-600 text-lg">
-                       <p>
-                           Returning home shouldn't mean fighting a new war against bureaucracy. Too many veterans are denied disability benefits not because they aren't injured, but because they lack the "perfect" paperwork.
-                       </p>
-                       <p>
-                           At <span class="font-semibold text-navy-800">Thank You For Your Service</span>, we provide the missing link: <strong class="text-slate-900">High-quality, private medical evidence.</strong>
-                       </p>
-                       <p>
-                           We don't just file papers; we build strategic cases. We pair you with specialized doctors who understand VA requirements, ensuring your Nexus Letters and DBQs tell the undeniable truth of your sacrifice.
-                       </p>
+   <!-- Mission De-Brief Terminal -->
+   <section class="mission-files-section">
+       <div class="mission-container">
+           <div class="mission-terminal" id="terminal">
+               <div class="terminal-header">
+                   <div class="header-left">
+                       <span class="status-dot"></span>
+                       <span class="terminal-title">TYFYS_SECURE_SERVER // ACCESS_LOGS</span>
                    </div>
-                  
-                   <div class="mt-8 grid grid-cols-2 gap-4">
-                       <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                           <i data-lucide="check-circle-2" class="h-6 w-6 text-green-600 mb-2"></i>
-                           <span class="block font-bold text-slate-900">HIPAA Compliant</span>
-                           <span class="text-sm text-slate-500">Your data is secure</span>
-                       </div>
-                       <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
-                           <i data-lucide="clock" class="h-6 w-6 text-blue-600 mb-2"></i>
-                           <span class="block font-bold text-slate-900">Speed & Precision</span>
-                           <span class="text-sm text-slate-500">30-60 day prep time</span>
-                       </div>
-                   </div>
+                   <div style="opacity: 0.6">ENCRYPTION: AES-256</div>
                </div>
-               <div class="relative">
-                   <div class="absolute inset-0 bg-gold-500 rounded-2xl transform rotate-3 translate-x-2 translate-y-2"></div>
-                   <img src="https://images.unsplash.com/photo-1579783483458-83d0b161d940?q=80&w=1000&auto=format&fit=crop" alt="Veterans talking" class="relative rounded-2xl shadow-xl w-full object-cover h-[500px] grayscale hover:grayscale-0 transition duration-500">
+
+               <div class="terminal-body">
+                   <div class="file-list-sidebar" id="fileList">
+                       <div class="sidebar-header">AVAILABLE CASE FILES (13)</div>
+                   </div>
+
+                   <div class="display-area">
+                       <div class="decryption-overlay" id="decryptOverlay">
+                           <div id="decryptText">ACCESSING DATABASE...</div>
+                           <div class="loading-bar">
+                               <div class="loading-progress" id="loadingProgress"></div>
+                           </div>
+                           <div style="font-size: 0.7rem; margin-top: 10px; opacity: 0.7; font-family: 'Courier New';">verifying credentials...</div>
+                       </div>
+
+                       <div class="content-wrapper">
+                           <div class="case-header">
+                               <div>
+                                   <div class="case-title">TRANSMISSION CONTENT</div>
+                                   <div style="font-size: 0.7rem; color: #475569; margin-top: 2px;">SECURE CHANNEL 04-X</div>
+                               </div>
+                               <div class="case-badge" id="caseStatus">VERIFIED</div>
+                           </div>
+
+                           <div class="typewriter-text" id="reviewText"></div>
+
+                           <div class="signature-block">
+                               <span class="sig-name" id="reviewAuthor">Loading...</span>
+                               <span class="sig-detail" id="reviewBranch">Loading...</span>
+                           </div>
+                       </div>
+                   </div>
                </div>
            </div>
        </div>
@@ -444,6 +773,120 @@
        </div>
    </footer>
 
+
+   <script>
+       const missionData = [
+           { id: "M-001", text: "Finding this company after 8 years of denials changed everything for me. The process isn't just hands-off – it's fully done for you.", author: "James R.", branch: "Marine Corps Veteran", status: "GRANTED" },
+           { id: "A-042", text: "As a female veteran, I sometimes felt invisible after service. This company recognizes all of us – just like the values we upheld while serving.", author: "Sarah T.", branch: "Army Veteran", status: "VERIFIED" },
+           { id: "V-197", text: "After decades of feeling disconnected, I found a place where my time is honored. The quality of their service reminds me of the excellence we strived for.", author: "Robert L.", branch: "Vietnam Veteran", status: "HONORED" },
+           { id: "AF-204", text: "I didn't think my back pain would ever be taken seriously. The medical evidence provided here was undeniably thorough. Finally got the rating I deserved.", author: "Michael K.", branch: "Air Force Veteran", status: "GRANTED" },
+           { id: "N-882", text: "The DBQs were filled out with such precision. My VSO was shocked at the quality of the paperwork. You guys know exactly what the VA looks for.", author: "David P.", branch: "Navy Veteran", status: "APPROVED" },
+           { id: "M-331", text: "I was skeptical about private medical evidence, but the transparency here is unmatched. No hidden fees, just straight talk and results.", author: "Carlos G.", branch: "Marine Corps Veteran", status: "VERIFIED" },
+           { id: "CG-019", text: "Coast Guard vets often get overlooked. TYFYS treated my case with the same urgency as front-line combat troops. 100% P&T achieved.", author: "Jessica M.", branch: "Coast Guard Veteran", status: "100% P&T" },
+           { id: "A-550", text: "My PTSD claim had been stagnant for three years. One detailed Nexus Letter from this team broke the logjam. I can finally breathe easier.", author: "Marcus W.", branch: "Army Veteran", status: "SERVICE CONNECTED" },
+           { id: "N-101", text: "Speed was my main concern. I didn't want to wait months for an appointment. I was seen by a doctor within two weeks of signing up.", author: "Erica B.", branch: "Navy Veteran", status: "EXPEDITED" },
+           { id: "AF-774", text: "Professionalism from start to finish. They didn't promise me the moon, they just promised to do the work. And they delivered.", author: "Thomas H.", branch: "Air Force Veteran", status: "VERIFIED" },
+           { id: "A-992", text: "I struggled to explain how my knee injury affected my daily life. The doctor they connected me with put it into words the VA couldn't ignore.", author: "Samuel L.", branch: "Army Veteran", status: "GRANTED" },
+           { id: "M-665", text: "It's rare to find a company that actually answers the phone. Every question I had about the process was answered by a human, usually another vet.", author: "Daniel R.", branch: "Marine Corps Veteran", status: "SUPPORTED" },
+           { id: "V-220", text: "At 72 years old, I thought it was too late to file for tinnitus. They showed me it's never too late to claim what you earned.", author: "William T.", branch: "Army Veteran", status: "GRANTED" }
+       ];
+
+       const terminal = document.getElementById('terminal');
+       const fileListEl = document.getElementById('fileList');
+       const textEl = document.getElementById('reviewText');
+       const authorEl = document.getElementById('reviewAuthor');
+       const branchEl = document.getElementById('reviewBranch');
+       const statusEl = document.getElementById('caseStatus');
+       const decryptOverlay = document.getElementById('decryptOverlay');
+       const loadingProgress = document.getElementById('loadingProgress');
+       const decryptText = document.getElementById('decryptText');
+       let typeTimeout;
+
+       setTimeout(() => {
+           terminal?.classList.add('system-ready');
+           renderFileList();
+           openFile(0, true);
+       }, 1000);
+
+       function renderFileList() {
+           if (!fileListEl) return;
+           fileListEl.innerHTML = '<div class="sidebar-header">AVAILABLE CASE FILES (13)</div>';
+
+           missionData.forEach((item, index) => {
+               const div = document.createElement('div');
+               div.className = 'file-item';
+               div.onclick = () => openFile(index);
+               div.id = `file-${index}`;
+
+               div.innerHTML = `
+                   <div class="file-icon">📁</div>
+                   <div class="file-meta">
+                       <span class="file-id">CASE #${item.id}</span>
+                       <span class="file-name">${item.author}</span>
+                   </div>
+               `;
+               fileListEl.appendChild(div);
+           });
+       }
+
+       function typeWriter(text, i) {
+           if (!textEl) return;
+           if (i < text.length) {
+               textEl.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+               const randomSpeed = Math.floor(Math.random() * 15) + 5;
+               typeTimeout = setTimeout(() => typeWriter(text, i + 1), randomSpeed);
+           } else {
+               textEl.innerHTML = text + '<span class="cursor"></span>';
+           }
+       }
+
+       function openFile(index, skipAnimation = false) {
+           if (!fileListEl) return;
+           document.querySelectorAll('.file-item').forEach(el => el.classList.remove('active'));
+           document.getElementById(`file-${index}`)?.classList.add('active');
+
+           const data = missionData[index];
+           if (!data) return;
+
+           if (skipAnimation) {
+               updateContent(data);
+               return;
+           }
+
+           decryptOverlay?.classList.add('active');
+           if (loadingProgress) loadingProgress.style.width = '0%';
+           if (decryptText) decryptText.innerText = 'ACCESSING DATABASE...';
+
+           setTimeout(() => { if (loadingProgress) loadingProgress.style.width = '40%'; }, 100);
+           setTimeout(() => {
+               if (loadingProgress) loadingProgress.style.width = '70%';
+               if (decryptText) decryptText.innerText = 'DECRYPTING FILE ' + data.id + '...';
+           }, 400);
+           setTimeout(() => { if (loadingProgress) loadingProgress.style.width = '100%'; }, 800);
+
+           setTimeout(() => {
+               decryptOverlay?.classList.remove('active');
+               updateContent(data);
+           }, 1100);
+       }
+
+       function updateContent(data) {
+           clearTimeout(typeTimeout);
+
+           if (authorEl) authorEl.innerText = data.author;
+           if (branchEl) branchEl.innerText = data.branch;
+           if (statusEl) statusEl.innerText = data.status;
+
+           if (statusEl) {
+               statusEl.style.color = data.status.includes('100%') ? '#fbbf24' : '#4ade80';
+           }
+
+           if (textEl) {
+               textEl.innerHTML = '<span class="cursor"></span>';
+               setTimeout(() => { typeWriter(data.text, 0); }, 50);
+           }
+       }
+   </script>
 
    <script>
        // Initialize Icons
