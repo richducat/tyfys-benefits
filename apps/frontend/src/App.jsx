@@ -7,16 +7,6 @@ import {
   saveOnboardingState
 } from './accountStorage';
 
-function generateRandomState() {
-  if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
-    const buffer = new Uint32Array(4);
-    crypto.getRandomValues(buffer);
-    return Array.from(buffer, (num) => num.toString(16).padStart(8, '0')).join('');
-  }
-
-  return Math.random().toString(36).slice(2);
-}
-
 const defaultAccountState = {
   email: '',
   password: '',
@@ -328,28 +318,6 @@ export default function App() {
     setAccountState((prev) => ({ ...prev, loggedIn: false }));
   };
 
-  const handleTeslaConnect = () => {
-    const clientId =
-      process.env.NEXT_PUBLIC_TESLA_CLIENT_ID ||
-      (typeof import.meta !== 'undefined' && import.meta.env?.NEXT_PUBLIC_TESLA_CLIENT_ID) ||
-      (typeof import.meta !== 'undefined' && import.meta.env?.VITE_TESLA_CLIENT_ID);
-
-    if (!clientId) {
-      alert('Tesla client ID is not configured.');
-      return;
-    }
-
-    const authUrl =
-      'https://auth.tesla.com/oauth2/v3/authorize' +
-      '?response_type=code' +
-      `&client_id=${clientId}` +
-      `&redirect_uri=${encodeURIComponent('https://teslahelper.app/auth/callback')}` +
-      '&scope=openid offline_access user_data vehicle_device_data vehicle_cmds vehicle_charging_cmds' +
-      `&state=${generateRandomState()}`;
-
-    window.location.href = authUrl;
-  };
-
   return (
     <div className="page">
       <header className="topbar">
@@ -360,7 +328,6 @@ export default function App() {
         <div className="top-actions">
           <button className="ghost">Talk to a Specialist</button>
           <button>Open claim prep assistant</button>
-          <button onClick={handleTeslaConnect}>Connect</button>
         </div>
       </header>
 
