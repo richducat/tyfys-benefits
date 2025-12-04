@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Veteran Briefing Room: Learn the truth about VA claims, the 100% rating work myth, and why relying on free VSOs can cost you millions in lifetime benefits.">
+   <title>Briefing Room | Veteran Education | Thank You For Your Service</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+   <script src="https://unpkg.com/lucide@latest"></script>
+   <script>
+       tailwind.config = {
+           theme: {
+               extend: {
+                   colors: {
+                       navy: { 50: '#f0f4ff', 100: '#e0eaff', 800: '#1e3a8a', 900: '#0f172a' },
+                       gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                   },
+                   fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] }
+               }
+           }
+       }
+   </script>
+   <style>
+       html { scroll-behavior: smooth; }
+       .hero-pattern {
+           background-color: #0f172a;
+           background-image: radial-gradient(#1e293b 1px, transparent 1px);
+           background-size: 30px 30px;
+       }
+   </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
+
+
+   <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex justify-between h-20">
+               <div class="flex items-center gap-3">
+                   <a href="index.html" class="flex items-center gap-3">
+                       <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
+                       <div class="flex flex-col">
+                           <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                           <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
+                       </div>
+                   </a>
+               </div>
+               <div class="hidden md:flex items-center space-x-6">
+                   <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
+                   <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                   <a href="mission_team.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Mission &amp; Team</a>
+                   <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+
+                   <!-- Dropdown: Claim Types -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
+                           <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
+                       </div>
+                   </div>
+
+
+                   <!-- Dropdown: Resources -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-navy-800 font-bold border-b-2 border-gold-500 transition flex items-center gap-1">
+                           Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                           <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                           <a href="education.html" class="block px-4 py-3 bg-navy-50 text-navy-800 font-semibold">Briefing Room</a>
+                       </div>
+                   </div>
+
+
+                   <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                       Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                   </a>
+               </div>
+               <div class="flex items-center md:hidden">
+                   <button type="button" class="text-slate-500 hover:text-slate-700">
+                       <i data-lucide="menu" class="h-7 w-7"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+   </nav>
+
+
+   <!-- Header -->
+   <div class="bg-navy-900 text-white py-24 border-b-4 border-gold-500">
+       <div class="max-w-3xl mx-auto px-4 text-center">
+           <div class="inline-flex items-center gap-2 bg-navy-800 border border-navy-700 rounded-full px-4 py-1.5 mb-8 shadow-md">
+               <i data-lucide="info" class="h-4 w-4 text-gold-500"></i>
+               <span class="text-sm font-bold text-gold-400 uppercase tracking-wider">Mission Briefing</span>
+           </div>
+           <h1 class="font-serif text-4xl md:text-6xl font-bold mb-6">Get Briefed Before You Call</h1>
+           <p class="text-xl text-slate-300 leading-relaxed">
+               Knowledge is leverage. Read this page to understand how the system works against you—and how we help you win.
+           </p>
+       </div>
+   </div>
+
+
+   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10">
+
+       <!-- Briefing 1: The ROI -->
+       <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden mb-12 transform hover:-translate-y-1 transition duration-500">
+           <div class="bg-gold-500 h-2"></div>
+           <div class="p-10 md:p-12">
+               <div class="flex items-center gap-5 mb-8">
+                   <div class="bg-navy-100 p-4 rounded-full"><i data-lucide="calculator" class="h-8 w-8 text-navy-800"></i></div>
+                   <h2 class="text-3xl font-serif font-bold text-navy-900">Briefing 1: The Math (Why "Cost" is a Myth)</h2>
+               </div>
+               <div class="prose max-w-none text-slate-600 text-lg leading-relaxed">
+                   <p class="mb-6">
+                       Veterans often hesitate to invest in their claim. But the better question is: <strong>"What is the cost of waiting?"</strong>
+                   </p>
+                   <p class="mb-8">
+                       Let's look at the numbers. If we move you from a 60% rating to 100%, that is roughly an <strong>$1,800/month increase</strong> in tax-free income.
+                   </p>
+                   <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 mb-8 font-mono text-base md:text-lg">
+                       <div class="flex justify-between mb-4 pb-4 border-b border-slate-200"><span>Monthly Increase:</span> <span class="font-bold text-green-600">+$1,800</span></div>
+                       <div class="flex justify-between mb-4 pb-4 border-b border-slate-200"><span>Annual Value:</span> <span class="font-bold text-navy-800">$21,600/yr</span></div>
+                       <div class="flex justify-between pt-2">
+                           <span>20-Year Lifetime Value:</span>
+                           <span class="font-bold text-navy-800">$432,000+</span>
+                       </div>
+                   </div>
+                   <p class="font-medium text-navy-800">
+                       <strong>The Reality:</strong> Our flat fee is typically recovered in just your first few months of increased benefits. Everything after that is profit for you and your family for life.
+                   </p>
+               </div>
+           </div>
+       </div>
+
+
+       <!-- Briefing 2: Private Evidence -->
+       <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden mb-12 transform hover:-translate-y-1 transition duration-500">
+           <div class="bg-navy-800 h-2"></div>
+           <div class="p-10 md:p-12">
+               <div class="flex items-center gap-5 mb-8">
+                   <div class="bg-navy-100 p-4 rounded-full"><i data-lucide="file-check" class="h-8 w-8 text-navy-800"></i></div>
+                   <h2 class="text-3xl font-serif font-bold text-navy-900">Briefing 2: The "Nexus" Advantage</h2>
+               </div>
+               <div class="prose max-w-none text-slate-600 text-lg leading-relaxed">
+                   <p class="mb-6">
+                       The #1 reason for denial is <strong>"No Service Connection."</strong> The VA agrees you are hurt, but they say it didn't happen in service.
+                   </p>
+                   <p class="mb-6">
+                       A VSO cannot fix this. A VSO can only submit the records you give them. If you don't have a medical opinion linking your current back pain to your service 10 years ago, the VSO will likely file a losing claim.
+                   </p>
+                   <div class="bg-navy-50 p-6 rounded-xl border-l-4 border-navy-800 mb-6">
+                       <p class="font-bold text-navy-900 mb-2">We provide the solution:</p>
+                       <ul class="list-none space-y-3">
+                           <li class="flex items-start gap-2"><i data-lucide="check" class="h-5 w-5 text-green-500 mt-1"></i> <span>We connect you with private doctors via Telehealth.</span></li>
+                           <li class="flex items-start gap-2"><i data-lucide="check" class="h-5 w-5 text-green-500 mt-1"></i> <span>They review your service records forensically.</span></li>
+                           <li class="flex items-start gap-2"><i data-lucide="check" class="h-5 w-5 text-green-500 mt-1"></i> <span>They write a <strong>Nexus Letter</strong> that explicitly links your condition to service using the VA's own language.</span></li>
+                       </ul>
+                   </div>
+                   <p>
+                       This is why our success rate is industry-leading. We don't guess; we prove it.
+                   </p>
+               </div>
+           </div>
+       </div>
+
+
+       <!-- Briefing 3: Work & 100% -->
+       <div class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden mb-12 transform hover:-translate-y-1 transition duration-500">
+           <div class="bg-green-600 h-2"></div>
+           <div class="p-10 md:p-12">
+               <div class="flex items-center gap-5 mb-8">
+                   <div class="bg-green-100 p-4 rounded-full"><i data-lucide="briefcase" class="h-8 w-8 text-green-800"></i></div>
+                   <h2 class="text-3xl font-serif font-bold text-navy-900">Briefing 3: Myth Busting (Working at 100%)</h2>
+               </div>
+               <div class="prose max-w-none text-slate-600 text-lg leading-relaxed">
+                   <p class="mb-6">
+                       <strong>MYTH:</strong> "If I get 100% disability, I can't work anymore."
+                   </p>
+                   <p class="mb-6">
+                       <strong>FACT:</strong> Unless you are filed for TDIU (Unemployability), you can earn $1 million a year and still collect your full 100% VA disability check.
+                   </p>
+                   <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-xl mb-4">
+                       <p class="text-green-900 italic font-medium">
+                           "We encourage our veterans to keep working! That's two income streams. The 100% rating is compensation for pain and suffering, not a replacement for your salary."
+                       </p>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+
+       <!-- CTA Box -->
+       <div class="bg-gradient-to-br from-navy-900 to-navy-800 rounded-3xl p-16 text-center text-white shadow-2xl">
+           <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6">You Are Now Briefed. Ready to Execute?</h2>
+           <p class="text-slate-300 mb-10 max-w-2xl mx-auto text-lg">
+               You understand the ROI. You understand the medical evidence. Now let's get your claim started with a team that fights to win.
+           </p>
+           <a href="contact.html" class="inline-flex items-center justify-center bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-xl px-12 py-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+               Start My Claim
+               <i data-lucide="arrow-right" class="ml-2 h-6 w-6"></i>
+           </a>
+       </div>
+
+
+   </div>
+
+
+   <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+               <div class="col-span-1 md:col-span-2">
+                   <div class="flex items-center gap-3 mb-6">
+                       <i data-lucide="shield" class="h-8 w-8 text-gold-500"></i>
+                       <span class="text-white font-serif font-bold text-2xl">Thank You For Your Service</span>
+                   </div>
+                   <p class="text-slate-400 mb-6 max-w-sm leading-relaxed">
+                       We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+                   </p>
+                   <div class="flex space-x-4">
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                   </div>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
+                       <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
+                       <li><a href="mission_team.html" class="hover:text-gold-500 transition">Our Mission &amp; Team</a></li>
+                       <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
+                       <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
+                       <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
+                   </ul>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i> 11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
+                       <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i> support@thankyouforyourservice.co</li>
+                       <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i> 321-248-2805</li>
+                   </ul>
+               </div>
+           </div>
+           <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+               &copy; 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+           </div>
+       </div>
+   </footer>
+
+
+   <script>lucide.createIcons();</script>
+</body>
+</html>
