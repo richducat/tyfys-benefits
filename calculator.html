@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Calculate the potential lifetime value of your VA disability rating increase. See how much money you are leaving on the table.">
+   <title>VA Disability ROI Calculator | Thank You For Your Service</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+   <script src="https://unpkg.com/lucide@latest"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script>
+       tailwind.config = {
+           theme: {
+               extend: {
+                   colors: {
+                       navy: { 50: '#f0f4ff', 100: '#e0eaff', 800: '#1e3a8a', 900: '#0f172a' },
+                       gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                   },
+                   fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] }
+               }
+           }
+       }
+   </script>
+   <style>
+       html { scroll-behavior: smooth; }
+   </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
+
+
+   <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex justify-between h-20">
+               <div class="flex items-center gap-3">
+                   <a href="index.html" class="flex items-center gap-2">
+                       <i data-lucide="shield-check" class="h-8 w-8 text-navy-800"></i>
+                       <span class="font-serif font-bold text-xl text-slate-900 tracking-tight">Thank You For Your Service</span>
+                   </a>
+               </div>
+               <div class="hidden md:flex items-center space-x-6">
+                   <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
+                   <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                   <a href="mission_team.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Mission &amp; Team</a>
+                   <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+
+                   <!-- Dropdown: Claim Types -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
+                           <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
+                       </div>
+                   </div>
+
+                   <!-- Dropdown: Resources -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-navy-800 font-bold border-b-2 border-gold-500 transition flex items-center gap-1">
+                           Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="calculator.html" class="block px-4 py-3 bg-navy-50 text-navy-800 font-semibold">Backpay Calculator</a>
+                           <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                           <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                       </div>
+                   </div>
+
+                   <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                       Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                   </a>
+               </div>
+           </div>
+       </div>
+   </nav>
+
+
+   <!-- Header -->
+   <div class="bg-navy-900 text-white py-20 border-b-4 border-gold-500">
+       <div class="max-w-4xl mx-auto px-4 text-center">
+           <h1 class="font-serif text-4xl md:text-5xl font-bold mb-6">VA Benefits ROI Calculator</h1>
+           <p class="text-xl text-slate-300">
+               Stop guessing. See exactly how much money you lose every month by settling for a lower rating.
+           </p>
+       </div>
+   </div>
+
+
+   <!-- Calculator Section -->
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10 pb-20 flex-grow">
+       <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+           <div class="grid grid-cols-1 lg:grid-cols-2">
+
+               <!-- Input Side -->
+               <div class="p-8 md:p-12 bg-slate-50 border-r border-slate-200">
+                   <h3 class="text-2xl font-bold text-navy-900 mb-6 flex items-center gap-2">
+                       <i data-lucide="sliders" class="h-6 w-6 text-gold-500"></i> Your Scenario
+                   </h3>
+
+                   <div class="space-y-8">
+                       <div>
+                           <label class="block text-sm font-bold text-slate-700 mb-2">Current Rating (%)</label>
+                           <input type="range" id="currentRating" min="0" max="90" step="10" value="30" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-navy-800">
+                           <div class="flex justify-between text-xs text-slate-500 mt-2 font-mono">
+                               <span>0%</span><span>50%</span><span>90%</span>
+                           </div>
+                           <div class="mt-2 text-right font-bold text-navy-800 text-lg" id="currentRatingDisplay">30%</div>
+                       </div>
+
+
+                       <div>
+                           <label class="block text-sm font-bold text-slate-700 mb-2">Goal Rating (%)</label>
+                           <input type="range" id="goalRating" min="10" max="100" step="10" value="80" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-gold-500">
+                           <div class="flex justify-between text-xs text-slate-500 mt-2 font-mono">
+                               <span>10%</span><span>50%</span><span>100%</span>
+                           </div>
+                           <div class="mt-2 text-right font-bold text-gold-600 text-lg" id="goalRatingDisplay">80%</div>
+                       </div>
+
+
+                       <div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm">
+                           <h4 class="font-bold text-sm text-slate-500 uppercase mb-2">Estimated Monthly Increase</h4>
+                           <div class="text-4xl font-black text-green-600 tracking-tight" id="monthlyIncrease">$1,483</div>
+                           <p class="text-xs text-slate-400 mt-1">*Based on 2025 single veteran rates</p>
+                       </div>
+                   </div>
+               </div>
+
+
+               <!-- Results Side -->
+               <div class="p-8 md:p-12 bg-white">
+                   <h3 class="text-2xl font-bold text-navy-900 mb-6 flex items-center gap-2">
+                       <i data-lucide="trending-up" class="h-6 w-6 text-green-500"></i> Lifetime Impact
+                   </h3>
+
+
+                   <div class="space-y-6">
+                       <div class="grid grid-cols-2 gap-4">
+                           <div class="bg-navy-50 p-4 rounded-xl">
+                               <p class="text-xs font-bold text-navy-600 uppercase">1 Year Value</p>
+                               <p class="text-2xl font-bold text-navy-900" id="year1Value">$17,796</p>
+                           </div>
+                           <div class="bg-navy-50 p-4 rounded-xl">
+                               <p class="text-xs font-bold text-navy-600 uppercase">5 Year Value</p>
+                               <p class="text-2xl font-bold text-navy-900" id="year5Value">$88,980</p>
+                           </div>
+                       </div>
+
+
+                       <div class="bg-navy-900 text-white p-8 rounded-2xl shadow-lg relative overflow-hidden">
+                           <div class="absolute top-0 right-0 bg-gold-500 w-20 h-20 rounded-bl-full -mr-10 -mt-10 opacity-20"></div>
+                           <p class="text-sm font-bold text-gold-400 uppercase tracking-widest mb-2">20-Year Lifetime Value</p>
+                           <p class="text-5xl md:text-6xl font-black tracking-tighter" id="lifetimeValue">$355,920</p>
+                           <p class="text-sm text-slate-400 mt-4 border-t border-white/10 pt-4">
+                               This is the amount you lose by not filing. Compare this to our one-time flat fee.
+                           </p>
+                       </div>
+
+
+                       <a href="contact.html" class="block w-full py-4 bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-center rounded-xl shadow-md transition transform hover:-translate-y-1">
+                           Stop Losing Money - Start Claim
+                       </a>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <div class="text-center mt-12 text-sm text-slate-500 max-w-2xl mx-auto">
+           Disclaimer: Estimates are based on 2025 VA Compensation Rate Tables for a single veteran with no dependents. Actual ratings and compensation may vary based on individual circumstances (dependents, SMC, etc.). This tool is for educational purposes only.
+       </div>
+   </div>
+
+
+   <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-center">
+       <p>&copy; 2025 Thank You For Your Service.</p>
+   </footer>
+
+
+   <script>
+       // Simplified 2025 VA Rates (Single Veteran)
+       const rates = {
+           0: 0,
+           10: 171.23,
+           20: 338.49,
+           30: 524.31,
+           40: 755.28,
+           50: 1075.16,
+           60: 1361.88,
+           70: 1716.28,
+           80: 1995.01,
+           90: 2241.91,
+           100: 3737.85
+       };
+
+
+       const currentSlider = document.getElementById('currentRating');
+       const goalSlider = document.getElementById('goalRating');
+
+       function updateCalc() {
+           let current = parseInt(currentSlider.value);
+           let goal = parseInt(goalSlider.value);
+
+
+           // Ensure goal is always higher than current
+           if (goal <= current) {
+               goal = current + 10;
+               if (goal > 100) goal = 100;
+               goalSlider.value = goal;
+           }
+
+
+           document.getElementById('currentRatingDisplay').innerText = current + '%';
+           document.getElementById('goalRatingDisplay').innerText = goal + '%';
+
+
+           const currentPay = rates[current] || 0;
+           const goalPay = rates[goal] || 0;
+           const diff = goalPay - currentPay;
+
+
+           document.getElementById('monthlyIncrease').innerText = formatMoney(diff);
+           document.getElementById('year1Value').innerText = formatMoney(diff * 12);
+           document.getElementById('year5Value').innerText = formatMoney(diff * 12 * 5);
+           document.getElementById('lifetimeValue').innerText = formatMoney(diff * 12 * 20);
+       }
+
+
+       function formatMoney(amount) {
+           return '$' + amount.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+       }
+
+
+       currentSlider.addEventListener('input', updateCalc);
+       goalSlider.addEventListener('input', updateCalc);
+
+
+       // Init
+       updateCalc();
+       lucide.createIcons();
+   </script>
+</body>
+</html>
