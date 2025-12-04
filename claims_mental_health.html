@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Increase your VA rating for PTSD, Depression, and Anxiety. We provide the Nexus Letters and DBQs needed to prove service connection for mental health claims.">
+   <title>VA Mental Health Claims | PTSD & Depression Nexus Letters | TYFYS</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+   <script src="https://unpkg.com/lucide@latest"></script>
+   <script>
+       tailwind.config = {
+           theme: {
+               extend: {
+                   colors: {
+                       navy: { 50: '#f0f4ff', 100: '#e0eaff', 700: '#2d4a9e', 800: '#1e3a8a', 900: '#0f172a' },
+                       gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                   },
+                   fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] }
+               }
+           }
+       }
+   </script>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
+
+
+   <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex justify-between h-20">
+               <div class="flex items-center gap-3">
+                   <a href="index.html" class="flex items-center gap-3">
+                       <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
+                       <div class="flex flex-col">
+                           <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                           <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
+                       </div>
+                   </a>
+               </div>
+               <div class="hidden md:flex items-center space-x-6">
+                   <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
+                   <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                   <a href="mission_team.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Mission &amp; Team</a>
+                   <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+
+                   <!-- Dropdown: Claim Types -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="claims_mental_health.html" class="block px-4 py-3 bg-navy-50 text-navy-800 font-semibold">Mental Health &amp; PTSD</a>
+                           <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck &amp; Joints</a>
+                       </div>
+                   </div>
+
+
+                   <!-- Dropdown: Resources -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                           <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                           <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                       </div>
+                   </div>
+
+
+                   <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                       Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                   </a>
+               </div>
+               <!-- Mobile menu button -->
+               <div class="flex items-center md:hidden">
+                   <button type="button" class="text-slate-500 hover:text-slate-700">
+                       <i data-lucide="menu" class="h-7 w-7"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+   </nav>
+
+
+   <!-- Header -->
+   <div class="bg-navy-900 text-white py-20 border-b-4 border-gold-500">
+       <div class="max-w-4xl mx-auto px-4 text-center">
+           <div class="inline-flex items-center gap-2 bg-navy-800 border border-navy-700 rounded-full px-4 py-1 mb-6">
+               <i data-lucide="brain" class="h-4 w-4 text-gold-500"></i>
+               <span class="text-sm font-bold text-gold-400 uppercase tracking-wider">High Value Claim Type</span>
+           </div>
+           <h1 class="font-serif text-4xl md:text-5xl font-bold mb-6">Mental Health &amp; PTSD Claims</h1>
+           <p class="text-xl text-slate-300">
+               The most common high-value claim. Stop settling for 30% when you deserve 70% or 100%.
+           </p>
+       </div>
+   </div>
+
+
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex-1">
+       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+           <div>
+               <h2 class="font-serif text-3xl font-bold text-navy-900 mb-6">Why Your Claim Was Denied (Or Underrated)</h2>
+               <div class="space-y-6 text-slate-600 text-lg">
+                   <p>
+                       Mental health claims like PTSD, Depression, and Anxiety are subjective. The VA C&amp;P examiners often spend less than 15 minutes with you. They check boxes without understanding the daily impact on your life, work, and relationships.
+                   </p>
+                   <p>
+                       <strong>The Solution:</strong> We connect you with a private Psychologist or Psychiatrist via Telehealth. They spend the time to fully evaluate you and complete a detailed DBQ (Disability Benefits Questionnaire) that reflects the <em>true</em> severity of your condition.
+                   </p>
+               </div>
+
+               <div class="mt-8 bg-gold-50 border-l-4 border-gold-500 p-6 rounded-r-lg">
+                   <p class="font-bold text-navy-900 italic">
+                       "I was rated at 30% for PTSD for 8 years. The psychologist they connected me with documented how it affected my work. Rating increased to 70%."
+                   </p>
+                   <p class="text-sm text-navy-600 mt-2">— Christopher L., Army Veteran</p>
+               </div>
+           </div>
+
+
+           <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+               <h3 class="font-bold text-xl text-navy-900 mb-6 border-b border-slate-100 pb-4">Conditions We Help With</h3>
+               <ul class="space-y-4">
+                   <li class="flex items-start gap-3">
+                       <i data-lucide="check-circle" class="h-6 w-6 text-green-500 flex-shrink-0"></i>
+                       <div>
+                           <span class="font-bold text-slate-900">PTSD (Post Traumatic Stress)</span>
+                           <p class="text-sm text-slate-500">Combat or Non-Combat stressors.</p>
+                       </div>
+                   </li>
+                   <li class="flex items-start gap-3">
+                       <i data-lucide="check-circle" class="h-6 w-6 text-green-500 flex-shrink-0"></i>
+                       <div>
+                           <span class="font-bold text-slate-900">Major Depressive Disorder</span>
+                           <p class="text-sm text-slate-500">Often secondary to physical pain.</p>
+                       </div>
+                   </li>
+                   <li class="flex items-start gap-3">
+                       <i data-lucide="check-circle" class="h-6 w-6 text-green-500 flex-shrink-0"></i>
+                       <div>
+                           <span class="font-bold text-slate-900">General Anxiety Disorder</span>
+                           <p class="text-sm text-slate-500">Service-connected stress.</p>
+                       </div>
+                   </li>
+               </ul>
+               <div class="mt-8">
+                   <a href="contact.html" class="block w-full py-4 bg-navy-800 hover:bg-navy-900 text-white font-bold text-center rounded-xl transition">
+                       Start Mental Health Claim
+                   </a>
+               </div>
+           </div>
+
+
+       </div>
+   </div>
+
+
+   <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+               <div class="col-span-1 md:col-span-2">
+                   <div class="flex items-center gap-3 mb-6">
+                       <i data-lucide="shield" class="h-8 w-8 text-gold-500"></i>
+                       <span class="text-white font-serif font-bold text-2xl">Thank You For Your Service</span>
+                   </div>
+                   <p class="text-slate-400 mb-6 max-w-sm leading-relaxed">
+                       We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+                   </p>
+                   <div class="flex space-x-4">
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                   </div>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
+                       <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
+                       <li><a href="mission_team.html" class="hover:text-gold-500 transition">Our Mission &amp; Team</a></li>
+                       <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
+                       <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
+                       <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
+                   </ul>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i> 11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
+                       <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i> support@thankyouforyourservice.co</li>
+                       <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i> 321-248-2805</li>
+                   </ul>
+               </div>
+           </div>
+           <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+               &copy; 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+           </div>
+       </div>
+   </footer>
+
+
+   <script>lucide.createIcons();</script>
+</body>
+</html>
