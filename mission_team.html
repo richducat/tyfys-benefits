@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mission | Thank You For Your Service</title>
+
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+   <script src="https://unpkg.com/lucide@latest"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script>
+       tailwind.config = {
+           theme: {
+               extend: {
+                   colors: {
+                       navy: { 50: '#f0f4ff', 100: '#e0eaff', 700: '#2d4a9e', 800: '#1e3a8a', 900: '#0f172a' },
+                       gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                   },
+                   fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                   boxShadow: { 'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)' }
+               }
+           }
+       }
+   </script>
+   <style>
+       html { scroll-behavior: smooth; }
+       .hero-overlay { background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05), transparent 35%), radial-gradient(circle at 90% 10%, rgba(255,255,255,0.08), transparent 30%); }
+       .group:hover .group-hover\:block { display: block; }
+       .profile-card { transition: all 0.3s ease; }
+       .profile-card:hover { transform: translateY(-4px); }
+       .active-profile { border-color: #1e3a8a; background-color: #f8fafc; }
+   </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
+
+   <!-- Navigation -->
+   <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex justify-between h-20">
+               <div class="flex items-center gap-3">
+                   <a href="index.html" class="flex items-center gap-3">
+                       <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
+                       <div class="flex flex-col">
+                           <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                           <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
+                       </div>
+                   </a>
+               </div>
+               <div class="hidden md:flex items-center space-x-6">
+                   <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
+                   <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                   <a href="mission_team.html" class="text-navy-800 font-bold border-b-2 border-gold-500">Mission</a>
+                   <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+
+                   <!-- Dropdown: Claim Types -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health &amp; PTSD</a>
+                           <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck &amp; Joints</a>
+                       </div>
+                   </div>
+
+                   <!-- Dropdown: Resources -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                           <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                           <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                       </div>
+                   </div>
+
+                   <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                       Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                   </a>
+               </div>
+               <!-- Mobile menu button -->
+               <div class="flex items-center md:hidden">
+                   <button type="button" class="text-slate-500 hover:text-slate-700">
+                       <i data-lucide="menu" class="h-7 w-7"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+   </nav>
+
+   <main class="flex-grow">
+       <!-- Hero -->
+       <section class="bg-slate-900 text-white py-16 lg:py-24 relative overflow-hidden hero-overlay">
+           <div class="absolute top-0 right-0 -mr-32 -mt-16 w-96 h-96 bg-navy-800 rounded-full mix-blend-multiply blur-3xl opacity-40"></div>
+           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+               <div class="text-center max-w-3xl mx-auto">
+                   <div class="inline-block px-4 py-1 mb-5 text-xs font-semibold tracking-wider text-gold-400 uppercase bg-white/5 rounded-full border border-white/10">
+                       Veteran Led • Built on Trust
+                   </div>
+                   <h1 class="font-serif text-4xl md:text-5xl font-extrabold tracking-tight mb-5">Service Beyond the Uniform</h1>
+                   <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+                       We are a veteran-led, HIPAA-aligned team of strategists, technologists, and advocates. Explore the leaders guiding our mission to deliver bulletproof VA claims.
+                   </p>
+               </div>
+
+               <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 border-t border-white/10 pt-8">
+                   <div class="text-center">
+                       <div class="text-3xl font-bold text-gold-400 mb-1" id="stat-experience">0+</div>
+                       <div class="text-xs tracking-widest uppercase text-slate-300">Years Combined Leadership</div>
+                   </div>
+                   <div class="text-center border-l-0 md:border-l border-white/10">
+                       <div class="text-3xl font-bold text-gold-400 mb-1">100%</div>
+                       <div class="text-xs tracking-widest uppercase text-slate-300">Mission Focused</div>
+                   </div>
+                   <div class="text-center border-l-0 md:border-l border-white/10">
+                       <div class="text-3xl font-bold text-gold-400 mb-1">50 States</div>
+                       <div class="text-xs tracking-widest uppercase text-slate-300">Telehealth Coverage</div>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Team Command Center -->
+       <section class="py-16 bg-white">
+           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+               <div class="mb-12">
+                   <h2 class="font-serif text-3xl font-bold text-slate-900 mb-3">Meet the Command Staff</h2>
+                   <p class="text-lg text-slate-600 max-w-2xl">Select a leader to see their mission focus, background, and an interactive skill radar showcasing their strengths.</p>
+               </div>
+
+               <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                   <div class="lg:col-span-4 flex flex-col space-y-4">
+                       <button id="card-karen" class="profile-card active-profile bg-white p-4 rounded-xl border border-slate-200 text-left w-full" onclick="updateProfile('karen')">
+                           <div class="flex items-center gap-4">
+                               <div class="h-14 w-14 rounded-full bg-navy-50 border border-slate-200 flex items-center justify-center text-navy-800">
+                                   <i data-lucide="anchor" class="h-6 w-6"></i>
+                               </div>
+                               <div>
+                                   <p class="font-bold text-slate-900">Karen Hallett</p>
+                                   <p class="text-xs text-gold-600 font-semibold uppercase">Owner • Navy Captain</p>
+                               </div>
+                               <i data-lucide="chevron-right" class="ml-auto h-5 w-5 text-slate-300"></i>
+                           </div>
+                       </button>
+                       <button id="card-richard" class="profile-card bg-white p-4 rounded-xl border border-transparent text-left w-full" onclick="updateProfile('richard')">
+                           <div class="flex items-center gap-4">
+                               <div class="h-14 w-14 rounded-full bg-navy-50 border border-slate-200 flex items-center justify-center text-navy-800">
+                                   <i data-lucide="code-2" class="h-6 w-6"></i>
+                               </div>
+                               <div>
+                                   <p class="font-bold text-slate-900">Richard Ducat</p>
+                                   <p class="text-xs text-blue-700 font-semibold uppercase">Chief Technology Officer</p>
+                               </div>
+                               <i data-lucide="chevron-right" class="ml-auto h-5 w-5 text-slate-300"></i>
+                           </div>
+                       </button>
+                       <button id="card-clay" class="profile-card bg-white p-4 rounded-xl border border-transparent text-left w-full" onclick="updateProfile('clay')">
+                           <div class="flex items-center gap-4">
+                               <div class="h-14 w-14 rounded-full bg-navy-50 border border-slate-200 flex items-center justify-center text-navy-800">
+                                   <i data-lucide="hand-heart" class="h-6 w-6"></i>
+                               </div>
+                               <div>
+                                   <p class="font-bold text-slate-900">Clay Lewis</p>
+                                   <p class="text-xs text-green-700 font-semibold uppercase">Director of Veteran Care</p>
+                               </div>
+                               <i data-lucide="chevron-right" class="ml-auto h-5 w-5 text-slate-300"></i>
+                           </div>
+                       </button>
+                   </div>
+
+                   <div class="lg:col-span-8 bg-slate-50 border border-slate-200 rounded-2xl p-6 md:p-8 shadow-soft">
+                       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                           <div class="flex flex-col">
+                               <span id="detail-rank" class="px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold uppercase rounded tracking-wide w-fit">United States Navy</span>
+                               <h3 id="detail-name" class="font-serif text-3xl font-bold text-slate-900 mt-3">CAPT Karen Hallett</h3>
+                               <p id="detail-title" class="text-lg text-gold-600 font-semibold mb-5">Owner</p>
+                               <p id="detail-bio" class="text-slate-600 leading-relaxed mb-6">
+                                   As a Navy Captain, Karen has spent decades leading diverse teams in high-pressure environments. She brings a command-level perspective to organizational structure and mission success. Her leadership ensures that TYFYS operates with the same integrity and discipline found in the fleet.
+                               </p>
+                               <a id="detail-link" href="https://www.linkedin.com/in/karen-hallett-3b2795120/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-navy-800 font-semibold hover:text-gold-600 transition">
+                                   <i data-lucide="linkedin" class="h-5 w-5 mr-2"></i> View Verified LinkedIn Profile
+                               </a>
+                           </div>
+                           <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col">
+                               <h4 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Core Competency Matrix</h4>
+                               <div class="relative w-full max-w-md mx-auto h-72">
+                                   <canvas id="skillsChart"></canvas>
+                               </div>
+                               <p class="text-xs text-center text-slate-400 mt-4 italic">*Relative expertise distribution based on career history.</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Values -->
+       <section class="py-16 bg-slate-900 text-white">
+           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+               <div class="text-center mb-12">
+                   <span class="text-gold-500 font-bold uppercase tracking-widest text-xs">Why Veterans Trust Us</span>
+                   <h2 class="font-serif text-3xl font-bold mt-3">Our Values in Action</h2>
+                   <p class="text-slate-300 max-w-2xl mx-auto mt-4">Our operating principles come from the same code we lived by in uniform: integrity, precision, and unwavering accountability.</p>
+               </div>
+
+               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                   <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:-translate-y-1 transition transform">
+                       <div class="h-12 w-12 bg-gold-500/20 text-gold-400 rounded-lg flex items-center justify-center mb-4">
+                           <i data-lucide="shield-check" class="h-6 w-6"></i>
+                       </div>
+                       <h3 class="text-lg font-semibold text-white mb-2">Unwavering Integrity</h3>
+                       <p class="text-sm text-slate-200">We do what is right, not what is easy. Our word is our bond, just as it was in uniform.</p>
+                   </div>
+                   <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:-translate-y-1 transition transform">
+                       <div class="h-12 w-12 bg-blue-500/20 text-blue-200 rounded-lg flex items-center justify-center mb-4">
+                           <i data-lucide="target" class="h-6 w-6"></i>
+                       </div>
+                       <h3 class="text-lg font-semibold text-white mb-2">Mission First</h3>
+                       <p class="text-sm text-slate-200">Every decision is weighed against one metric: does it help veterans secure the benefits they earned?</p>
+                   </div>
+                   <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:-translate-y-1 transition transform">
+                       <div class="h-12 w-12 bg-emerald-500/20 text-emerald-200 rounded-lg flex items-center justify-center mb-4">
+                           <i data-lucide="cpu" class="h-6 w-6"></i>
+                       </div>
+                       <h3 class="text-lg font-semibold text-white mb-2">Technical Excellence</h3>
+                       <p class="text-sm text-slate-200">Led by a seasoned CTO, our platform is secure, scalable, and compliant with HIPAA-aligned standards.</p>
+                   </div>
+                   <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:-translate-y-1 transition transform">
+                       <div class="h-12 w-12 bg-rose-500/20 text-rose-200 rounded-lg flex items-center justify-center mb-4">
+                           <i data-lucide="users" class="h-6 w-6"></i>
+                       </div>
+                       <h3 class="text-lg font-semibold text-white mb-2">Community Driven</h3>
+                       <p class="text-sm text-slate-200">We are part of the community we serve—advocating, educating, and showing up when it matters.</p>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- CTA -->
+       <section class="py-20 bg-white">
+           <div class="max-w-4xl mx-auto px-4 text-center">
+               <h2 class="font-serif text-3xl font-bold text-slate-900 mb-4">Ready to Join Forces?</h2>
+               <p class="text-lg text-slate-600 mb-8">Whether you are a veteran seeking support or a partner looking to champion the mission, we are ready to collaborate.</p>
+               <div class="flex flex-col sm:flex-row justify-center gap-4">
+                   <a href="contact.html" class="inline-flex items-center justify-center bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                       Contact Leadership
+                       <i data-lucide="arrow-right" class="h-5 w-5 ml-2"></i>
+                   </a>
+                   <a href="process.html" class="inline-flex items-center justify-center border-2 border-slate-200 hover:border-navy-800 hover:text-navy-800 text-slate-700 font-semibold px-8 py-4 rounded-xl transition">
+                       View Our Process
+                   </a>
+               </div>
+           </div>
+       </section>
+   </main>
+
+   <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+               <div class="col-span-1 md:col-span-2">
+                   <div class="flex items-center gap-3 mb-6">
+                       <i data-lucide="shield" class="h-8 w-8 text-gold-500"></i>
+                       <span class="text-white font-serif font-bold text-2xl">Thank You For Your Service</span>
+                   </div>
+                   <p class="text-slate-400 mb-6 max-w-sm leading-relaxed">
+                       We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+                   </p>
+                   <div class="flex space-x-4">
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                   </div>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
+                       <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
+                       <li><a href="mission_team.html" class="hover:text-gold-500 transition">Mission</a></li>
+                       <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
+                       <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
+                       <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
+                   </ul>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i> 11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
+                       <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i> support@thankyouforyourservice.co</li>
+                       <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i> 321-248-2805</li>
+                   </ul>
+               </div>
+           </div>
+           <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+               &copy; 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+           </div>
+       </div>
+   </footer>
+
+   <script>
+       const teamData = {
+           karen: {
+               name: 'CAPT Karen Hallett',
+               title: 'Owner',
+               tag: 'United States Navy',
+               bio: 'As a Navy Captain, Karen has spent decades leading diverse teams in high-pressure environments. She brings a command-level perspective to organizational structure and mission success. Her leadership ensures that TYFYS operates with the same integrity and discipline found in the fleet.',
+               linkedin: 'https://www.linkedin.com/in/karen-hallett-3b2795120/',
+               skills: [95, 70, 90, 60, 90],
+               tagClass: 'px-2 py-1 bg-slate-100 text-slate-700 text-xs font-bold uppercase rounded tracking-wide'
+           },
+           richard: {
+               name: 'Richard Ducat',
+               title: 'Chief Technology Officer',
+               tag: 'Tech Leadership',
+               bio: 'Richard ensures the platform is secure, scalable, and easy to use. He bridges complex VA requirements with user-friendly technology, safeguarding data while accelerating outcomes.',
+               linkedin: 'https://www.linkedin.com/in/richard-ducat-6a36296a/',
+               skills: [80, 98, 78, 55, 85],
+               tagClass: 'px-2 py-1 bg-blue-100 text-blue-700 text-xs font-bold uppercase rounded tracking-wide'
+           },
+           clay: {
+               name: 'Clay Lewis',
+               title: 'Director of Veteran Care',
+               tag: 'Growth & Partnerships',
+               bio: 'Clay serves as the bridge between veterans and our team. His expertise is building trust-driven relationships that keep veterans supported from the first call through the final decision.',
+               linkedin: 'https://www.linkedin.com/in/clayalewis/',
+               skills: [75, 45, 70, 95, 82],
+               tagClass: 'px-2 py-1 bg-green-100 text-green-700 text-xs font-bold uppercase rounded tracking-wide'
+           }
+       };
+
+       let radarChart;
+
+       document.addEventListener('DOMContentLoaded', () => {
+           initChart(teamData.karen.skills);
+           animateStats();
+           lucide.createIcons();
+       });
+
+       function initChart(data) {
+           const ctx = document.getElementById('skillsChart');
+           radarChart = new Chart(ctx, {
+               type: 'radar',
+               data: {
+                   labels: ['Strategy', 'Technology', 'Operations', 'Advocacy', 'Leadership'],
+                   datasets: [{
+                       label: 'Expertise Level',
+                       data,
+                       fill: true,
+                       backgroundColor: 'rgba(245, 158, 11, 0.18)',
+                       borderColor: 'rgba(245, 158, 11, 1)',
+                       pointBackgroundColor: '#ffffff',
+                       pointBorderColor: '#1e3a8a',
+                       borderWidth: 2
+                   }]
+               },
+               options: {
+                   responsive: true,
+                   maintainAspectRatio: false,
+                   scales: {
+                       r: {
+                           suggestedMin: 0,
+                           suggestedMax: 100,
+                           angleLines: { color: '#e2e8f0' },
+                           grid: { color: '#e2e8f0' },
+                           ticks: { display: false },
+                           pointLabels: { color: '#475569', font: { family: 'Inter', size: 11, weight: '600' } }
+                       }
+                   },
+                   plugins: { legend: { display: false } }
+               }
+           });
+       }
+
+       function updateProfile(key) {
+           const data = teamData[key];
+
+           document.querySelectorAll('.profile-card').forEach(card => {
+               card.classList.remove('active-profile');
+               card.classList.add('border-transparent');
+           });
+           const activeCard = document.getElementById(`card-${key}`);
+           activeCard.classList.add('active-profile');
+           activeCard.classList.remove('border-transparent');
+
+           document.getElementById('detail-name').innerText = data.name;
+           document.getElementById('detail-title').innerText = data.title;
+           document.getElementById('detail-rank').innerText = data.tag;
+           document.getElementById('detail-rank').className = data.tagClass;
+           document.getElementById('detail-bio').innerText = data.bio;
+           document.getElementById('detail-link').href = data.linkedin;
+
+           radarChart.data.datasets[0].data = data.skills;
+           radarChart.update();
+       }
+
+       function animateStats() {
+           const el = document.getElementById('stat-experience');
+           let current = 0;
+           const target = 55;
+           const interval = setInterval(() => {
+               current += 1;
+               el.textContent = `${current}+`;
+               if (current >= target) clearInterval(interval);
+           }, 35);
+       }
+   </script>
+</body>
+</html>

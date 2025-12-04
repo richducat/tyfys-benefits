@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Compare VA disability claim options. See why VSOs and lawyers often fail where private medical evidence succeeds. Transparent comparison chart.">
+   <title>VSO vs. Lawyer vs. Private Evidence | Comparison | Thank You For Your Service</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+   <script src="https://unpkg.com/lucide@latest"></script>
+   <script>
+       tailwind.config = {
+           theme: {
+               extend: {
+                   colors: {
+                       navy: { 50: '#f0f4ff', 100: '#e0eaff', 800: '#1e3a8a', 900: '#0f172a' },
+                       gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                   },
+                   fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] }
+               }
+           }
+       }
+   </script>
+   <style>
+       html { scroll-behavior: smooth; }
+   </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
+
+
+   <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex justify-between h-20">
+               <div class="flex items-center gap-3">
+                   <a href="index.html" class="flex items-center gap-3">
+                       <i data-lucide="shield-check" class="h-8 w-8 text-navy-800"></i>
+                       <span class="font-serif font-bold text-xl text-slate-900 tracking-tight">Thank You For Your Service</span>
+                   </a>
+               </div>
+               <div class="hidden md:flex items-center space-x-6">
+                   <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
+                   <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                   <a href="mission_team.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Mission</a>
+                   <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+
+                   <!-- Dropdown: Claim Types -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
+                           <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
+                       </div>
+                   </div>
+
+                   <!-- Dropdown: Resources -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-navy-800 font-bold border-b-2 border-gold-500 transition flex items-center gap-1">
+                           Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                           <a href="comparison.html" class="block px-4 py-3 bg-navy-50 text-navy-800 font-semibold">Compare: VSO vs. Us</a>
+                           <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                       </div>
+                   </div>
+
+                   <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                       Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                   </a>
+               </div>
+               <div class="flex items-center md:hidden">
+                   <button type="button" class="text-slate-500 hover:text-slate-700">
+                       <i data-lucide="menu" class="h-6 w-6"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+   </nav>
+
+
+   <!-- Header -->
+   <div class="bg-navy-900 text-white py-20 border-b-4 border-gold-500">
+       <div class="max-w-4xl mx-auto px-4 text-center">
+           <h1 class="font-serif text-4xl md:text-5xl font-bold mb-6">Stop Bringing a Knife to a Gunfight</h1>
+           <p class="text-xl text-slate-300">
+               Understanding why 70% of claims fail with the "Standard Approach" and how we win with evidence.
+           </p>
+       </div>
+   </div>
+
+
+   <!-- Comparison Table Section -->
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10 pb-20 flex-grow">
+       <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+           <div class="overflow-x-auto">
+               <table class="w-full text-left border-collapse">
+                   <thead>
+                       <tr class="bg-slate-50 border-b border-slate-200">
+                           <th class="p-6 text-sm font-bold text-slate-500 uppercase tracking-wider w-1/4">Feature</th>
+                           <th class="p-6 text-xl font-serif font-bold text-slate-900 w-1/4">Free VSO <span class="block text-xs font-sans font-normal text-slate-500 mt-1">(DAV, VFW, etc.)</span></th>
+                           <th class="p-6 text-xl font-serif font-bold text-slate-900 w-1/4">VA Lawyer <span class="block text-xs font-sans font-normal text-slate-500 mt-1">(Attorneys)</span></th>
+                           <th class="p-6 text-xl font-serif font-bold text-navy-800 bg-navy-50 border-t-4 border-navy-800 w-1/4 relative">
+                               TYFYS <span class="block text-xs font-sans font-normal text-navy-600 mt-1">(Private Medical Evidence)</span>
+                               <span class="absolute top-0 right-0 bg-gold-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl uppercase">Recommended</span>
+                           </th>
+                       </tr>
+                   </thead>
+                   <tbody class="divide-y divide-slate-100">
+                       <tr class="hover:bg-slate-50 transition">
+                           <td class="p-6 font-bold text-slate-700">Cost Structure</td>
+                           <td class="p-6 text-green-600 font-bold">Free</td>
+                           <td class="p-6 text-red-600 font-bold">20% - 33% <span class="block text-sm font-normal text-slate-500">of backpay forever</span></td>
+                           <td class="p-6 bg-navy-50/50 text-navy-800 font-bold">Transparent Flat Fee <span class="block text-sm font-normal text-navy-600">You keep 100% of backpay</span></td>
+                       </tr>
+                       <tr class="hover:bg-slate-50 transition">
+                           <td class="p-6 font-bold text-slate-700">Medical Evidence</td>
+                           <td class="p-6 text-slate-500">None. They only file forms.</td>
+                           <td class="p-6 text-slate-500">Rarely included.</td>
+                           <td class="p-6 bg-navy-50/50 text-navy-800 font-bold flex items-center gap-2">
+                               <i data-lucide="check-circle" class="h-5 w-5 text-green-500"></i> Included (Nexus Letters)
+                           </td>
+                       </tr>
+                       <tr class="hover:bg-slate-50 transition">
+                           <td class="p-6 font-bold text-slate-700">Speed</td>
+                           <td class="p-6 text-slate-500">Slow (Overworked)</td>
+                           <td class="p-6 text-red-600 font-bold">Intentionally Slow <span class="block text-sm font-normal text-slate-500">More delay = bigger cut for them</span></td>
+                           <td class="p-6 bg-navy-50/50 text-green-600 font-bold">Fastest (30-60 Days)</td>
+                       </tr>
+                       <tr class="hover:bg-slate-50 transition">
+                           <td class="p-6 font-bold text-slate-700">C&P Exam Risk</td>
+                           <td class="p-6 text-red-600 font-bold">High Risk <span class="block text-sm font-normal text-slate-500">You are at mercy of VA doctors</span></td>
+                           <td class="p-6 text-red-600 font-bold">High Risk</td>
+                           <td class="p-6 bg-navy-50/50 text-green-600 font-bold">Low / Bypassed <span class="block text-sm font-normal text-navy-600">Private evidence often replaces exams</span></td>
+                       </tr>
+                       <tr class="hover:bg-slate-50 transition">
+                           <td class="p-6 font-bold text-slate-700">Success Rate</td>
+                           <td class="p-6 text-slate-500">~30-40% Avg</td>
+                           <td class="p-6 text-slate-500">Variable</td>
+                           <td class="p-6 bg-navy-50/50 text-navy-800 font-bold">Industry Leading (98%)</td>
+                       </tr>
+                   </tbody>
+               </table>
+           </div>
+       </div>
+
+
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+           <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+               <h3 class="font-serif text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                   <i data-lucide="alert-triangle" class="h-5 w-5 text-gold-500"></i> Why VSOs Fail
+               </h3>
+               <p class="text-slate-600 mb-4">
+                   VSOs are well-meaning but overworked. More importantly, <strong>they cannot write medical opinions</strong>. They submit your claim and hope the VA doctor (C&P exam) rates you favorably. This is gambling with your benefits.
+               </p>
+           </div>
+           <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+               <h3 class="font-serif text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                   <i data-lucide="alert-triangle" class="h-5 w-5 text-red-500"></i> Why Lawyers Cost More
+               </h3>
+               <p class="text-slate-600 mb-4">
+                   Lawyers take a percentage of your backpay. This creates a <strong>perverse incentive</strong>: the longer your claim takes, the bigger your backpay check, and the more money they make. We charge a flat fee because we want you to win <em>now</em>.
+               </p>
+           </div>
+       </div>
+
+
+       <div class="mt-12 text-center">
+            <a href="contact.html" class="inline-flex items-center justify-center bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-xl px-12 py-5 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+               Choose the Winning Strategy
+               <i data-lucide="arrow-right" class="ml-2 h-6 w-6"></i>
+           </a>
+       </div>
+   </div>
+
+
+   <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+               <div class="col-span-1 md:col-span-2">
+                   <div class="flex items-center gap-3 mb-6">
+                       <i data-lucide="shield" class="h-8 w-8 text-gold-500"></i>
+                       <span class="text-white font-serif font-bold text-2xl">Thank You For Your Service</span>
+                   </div>
+                   <p class="text-slate-400 mb-6 max-w-sm leading-relaxed">
+                       We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+                   </p>
+                   <div class="flex space-x-4">
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                   </div>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
+                       <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
+                       <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
+                       <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
+                       <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
+                   </ul>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i> 11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
+                       <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i> support@thankyouforyourservice.co</li>
+                       <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i> 321-248-2805</li>
+                   </ul>
+               </div>
+           </div>
+           <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+               &copy; 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+           </div>
+       </div>
+   </footer>
+
+
+   <script>lucide.createIcons();</script>
+</body>
+</html>
