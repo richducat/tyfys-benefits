@@ -1,518 +1,493 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TYFYS | Secure portal access</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0c1726;
-      --panel: rgba(16, 33, 56, 0.95);
-      --card: #0f213b;
-      --primary: #00c2ff;
-      --primary-dark: #0094c8;
-      --accent: #9ef01a;
-      --text: #e8f0f7;
-      --muted: #b2c0d0;
-      --radius: 16px;
-      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-    }
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Maximize your VA disability rating with private medical evidence. We help veterans build fully developed claims to get the benefits they deserve. Schedule a free discovery call.">
+   <meta name="keywords" content="VA disability increase, nexus letter, private medical evidence, VA claim help, veteran benefits, fully developed claim">
+   <title>VA Disability Claim Help | Increase Your Rating | Thank You For Your Service</title>
+  
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1PEBFCV9Q"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
 
-    * { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: radial-gradient(circle at 20% 20%, rgba(0, 194, 255, 0.12), transparent 35%),
-                  radial-gradient(circle at 80% 0%, rgba(158, 240, 26, 0.12), transparent 40%),
-                  var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+     gtag('config', 'G-L1PEBFCV9Q');
+   </script>
+  
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16550370073">
+   </script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
 
-    a { color: inherit; text-decoration: none; }
 
-    .overlay-shell {
-      position: relative;
-      min-height: 100vh;
-      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-      backdrop-filter: blur(6px);
-    }
+     gtag('config', 'AW-16550370073');
+   </script>
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(12, 23, 38, 0.9);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
 
-    .nav-shell {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.9rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .brand-logo {
-      height: 44px;
-      width: 44px;
-      border-radius: 10px;
-      background: linear-gradient(145deg, rgba(0,194,255,0.9), rgba(158,240,26,0.9));
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      color: #04111f;
-      letter-spacing: -0.5px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-    }
-
-    .brand span { display: block; line-height: 1.1; font-weight: 700; }
-    .brand small { color: var(--muted); font-weight: 600; }
-
-    nav { display: flex; align-items: center; gap: 0.75rem; font-weight: 600; }
-    nav a { padding: 0.55rem 0.9rem; border-radius: 999px; transition: background 0.2s ease, color 0.2s ease; }
-    nav a:hover { background: rgba(255,255,255,0.08); color: #fff; }
-
-    .nav-toggle { display: none; }
-
-    .hero {
-      max-width: 1200px;
-      margin: 1.5rem auto 1rem;
-      padding: 1.75rem 1.25rem 0.75rem;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 1.5rem;
-      align-items: flex-start;
-    }
-
-    .eyebrow { color: var(--accent); text-transform: uppercase; font-weight: 700; letter-spacing: 0.6px; font-size: 0.9rem; }
-    h1 { font-size: 2.35rem; margin: 0.3rem 0; }
-    .subhead { color: var(--muted); font-size: 1.05rem; max-width: 760px; }
-
-    .cta-row { display: flex; gap: 0.85rem; flex-wrap: wrap; margin: 1rem 0 0.75rem; }
-
-    .btn { border: none; cursor: pointer; border-radius: 12px; font-weight: 700; padding: 0.85rem 1.15rem; transition: transform 0.15s ease, box-shadow 0.2s ease; }
-    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #04111f; box-shadow: 0 14px 24px rgba(0, 194, 255, 0.28); }
-    .btn-ghost { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.08); }
-    .btn:hover { transform: translateY(-2px); }
-
-    .reassure { display: grid; gap: 0.45rem; margin-top: 0.5rem; color: #d7e0ec; }
-    .reassure span { display: inline-flex; align-items: center; gap: 0.35rem; }
-    .reassure strong { color: #fff; }
-    .tiny { font-size: 0.85rem; color: var(--muted); }
-
-    .card {
-      background: var(--panel);
-      border-radius: var(--radius);
-      padding: 1.35rem;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,0.07);
-    }
-
-    .auth-card { position: relative; overflow: hidden; }
-    .auth-title { margin: 0 0 0.35rem; }
-    .tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem; margin-bottom: 0.75rem; }
-    .tab-btn {
-      padding: 0.75rem 0.5rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.05);
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-    .tab-btn.active {
-      background: linear-gradient(135deg, rgba(0, 194, 255, 0.16), rgba(158, 240, 26, 0.16));
-      border-color: rgba(0, 194, 255, 0.35);
-    }
-
-    .form-grid { display: grid; gap: 0.9rem; }
-    label { display: block; color: var(--muted); margin-bottom: 0.25rem; font-weight: 600; }
-    input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
-      width: 100%;
-      padding: 0.85rem 0.75rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
-      color: #fff;
-      font-size: 1rem;
-    }
-    input:focus { outline: 2px solid var(--primary); }
-
-    .checkbox { display: flex; gap: 0.6rem; align-items: flex-start; color: #d9e4ef; }
-    .checkbox input { margin-top: 0.2rem; }
-
-    .status-message {
-      margin: -0.2rem 0 0.35rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    .status-message.error { color: #ff9ca3; }
-    .status-message.success { color: #9ef01a; }
-    .status-message.info { color: var(--primary); }
-
-    .link { color: var(--primary); font-weight: 700; }
-
-    .section {
-      max-width: 1200px;
-      margin: 1.5rem auto;
-      padding: 0 1.25rem;
-    }
-    .section h2 { margin: 0 0 0.5rem; font-size: 1.65rem; }
-    .section p { color: var(--muted); margin: 0 0 1rem; }
-
-    .feature-grid, .timeline-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .feature-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); padding: 1rem; border-radius: 14px; }
-    .feature-card h3 { margin: 0 0 0.35rem; }
-    .feature-card p { margin: 0; color: #d5deea; }
-
-    .steps { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .step { border: 1px solid rgba(255,255,255,0.08); padding: 1rem; border-radius: 14px; background: rgba(255,255,255,0.03); }
-    .step strong { display: block; margin-bottom: 0.3rem; }
-
-    .fit-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .list-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 1rem; border-radius: 14px; }
-    .list-box ul { margin: 0.2rem 0 0; padding-left: 1rem; color: #d5deea; line-height: 1.6; }
-
-    .faq-grid { display: grid; gap: 0.75rem; }
-    .faq { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; overflow: hidden; }
-    .faq button { width: 100%; background: none; border: none; color: #fff; text-align: left; padding: 1rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-    .faq-content { padding: 0 1rem 1rem; color: #d5deea; display: none; }
-    .faq.open .faq-content { display: block; }
-
-    .compliance { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 1.25rem; box-shadow: var(--shadow); }
-
-    footer { border-top: 1px solid rgba(255,255,255,0.08); background: rgba(12, 23, 38, 0.92); margin-top: 2rem; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--muted); }
-    .footer-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-
-    @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; padding-top: 1rem; }
-      nav { display: none; position: absolute; right: 1.25rem; top: 60px; background: rgba(12,23,38,0.95); padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); flex-direction: column; }
-      nav.open { display: flex; }
-      .nav-toggle { display: inline-flex; background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.12); padding: 0.5rem 0.85rem; border-radius: 10px; font-weight: 700; }
-    }
-  </style>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+   <script src="https://unpkg.com/lucide@latest"></script>
+   <script>
+       tailwind.config = {
+           theme: {
+               extend: {
+                   colors: {
+                       navy: { 50: '#f0f4ff', 100: '#e0eaff', 700: '#2d4a9e', 800: '#1e3a8a', 900: '#0f172a' },
+                       gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                   },
+                   fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                   boxShadow: {
+                       'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                       'glow': '0 0 15px rgba(245, 158, 11, 0.3)'
+                   }
+               }
+           }
+       }
+   </script>
+   <style>
+       html { scroll-behavior: smooth; }
+       .hero-pattern {
+           background-color: #0f172a;
+           background-image: radial-gradient(#1e293b 1px, transparent 1px);
+           background-size: 30px 30px;
+       }
+       /* Dropdown Menu Styles */
+       .group:hover .group-hover\:block { display: block; }
+   </style>
 </head>
-<body>
-  <div class="overlay-shell">
-    <header>
-      <div class="nav-shell">
-        <div class="brand">
-          <div class="brand-logo">TY</div>
-          <div>
-            <span>Thank You For Your Service</span>
-            <small>VA Evidence &amp; Claim Prep Portal</small>
-          </div>
-        </div>
-        <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" onclick="toggleNav()">☰ Menu</button>
-        <nav id="main-nav">
-          <a href="#how">How it works</a>
-          <a href="#included">What’s included</a>
-          <a href="#faq">FAQs</a>
-          <a href="#auth">Login</a>
-        </nav>
-      </div>
-    </header>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
 
-    <section class="hero" id="auth">
-      <div>
-        <div class="eyebrow">Built by veterans, for veterans</div>
-        <h1>Get your VA disability evidence organized and ready to file.</h1>
-        <p class="subhead">Thank You For Your Service (TYFYS) helps you collect records, prepare for private medical evaluations, and build a fully developed claim evidence packet—so you can file confidently through official VA channels or with an accredited representative you trust.</p>
-        <div class="cta-row">
-          <button class="btn btn-primary" type="button" onclick="openCreateTab()">Create my TYFYS account</button>
-          <a class="btn btn-ghost" href="mailto:hello@tyfys.net">Talk to a TYFYS specialist</a>
-        </div>
-        <div class="reassure">
-          <span>• Secure, veteran‑focused portal</span>
-          <span>• Clear, no‑skip evidence checklists</span>
-          <span>• Built around your MOS, era, and conditions</span>
-        </div>
-        <p class="tiny" style="max-width:720px; margin-top:0.6rem;">TYFYS is a private, Service‑Disabled Veteran‑Owned business. We are not the U.S. Department of Veterans Affairs (VA) or a Veterans Service Organization, and we do not file claims or appeals for you. We help you organize medical evidence and documentation so you can file through official VA channels or with an accredited representative of your choice.</p>
-      </div>
-      <div class="card auth-card">
-        <p class="eyebrow" style="margin:0 0 0.3rem;">Access your TYFYS portal</p>
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="login" onclick="showTab('login')">Log in</button>
-          <button class="tab-btn" data-tab="create" onclick="showTab('create')">Create account</button>
-        </div>
 
-        <div id="login" class="tab-content">
-          <form id="login-form" class="form-grid">
-            <div>
-              <label for="login-email">Email</label>
-              <input id="login-email" name="email" type="email" placeholder="you@example.com" required />
-            </div>
-            <div>
-              <label for="login-password">Password</label>
-              <input id="login-password" name="password" type="password" placeholder="Enter password" required />
-            </div>
-            <p id="login-status" class="status-message" aria-live="polite"></p>
-            <button class="btn btn-primary" type="submit" style="width:100%;">Log in</button>
-            <a class="link" href="mailto:hello@tyfys.net?subject=Reset%20my%20TYFYS%20password">Forgot your password?</a>
-            <p class="tiny">Already working with Thank You For Your Service? Log in to pick up where you left off.</p>
-          </form>
-        </div>
+   <!-- Navigation -->
+   <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex justify-between h-20">
+               <div class="flex items-center gap-3">
+                   <a href="index.html" class="flex items-center gap-3">
+                       <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
+                       <div class="flex flex-col">
+                           <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                           <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
+                       </div>
+                   </a>
+               </div>
+               <div class="hidden md:flex items-center space-x-6">
+                   <a href="index.html" class="text-navy-800 font-bold border-b-2 border-gold-500">Home</a>
+                   <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                   <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+                  
+                   <!-- Dropdown: Claim Types -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
+                           <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
+                       </div>
+                   </div>
 
-        <div id="create" class="tab-content" style="display:none;">
-          <p class="tiny" style="margin-top:0;">New to Thank You For Your Service? Create your secure portal to start organizing your claim evidence and preparing for your private medical evaluations.</p>
-          <form id="create-form" class="form-grid">
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:0.75rem;">
-              <div>
-                <label for="first-name">First name</label>
-                <input id="first-name" name="firstName" type="text" placeholder="First name" required />
-              </div>
-              <div>
-                <label for="last-name">Last name</label>
-                <input id="last-name" name="lastName" type="text" placeholder="Last name" required />
-              </div>
-            </div>
-            <div>
-              <label for="create-email">Email</label>
-              <input id="create-email" name="email" type="email" placeholder="you@example.com" required />
-            </div>
-            <div>
-              <label for="phone">Mobile phone</label>
-              <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" required />
-            </div>
-            <div>
-              <label for="create-password">Create password</label>
-              <input id="create-password" name="password" type="password" placeholder="Create a password" required />
-            </div>
-            <label class="checkbox">
-              <input id="confirm-not-va" name="confirmNotVa" type="checkbox" required />
-              <span>I understand TYFYS is not the VA or a VSO and does not file my claim for me.</span>
-            </label>
-            <label class="checkbox">
-              <input id="confirm-terms" name="confirmTerms" type="checkbox" required />
-              <span>I’ve read and agree to the Terms of Use and Privacy Policy.</span>
-            </label>
-            <p id="create-status" class="status-message" aria-live="polite"></p>
-            <button class="btn btn-primary" type="submit" style="width:100%;">Create my TYFYS account</button>
-            <p class="tiny">You can always file a VA disability claim for free directly with the VA or with an accredited Veterans Service Organization or representative. TYFYS is an optional, paid evidence‑development service.</p>
-          </form>
-        </div>
-      </div>
-    </section>
 
-    <section class="section" id="included">
-      <h2>What your TYFYS portal helps you do</h2>
-      <p>Once you’re logged in, your dashboard turns the VA disability process into clear missions—so you always know what’s done, what’s next, and what evidence is still missing.</p>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <h3>Evidence checklists by condition</h3>
-          <p>Tap into condition‑specific guidance for musculoskeletal, mental health, respiratory, neurological, cardiac, and more—so you know what medical records, imaging, and statements usually support stronger claims and rating increases.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Occupation &amp; era insights</h3>
-          <p>Choose your MOS/rate and era of service to see common primary and secondary conditions, exposures, and recommended evaluations that often show up for that kind of service. This helps you and your providers connect the dots the VA may have missed.</p>
-        </div>
-        <div class="feature-card">
-          <h3>DD‑214 &amp; Intent to File guidance</h3>
-          <p>Step‑by‑step instructions and official links to help you request your DD‑214, gather key records, and submit an Intent to File so your effective date is protected while you build your evidence.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Private exam prep &amp; packet builder</h3>
-          <p>TYFYS coordinates with private providers (telehealth and in‑person where available) for DBQs, medical opinions, and exams that speak the VA’s language. All of it is organized into a single evidence packet you can use to file a fully developed claim.</p>
-        </div>
-      </div>
-    </section>
+                   <!-- Dropdown: Resources -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                           <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                           <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                       </div>
+                   </div>
 
-    <section class="section" id="how">
-      <h2>How TYFYS fits into your VA claim</h2>
-      <p>We don’t replace the VA or an accredited representative. We focus on evidence, so when you’re ready to file, you’re not guessing what to send—or scrambling for records at the last minute.</p>
-      <div class="steps">
-        <div class="step">
-          <strong>1. Intake &amp; goals</strong>
-          <p>Share your service history, current rating, major conditions, and what you’re trying to accomplish. Your TYFYS advocate uses this to build your roadmap.</p>
-        </div>
-        <div class="step">
-          <strong>2. Records &amp; questionnaires</strong>
-          <p>Track down your DD‑214, service treatment records, and private medical records, then complete short “mini‑DBQs” and condition‑specific questionnaires to guide your providers.</p>
-        </div>
-        <div class="step">
-          <strong>3. Private provider evaluations</strong>
-          <p>TYFYS coordinates private medical evaluations focused on VA rating criteria—covering primary and secondary conditions tied to your MOS, era, and deployment history.</p>
-        </div>
-        <div class="step">
-          <strong>4. Final evidence packet &amp; filing</strong>
-          <p>Once your documents are in, we help you assemble a clear, VA‑ready evidence packet mapped to the forms you’ll use. You then file directly with the VA or an accredited representative.</p>
-        </div>
-      </div>
-      <div class="cta-row" style="margin-top:1rem;">
-        <button class="btn btn-primary">Create my TYFYS account</button>
-        <button class="btn btn-ghost">Start with your intake</button>
-      </div>
-    </section>
 
-    <section class="section" id="fit">
-      <h2>Is TYFYS the right fit for you?</h2>
-      <div class="fit-grid">
-        <div class="list-box">
-          <strong>TYFYS can be a good fit if…</strong>
-          <ul>
-            <li>You already have a VA rating but believe it’s too low.</li>
-            <li>You’re filing for multiple conditions and don’t want to miss secondary issues.</li>
-            <li>Your MOS, deployments, or era came with unique exposures.</li>
-            <li>You want private medical opinions and detailed DBQs—not just a quick C&amp;P exam.</li>
-          </ul>
-        </div>
-        <div class="list-box">
-          <strong>You should know…</strong>
-          <ul>
-            <li>You can always file a VA disability claim on your own or with a free accredited VSO. TYFYS is optional support.</li>
-            <li>We do not provide legal advice and do not represent you before the VA or any court.</li>
-            <li>We cannot promise a specific rating, effective date, or outcome. Those decisions are made only by the VA.</li>
-            <li>Our pricing is a flat‑fee model, agreed up front, with no percentage of your backpay taken.</li>
-          </ul>
-        </div>
-      </div>
-      <p class="tiny" style="margin-top:0.6rem;">Not sure yet? Talk to a TYFYS specialist and ask anything before you decide.</p>
-    </section>
+                   <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                       Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                   </a>
+               </div>
+               <!-- Mobile menu button -->
+               <div class="flex items-center md:hidden">
+                   <button type="button" class="text-slate-500 hover:text-slate-700">
+                       <i data-lucide="menu" class="h-7 w-7"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+   </nav>
 
-    <section class="section" id="faq">
-      <h2>Questions veterans ask us most</h2>
-      <div class="faq-grid">
-        <div class="faq">
-          <button onclick="toggleFaq(this)">Are you the VA? <span>+</span></button>
-          <div class="faq-content">No. Thank You For Your Service is a private, Service‑Disabled Veteran‑Owned business. We’re not the VA, not a government agency, and not a Veterans Service Organization. We help with evidence, organization, and preparation—not official claim decisions.</div>
-        </div>
-        <div class="faq">
-          <button onclick="toggleFaq(this)">Can I use TYFYS and still work with a VSO or accredited rep? <span>+</span></button>
-          <div class="faq-content">Absolutely. Many veterans use TYFYS to gather medical records, private exam reports, and condition‑specific evidence, then take that packet to a free VSO or other accredited representative to file. We play nicely with others.</div>
-        </div>
-        <div class="faq">
-          <button onclick="toggleFaq(this)">Do you guarantee I’ll get to 100%? <span>+</span></button>
-          <div class="faq-content">No. We’re serious about ethics and compliance, so we don’t guarantee ratings or outcomes. What we do focus on is building the strongest possible medical evidence and documentation for the VA to review. The decision is always up to the VA.</div>
-        </div>
-        <div class="faq">
-          <button onclick="toggleFaq(this)">How is TYFYS different from “results‑based” companies? <span>+</span></button>
-          <div class="faq-content">We don’t take a percentage of your backpay. Our focus is on building a comprehensive, fully developed claim evidence package using private medical evaluations and detailed documentation, for a clear flat fee. You stay in control of filing and who represents you.</div>
-        </div>
-        <div class="faq">
-          <button onclick="toggleFaq(this)">What does it cost? <span>+</span></button>
-          <div class="faq-content">Pricing depends on how many conditions and claims you’re working on. We use a straightforward flat‑fee structure, discussed with you before you sign anything—no surprise add‑ons, and no cut of your backpay. For details, schedule a quick call with a TYFYS specialist.</div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="compliance">
-        <strong>Important information about Thank You For Your Service (TYFYS)</strong>
-        <ul style="margin:0.5rem 0 0; padding-left:1.1rem; color:#d5deea; line-height:1.7;">
-          <li>TYFYS is a private, Service‑Disabled Veteran‑Owned business.</li>
-          <li>We are not the U.S. Department of Veterans Affairs (VA), any other government agency, or a Veterans Service Organization.</li>
-          <li>You can always file a VA disability claim for free directly with the VA or with help from an accredited VSO or representative.</li>
-          <li>TYFYS does not provide legal, tax, or financial advice and does not represent you before the VA or any court.</li>
-          <li>Our tools help you collect records, prepare for medical evaluations, and organize evidence. Using TYFYS does not guarantee any specific rating, effective date, or outcome on your VA claim.</li>
-        </ul>
-      </div>
-    </section>
+   <!-- Hero Section -->
+   <div class="hero-pattern relative text-white py-16 lg:py-24 border-b-4 border-gold-500 overflow-hidden">
+       <!-- Abstract Background Elements -->
+       <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-navy-800 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+       <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-gold-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
 
-    <footer>
-      <div class="footer-inner">
-        <span>© 2025 Thank You For Your Service</span>
-        <div class="footer-links">
-          <a href="#">Terms</a>
-          <a href="#">Privacy</a>
-          <a href="https://www.va.gov" target="_blank" rel="noreferrer">VA.gov</a>
-          <a href="#auth">Portal login</a>
-        </div>
-      </div>
-    </footer>
-  </div>
 
-  <script>
-    const portalUrl = './claim-assistant/index.html';
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+              
+               <!-- Left Column -->
+               <div class="pt-4">
+                   <div class="inline-flex items-center gap-2 bg-navy-800/80 border border-navy-600 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm shadow-lg">
+                       <span class="relative flex h-3 w-3">
+                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                         <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                       </span>
+                       <span class="text-sm font-semibold text-green-400 uppercase tracking-wider">Telehealth Enabled • 50 States</span>
+                   </div>
+                  
+                   <h1 class="font-serif text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-[1.1]">
+                       We Don't Take Your Backpay. <br> <span class="text-gold-500">We Just Get You More of It.</span>
+                   </h1>
+                  
+                   <p class="text-lg md:text-xl text-slate-300 mb-6 leading-relaxed max-w-2xl">
+                       Stop relying on the "Wait and Hope" strategy. We connect you with private doctors to generate the <strong>DBQs and Nexus Letters</strong> required to win your claim. No percentages. No hidden fees.
+                   </p>
 
-    function toggleNav() {
-      const nav = document.getElementById('main-nav');
-      nav.classList.toggle('open');
-    }
 
-    function showTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-      document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
-      document.getElementById(tabId).style.display = 'block';
-    }
+                   <!-- Slimmed Down "Cost of Waiting" Banner (Moved Here) -->
+                   <div class="bg-navy-900/50 backdrop-blur-md border-l-4 border-red-500 rounded-r-lg p-3 mb-8 max-w-xl flex items-center justify-between shadow-lg">
+                       <div class="flex items-center gap-3">
+                           <div class="bg-red-500/20 p-2 rounded-full hidden sm:block">
+                               <i data-lucide="trending-down" class="h-5 w-5 text-red-400"></i>
+                           </div>
+                           <div>
+                               <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wide">The Cost of Waiting</p>
+                               <p class="text-white text-sm font-medium">You lose approx. <span class="text-red-400 font-bold text-base">-$958/month</span> every month you delay.</p>
+                           </div>
+                       </div>
+                   </div>
 
-    function openCreateTab() {
-      showTab('create');
-      setTimeout(() => document.getElementById('first-name')?.focus(), 80);
-      document.getElementById('main-nav')?.classList.remove('open');
-    }
 
-    function setStatus(elementId, message, type = 'info') {
-      const el = document.getElementById(elementId);
-      if (!el) return;
-      el.textContent = message;
-      el.className = `status-message ${type}`;
-    }
+                   <div class="flex items-center gap-4 text-sm text-slate-400 border-t border-white/10 pt-4">
+                       <div class="flex items-center gap-1 text-gold-500">
+                           <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                           <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                           <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                           <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                           <i data-lucide="star" class="h-5 w-5 fill-current"></i>
+                       </div>
+                       <p class="font-medium">98% Success Rate on Fully Developed Claims</p>
+                   </div>
+               </div>
 
-    function handleLoginSubmit(event) {
-      event.preventDefault();
-      const email = document.getElementById('login-email').value.trim();
-      const password = document.getElementById('login-password').value.trim();
 
-      if (!email || !password) {
-        setStatus('login-status', 'Please enter your email and password to continue.', 'error');
-        return;
-      }
+               <!-- Right Column: Growform Embed -->
+               <div class="relative w-full h-full min-h-[500px]">
+                   <!-- Growform Snippet -->
+                   <script type="text/javascript" src="https://embed.growform.co/client/6632b4a3844d19000b9773bd"></script>
+                   <!-- End Growform Snippet -->
+               </div>
 
-      setStatus('login-status', 'Logging you in and opening your dashboard…', 'info');
-      localStorage.setItem('tyfysUserEmail', email);
-      setTimeout(() => { window.location.href = portalUrl; }, 300);
-    }
 
-    function handleCreateSubmit(event) {
-      event.preventDefault();
-      const first = document.getElementById('first-name').value.trim();
-      const last = document.getElementById('last-name').value.trim();
-      const email = document.getElementById('create-email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const password = document.getElementById('create-password').value.trim();
-      const confirmNotVa = document.getElementById('confirm-not-va').checked;
-      const confirmTerms = document.getElementById('confirm-terms').checked;
+           </div>
+       </div>
+   </div>
 
-      if (!first || !last || !email || !phone || !password || !confirmNotVa || !confirmTerms) {
-        setStatus('create-status', 'Please complete all fields and confirmations to create your portal.', 'error');
-        return;
-      }
 
-      const displayName = `${first} ${last}`.trim();
-      localStorage.setItem('tyfysUserName', displayName);
-      localStorage.setItem('tyfysUserEmail', email);
-      setStatus('create-status', 'Account created. Redirecting you to your TYFYS portal…', 'success');
-      setTimeout(() => { window.location.href = portalUrl; }, 500);
-    }
+   <!-- Certification & Trust Strip -->
+   <div class="bg-white border-b border-slate-100 py-10">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <p class="text-center text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Recognized Standards of Excellence</p>
+           <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition duration-500">
+               <!-- Badges (Simulated with Icons/Text for speed) -->
+               <div class="flex items-center gap-2">
+                   <i data-lucide="award" class="h-8 w-8 text-navy-800"></i>
+                   <span class="font-bold text-navy-900 text-lg">SDVOSB <span class="block text-xs font-normal text-slate-500">Service-Disabled Veteran-Owned</span></span>
+               </div>
+               <div class="flex items-center gap-2">
+                   <i data-lucide="lock" class="h-8 w-8 text-navy-800"></i>
+                   <span class="font-bold text-navy-900 text-lg">HIPAA <span class="block text-xs font-normal text-slate-500">Aligned & Compliant</span></span>
+               </div>
+               <div class="flex items-center gap-2">
+                   <i data-lucide="check-circle-2" class="h-8 w-8 text-navy-800"></i>
+                   <span class="font-bold text-navy-900 text-lg">98% Success <span class="block text-xs font-normal text-slate-500">Fully Developed Claims</span></span>
+               </div>
+                <div class="flex items-center gap-2">
+                   <i data-lucide="flag" class="h-8 w-8 text-navy-800"></i>
+                   <span class="font-bold text-navy-900 text-lg">Veteran Led <span class="block text-xs font-normal text-slate-500">Navy Captain Owned</span></span>
+               </div>
+           </div>
+       </div>
+   </div>
 
-    function toggleFaq(button) {
-      const faq = button.parentElement;
-      const open = faq.classList.contains('open');
-      document.querySelectorAll('.faq').forEach(f => f.classList.remove('open'));
-      if (!open) faq.classList.add('open');
-    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('login-form')?.addEventListener('submit', handleLoginSubmit);
-      document.getElementById('create-form')?.addEventListener('submit', handleCreateSubmit);
-    });
-  </script>
+   <!-- The Reality Check (Problem Agitation) -->
+   <section class="py-24 bg-slate-50 relative">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="text-center max-w-3xl mx-auto mb-20">
+               <span class="text-red-600 font-bold uppercase tracking-wider text-sm bg-red-50 px-4 py-1 rounded-full">The Hard Truth</span>
+               <h2 class="font-serif text-4xl md:text-5xl font-bold text-slate-900 mt-6 leading-tight">The VA Doesn't Deny <span class="italic text-navy-800">You.</span> <br> They Deny Your Paperwork.</h2>
+               <p class="mt-6 text-xl text-slate-600 leading-relaxed">
+                   You served honorably. You have the injuries. But the VA requires specific medical evidence to prove "Service Connection." Without it, your claim is dead on arrival.
+               </p>
+           </div>
+
+
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+               <!-- Problem 1 -->
+               <div class="bg-white p-10 rounded-2xl border-l-4 border-navy-800 shadow-sm hover:shadow-xl transition duration-300">
+                   <div class="flex items-center gap-4 mb-6">
+                       <div class="bg-navy-100 p-3 rounded-xl"><i data-lucide="scale" class="h-8 w-8 text-navy-800"></i></div>
+                       <h3 class="font-bold text-xl text-slate-900">The Attorney Trap</h3>
+                   </div>
+                   <p class="text-slate-600 mb-6 text-lg">Lawyers typically take <strong>20-33% of your backpay</strong>. Because they get paid from backpay, they are financially incentivized to drag your case out for years.</p>
+                   <div class="flex items-center gap-2 text-navy-800 font-bold">
+                       <i data-lucide="check" class="h-5 w-5"></i>
+                       <span>We charge a flat fee. No percentages.</span>
+                   </div>
+               </div>
+               <!-- Problem 2 -->
+               <div class="bg-white p-10 rounded-2xl border-l-4 border-red-500 shadow-sm hover:shadow-xl transition duration-300">
+                   <div class="flex items-center gap-4 mb-6">
+                       <div class="bg-red-100 p-3 rounded-xl"><i data-lucide="file-warning" class="h-8 w-8 text-red-600"></i></div>
+                       <h3 class="font-bold text-xl text-slate-900">The VSO Limitation</h3>
+                   </div>
+                   <p class="text-slate-600 mb-6 text-lg">VSOs are free and well-meaning, but they <strong>cannot write medical opinions</strong>. They rely on VA doctors (C&P exams) to rate you. Relying on the VA to rate itself is why 70% of claims fail.</p>
+                   <div class="flex items-center gap-2 text-navy-800 font-bold">
+                       <i data-lucide="check" class="h-5 w-5"></i>
+                       <span>We provide private medical opinions.</span>
+                   </div>
+               </div>
+               <!-- Problem 3 -->
+               <div class="bg-white p-10 rounded-2xl border-l-4 border-gold-500 shadow-sm hover:shadow-xl transition duration-300">
+                   <div class="flex items-center gap-4 mb-6">
+                       <div class="bg-gold-100 p-3 rounded-xl"><i data-lucide="check-circle-2" class="h-8 w-8 text-gold-600"></i></div>
+                       <h3 class="font-bold text-xl text-slate-900">The "Service Connection" Gap</h3>
+                   </div>
+                   <p class="text-slate-600 mb-6 text-lg">You have an injury now. You served then. But without a <strong>Nexus Letter</strong> linking the two medically, the VA assumes they are unrelated. This is the missing link for most veterans.</p>
+                   <div class="flex items-center gap-2 text-navy-800 font-bold">
+                       <i data-lucide="check" class="h-5 w-5"></i>
+                       <span>We build the Nexus for you.</span>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+
+   <!-- The Solution (Visual Process) -->
+   <section class="py-24 bg-white">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+               <h2 class="font-serif text-3xl font-bold text-slate-900">The "Fully Developed Claim" Advantage</h2>
+               <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">We don't just "submit" forms. We build a bulletproof case that often allows you to skip the dreaded C&P exams.</p>
+           </div>
+
+
+           <div class="relative">
+               <!-- Connecting Line (Desktop) -->
+               <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-slate-100 -translate-y-1/2 z-0"></div>
+
+
+               <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+                   <!-- Step 1 -->
+                   <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-lg text-center">
+                       <div class="w-16 h-16 bg-navy-800 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-white">1</div>
+                       <h3 class="font-bold text-lg text-navy-900 mb-2">Discovery</h3>
+                       <p class="text-sm text-slate-600">We "squeeze and drain" your records to find High Value claims you missed.</p>
+                   </div>
+                   <!-- Step 2 -->
+                   <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-lg text-center">
+                       <div class="w-16 h-16 bg-navy-800 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-white">2</div>
+                       <h3 class="font-bold text-lg text-navy-900 mb-2">Strategy</h3>
+                       <p class="text-sm text-slate-600">We create a Game Plan targeting specific conditions (PTSD, Back Pain, etc).</p>
+                   </div>
+                   <!-- Step 3 (Highlight) -->
+                   <div class="bg-gold-50 p-6 rounded-xl border-2 border-gold-400 shadow-xl text-center transform scale-105">
+                       <div class="w-16 h-16 bg-gold-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-white">3</div>
+                       <h3 class="font-bold text-lg text-navy-900 mb-2">Private Evidence</h3>
+                       <p class="text-sm text-slate-600">Our doctors write the Nexus Letters & DBQs needed to prove your claim.</p>
+                   </div>
+                   <!-- Step 4 -->
+                   <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-lg text-center">
+                       <div class="w-16 h-16 bg-navy-800 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-white">4</div>
+                       <h3 class="font-bold text-lg text-navy-900 mb-2">Submission</h3>
+                       <p class="text-sm text-slate-600">We submit a "Fully Developed Claim" for faster decision (30-60 days avg).</p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+
+   <!-- Success Stories (From PDF) -->
+   <section class="py-24 bg-navy-900 text-white">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="text-center mb-16">
+               <span class="text-gold-500 font-bold uppercase tracking-wider text-sm">Real Results</span>
+               <h2 class="font-serif text-3xl font-bold mt-2">Verified Success Stories</h2>
+               <p class="mt-4 text-xl text-slate-400">Zero history of rating decreases. 100% commitment to your case.</p>
+           </div>
+
+
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+               <!-- Story 1 -->
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-gold-500 transition duration-300">
+                   <div class="flex items-center gap-2 mb-4">
+                       <div class="bg-green-500 text-navy-900 text-xs font-bold px-2 py-1 rounded">30% to 70%</div>
+                       <span class="text-slate-400 text-sm">Musculoskeletal</span>
+                   </div>
+                   <p class="text-slate-300 italic mb-6">"After 15 years at 30% for my back, I didn't think an increase was possible. The team got me proper medical documentation showing deterioration. My only regret is not doing this years ago."</p>
+                   <div class="flex items-center gap-3">
+                       <div class="bg-slate-700 w-10 h-10 rounded-full flex items-center justify-center font-bold">JT</div>
+                       <div>
+                           <p class="font-bold text-white">James T.</p>
+                           <p class="text-xs text-slate-400">Back Pain Increase</p>
+                       </div>
+                   </div>
+               </div>
+
+
+               <!-- Story 2 -->
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-gold-500 transition duration-300">
+                   <div class="flex items-center gap-2 mb-4">
+                       <div class="bg-green-500 text-navy-900 text-xs font-bold px-2 py-1 rounded">30% to 70%</div>
+                       <span class="text-slate-400 text-sm">Mental Health</span>
+                   </div>
+                   <p class="text-slate-300 italic mb-6">"I was rated at 30% for PTSD for 8 years despite deteriorating health. The psychologist they connected me with documented how it affected my work. The back pay covered the fee ten times over."</p>
+                   <div class="flex items-center gap-3">
+                       <div class="bg-slate-700 w-10 h-10 rounded-full flex items-center justify-center font-bold">CL</div>
+                       <div>
+                           <p class="font-bold text-white">Christopher L.</p>
+                           <p class="text-xs text-slate-400">PTSD Increase</p>
+                       </div>
+                   </div>
+               </div>
+
+
+               <!-- Story 3 -->
+               <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-gold-500 transition duration-300">
+                   <div class="flex items-center gap-2 mb-4">
+                       <div class="bg-green-500 text-navy-900 text-xs font-bold px-2 py-1 rounded">20% to 80%</div>
+                       <span class="text-slate-400 text-sm">Secondary Conditions</span>
+                   </div>
+                   <p class="text-slate-300 italic mb-6">"I only had my back rated at 20% for years. The medical evaluation documented how my back condition caused hip, knee, and depression issues as secondary conditions. Huge win."</p>
+                   <div class="flex items-center gap-3">
+                       <div class="bg-slate-700 w-10 h-10 rounded-full flex items-center justify-center font-bold">KL</div>
+                       <div>
+                           <p class="font-bold text-white">Kevin L.</p>
+                           <p class="text-xs text-slate-400">Secondary Claims</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+
+   <!-- Qualification / FAQ -->
+   <section class="py-24 bg-slate-50">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="text-center mb-16">
+               <h2 class="font-serif text-3xl font-bold text-slate-900">Is This Right For You?</h2>
+               <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">We don't accept every case. We partner with veterans where we identify a clear path to victory.</p>
+           </div>
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+               <div class="bg-white p-8 rounded-2xl shadow-soft hover:-translate-y-2 transition duration-300 border border-slate-200">
+                   <div class="h-14 w-14 bg-navy-50 rounded-full flex items-center justify-center mb-6">
+                       <span class="font-serif font-bold text-navy-800 text-2xl">1</span>
+                   </div>
+                   <h3 class="font-bold text-xl text-slate-900 mb-4">Underrated Veterans</h3>
+                   <p class="text-slate-600 leading-relaxed">You have a rating, but it's too low. Your condition has worsened over time, but the VA hasn't acknowledged the severity in your medical records.</p>
+               </div>
+               <div class="bg-white p-8 rounded-2xl shadow-soft hover:-translate-y-2 transition duration-300 border border-slate-200">
+                   <div class="h-14 w-14 bg-navy-50 rounded-full flex items-center justify-center mb-6">
+                       <span class="font-serif font-bold text-navy-800 text-2xl">2</span>
+                   </div>
+                   <h3 class="font-bold text-xl text-slate-900 mb-4">Denied Service Connection</h3>
+                   <p class="text-slate-600 leading-relaxed">You have the injury and the service history, but the VA says they aren't linked. We use forensic medical reviews to find the proof they missed.</p>
+               </div>
+               <div class="bg-white p-8 rounded-2xl shadow-soft hover:-translate-y-2 transition duration-300 border border-slate-200">
+                   <div class="h-14 w-14 bg-navy-50 rounded-full flex items-center justify-center mb-6">
+                       <span class="font-serif font-bold text-navy-800 text-2xl">3</span>
+                   </div>
+                   <h3 class="font-bold text-xl text-slate-900 mb-4">High-Value Secondary Claims</h3>
+                   <p class="text-slate-600 leading-relaxed">Your back pain caused knee issues. Your tinnitus caused anxiety. We find the "hidden" claims that significantly boost your rating.</p>
+               </div>
+           </div>
+       </div>
+   </section>
+
+
+   <!-- Final CTA -->
+   <section class="py-28 bg-gradient-to-br from-navy-900 to-navy-800 text-white text-center relative overflow-hidden">
+       <!-- Abstract BG -->
+       <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+      
+       <div class="max-w-5xl mx-auto px-4 relative z-10">
+           <h2 class="font-serif text-4xl md:text-5xl font-bold mb-8">Stop Fighting Alone.</h2>
+           <p class="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+               Secure your financial future with a Fully Developed Claim.
+               <br>No percentages taken. No hidden costs. Just results.
+           </p>
+           <div class="flex flex-col sm:flex-row justify-center gap-6">
+               <a href="contact.html" class="inline-flex items-center justify-center bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-xl px-12 py-6 rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+                   Book Discovery Call
+                   <i data-lucide="chevron-right" class="ml-2 h-6 w-6"></i>
+               </a>
+               <a href="education.html" class="inline-flex items-center justify-center border-2 border-slate-600 hover:border-white hover:bg-white/5 text-white font-bold text-xl px-12 py-6 rounded-xl transition">
+                   Read The Briefing
+               </a>
+           </div>
+            <p class="mt-8 text-sm text-slate-400 opacity-80">100% Confidential. No commitment required.</p>
+       </div>
+   </section>
+
+
+   <!-- Footer -->
+   <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+               <div class="col-span-1 md:col-span-2">
+                   <div class="flex items-center gap-3 mb-6">
+                       <i data-lucide="shield" class="h-8 w-8 text-gold-500"></i>
+                       <span class="text-white font-serif font-bold text-2xl">Thank You For Your Service</span>
+                   </div>
+                   <p class="text-slate-400 mb-6 max-w-sm leading-relaxed">
+                       We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+                   </p>
+                   <div class="flex space-x-4">
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                   </div>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
+                       <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
+                       <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
+                       <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
+                       <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
+                   </ul>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i> 11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
+                       <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i> support@thankyouforyourservice.co</li>
+                       <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i> 321-248-2805</li>
+                   </ul>
+               </div>
+           </div>
+           <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+               &copy; 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+           </div>
+       </div>
+   </footer>
+
+
+   <script>
+       // Initialize Icons
+       lucide.createIcons();
+   </script>
 </body>
 </html>
