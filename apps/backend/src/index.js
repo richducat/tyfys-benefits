@@ -19,6 +19,24 @@ const claimAssistantRoot = path.resolve(__dirname, '../..', 'claim-assistant');
 const claimAssistantPublic = path.join(claimAssistantRoot, 'public');
 const claimAssistantTemplate = path.join(claimAssistantRoot, 'templates', 'vba-21-526ez-are.pdf');
 
+app.get('/auth/callback', (req, res) => {
+  const { code, state, error, error_description: errorDescription } = req.query;
+
+  if (error) {
+    return res.status(400).json({
+      message: 'Tesla authorization returned an error.',
+      error,
+      errorDescription
+    });
+  }
+
+  res.json({
+    message: 'Tesla authorization code received.',
+    code,
+    state
+  });
+});
+
 function safeSetText(form, name, value) {
   if (value == null || value === '') return;
   try {
