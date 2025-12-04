@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>About Us | Thank You For Your Service</title>
+  
+   <!-- Tailwind CSS -->
+   <script src="https://cdn.tailwindcss.com"></script>
+  
+   <!-- Fonts: Inter for UI, Merriweather for headings (trustworthy serif) -->
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+  
+   <!-- Lucide Icons -->
+   <script src="https://unpkg.com/lucide@latest"></script>
+
+
+   <script>
+       tailwind.config = {
+           theme: {
+               extend: {
+                   colors: {
+                       navy: {
+                           50: '#f0f4ff',
+                           100: '#e0eaff',
+                           800: '#1e3a8a', // Traditional Navy Blue
+                           900: '#0f172a', // Deep Slate
+                       },
+                       gold: {
+                           400: '#fbbf24',
+                           500: '#f59e0b', // Service Gold
+                           600: '#d97706',
+                       }
+                   },
+                   fontFamily: {
+                       sans: ['Inter', 'sans-serif'],
+                       serif: ['Merriweather', 'serif'],
+                   }
+               }
+           }
+       }
+   </script>
+   <style>
+       /* Smooth scrolling */
+       html { scroll-behavior: smooth; }
+      
+       /* Custom patterned background for hero */
+       .hero-pattern {
+           background-color: #0f172a;
+           background-image: radial-gradient(#1e293b 1px, transparent 1px);
+           background-size: 30px 30px;
+       }
+   </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
+
+
+   <!-- Navigation -->
+   <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex justify-between h-20">
+               <div class="flex items-center gap-3">
+                   <a href="index.html" class="flex items-center gap-3">
+                       <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
+                       <div class="flex flex-col">
+                           <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                           <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
+                       </div>
+                   </a>
+               </div>
+               <div class="hidden md:flex items-center space-x-6">
+                   <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
+                   <a href="about_us.html" class="text-navy-800 font-bold border-b-2 border-gold-500">About Us</a>
+                   <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+                  
+                   <!-- Dropdown: Claim Types -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
+                           <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
+                       </div>
+                   </div>
+
+
+                   <!-- Dropdown: Resources -->
+                   <div class="relative group h-full flex items-center">
+                       <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                           Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                           <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                           <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                           <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                       </div>
+                   </div>
+
+
+                   <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                       Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                   </a>
+               </div>
+               <!-- Mobile menu button -->
+               <div class="flex items-center md:hidden">
+                   <button type="button" class="text-slate-500 hover:text-slate-700">
+                       <i data-lucide="menu" class="h-7 w-7"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+   </nav>
+
+
+   <!-- Hero Section -->
+   <div class="hero-pattern relative text-white py-24 border-b-4 border-gold-500">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+           <div class="text-center max-w-3xl mx-auto">
+               <div class="inline-flex items-center gap-2 bg-navy-800/50 border border-navy-700 rounded-full px-4 py-1 mb-6 backdrop-blur-sm">
+                   <i data-lucide="star" class="h-4 w-4 text-gold-500 fill-gold-500"></i>
+                   <span class="text-sm font-medium text-gold-400 uppercase tracking-wider">Veteran Led & Operated</span>
+               </div>
+               <h1 class="font-serif text-4xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
+                   Mission First. <span class="text-gold-500">Veterans Always.</span>
+               </h1>
+               <p class="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed">
+                   We know the frustration of the VA system because we’ve lived it.
+                   Founded by a Navy Captain, we bridge the gap between your service and the benefits you earned.
+               </p>
+           </div>
+       </div>
+       <!-- Decorative gradient fade -->
+       <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-slate-900 to-transparent"></div>
+   </div>
+
+
+   <!-- Mission / Value Prop -->
+   <section class="py-20 bg-white">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+               <div>
+                   <h2 class="font-serif text-3xl font-bold text-slate-900 mb-6">Why We Fight For You</h2>
+                   <div class="space-y-6 text-slate-600 text-lg">
+                       <p>
+                           Returning home shouldn't mean fighting a new war against bureaucracy. Too many veterans are denied disability benefits not because they aren't injured, but because they lack the "perfect" paperwork.
+                       </p>
+                       <p>
+                           At <span class="font-semibold text-navy-800">Thank You For Your Service</span>, we provide the missing link: <strong class="text-slate-900">High-quality, private medical evidence.</strong>
+                       </p>
+                       <p>
+                           We don't just file papers; we build strategic cases. We pair you with specialized doctors who understand VA requirements, ensuring your Nexus Letters and DBQs tell the undeniable truth of your sacrifice.
+                       </p>
+                   </div>
+                  
+                   <div class="mt-8 grid grid-cols-2 gap-4">
+                       <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                           <i data-lucide="check-circle-2" class="h-6 w-6 text-green-600 mb-2"></i>
+                           <span class="block font-bold text-slate-900">HIPAA Compliant</span>
+                           <span class="text-sm text-slate-500">Your data is secure</span>
+                       </div>
+                       <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                           <i data-lucide="clock" class="h-6 w-6 text-blue-600 mb-2"></i>
+                           <span class="block font-bold text-slate-900">Speed & Precision</span>
+                           <span class="text-sm text-slate-500">30-60 day prep time</span>
+                       </div>
+                   </div>
+               </div>
+               <div class="relative">
+                   <div class="absolute inset-0 bg-gold-500 rounded-2xl transform rotate-3 translate-x-2 translate-y-2"></div>
+                   <img src="https://images.unsplash.com/photo-1579783483458-83d0b161d940?q=80&w=1000&auto=format&fit=crop" alt="Veterans talking" class="relative rounded-2xl shadow-xl w-full object-cover h-[500px] grayscale hover:grayscale-0 transition duration-500">
+               </div>
+           </div>
+       </div>
+   </section>
+
+
+   <!-- Social Proof / Testimonials Section (New) -->
+   <section class="py-20 bg-navy-50">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="text-center mb-16">
+               <span class="text-gold-600 font-bold uppercase tracking-wider text-sm">Social Proof</span>
+               <h2 class="font-serif text-3xl font-bold text-slate-900 mt-2">Verified Impact from The Ranks</h2>
+               <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">
+                   Trust is earned. Here is what your fellow service members are saying about our work.
+               </p>
+           </div>
+
+
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+               <!-- Review 1 -->
+               <div class="bg-white p-8 rounded-xl shadow-md border border-slate-100 relative">
+                   <div class="absolute -top-4 left-8 bg-gold-500 text-white p-2 rounded-full shadow-lg">
+                        <i data-lucide="quote" class="h-5 w-5 fill-white"></i>
+                   </div>
+                   <div class="flex text-gold-500 mb-4">
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                   </div>
+                   <p class="text-slate-600 italic mb-6">
+                       "Finding this company after 8 years of denials changed everything for me. The process isn't just hands-off – it's fully done for you."
+                   </p>
+                   <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                       <div class="bg-navy-100 p-2 rounded-full text-navy-800">
+                           <span class="font-bold text-sm">JR</span>
+                       </div>
+                       <div>
+                           <p class="font-bold text-slate-900 text-sm">James R.</p>
+                           <p class="text-xs text-slate-500 uppercase font-semibold">Marine Corps Veteran</p>
+                       </div>
+                   </div>
+               </div>
+
+
+               <!-- Review 2 -->
+               <div class="bg-white p-8 rounded-xl shadow-md border border-slate-100 relative">
+                   <div class="absolute -top-4 left-8 bg-gold-500 text-white p-2 rounded-full shadow-lg">
+                        <i data-lucide="quote" class="h-5 w-5 fill-white"></i>
+                   </div>
+                    <div class="flex text-gold-500 mb-4">
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                   </div>
+                   <p class="text-slate-600 italic mb-6">
+                       "As a female veteran, I sometimes felt invisible after service. This company recognizes all of us – just like the values we upheld while serving."
+                   </p>
+                   <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                       <div class="bg-navy-100 p-2 rounded-full text-navy-800">
+                           <span class="font-bold text-sm">ST</span>
+                       </div>
+                       <div>
+                           <p class="font-bold text-slate-900 text-sm">Sarah T.</p>
+                           <p class="text-xs text-slate-500 uppercase font-semibold">Army Veteran</p>
+                       </div>
+                   </div>
+               </div>
+
+
+               <!-- Review 3 -->
+               <div class="bg-white p-8 rounded-xl shadow-md border border-slate-100 relative">
+                   <div class="absolute -top-4 left-8 bg-gold-500 text-white p-2 rounded-full shadow-lg">
+                        <i data-lucide="quote" class="h-5 w-5 fill-white"></i>
+                   </div>
+                    <div class="flex text-gold-500 mb-4">
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                       <i data-lucide="star" class="h-4 w-4 fill-current"></i>
+                   </div>
+                   <p class="text-slate-600 italic mb-6">
+                       "After decades of feeling disconnected, I found a place where my time is honored. The quality of their service reminds me of the excellence we strived for in uniform."
+                   </p>
+                   <div class="flex items-center gap-3 border-t border-slate-100 pt-4">
+                       <div class="bg-navy-100 p-2 rounded-full text-navy-800">
+                           <span class="font-bold text-sm">RL</span>
+                       </div>
+                       <div>
+                           <p class="font-bold text-slate-900 text-sm">Robert L.</p>
+                           <p class="text-xs text-slate-500 uppercase font-semibold">Vietnam Veteran</p>
+                       </div>
+                   </div>
+               </div>
+           </div>
+          
+            <div class="mt-12 text-center">
+                <div class="inline-flex items-center justify-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border border-slate-200">
+                    <span class="font-bold text-navy-900">4.9/5 Rating</span>
+                    <span class="text-slate-300">|</span>
+                    <span class="text-slate-500 text-sm">Based on verified client feedback</span>
+                </div>
+           </div>
+       </div>
+   </section>
+
+
+   <!-- Leadership Team -->
+   <section class="py-20 bg-white border-t border-slate-200">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="text-center mb-16">
+               <h2 class="font-serif text-3xl font-bold text-slate-900">Meet Your Command Team</h2>
+               <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto">
+                   We aren't just case managers. We are veterans and professionals who understand the weight of the uniform.
+               </p>
+           </div>
+
+
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+              
+               <!-- Karen Hallett -->
+               <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-navy-800 hover:-translate-y-1 transition duration-300 group">
+                   <div class="bg-slate-100 h-64 overflow-hidden relative group">
+                       <img src="https://drive.google.com/uc?export=view&id=1c25VzGMkzEcs0WA9q1tcD92S7IW3nIJL" alt="Karen Hallett" class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition duration-500">
+                   </div>
+                   <div class="pt-8 pb-8 px-8 text-center">
+                       <h3 class="font-serif text-xl font-bold text-slate-900">Karen Hallett</h3>
+                       <p class="text-gold-600 font-bold text-sm uppercase tracking-wide mb-4">Owner • Navy Captain (Ret.)</p>
+                       <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                           With decades of leadership experience in the United States Navy, Captain Hallett leads with the same integrity and discipline she demanded in the fleet. She founded this company to ensure no veteran is left behind by the system they served.
+                       </p>
+                       <div class="border-t border-slate-100 pt-6">
+                           <a href="https://www.linkedin.com/in/karen-hallett-3b2795120/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-navy-800 hover:text-gold-600 font-semibold transition">
+                               <i data-lucide="linkedin" class="h-5 w-5 mr-2"></i>
+                               Connect on LinkedIn
+                           </a>
+                       </div>
+                   </div>
+               </div>
+
+
+               <!-- Richard Ducat -->
+               <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-slate-400 hover:-translate-y-1 transition duration-300 group">
+                   <div class="bg-slate-100 h-64 overflow-hidden relative group">
+                       <img src="https://drive.google.com/uc?export=view&id=1Vddqbr9uyTVv_qYjxpvCRwZU6TYaxuq8" alt="Richard Ducat" class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition duration-500">
+                   </div>
+                   <div class="pt-8 pb-8 px-8 text-center">
+                       <h3 class="font-serif text-xl font-bold text-slate-900">Richard Ducat</h3>
+                       <p class="text-gold-600 font-bold text-sm uppercase tracking-wide mb-4">Chief Technology Officer</p>
+                       <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                           Richard ensures that our platform is secure, efficient, and accessible. He bridges the gap between complex VA requirements and user-friendly technology, ensuring your medical evidence is handled with the highest level of security.
+                       </p>
+                       <div class="border-t border-slate-100 pt-6">
+                           <a href="https://www.linkedin.com/in/richard-ducat-6a36296a/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-navy-800 hover:text-gold-600 font-semibold transition">
+                               <i data-lucide="linkedin" class="h-5 w-5 mr-2"></i>
+                               Connect on LinkedIn
+                           </a>
+                       </div>
+                   </div>
+               </div>
+
+
+               <!-- Clay Lewis -->
+               <div class="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-slate-400 hover:-translate-y-1 transition duration-300 group">
+                   <div class="bg-slate-100 h-64 overflow-hidden relative group">
+                       <img src="https://drive.google.com/uc?export=view&id=1uBbBeJRzXD7xRhKshYmQFS01A9F0gLjT" alt="Clay Lewis" class="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition duration-500">
+                   </div>
+                   <div class="pt-8 pb-8 px-8 text-center">
+                       <h3 class="font-serif text-xl font-bold text-slate-900">Clay Lewis</h3>
+                       <p class="text-gold-600 font-bold text-sm uppercase tracking-wide mb-4">Director of Veteran Care</p>
+                       <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                           Clay serves as the bridge between veterans and our team. His focus is on advocacy and outreach, ensuring every veteran understands their rights and feels supported from the very first conversation to the final decision.
+                       </p>
+                       <div class="border-t border-slate-100 pt-6">
+                           <a href="https://www.linkedin.com/in/clayalewis/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-navy-800 hover:text-gold-600 font-semibold transition">
+                               <i data-lucide="linkedin" class="h-5 w-5 mr-2"></i>
+                               Connect on LinkedIn
+                           </a>
+                       </div>
+                   </div>
+               </div>
+
+
+           </div>
+       </div>
+   </section>
+
+
+   <!-- Trust / Stats Section -->
+   <section class="bg-navy-900 text-white py-16">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-700">
+               <div class="p-4">
+                   <div class="text-gold-500 font-bold text-4xl mb-2">$590K+</div>
+                   <div class="text-slate-300 text-sm uppercase tracking-wide">Projected Benefits Recovered (2025)</div>
+               </div>
+               <div class="p-4">
+                   <div class="text-gold-500 font-bold text-4xl mb-2">Veteran</div>
+                   <div class="text-slate-300 text-sm uppercase tracking-wide">Owned & Operated</div>
+               </div>
+               <div class="p-4">
+                   <div class="text-gold-500 font-bold text-4xl mb-2">Private</div>
+                   <div class="text-slate-300 text-sm uppercase tracking-wide">Medical Networks</div>
+               </div>
+           </div>
+       </div>
+   </section>
+
+
+   <!-- Call to Action -->
+   <section class="py-20 bg-white">
+       <div class="max-w-4xl mx-auto px-4 text-center">
+           <h2 class="font-serif text-3xl font-bold text-slate-900 mb-6">Ready to Get the Rating You Deserve?</h2>
+           <p class="text-lg text-slate-600 mb-8">
+               You fought for your country. Let us fight for your benefits. Schedule a free discovery call today.
+           </p>
+           <a href="https://thankyouforyourservice.co/" class="inline-flex items-center justify-center bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+               Start Your Claim Now
+               <i data-lucide="chevron-right" class="ml-2 h-5 w-5"></i>
+           </a>
+           <p class="mt-4 text-sm text-slate-400">
+               No outcome is guaranteed. We are a private service not affiliated with the VA.
+           </p>
+       </div>
+   </section>
+
+
+   <!-- Footer -->
+   <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+               <div class="col-span-1 md:col-span-2">
+                   <div class="flex items-center gap-3 mb-6">
+                       <i data-lucide="shield" class="h-8 w-8 text-gold-500"></i>
+                       <span class="text-white font-serif font-bold text-2xl">Thank You For Your Service</span>
+                   </div>
+                   <p class="text-slate-400 mb-6 max-w-sm leading-relaxed">
+                       We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+                   </p>
+                   <div class="flex space-x-4">
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                       <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                   </div>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
+                       <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
+                       <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
+                       <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
+                       <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
+                   </ul>
+               </div>
+               <div>
+                   <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
+                   <ul class="space-y-4 text-sm">
+                       <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i> 11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
+                       <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i> support@thankyouforyourservice.co</li>
+                       <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i> 321-248-2805</li>
+                   </ul>
+               </div>
+           </div>
+           <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+               &copy; 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+           </div>
+       </div>
+   </footer>
+
+
+   <script>
+       // Initialize Icons
+       lucide.createIcons();
+   </script>
+</body>
+</html>
