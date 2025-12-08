@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYFYS.net | Guide to Viewing & Saving Your VA Rating</title>
+    <meta name="description" content="Find, view, and save your VA disability rating on VA.gov with step-by-step login guidance and screenshot tips for every device.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Branding Colors (TYFYS Standard) */
+        .bg-tyfys-blue { background-color: #0F172A; } /* Slate 900 */
+        .text-tyfys-blue { color: #0F172A; }
+        .bg-tyfys-accent { background-color: #DC2626; } /* Red */
+        .text-tyfys-accent { color: #DC2626; }
+        .bg-brand-gold { background-color: #D97706; } /* Gold */
+        .text-brand-gold { color: #D97706; }
+        
+        /* Connector Line for Steps */
+        .step-line {
+            position: absolute;
+            left: 2rem;
+            top: 3.5rem;
+            bottom: -2rem;
+            width: 3px;
+            background-color: #E2E8F0;
+            z-index: 0;
+        }
+        .last-step .step-line { display: none; }
+
+    </style>
+    <!-- 
+        Narrative Plan:
+        1. Context: Explain that eBenefits has moved to VA.gov.
+        2. The Path: 3 steps to find the number.
+        3. The Capture: How to take a screenshot vs download a letter.
+        4. Comparison: When to use a screenshot vs an official letter.
+    -->
+</head>
+<body class="text-slate-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-tyfys-blue text-white sticky top-0 z-50 shadow-lg border-b-4 border-tyfys-accent">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="font-bold text-xl md:text-2xl tracking-tighter flex items-center gap-2">
+                <a href="index.html" class="flex items-center gap-2">
+                    <span class="bg-tyfys-accent text-white px-2 py-1 rounded text-sm font-black">TYFYS</span>
+                    <span>.net</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#find-it" class="hover:text-tyfys-accent transition">Find It</a>
+                <a href="#capture-it" class="hover:text-tyfys-accent transition">Screenshot It</a>
+                <a href="#official-letter" class="hover:text-tyfys-accent transition">Official Letters</a>
+            </div>
+            <div class="md:hidden text-xs text-gray-400 font-bold">Rating Proof Guide</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 py-16 text-center">
+            <div class="inline-block bg-green-100 text-green-800 px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-wide uppercase">Updated for VA.gov 2025</div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
+                Prove Your Service. <br><span class="text-brand-gold">Instantly.</span>
+            </h1>
+            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+                Need to show your disability rating for a retail discount or property tax exemption? <strong>Stop looking for eBenefits.</strong> Here is how to find, view, and save your rating on the new VA.gov system.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#find-it" class="bg-tyfys-blue text-white px-8 py-3 rounded-lg font-bold shadow hover:bg-slate-800 transition">Find My Rating</a>
+                <a href="#capture-it" class="border-2 border-slate-200 text-slate-700 px-8 py-3 rounded-lg font-bold hover:bg-slate-50 transition">How to Screenshot</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: The Migration Context (Change) -->
+    <section class="py-16 px-4 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Where did eBenefits go?</h2>
+                <p class="text-slate-600 text-lg mb-6">
+                    If you are looking for your rating on eBenefits, you are looking in the old filing cabinet. The VA has moved rating data to <strong>VA.gov</strong>.
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <span class="text-red-500 font-bold text-xl">✕</span>
+                        <div class="text-slate-600"><strong>eBenefits:</strong> Still used for some document uploads, but mostly retired for viewing ratings.</div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-green-600 font-bold text-xl">✓</span>
+                        <div class="text-slate-600"><strong>VA.gov:</strong> The new home for viewing your combined rating and individual disabilities.</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+                <h3 class="text-center font-bold text-slate-500 mb-4 uppercase text-xs tracking-wider">Where Veterans Check Ratings</h3>
+                <div class="chart-container">
+                    <canvas id="platformChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Step-by-Step (Organize) -->
+    <section id="find-it" class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">The Process</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">The 3-Click Path to Your Rating</h2>
+            </div>
+
+            <div class="relative pl-2 md:pl-0">
+                <!-- Step 1 -->
+                <div class="flex gap-6 mb-12 relative">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-tyfys-blue text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">1</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Log In to VA.gov</h3>
+                        <p class="text-slate-600 mt-2">Use your <strong>Login.gov</strong> or <strong>ID.me</strong> account. (See our previous guide if you don't have one!).</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex gap-6 mb-12 relative">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-white border-4 border-tyfys-blue text-tyfys-blue rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">2</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Click "Disability"</h3>
+                        <p class="text-slate-600 mt-2">This is usually in the main menu bar or a large icon on the dashboard called <strong>"Check your claim, decision review, or appeal status"</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex gap-6 relative last-step">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-brand-gold text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">3</div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Select "View your VA disability ratings"</h3>
+                        <p class="text-slate-600 mt-2">Don't click "Claims." Look specifically for the word <strong>Rating</strong>. This page will show your big "Combined Rating" percentage at the top.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: How to Screenshot (Organize/Inform) -->
+    <section id="capture-it" class="py-16 px-4 bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-brand-gold font-bold tracking-widest text-sm uppercase">Technical Skills</span>
+                <h2 class="text-3xl font-bold mt-2">How to Capture the Proof</h2>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto">
+                    Once you see your rating on the screen, how do you save it? Choose your device below.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-slate-800">
+                <!-- Windows -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-500">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h3 class="font-bold text-xl mb-2">Windows PC</h3>
+                    <p class="text-sm text-slate-500 mb-4">The easiest way is the "Snipping Tool".</p>
+                    <ol class="list-decimal pl-4 space-y-2 text-sm font-medium">
+                        <li>Press <code class="bg-slate-100 px-1 rounded">Windows Logo Key</code> + <code class="bg-slate-100 px-1 rounded">Shift</code> + <code class="bg-slate-100 px-1 rounded">S</code>.</li>
+                        <li>Your screen will go dark.</li>
+                        <li>Click and drag a box around your rating number.</li>
+                        <li>It is now copied! Paste it into an email or Word doc.</li>
+                    </ol>
+                </div>
+
+                <!-- Mac -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-gray-500">
+                    <div class="text-4xl mb-4">🍎</div>
+                    <h3 class="font-bold text-xl mb-2">Apple Mac</h3>
+                    <p class="text-sm text-slate-500 mb-4">Use the keyboard shortcut.</p>
+                    <ol class="list-decimal pl-4 space-y-2 text-sm font-medium">
+                        <li>Press <code class="bg-slate-100 px-1 rounded">Command</code> + <code class="bg-slate-100 px-1 rounded">Shift</code> + <code class="bg-slate-100 px-1 rounded">4</code>.</li>
+                        <li>Your cursor turns into a crosshair.</li>
+                        <li>Click and drag a box around your rating.</li>
+                        <li>The image will save to your Desktop automatically.</li>
+                    </ol>
+                </div>
+
+                <!-- Mobile -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-brand-gold">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="font-bold text-xl mb-2">iPhone / Android</h3>
+                    <p class="text-sm text-slate-500 mb-4">Two-button combination.</p>
+                    <ul class="space-y-3 text-sm font-medium">
+                        <li><strong>iPhone:</strong> Press <em>Power</em> (right side) and <em>Volume Up</em> (left side) at the same time.</li>
+                        <li><strong>Android:</strong> Press <em>Power</em> and <em>Volume Down</em> at the same time.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Screenshot vs Official Letter (Compare) -->
+    <section id="official-letter" class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 bg-slate-50 p-8 rounded-2xl border border-slate-200">
+                    <h3 class="text-center font-bold text-slate-500 mb-6 uppercase text-xs tracking-wider">Proof of Rating: Screenshot vs. Letter</h3>
+                    <div class="chart-container">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                    <div class="mt-6 text-sm text-center text-slate-500">
+                        <span class="inline-block w-3 h-3 bg-tyfys-blue rounded-full mr-1"></span> Official Letter
+                        <span class="inline-block w-3 h-3 bg-tyfys-accent rounded-full ml-4 mr-1"></span> Screenshot
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">"Can I Use a Screenshot for a Mortgage?"</h2>
+                    <p class="text-xl font-bold text-tyfys-accent mb-4">Probably NOT.</p>
+                    <p class="text-slate-600 text-lg mb-6">
+                        Screenshots are great for quick discounts (like Lowe's or Home Depot) or State Park passes. However, for serious financial business (VA Loans, Property Tax Exemptions), you need the <strong>Official Benefit Summary Letter</strong>.
+                    </p>
+                    
+                    <div class="bg-blue-50 border-l-4 border-tyfys-blue p-6 rounded-r-lg">
+                        <h4 class="font-bold text-tyfys-blue mb-2">How to get the Official Letter:</h4>
+                        <p class="text-slate-700 text-sm">
+                            On the same VA.gov dashboard, instead of clicking "Disability", look for the box that says <strong>"Letters"</strong> or <strong>"Download your benefit letters"</strong>. This generates a PDF signed by the VA Commissioner.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Acceptance Chart (Inform) -->
+    <section class="py-16 px-4 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8">What Proof Do They Need?</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <div class="chart-container">
+                    <canvas id="acceptanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="font-black text-2xl text-white mb-4 tracking-tighter">TYFYS<span class="text-tyfys-accent">.net</span></div>
+            <p class="mb-6 text-sm max-w-lg mx-auto">Helping veterans navigate the digital transition with ease. This guide is for educational purposes and is not affiliated with the U.S. Department of Veterans Affairs.</p>
+            <div class="text-xs text-slate-600">
+                &copy; 2025 TYFYS.net. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Label Wrapping Helper
+        function wrapLabel(label) {
+            const maxLen = 16;
+            if (label.length <= maxLen) return label;
+            return label.split(' ');
+        }
+
+        // 1. Platform Chart (Doughnut)
+        const ctxPlatform = document.getElementById('platformChart').getContext('2d');
+        new Chart(ctxPlatform, {
+            type: 'doughnut',
+            data: {
+                labels: ['VA.gov (New)', 'VA Mobile App', 'eBenefits (Legacy)'],
+                datasets: [{
+                    data: [60, 30, 10], // Estimated Usage
+                    backgroundColor: ['#0F172A', '#DC2626', '#CBD5E1'], // Slate 900, Red, Slate 300
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { padding: 20, font: { family: 'Inter' } } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) { return context.label + ': ' + context.raw + '%'; }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 2. Comparison Chart (Radar)
+        const ctxComp = document.getElementById('comparisonChart').getContext('2d');
+        new Chart(ctxComp, {
+            type: 'radar',
+            data: {
+                labels: ['Speed', 'Official Status', 'Detail Level', 'Ease of Sharing', 'Digital Security'],
+                datasets: [{
+                    label: 'Official Letter (PDF)',
+                    data: [6, 10, 10, 8, 10],
+                    fill: true,
+                    backgroundColor: 'rgba(15, 23, 42, 0.2)',
+                    borderColor: '#0F172A',
+                    pointBackgroundColor: '#0F172A'
+                }, {
+                    label: 'Screenshot',
+                    data: [10, 3, 4, 9, 2],
+                    fill: true,
+                    backgroundColor: 'rgba(220, 38, 38, 0.2)',
+                    borderColor: '#DC2626',
+                    pointBackgroundColor: '#DC2626'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#E2E8F0' },
+                        grid: { color: '#E2E8F0' },
+                        pointLabels: { font: { family: 'Inter', size: 11, weight: '600' } },
+                        suggestedMin: 0,
+                        suggestedMax: 10,
+                        ticks: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false } // Custom legend in HTML
+                }
+            }
+        });
+
+        // 3. Acceptance Chart (Bar)
+        const ctxAccept = document.getElementById('acceptanceChart').getContext('2d');
+        new Chart(ctxAccept, {
+            type: 'bar',
+            data: {
+                labels: ['Retail Discounts', 'State Park Pass', 'Job Preference', 'Property Tax', 'VA Home Loan'],
+                datasets: [{
+                    label: 'Screenshot Accepted',
+                    data: [10, 8, 3, 1, 0], // Likelihood 0-10
+                    backgroundColor: '#DC2626',
+                    borderRadius: 4
+                }, {
+                    label: 'Official Letter Required',
+                    data: [10, 10, 10, 10, 10], // Always accepted
+                    backgroundColor: '#0F172A',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { display: false },
+                        grid: { display: false },
+                        title: { display: true, text: 'Likelihood of Acceptance' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            title: function(items) { return items[0].label; }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
