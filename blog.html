@@ -25,7 +25,7 @@
 <body class="font-sans text-slate-700 antialiased bg-slate-50">
 
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
                 <div class="flex items-center gap-3">
@@ -40,10 +40,44 @@
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
                     <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
-                    <a href="blog.html" class="text-navy-800 font-bold border-b-2 border-gold-500">Blog</a>
-                    <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2">
+                    <a href="mission_team.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Team</a>
+                    <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+
+                    <!-- Dropdown: Claim Types -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                            Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                            <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
+                            <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
+                        </div>
+                    </div>
+
+
+                    <!-- Dropdown: Resources -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                            Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                            <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                            <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                            <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                            <a href="blog.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition font-bold text-navy-800">Blog</a>
+                        </div>
+                    </div>
+
+
+                    <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
                         Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
                     </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="text-slate-500 hover:text-slate-700" data-mobile-menu-toggle aria-expanded="false" aria-label="Toggle navigation">
+                        <i data-lucide="menu" class="h-7 w-7"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -155,6 +189,15 @@
                         <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="va-math-explained.html" class="hover:text-gold-600">VA Math Explained</a></h3>
                         <p class="text-slate-600 text-sm mb-4">Why 50% + 50% doesn't equal 100%, and how to navigate the "Fuzzy Math" of the VA.</p>
                         <a href="va-math-explained.html" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                <!-- Post 7 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Appeals</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="service-connection-denied-appeal.html" class="hover:text-gold-600">Service Connection Denied: Now What?</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">How to read your denial letter, find the missing evidence, and file a strong appeal when VA says "not service connected."</p>
+                        <a href="service-connection-denied-appeal.html" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
                     </div>
                 </article>
             </div>
@@ -276,13 +319,70 @@
                         <a href="knee-pain-range-of-motion.html" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
                     </div>
                 </article>
+                <!-- Post 18 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Mental Health</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="prepare-mental-health-evaluation.html" class="hover:text-gold-600">Prepare for a Telehealth Eval</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Exactly what to expect in your mental health C&P, what to share about your worst days, and how to avoid underselling your symptoms.</p>
+                        <a href="prepare-mental-health-evaluation.html" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
+                <!-- Post 19 -->
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Mental Health</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="somatic-symptom-disorder-claims.html" class="hover:text-gold-600">Somatic Symptom Disorder</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">When chronic pain wrecks your mental health, this diagnosis can unlock secondary mental health ratings tied to physical conditions.</p>
+                        <a href="somatic-symptom-disorder-claims.html" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+                    </div>
+                </article>
             </div>
         </div>
 
     </div>
 
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-center">
-        <p>&copy; 2025 Thank You For Your Service. All rights reserved.</p>
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i data-lucide="shield" class="h-8 w-8 text-gold-500"></i>
+                        <span class="text-white font-serif font-bold text-2xl">Thank You For Your Service</span>
+                    </div>
+                    <p class="text-slate-400 mb-6 max-w-sm leading-relaxed">
+                        We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
+                        <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
+                        <li><a href="mission_team.html" class="hover:text-gold-500 transition">Our Team</a></li>
+                        <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
+                        <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
+                        <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i> 11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
+                        <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i> support@thankyouforyourservice.co</li>
+                        <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i> 321-248-2805</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+                &copy; 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+            </div>
+        </div>
     </footer>
 
     <script src="apps/mobile-nav.js"></script>
