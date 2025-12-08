@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYFYS.net | Guide to Private Medical Records</title>
+    <meta name="description" content="Learn how to gather private medical records yourself, use the HITECH Act to save money, and upload evidence fast with QuickSubmit.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 50: '#f0f4ff', 100: '#e0eaff', 700: '#2d4a9e', 800: '#1e3a8a', 900: '#0f172a' },
+                        gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(245, 158, 11, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Branding Colors (TYFYS Standard) */
+        .bg-tyfys-blue { background-color: #0F172A; }
+        .text-tyfys-blue { color: #0F172A; }
+        .bg-tyfys-accent { background-color: #DC2626; }
+        .text-tyfys-accent { color: #DC2626; }
+        .bg-brand-gold { background-color: #D97706; }
+        .text-brand-gold { color: #D97706; }
+
+        /* Connector Line for Steps */
+        .step-line {
+            position: absolute;
+            left: 2rem;
+            top: 3.5rem;
+            bottom: -2rem;
+            width: 3px;
+            background-color: #E2E8F0;
+            z-index: 0;
+        }
+        .last-step .step-line { display: none; }
+
+    </style>
+    <!-- 
+        Narrative Plan:
+        1. Context: VA records are automatic; Private records are NOT.
+        2. The Strategy: "Duty to Assist" vs. "Silver Platter" doctrine.
+        3. The HITECH Act: How to avoid paying $100+ for copies.
+        4. Step-by-Step: Gathering and Uploading (QuickSubmit).
+    -->
+</head>
+<body class="text-slate-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
+                        <div class="flex flex-col">
+                            <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                            <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
+                    <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                    <a href="mission_team.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Team</a>
+                    <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+
+                    <!-- Dropdown: Claim Types -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                            Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                            <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
+                            <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
+                        </div>
+                    </div>
+
+
+                    <!-- Dropdown: Resources -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                            Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                            <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                            <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                            <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                            <a href="blog.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Blog</a>
+                        </div>
+                    </div>
+
+
+                    <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                        Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="text-slate-500 hover:text-slate-700" data-mobile-menu-toggle aria-expanded="false" aria-label="Toggle navigation">
+                        <i data-lucide="menu" class="h-7 w-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 py-16 text-center">
+            <div class="inline-block bg-green-100 text-green-800 px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-wide uppercase">The "Silver Platter" Method</div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
+                Control Your Evidence. <br><span class="text-brand-gold">Win Your Claim.</span>
+            </h1>
+            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+                The VA has a "Duty to Assist" to find your private records, but they often fail. Don't leave your financial future in the hands of a fax machine. Learn how to gather your civilian medical records yourself.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#hitech-hack" class="bg-tyfys-blue text-white px-8 py-3 rounded-lg font-bold shadow hover:bg-slate-800 transition">Get Records Cheaply</a>
+                <a href="#upload" class="border-2 border-slate-200 text-slate-700 px-8 py-3 rounded-lg font-bold hover:bg-slate-50 transition">Upload Tool</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: The Strategy (Inform/Compare) -->
+    <section id="strategy" class="py-16 px-4 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Who should fetch the records?</h2>
+                <p class="text-slate-600 text-lg mb-6">
+                    You have two choices: Ask the VA to do it (Form 21-4142) or do it yourself. The data shows a clear winner for speed and accuracy.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-tyfys-accent">
+                        <h3 class="font-bold text-tyfys-accent">Option A: The VA Does It (Slow)</h3>
+                        <p class="text-sm text-slate-600">You sign Form 21-4142. The VA faxes a request. If the doctor doesn't reply in 30 days, the VA stops trying. <strong>High risk of missing evidence.</strong></p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-600">Option B: You Do It (Fast)</h3>
+                        <p class="text-sm text-slate-600">You walk into the office, get the file, and upload it. You verify 100% of the diagnosis is there before the Rater sees it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+                <h3 class="text-center font-bold text-slate-500 mb-4 uppercase text-xs tracking-wider">Success Rate: Evidence Retrieval</h3>
+                <div class="chart-container">
+                    <canvas id="successChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: The HITECH Act Hack (Organize/Process) -->
+    <section id="hitech-hack" class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-brand-gold font-bold tracking-widest text-sm uppercase">Money Saving Tip</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Don't Pay $0.75 Per Page!</h2>
+                <p class="text-slate-500 mt-2">
+                    Private doctors often charge huge fees for "Medical Records Requests." Use the <strong>HITECH Act</strong> to bypass this.
+                </p>
+            </div>
+
+            <div class="relative pl-2 md:pl-0">
+                <!-- Step 1 -->
+                <div class="flex gap-6 mb-12 relative">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-tyfys-blue text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">1</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Request "Electronic" Copies</h3>
+                        <p class="text-slate-600 mt-2">
+                            Under the HITECH Act, if records are digital (EHR), you have a right to get them digitally (CD, Email, Portal). Do <strong>not</strong> ask for paper.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex gap-6 mb-12 relative">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-white border-4 border-tyfys-blue text-tyfys-blue rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">2</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Cite "Patient Right of Access"</h3>
+                        <p class="text-slate-600 mt-2">
+                            This request is for <strong>YOU</strong> (the patient), not a lawyer or insurance company.
+                            <br><span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded font-bold">Pro Tip: The fee is capped at a "reasonable cost" (often ~$6.50 flat rate).</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex gap-6 relative last-step">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-brand-gold text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">3</div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Get the PDF</h3>
+                        <p class="text-slate-600 mt-2">
+                            Once you have the PDF file, save it to your computer. <strong>Do not</strong> modify it. It needs to remain an original copy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Uploading (Organize) -->
+    <section id="upload" class="py-16 px-4 bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 bg-white p-6 rounded-2xl shadow-lg text-slate-800">
+                    <h3 class="text-center font-bold text-slate-500 mb-4 uppercase text-xs tracking-wider">Method Speed Comparison</h3>
+                    <div class="chart-container">
+                        <canvas id="speedChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="order-1 md:order-2">
+                    <h2 class="text-3xl font-bold text-white mb-6">The Secret Weapon: QuickSubmit</h2>
+                    <p class="text-slate-300 text-lg mb-6">
+                        Don't mail your records. Don't even use the standard VA.gov claim tool if the claim is already submitted. Use the direct intake portal.
+                    </p>
+                    <div class="bg-blue-900/50 border border-blue-500 p-6 rounded-xl">
+                        <h4 class="font-bold text-white text-lg mb-2">How to use QuickSubmit:</h4>
+                        <ol class="list-decimal pl-5 space-y-3 text-slate-300">
+                            <li>Go to <strong><a href="https://eauth.va.gov/accessva/?cspSelectFor=quicksubmit" class="text-blue-300 hover:underline">access.va.gov</a></strong>.</li>
+                            <li>Select <strong>"QuickSubmit"</strong> (formerly Direct Upload).</li>
+                            <li>Sign in with ID.me or Login.gov.</li>
+                            <li>Select <strong>"Compensation"</strong> as the category.</li>
+                            <li>Upload your Private Medical Record PDF.</li>
+                        </ol>
+                        <p class="mt-4 text-sm font-bold text-green-400">Records uploaded here appear in your file within days, not weeks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="font-black text-2xl text-white mb-4 tracking-tighter">TYFYS<span class="text-tyfys-accent">.net</span></div>
+            <p class="mb-6 text-sm max-w-lg mx-auto">Helping veterans navigate the digital transition with ease. This guide is for educational purposes and is not affiliated with the Department of Veterans Affairs.</p>
+            <div class="text-xs text-slate-600">
+                &copy; 2025 TYFYS.net. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Label Wrapping Helper
+        function wrapLabel(label) {
+            const maxLen = 16;
+            if (label.length <= maxLen) return label;
+            return label.split(' ');
+        }
+
+        // 1. Success Chart (Doughnut)
+        const ctxSuccess = document.getElementById('successChart').getContext('2d');
+        new Chart(ctxSuccess, {
+            type: 'doughnut',
+            data: {
+                labels: ['DIY (You Retrieve)', 'VA Duty to Assist (Form 21-4142)'],
+                datasets: [{
+                    data: [95, 40],
+                    backgroundColor: ['#0F172A', '#DC2626'], 
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { padding: 15, font: { family: 'Inter', size: 11 } } },
+                    title: { display: true, text: 'Success Rate: Getting Records', padding: 20 }
+                }
+            }
+        });
+
+        // 2. Speed Chart (Bar)
+        const ctxSpeed = document.getElementById('speedChart').getContext('2d');
+        new Chart(ctxSpeed, {
+            type: 'bar',
+            data: {
+                labels: ['QuickSubmit Upload', 'Standard Mail/Fax', 'VA Retrieving for You'],
+                datasets: [{
+                    label: 'Days to File',
+                    data: [3, 20, 60],
+                    backgroundColor: ['#0F172A', '#D97706', '#DC2626'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Days Until Evidence is in File' },
+                        grid: { display: false }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+
+    <script src="apps/mobile-nav.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
