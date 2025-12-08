@@ -3,24 +3,30 @@
     { label: 'Home', href: 'index.html', group: 'Primary', icon: 'home' },
     { label: 'About Us', href: 'about_us.html', group: 'Primary', icon: 'info' },
     { label: 'Our Team', href: 'mission_team.html', group: 'Primary', icon: 'users' },
-    { label: 'Our Process', href: 'process.html', group: 'Primary', icon: 'route' },
-    { label: 'Intake', href: 'intake-portal.html', group: 'Primary', icon: 'clipboard-list' }
+    { label: 'Our Process', href: 'process.html', group: 'Primary', icon: 'route' }
   ];
 
   const claimTypes = [
     {
       label: 'Mental Health & PTSD',
       href: 'claims_mental_health.html',
-      group: 'Claim Types',
+      group: 'VA Claims',
       icon: 'brain',
       description: 'Therapy DBQs, stressor statements, and nexus support.'
     },
     {
       label: 'Back, Neck & Joints',
       href: 'claims_musculoskeletal.html',
-      group: 'Claim Types',
+      group: 'VA Claims',
       icon: 'bone',
       description: 'Orthopedic exams, ROM charts, and pain documentation.'
+    },
+    {
+      label: 'Intake',
+      href: 'intake-portal.html',
+      group: 'VA Claims',
+      icon: 'clipboard-list',
+      description: 'Start your VA claim intake with our team.'
     }
   ];
 
