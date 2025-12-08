@@ -6,10 +6,31 @@
     <title>TYFYS.net | Guide to Viewing & Saving Your VA Rating</title>
     <meta name="description" content="Find, view, and save your VA disability rating on VA.gov with step-by-step login guidance and screenshot tips for every device.">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 50: '#f0f4ff', 100: '#e0eaff', 700: '#2d4a9e', 800: '#1e3a8a', 900: '#0f172a' },
+                        gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(245, 158, 11, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+
+        /* Dropdown Menu Styles */
+        .group:hover .group-hover\:block { display: block; }
         
         /* Chart Container Styling - MANDATORY */
         .chart-container {
@@ -59,20 +80,61 @@
 <body class="text-slate-800 antialiased">
 
     <!-- Navigation -->
-    <nav class="bg-tyfys-blue text-white sticky top-0 z-50 shadow-lg border-b-4 border-tyfys-accent">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="font-bold text-xl md:text-2xl tracking-tighter flex items-center gap-2">
-                <a href="index.html" class="flex items-center gap-2">
-                    <span class="bg-tyfys-accent text-white px-2 py-1 rounded text-sm font-black">TYFYS</span>
-                    <span>.net</span>
-                </a>
+    <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
+                        <div class="flex flex-col">
+                            <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                            <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-navy-800 font-bold border-b-2 border-gold-500">Home</a>
+                    <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                    <a href="mission_team.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Team</a>
+                    <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+
+                    <!-- Dropdown: Claim Types -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                            Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                            <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
+                            <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
+                        </div>
+                    </div>
+
+
+                    <!-- Dropdown: Resources -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                            Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                            <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                            <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                            <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                            <a href="blog.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Blog</a>
+                        </div>
+                    </div>
+
+
+                    <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                        Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="text-slate-500 hover:text-slate-700" data-mobile-menu-toggle aria-expanded="false" aria-label="Toggle navigation">
+                        <i data-lucide="menu" class="h-7 w-7"></i>
+                    </button>
+                </div>
             </div>
-            <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#find-it" class="hover:text-tyfys-accent transition">Find It</a>
-                <a href="#capture-it" class="hover:text-tyfys-accent transition">Screenshot It</a>
-                <a href="#official-letter" class="hover:text-tyfys-accent transition">Official Letters</a>
-            </div>
-            <div class="md:hidden text-xs text-gray-400 font-bold">Rating Proof Guide</div>
         </div>
     </nav>
 
@@ -396,6 +458,10 @@
                 }
             }
         });
+    </script>
+    <script src="apps/mobile-nav.js"></script>
+    <script>
+        lucide.createIcons();
     </script>
 </body>
 </html>
