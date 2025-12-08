@@ -6,6 +6,10 @@
     { label: 'Our Process', href: 'process.html' },
   ];
 
+  const clientLinks = [
+    { label: 'Intake', href: 'intake-portal.html' },
+  ];
+
   const claimTypes = [
     { label: 'Mental Health & PTSD', href: 'claims_mental_health.html' },
     { label: 'Back, Neck & Joints', href: 'claims_musculoskeletal.html' },
@@ -63,6 +67,7 @@
         </div>
         <div class="h-[calc(100%-4rem)] overflow-y-auto p-5 space-y-6" data-mobile-menu>
           <div class="space-y-2" data-mobile-primary></div>
+          <div class="space-y-2" data-mobile-clients></div>
           <div class="space-y-2" data-mobile-claims></div>
           <div class="space-y-2" data-mobile-resources></div>
           <a href="contact.html" class="block text-center bg-navy-800 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-navy-900 transition" data-mobile-cta>Book Discovery Call</a>
@@ -74,11 +79,13 @@
     const panel = menuWrapper.querySelector('[data-mobile-panel]');
     const closeButton = menuWrapper.querySelector('[data-mobile-menu-close]');
     const primaryContainer = menuWrapper.querySelector('[data-mobile-primary]');
+    const clientContainer = menuWrapper.querySelector('[data-mobile-clients]');
     const claimContainer = menuWrapper.querySelector('[data-mobile-claims]');
     const resourceContainer = menuWrapper.querySelector('[data-mobile-resources]');
     const menuLinks = menuWrapper.querySelector('[data-mobile-menu]');
 
     links.forEach((item) => primaryContainer.appendChild(createLink(item)));
+    clientContainer.appendChild(createSection('Clients', clientLinks));
     claimContainer.appendChild(createSection('Claim Types', claimTypes));
     resourceContainer.appendChild(createSection('Resources', resources));
 
