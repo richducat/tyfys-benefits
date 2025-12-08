@@ -4,7 +4,7 @@
     { label: 'About Us', href: 'about_us.html' },
     { label: 'Our Team', href: 'mission_team.html' },
     { label: 'Our Process', href: 'process.html' },
-    { label: 'Intake Portal', href: 'intake-portal.html' },
+    { label: 'Intake', href: 'intake-portal.html' },
   ];
 
   const claimTypes = [
