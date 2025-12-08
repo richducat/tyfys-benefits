@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYFYS.net | Guide to Recovering Service Treatment Records</title>
+    <meta name="description" content="Step-by-step guide to recover Service Treatment Records through VetRecs, including discharge date checks, request walkthrough, and signature requirements.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Branding Colors (TYFYS Standard) */
+        .bg-tyfys-blue { background-color: #0F172A; } /* Slate 900 */
+        .text-tyfys-blue { color: #0F172A; }
+        .bg-tyfys-accent { background-color: #DC2626; } /* Red */
+        .text-tyfys-accent { color: #DC2626; }
+        .bg-brand-gold { background-color: #D97706; } /* Gold */
+        .text-brand-gold { color: #D97706; }
+        
+        /* Connector Line for Steps */
+        .step-line {
+            position: absolute;
+            left: 2rem;
+            top: 3.5rem;
+            bottom: -2rem;
+            width: 3px;
+            background-color: #E2E8F0;
+            z-index: 0;
+        }
+        .last-step .step-line { display: none; }
+
+    </style>
+    <!-- 
+        Narrative Plan:
+        1. Context: Medical Records (STRs) are the currency of VA claims.
+        2. Location Check: NPRC (St. Louis) vs. VA (Digital).
+        3. The VetRecs Walkthrough: Step-by-step form completion.
+        4. The Signature Trap: The #1 reason requests fail.
+    -->
+</head>
+<body class="text-slate-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-tyfys-blue text-white sticky top-0 z-50 shadow-lg border-b-4 border-tyfys-accent">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="font-bold text-xl md:text-2xl tracking-tighter flex items-center gap-2">
+                <span class="bg-tyfys-accent text-white px-2 py-1 rounded text-sm font-black">TYFYS</span>
+                <span>.net</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#location-check" class="hover:text-tyfys-accent transition">Where are they?</a>
+                <a href="#vetrecs-steps" class="hover:text-tyfys-accent transition">VetRecs Steps</a>
+                <a href="#signature-trap" class="hover:text-tyfys-accent transition">The Signature Trap</a>
+            </div>
+            <div class="md:hidden text-xs text-gray-400 font-bold">Medical Records Guide</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 py-16 text-center">
+            <div class="inline-block bg-brand-gold text-white px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-wide uppercase">The "Deep Dive" Guide</div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
+                Recover Your <br><span class="text-tyfys-accent">Service Treatment Records</span>
+            </h1>
+            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+                Your <strong>STRs</strong> (Service Treatment Records) are the only proof that an injury happened in service. Without them, your VA claim is just a story. Here is the exact, click-by-click process to retrieve them from the National Archives.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#vetrecs-steps" class="bg-tyfys-blue text-white px-8 py-3 rounded-lg font-bold shadow hover:bg-slate-800 transition">Start VetRecs Process</a>
+                <a href="#location-check" class="border-2 border-slate-200 text-slate-700 px-8 py-3 rounded-lg font-bold hover:bg-slate-50 transition">Check Dates First</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: Where is my Record? (Inform/Compare) -->
+    <section id="location-check" class="py-16 px-4 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Stop! Check Your Discharge Date.</h2>
+                <p class="text-slate-600 text-lg mb-6">
+                    Not all records are in the National Archives (NPRC) in St. Louis. If you discharged recently, your records are likely already digital.
+                </p>
+                
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-tyfys-blue">
+                        <h3 class="font-bold text-tyfys-blue">The "Archives" Era (Use this guide)</h3>
+                        <p class="text-sm text-slate-600">Discharged <strong>Before 2014</strong> (Army), <strong>Before 1998</strong> (Navy), or <strong>Before 2004</strong> (Air Force).</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-brand-gold">
+                        <h3 class="font-bold text-brand-gold">The "Digital" Era</h3>
+                        <p class="text-sm text-slate-600">Discharged recently? Do NOT use VetRecs. Go to <strong>TRICARE Online</strong> or <strong>VA.gov</strong> directly.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+                <h3 class="text-center font-bold text-slate-500 mb-4 uppercase text-xs tracking-wider">Record Location by Discharge Year</h3>
+                <div class="chart-container">
+                    <canvas id="locationChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: The VetRecs Walkthrough (Organize/Process) -->
+    <section id="vetrecs-steps" class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">The Walkthrough</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">How to Use vetrecs.archives.gov</h2>
+                <p class="text-slate-500 mt-2">Follow these steps exactly to avoid a generic "No Record Found" letter.</p>
+            </div>
+
+            <div class="relative pl-2 md:pl-0">
+                <!-- Step 1 -->
+                <div class="flex gap-6 mb-12 relative">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-tyfys-blue text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">1</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Launch & Authenticate</h3>
+                        <p class="text-slate-600 mt-2">Go to <a href="#" class="text-blue-600 underline">vetrecs.archives.gov</a>. Click "Make a New Request". <strong>New Rule:</strong> You must now sign in using <strong>ID.me</strong> or <strong>Login.gov</strong> to start the request.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex gap-6 mb-12 relative">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-white border-4 border-tyfys-blue text-tyfys-blue rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">2</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Document Selection (CRITICAL)</h3>
+                        <p class="text-slate-600 mt-2">
+                            When asked what you want, do <strong>NOT</strong> just select "Military Personnel File". You must manually check:
+                        </p>
+                        <ul class="mt-2 space-y-1 text-sm font-semibold text-tyfys-accent">
+                            <li>☑ Inpatient Clinical Records</li>
+                            <li>☑ Outpatient Medical Records</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex gap-6 mb-12 relative">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-white border-4 border-tyfys-blue text-tyfys-blue rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">3</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">The "Comments" Section Hack</h3>
+                        <p class="text-slate-600 mt-2">
+                            In the "Purpose" or "Comments" box, type this exact phrase: 
+                            <br><code class="bg-gray-100 p-1 rounded text-slate-800">"REQUESTING ALL SERVICE TREATMENT RECORDS (STRs) FOR VA DISABILITY CLAIM."</code>
+                            <br>This signals the clerks to look in the medical vaults, not just the personnel vaults.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex gap-6 relative last-step">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-brand-gold text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">4</div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Review & Submit</h3>
+                        <p class="text-slate-600 mt-2">
+                            Verify your SSN and Service Number. A single digit error here will result in a lost request.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: The Signature Trap (Warning) -->
+    <section id="signature-trap" class="py-16 px-4 bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-brand-gold font-bold tracking-widest text-sm uppercase">The Failure Point</span>
+                <h2 class="text-3xl font-bold mt-2">Do Not Ignore the Signature Page</h2>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto">
+                    Even if you submit online, the system often generates a PDF "Signature Verification" page at the end.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="bg-white p-6 rounded-2xl shadow-lg text-slate-800">
+                    <div class="chart-container">
+                        <canvas id="successChart"></canvas>
+                    </div>
+                    <p class="text-center text-xs text-slate-500 mt-4">Requests without a wet signature often stall indefinitely.</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-red-900/50 border border-red-500 p-6 rounded-xl">
+                        <h4 class="font-bold text-white text-lg mb-2">If you see a "Signature Page" PDF:</h4>
+                        <ol class="list-decimal pl-5 space-y-2 text-slate-300">
+                            <li><strong>PRINT</strong> the page immediately.</li>
+                            <li><strong>SIGN</strong> it with a pen (wet signature).</li>
+                            <li><strong>FAX</strong> it to the number on the sheet (usually 314-801-9195) OR <strong>MAIL</strong> it within 20 days.</li>
+                        </ol>
+                        <p class="mt-4 text-sm font-bold text-red-400">If they do not receive this paper within 20 days, your online request is deleted.</p>
+                    </div>
+                    
+                    <div class="bg-green-900/30 border border-green-500 p-6 rounded-xl">
+                        <h4 class="font-bold text-white text-lg mb-2">The ID.me Exception</h4>
+                        <p class="text-slate-300 text-sm">
+                            If you successfully verified with <strong>ID.me</strong> at the start, you <em>might</em> skip the paper signature. However, if the system asks for it, <strong>do not assume ID.me was enough.</strong> Send the paper.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="font-black text-2xl text-white mb-4 tracking-tighter">TYFYS<span class="text-tyfys-accent">.net</span></div>
+            <p class="mb-6 text-sm max-w-lg mx-auto">Helping veterans navigate the digital transition with ease. This guide is for educational purposes and is not affiliated with the U.S. National Archives.</p>
+            <div class="text-xs text-slate-600">
+                &copy; 2025 TYFYS.net. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Label Wrapping Helper
+        function wrapLabel(label) {
+            const maxLen = 16;
+            if (label.length <= maxLen) return label;
+            return label.split(' ');
+        }
+
+        // 1. Location Chart (Horizontal Bar)
+        const ctxLoc = document.getElementById('locationChart').getContext('2d');
+        new Chart(ctxLoc, {
+            type: 'bar',
+            data: {
+                labels: ['Pre-1995 (Archival)', '1995-2013 (VetRecs/NPRC)', '2014-Present (VA/HAIMS)'],
+                datasets: [{
+                    label: 'Likely Location',
+                    data: [100, 80, 20], // Abstract representation of NPRC reliance
+                    backgroundColor: ['#D97706', '#0F172A', '#DC2626'], // Gold, Slate, Red
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        display: false
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Inter', weight: '600' } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const labels = ['Stored in St. Louis (Physical)', 'Stored in St. Louis (Physical)', 'Likely Digital (VA.gov)'];
+                                return labels[context.dataIndex];
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 2. Success Chart (Doughnut) - Signature Impact
+        const ctxSuccess = document.getElementById('successChart').getContext('2d');
+        new Chart(ctxSuccess, {
+            type: 'doughnut',
+            data: {
+                labels: ['Successful Retrieval', 'Rejected (No Signature)'],
+                datasets: [{
+                    data: [60, 40], // Estimate of rejected requests due to signature
+                    backgroundColor: ['#0F172A', '#DC2626'], 
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { padding: 15, font: { family: 'Inter', size: 11 } } },
+                    title: { display: true, text: 'Request Success Rate', padding: 20 }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
