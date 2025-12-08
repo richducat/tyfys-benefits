@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYFYS.net | Guide to VA Blue Button Records</title>
+    <meta name="description" content="Learn what the VA Blue Button report contains and download your health records instantly with this step-by-step guide.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Branding Colors (TYFYS Standard) */
+        .bg-tyfys-blue { background-color: #0F172A; } /* Slate 900 */
+        .text-tyfys-blue { color: #0F172A; }
+        .bg-tyfys-accent { background-color: #DC2626; } /* Red */
+        .text-tyfys-accent { color: #DC2626; }
+        .bg-brand-gold { background-color: #D97706; } /* Gold */
+        .text-brand-gold { color: #D97706; }
+        
+        /* Connector Line for Steps */
+        .step-line {
+            position: absolute;
+            left: 2rem;
+            top: 3.5rem;
+            bottom: -2rem;
+            width: 3px;
+            background-color: #E2E8F0;
+            z-index: 0;
+        }
+        .last-step .step-line { display: none; }
+
+    </style>
+    <!-- 
+        Narrative Plan:
+        1. Context: Explain the "Blue Button" concept (Portability).
+        2. Content: What is actually in the file? (Doughnut Chart).
+        3. The Path: Step-by-step instructions to download.
+        4. Comparison: Blue Button (Instant) vs ROI Office (Weeks).
+    -->
+</head>
+<body class="text-slate-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-tyfys-blue text-white sticky top-0 z-50 shadow-lg border-b-4 border-tyfys-accent">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="font-bold text-xl md:text-2xl tracking-tighter flex items-center gap-2">
+                <a href="index.html" class="flex items-center gap-2">
+                    <span class="bg-tyfys-accent text-white px-2 py-1 rounded text-sm font-black">TYFYS</span>
+                    <span>.net</span>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#what-is-it" class="hover:text-tyfys-accent transition">What's Inside</a>
+                <a href="#how-to" class="hover:text-tyfys-accent transition">How to Download</a>
+                <a href="#comparison" class="hover:text-tyfys-accent transition">Blue Button vs. Official</a>
+            </div>
+            <div class="md:hidden text-xs text-gray-400 font-bold">Health Record Guide</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 py-16 text-center">
+            <div class="inline-block bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-wide uppercase">Your Data. Your Control.</div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
+                Your Health History. <br><span class="text-brand-gold">In Your Hands.</span>
+            </h1>
+            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
+                Seeing a private doctor? Need a copy of your labs? <strong>Don't wait weeks for the paperwork.</strong> Learn how to use the VA "Blue Button" to download your medical history instantly.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#how-to" class="bg-tyfys-blue text-white px-8 py-3 rounded-lg font-bold shadow hover:bg-slate-800 transition">Start Guide</a>
+                <a href="#what-is-it" class="border-2 border-slate-200 text-slate-700 px-8 py-3 rounded-lg font-bold hover:bg-slate-50 transition">See What's Inside</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: What is Blue Button? (Inform) -->
+    <section id="what-is-it" class="py-16 px-4 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">What is the "Blue Button"?</h2>
+                <p class="text-slate-600 text-lg mb-6">
+                    It is a universal symbol for <strong>"Download My Data"</strong>. When you click it on VA.gov, it generates a single PDF or Text file containing your selected medical history.
+                </p>
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-tyfys-accent">
+                    <h4 class="font-bold text-slate-900 mb-2">Why Veterans Use It:</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li>• Sharing blood work trends with a private cardiologist.</li>
+                        <li>• Keeping a backup copy for emergencies.</li>
+                        <li>• Reviewing doctor's notes (Clinical Notes) for accuracy.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+                <h3 class="text-center font-bold text-slate-500 mb-4 uppercase text-xs tracking-wider">What's Inside the Report?</h3>
+                <div class="chart-container">
+                    <canvas id="contentChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Step-by-Step (Organize) -->
+    <section id="how-to" class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">The Process</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">3 Steps to Download</h2>
+            </div>
+
+            <div class="relative pl-2 md:pl-0">
+                <!-- Step 1 -->
+                <div class="flex gap-6 mb-12 relative">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-tyfys-blue text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">1</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Sign in to VA.gov</h3>
+                        <p class="text-slate-600 mt-2">Use your <strong>Login.gov</strong> or <strong>ID.me</strong> account. Navigate to the "Health Care" section.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex gap-6 mb-12 relative">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-white border-4 border-tyfys-blue text-tyfys-blue rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">2</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Select "Blue Button Report"</h3>
+                        <p class="text-slate-600 mt-2">Look for the link that says <strong>"VA Blue Button Report"</strong> (often under "Health Records"). It may redirect you to the My HealtheVet portal.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex gap-6 relative last-step">
+                    <div class="flex-shrink-0 w-16 text-center relative z-10">
+                        <div class="w-16 h-16 bg-brand-gold text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">3</div>
+                    </div>
+                    <div class="pt-2">
+                        <h3 class="text-xl font-bold text-slate-900">Customize & Download</h3>
+                        <p class="text-slate-600 mt-2">
+                            <strong>Crucial Step:</strong> You must select a Date Range (e.g., "Last 3 Months") and check the boxes for the data you want (e.g., "VA Lab Results"). Then click <strong>Download PDF</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Time Saved (Change/Compare) -->
+    <section class="py-16 px-4 bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-brand-gold font-bold tracking-widest text-sm uppercase">Why It Matters</span>
+                <h2 class="text-3xl font-bold mt-2">Instant Access vs. The "Old Way"</h2>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto">
+                    Why fill out forms when you can click a button?
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="bg-white p-6 rounded-2xl shadow-lg text-slate-800">
+                    <div class="chart-container">
+                        <canvas id="timeChart"></canvas>
+                    </div>
+                    <p class="text-center text-xs text-slate-500 mt-4">Average time to receive records.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-4">The "Release of Information" Trap</h3>
+                    <p class="text-slate-300 text-lg mb-6">
+                        Traditionally, getting records required filling out <strong>VA Form 10-5345</strong> and waiting for the "Release of Information" office to mail you a packet.
+                    </p>
+                    <div class="bg-brand-gold/10 border border-brand-gold/30 p-6 rounded-lg">
+                        <h4 class="font-bold text-brand-gold mb-2">When to use the Old Way:</h4>
+                        <p class="text-sm text-slate-300">
+                            Only use the formal request if you need <strong>Certified</strong> records for a legal case. For medical care, the Blue Button PDF is usually sufficient.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Comparison Radar (Compare) -->
+    <section id="comparison" class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">Method Comparison</span>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-6">Which Method is Right for You?</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-slate-50 p-6 rounded-lg border-l-4 border-tyfys-blue shadow-sm">
+                            <h4 class="font-bold text-tyfys-blue text-lg">Blue Button (DIY)</h4>
+                            <p class="text-slate-600 text-sm mt-1">Best for doctor visits, personal tracking, and quick reference. Fast, free, and immediate.</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg border-l-4 border-tyfys-accent shadow-sm">
+                            <h4 class="font-bold text-tyfys-accent text-lg">Official Request (ROI)</h4>
+                            <p class="text-slate-600 text-sm mt-1">Best for lawyers or court cases where a "Certified" stamp is legally required.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 lg:order-2 bg-slate-50 p-8 rounded-2xl border border-slate-200">
+                    <h3 class="text-center font-bold text-slate-500 mb-6 uppercase text-xs tracking-wider">Features Breakdown</h3>
+                    <div class="chart-container">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                    <div class="mt-6 text-sm text-center text-slate-500">
+                        <span class="inline-block w-3 h-3 bg-tyfys-blue rounded-full mr-1"></span> Blue Button
+                        <span class="inline-block w-3 h-3 bg-tyfys-accent rounded-full ml-4 mr-1"></span> Official ROI Request
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="font-black text-2xl text-white mb-4 tracking-tighter">TYFYS<span class="text-tyfys-accent">.net</span></div>
+            <p class="mb-6 text-sm max-w-lg mx-auto">Helping veterans navigate the digital transition with ease. This guide is for educational purposes and is not affiliated with the U.S. Department of Veterans Affairs.</p>
+            <div class="text-xs text-slate-600">
+                &copy; 2025 TYFYS.net. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Charts -->
+    <script>
+        // Label Wrapping Helper
+        function wrapLabel(label) {
+            const maxLen = 16;
+            if (label.length <= maxLen) return label;
+            return label.split(' ');
+        }
+
+        // 1. Content Chart (Doughnut) - What's Inside?
+        const ctxContent = document.getElementById('contentChart').getContext('2d');
+        new Chart(ctxContent, {
+            type: 'doughnut',
+            data: {
+                labels: ['Lab Results', 'Clinical Notes', 'Medication List', 'Vitals/History', 'Admin Data'],
+                datasets: [{
+                    data: [35, 25, 20, 15, 5], // Estimated Composition
+                    backgroundColor: ['#0F172A', '#334155', '#DC2626', '#D97706', '#94A3B8'], 
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { padding: 20, font: { family: 'Inter' } } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) { return context.label + ': ' + context.raw + '%'; }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 2. Time Chart (Bar) - Speed Comparison
+        const ctxTime = document.getElementById('timeChart').getContext('2d');
+        new Chart(ctxTime, {
+            type: 'bar',
+            data: {
+                labels: ['Blue Button', 'Official Request (ROI)'],
+                datasets: [{
+                    label: 'Days to Receive',
+                    data: [0.1, 25], // Instant vs 20-30 days
+                    backgroundColor: ['#DC2626', '#0F172A'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Days Waiting' },
+                        grid: { display: false }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // 3. Comparison Chart (Radar)
+        const ctxComp = document.getElementById('comparisonChart').getContext('2d');
+        new Chart(ctxComp, {
+            type: 'radar',
+            data: {
+                labels: ['Speed', 'Cost (Free)', 'Ease of Use', 'Legal Status', 'Detail Level'],
+                datasets: [{
+                    label: 'Blue Button',
+                    data: [10, 10, 9, 5, 10],
+                    fill: true,
+                    backgroundColor: 'rgba(15, 23, 42, 0.2)',
+                    borderColor: '#0F172A',
+                    pointBackgroundColor: '#0F172A'
+                }, {
+                    label: 'Official ROI',
+                    data: [2, 10, 3, 10, 10],
+                    fill: true,
+                    backgroundColor: 'rgba(220, 38, 38, 0.2)',
+                    borderColor: '#DC2626',
+                    pointBackgroundColor: '#DC2626'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#E2E8F0' },
+                        grid: { color: '#E2E8F0' },
+                        pointLabels: { font: { family: 'Inter', size: 11, weight: '600' } },
+                        suggestedMin: 0,
+                        suggestedMax: 10,
+                        ticks: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
