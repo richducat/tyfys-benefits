@@ -25,6 +25,8 @@
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+
+        /* Chart Container Styling - MANDATORY */
         .chart-container {
             position: relative;
             width: 100%;
@@ -37,6 +39,8 @@
         @media (min-width: 768px) {
             .chart-container { height: 400px; }
         }
+
+        /* Custom Flowchart Connector Styles */
         .step-connector { position: relative; }
         .step-connector::after {
             content: '';
@@ -49,12 +53,16 @@
             z-index: 0;
         }
         .step-connector:last-child::after { display: none; }
+
+        /* Branding Colors */
         .bg-tyfys-blue { background-color: #0F172A; }
         .text-tyfys-blue { color: #0F172A; }
         .bg-tyfys-accent { background-color: #DC2626; }
         .text-tyfys-accent { color: #DC2626; }
         .bg-brand-gold { background-color: #D97706; }
         .text-brand-gold { color: #D97706; }
+
+        /* Card Hover Effects */
         .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .hover-lift:hover {
             transform: translateY(-5px);
@@ -62,9 +70,10 @@
         }
     </style>
 </head>
-<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+<body class="font-sans text-slate-800 antialiased bg-slate-50">
+
+    <!-- Navigation (TYFYS standard) -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
                 <div class="flex items-center gap-3">
@@ -114,358 +123,364 @@
         </div>
     </nav>
 
-    <main class="flex-1">
-        <!-- Hero Section -->
-        <header class="bg-white shadow-sm border-b border-gray-100">
-            <div class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center">
-                <div class="inline-block bg-blue-50 text-tyfys-blue px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-wide uppercase">Official 2025 Transition Update</div>
-                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight tracking-tight">
-                    Secure Your Benefits <br><span class="text-tyfys-accent">Before It's Too Late</span>
-                </h1>
-                <p class="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-                    The VA is retiring old login systems in 2025. TYFYS.net presents a frustration-free guide written specifically for senior veterans to secure their accounts.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#guide" class="bg-tyfys-accent text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:bg-red-700 transition transform hover:-translate-y-1">Start The Guide</a>
-                    <a href="#timeline" class="border-2 border-slate-200 text-slate-700 px-8 py-3 rounded-lg font-bold hover:bg-slate-50 transition">View Deadlines</a>
-                </div>
-            </div>
-        </header>
+    <!-- Hero Section -->
+    <header class="bg-white shadow-sm border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center">
+            <div class="inline-block bg-blue-50 text-tyfys-blue px-4 py-1 rounded-full text-xs font-bold mb-4 tracking-wide uppercase">Official 2025 Transition Update</div>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight tracking-tight">
+                Secure Your Benefits <br><span class="text-tyfys-accent">Before It's Too Late</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+                The VA is retiring old login systems in 2025. TYFYS.net presents a frustration-free guide written specifically for senior veterans to secure their accounts.
+            </p>
+        </div>
+    </div>
 
-        <!-- Section 1: The Timeline (Change) -->
-        <section id="timeline" class="py-20 px-4 bg-slate-50 border-b border-slate-200">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5">
-                    <h2 class="text-3xl font-bold text-slate-900 mb-6">Why Act Now? <br><span class="text-brand-gold">The Clock is Ticking</span></h2>
-                    <p class="text-slate-600 text-lg mb-6 leading-relaxed">
-                        My HealtheVet and DS Logon are being retired to improve security. Don't wait until the last day to switch to <strong>Login.gov</strong> or <strong>ID.me</strong>.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm border-l-4 border-tyfys-accent">
-                            <div class="text-2xl">⚠️</div>
-                            <div>
-                                <h3 class="font-bold text-slate-900">Jan 31, 2025</h3>
-                                <p class="text-sm text-slate-500">My HealtheVet username/passwords retire.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm border-l-4 border-brand-gold">
-                            <div class="text-2xl">⚠️</div>
-                            <div>
-                                <h3 class="font-bold text-slate-900">Sept 30, 2025</h3>
-                                <p class="text-sm text-slate-500">DS Logon systems are fully retired.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:col-span-7 bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
-                    <div class="chart-container">
-                        <canvas id="timelineChart"></canvas>
-                    </div>
-                    <p class="text-center text-xs text-slate-400 mt-4 font-mono">Data Source: VA.gov 2025 Transition Timeline</p>
-                </div>
-            </div>
-        </section>
+    <!-- Blog Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
 
-        <!-- Section 2: Preparation Checklist (Organize) -->
-        <section id="prep" class="py-20 px-4 bg-white">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-16">
-                    <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">Phase 1: Preparation</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">The "Before You Start" Checklist</h2>
-                    <p class="text-slate-600 max-w-2xl mx-auto">
-                        Gather these items before you sit down at the computer. Being prepared prevents the system from "timing out" while you search for your wallet.
-                    </p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-slate-50 rounded-xl p-8 text-center border border-slate-100 hover-lift">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">✉️</div>
-                        <h3 class="font-bold text-slate-900 text-lg mb-2">Unique Email</h3>
-                        <p class="text-sm text-slate-500">You need your own email address. You cannot share one with your spouse.</p>
-                    </div>
-                    <div class="bg-slate-50 rounded-xl p-8 text-center border border-slate-100 hover-lift">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">📱</div>
-                        <h3 class="font-bold text-slate-900 text-lg mb-2">Mobile Phone</h3>
-                        <p class="text-sm text-slate-500">Needed to receive a security code via text or call.</p>
-                    </div>
-                    <div class="bg-slate-50 rounded-xl p-8 text-center border border-slate-100 hover-lift">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">👓</div>
-                        <h3 class="font-bold text-slate-900 text-lg mb-2">Glasses</h3>
-                        <p class="text-sm text-slate-500">There will be small text and numbers to read. Have them ready!</p>
-                    </div>
-                    <div class="bg-slate-50 rounded-xl p-8 text-center border border-slate-100 hover-lift">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">🆔</div>
-                        <h3 class="font-bold text-slate-900 text-lg mb-2">Current ID</h3>
-                        <p class="text-sm text-slate-500">Driver's License, State ID, or Passport. Check expiration!</p>
-                    </div>
-                </div>
-                <div class="mt-10 bg-amber-50 rounded-xl p-6 border border-amber-200 flex flex-col md:flex-row gap-6 items-center">
-                    <div class="flex-shrink-0 bg-brand-gold text-white font-bold px-4 py-2 rounded shadow-sm">SENIOR PRO TIP</div>
-                    <p class="text-slate-800 text-sm md:text-base italic">
-                        "Does using a smartphone camera for a 'selfie' make you nervous? Don't worry. We cover an <strong>In-Person</strong> option later that lets you skip the camera entirely."
-                    </p>
-                </div>
+        <!-- Category: VA Guides -->
+        <div class="mb-16">
+            <div class="flex items-center gap-2 mb-8">
+                <i data-lucide="book-open-check" class="h-6 w-6 text-gold-500"></i>
+                <h2 class="text-2xl font-serif font-bold text-navy-900">VA Guides</h2>
             </div>
-        </section>
-
-        <!-- Section 3: Comparison (Compare) -->
-        <section id="compare" class="py-20 px-4 bg-slate-50 border-y border-slate-200">
-            <div class="max-w-6xl mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div class="order-2 lg:order-1 bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="font-bold text-slate-500 uppercase text-xs tracking-wider">Feature Breakdown</h3>
-                            <div class="flex gap-4 text-xs font-bold">
-                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tyfys-blue"></span> Login.gov</span>
-                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> ID.me</span>
-                            </div>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="comparisonChart"></canvas>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-navy-500 uppercase tracking-wider">Step-by-Step</span>
+                        <h3 class="text-xl font-bold text-navy-900 mt-2 mb-3"><a href="senior-veterans-va-gov-account-guide-2025.html" class="hover:text-gold-600">Create Your VA.gov Account (2025 Update)</a></h3>
+                        <p class="text-slate-600 text-sm mb-4">Senior-friendly walkthrough for moving from My HealtheVet or DS Logon to Login.gov/ID.me without the tech headaches.</p>
+                        <a href="senior-veterans-va-gov-account-guide-2025.html" class="text-navy-800 font-bold text-sm flex items-center gap-1">Read Article <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
                     </div>
-                    <div class="order-1 lg:order-2">
-                        <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">Phase 2: Decision</span>
-                        <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-6">Choose Your Path</h2>
-                        <p class="text-slate-600 text-lg mb-8">
-                            You have two main doors to enter the VA.gov house. Both work perfectly fine, but they have different strengths.
-                        </p>
-                        <div class="space-y-6">
-                            <div class="bg-white p-6 rounded-lg border-l-4 border-tyfys-blue shadow-sm">
-                                <h4 class="font-bold text-tyfys-blue text-lg">Option A: Login.gov</h4>
-                                <p class="text-slate-600 text-sm mt-1">Run by the government. Simple, direct, and usually the best place to start for most veterans.</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-lg border-l-4 border-brand-gold shadow-sm">
-                                <h4 class="font-bold text-brand-gold text-lg">Option B: ID.me</h4>
-                                <p class="text-slate-600 text-sm mt-1">A private partner. Offers more robust support options, including video calls and UPS store visits.</p>
-                            </div>
-                        </div>
-                        <div class="mt-8 p-4 bg-blue-50 rounded text-sm text-tyfys-blue font-medium">
-                            <strong>TYFYS Recommendation:</strong> Try Login.gov first. If you get stuck, switch to ID.me for their offline support.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Step-by-Step Guide (Organize/Flow) -->
-        <section id="guide" class="py-20 px-4 bg-white">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-16">
-                    <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">Phase 3: Execution</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Digital Account Creation</h2>
-                </div>
-                <div class="mb-20">
-                    <div class="flex items-center mb-10 pb-4 border-b border-slate-100">
-                        <div class="bg-tyfys-blue text-white rounded-lg w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 shadow-lg">A</div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-900">Creating a Login.gov Account</h3>
-                            <p class="text-slate-500 text-sm">The primary government pathway.</p>
-                        </div>
-                    </div>
-                    <div class="pl-4">
-                        <div class="step-connector flex pb-12 group">
-                            <div class="flex-shrink-0 w-16 text-center z-10">
-                                <span class="bg-white border-2 border-slate-200 text-slate-400 group-hover:border-tyfys-blue group-hover:text-tyfys-blue transition rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-sm">1</span>
-                            </div>
-                            <div class="ml-4 pt-1 w-full">
-                                <h4 class="font-bold text-slate-900 text-lg">Start at VA.gov</h4>
-                                <p class="text-slate-600 mt-1">Click "Sign In" at the top right, then select "Create an account with Login.gov".</p>
-                            </div>
-                        </div>
-                        <div class="step-connector flex pb-12 group">
-                            <div class="flex-shrink-0 w-16 text-center z-10">
-                                <span class="bg-white border-2 border-slate-200 text-slate-400 group-hover:border-tyfys-blue group-hover:text-tyfys-blue transition rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-sm">2</span>
-                            </div>
-                            <div class="ml-4 pt-1 w-full">
-                                <h4 class="font-bold text-slate-900 text-lg">Enter Email & Confirm</h4>
-                                <p class="text-slate-600 mt-1">Enter your email. Check your inbox immediately for a confirmation link and click it.</p>
-                            </div>
-                        </div>
-                        <div class="step-connector flex pb-12 group">
-                            <div class="flex-shrink-0 w-16 text-center z-10">
-                                <span class="bg-white border-2 border-slate-200 text-slate-400 group-hover:border-tyfys-blue group-hover:text-tyfys-blue transition rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-sm">3</span>
-                            </div>
-                            <div class="ml-4 pt-1 w-full">
-                                <h4 class="font-bold text-slate-900 text-lg">Create Password</h4>
-                                <p class="text-slate-600 mt-1">Use a "pass-phrase" easy to remember but hard to guess (e.g., <code>Blue_Coffee_Mug_1955</code>).</p>
-                            </div>
-                        </div>
-                        <div class="step-connector flex group">
-                            <div class="flex-shrink-0 w-16 text-center z-10">
-                                <span class="bg-tyfys-accent text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-md">4</span>
-                            </div>
-                            <div class="ml-4 pt-1 w-full bg-red-50 p-6 rounded-lg border border-red-100 -mt-4">
-                                <h4 class="font-bold text-tyfys-accent text-lg">Verify Identity</h4>
-                                <p class="text-slate-700 mt-1">Upload a photo of your Driver's License. If this fails, don't panic—you can choose the <strong>In-Person (USPS)</strong> option.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex items-center mb-8 pb-4 border-b border-slate-100">
-                        <div class="bg-brand-gold text-white rounded-lg w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 shadow-lg">B</div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-900">Creating an ID.me Account</h3>
-                            <p class="text-slate-500 text-sm">Best if you need extra help.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white p-8 rounded-xl border-2 border-slate-100 shadow-sm">
-                        <p class="mb-6 text-slate-600 text-center">The setup process is similar, but ID.me offers three distinct ways to verify your identity in Step 5:</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="bg-slate-50 p-6 rounded-lg text-center hover:bg-white hover:shadow-md transition border border-slate-100">
-                                <div class="font-bold text-lg mb-2 text-slate-900">Self-Service</div>
-                                <p class="text-xs text-slate-500">Take photos with your phone (Fastest)</p>
-                            </div>
-                            <div class="bg-slate-50 p-6 rounded-lg text-center hover:bg-white hover:shadow-md transition border border-slate-100">
-                                <div class="font-bold text-lg mb-2 text-slate-900">Video Call</div>
-                                <p class="text-xs text-slate-500">Chat with a "Video Referee" via webcam</p>
-                            </div>
-                            <div class="bg-amber-50 p-6 rounded-lg text-center hover:shadow-md transition border border-amber-100">
-                                <div class="font-bold text-lg mb-2 text-brand-gold">In-Person</div>
-                                <p class="text-xs text-slate-700">Visit a UPS Store (No camera needed)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 5: In-Person Options (Relationship/Distribution) -->
-        <section id="offline" class="py-20 px-4 bg-tyfys-blue text-white">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-12">
-                    <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">Phase 4: Alternatives</span>
-                    <h2 class="text-3xl font-bold mt-2">Struggling with the Camera?</h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 lg:order-1">
-                        <p class="text-slate-300 text-lg mb-8">
-                            You are not alone. Many veterans prefer to verify their identity in person rather than fighting with a smartphone camera.
-                        </p>
-                        <div class="space-y-6">
-                            <div class="bg-white/10 backdrop-blur p-6 rounded-xl border border-white/10">
-                                <h3 class="font-bold text-brand-gold text-xl mb-4">Option A: The UPS Store (For ID.me)</h3>
-                                <ul class="list-disc pl-5 space-y-2 text-slate-200">
-                                    <li>Select "Verify in Person" on the ID.me screen.</li>
-                                    <li>Write down your <strong>Registration Code</strong>.</li>
-                                    <li>Bring your Code, ID, and a Utility Bill to the store.</li>
-                                </ul>
-                            </div>
-                            <div class="bg-white/10 backdrop-blur p-6 rounded-xl border border-white/10">
-                                <h3 class="font-bold text-white text-xl mb-4">Option B: The Post Office (For Login.gov)</h3>
-                                <ul class="list-disc pl-5 space-y-2 text-slate-200">
-                                    <li>Select "Verify at a Post Office" on Login.gov.</li>
-                                    <li>You will get a <strong>Barcode</strong> via email.</li>
-                                    <li>Bring the Barcode and your State ID to a participating USPS location.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-1 lg:order-2">
-                        <div class="bg-white rounded-xl p-8 shadow-2xl text-slate-800">
-                            <h3 class="text-center font-bold text-slate-500 mb-6 uppercase text-xs tracking-wider">Verification Method Popularity</h3>
-                            <div class="chart-container">
-                                <canvas id="verificationChart"></canvas>
-                            </div>
-                            <p class="text-center text-xs text-slate-400 mt-6 italic">In-person verification is a standard and respected choice.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 6: Troubleshooting & Help -->
-        <section class="py-20 px-4 bg-slate-100 border-t border-slate-200">
-            <div class="max-w-5xl mx-auto">
-                <h2 class="text-3xl font-bold text-slate-900 mb-10 text-center">Troubleshooting & Support</h2>
-                <div class="bg-white p-8 rounded-2xl shadow-sm mb-12">
-                    <h3 class="font-bold text-lg mb-6 text-center text-slate-800 uppercase tracking-wide">Quick Camera Fixes</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100">
-                        <div class="pt-4 md:pt-0">
-                            <div class="text-3xl mb-3">💡</div>
-                            <div class="font-bold text-slate-900">Bright Light</div>
-                            <div class="text-sm text-slate-500 mt-2">Turn on all lights. Dark rooms are the #1 cause of failure.</div>
-                        </div>
-                        <div class="pt-4 md:pt-0 md:pl-4">
-                            <div class="text-3xl mb-3">⬛</div>
-                            <div class="font-bold text-slate-900">Dark Background</div>
-                            <div class="text-sm text-slate-500 mt-2">Place ID on a dark surface. White tables cause glare.</div>
-                        </div>
-                        <div class="pt-4 md:pt-0 md:pl-4">
-                            <div class="text-3xl mb-3">💪</div>
-                            <div class="font-bold text-slate-900">Steady Hands</div>
-                            <div class="text-sm text-slate-500 mt-2">Brace your elbows on the table while holding the phone.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white p-8 rounded-xl shadow-sm border-t-4 border-tyfys-blue hover:shadow-md transition">
-                        <h3 class="font-bold text-tyfys-blue text-xl mb-2">MyVA411 Help Line</h3>
-                        <p class="text-slate-600 mb-4 text-sm">The "front door" to the VA. They can guide you through any issue.</p>
-                        <a href="tel:8006982411" class="text-2xl font-black text-tyfys-accent hover:underline">800-698-2411</a>
-                    </div>
-                    <div class="bg-white p-8 rounded-xl shadow-sm border-t-4 border-brand-gold hover:shadow-md transition">
-                        <h3 class="font-bold text-brand-gold text-xl mb-2">Login.gov Support</h3>
-                        <p class="text-slate-600 mb-4 text-sm">24/7 dedicated support specifically for login issues.</p>
-                        <a href="tel:8448756446" class="text-2xl font-black text-tyfys-blue hover:underline">844-875-6446</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div class="col-span-1 md:col-span-2">
-                    <div class="flex items-center gap-3 mb-6">
-                        <i data-lucide="shield" class="h-8 w-8 text-gold-500"></i>
-                        <span class="text-white font-bold text-2xl">Thank You For Your Service</span>
-                    </div>
-                    <p class="text-slate-400 mb-6 max-w-sm leading-relaxed">
-                        We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
-                        <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
-                    <ul class="space-y-4 text-sm">
-                        <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
-                        <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
-                        <li><a href="mission_team.html" class="hover:text-gold-500 transition">Our Team</a></li>
-                        <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
-                        <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
-                        <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
-                    <ul class="space-y-4 text-sm">
-                        <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i> 11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
-                        <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i> support@thankyouforyourservice.co</li>
-                        <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i> 321-248-2805</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
-                &copy; 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+                </article>
             </div>
         </div>
+
+        <!-- Category: Strategy -->
+        <div class="mb-16">
+            <div class="flex items-center gap-2 mb-8">
+                <i data-lucide="crosshair" class="h-6 w-6 text-gold-500"></i>
+                <h2 class="text-2xl font-serif font-bold text-navy-900">Winning Claim Strategies</h2>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: The Timeline (Change) -->
+    <section id="timeline" class="py-20 px-4 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5">
+                <h2 class="text-3xl font-bold text-slate-900 mb-6">Why Act Now? <br><span class="text-brand-gold">The Clock is Ticking</span></h2>
+                <p class="text-slate-600 text-lg mb-6 leading-relaxed">
+                    My HealtheVet and DS Logon are being retired to improve security. Don't wait until the last day to switch to <strong>Login.gov</strong> or <strong>ID.me</strong>.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm border-l-4 border-tyfys-accent">
+                        <div class="text-2xl">⚠️</div>
+                        <div>
+                            <h3 class="font-bold text-slate-900">Jan 31, 2025</h3>
+                            <p class="text-sm text-slate-500">My HealtheVet username/passwords retire.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-white rounded-lg shadow-sm border-l-4 border-brand-gold">
+                        <div class="text-2xl">⚠️</div>
+                        <div>
+                            <h3 class="font-bold text-slate-900">Sept 30, 2025</h3>
+                            <p class="text-sm text-slate-500">DS Logon systems are fully retired.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
+                <div class="chart-container">
+                    <canvas id="timelineChart"></canvas>
+                </div>
+                <p class="text-center text-xs text-slate-400 mt-4 font-mono">Data Source: VA.gov 2025 Transition Timeline</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Preparation Checklist (Organize) -->
+    <section id="prep" class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">Phase 1: Preparation</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">The "Before You Start" Checklist</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">
+                    Gather these items before you sit down at the computer. Being prepared prevents the system from "timing out" while you search for your wallet.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-slate-50 rounded-xl p-8 text-center border border-slate-100 hover-lift">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">✉️</div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">Unique Email</h3>
+                    <p class="text-sm text-slate-500">You need your own email address. You cannot share one with your spouse.</p>
+                </div>
+                <div class="bg-slate-50 rounded-xl p-8 text-center border border-slate-100 hover-lift">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">📱</div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">Mobile Phone</h3>
+                    <p class="text-sm text-slate-500">Needed to receive a security code via text or call.</p>
+                </div>
+                <div class="bg-slate-50 rounded-xl p-8 text-center border border-slate-100 hover-lift">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">👓</div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">Glasses</h3>
+                    <p class="text-sm text-slate-500">There will be small text and numbers to read. Have them ready!</p>
+                </div>
+                <div class="bg-slate-50 rounded-xl p-8 text-center border border-slate-100 hover-lift">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">🆔</div>
+                    <h3 class="font-bold text-slate-900 text-lg mb-2">Current ID</h3>
+                    <p class="text-sm text-slate-500">Driver's License, State ID, or Passport. Check expiration!</p>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-amber-50 rounded-xl p-6 border border-amber-200 flex flex-col md:flex-row gap-6 items-center">
+                <div class="flex-shrink-0 bg-brand-gold text-white font-bold px-4 py-2 rounded shadow-sm">SENIOR PRO TIP</div>
+                <p class="text-slate-800 text-sm md:text-base italic">
+                    "Does using a smartphone camera for a 'selfie' make you nervous? Don't worry. We cover an <strong>In-Person</strong> option later that lets you skip the camera entirely."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Comparison (Compare) -->
+    <section id="compare" class="py-20 px-4 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-slate-500 uppercase text-xs tracking-wider">Feature Breakdown</h3>
+                        <div class="flex gap-4 text-xs font-bold">
+                            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tyfys-blue"></span> Login.gov</span>
+                            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-brand-gold"></span> ID.me</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">Phase 2: Decision</span>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-6">Choose Your Path</h2>
+                    <p class="text-slate-600 text-lg mb-8">
+                        You have two main doors to enter the VA.gov house. Both work perfectly fine, but they have different strengths.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-lg border-l-4 border-tyfys-blue shadow-sm">
+                            <h4 class="font-bold text-tyfys-blue text-lg">Option A: Login.gov</h4>
+                            <p class="text-slate-600 text-sm mt-1">Run by the government. Simple, direct, and usually the best place to start for most veterans.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg border-l-4 border-brand-gold shadow-sm">
+                            <h4 class="font-bold text-brand-gold text-lg">Option B: ID.me</h4>
+                            <p class="text-slate-600 text-sm mt-1">A private partner. Offers more robust support options, including video calls and UPS store visits.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-blue-50 rounded text-sm text-tyfys-blue font-medium">
+                        <strong>TYFYS Recommendation:</strong> Try Login.gov first. If you get stuck, switch to ID.me for their offline support.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Step-by-Step Guide (Organize/Flow) -->
+    <section id="guide" class="py-20 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">Phase 3: Execution</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Digital Account Creation</h2>
+            </div>
+
+            <div class="mb-20">
+                <div class="flex items-center mb-10 pb-4 border-b border-slate-100">
+                    <div class="bg-tyfys-blue text-white rounded-lg w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 shadow-lg">A</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900">Creating a Login.gov Account</h3>
+                        <p class="text-slate-500 text-sm">The primary government pathway.</p>
+                    </div>
+                </div>
+
+                <div class="pl-4">
+                    <div class="step-connector flex pb-12 group">
+                        <div class="flex-shrink-0 w-16 text-center z-10">
+                            <span class="bg-white border-2 border-slate-200 text-slate-400 group-hover:border-tyfys-blue group-hover:text-tyfys-blue transition rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-sm">1</span>
+                        </div>
+                        <div class="ml-4 pt-1 w-full">
+                            <h4 class="font-bold text-slate-900 text-lg">Start at VA.gov</h4>
+                            <p class="text-slate-600 mt-1">Click "Sign In" at the top right, then select "Create an account with Login.gov".</p>
+                        </div>
+                    </div>
+                    <div class="step-connector flex pb-12 group">
+                        <div class="flex-shrink-0 w-16 text-center z-10">
+                            <span class="bg-white border-2 border-slate-200 text-slate-400 group-hover:border-tyfys-blue group-hover:text-tyfys-blue transition rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-sm">2</span>
+                        </div>
+                        <div class="ml-4 pt-1 w-full">
+                            <h4 class="font-bold text-slate-900 text-lg">Enter Email & Confirm</h4>
+                            <p class="text-slate-600 mt-1">Enter your email. Check your inbox immediately for a confirmation link and click it.</p>
+                        </div>
+                    </div>
+                    <div class="step-connector flex pb-12 group">
+                        <div class="flex-shrink-0 w-16 text-center z-10">
+                            <span class="bg-white border-2 border-slate-200 text-slate-400 group-hover:border-tyfys-blue group-hover:text-tyfys-blue transition rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-sm">3</span>
+                        </div>
+                        <div class="ml-4 pt-1 w-full">
+                            <h4 class="font-bold text-slate-900 text-lg">Create Password</h4>
+                            <p class="text-slate-600 mt-1">Use a "pass-phrase" easy to remember but hard to guess (e.g., <code>Blue_Coffee_Mug_1955</code>).</p>
+                        </div>
+                    </div>
+                    <div class="step-connector flex group">
+                        <div class="flex-shrink-0 w-16 text-center z-10">
+                            <span class="bg-tyfys-accent text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-md">4</span>
+                        </div>
+                        <div class="ml-4 pt-1 w-full bg-red-50 p-6 rounded-lg border border-red-100 -mt-4">
+                            <h4 class="font-bold text-tyfys-accent text-lg">Verify Identity</h4>
+                            <p class="text-slate-700 mt-1">Upload a photo of your Driver's License. If this fails, don't panic—you can choose the <strong>In-Person (USPS)</strong> option.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="flex items-center mb-8 pb-4 border-b border-slate-100">
+                    <div class="bg-brand-gold text-white rounded-lg w-12 h-12 flex items-center justify-center font-bold text-xl mr-4 shadow-lg">B</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900">Creating an ID.me Account</h3>
+                        <p class="text-slate-500 text-sm">Best if you need extra help.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl border-2 border-slate-100 shadow-sm">
+                    <p class="mb-6 text-slate-600 text-center">The setup process is similar, but ID.me offers three distinct ways to verify your identity in Step 5:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-slate-50 p-6 rounded-lg text-center hover:bg-white hover:shadow-md transition border border-slate-100">
+                            <div class="font-bold text-lg mb-2 text-slate-900">Self-Service</div>
+                            <p class="text-xs text-slate-500">Take photos with your phone (Fastest)</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg text-center hover:bg-white hover:shadow-md transition border border-slate-100">
+                            <div class="font-bold text-lg mb-2 text-slate-900">Video Call</div>
+                            <p class="text-xs text-slate-500">Chat with a "Video Referee" via webcam</p>
+                        </div>
+                        <div class="bg-amber-50 p-6 rounded-lg text-center hover:shadow-md transition border border-amber-100">
+                            <div class="font-bold text-lg mb-2 text-brand-gold">In-Person</div>
+                            <p class="text-xs text-slate-700">Visit a UPS Store (No camera needed)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 5: In-Person Options (Relationship/Distribution) -->
+    <section id="offline" class="py-20 px-4 bg-tyfys-blue text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                 <span class="text-tyfys-accent font-bold tracking-widest text-sm uppercase">Phase 4: Alternatives</span>
+                 <h2 class="text-3xl font-bold mt-2">Struggling with the Camera?</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <p class="text-slate-300 text-lg mb-8">
+                        You are not alone. Many veterans prefer to verify their identity in person rather than fighting with a smartphone camera.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="bg-white/10 backdrop-blur p-6 rounded-xl border border-white/10">
+                            <h3 class="font-bold text-brand-gold text-xl mb-4">Option A: The UPS Store (For ID.me)</h3>
+                            <ul class="list-disc pl-5 space-y-2 text-slate-200">
+                                <li>Select "Verify in Person" on the ID.me screen.</li>
+                                <li>Write down your <strong>Registration Code</strong>.</li>
+                                <li>Bring your Code, ID, and a Utility Bill to the store.</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white/10 backdrop-blur p-6 rounded-xl border border-white/10">
+                            <h3 class="font-bold text-white text-xl mb-4">Option B: The Post Office (For Login.gov)</h3>
+                            <ul class="list-disc pl-5 space-y-2 text-slate-200">
+                                <li>Select "Verify at a Post Office" on Login.gov.</li>
+                                <li>You will get a <strong>Barcode</strong> via email.</li>
+                                <li>Bring the Barcode and your State ID to a participating USPS location.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <div class="bg-white rounded-xl p-8 shadow-2xl text-slate-800">
+                        <h3 class="text-center font-bold text-slate-500 mb-6 uppercase text-xs tracking-wider">Verification Method Popularity</h3>
+                        <div class="chart-container">
+                            <canvas id="verificationChart"></canvas>
+                        </div>
+                        <p class="text-center text-xs text-slate-400 mt-6 italic">In-person verification is a standard and respected choice.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Troubleshooting & Help -->
+    <section class="py-20 px-4 bg-slate-100 border-t border-slate-200">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-slate-900 mb-10 text-center">Troubleshooting & Support</h2>
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm mb-12">
+                <h3 class="font-bold text-lg mb-6 text-center text-slate-800 uppercase tracking-wide">Quick Camera Fixes</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                    <div class="pt-4 md:pt-0">
+                        <div class="text-3xl mb-3">💡</div>
+                        <div class="font-bold text-slate-900">Bright Light</div>
+                        <div class="text-sm text-slate-500 mt-2">Turn on all lights. Dark rooms are the #1 cause of failure.</div>
+                    </div>
+                    <div class="pt-4 md:pt-0 md:pl-4">
+                        <div class="text-3xl mb-3">⬛</div>
+                        <div class="font-bold text-slate-900">Dark Background</div>
+                        <div class="text-sm text-slate-500 mt-2">Place ID on a dark surface. White tables cause glare.</div>
+                    </div>
+                    <div class="pt-4 md:pt-0 md:pl-4">
+                        <div class="text-3xl mb-3">💪</div>
+                        <div class="font-bold text-slate-900">Steady Hands</div>
+                        <div class="text-sm text-slate-500 mt-2">Brace your elbows on the table while holding the phone.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-8 rounded-xl shadow-sm border-t-4 border-tyfys-blue hover:shadow-md transition">
+                    <h3 class="font-bold text-tyfys-blue text-xl mb-2">MyVA411 Help Line</h3>
+                    <p class="text-slate-600 mb-4 text-sm">The "front door" to the VA. They can guide you through any issue.</p>
+                    <a href="tel:8006982411" class="text-2xl font-black text-tyfys-accent hover:underline">800-698-2411</a>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm border-t-4 border-brand-gold hover:shadow-md transition">
+                    <h3 class="font-bold text-brand-gold text-xl mb-2">Login.gov Support</h3>
+                    <p class="text-slate-600 mb-4 text-sm">24/7 dedicated support specifically for login issues.</p>
+                    <a href="tel:8448756446" class="text-2xl font-black text-tyfys-blue hover:underline">844-875-6446</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-center">
+        <p>&copy; 2025 Thank You For Your Service. All rights reserved.</p>
     </footer>
 
     <!-- JavaScript for Charts and Navigation -->
     <script src="apps/mobile-nav.js"></script>
+    <script>lucide.createIcons();</script>
     <script>
         function wrapLabel(label) {
             const maxLen = 16;
             if (label.length <= maxLen) return label;
+
             const words = label.split(' ');
             const lines = [];
             let currentLine = words[0];
+
             for (let i = 1; i < words.length; i++) {
                 if ((currentLine + " " + words[i]).length <= maxLen) {
                     currentLine += " " + words[i];
@@ -483,11 +498,7 @@
                 title: function(tooltipItems) {
                     const item = tooltipItems[0];
                     let label = item.chart.data.labels[item.dataIndex];
-                    if (Array.isArray(label)) {
-                        return label.join(' ');
-                    } else {
-                        return label;
-                    }
+                    return Array.isArray(label) ? label.join(' ') : label;
                 }
             }
         };
@@ -624,9 +635,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                layout: {
-                    padding: 20
-                },
+                layout: { padding: 20 },
                 plugins: {
                     legend: {
                         position: 'bottom',
@@ -644,10 +653,6 @@
                 }
             }
         });
-
-        if (window.lucide?.createIcons) {
-            window.lucide.createIcons();
-        }
     </script>
 </body>
 </html>
