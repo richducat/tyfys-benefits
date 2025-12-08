@@ -1,134 +1,320 @@
-(function() {
-  const links = [
-    { label: 'Home', href: 'index.html' },
-    { label: 'About Us', href: 'about_us.html' },
-    { label: 'Our Team', href: 'mission_team.html' },
-    { label: 'Our Process', href: 'process.html' },
-    { label: 'Intake', href: 'intake-portal.html' },
+(function () {
+  const primaryLinks = [
+    { label: 'Home', href: 'index.html', group: 'Primary', icon: 'home' },
+    { label: 'About Us', href: 'about_us.html', group: 'Primary', icon: 'info' },
+    { label: 'Our Team', href: 'mission_team.html', group: 'Primary', icon: 'users' },
+    { label: 'Our Process', href: 'process.html', group: 'Primary', icon: 'route' },
+    { label: 'Intake', href: 'intake-portal.html', group: 'Primary', icon: 'clipboard-list' }
   ];
 
   const claimTypes = [
-    { label: 'Mental Health & PTSD', href: 'claims_mental_health.html' },
-    { label: 'Back, Neck & Joints', href: 'claims_musculoskeletal.html' },
+    {
+      label: 'Mental Health & PTSD',
+      href: 'claims_mental_health.html',
+      group: 'Claim Types',
+      icon: 'brain',
+      description: 'Therapy DBQs, stressor statements, and nexus support.'
+    },
+    {
+      label: 'Back, Neck & Joints',
+      href: 'claims_musculoskeletal.html',
+      group: 'Claim Types',
+      icon: 'bone',
+      description: 'Orthopedic exams, ROM charts, and pain documentation.'
+    }
   ];
 
   const resources = [
-    { label: 'Backpay Calculator', href: 'calculator.html' },
-    { label: 'Compare: VSO vs. Us', href: 'comparison.html' },
-    { label: 'Briefing Room', href: 'education.html' },
-    { label: 'Blog', href: 'blog.html' },
+    {
+      label: 'Backpay Calculator',
+      href: 'calculator.html',
+      group: 'Resources',
+      icon: 'calculator',
+      description: 'Project potential monthly increases instantly.'
+    },
+    {
+      label: 'Compare: VSO vs. Us',
+      href: 'comparison.html',
+      group: 'Resources',
+      icon: 'scale',
+      description: 'Understand how private evidence accelerates claims.'
+    },
+    {
+      label: 'Briefing Room',
+      href: 'education.html',
+      group: 'Resources',
+      icon: 'graduation-cap',
+      description: 'Step-by-step guides to avoid VA claim pitfalls.'
+    },
+    {
+      label: 'Blog',
+      href: 'blog.html',
+      group: 'Resources',
+      icon: 'book-open',
+      description: 'Expert commentary on ratings, appeals, and benefits.'
+    }
   ];
 
-  function createLink({ label, href }) {
-    const anchor = document.createElement('a');
-    anchor.href = href;
-    anchor.textContent = label;
-    anchor.className = 'block w-full text-left px-4 py-3 rounded-lg font-semibold text-slate-800 hover:bg-navy-50 hover:text-navy-800 transition';
-    anchor.setAttribute('role', 'menuitem');
-    return anchor;
-  }
-
-  function createSection(title, items) {
-    const section = document.createElement('div');
-    section.className = 'space-y-2';
-
-    const header = document.createElement('p');
-    header.className = 'text-xs font-bold uppercase tracking-[0.2em] text-slate-400 px-2';
-    header.textContent = title;
-    section.appendChild(header);
-
-    items.forEach((item) => section.appendChild(createLink(item)));
-    return section;
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const nav = document.querySelector('nav');
-    const toggleButton = nav?.querySelector('[data-mobile-menu-toggle]');
-
-    if (!nav || !toggleButton) return;
-
-    const menuWrapper = document.createElement('div');
-    menuWrapper.className = 'md:hidden fixed inset-0 z-50 hidden';
-
-    menuWrapper.innerHTML = `
-      <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 transition-opacity duration-300" data-mobile-overlay></div>
-      <div class="absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300" data-mobile-panel>
-        <div class="flex items-center justify-between h-16 px-5 border-b border-slate-200">
-          <div class="flex items-center gap-2">
-            <i data-lucide="shield-check" class="h-6 w-6 text-navy-800"></i>
-            <span class="font-serif font-bold text-lg text-slate-900">TYFYS</span>
-          </div>
-          <button type="button" class="text-slate-500 hover:text-slate-700" aria-label="Close navigation" data-mobile-menu-close>
-            <i data-lucide="x" class="h-6 w-6"></i>
-          </button>
-        </div>
-        <div class="h-[calc(100%-4rem)] overflow-y-auto p-5 space-y-6" data-mobile-menu>
-          <div class="space-y-2" data-mobile-primary></div>
-          <div class="space-y-2" data-mobile-claims></div>
-          <div class="space-y-2" data-mobile-resources></div>
-          <a href="contact.html" class="block text-center bg-navy-800 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-navy-900 transition" data-mobile-cta>Book Discovery Call</a>
-        </div>
-      </div>
-    `;
-
-    const overlay = menuWrapper.querySelector('[data-mobile-overlay]');
-    const panel = menuWrapper.querySelector('[data-mobile-panel]');
-    const closeButton = menuWrapper.querySelector('[data-mobile-menu-close]');
-    const primaryContainer = menuWrapper.querySelector('[data-mobile-primary]');
-    const claimContainer = menuWrapper.querySelector('[data-mobile-claims]');
-    const resourceContainer = menuWrapper.querySelector('[data-mobile-resources]');
-    const menuLinks = menuWrapper.querySelector('[data-mobile-menu]');
-
-    links.forEach((item) => primaryContainer.appendChild(createLink(item)));
-    claimContainer.appendChild(createSection('Claim Types', claimTypes));
-    resourceContainer.appendChild(createSection('Resources', resources));
-
-    function openMenu() {
-      menuWrapper.classList.remove('hidden');
-      document.body.classList.add('overflow-hidden');
-      toggleButton.setAttribute('aria-expanded', 'true');
-      requestAnimationFrame(() => {
-        overlay.classList.remove('opacity-0');
-        panel.classList.remove('translate-x-full');
-      });
+  const quickActions = [
+    {
+      label: 'Book Discovery Call',
+      href: 'contact.html',
+      group: 'Actions',
+      icon: 'phone',
+      description: 'Talk with our team about your claim strategy.'
     }
+  ];
 
-    function closeMenu() {
-      overlay.classList.add('opacity-0');
-      panel.classList.add('translate-x-full');
-      toggleButton.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('overflow-hidden');
-      overlay.addEventListener('transitionend', () => menuWrapper.classList.add('hidden'), { once: true });
-    }
-
-    toggleButton.addEventListener('click', () => {
-      const expanded = toggleButton.getAttribute('aria-expanded') === 'true';
-      if (expanded) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
-    overlay?.addEventListener('click', closeMenu);
-    closeButton?.addEventListener('click', closeMenu);
-
-    menuLinks?.addEventListener('click', (event) => {
-      if (event.target instanceof HTMLAnchorElement) {
-        closeMenu();
-      }
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && toggleButton.getAttribute('aria-expanded') === 'true') {
-        closeMenu();
-      }
-    });
-
-    document.body.appendChild(menuWrapper);
-
+  function renderIcons() {
     if (window.lucide?.createIcons) {
       window.lucide.createIcons();
     }
+  }
+
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('[data-site-nav]');
+    if (!nav) return;
+
+    const navLinks = [...primaryLinks, ...claimTypes, ...resources, ...quickActions];
+
+    // Glassmorphism scroll state
+    const setNavSurface = () => {
+      const scrolled = window.scrollY > 12;
+      nav.classList.toggle('is-scrolled', scrolled);
+    };
+    setNavSurface();
+    window.addEventListener('scroll', setNavSurface, { passive: true });
+
+    // Accessibility controls
+    const root = document.documentElement;
+    let fontScale = 1;
+
+    const applyFontScale = () => {
+      const scale = clamp(fontScale, 0.9, 1.25);
+      root.style.setProperty('--font-scale', scale.toFixed(2));
+      root.style.fontSize = `${16 * scale}px`;
+    };
+
+    const toggleButton = nav.querySelector('[data-accessibility-toggle]');
+    const panel = nav.querySelector('[data-accessibility-panel]');
+
+    toggleButton?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const expanded = toggleButton.getAttribute('aria-expanded') === 'true';
+      toggleButton.setAttribute('aria-expanded', (!expanded).toString());
+      panel?.classList.toggle('hidden', expanded);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!panel || !toggleButton) return;
+      if (panel.contains(event.target) || toggleButton.contains(event.target)) return;
+      panel.classList.add('hidden');
+      toggleButton.setAttribute('aria-expanded', 'false');
+    });
+
+    nav.querySelectorAll('[data-font-increase]').forEach((button) => {
+      button.addEventListener('click', () => {
+        fontScale = clamp(fontScale + 0.05, 0.9, 1.25);
+        applyFontScale();
+      });
+    });
+
+    nav.querySelectorAll('[data-font-decrease]').forEach((button) => {
+      button.addEventListener('click', () => {
+        fontScale = clamp(fontScale - 0.05, 0.9, 1.25);
+        applyFontScale();
+      });
+    });
+
+    nav.querySelectorAll('[data-contrast-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const enabled = document.body.classList.toggle('high-contrast');
+        button.setAttribute('aria-pressed', enabled.toString());
+      });
+    });
+
+    nav.querySelectorAll('[data-grayscale-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const enabled = document.body.classList.toggle('grayscale-mode');
+        button.setAttribute('aria-pressed', enabled.toString());
+      });
+    });
+
+    applyFontScale();
+
+    // Mobile drawer
+    const mobileToggle = nav.querySelector('[data-mobile-menu-toggle]');
+    const mobileContainer = nav.querySelector('[data-mobile-drawer-container]');
+    const mobileOverlay = nav.querySelector('[data-mobile-overlay]');
+    const mobileDrawer = nav.querySelector('[data-mobile-drawer]');
+    const mobileClose = nav.querySelector('[data-mobile-close]');
+
+    const isDrawerOpen = () => mobileToggle?.getAttribute('aria-expanded') === 'true';
+
+    function closeDrawer() {
+      if (!mobileContainer || !mobileOverlay || !mobileDrawer || !mobileToggle) return;
+      mobileOverlay.classList.add('opacity-0');
+      mobileDrawer.classList.add('translate-x-full');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('overflow-hidden');
+      mobileOverlay.addEventListener(
+        'transitionend',
+        () => {
+          mobileContainer.classList.add('hidden');
+          mobileContainer.classList.add('pointer-events-none');
+        },
+        { once: true }
+      );
+    }
+
+    function openDrawer() {
+      if (!mobileContainer || !mobileOverlay || !mobileDrawer || !mobileToggle) return;
+      mobileContainer.classList.remove('hidden');
+      mobileContainer.classList.remove('pointer-events-none');
+      document.body.classList.add('overflow-hidden');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(() => {
+        mobileOverlay.classList.remove('opacity-0');
+        mobileDrawer.classList.remove('translate-x-full');
+      });
+    }
+
+    mobileToggle?.addEventListener('click', () => {
+      if (isDrawerOpen()) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+
+    mobileOverlay?.addEventListener('click', closeDrawer);
+    mobileClose?.addEventListener('click', closeDrawer);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeDrawer();
+      }
+    });
+
+    nav.querySelectorAll('[data-mobile-cta]').forEach((link) => {
+      link.addEventListener('click', closeDrawer);
+    });
+
+    // Command palette
+    const palette = nav.querySelector('[data-command-palette]');
+    const paletteInput = palette?.querySelector('[data-command-input]');
+    const paletteResults = palette?.querySelector('[data-command-results]');
+    const paletteTriggers = nav.querySelectorAll('[data-command-trigger]');
+    const paletteClosers = palette?.querySelectorAll('[data-command-close]') ?? [];
+
+    const renderList = (items) => {
+      if (!paletteResults) return;
+      paletteResults.innerHTML = '';
+
+      if (!items.length) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'px-5 py-6 text-sm text-slate-500';
+        emptyState.textContent = 'No matches found. Try a broader search.';
+        paletteResults.appendChild(emptyState);
+        return;
+      }
+
+      const grouped = items.reduce((acc, item) => {
+        acc[item.group] = acc[item.group] || [];
+        acc[item.group].push(item);
+        return acc;
+      }, {});
+
+      Object.entries(grouped).forEach(([group, entries]) => {
+        const label = document.createElement('div');
+        label.className = 'command-group-label';
+        label.textContent = group;
+        paletteResults.appendChild(label);
+
+        entries.forEach((item) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'command-result';
+          button.innerHTML = `
+            <div class="flex items-center gap-3">
+              <span class="h-9 w-9 rounded-xl bg-slate-50 text-slate-700 flex items-center justify-center"><i data-lucide="${item.icon}"></i></span>
+              <div class="flex-1 text-left">
+                <p class="text-sm font-semibold text-slate-900">${item.label}</p>
+                ${item.description ? `<p class="text-xs text-slate-500 mt-0.5">${item.description}</p>` : ''}
+              </div>
+              <span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">${item.group}</span>
+            </div>
+          `;
+          button.addEventListener('click', () => {
+            window.location.href = item.href;
+            closePalette();
+          });
+          paletteResults.appendChild(button);
+        });
+      });
+
+      renderIcons();
+    };
+
+    const openPalette = () => {
+      if (!palette) return;
+      if (isDrawerOpen()) closeDrawer();
+      palette.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+      renderList(navLinks);
+      paletteInput?.focus();
+    };
+
+    const closePalette = () => {
+      if (!palette) return;
+      palette.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      if (paletteInput) paletteInput.value = '';
+      renderList(navLinks);
+    };
+
+    paletteTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        openPalette();
+      });
+    });
+
+    paletteClosers.forEach((closer) => {
+      closer.addEventListener('click', closePalette);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      const key = event.key.toLowerCase();
+      if ((event.metaKey || event.ctrlKey) && key === 'k') {
+        event.preventDefault();
+        openPalette();
+      }
+      if (key === 'escape' && palette && !palette.classList.contains('hidden')) {
+        closePalette();
+      }
+    });
+
+    paletteInput?.addEventListener('input', (event) => {
+      const value = event.target.value.toLowerCase();
+      const filtered = navLinks.filter((item) => {
+        const haystack = `${item.label} ${item.description || ''}`.toLowerCase();
+        return haystack.includes(value);
+      });
+      renderList(filtered);
+    });
+
+    palette?.addEventListener('click', (event) => {
+      if (event.target instanceof HTMLElement && event.target.hasAttribute('data-command-close')) {
+        closePalette();
+      }
+    });
+
+    // Re-render lucide icons after DOM is ready
+    renderIcons();
   });
 })();

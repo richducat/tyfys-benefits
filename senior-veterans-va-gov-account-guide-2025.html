@@ -6,6 +6,7 @@
     <title>The Senior Veteran’s Guide to Creating a VA.gov Account (2025 Update) | TYFYS Veteran Benefits Blog</title>
     <meta name="description" content="Step-by-step help for senior veterans to create a VA.gov account in 2025, including Login.gov, ID.me, and no-camera in-person verification options.">
     <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="apps/navigation.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -37,63 +38,304 @@
 </head>
 <body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
-                <div class="flex items-center gap-3">
-                    <a href="index.html" class="flex items-center gap-3">
-                        <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
-                        <div class="flex flex-col">
-                            <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
-                            <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
-                    <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
-                    <a href="mission_team.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Team</a>
-                    <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+       <!-- Navigation -->
+   <nav class="sticky top-0 z-50 transition-all duration-500 bg-transparent" data-site-nav>
+       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div class="flex justify-between items-center h-20">
+               <div class="flex items-center gap-3">
+                   <a href="index.html" class="flex items-center gap-3">
+                       <span class="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-white/80 shadow-lg ring-1 ring-white/60 backdrop-blur">
+                           <i data-lucide="shield-check" class="h-6 w-6 text-navy-800"></i>
+                       </span>
+                       <div class="flex flex-col">
+                           <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                           <span class="text-[11px] text-gold-600 font-bold uppercase tracking-[0.25em] mt-1">Veteran Owned & Operated</span>
+                       </div>
+                   </a>
+               </div>
+               <div class="hidden lg:flex items-center gap-6">
+                   <a href="index.html" class="nav-link active">Home</a>
+                   <a href="about_us.html" class="nav-link">About Us</a>
+                   <a href="mission_team.html" class="nav-link">Our Team</a>
+                   <a href="process.html" class="nav-link">Our Process</a>
+                   <a href="intake-portal.html" class="nav-link">Intake</a>
 
-                    <a href="intake-portal.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Intake</a>
+                   <div class="relative nav-dropdown">
+                       <button class="nav-link flex items-center gap-2" type="button">
+                           Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="nav-mega absolute left-0 top-12 w-[28rem] bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-slate-100 p-4">
+                           <div class="grid grid-cols-2 gap-4">
+                               <a href="claims_mental_health.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                   <div class="h-10 w-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                                       <i data-lucide="brain" class="h-5 w-5"></i>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-slate-900">Mental Health & PTSD</p>
+                                       <p class="text-sm text-slate-500">Therapy DBQs, stressor statements, and nexus support.</p>
+                                   </div>
+                               </a>
+                               <a href="claims_musculoskeletal.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                   <div class="h-10 w-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                                       <i data-lucide="bone" class="h-5 w-5"></i>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-slate-900">Back, Neck & Joints</p>
+                                       <p class="text-sm text-slate-500">Orthopedic exams, ROM charts, and pain documentation.</p>
+                                   </div>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
 
-                    <!-- Dropdown: Claim Types -->
-                    <div class="relative group h-full flex items-center">
-                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
-                            Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
-                        </button>
-                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
-                            <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
-                            <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
-                        </div>
-                    </div>
+                   <div class="relative nav-dropdown">
+                       <button class="nav-link flex items-center gap-2" type="button">
+                           Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                       </button>
+                       <div class="nav-mega absolute left-0 top-12 w-[34rem] bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-slate-100 p-4">
+                           <div class="grid grid-cols-2 gap-4">
+                               <a href="calculator.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                   <div class="h-10 w-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                                       <i data-lucide="calculator" class="h-5 w-5"></i>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-slate-900">Backpay Calculator</p>
+                                       <p class="text-sm text-slate-500">Project potential monthly increases instantly.</p>
+                                   </div>
+                               </a>
+                               <a href="comparison.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                   <div class="h-10 w-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center">
+                                       <i data-lucide="scale" class="h-5 w-5"></i>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-slate-900">Compare: VSO vs. Us</p>
+                                       <p class="text-sm text-slate-500">Understand how private evidence accelerates claims.</p>
+                                   </div>
+                               </a>
+                               <a href="education.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                   <div class="h-10 w-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                                       <i data-lucide="graduation-cap" class="h-5 w-5"></i>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-slate-900">Briefing Room</p>
+                                       <p class="text-sm text-slate-500">Step-by-step guides to avoid VA claim pitfalls.</p>
+                                   </div>
+                               </a>
+                               <a href="blog.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                   <div class="h-10 w-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+                                       <i data-lucide="book-open" class="h-5 w-5"></i>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-slate-900">Blog</p>
+                                       <p class="text-sm text-slate-500">Expert commentary on ratings, appeals, and benefits.</p>
+                                   </div>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
 
-                    <!-- Dropdown: Resources -->
-                    <div class="relative group h-full flex items-center">
-                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
-                            Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
-                        </button>
-                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
-                            <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
-                            <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
-                            <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
-                            <a href="blog.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Blog</a>
-                        </div>
-                    </div>
+                   <button type="button" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-slate-200 bg-white/70 text-slate-800 font-semibold shadow-sm hover:border-slate-300 hover:-translate-y-0.5 transition" data-command-trigger>
+                       <i data-lucide="search" class="h-4 w-4"></i>
+                       <span class="text-sm">Cmd/Ctrl + K</span>
+                   </button>
 
-                    <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
-                        Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
-                    </a>
-                </div>
-                <div class="flex items-center md:hidden">
-                    <button type="button" class="text-slate-500 hover:text-slate-700" data-mobile-menu-toggle aria-expanded="false" aria-label="Toggle navigation">
-                        <i data-lucide="menu" class="h-7 w-7"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+                   <div class="relative">
+                       <button type="button" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-slate-200 bg-white/70 text-slate-800 font-semibold shadow-sm hover:border-slate-300 hover:-translate-y-0.5 transition" data-accessibility-toggle aria-expanded="false">
+                           <i data-lucide="accessibility" class="h-4 w-4"></i>
+                           <span class="text-sm">Accessibility</span>
+                       </button>
+                       <div data-accessibility-panel class="hidden absolute right-0 mt-3 w-72 rounded-2xl bg-white shadow-xl border border-slate-200 p-4 space-y-3">
+                           <div class="flex items-center justify-between">
+                               <p class="text-sm font-semibold text-slate-900">Assistive Toolbar</p>
+                               <span class="text-xs text-slate-500">Live page controls</span>
+                           </div>
+                           <div class="grid grid-cols-2 gap-3">
+                               <button type="button" class="accessibility-button" data-font-increase>
+                                   <i data-lucide="plus" class="h-4 w-4"></i>
+                                   <span>A+ Font</span>
+                               </button>
+                               <button type="button" class="accessibility-button" data-font-decrease>
+                                   <i data-lucide="minus" class="h-4 w-4"></i>
+                                   <span>A- Font</span>
+                               </button>
+                               <button type="button" class="accessibility-button" data-contrast-toggle>
+                                   <i data-lucide="contrast" class="h-4 w-4"></i>
+                                   <span>High Contrast</span>
+                               </button>
+                               <button type="button" class="accessibility-button" data-grayscale-toggle>
+                                   <i data-lucide="palette" class="h-4 w-4"></i>
+                                   <span>Grayscale</span>
+                               </button>
+                           </div>
+                       </div>
+                   </div>
+
+                   <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-full font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                       Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                   </a>
+               </div>
+
+               <div class="flex items-center gap-3 lg:hidden">
+                   <button type="button" class="p-2 rounded-full bg-white/70 border border-white/70 shadow-sm text-navy-800" data-command-trigger aria-label="Open command palette">
+                       <i data-lucide="search" class="h-5 w-5"></i>
+                   </button>
+                   <button type="button" class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 text-navy-800 shadow border border-white/80 font-semibold" data-mobile-menu-toggle aria-expanded="false" aria-label="Open navigation">
+                       <i data-lucide="menu" class="h-6 w-6"></i>
+                       <span class="text-sm">Menu</span>
+                   </button>
+               </div>
+           </div>
+       </div>
+
+       <div class="fixed inset-0 z-40 pointer-events-none hidden" data-mobile-drawer-container>
+           <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 transition-opacity duration-300" data-mobile-overlay></div>
+           <div class="absolute top-0 right-0 w-full max-w-sm h-full bg-white shadow-2xl translate-x-full transition-transform duration-300" data-mobile-drawer>
+               <div class="flex items-center justify-between h-16 px-5 border-b border-slate-200">
+                   <div class="flex items-center gap-2">
+                       <i data-lucide="shield-check" class="h-6 w-6 text-navy-800"></i>
+                       <span class="font-serif font-bold text-lg text-slate-900">TYFYS</span>
+                   </div>
+                   <button type="button" class="text-slate-500 hover:text-slate-700" aria-label="Close navigation" data-mobile-close>
+                       <i data-lucide="x" class="h-6 w-6"></i>
+                   </button>
+               </div>
+               <div class="h-[calc(100%-4rem)] overflow-y-auto p-5 space-y-6">
+                   <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+                       <div class="p-3 rounded-lg bg-white shadow-sm text-navy-800">
+                           <i data-lucide="command" class="h-5 w-5"></i>
+                       </div>
+                       <div class="flex-1">
+                           <p class="text-sm font-semibold text-slate-900">Spotlight search</p>
+                           <p class="text-xs text-slate-500">Press Cmd/Ctrl + K anytime</p>
+                       </div>
+                       <button type="button" class="text-sm font-semibold text-navy-800" data-command-trigger>Open</button>
+                   </div>
+
+                   <div class="space-y-3">
+                       <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Primary</p>
+                       <div class="grid grid-cols-1 gap-2">
+                           <a href="index.html" class="block w-full text-left px-4 py-3 rounded-lg font-semibold text-slate-800 bg-slate-50 hover:bg-navy-50 hover:text-navy-800 transition">Home</a>
+                           <a href="about_us.html" class="block w-full text-left px-4 py-3 rounded-lg font-semibold text-slate-800 bg-slate-50 hover:bg-navy-50 hover:text-navy-800 transition">About Us</a>
+                           <a href="mission_team.html" class="block w-full text-left px-4 py-3 rounded-lg font-semibold text-slate-800 bg-slate-50 hover:bg-navy-50 hover:text-navy-800 transition">Our Team</a>
+                           <a href="process.html" class="block w-full text-left px-4 py-3 rounded-lg font-semibold text-slate-800 bg-slate-50 hover:bg-navy-50 hover:text-navy-800 transition">Our Process</a>
+                           <a href="intake-portal.html" class="block w-full text-left px-4 py-3 rounded-lg font-semibold text-slate-800 bg-slate-50 hover:bg-navy-50 hover:text-navy-800 transition">Intake</a>
+                       </div>
+                   </div>
+
+                   <div class="space-y-3">
+                       <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Claim Types</p>
+                       <div class="grid grid-cols-1 gap-3">
+                           <a href="claims_mental_health.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                               <div class="h-10 w-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                                   <i data-lucide="brain" class="h-5 w-5"></i>
+                               </div>
+                               <div>
+                                   <p class="font-semibold text-slate-900">Mental Health & PTSD</p>
+                                   <p class="text-sm text-slate-500">Therapy DBQs and nexus support.</p>
+                               </div>
+                           </a>
+                           <a href="claims_musculoskeletal.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                               <div class="h-10 w-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                                   <i data-lucide="bone" class="h-5 w-5"></i>
+                               </div>
+                               <div>
+                                   <p class="font-semibold text-slate-900">Back, Neck & Joints</p>
+                                   <p class="text-sm text-slate-500">Orthopedic exams and ROM charts.</p>
+                               </div>
+                           </a>
+                       </div>
+                   </div>
+
+                   <div class="space-y-3">
+                       <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Resources</p>
+                       <div class="grid grid-cols-1 gap-3">
+                           <a href="calculator.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                               <div class="h-10 w-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                                   <i data-lucide="calculator" class="h-5 w-5"></i>
+                               </div>
+                               <div>
+                                   <p class="font-semibold text-slate-900">Backpay Calculator</p>
+                                   <p class="text-sm text-slate-500">Model projected monthly increases.</p>
+                               </div>
+                           </a>
+                           <a href="comparison.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                               <div class="h-10 w-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center">
+                                   <i data-lucide="scale" class="h-5 w-5"></i>
+                               </div>
+                               <div>
+                                   <p class="font-semibold text-slate-900">Compare: VSO vs. Us</p>
+                                   <p class="text-sm text-slate-500">See how private evidence accelerates claims.</p>
+                               </div>
+                           </a>
+                           <a href="education.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                               <div class="h-10 w-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                                   <i data-lucide="graduation-cap" class="h-5 w-5"></i>
+                               </div>
+                               <div>
+                                   <p class="font-semibold text-slate-900">Briefing Room</p>
+                                   <p class="text-sm text-slate-500">Guides and checklists that prevent denials.</p>
+                               </div>
+                           </a>
+                           <a href="blog.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                               <div class="h-10 w-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+                                   <i data-lucide="book-open" class="h-5 w-5"></i>
+                               </div>
+                               <div>
+                                   <p class="font-semibold text-slate-900">Blog</p>
+                                   <p class="text-sm text-slate-500">Expert commentary on ratings, appeals, and benefits.</p>
+                               </div>
+                           </a>
+                       </div>
+                   </div>
+
+                   <div class="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+                       <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Assistive Toolbar</p>
+                       <div class="grid grid-cols-2 gap-3">
+                           <button type="button" class="accessibility-button" data-font-increase>
+                               <i data-lucide="plus" class="h-4 w-4"></i>
+                               <span>A+ Font</span>
+                           </button>
+                           <button type="button" class="accessibility-button" data-font-decrease>
+                               <i data-lucide="minus" class="h-4 w-4"></i>
+                               <span>A- Font</span>
+                           </button>
+                           <button type="button" class="accessibility-button" data-contrast-toggle>
+                               <i data-lucide="contrast" class="h-4 w-4"></i>
+                               <span>High Contrast</span>
+                           </button>
+                           <button type="button" class="accessibility-button" data-grayscale-toggle>
+                               <i data-lucide="palette" class="h-4 w-4"></i>
+                               <span>Grayscale</span>
+                           </button>
+                       </div>
+                   </div>
+
+                   <a href="contact.html" class="block text-center bg-navy-800 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-navy-900 transition" data-mobile-cta>Book Discovery Call</a>
+               </div>
+           </div>
+       </div>
+
+       <div class="hidden" data-command-palette>
+           <div class="fixed inset-0 z-50 flex items-start justify-center pt-24">
+               <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" data-command-close></div>
+               <div class="relative w-full max-w-2xl mx-auto bg-white/90 backdrop-blur-xl border border-white/60 rounded-2xl overflow-hidden command-panel">
+                   <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-100">
+                       <i data-lucide="search" class="h-5 w-5 text-slate-500"></i>
+                       <input type="text" data-command-input placeholder="Search pages, tools, or actions" class="flex-1 bg-transparent focus:outline-none text-sm text-slate-900 placeholder:text-slate-400">
+                       <button type="button" class="text-slate-400 hover:text-slate-600" data-command-close>
+                           <i data-lucide="x" class="h-5 w-5"></i>
+                       </button>
+                   </div>
+                   <div class="max-h-80 overflow-y-auto bg-white/80" data-command-results></div>
+                   <div class="px-5 py-3 bg-slate-50 text-xs text-slate-500 flex items-center justify-between">
+                       <span>Navigate faster with Cmd/Ctrl + K</span>
+                       <span class="inline-flex items-center gap-1"><i data-lucide="mouse-pointer" class="h-3.5 w-3.5"></i> Enter to open</span>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </nav>
+
 
     <!-- Hero -->
     <header class="bg-navy-900 text-white py-16 border-b-4 border-gold-500">
