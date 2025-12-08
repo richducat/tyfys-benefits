@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure TYFYS Intake Portal with guided onboarding, document uploads, and scheduling." />
+    <title>TYFYS Intake Portal | Secure Client Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 50: '#f0f4ff', 100: '#e0eaff', 700: '#2d4a9e', 800: '#1e3a8a', 900: '#0f172a' },
+                        gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(245, 158, 11, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-pattern {
+            background-color: #0f172a;
+            background-image: radial-gradient(#1e293b 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .group:hover .group-hover\:block { display: block; }
+    </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <i data-lucide="shield-check" class="h-9 w-9 text-navy-800"></i>
+                        <div class="flex flex-col">
+                            <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                            <span class="text-xs text-gold-600 font-bold uppercase tracking-widest mt-1">Veteran Owned & Operated</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Home</a>
+                    <a href="about_us.html" class="text-slate-600 hover:text-navy-800 font-medium transition">About Us</a>
+                    <a href="mission_team.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Team</a>
+                    <a href="process.html" class="text-slate-600 hover:text-navy-800 font-medium transition">Our Process</a>
+                    <a href="intake-portal.html" class="text-navy-800 font-bold border-b-2 border-gold-500">Intake Portal</a>
+
+                    <!-- Dropdown: Claim Types -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                            Claim Types <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                            <a href="claims_mental_health.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Mental Health & PTSD</a>
+                            <a href="claims_musculoskeletal.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Back, Neck & Joints</a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown: Resources -->
+                    <div class="relative group h-full flex items-center">
+                        <button class="text-slate-600 hover:text-navy-800 font-medium transition flex items-center gap-1">
+                            Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="hidden group-hover:block absolute top-14 left-0 w-64 bg-white shadow-xl rounded-lg border border-slate-100 py-2 animate-fade-in z-50">
+                            <a href="calculator.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Backpay Calculator</a>
+                            <a href="comparison.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Compare: VSO vs. Us</a>
+                            <a href="education.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Briefing Room</a>
+                            <a href="blog.html" class="block px-4 py-3 hover:bg-navy-50 text-slate-700 hover:text-navy-800 transition">Blog</a>
+                        </div>
+                    </div>
+
+                    <a href="contact.html" class="bg-navy-800 hover:bg-navy-900 text-white px-5 py-2.5 rounded-md font-semibold transition shadow-md flex items-center gap-2 hover:shadow-lg transform hover:-translate-y-0.5">
+                        Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="text-slate-500 hover:text-slate-700" data-mobile-menu-toggle aria-expanded="false" aria-label="Toggle navigation">
+                        <i data-lucide="menu" class="h-7 w-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-pattern text-white py-14 border-b-4 border-gold-500">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-navy-800/80 border border-navy-600 rounded-full px-4 py-1.5 mb-5 backdrop-blur-sm shadow-lg">
+                        <span class="relative flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                        </span>
+                        <span class="text-sm font-semibold text-green-400 uppercase tracking-wider">Secure Intake System • HIPAA Aligned</span>
+                    </div>
+                    <h1 class="font-serif text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-[1.1]">Welcome to the TYFYS Intake Portal</h1>
+                    <p class="text-lg text-slate-300 leading-relaxed max-w-2xl">Complete your intake packet, upload records, and schedule your intake review in one streamlined, secure experience. Scout walks you through every step.</p>
+                    <div class="mt-6 flex flex-wrap gap-3 text-sm text-slate-200">
+                        <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full border border-white/20"><i data-lucide="lock" class="h-4 w-4"></i>Encrypted sync</span>
+                        <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full border border-white/20"><i data-lucide="cloud" class="h-4 w-4"></i>Cloud uploads</span>
+                        <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full border border-white/20"><i data-lucide="calendar" class="h-4 w-4"></i>Telehealth ready</span>
+                    </div>
+                </div>
+                <div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-2xl backdrop-blur-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white shadow-lg">
+                            <i data-lucide="message-square" class="h-6 w-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-200">Automated Intake Coordinator</p>
+                            <h2 class="text-xl font-bold text-white">Scout keeps you on track</h2>
+                        </div>
+                    </div>
+                    <p class="text-slate-200 text-sm leading-relaxed">Use the portal below to answer profile questions, list conditions, upload evidence, and lock in your intake review. Your responses sync securely with our team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intake App -->
+    <main class="flex-1 bg-slate-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden">
+                <div id="intake-root"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i data-lucide="shield-check" class="h-9 w-9 text-gold-500"></i>
+                        <div>
+                            <h3 class="text-white font-bold text-2xl">Thank You For Your Service</h3>
+                            <p class="text-sm text-gold-500 font-semibold">Private Medical Evidence for VA Disability</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-2xl mb-6">
+                        We help veterans nationwide secure the medical evidence they need to win their VA claims. Our private provider network delivers telehealth-ready DBQs and Nexus Letters built around your story.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-gold-500 transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
+                        <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
+                        <li><a href="mission_team.html" class="hover:text-gold-500 transition">Our Team</a></li>
+                        <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
+                        <li><a href="intake-portal.html" class="hover:text-gold-500 transition">Intake Portal</a></li>
+                        <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
+                        <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i> 11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
+                        <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i> support@thankyouforyourservice.co</li>
+                        <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i> 321-248-2805</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+                &copy; 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+            </div>
+        </div>
+    </footer>
+
+    <script src="apps/mobile-nav.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQGNQYr0nVeKh8Yg186hHES375dUNv_Ij1vXiOny1veaMk6P1ueA8vYlSr4uh1fbqy/exec";
+
+        const ICON_MAP = {
+            shield: 'shield',
+            user: 'user',
+            filetext: 'file-text',
+            activity: 'activity',
+            circlecheck: 'circle-check',
+            circlealert: 'alert-circle',
+            cloudupload: 'cloud-upload',
+            chevronright: 'chevron-right',
+            database: 'database',
+            stethoscope: 'stethoscope',
+            filecheck: 'file-check',
+            lock: 'lock',
+            arrowright: 'arrow-right',
+            x: 'x',
+            circlehelp: 'help-circle',
+            externallink: 'external-link',
+            arrowleft: 'arrow-left',
+            monitor: 'monitor',
+            phone: 'phone',
+            calendar: 'calendar',
+            clock: 'clock',
+            check: 'check',
+            calendarcheck: 'calendar-check',
+            globe: 'globe',
+            rotatecw: 'rotate-cw',
+            hearthandshake: 'hand-heart',
+            messagesquare: 'message-square',
+            cloudlightning: 'cloud-lightning',
+            users: 'users',
+            wifi: 'wifi'
+        };
+
+        const LucideIcon = ({ name, size = 18, className = '' }) => {
+            const key = name.toLowerCase();
+            const iconName = ICON_MAP[key] || key;
+            return <i data-lucide={iconName} className={className} style={{ width: `${size}px`, height: `${size}px` }} aria-hidden="true"></i>;
+        };
+
+        const CONDITION_CATEGORIES = {
+            'Mental Health': ['PTSD', 'Depression', 'Anxiety', 'Sleep Disturbances', 'Panic Attacks'],
+            'Musculoskeletal': ['Back Pain', 'Knee Pain', 'Shoulder Pain', 'Neck Pain', 'Ankle Instability'],
+            'Neurological': ['Migraines', 'TBI Residuals', 'Radiculopathy', 'Vertigo', 'Peripheral Neuropathy'],
+            'Respiratory / ENT': ['Sleep Apnea', 'Chronic Sinusitis', 'Asthma', 'Rhinitis', 'Hearing Loss']
+        };
+
+        const DOCUMENT_GUIDES = {
+            dd214: {
+                title: 'DD214',
+                url: 'https://www.va.gov/records/get-military-service-records/',
+                steps: [
+                    'Sign in to VA.gov with Login.gov or ID.me.',
+                    'Go to “Check Your VA Claim or Appeal Status” and open Records.',
+                    'Download the Member-4 copy of your DD214 as a PDF.'
+                ]
+            },
+            benefitsLetter: {
+                title: 'Benefits Summary Letter',
+                url: 'https://www.va.gov/records/download-va-letters/',
+                steps: [
+                    'Sign in to VA.gov.',
+                    'Navigate to “Your VA Letters.”',
+                    'Download the Benefits Summary & Service Verification letter.'
+                ]
+            },
+            blueButton: {
+                title: 'VA Blue Button Report',
+                url: 'https://www.myhealth.va.gov/',
+                steps: [
+                    'Sign in to My HealtheVet.',
+                    'Open “Health Records” then select “VA Blue Button.”',
+                    'Export your most recent medical history as a PDF.'
+                ]
+            }
+        };
+
+        const ClientIntakeSystem = () => {
+            const [packet, setPacket] = useState({
+                firstName: '', lastName: '', dob: '',
+                altContact: { name: '', relation: '', phone: '' },
+                branch: '', discharge: '',
+                currentRating: null,
+                referralSource: '',
+                techReady: false,
+                conditions: [],
+                documents: {
+                    dd214: null,
+                    benefitsLetter: null,
+                    blueButton: null,
+                    privateRecords: null,
+                    witnessStatements: null
+                },
+                folderId: null,
+                step: 'intro',
+                isComplete: false,
+                needsLiveHelp: false,
+                bookingTime: null,
+                commitmentSigned: false
+            });
+
+            const [messages, setMessages] = useState([]);
+            const [isTyping, setIsTyping] = useState(false);
+            const [activeCategory, setActiveCategory] = useState(null);
+            const [panelMode, setPanelMode] = useState('packet');
+            const [activeGuide, setActiveGuide] = useState(null);
+            const [pendingCondition, setPendingCondition] = useState(null);
+            const [syncStatus, setSyncStatus] = useState({ status: 'idle', message: '' });
+            const messagesEndRef = useRef(null);
+
+            useEffect(() => {
+                if (window.lucide?.createIcons) {
+                    window.lucide.createIcons();
+                }
+            }, [messages, panelMode, activeGuide, packet, activeCategory]);
+
+            const syncToGoogle = async (action, payload) => {
+                setSyncStatus({ status: 'syncing', message: action });
+                const fullPayload = {
+                    ...payload,
+                    folderId: packet.folderId,
+                    packetContext: { firstName: packet.firstName, lastName: packet.lastName }
+                };
+
+                try {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: "POST",
+                        mode: "no-cors",
+                        headers: { "Content-Type": "text/plain" },
+                        body: JSON.stringify({ action, payload: fullPayload })
+                    });
+
+                    setSyncStatus({ status: 'success', message: 'Synced' });
+
+                    if (action === 'CREATE_CLIENT_FOLDER' && !packet.folderId) {
+                        setPacket(prev => ({ ...prev, folderId: 'PENDING_SERVER_LOOKUP' }));
+                    }
+                } catch (error) {
+                    console.error("Sync Error", error);
+                    setSyncStatus({ status: 'error', message: 'Sync Retry' });
+                }
+
+                setTimeout(() => setSyncStatus({ status: 'idle', message: '' }), 3000);
+            };
+
+            const addBotMessage = (text, type = 'text', payload = null) => {
+                setIsTyping(true);
+                const delay = Math.min(1000, Math.max(500, text.length * 10));
+                setTimeout(() => {
+                    setIsTyping(false);
+                    setMessages(prev => [...prev, { id: Date.now(), sender: 'bot', text, type, payload }]);
+                }, delay);
+            };
+
+            const addUserMessage = (text) => {
+                setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text }]);
+            };
+
+            useEffect(() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            }, [messages, isTyping, packet.conditions]);
+
+            useEffect(() => {
+                addBotMessage("Welcome to the TYFYS family. Payment confirmed.");
+                setTimeout(() => {
+                    addBotMessage("I am Scout, your Intake Coordinator. My job is to build your packet for our medical providers.");
+                    setTimeout(() => {
+                        addBotMessage("To begin, I need to confirm your official profile details.", 'action', {
+                            type: 'input_name',
+                            label: 'Enter Full Legal Name'
+                        });
+                    }, 1500);
+                }, 1000);
+            }, []);
+
+            const handleInteraction = (type, value) => {
+                if (type === 'name') {
+                    const [first, ...rest] = value.split(' ');
+                    const lastName = rest.join(' ');
+                    setPacket(prev => ({ ...prev, firstName: first, lastName: lastName }));
+                    syncToGoogle('CREATE_CLIENT_FOLDER', { folderName: `${lastName}, ${first} (Intake)` });
+                    addUserMessage(value);
+                    nextStep('referral_check');
+                }
+
+                if (type === 'referral_check') {
+                    setPacket(prev => ({ ...prev, referralSource: value }));
+                    syncToGoogle('UPDATE_SHEET_ROW', { referral: value });
+                    addUserMessage(value);
+                    nextStep('alt_contact_check');
+                }
+
+                if (type === 'alt_contact_check') {
+                    if (value === 'yes') {
+                        addUserMessage("Yes");
+                        addBotMessage("Please enter their Name and Relation (e.g. 'Jane Doe, Wife').", 'action', {
+                            type: 'input_alt_contact',
+                            label: 'Name, Relation'
+                        });
+                    } else {
+                        addUserMessage("No, just me");
+                        nextStep('branch');
+                    }
+                }
+
+                if (type === 'alt_contact_entry') {
+                    setPacket(prev => ({ ...prev, altContact: { ...prev.altContact, name: value } }));
+                    addUserMessage(value);
+                    nextStep('branch');
+                }
+
+                if (type === 'branch') {
+                    setPacket(prev => ({ ...prev, branch: value }));
+                    addUserMessage(value);
+                    nextStep('discharge');
+                }
+
+                if (type === 'discharge') {
+                    setPacket(prev => ({ ...prev, discharge: value }));
+                    addUserMessage(value);
+                    nextStep('rating');
+                }
+
+                if (type === 'rating') {
+                    setPacket(prev => ({ ...prev, currentRating: value }));
+                    syncToGoogle('UPDATE_SHEET_ROW', {
+                        name: `${packet.firstName} ${packet.lastName}`,
+                        branch: packet.branch,
+                        rating: value,
+                        status: 'Profile Started'
+                    });
+                    addUserMessage(`${value}%`);
+                    nextStep('conditions_intro');
+                }
+
+                if (type === 'condition_add') {
+                    const newCond = { id: Date.now(), name: value, status: 'Pending', dbq: 'Auto', impact: '' };
+                    setPendingCondition(newCond);
+                    addUserMessage(value);
+                    addBotMessage(`Is ${value} a New Claim or an Increase?`, 'options', [
+                        { label: "New Claim", value: { type: 'condition_type', mode: 'New' } },
+                        { label: "Increase", value: { type: 'condition_type', mode: 'Increase' } },
+                        { label: "Secondary", value: { type: 'condition_type', mode: 'Secondary' } }
+                    ]);
+                    return;
+                }
+
+                if (type === 'condition_type') {
+                    setPendingCondition(prev => ({ ...prev, status: value.mode }));
+                    addUserMessage(value.mode);
+                    addBotMessage("Pro-Tip: When describing impact, do NOT act tough. We need to document your 'worst day', not your best day.");
+                    setTimeout(() => {
+                        addBotMessage(`In a few words, how does this affect your daily life (work, sleep, family)?`, 'action', {
+                            type: 'input_impact',
+                            label: 'e.g., "I cannot lift my kids" or "I wake up 4x a night"'
+                        });
+                    }, 1500);
+                }
+
+                if (type === 'impact_statement') {
+                    const finalizedCond = { ...pendingCondition, impact: value };
+                    setPacket(prev => ({ ...prev, conditions: [...prev.conditions, finalizedCond] }));
+                    syncToGoogle('LOG_CONDITION', finalizedCond);
+                    setPendingCondition(null);
+                    addUserMessage(value);
+                    addBotMessage("Noted. This helps our medical providers write a stronger Nexus Letter.", 'options', [
+                        { label: "Add Another Condition", value: 'add_more_conditions' },
+                        { label: "I'm Done Adding", value: 'start_evidence' }
+                    ]);
+                }
+
+                if (type === 'flow_control') {
+                    if (value === 'add_more_conditions') nextStep('conditions_selection');
+                    if (value === 'start_evidence') nextStep('evidence_intro');
+                }
+
+                if (type === 'guide_toggle') {
+                    setActiveGuide(value);
+                    setPanelMode('browser');
+                    addBotMessage("I've opened the secure browser on the right. Follow the steps to get your document.");
+                }
+
+                if (type === 'missing_help') {
+                    setPacket(prev => ({
+                        ...prev,
+                        needsLiveHelp: true,
+                        documents: { ...prev.documents, [value]: 'Needs Help' }
+                    }));
+                    syncToGoogle('UPDATE_SHEET_ROW', { notes: `Missing Doc: ${value}` });
+                    addUserMessage("I do not have this document");
+                    addBotMessage(`Flagged for manual retrieval. We will handle this on your call.`);
+                    setTimeout(() => {
+                        addBotMessage("Proceed to next step?", 'options', [
+                            { label: "Continue", value: { type: 'skip_continue', doc: value } },
+                        ]);
+                    }, 1000);
+                }
+
+                if (type === 'skip_continue') {
+                    addUserMessage("Continue");
+                    proceedToNextDoc(value.doc);
+                }
+
+                if (type === 'upload_complete') {
+                    const { docType, fileName, mimeType, base64Data } = value;
+                    setPacket(prev => ({
+                        ...prev,
+                        documents: { ...prev.documents, [docType]: 'Uploaded' }
+                    }));
+                    setPanelMode('packet');
+                    syncToGoogle('UPLOAD_FILE', {
+                        fileName: fileName,
+                        mimeType: mimeType,
+                        base64Data: base64Data
+                    });
+                    addUserMessage("File Uploaded Successfully");
+                    proceedToNextDoc(docType);
+                }
+
+                if (type === 'upload_error') {
+                    addBotMessage(`Error: ${value}`);
+                }
+
+                if (type === 'tech_check') {
+                    if (value === 'yes') {
+                        setPacket(prev => ({ ...prev, techReady: true }));
+                        addUserMessage("Yes, I have a device");
+                        handleInteraction('start_oath', null);
+                    } else {
+                        addUserMessage("No");
+                        addBotMessage("Our providers primarily use Telehealth. Please try to secure a smartphone or computer before your appointment.");
+                        setTimeout(() => handleInteraction('start_oath', null), 2000);
+                    }
+                }
+
+                if (type === 'start_oath') {
+                    setPanelMode('packet');
+                    addBotMessage("We have everything we need to build your file. Now, one final check.");
+                    setTimeout(() => {
+                        addBotMessage("Our providers are in high demand. We need your commitment that you will attend your scheduled exams.");
+                        setTimeout(() => {
+                            addBotMessage("Do you promise to follow through with the appointments we book for you?", 'options', [
+                                { label: "Yes, I commit (Digital Oath)", value: "oath_signed" }
+                            ]);
+                        }, 1000);
+                    }, 1000);
+                }
+
+                if (value === 'oath_signed') {
+                    setPacket(prev => ({ ...prev, commitmentSigned: true }));
+                    syncToGoogle('UPDATE_SHEET_ROW', {
+                        name: `${packet.firstName} ${packet.lastName}`,
+                        status: 'Oath Signed / Ready to Book'
+                    });
+                    addUserMessage("Yes, I commit.");
+                    addBotMessage("Thank you. I've recorded your commitment.");
+                    setTimeout(() => {
+                        handleInteraction('start_booking', null);
+                    }, 1000);
+                }
+
+                if (type === 'start_booking') {
+                    setPacket(prev => ({ ...prev, isComplete: true }));
+                    setPanelMode('calendar');
+                    addBotMessage("The final step is to review your file with an Intake Specialist. Please select a time on the calendar.");
+                }
+
+                if (type === 'booking_confirmed') {
+                    setPacket(prev => ({ ...prev, bookingTime: 'Scheduled via Zoho' }));
+                    syncToGoogle('UPDATE_SHEET_ROW', {
+                        name: `${packet.firstName} ${packet.lastName}`,
+                        status: 'APPOINTMENT CONFIRMED'
+                    });
+                    setPanelMode('packet');
+                    addBotMessage("Booking Confirmed.");
+                    addBotMessage("Our specialist will call you at your selected time. Please have your ID ready.");
+                }
+            };
+
+            const proceedToNextDoc = (currentDoc) => {
+                if (currentDoc === 'dd214') nextStep('benefitsLetter');
+                else if (currentDoc === 'benefitsLetter') nextStep('blueButton');
+                else if (currentDoc === 'blueButton') nextStep('private_records');
+                else if (currentDoc === 'private_records') nextStep('witness_statements');
+                else if (currentDoc === 'witness_statements') nextStep('tech_readiness');
+            };
+
+            const nextStep = (target) => {
+                if (target === 'referral_check') {
+                    addBotMessage("One quick question: How did you hear about TYFYS?", 'options', [
+                        { label: "Facebook / Instagram", value: "Social Media" },
+                        { label: "Google Search", value: "Search" },
+                        { label: "Friend / Veteran", value: "Referral" },
+                        { label: "Email / Newsletter", value: "Email" }
+                    ]);
+                }
+                if (target === 'alt_contact_check') {
+                    addBotMessage("Is there a spouse, family member, or caretaker who helps manage your medical appointments?", 'options', [
+                        { label: "Yes", value: "yes" },
+                        { label: "No, just me", value: "no" }
+                    ]);
+                }
+                if (target === 'branch') {
+                    addBotMessage("Select your Branch of Service:", 'options', [
+                        { label: "Army", value: 'Army' }, { label: "Navy", value: 'Navy' },
+                        { label: "Air Force", value: 'Air Force' }, { label: "Marines", value: 'Marines' },
+                        { label: "Coast Guard", value: 'Coast Guard' }
+                    ]);
+                }
+                if (target === 'discharge') {
+                    addBotMessage("Confirm Character of Discharge:", 'options', [
+                        { label: "Honorable", value: 'Honorable' }, { label: "General", value: 'General' },
+                        { label: "Other Than Honorable", value: 'OTH' }
+                    ]);
+                }
+                if (target === 'rating') {
+                    const ratings = [];
+                    for (let i = 0; i <= 100; i += 10) ratings.push({ label: `${i}%`, value: i });
+                    addBotMessage("What is your current combined VA Rating?", 'grid_options', ratings);
+                }
+                if (target === 'conditions_intro') {
+                    addBotMessage("We need to identify every condition you want evaluated. Accuracy is key here.");
+                    setTimeout(() => nextStep('conditions_selection'), 1500);
+                }
+                if (target === 'conditions_selection') {
+                    addBotMessage("Select a category:", 'category_selector', Object.keys(CONDITION_CATEGORIES));
+                }
+                if (target === 'evidence_intro') {
+                    addBotMessage("Now for the **Evidence**. We cannot send your file to a doctor without these official records.");
+                    setTimeout(() => nextStep('dd214_upload'), 1500);
+                }
+                if (target === 'dd214_upload') addBotMessage("STEP 1: Upload your DD214 (Member-4 Copy).", 'upload', 'dd214');
+                if (target === 'benefitsLetter') addBotMessage("STEP 2: Upload your VA Benefits Summary Letter.", 'upload', 'benefitsLetter');
+                if (target === 'blueButton') addBotMessage("STEP 3: Upload your VA Blue Button Report (Medical History).", 'upload', 'blueButton');
+                if (target === 'private_records') addBotMessage("STEP 4: (Optional) Upload any Private Medical Records.", 'upload', 'private_records');
+                if (target === 'witness_statements') addBotMessage("STEP 5: (Optional) Upload Buddy Letters or Spouse Statements.", 'upload', 'witness_statements');
+                if (target === 'tech_readiness') {
+                    addBotMessage("Final Question: Do you have a smartphone or computer with a working camera for Telehealth appointments?", 'options', [
+                        { label: "Yes, I'm ready", value: { type: 'tech_check', value: 'yes' } },
+                        { label: "No / Not Sure", value: { type: 'tech_check', value: 'no' } }
+                    ]);
+                }
+            };
+
+            const handleFileUpload = (file, docType) => {
+                if (!file) return;
+
+                if (file.size > 10 * 1024 * 1024) {
+                    handleInteraction('upload_error', 'File is too large. Please upload a file smaller than 10MB.');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const base64Raw = e.target.result.split(',')[1];
+
+                    handleInteraction('upload_complete', {
+                        docType,
+                        fileName: file.name,
+                        mimeType: file.type,
+                        base64Data: base64Raw
+                    });
+                };
+                reader.onerror = (e) => console.error("File reading error", e);
+                reader.readAsDataURL(file);
+            };
+
+            const BrowserPanel = ({ guideKey }) => {
+                const guide = DOCUMENT_GUIDES[guideKey];
+                if (!guide) return null;
+
+                return (
+                    <div className="h-full flex flex-col bg-slate-100 border-l border-slate-300 animate-in slide-in-from-right duration-300">
+                        <div className="bg-slate-200 border-b border-slate-300 p-2 flex items-center gap-2">
+                            <div className="flex gap-1.5 ml-2">
+                                <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                                <div className="w-3 h-3 rounded-full bg-amber-400"></div>
+                                <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                            </div>
+                            <div className="flex-1 bg-white border border-slate-300 rounded-md px-3 py-1.5 flex items-center gap-2 text-xs text-slate-600 shadow-sm mx-2">
+                                <LucideIcon name="lock" size={10} className="text-green-600" />
+                                <span className="flex-1 truncate font-mono text-[10px]">{guide.url}</span>
+                            </div>
+                            <button onClick={() => setPanelMode('packet')} className="p-1 hover:bg-slate-300 rounded">
+                                <LucideIcon name="x" size={16} className="text-slate-500" />
+                            </button>
+                        </div>
+                        <div className="flex-1 overflow-y-auto p-6 bg-white">
+                            <div className="max-w-lg mx-auto">
+                                <div className="text-center mb-8 border-b border-slate-100 pb-6">
+                                    <LucideIcon name="globe" size={48} className="text-blue-600 mx-auto mb-2" />
+                                    <h2 className="text-2xl font-bold text-slate-800">{guide.title} Assistant</h2>
+                                    <p className="text-slate-500 text-sm">Secure Document Retrieval</p>
+                                </div>
+                                <a href={guide.url} target="_blank" rel="noreferrer" className="block w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-center rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 mb-8">
+                                    Launch Secure Portal <LucideIcon name="externallink" size={18} />
+                                </a>
+                                <div className="space-y-4">
+                                    <h3 className="font-bold text-slate-700 uppercase text-xs tracking-wider border-b border-slate-200 pb-2">Retrieval Checklist</h3>
+                                    {guide.steps.map((step, i) => (
+                                        <div key={i} className="flex gap-3">
+                                            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs border border-slate-200">{i + 1}</div>
+                                            <p className="text-sm text-slate-600 leading-relaxed">{step}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            const CalendarPanel = () => (
+                <div className="h-full flex flex-col animate-in slide-in-from-right duration-500 bg-white">
+                    <div className="bg-slate-900 text-white p-4">
+                        <h2 className="text-lg font-bold mb-1 flex items-center gap-2">
+                            <LucideIcon name="calendar" size={18} className="text-blue-400" /> Intake Review
+                        </h2>
+                        <p className="text-slate-400 text-xs">Select a time to finalize your packet.</p>
+                    </div>
+                    <div className="flex-1 bg-white relative">
+                        <iframe width='100%' height='100%' src='https://clay-thankyouforyourservice.zohobookings.com/portal-embed#/4739587000000065158' frameBorder='0' allowFullScreen='' title="Zoho Bookings"></iframe>
+                    </div>
+                    <div className="p-4 bg-slate-50 border-t border-slate-200">
+                        <p className="text-xs text-center text-slate-500 mb-3">Once you have selected a time above, confirm below.</p>
+                        <button onClick={() => handleInteraction('booking_confirmed', null)} className="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                            <LucideIcon name="calendarcheck" size={20} /> I have confirmed my appointment
+                        </button>
+                    </div>
+                </div>
+            );
+
+            const EvidenceRow = ({ label, status, optional }) => (
+                <div className="p-3 flex items-center justify-between text-sm">
+                    <span className="text-slate-600">{label}</span>
+                    {status === 'Uploaded' ? (
+                        <div className="flex items-center gap-1 text-green-600 font-bold text-xs"><LucideIcon name="circlecheck" size={14} /> Uploaded</div>
+                    ) : status === 'Needs Help' ? (
+                        <div className="flex items-center gap-1 text-amber-600 font-bold text-xs"><LucideIcon name="phone" size={14} /> Needs Help</div>
+                    ) : (
+                        <div className={`flex items-center gap-1 font-bold text-xs ${optional ? 'text-slate-400' : 'text-red-400'}`}><LucideIcon name="x" size={14} /> {optional ? 'Optional' : 'Missing'}</div>
+                    )}
+                </div>
+            );
+
+            const PacketPanel = () => (
+                <>
+                    <div className="h-16 bg-slate-900 flex items-center px-6 gap-3 text-white flex-shrink-0 justify-between">
+                        <div className="flex items-center gap-3">
+                            <LucideIcon name="stethoscope" size={20} className="text-blue-400" />
+                            <h2 className="font-bold tracking-wide">Provider Packet</h2>
+                        </div>
+                        {syncStatus.status !== 'idle' && (
+                            <div className="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-full animate-pulse">
+                                <LucideIcon name="cloudlightning" size={14} className="text-green-400" />
+                                <span className="text-[10px] text-green-400 font-mono">{syncStatus.message}...</span>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                        <div className="border border-slate-200 rounded-xl overflow-hidden">
+                            <div className="bg-slate-50 p-3 border-b border-slate-200 flex justify-between items-center">
+                                <h3 className="font-bold text-slate-700 text-sm">Client Profile</h3>
+                                {packet.firstName && packet.discharge ? <LucideIcon name="circlecheck" size={16} className="text-green-500" /> : <LucideIcon name="circlealert" size={16} className="text-amber-500" />}
+                            </div>
+                            <div className="p-4 space-y-3">
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-slate-500">Name:</span>
+                                    <span className="font-semibold">{packet.firstName} {packet.lastName || '...'}</span>
+                                </div>
+                                {packet.referralSource && (
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-slate-500">Referral:</span>
+                                        <span className="font-semibold">{packet.referralSource}</span>
+                                    </div>
+                                )}
+                                {packet.altContact.name && (
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-slate-500 flex items-center gap-1"><LucideIcon name="users" size={12} /> Caretaker:</span>
+                                        <span className="font-semibold truncate max-w-[150px]">{packet.altContact.name}</span>
+                                    </div>
+                                )}
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-slate-500">Rating:</span>
+                                    <span className="font-semibold">{packet.currentRating !== null ? `${packet.currentRating}%` : '...'}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="border border-slate-200 rounded-xl overflow-hidden">
+                            <div className="bg-slate-50 p-3 border-b border-slate-200 flex justify-between items-center">
+                                <h3 className="font-bold text-slate-700 text-sm">Conditions & Impact</h3>
+                                <span className="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded-full">{packet.conditions.length}</span>
+                            </div>
+                            <div className="p-2 space-y-2">
+                                {packet.conditions.length === 0 && <p className="text-xs text-slate-400 p-2 italic text-center">No conditions selected yet.</p>}
+                                {packet.conditions.map((c, i) => (
+                                    <div key={i} className="p-3 bg-white border border-slate-100 rounded shadow-sm">
+                                        <div className="flex justify-between items-center mb-1">
+                                            <span className="text-xs font-bold text-slate-700 truncate">{c.name}</span>
+                                            <span className={`text-[10px] px-1.5 py-0.5 rounded uppercase font-bold ${c.status === 'Increase' ? 'bg-amber-100 text-amber-700' : 'bg-green-100 text-green-700'}`}>
+                                                {c.status}
+                                            </span>
+                                        </div>
+                                        <div className="text-[10px] text-slate-500 italic bg-slate-50 p-1.5 rounded">
+                                            "Impact: {c.impact || 'Pending...'}"
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="border border-slate-200 rounded-xl overflow-hidden">
+                            <div className="bg-slate-50 p-3 border-b border-slate-200 flex justify-between items-center">
+                                <h3 className="font-bold text-slate-700 text-sm">Evidence Locker</h3>
+                                {packet.needsLiveHelp ? <LucideIcon name="phone" size={16} className="text-amber-500 animate-pulse" /> : <LucideIcon name="database" size={16} className="text-slate-400" />}
+                            </div>
+                            <div className="divide-y divide-slate-100">
+                                <EvidenceRow label="DD214 (Service)" status={packet.documents.dd214} />
+                                <EvidenceRow label="Benefits Letter" status={packet.documents.benefitsLetter} />
+                                <EvidenceRow label="Blue Button Rpt" status={packet.documents.blueButton} />
+                                <EvidenceRow label="Private Records" status={packet.documents.privateRecords} optional />
+                                <EvidenceRow label="Witness Statements" status={packet.documents.witnessStatements} optional />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2">
+                            <div className={`p-3 rounded-xl text-center flex flex-col items-center justify-center gap-1 ${packet.techReady ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'bg-slate-50 text-slate-400'}`}>
+                                <LucideIcon name="wifi" size={16} />
+                                <span className="text-[10px] font-bold">{packet.techReady ? 'Tech Ready' : 'Pending'}</span>
+                            </div>
+                            <div className={`p-3 rounded-xl text-center flex flex-col items-center justify-center gap-1 transition-colors ${packet.bookingTime ? 'bg-green-600 text-white' : 'bg-slate-100 text-slate-400'}`}>
+                                {packet.bookingTime ? <LucideIcon name="circlecheck" size={16} /> : <LucideIcon name="hearthandshake" size={16} />}
+                                <span className="text-[10px] font-bold">{packet.bookingTime ? 'Booked' : 'Schedule'}</span>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            );
+
+            const MessageBubble = ({ msg }) => {
+                const isBot = msg.sender === 'bot';
+                return (
+                    <div className={`flex ${isBot ? 'justify-start' : 'justify-end'} mb-6`}>
+                        <div className={`max-w-[85%] ${isBot ? 'flex flex-row' : 'flex flex-row-reverse'} gap-3`}>
+                            <div className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-sm ${isBot ? 'bg-blue-600 text-white' : 'bg-slate-800 text-white'}`}>
+                                {isBot ? <LucideIcon name="shield" size={20} /> : <LucideIcon name="user" size={20} />}
+                            </div>
+                            <div className="space-y-2 w-full">
+                                <div className={`p-4 rounded-2xl text-sm shadow-sm leading-relaxed ${
+                                    isBot ? 'bg-white border border-slate-200 text-slate-700 rounded-tl-none' : 'bg-slate-800 text-white rounded-tr-none'
+                                }`}>
+                                    {msg.text}
+                                </div>
+                                {isBot && msg.payload && (
+                                    <div className="animate-in fade-in slide-in-from-top-2 duration-300">
+                                        {msg.type === 'options' && (
+                                            <div className="flex flex-wrap gap-2">
+                                                {msg.payload.map((opt, i) => (
+                                                    <button key={i} onClick={() => {
+                                                        if (opt.value.type) handleInteraction(opt.value.type, opt.value);
+                                                        else if (['add_more_conditions', 'start_evidence'].includes(opt.value)) handleInteraction('flow_control', opt.value);
+                                                        else if (opt.value === 'stop_wait') handleInteraction(null, 'stop_wait');
+                                                        else if (opt.value === 'jump_to_booking') handleInteraction(null, 'jump_to_booking');
+                                                        else if (opt.value === 'oath_signed') handleInteraction(null, 'oath_signed');
+                                                        else if (opt.value === 'yes') handleInteraction('alt_contact_check', 'yes');
+                                                        else if (opt.value === 'no') handleInteraction('alt_contact_check', 'no');
+                                                        else if (['Army', 'Navy', 'Air Force', 'Marines', 'Coast Guard'].includes(opt.value)) handleInteraction('branch', opt.value);
+                                                        else if (['Honorable', 'General', 'OTH'].includes(opt.value)) handleInteraction('discharge', opt.value);
+                                                        else if (['Social Media', 'Search', 'Referral', 'Email'].includes(opt.value)) handleInteraction('referral_check', opt.value);
+                                                    }} className="px-5 py-3 bg-white border border-slate-200 text-blue-700 font-bold rounded-xl shadow-sm hover:border-blue-400 hover:shadow-md transition-all text-sm">
+                                                        {opt.label}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
+                                        {msg.type === 'grid_options' && (
+                                            <div className="grid grid-cols-5 gap-2">
+                                                {msg.payload.map((opt, i) => (
+                                                    <button key={i} onClick={() => handleInteraction('rating', opt.value)} className="px-1 py-3 bg-white border border-slate-200 rounded-lg text-sm font-bold hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all">
+                                                        {opt.label}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
+                                        {msg.type === 'category_selector' && (
+                                            <div className="space-y-2 w-full max-w-sm">
+                                                {activeCategory ? (
+                                                    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                                                        <div className="bg-slate-50 p-3 flex justify-between items-center border-b border-slate-200">
+                                                            <span className="font-bold text-slate-700 ml-1">{activeCategory}</span>
+                                                            <button onClick={() => setActiveCategory(null)} className="p-1 hover:bg-slate-200 rounded"><LucideIcon name="x" size={16} /></button>
+                                                        </div>
+                                                        <div className="max-h-64 overflow-y-auto p-2 space-y-1">
+                                                            {CONDITION_CATEGORIES[activeCategory].map((cond, i) => (
+                                                                <button key={i} onClick={() => { handleInteraction('condition_add', cond); setActiveCategory(null); }} className="w-full text-left p-3 hover:bg-blue-50 text-slate-700 hover:text-blue-700 rounded-lg text-sm font-medium transition-colors flex items-center justify-between group">
+                                                                    {cond} <LucideIcon name="chevronright" size={14} className="text-slate-300 group-hover:text-blue-500" />
+                                                                </button>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="grid grid-cols-1 gap-2">
+                                                        {msg.payload.map((cat, i) => (
+                                                            <button key={i} onClick={() => setActiveCategory(cat)} className="p-4 bg-white border border-slate-200 rounded-xl text-left font-bold text-slate-700 hover:border-blue-400 hover:shadow-md transition-all flex justify-between items-center">
+                                                                {cat} <LucideIcon name="chevronright" size={16} className="text-slate-300" />
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                        {msg.type === 'upload' && (
+                                            <div className="w-full max-w-md bg-white border border-slate-200 p-4 rounded-xl shadow-sm space-y-3">
+                                                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-blue-100 border-dashed rounded-lg cursor-pointer bg-blue-50 hover:bg-blue-100 transition-all group">
+                                                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                                        <LucideIcon name="cloudupload" size={40} className="mb-3 text-blue-400 group-hover:text-blue-600 transition-colors" />
+                                                        <p className="mb-1 text-sm text-slate-700 font-bold">Click to Upload File</p>
+                                                        <p className="text-xs text-slate-500">PDF preferred (Max 10MB)</p>
+                                                    </div>
+                                                    <input type="file" className="hidden" onChange={(e) => handleFileUpload(e.target.files[0], msg.payload)} />
+                                                </label>
+
+                                                <div className="flex gap-2">
+                                                    {msg.payload !== 'private_records' && msg.payload !== 'witness_statements' && (
+                                                        <button onClick={() => handleInteraction('guide_toggle', msg.payload)} className="flex-1 flex items-center justify-center gap-2 text-xs text-blue-600 font-bold py-2 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                                                            <LucideIcon name="globe" size={14} /> Help me find this
+                                                        </button>
+                                                    )}
+                                                    <button onClick={() => handleInteraction('missing_help', msg.payload)} className="flex-1 flex items-center justify-center gap-2 text-xs text-amber-600 font-bold py-2 bg-amber-50 rounded-lg hover:bg-amber-100 transition-colors">
+                                                        <LucideIcon name="phone" size={14} /> Need Live Help
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                        {msg.type === 'action' && msg.payload.type === 'input_name' && (
+                                            <form onSubmit={(e) => { e.preventDefault(); const val = e.target.elements.nameInput.value; if (val.trim()) handleInteraction('name', val); }} className="flex gap-2 w-full max-w-sm">
+                                                <input name="nameInput" className="flex-1 p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g., John Doe" />
+                                                <button type="submit" className="bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition-colors shadow-sm"><LucideIcon name="arrowright" size={20} /></button>
+                                            </form>
+                                        )}
+                                        {msg.type === 'action' && msg.payload.type === 'input_alt_contact' && (
+                                            <form onSubmit={(e) => { e.preventDefault(); const val = e.target.elements.altInput.value; if (val.trim()) handleInteraction('alt_contact_entry', val); }} className="flex gap-2 w-full max-w-sm">
+                                                <input name="altInput" className="flex-1 p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder={msg.payload.label} />
+                                                <button type="submit" className="bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition-colors shadow-sm"><LucideIcon name="arrowright" size={20} /></button>
+                                            </form>
+                                        )}
+                                        {msg.type === 'action' && msg.payload.type === 'input_impact' && (
+                                            <form onSubmit={(e) => { e.preventDefault(); const val = e.target.elements.impactInput.value; if (val.trim()) handleInteraction('impact_statement', val); }} className="flex gap-2 w-full max-w-sm">
+                                                <input name="impactInput" className="flex-1 p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" placeholder={msg.payload.label} />
+                                                <button type="submit" className="bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition-colors shadow-sm"><LucideIcon name="messagesquare" size={20} /></button>
+                                            </form>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            return (
+                <div className="flex h-[900px] bg-slate-100 font-sans text-slate-800 overflow-hidden">
+                    <div className="w-full md:w-7/12 flex flex-col bg-slate-50 border-r border-slate-200 relative z-10">
+                        <div className="h-16 px-6 bg-white border-b border-slate-200 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-blue-700 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-100">
+                                    <LucideIcon name="shield" size={20} />
+                                </div>
+                                <div>
+                                    <h1 className="font-extrabold text-slate-800 text-lg">TYFYS Intake</h1>
+                                    <p className="text-xs text-slate-500 font-medium">Secure Client Portal</p>
+                                </div>
+                            </div>
+                            <div className="bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                System Active
+                            </div>
+                        </div>
+                        <div className="flex-1 overflow-y-auto p-6">
+                            {messages.map(msg => <MessageBubble key={msg.id} msg={msg} />)}
+                            {isTyping && (
+                                <div className="flex items-center gap-2 ml-14 mb-6">
+                                    <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></span>
+                                    <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce delay-75"></span>
+                                    <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce delay-150"></span>
+                                </div>
+                            )}
+                            <div ref={messagesEndRef} />
+                        </div>
+                    </div>
+
+                    <div className="hidden md:flex flex-col flex-1 bg-white shadow-xl z-20 overflow-hidden relative">
+                        {panelMode === 'packet' && <PacketPanel />}
+                        {panelMode === 'browser' && <BrowserPanel guideKey={activeGuide} />}
+                        {panelMode === 'calendar' && <CalendarPanel />}
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('intake-root')).render(<ClientIntakeSystem />);
+    </script>
+</body>
+</html>
