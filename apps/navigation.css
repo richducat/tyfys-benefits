@@ -30,6 +30,36 @@ body.grayscale-mode {
   transition: background-color 300ms ease, box-shadow 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease;
 }
 
+[data-site-nav] .nav-actions {
+  align-items: center;
+  gap: 1.1rem;
+}
+
+[data-site-nav] .nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 44px;
+  padding: 0 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+[data-site-nav] .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 46px;
+  padding: 0 1.1rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
 [data-site-nav].is-scrolled {
   background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(18px);
