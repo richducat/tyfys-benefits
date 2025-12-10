@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTSD Claim Express - VA Claim Team</title>
+    
+    <!-- 1. TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. REACT & REACT DOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- 3. BABEL (For JSX) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        
+        .fade-enter { opacity: 0; transform: translateY(10px); }
+        .fade-enter-active { opacity: 1; transform: translateY(0); transition: opacity 300ms, transform 300ms; }
+        .fade-exit { opacity: 1; transform: translateY(0); }
+        .fade-exit-active { opacity: 0; transform: translateY(-10px); transition: opacity 300ms, transform 300ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Chat Animations */
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message-anim { animation: messageSlide 0.3s ease-out forwards; }
+        
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Drip Reveal Animation */
+        @keyframes dripReveal {
+            from { opacity: 0; transform: translateY(15px); filter: blur(4px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+        .drip-item { animation: dripReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; }
+
+        /* Ledger Animation */
+        @keyframes ledgerPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); color: #10b981; }
+            100% { transform: scale(1); }
+        }
+        .ledger-update { animation: ledgerPop 0.4s ease-out; }
+
+        /* Sync Pulse */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.33); }
+            80%, 100% { opacity: 0; }
+        }
+        .pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            background-color: rgba(16, 185, 129, 0.6);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' },
+                        military: { 800: '#1e293b', 900: '#0f172a' },
+                        gold: { 400: '#fbbf24', 500: '#f59e0b' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen overflow-hidden selection:bg-brand-200">
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // --- ICONS ---
+        const Icons = {
+            ChevronRight: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>,
+            ChevronLeft: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>,
+            Check: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>,
+            Info: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>,
+            Shield: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+            User: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+            FileText: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>,
+            Brain: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>,
+            Activity: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>,
+            Lock: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>,
+            XCircle: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>,
+            Phone: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
+            DollarSign: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>,
+            X: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>,
+            Sync: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>,
+            Star: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+        };
+
+        // --- MENTAL HEALTH SCREENING DATA ---
+        const SCREENING_QUESTIONS = [
+            { id: 'condition_desc', label: 'Please specify the condition(s) you are diagnosed with:', type: 'text' },
+            { id: 'social_impact', label: 'Please explain in detail how your disability affects your social/marital and family condition NOW:', type: 'textarea', placeholder: 'Example: I am currently married and have a rocky relationship because my anxiety/PTSD makes it hard for me to socialize...' },
+            { id: 'work_impact', label: 'Relevant Occupational and Educational History', type: 'textarea', placeholder: 'Example: I\'ve missed work due to stress and anxiety, had trouble focusing...' },
+            { id: 'counseling', label: 'Are you currently undergoing counseling? If yes, indicate frequency.', type: 'text' },
+            { id: 'meds', label: 'Are you currently taking any medications? If yes, list all medication(s).', type: 'text' },
+            { id: 'improvement', label: 'Do you think that your counseling/medications are improving your condition? Explain.', type: 'textarea' },
+            { id: 'legal_history', label: 'Relevant Legal and Behavioral History (Within the past year)', type: 'text', placeholder: 'Example: None reported OR DUI 6 months ago etc.' },
+            { id: 'substance_abuse', label: 'Relevant Substance Abuse History (Do you drink/smoke/drug use? If so, indicate frequency)', type: 'text' },
+            { id: 'financial_competency', label: 'Do you feel competent to manage your financial affairs?', type: 'radio', options: ['Yes', 'No'] },
+            { 
+                id: 'impairment_level', 
+                label: 'Which of the following BEST describes your level of occupational and social impairment?', 
+                type: 'radio', 
+                options: [
+                    'No mental disorder diagnosis',
+                    'Symptoms are not severe enough to interfere with occupational and social functions',
+                    'Symptoms controlled by medication',
+                    'Occasional decrease in work efficiency',
+                    'Reduced reliability and productivity',
+                    'Deficiencies in most areas such as work, school, family relations',
+                    'Total occupational and social impairment'
+                ]
+            },
+            {
+                id: 'symptom_checklist',
+                label: 'Think of the symptoms you’ve had over the past year and check all that apply:',
+                type: 'checklist',
+                options: [
+                    'Depressed Mood', 'Anxiety', 'Suspiciousness', 'Panic attacks', 'Chronic Sleep impairment',
+                    'Mild Memory loss', 'Impairment of short and long-term memory', 'Flattened Affect',
+                    'Speech disorder', 'Difficulty in understanding complex commands', 'Impaired Judgment',
+                    'Impaired abstract thinking', 'Disturbances of mood and motivation', 'Suicidal Ideas',
+                    'Obsessional rituals', 'Impulse control issues', 'Spatial disorientation',
+                    'Persistent delusions or hallucinations', 'Grossly inappropriate behavior',
+                    'Persistent danger of hurting self or others', 'Neglect of personal appearance',
+                    'Disorientation to time or place'
+                ]
+            }
+        ];
+
+        // --- CONTENT & LOGIC ---
+        const QUESTIONS = [
+             {
+                id: 'discharge_status',
+                title: "What is your discharge status?",
+                subtitle: "We must verify eligibility before proceeding.",
+                type: 'single',
+                valueAdd: 0,
+                badge: 'Eligibility Check',
+                guide: {
+                    title: "Eligibility Requirement",
+                    content: "The VA requires a discharge characterization of 'Honorable' or 'General Under Honorable Conditions' for most benefits. If you have a Dishonorable or Bad Conduct discharge, we cannot assist at this time.",
+                    tip: "If you have an OTH (Other Than Honorable), you may still qualify, but it requires a special review.",
+                },
+                options: [
+                    { id: 'honorable', label: 'Honorable', desc: 'Standard honorable discharge.', icon: 'Check' },
+                    { id: 'general', label: 'General (Under Honorable)', desc: 'General discharge.', icon: 'Check' },
+                    { id: 'oth', label: 'Other Than Honorable (OTH)', desc: 'May require upgrade.', icon: 'Shield' },
+                    { id: 'dishonorable', label: 'Dishonorable / Bad Conduct', desc: 'Disqualifies from most benefits.', icon: 'XCircle', disqualify: true }
+                ]
+            },
+            {
+                id: 'legal_status',
+                title: "Are you currently in an active appeal with a Judge?",
+                subtitle: "We cannot interfere with active legal proceedings.",
+                type: 'single',
+                valueAdd: 0,
+                badge: 'Legal Check',
+                guide: {
+                    title: "Legal Jurisdiction",
+                    content: "If your claim is currently at the Board of Veterans' Appeals (BVA) or Higher Level Review, our hands are tied until that process concludes.",
+                    tip: "If you are just 'thinking' about appealing, we CAN help. This only applies if you have already filed a formal Notice of Disagreement.",
+                },
+                options: [
+                    { id: 'no_appeal', label: 'No, I am not in appeal', desc: 'My claim is closed or I haven\'t filed yet.', icon: 'Check' },
+                    { id: 'yes_appeal', label: 'Yes, I am waiting for a Judge', desc: 'I have an active BVA hearing scheduled.', icon: 'Gavel', disqualify: true }
+                ]
+            },
+            {
+                id: 'era',
+                title: "When did you serve our country?",
+                subtitle: "This helps us identify specific benefits you earned during that time.",
+                type: 'single',
+                valueAdd: 500,
+                badge: 'Presumptive Eligible',
+                guide: {
+                    title: "Strategic Advantage",
+                    content: "We don't just ask this for records. We look for specific eras like Vietnam (Agent Orange) or Post-9/11 (Burn Pits). Identifying the right era is often the first 'Key' to unlocking an automatic rating.",
+                    tip: "Did you know? The PACT Act expanded benefits for millions. Even if you were denied before, you might qualify now.",
+                    objection: {
+                        myth: "I wasn't in combat, so I don't qualify.",
+                        fact: "False. Injuries happen in training, PT, and daily duty. The VA compensates for ANY service-connected disability, combat or not."
+                    }
+                },
+                options: [
+                    { id: 'post911', label: 'Post-9/11 Era', desc: 'Sep 11, 2001 - Present', icon: 'Shield' },
+                    { id: 'gulf', label: 'Gulf War Era', desc: 'Aug 1990 - Sep 2001', icon: 'Shield' },
+                    { id: 'vietnam', label: 'Vietnam Era', desc: 'Feb 1955 - May 1975', icon: 'Shield' },
+                    { id: 'peacetime', label: 'Peacetime / Other', desc: 'Between major conflicts', icon: 'User' }
+                ]
+            },
+            {
+                id: 'rating',
+                title: "What is your CURRENT disability rating?",
+                subtitle: "Be honest - knowing your gap to 100% helps us build the right strategy.",
+                type: 'slider',
+                valueAdd: 1200,
+                badge: 'High Value Gap',
+                guide: {
+                    title: "The 'VA Math' Factor",
+                    content: "Moving from 90% to 100% is the hardest leap because of how the VA calculates disability. But financially, it's the most rewarding step you can take.",
+                    tip: "The difference between 90% and 100% can be over $1,500/mo tax-free. Over 20 years, that's life-changing wealth.",
+                    objection: {
+                        myth: "I don't want 100% because I still want to work.",
+                        fact: "Total Myth. Unless you apply for TDIU (Unemployability), a 100% rating DOES NOT limit your ability to work and earn a salary."
+                    }
+                }
+            },
+            {
+                id: 'conditions',
+                title: "Which of these conditions affects your daily life the most?",
+                subtitle: "We look for 'Secondary Conditions' that others miss.",
+                type: 'multi',
+                valueAdd: 300,
+                badge: 'Multi-Claim Strategy',
+                caseStudy: {
+                    title: "Success Story: Musculoskeletal",
+                    content: "\"After 15 years at 30% for my back, I didn't think an increase was possible. The team got me proper documentation showing deterioration. Now I'm at 70%.\" - James T."
+                },
+                guide: {
+                    title: "The Whole Soldier Concept",
+                    content: "We don't just look at one injury. We look at 'Secondary Conditions'. For example, a bad knee often leads to a bad back or hip. The VA owes you for that secondary injury too.",
+                    tip: "Mental health is often a secondary condition to chronic physical pain. Don't overlook it.",
+                    objection: {
+                        myth: "It's just 'getting old'.",
+                        fact: "If it started in service or was made worse by service, it's compensable. Don't self-diagnose your way out of benefits you earned."
+                    }
+                },
+                options: [
+                    { id: 'mental', label: 'Mental Health', desc: 'Anxiety, PTSD, Depression, Insomnia', icon: 'Brain' },
+                    { id: 'ortho', label: 'Joints & Bones', desc: 'Back, Knees, Neck, Shoulders', icon: 'Activity' },
+                    { id: 'senses', label: 'Senses', desc: 'Ringing Ears (Tinnitus), Hearing Loss', icon: 'Activity' },
+                    { id: 'internal', label: 'Internal', desc: 'Respiratory, IBS, Reflux, Sleep Apnea', icon: 'User' }
+                ]
+            },
+            {
+                id: 'impact',
+                title: "How does this condition impact your work or social life?",
+                subtitle: "This is the key to a higher rating percentage.",
+                type: 'single',
+                valueAdd: 500,
+                badge: 'High Severity',
+                guide: {
+                    title: "Severity = Compensation",
+                    content: "The VA rates you based on 'Occupational and Social Impairment'. If you miss work or avoid social events because of your condition, that is evidence for a higher rating.",
+                    tip: "We use 'DBQs' (Disability Benefits Questionnaires) to document exactly how your life is impacted, ensuring you get the rating you deserve.",
+                    objection: {
+                        myth: "I can just tough it out.",
+                        fact: "You earned these benefits. 'Toughing it out' just saves the government money at your expense."
+                    }
+                },
+                options: [
+                    { id: 'severe', label: 'Frequently', desc: 'I miss work or avoid social events weekly.' },
+                    { id: 'moderate', label: 'Occasionally', desc: 'It bothers me, but I push through.' },
+                    { id: 'mild', label: 'Rarely', desc: 'It is a minor nuisance.' }
+                ]
+            },
+            {
+                id: 'nexus',
+                title: "How do you plan to prove the 'Nexus' (Service Connection)?",
+                subtitle: "The 'Nexus' is the legal link between your service and your condition.",
+                type: 'single',
+                valueAdd: 0,
+                badge: 'Nexus Required',
+                guide: {
+                    title: "The #1 Reason for Denial",
+                    content: "80% of claims are denied because they lack a 'Nexus Letter'. You can have the injury and the service record, but without a doctor linking them with specific legal phrasing ('at least as likely as not'), you lose.",
+                    tip: "VSOs (free services) generally CANNOT provide Nexus Letters. We have a network of private doctors who specialize in writing them.",
+                    objection: {
+                        myth: "My regular doctor can write a note.",
+                        fact: "Civilian doctors rarely know the specific 'VA legal language' required. A generic note often leads to denial. You need a specialist."
+                    }
+                },
+                options: [
+                    { id: 'private_doc', label: 'I need a specialist (Recommended)', desc: 'I want a private doctor who knows VA law to write a Nexus Letter.' },
+                    { id: 'vso', label: 'I will use a VSO', desc: 'I will rely on the VA\'s C&P exam doctors.' },
+                    { id: 'unsure', label: 'I am not sure', desc: 'I don\'t know what a Nexus Letter is.' }
+                ]
+            },
+            {
+                id: 'records',
+                title: "Have you struggled to get your medical records?",
+                subtitle: "We need to know what evidence we have to work with.",
+                type: 'single',
+                valueAdd: 0,
+                badge: 'Evidence Strategy',
+                guide: {
+                    title: "Evidence is King",
+                    content: "We don't just file forms; we build a case. We comb through your Service Treatment Records (STRs) to find every shred of evidence to support your claim.",
+                    tip: "If you don't have your records, we can help you request them. It's the foundation of your financial future.",
+                    objection: {
+                        myth: "The VA already has my records.",
+                        fact: "They do, but they are overloaded. They often miss key details. We 'squeeze' your records to ensure nothing is overlooked."
+                    }
+                },
+                options: [
+                    { id: 'struggled', label: 'Yes, it\'s confusing', desc: 'I don\'t know where to start.' },
+                    { id: 'va_has', label: 'The VA has them', desc: 'I assume they have everything.' },
+                    { id: 'have_them', label: 'I have copies', desc: 'I have my physical or digital files.' }
+                ]
+            },
+            {
+                id: 'contact_basic',
+                title: "Let's start your secure profile.",
+                subtitle: "Who are we building this strategy for?",
+                type: 'contact_basic',
+                valueAdd: 0,
+                badge: 'Profile Started',
+                guide: {
+                    title: "Secure & Confidential",
+                    content: "We use this to create a secure file for your case. Your privacy is protected by 256-bit encryption, just like a bank.",
+                    tip: "Please use your legal name as it appears on your DD-214 for accurate record matching."
+                },
+                fields: [
+                    { id: 'firstName', label: 'First Name', placeholder: 'John' },
+                    { id: 'lastName', label: 'Last Name', placeholder: 'Doe' }
+                ]
+            },
+            {
+                id: 'contact_details',
+                title: "Where should we send your Strategy Report?",
+                subtitle: "We'll send your ROI analysis here.",
+                type: 'contact_details',
+                valueAdd: 0,
+                badge: 'Contact Linked',
+                guide: {
+                    title: "Your Report is Ready",
+                    content: "We've compiled your potential rating increase and lifetime value. We need a secure way to send you this sensitive financial information.",
+                    tip: "Double check your email. This report contains the blueprint for your financial future."
+                },
+                fields: [
+                    { id: 'email', label: 'Email', placeholder: 'john@example.com' },
+                    { id: 'phone', label: 'Phone', placeholder: '(555) 555-5555' }
+                ]
+            }
+        ];
+
+        // --- HOOKS ---
+        const useDataSync = (answers) => {
+            const [isSyncing, setIsSyncing] = useState(false);
+            useEffect(() => {
+                const hasAnswers = Object.values(answers).some(val => 
+                    Array.isArray(val) ? val.length > 0 : !!val
+                );
+                if (hasAnswers) {
+                    setIsSyncing(true);
+                    const timer = setTimeout(() => setIsSyncing(false), 1500);
+                    return () => clearTimeout(timer);
+                }
+            }, [answers]);
+            return isSyncing;
+        };
+
+        // --- COMPONENTS ---
+
+        const BookingModal = ({ isOpen, onClose, src }) => {
+            if (!isOpen) return null;
+            return (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm animate-in fade-in duration-300">
+                    <div className="bg-white w-full max-w-4xl h-[90vh] rounded-2xl shadow-2xl overflow-hidden relative flex flex-col animate-in zoom-in-95 duration-300">
+                        <div className="bg-military-900 p-4 flex justify-between items-center shrink-0">
+                            <div className="flex items-center gap-2 text-white">
+                                <Icons.Phone />
+                                <span className="font-bold">Priority Intake Line</span>
+                            </div>
+                            <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
+                                <Icons.X />
+                            </button>
+                        </div>
+                        <div className="flex-1 overflow-hidden bg-white relative">
+                            <iframe 
+                                width='100%' 
+                                height='100%' 
+                                src={src || 'https://clay-thankyouforyourservice.zohobookings.com/portal-embed#/4739587000000065030'}
+                                frameBorder='0' 
+                                allowFullScreen='' 
+                                className="absolute inset-0 w-full h-full"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const MissionSidebar = ({ stepData, userName, answers, onBook, isSyncing }) => {
+            const accumulatedValue = useMemo(() => {
+                let total = 0;
+                if (answers.era) total += 500;
+                if (answers.rating) total += 1200;
+                if (answers.conditions) total += (answers.conditions.length * 300);
+                if (answers.nexus === 'no_letter') total += 0; 
+                if (answers.impact === 'severe') total += 800;
+                return total;
+            }, [answers]);
+
+            const badges = useMemo(() => {
+                const b = [];
+                if (answers.era) b.push("Active Duty Era");
+                if (answers.conditions?.length > 1) b.push("Multi-Claim");
+                if (answers.rating && answers.rating < 90) b.push("High Growth Potential");
+                if (answers.nexus === 'no_letter') b.push("Gap Detected");
+                return b;
+            }, [answers]);
+
+            return (
+                <div className="h-full bg-military-900 text-slate-300 flex flex-col border-l border-slate-700 relative overflow-hidden transition-all duration-500 shadow-2xl">
+                    <div className="p-6 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md relative z-10">
+                        <div className="flex items-center justify-between mb-4">
+                            <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Potential Value</span>
+                            <div className={`flex items-center gap-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase transition-all duration-300 ${isSyncing ? 'bg-green-500/20 text-green-400' : 'bg-slate-800 text-slate-500'}`}>
+                                {isSyncing && (
+                                    <div className="relative w-2 h-2">
+                                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                        <div className="pulse-ring"></div>
+                                    </div>
+                                )}
+                                {isSyncing ? 'Syncing...' : 'Live'}
+                            </div>
+                        </div>
+                        <div className="flex items-baseline gap-1">
+                            <span className="text-4xl font-black text-white ledger-update" key={accumulatedValue}>
+                                +${accumulatedValue.toLocaleString()}
+                            </span>
+                            <span className="text-sm font-medium text-slate-500">/mo</span>
+                        </div>
+                        <div className="w-full bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
+                            <div className="bg-green-500 h-full transition-all duration-1000" style={{ width: `${Math.min((accumulatedValue / 3000) * 100, 100)}%` }}></div>
+                        </div>
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+                        {stepData ? (
+                            <>
+                                <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-5 shadow-sm">
+                                    <h4 className="text-brand-300 font-bold mb-2 flex items-center gap-2 text-xs uppercase tracking-wide">
+                                        <Icons.Info /> Mission Intel
+                                    </h4>
+                                    <p className="text-sm leading-relaxed text-slate-300">
+                                        {stepData.guide.content}
+                                    </p>
+                                </div>
+                                {stepData.guide.objection && (
+                                    <div className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden">
+                                        <div className="bg-red-900/20 p-3 border-b border-red-900/30 flex items-center gap-2">
+                                            <Icons.XCircle />
+                                            <span className="text-xs font-bold text-red-300 uppercase">Debunking Myths</span>
+                                        </div>
+                                        <div className="p-4 space-y-3">
+                                            <p className="text-xs text-slate-400 italic">"{stepData.guide.objection.myth}"</p>
+                                            <div className="h-px bg-slate-700 w-full"></div>
+                                            <p className="text-xs text-slate-200">
+                                                <strong className="text-brand-400">FACT:</strong> {stepData.guide.objection.fact}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                                {stepData.caseStudy && (
+                                    <div className="bg-brand-900/20 border border-brand-800/50 rounded-xl p-5 shadow-sm animate-in slide-in-from-right">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <div className="text-gold-400"><Icons.Star /></div>
+                                            <h4 className="text-gold-400 font-bold text-xs uppercase tracking-wide">
+                                                {stepData.caseStudy.title}
+                                            </h4>
+                                        </div>
+                                        <p className="text-xs italic leading-relaxed text-slate-300">
+                                            {stepData.caseStudy.content}
+                                        </p>
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <div className="text-center text-slate-500 py-10 italic">
+                                Analysis Complete. Review your strategy report.
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="p-6 border-t border-slate-800 bg-slate-900 z-20">
+                        <button 
+                            onClick={onBook}
+                            className="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-500 hover:to-brand-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-brand-900/50 flex items-center justify-center gap-3 transition-all transform hover:-translate-y-1 group"
+                        >
+                            <div className="bg-white/20 p-1.5 rounded-full group-hover:bg-white/30 transition-colors">
+                                <Icons.Phone /> 
+                            </div>
+                            <div className="text-left">
+                                <div className="text-xs font-medium text-brand-200 uppercase tracking-wider">Stuck?</div>
+                                <div className="text-sm">Talk to a Human Now</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        const SelectionCard = ({ option, selected, onClick, multi }) => {
+            const IconComp = option.icon && Icons[option.icon] ? Icons[option.icon] : null;
+            return (
+                <button 
+                    onClick={onClick}
+                    className={`
+                        relative w-full text-left p-5 rounded-xl border-2 transition-all duration-200 group
+                        ${selected 
+                            ? 'border-brand-500 bg-brand-50 shadow-lg shadow-brand-900/10 z-10 scale-[1.02]' 
+                            : 'border-slate-200 bg-white hover:border-brand-300 hover:shadow-md hover:bg-slate-50'
+                        }
+                    `}
+                >
+                    <div className="flex items-start gap-4">
+                        {IconComp && (
+                            <div className={`
+                                p-3 rounded-lg transition-colors
+                                ${selected ? 'bg-brand-500 text-white' : 'bg-slate-100 text-slate-400 group-hover:bg-brand-100 group-hover:text-brand-500'}
+                            `}>
+                                <IconComp />
+                            </div>
+                        )}
+                        <div className="flex-1">
+                            <div className="flex justify-between items-center mb-1">
+                                <h4 className={`font-bold text-lg ${selected ? 'text-brand-900' : 'text-slate-700'}`}>
+                                    {option.label}
+                                </h4>
+                                {selected && <div className="text-brand-600"><Icons.Check /></div>}
+                            </div>
+                            <p className={`text-sm ${selected ? 'text-brand-700' : 'text-slate-500'}`}>
+                                {option.desc}
+                            </p>
+                        </div>
+                    </div>
+                </button>
+            );
+        };
+
+        const ContactForm = ({ fields, values, onChange }) => {
+            return (
+                <div className="space-y-4">
+                    {fields.map(field => (
+                        <div key={field.id}>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">{field.label}</label>
+                            <input
+                                type="text"
+                                className="w-full p-4 border-2 border-slate-200 rounded-xl focus:border-brand-500 focus:ring-4 focus:ring-brand-100 outline-none transition-all"
+                                placeholder={field.placeholder}
+                                value={values[field.id] || ''}
+                                onChange={(e) => onChange(field.id, e.target.value)}
+                            />
+                        </div>
+                    ))}
+                </div>
+            );
+        };
+
+        const SliderInput = ({ value, onChange }) => {
+            return (
+                <div className="w-full py-8">
+                    <div className="relative h-4 bg-slate-200 rounded-full">
+                        <div 
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-brand-400 to-brand-600 rounded-full transition-all duration-300"
+                            style={{ width: `${value}%` }}
+                        ></div>
+                        <input 
+                            type="range" 
+                            min="0" 
+                            max="100" 
+                            step="10" 
+                            value={value} 
+                            onChange={(e) => onChange(parseInt(e.target.value))}
+                            className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+                        />
+                        {[0, 20, 40, 60, 80, 100].map(tick => (
+                            <div 
+                                key={tick} 
+                                className="absolute top-6 transform -translate-x-1/2 text-xs font-bold text-slate-400"
+                                style={{ left: `${tick}%` }}
+                            >
+                                {tick}%
+                            </div>
+                        ))}
+                    </div>
+                    <div className="mt-12 text-center">
+                        <span className="text-6xl font-black text-slate-800 tracking-tighter">
+                            {value}<span className="text-2xl text-slate-400">%</span>
+                        </span>
+                        <p className="text-brand-600 font-medium mt-2">Current Rating</p>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- NEW COMPONENT: DISCOUNT UNLOCK ---
+        const PaymentSimulation = ({ onPaymentComplete }) => {
+            const [status, setStatus] = useState('idle');
+
+            const handleUnlock = () => {
+                setStatus('processing');
+                setTimeout(() => {
+                    setStatus('success');
+                    setTimeout(onPaymentComplete, 2000);
+                }, 2000);
+            };
+
+            if (status === 'success') {
+                return (
+                    <div className="flex flex-col items-center justify-center h-full p-10 text-center animate-in zoom-in">
+                        <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
+                            <Icons.Check />
+                        </div>
+                        <h2 className="text-3xl font-black text-slate-900 mb-2">Deposit Confirmed!</h2>
+                        <p className="text-slate-500">Unlocking Medical Screening...</p>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="flex flex-col items-center justify-center h-full p-8 text-center max-w-md mx-auto">
+                    <div className="mb-8">
+                        <div className="w-20 h-20 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Icons.Lock />
+                        </div>
+                        <h2 className="text-2xl font-bold text-slate-900 mb-2">Unlock Medical Screening</h2>
+                        <p className="text-slate-500 text-sm">
+                           A fully refundable $50 deposit is required to proceed to the detailed medical questionnaire. This ensures your slot with our intake team.
+                        </p>
+                    </div>
+
+                    <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 w-full mb-8">
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-slate-600 font-medium">Standard Price</span>
+                            <span className="text-slate-400 line-through">$548</span>
+                        </div>
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-slate-600 font-medium">Deposit Credit</span>
+                            <span className="text-green-600 font-bold">-$50</span>
+                        </div>
+                        <div className="h-px bg-slate-200 my-2"></div>
+                        <div className="flex justify-between items-center text-lg">
+                            <span className="text-slate-900 font-bold">Deposit Due Now</span>
+                            <span className="text-brand-600 font-black">$50</span>
+                        </div>
+                    </div>
+
+                    <button 
+                        onClick={handleUnlock}
+                        disabled={status === 'processing'}
+                        className="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl shadow-xl flex items-center justify-center gap-2 transition-all disabled:opacity-70"
+                    >
+                        {status === 'processing' ? (
+                            <>Processing... <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span></>
+                        ) : (
+                            <>Pay $50 Deposit <Icons.Lock /></>
+                        )}
+                    </button>
+                     <p className="mt-4 text-xs text-slate-400 flex items-center justify-center gap-1">
+                        <Icons.Lock /> 256-Bit SSL Encrypted
+                    </p>
+                </div>
+            );
+        };
+
+        const MentalHealthScreening = ({ onComplete }) => {
+            const [data, setData] = useState({});
+            
+            const handleInput = (id, val) => {
+                setData(prev => ({ ...prev, [id]: val }));
+            };
+
+            const isFormComplete = () => {
+                return data.condition_desc && data.social_impact;
+            };
+
+            return (
+                <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200 animate-in fade-in slide-in-from-bottom duration-500 max-h-[80vh] overflow-y-auto">
+                    <div className="bg-brand-900 p-6 text-white">
+                        <h2 className="text-2xl font-bold mb-2">Mental Disorders Disability Patient Questionnaire</h2>
+                        <p className="text-brand-200 text-sm">Please answer accurately. Your deposit has unlocked this priority screening.</p>
+                    </div>
+                    <div className="p-8 space-y-8">
+                        {SCREENING_QUESTIONS.map(q => (
+                            <div key={q.id} className="space-y-3">
+                                <label className="block text-sm font-bold text-slate-800">{q.label}</label>
+                                {q.type === 'text' && <input type="text" className="w-full p-3 border rounded-lg" onChange={e => handleInput(q.id, e.target.value)} />}
+                                {q.type === 'textarea' && <textarea className="w-full p-3 border rounded-lg h-32" placeholder={q.placeholder} onChange={e => handleInput(q.id, e.target.value)}></textarea>}
+                                {q.type === 'radio' && (
+                                    <div className="flex flex-col gap-2">
+                                        {q.options.map(opt => (
+                                            <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                                                <input type="radio" name={q.id} value={opt} onChange={() => handleInput(q.id, opt)} className="w-5 h-5 text-brand-600" />
+                                                <span className="text-sm">{opt}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                )}
+                                {q.type === 'checklist' && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                        {q.options.map(opt => (
+                                            <label key={opt} className="flex items-center gap-2 cursor-pointer p-2 hover:bg-slate-50 rounded">
+                                                <input type="checkbox" onChange={e => {
+                                                    const current = data[q.id] || [];
+                                                    if(e.target.checked) handleInput(q.id, [...current, opt]);
+                                                    else handleInput(q.id, current.filter(x => x !== opt));
+                                                }} className="w-4 h-4 rounded text-brand-600" />
+                                                <span className="text-xs font-medium">{opt}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                        <button 
+                            onClick={onComplete}
+                            disabled={!isFormComplete()}
+                            className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl shadow-lg text-lg transition-all"
+                        >
+                            Complete Screening
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        const FinalSuccess = ({ onBookIntake }) => {
+            return (
+                <div className="flex flex-col items-center justify-center h-full p-8 text-center max-w-xl mx-auto animate-in slide-in-from-bottom duration-700">
+                    <div className="bg-green-100 text-green-700 px-4 py-2 rounded-full font-bold text-sm mb-6 flex items-center gap-2">
+                        <Icons.Check /> Screening Approved
+                    </div>
+                    <h1 className="text-4xl font-black text-slate-900 mb-4">You Are Qualified.</h1>
+                    <p className="text-lg text-slate-600 mb-8">
+                        Based on your screening, you are an excellent candidate. Your $50 deposit has been credited.
+                    </p>
+
+                    <div className="bg-white border-2 border-brand-100 p-6 rounded-2xl w-full shadow-xl mb-8 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl">
+                            CREDIT APPLIED
+                        </div>
+                        <div className="flex justify-between items-end mb-2">
+                            <div className="text-left">
+                                <span className="block text-xs font-bold text-slate-400 uppercase">Total Package</span>
+                                <span className="text-lg text-slate-400 line-through decoration-red-500">$548</span>
+                            </div>
+                            <div className="text-right">
+                                <span className="block text-xs font-bold text-brand-600 uppercase">Remaining Balance</span>
+                                <span className="text-4xl font-black text-slate-900">$498</span>
+                            </div>
+                        </div>
+                        <p className="text-xs text-slate-500 text-left mt-2">
+                            Includes Nexus Letter, DBQ, and Expedited Review.
+                        </p>
+                    </div>
+
+                    <div className="w-full flex flex-col gap-3">
+                        <button 
+                            onClick={onBookIntake}
+                            className="w-full bg-brand-600 hover:bg-brand-500 text-white text-lg font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all"
+                        >
+                            Book Intake to Finalize <Icons.ChevronRight />
+                        </button>
+                    </div>
+                   
+                    <p className="mt-4 text-sm text-slate-500">
+                        Next Step: Speak with your Case Manager to finalize your claim.
+                    </p>
+                </div>
+            );
+        };
+
+        const SalesBot = ({ data, onFreeConsult, onStartChat }) => {
+            const [messages, setMessages] = useState([]);
+            const [isTyping, setIsTyping] = useState(false);
+            const [options, setOptions] = useState([]);
+            const messagesEndRef = useRef(null);
+
+            const PTSD_FEE = 548;
+            const breakEven = 1;
+
+            const scrollToBottom = () => {
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            };
+
+            useEffect(scrollToBottom, [messages, isTyping]);
+
+            const addMessage = (text, type = 'bot', nextOptions = []) => {
+                if (type === 'bot') {
+                    setIsTyping(true);
+                    setTimeout(() => {
+                        setIsTyping(false);
+                        setMessages(prev => [...prev, { text, type }]);
+                        setOptions(nextOptions);
+                    }, 2000);
+                } else {
+                    setMessages(prev => [...prev, { text, type }]);
+                    setOptions([]);
+                }
+            };
+
+            useEffect(() => {
+                if(onStartChat) {
+                    setTimeout(() => {
+                        addMessage(`I've analyzed your PTSD profile. Based on your symptoms and stressor type, you have a very strong case for a significant rating increase.`, 'bot', [
+                            { label: "What's the strategy?", next: 'strategy' },
+                            { label: "How much can I get?", next: 'value' }
+                        ]);
+                    }, 1500);
+                }
+            }, [onStartChat]);
+
+            const handleOption = (opt) => {
+                addMessage(opt.label, 'user');
+                
+                if (opt.next === 'strategy') {
+                    addMessage("To win a PTSD claim, you need a 'Nexus Letter' and a 'DBQ' completed by a psychologist. VSOs cannot provide these. We can. We connect you with a private psychologist to handle both documents in one go.", 'bot', [
+                        { label: "That's exactly what I need.", next: 'price' },
+                        { label: "Why can't the VA do it?", next: 'va_risk' }
+                    ]);
+                }
+
+                if (opt.next === 'value') {
+                    addMessage("A 70% PTSD rating pays over $1,700/mo tax-free. A 100% rating pays over $3,700/mo. The difference is life-changing.", 'bot', [
+                        { label: "Okay, how do we start?", next: 'price' }
+                    ]);
+                }
+
+                if (opt.next === 'va_risk') {
+                    addMessage("You can gamble on a VA C&P exam, but those doctors work for the VA, not you. They often rush exams and miss symptoms. Our private doctors work for YOU to document the full severity of your condition.", 'bot', [
+                        { label: "I don't want to gamble. Let's do it.", next: 'price' }
+                    ]);
+                }
+
+                if (opt.next === 'price') {
+                    addMessage(`We have a streamlined 'PTSD Express' package. It includes the Psychologist Review, Nexus Letter, and DBQ. \n\nThe total investment is a flat **$${PTSD_FEE}**. No hidden fees. No percentage of your backpay.`, 'bot', [
+                        { label: "I'm ready. Let's start.", next: 'close' },
+                        { label: "That sounds fair.", next: 'close' },
+                        { label: "I need to think about it.", next: 'downsell' }
+                    ]);
+                }
+
+                if (opt.next === 'close') {
+                    addMessage("Great. I'm taking you to the secure deposit portal. A fully refundable $50 deposit is required to unlock the comprehensive medical screening.", 'bot', [
+                        { label: "Proceed to $50 Deposit", action: 'deposit' } 
+                    ]);
+                }
+
+                if (opt.next === 'downsell') {
+                    addMessage("I understand. If you're not ready to commit, I can schedule a free 'Mental Health Strategy Call' with a specialist to review your case in more detail.", 'bot', [
+                        { label: "Yes, I'd like a free call.", action: 'consult' }
+                    ]);
+                }
+            };
+
+            return (
+                <div className="flex flex-col h-full bg-white rounded-xl overflow-hidden shadow-2xl border border-slate-200">
+                    <div className="bg-military-900 p-4 flex items-center justify-between shrink-0">
+                        <div className="flex items-center gap-3">
+                            <div className="relative">
+                                <div className="w-10 h-10 rounded-full bg-slate-200 border-2 border-green-500 overflow-hidden">
+                                    <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah&backgroundColor=b6e3f4`} alt="Sarah" />
+                                </div>
+                                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-military-900 rounded-full"></div>
+                            </div>
+                            <div>
+                                <h3 className="text-white font-bold text-sm">Sarah Jenkins</h3>
+                                <p className="text-brand-400 text-xs font-medium">PTSD Strategist • Live</p>
+                            </div>
+                        </div>
+                        <div className="bg-white/10 px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
+                            Secure Chat
+                        </div>
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+                        {messages.map((msg, i) => (
+                            <div key={i} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'} message-anim`}>
+                                <div className={`
+                                    max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm whitespace-pre-wrap
+                                    ${msg.type === 'user' 
+                                        ? 'bg-brand-600 text-white rounded-br-none' 
+                                        : 'bg-white text-slate-700 border border-slate-200 rounded-bl-none'}
+                                `}>
+                                    {msg.text}
+                                </div>
+                            </div>
+                        ))}
+                        
+                        {isTyping && (
+                            <div className="flex justify-start">
+                                <div className="bg-white border border-slate-200 p-3 rounded-2xl rounded-bl-none flex gap-1">
+                                    <div className="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                                    <div className="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                                    <div className="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                                </div>
+                            </div>
+                        )}
+                        <div ref={messagesEndRef} />
+                    </div>
+
+                    <div className="p-4 bg-white border-t border-slate-200 shrink-0 min-h-[80px] flex items-center justify-center">
+                        {options.length > 0 ? (
+                            <div className="flex flex-wrap gap-2 justify-center w-full">
+                                {options.map((opt, i) => (
+                                    <button 
+                                        key={i} 
+                                        onClick={() => {
+                                            if (opt.action === 'deposit') {
+                                                onFreeConsult('payment'); 
+                                            } else if (opt.action === 'consult') {
+                                                onFreeConsult('consult');
+                                            } else {
+                                                handleOption(opt);
+                                            }
+                                        }}
+                                        className="bg-brand-50 hover:bg-brand-100 text-brand-700 border border-brand-200 px-4 py-3 rounded-xl text-sm font-bold transition-all w-full md:w-auto shadow-sm hover:shadow-md active:scale-95"
+                                    >
+                                        {opt.label}
+                                    </button>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="text-xs text-slate-400 italic flex items-center gap-2">
+                                <Icons.Lock /> Chat is encrypted. Sarah is typing...
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const ReportGen = ({ data, onFreeConsult }) => {
+            const [revealStep, setRevealStep] = useState(0);
+            const [showChat, setShowChat] = useState(false);
+
+            useEffect(() => {
+                setTimeout(() => setRevealStep(1), 1000); 
+                setTimeout(() => setRevealStep(2), 2000); 
+                setTimeout(() => setRevealStep(3), 3000); 
+                setTimeout(() => setRevealStep(4), 4000); 
+                setTimeout(() => setRevealStep(5), 5000); 
+                setTimeout(() => setRevealStep(6), 6000); 
+                setTimeout(() => setShowChat(true), 7500); 
+            }, []);
+
+            return (
+                <div className="flex h-full gap-6">
+                    <div className={`flex-1 overflow-y-auto p-2 transition-all duration-700 ${showChat ? 'hidden md:block md:w-1/2 lg:w-5/12' : 'w-full'}`}>
+                        <div className="bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden mb-6 relative">
+                            <div className="bg-slate-900 p-4 flex justify-between items-center">
+                                <span className="text-slate-300 font-bold uppercase text-xs tracking-wider">PTSD Impact Analysis</span>
+                                <span className="text-green-400 font-mono text-xs">CONFIDENTIAL</span>
+                            </div>
+                            
+                            <div className="p-6 space-y-6 pb-20">
+                                <div className="grid grid-cols-2 gap-4 border-b border-slate-100 pb-4">
+                                    <div className={`drip-item ${revealStep >= 1 ? 'opacity-100' : ''}`}>
+                                        <p className="text-slate-500 text-xs font-bold uppercase mb-1">Target Rating</p>
+                                        <p className="text-3xl font-black text-slate-900">70% - 100%</p>
+                                    </div>
+                                    <div className={`drip-item ${revealStep >= 2 ? 'opacity-100' : ''} text-right`}>
+                                        <p className="text-slate-500 text-xs font-bold uppercase mb-1">Monthly Value</p>
+                                        <p className="text-xl font-bold text-slate-700">$1,700 - $3,700+</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className={`drip-item ${revealStep >= 3 ? 'opacity-100' : ''}`}>
+                                        <p className="text-slate-400 text-xs font-bold uppercase mb-1">Fee</p>
+                                        <p className="text-lg font-bold text-slate-600">$548</p>
+                                        <p className="text-[10px] text-slate-400">Flat Rate</p>
+                                    </div>
+                                    <div className={`drip-item ${revealStep >= 4 ? 'opacity-100' : ''} text-right`}>
+                                        <p className="text-slate-400 text-xs font-bold uppercase mb-1">Break-Even</p>
+                                        <p className="text-lg font-bold text-green-600">~2 Months</p>
+                                    </div>
+                                </div>
+
+                                <div className={`drip-item ${revealStep >= 5 ? 'opacity-100' : ''} bg-brand-50 rounded-xl p-5 border border-brand-100 transform transition-all duration-500 hover:scale-105`}>
+                                    <p className="text-brand-800 text-xs font-bold uppercase mb-2">Potential Backpay</p>
+                                    <p className="text-4xl font-black text-brand-600 mb-1">$15,000+</p>
+                                    <p className="text-xs text-brand-600/70 leading-tight">Based on average claim times.</p>
+                                </div>
+
+                                <div className={`drip-item ${revealStep >= 6 ? 'opacity-100' : ''} bg-slate-50 rounded-xl p-4 border border-slate-200`}>
+                                    <h4 className="font-bold text-sm text-slate-700 mb-3 flex items-center gap-2"><Icons.Shield /> Included in $548 Package</h4>
+                                    <ul className="text-xs text-slate-600 space-y-2">
+                                        <li className="flex items-center gap-2"><div className="text-green-500"><Icons.Check /></div> <strong>Nexus Letter</strong> (Service Connection)</li>
+                                        <li className="flex items-center gap-2"><div className="text-green-500"><Icons.Check /></div> <strong>DBQ</strong> (Disability Questionnaire)</li>
+                                        <li className="flex items-center gap-2"><div className="text-green-500"><Icons.Check /></div> Psychologist Review</li>
+                                        <li className="flex items-center gap-2"><div className="text-green-500"><Icons.Check /></div> Expedited Handling</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {revealStep >= 6 && (
+                                <div className="absolute bottom-0 left-0 w-full p-4 bg-white border-t border-slate-100 animate-in slide-in-from-bottom duration-500">
+                                    <button 
+                                        onClick={onFreeConsult}
+                                        className="w-full text-slate-500 hover:text-slate-700 text-xs font-medium flex items-center justify-center gap-2 py-2 hover:bg-slate-50 rounded-lg transition-colors"
+                                    >
+                                        <Icons.Phone /> Not sure? Speak to a PTSD Specialist.
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        <p className="text-center text-xs text-slate-400 animate-pulse">{revealStep < 6 ? 'Analyzing benefit eligibility...' : 'Analysis Complete. Strategist connecting...'}</p>
+                    </div>
+
+                    {showChat && (
+                        <div className="flex-1 h-full animate-in slide-in-from-right duration-500 z-40">
+                            <SalesBot data={data} onStartChat={true} onFreeConsult={onFreeConsult} />
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [started, setStarted] = useState(false);
+            const [currentQIndex, setCurrentQIndex] = useState(0);
+            const [appStage, setAppStage] = useState('intake'); // intake, report, payment, screening, success
+            const [showBooking, setShowBooking] = useState(false);
+            const [bookingUrl, setBookingUrl] = useState('');
+            const [answers, setAnswers] = useState({
+                conditions: [],
+                rating: 0,
+                nexus: '',
+                era: '',
+                dependents: '',
+                records: ''
+            });
+
+            const isSyncing = useDataSync(answers);
+
+            const activeQuestions = useMemo(() => {
+                return QUESTIONS.filter(q => !q.condition || q.condition(answers));
+            }, [answers]);
+
+            const currentQ = activeQuestions[currentQIndex];
+
+            const handleAnswer = (val) => {
+                setAnswers(prev => {
+                    let newVal;
+                    if (currentQ.type === 'multi') {
+                        const prevVals = prev[currentQ.id] || [];
+                        if (prevVals.includes(val)) {
+                            newVal = prevVals.filter(v => v !== val);
+                        } else {
+                            newVal = [...prevVals, val];
+                        }
+                        return { ...prev, [currentQ.id]: newVal };
+                    }
+                    if (currentQ.type.startsWith('contact')) {
+                        return { ...prev, [val.id]: val.value };
+                    }
+                    return { ...prev, [currentQ.id]: val };
+                });
+            };
+
+            const handleNext = () => {
+                // HARD STOP CHECK
+                const disqualifying = activeQuestions[currentQIndex].options?.find(o => 
+                    o.disqualify && (
+                        (answers[currentQ.id] === o.id) || 
+                        (Array.isArray(answers[currentQ.id]) && answers[currentQ.id].includes(o.id))
+                    )
+                );
+
+                if (disqualifying) {
+                    alert("Based on your answers, we cannot assist with this claim at this time due to eligibility restrictions.");
+                    return;
+                }
+
+                if (currentQIndex < activeQuestions.length - 1) {
+                    setCurrentQIndex(prev => prev + 1);
+                } else {
+                    setAppStage('report');
+                }
+            };
+
+            const handleBack = () => {
+                if (currentQIndex > 0) {
+                    setCurrentQIndex(prev => prev - 1);
+                }
+            };
+
+            const handleStageTransition = (nextStage) => {
+                if (nextStage === 'payment') {
+                    setAppStage('payment'); // This now triggers PaymentSimulation (DiscountUnlock previously)
+                } else if (nextStage === 'consult') {
+                    setBookingUrl('https://clay-thankyouforyourservice.zohobookings.com/portal-embed#/4739587000000065030');
+                    setShowBooking(true);
+                } else if (nextStage === 'post-payment') {
+                    setBookingUrl('https://clay-thankyouforyourservice.zohobookings.com/portal-embed#/4739587000000065158');
+                    setShowBooking(true);
+                }
+            };
+
+            const progressScore = useMemo(() => {
+                let score = 10; 
+                if (answers.stressor_type) score += 20;
+                if (answers.symptoms?.length > 0) score += 20;
+                if (answers.work_impact) score += 20;
+                if (answers.firstName && answers.email) score += 30;
+                return Math.min(score, 100);
+            }, [answers]);
+
+            if (!started) {
+                return (
+                    <div className="h-screen w-full flex flex-col md:flex-row">
+                        <div className="flex-1 bg-white p-8 md:p-16 flex flex-col justify-center items-start z-10">
+                            <div className="mb-6 bg-brand-50 text-brand-600 px-4 py-2 rounded-full text-sm font-bold inline-flex items-center gap-2">
+                                <Icons.Shield /> VA Claim Team
+                            </div>
+                            <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-6 leading-[1.1] tracking-tight">
+                                Get Rated for <br/>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-600">PTSD.</span>
+                            </h1>
+                            <p className="text-xl text-slate-500 mb-8 max-w-lg leading-relaxed">
+                                We specialize in mental health claims. Get your Nexus Letter and DBQ from a private psychologist for a flat fee.
+                            </p>
+                            <button onClick={() => setStarted(true)} className="bg-military-900 hover:bg-military-800 text-white text-xl font-bold px-10 py-5 rounded-2xl shadow-2xl flex items-center gap-3 transition-all hover:translate-x-1">
+                                Start PTSD Screening <Icons.ChevronRight />
+                            </button>
+                            <div className="mt-8 flex gap-8 text-sm font-bold text-slate-400">
+                                <span className="flex items-center gap-2"><Icons.Lock /> 256-bit Encrypted</span>
+                                <span className="flex items-center gap-2"><Icons.Check /> Flat Fee: $548</span>
+                            </div>
+                        </div>
+                        <div className="hidden md:block w-1/3 bg-military-900 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1548126032-079a0fb0099f?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-military-900 via-transparent to-transparent"></div>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="h-screen w-full flex flex-col md:flex-row overflow-hidden">
+                    <BookingModal isOpen={showBooking} onClose={() => setShowBooking(false)} src={bookingUrl} />
+
+                    <div className="flex-1 bg-slate-50 relative flex flex-col h-full overflow-hidden">
+                        {appStage === 'intake' && (
+                            <div className="h-20 border-b border-slate-200 px-8 flex items-center justify-between bg-white shrink-0 z-20">
+                                <div className="flex items-center gap-4">
+                                    {currentQIndex > 0 && (
+                                        <button onClick={handleBack} className="p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors">
+                                            <Icons.ChevronLeft />
+                                        </button>
+                                    )}
+                                    <div className="flex flex-col">
+                                        <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Step {currentQIndex + 1} of {activeQuestions.length}</span>
+                                        <div className="h-1.5 w-32 bg-slate-100 rounded-full mt-1 overflow-hidden">
+                                            <div className="h-full bg-brand-500 transition-all duration-500" style={{ width: `${((currentQIndex + 1) / activeQuestions.length) * 100}%` }}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-xs font-bold text-slate-400 uppercase text-right hidden md:block">Case<br/>Strength</span>
+                                    <div className="relative w-12 h-12 flex items-center justify-center">
+                                        <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                                            <path className="text-slate-200" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
+                                            <path className="text-green-500 transition-all duration-1000" strokeDasharray={`${progressScore}, 100`} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
+                                        </svg>
+                                        <span className="absolute text-xs font-bold text-slate-700">{progressScore}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="flex-1 overflow-y-auto p-4 md:p-8 relative">
+                            {appStage === 'intake' && (
+                                <div className="max-w-2xl mx-auto animate-[fadeIn_0.5s_ease-out] mt-8">
+                                    <div className="mb-8">
+                                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-3 leading-tight">{currentQ.title}</h2>
+                                        <p className="text-lg text-slate-500">{currentQ.subtitle}</p>
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        {currentQ.type === 'slider' ? (
+                                            <SliderInput value={answers[currentQ.id]} onChange={(val) => handleAnswer(val)} />
+                                        ) : currentQ.type.startsWith('contact') ? (
+                                            <ContactForm fields={currentQ.fields} values={answers} onChange={(id, val) => handleAnswer({ id, value: val })} />
+                                        ) : (
+                                            currentQ.options.map(opt => (
+                                                <SelectionCard 
+                                                    key={opt.id} 
+                                                    option={opt} 
+                                                    multi={currentQ.type === 'multi'}
+                                                    selected={
+                                                        currentQ.type === 'multi' 
+                                                        ? (answers[currentQ.id] || []).includes(opt.id)
+                                                        : answers[currentQ.id] === opt.id
+                                                    }
+                                                    onClick={() => handleAnswer(opt.id)}
+                                                />
+                                            ))
+                                        )}
+                                    </div>
+                                    
+                                    <div className="mt-10 flex justify-end">
+                                        <button 
+                                            onClick={handleNext}
+                                            disabled={
+                                                currentQ.type.startsWith('contact') 
+                                                ? currentQ.fields.some(f => !answers[f.id])
+                                                : currentQ.type === 'multi' 
+                                                    ? (answers[currentQ.id] || []).length === 0 
+                                                    : !answers[currentQ.id] && answers[currentQ.id] !== 0
+                                            }
+                                            className="bg-military-900 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-military-800 text-white text-lg font-bold px-10 py-4 rounded-xl shadow-xl flex items-center gap-3 transition-all"
+                                        >
+                                            Continue <Icons.ChevronRight />
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+
+                            {appStage === 'report' && (
+                                <ReportGen data={answers} onFreeConsult={handleStageTransition} />
+                            )}
+
+                            {appStage === 'payment' && (
+                                <PaymentSimulation onPaymentComplete={() => setAppStage('screening')} />
+                            )}
+                            
+                            {appStage === 'screening' && (
+                                <div className="max-w-4xl mx-auto">
+                                    <MentalHealthScreening onComplete={() => setAppStage('success')} />
+                                </div>
+                            )}
+
+                            {appStage === 'success' && (
+                                <FinalSuccess onBookIntake={() => handleStageTransition('post-payment')} />
+                            )}
+                        </div>
+                    </div>
+
+                    <div className={`hidden md:block transition-all duration-500 z-30 h-full ${['intake', 'report'].includes(appStage) ? 'w-[400px] opacity-100' : 'w-0 opacity-0 overflow-hidden'}`}>
+                        {appStage === 'report' ? (
+                            <div className="flex-1 h-full bg-white border-l border-slate-200">
+                                <SalesBot data={answers} onStartChat={true} onFreeConsult={handleStageTransition} />
+                            </div>
+                        ) : (
+                            <MissionSidebar 
+                                stepData={currentQ} 
+                                userName={answers.firstName} 
+                                answers={answers} 
+                                isSyncing={isSyncing}
+                                onBook={() => handleStageTransition('consult')} 
+                            />
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>
