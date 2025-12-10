@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suntree Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #f8fafc;
+      }
+
+      /* Lightweight support for the animate-in utility classes used by the app */
+      .animate-in {
+        opacity: 0;
+        transform: translateY(6px);
+        animation: fadeInUp 0.35s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import React, { useEffect, useState } from 'https://esm.sh/react@18.2.0';
+      import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
+      import {
+        Users,
+        Calendar,
+        FileText,
+        MessageSquare,
+        Bell,
+        Search,
+        ChevronRight,
+        Upload,
+        CheckCircle,
+        XCircle,
+        Clock,
+        MoreVertical,
+        File,
+        Download,
+        ArrowRight,
+        Shield,
+        Activity,
+        Briefcase,
+        AlertCircle,
+        Check
+      } from 'https://esm.sh/lucide-react@0.456.0?dev';
+
+      const INITIAL_VETERANS = [
+        {
+          id: 'v1',
+          name: 'Michael R.',
+          branch: 'Army',
+          status: 'pending_review',
+          conditions: ['PTSD (Increase)', 'TBI Residuals'],
+          insight:
+            'Combat veteran (OEF). Currently rated 30% for PTSD. Reports worsening symptoms: severe social isolation, panic attacks 2x/week. Needs DBQ focusing on occupational impairment.',
+          documents: ['DD214.pdf', 'Prev_Psych_Eval_2019.pdf', 'Buddy_Statement.pdf'],
+          appointmentDate: null,
+          unreadMessages: 1
+        },
+        {
+          id: 'v2',
+          name: 'Sarah J.',
+          branch: 'Air Force',
+          status: 'scheduled',
+          conditions: ['Major Depressive Disorder', 'Anxiety (Secondary)'],
+          insight:
+            'Seeking connection for Depression secondary to chronic Tinnitus and Back Pain. Needs Nexus linking chronic pain to mental health decline.',
+          documents: ['Medical_Records_Civ.pdf', 'Personal_Statement.pdf'],
+          appointmentDate: '2025-10-27T10:00:00',
+          unreadMessages: 0
+        },
+        {
+          id: 'v3',
+          name: 'David K.',
+          branch: 'Marines',
+          status: 'evidence_upload',
+          conditions: ['Insomnia', 'PTSD'],
+          insight:
+            'Telehealth eval completed last week. Waiting on final DBQ upload. Veteran reports sleep apnea connection as well.',
+          documents: ['Sleep_Study.pdf', 'Nexus_Letter_Draft.docx'],
+          appointmentDate: '2025-10-15T14:30:00',
+          unreadMessages: 2
+        },
+        {
+          id: 'v4',
+          name: 'Robert M.',
+          branch: 'Navy',
+          status: 'pending_review',
+          conditions: ['Anxiety', 'Adjustment Disorder'],
+          insight:
+            'New Claim. Discharged 2022. Records show in-service stressors but no formal diagnosis. Needs initial psych eval and Nexus.',
+          documents: ['Service_Treatment_Records.pdf'],
+          appointmentDate: null,
+          unreadMessages: 0
+        }
+      ];
+
+      const INITIAL_MESSAGES = [
+        {
+          id: 1,
+          sender: 'TYFYS Case Mgr',
+          text: 'Dr., can you double check the DBQ for Sarah J? We need to ensure the occupational impairment box is checked correctly based on her statement.',
+          time: '10:42 AM',
+          fromMe: false,
+          avatar: 'CM'
+        },
+        {
+          id: 2,
+          sender: 'Suntree Psychiatry',
+          text: 'Received. I will review it before our session this afternoon.',
+          time: '10:45 AM',
+          fromMe: true,
+          avatar: 'SP'
+        }
+      ];
+
+      const App = () => {
+        const [view, setView] = useState('dashboard');
+        const [selectedVet, setSelectedVet] = useState(null);
+        const [veterans, setVeterans] = useState(INITIAL_VETERANS);
+        const [messages, setMessages] = useState(INITIAL_MESSAGES);
+        const [showUploadModal, setShowUploadModal] = useState(false);
+        const [uploadProgress, setUploadProgress] = useState(0);
+        const [toast, setToast] = useState(null);
+        const [chatInput, setChatInput] = useState('');
+
+        const handleStatusChange = (vetId, newStatus) => {
+          setVeterans((prev) => prev.map((v) => (v.id === vetId ? { ...v, status: newStatus } : v)));
+
+          if (selectedVet && selectedVet.id === vetId) {
+            setSelectedVet((prev) => ({ ...prev, status: newStatus }));
+          }
+
+          let msg = '';
+          if (newStatus === 'scheduled') msg = 'Veteran Accepted & Schedule Updated';
+          if (newStatus === 'evidence_upload') msg = 'Status Updated: Ready for Upload';
+          if (newStatus === 'completed') msg = 'Case Completed & Sent to QC';
+          if (msg) showToast(msg, 'success');
+        };
+
+        const showToast = (message, type = 'success') => {
+          setToast({ message, type });
+          setTimeout(() => setToast(null), 3000);
+        };
+
+        const simulateUpload = () => {
+          let progress = 0;
+          const interval = setInterval(() => {
+            progress += 10;
+            setUploadProgress(progress);
+            if (progress >= 100) {
+              clearInterval(interval);
+              setTimeout(() => {
+                handleStatusChange(selectedVet.id, 'completed');
+                setShowUploadModal(false);
+                setUploadProgress(0);
+                setSelectedVet(null);
+              }, 600);
+            }
+          }, 200);
+        };
+
+        const sendMessage = () => {
+          if (!chatInput.trim()) return;
+          const newMsg = {
+            id: messages.length + 1,
+            sender: 'Suntree Psychiatry',
+            text: chatInput,
+            time: 'Just now',
+            fromMe: true,
+            avatar: 'SP'
+          };
+          setMessages([...messages, newMsg]);
+          setChatInput('');
+        };
+
+        const getStatusColor = (status) => {
+          switch (status) {
+            case 'pending_review':
+              return 'bg-amber-100 text-amber-800 border-amber-200';
+            case 'scheduled':
+              return 'bg-blue-100 text-blue-800 border-blue-200';
+            case 'evidence_upload':
+              return 'bg-purple-100 text-purple-800 border-purple-200';
+            case 'completed':
+              return 'bg-emerald-100 text-emerald-800 border-emerald-200';
+            default:
+              return 'bg-slate-100 text-slate-600';
+          }
+        };
+
+        const getStatusLabel = (status) => {
+          switch (status) {
+            case 'pending_review':
+              return 'Needs Review';
+            case 'scheduled':
+              return 'Scheduled';
+            case 'evidence_upload':
+              return 'Processing';
+            case 'completed':
+              return 'Completed';
+            default:
+              return status;
+          }
+        };
+
+        const Sidebar = () => (
+          <div className="w-72 bg-slate-900 text-white flex flex-col h-screen fixed left-0 top-0 z-50 shadow-2xl border-r border-slate-800">
+            <div className="p-6 border-b border-slate-800 flex items-center gap-3">
+              <div className="bg-blue-600 p-2 rounded-lg shadow-lg shadow-blue-900/50">
+                <Shield className="text-white" size={20} />
+              </div>
+              <div>
+                <span className="font-bold text-lg tracking-tight block text-white">
+                  TYFYS <span className="text-blue-400">Portal</span>
+                </span>
+                <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Secure V.2.4</span>
+              </div>
+            </div>
+
+            <div className="px-6 py-6">
+              <div className="flex items-center gap-3 mb-8 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 backdrop-blur-sm">
+                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-md border border-slate-600">
+                  <img
+                    src="https://lh3.googleusercontent.com/pw/AP1GczO_Z7X-T8JcKkYg-R-JzL-QkX-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X=w200-h200-p-k-no-nu"
+                    alt="Suntree Logo"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.style.display = 'none';
+                      e.target.parentNode.innerText = 'SP';
+                    }}
+                  />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-white">Suntree Psychiatry</div>
+                  <div className="text-xs text-green-400 flex items-center gap-1.5 font-medium">
+                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse shadow-green-400/50 shadow-sm"></span> Online
+                  </div>
+                </div>
+              </div>
+
+              <nav className="space-y-1.5">
+                <button
+                  onClick={() => {
+                    setView('dashboard');
+                    setSelectedVet(null);
+                  }}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
+                    view === 'dashboard'
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20'
+                      : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  }`}
+                >
+                  <Activity
+                    size={18}
+                    className={view === 'dashboard' ? 'text-white' : 'text-slate-500 group-hover:text-white'}
+                  />
+                  <span className="font-medium">Live Board</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setView('calendar');
+                    setSelectedVet(null);
+                  }}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
+                    view === 'calendar'
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20'
+                      : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  }`}
+                >
+                  <Calendar
+                    size={18}
+                    className={view === 'calendar' ? 'text-white' : 'text-slate-500 group-hover:text-white'}
+                  />
+                  <span className="font-medium">Schedule</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setView('messages');
+                    setSelectedVet(null);
+                  }}
+                  className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
+                    view === 'messages'
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20'
+                      : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <MessageSquare
+                      size={18}
+                      className={view === 'messages' ? 'text-white' : 'text-slate-500 group-hover:text-white'}
+                    />
+                    <span className="font-medium">Messages</span>
+                  </div>
+                  {INITIAL_VETERANS.some((v) => v.unreadMessages > 0) && (
+                    <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                      {INITIAL_VETERANS.reduce((acc, curr) => acc + curr.unreadMessages, 0)}
+                    </span>
+                  )}
+                </button>
+              </nav>
+            </div>
+
+            <div className="mt-auto p-6 border-t border-slate-800">
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-4 border border-slate-700 shadow-lg">
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Success Rate</h4>
+                  <span className="text-xs text-green-400 font-bold bg-green-400/10 px-1.5 py-0.5 rounded">+2.4%</span>
+                </div>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl font-bold text-white tracking-tight">98.2%</span>
+                  <span className="text-xs text-slate-500">this month</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+        const StatCard = ({ label, value, icon: Icon, color, subtext }) => (
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+            <div>
+              <div className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">{label}</div>
+              <div className="text-3xl font-extrabold text-slate-900 mb-1 tracking-tight">{value}</div>
+              <div className="text-xs text-slate-400 font-medium">{subtext}</div>
+            </div>
+            <div className={`p-3.5 rounded-xl ${color} bg-opacity-10`}>
+              <Icon className={color.replace('bg-', 'text-')} size={24} />
+            </div>
+          </div>
+        );
+
+        const VeteranCard = ({ vet }) => (
+          <div
+            onClick={() => setSelectedVet(vet)}
+            className="group bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-300 transition-all cursor-pointer relative animate-in"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center font-bold text-slate-600 border border-slate-200 shadow-sm">
+                  {vet.name.charAt(0)}
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900 text-base">{vet.name}</h4>
+                  <span className="text-xs text-slate-500 font-medium px-2 py-0.5 bg-slate-100 rounded-full border border-slate-200">
+                    {vet.branch}
+                  </span>
+                </div>
+              </div>
+              <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md border ${getStatusColor(vet.status)}`}>
+                {getStatusLabel(vet.status)}
+              </span>
+            </div>
+
+            <div className="space-y-3 mb-4">
+              <div className="text-sm text-slate-600">
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {vet.conditions.map((c, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 bg-slate-50 text-slate-700 rounded text-[11px] font-semibold border border-slate-100"
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="text-xs text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-100 italic leading-relaxed">
+                "{vet.insight}"
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+              <div className="flex gap-2 text-slate-400 items-center">
+                <FileText size={14} />
+                <span className="text-xs font-medium">{vet.documents.length} Files</span>
+              </div>
+              <div className="text-blue-600 text-xs font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Open Case <ArrowRight size={14} />
+              </div>
+            </div>
+
+            {vet.unreadMessages > 0 && (
+              <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full shadow-md animate-bounce">
+                {vet.unreadMessages}
+              </div>
+            )}
+          </div>
+        );
+
+        const DashboardView = () => (
+          <div className="p-8 max-w-[1600px] mx-auto animate-in">
+            <header className="flex justify-between items-center mb-10">
+              <div>
+                <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Suntree Psychiatry Portal</h1>
+                <p className="text-slate-500 mt-1 font-medium">Overview of your active VA Disability referrals.</p>
+              </div>
+              <div className="flex gap-3">
+                <button className="bg-white border border-slate-300 text-slate-700 px-4 py-2 rounded-lg text-sm font-bold hover:bg-slate-50 transition-colors shadow-sm flex items-center gap-2">
+                  <Download size={16} /> Export Reports
+                </button>
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition-colors shadow-md shadow-blue-200 flex items-center gap-2">
+                  <Bell size={16} /> Alerts <span className="bg-blue-500 text-white text-[10px] px-1.5 rounded-full">3</span>
+                </button>
+              </div>
+            </header>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+              <StatCard
+                label="Pending Review"
+                value={veterans.filter((v) => v.status === 'pending_review').length}
+                subtext="Action Required"
+                icon={Clock}
+                color="bg-amber-500"
+              />
+              <StatCard
+                label="Upcoming Appts"
+                value={veterans.filter((v) => v.status === 'scheduled').length}
+                subtext="Next 7 Days"
+                icon={Calendar}
+                color="bg-blue-500"
+              />
+              <StatCard
+                label="Processing"
+                value={veterans.filter((v) => v.status === 'evidence_upload').length}
+                subtext="Pending Upload"
+                icon={Upload}
+                color="bg-purple-500"
+              />
+              <StatCard label="Completed" value="42" subtext="This Month" icon={CheckCircle} color="bg-emerald-500" />
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                  <Activity className="text-blue-600" /> Active Pipeline
+                </h2>
+                <div className="relative group">
+                  <Search
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors"
+                    size={18}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Search patients by name or ID..."
+                    className="pl-10 pr-4 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-80 shadow-sm transition-all"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="bg-slate-50/50 p-2 rounded-2xl border border-dashed border-slate-200">
+                  <div className="flex items-center justify-between mb-4 px-2 pt-2">
+                    <h3 className="font-bold text-slate-700 flex items-center gap-2 text-sm uppercase tracking-wide">
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500 shadow-sm shadow-amber-200"></span>
+                      New Referrals
+                    </h3>
+                    <span className="bg-white px-2 py-0.5 rounded-md text-xs font-bold text-slate-600 border border-slate-200 shadow-sm">
+                      {veterans.filter((v) => v.status === 'pending_review').length}
+                    </span>
+                  </div>
+                  <div className="space-y-4">
+                    {veterans
+                      .filter((v) => v.status === 'pending_review')
+                      .map((vet) => (
+                        <VeteranCard key={vet.id} vet={vet} />
+                      ))}
+                  </div>
+                </div>
+
+                <div className="bg-slate-50/50 p-2 rounded-2xl border border-dashed border-slate-200">
+                  <div className="flex items-center justify-between mb-4 px-2 pt-2">
+                    <h3 className="font-bold text-slate-700 flex items-center gap-2 text-sm uppercase tracking-wide">
+                      <span className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-sm shadow-blue-200"></span>
+                      Scheduled
+                    </h3>
+                    <span className="bg-white px-2 py-0.5 rounded-md text-xs font-bold text-slate-600 border border-slate-200 shadow-sm">
+                      {veterans.filter((v) => v.status === 'scheduled').length}
+                    </span>
+                  </div>
+                  <div className="space-y-4">
+                    {veterans
+                      .filter((v) => v.status === 'scheduled')
+                      .map((vet) => (
+                        <VeteranCard key={vet.id} vet={vet} />
+                      ))}
+                  </div>
+                </div>
+
+                <div className="bg-slate-50/50 p-2 rounded-2xl border border-dashed border-slate-200">
+                  <div className="flex items-center justify-between mb-4 px-2 pt-2">
+                    <h3 className="font-bold text-slate-700 flex items-center gap-2 text-sm uppercase tracking-wide">
+                      <span className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-sm shadow-purple-200"></span>
+                      Pending Upload
+                    </h3>
+                    <span className="bg-white px-2 py-0.5 rounded-md text-xs font-bold text-slate-600 border border-slate-200 shadow-sm">
+                      {veterans.filter((v) => v.status === 'evidence_upload').length}
+                    </span>
+                  </div>
+                  <div className="space-y-4">
+                    {veterans
+                      .filter((v) => v.status === 'evidence_upload')
+                      .map((vet) => (
+                        <VeteranCard key={vet.id} vet={vet} />
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+        const CalendarView = () => (
+          <div className="p-8 max-w-7xl mx-auto h-full flex flex-col animate-in">
+            <header className="mb-8">
+              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Schedule</h1>
+              <p className="text-slate-500 font-medium">Upcoming appointments for Suntree Psychiatry.</p>
+            </header>
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm flex-1 p-8 overflow-y-auto">
+              <div className="grid grid-cols-7 gap-px bg-slate-200 rounded-lg overflow-hidden border border-slate-200 shadow-sm">
+                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
+                  <div
+                    key={d}
+                    className="bg-slate-50 p-4 text-center text-sm font-bold text-slate-500 uppercase tracking-widest"
+                  >
+                    {d}
+                  </div>
+                ))}
+                {Array.from({ length: 31 }).map((_, i) => (
+                  <div key={i} className={`bg-white h-32 p-3 relative group hover:bg-slate-50 transition-colors`}>
+                    <span className={`text-sm font-bold ${i === 26 ? 'text-blue-600' : 'text-slate-400'}`}>
+                      {i + 1}
+                    </span>
+                    {i === 26 && veterans.find((v) => v.name.includes('Sarah'))?.status === 'scheduled' && (
+                      <div
+                        onClick={() => {
+                          setSelectedVet(veterans.find((v) => v.name.includes('Sarah')));
+                          setView('dashboard');
+                        }}
+                        className="mt-2 bg-blue-50 text-blue-700 text-xs p-2 rounded-md font-bold truncate border-l-4 border-blue-500 shadow-sm cursor-pointer hover:bg-blue-100 transition-colors"
+                      >
+                        10:00 AM - Sarah J. <br />
+                        <span className="font-normal opacity-80">Depression Exam</span>
+                      </div>
+                    )}
+                    {i === 14 && veterans.find((v) => v.name.includes('David'))?.status === 'evidence_upload' && (
+                      <div
+                        onClick={() => {
+                          setSelectedVet(veterans.find((v) => v.name.includes('David')));
+                          setView('dashboard');
+                        }}
+                        className="mt-2 bg-purple-50 text-purple-700 text-xs p-2 rounded-md font-bold truncate border-l-4 border-purple-500 shadow-sm cursor-pointer hover:bg-purple-100 transition-colors"
+                      >
+                        2:30 PM - David K. <br />
+                        <span className="font-normal opacity-80">PTSD Review</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+
+        const MessagesView = () => (
+          <div className="p-8 max-w-6xl mx-auto h-full flex flex-col animate-in">
+            <header className="mb-8">
+              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Messages</h1>
+              <p className="text-slate-500 font-medium">Secure communication with TYFYS Case Managers.</p>
+            </header>
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm flex-1 flex overflow-hidden">
+              <div className="w-80 border-r border-slate-200 bg-slate-50 flex flex-col">
+                <div className="p-4 border-b border-slate-200">
+                  <input
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+                    placeholder="Search threads..."
+                  />
+                </div>
+                <div className="overflow-y-auto flex-1 p-2">
+                  <div className="p-3 bg-white rounded-xl shadow-sm border border-slate-200 mb-2 cursor-pointer">
+                    <div className="flex justify-between mb-1">
+                      <span className="font-bold text-slate-900 text-sm">TYFYS Case Mgr</span>
+                      <span className="text-[10px] text-slate-400">10:45 AM</span>
+                    </div>
+                    <p className="text-xs text-slate-500 line-clamp-1">Received. I will review it before...</p>
+                  </div>
+                  <div className="p-3 hover:bg-slate-100 rounded-xl cursor-pointer transition-colors mb-2">
+                    <div className="flex justify-between mb-1">
+                      <span className="font-bold text-slate-700 text-sm">Billing Dept</span>
+                      <span className="text-[10px] text-slate-400">Yesterday</span>
+                    </div>
+                    <p className="text-xs text-slate-500 line-clamp-1">Invoice #4092 Paid</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex-1 flex flex-col bg-white">
+                <div className="p-4 border-b border-slate-100 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">CM</div>
+                    <div>
+                      <h3 className="font-bold text-slate-900 text-sm">TYFYS Case Manager</h3>
+                      <span className="text-xs text-green-500 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Online
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex-1 p-6 space-y-6 overflow-y-auto bg-slate-50/30">
+                  {messages.map((msg) => (
+                    <div key={msg.id} className={`flex gap-3 ${msg.fromMe ? 'flex-row-reverse' : ''}`}>
+                      <div
+                        className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                          msg.fromMe ? 'bg-slate-800 text-white' : 'bg-blue-100 text-blue-600'
+                        }`}
+                      >
+                        {msg.avatar}
+                      </div>
+                      <div
+                        className={`max-w-md p-4 rounded-2xl shadow-sm ${
+                          msg.fromMe ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white border border-slate-200 rounded-tl-none'
+                        }`}
+                      >
+                        <p className={`text-sm ${msg.fromMe ? 'text-white' : 'text-slate-700'}`}>{msg.text}</p>
+                        <span className={`text-[10px] mt-2 block ${msg.fromMe ? 'text-blue-200' : 'text-slate-400'}`}>
+                          {msg.time}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="p-4 border-t border-slate-200 bg-white">
+                  <div className="flex gap-3">
+                    <button className="text-slate-400 hover:text-blue-600 transition-colors">
+                      <Upload size={20} />
+                    </button>
+                    <input
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                      className="flex-1 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                      placeholder="Type a message..."
+                    />
+                    <button
+                      onClick={sendMessage}
+                      className="bg-blue-600 text-white px-6 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-sm"
+                    >
+                      Send
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+        const VeteranDetail = () => (
+          <div className="h-full flex flex-col bg-white animate-in">
+            <div className="border-b border-slate-200 px-10 py-6 flex justify-between items-center bg-white sticky top-0 z-40">
+              <div className="flex items-center gap-6">
+                <button onClick={() => setSelectedVet(null)} className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-500">
+                  <ArrowRight className="transform rotate-180" />
+                </button>
+                <div>
+                  <div className="flex items-center gap-4 mb-1">
+                    <h1 className="text-3xl font-extrabold text-slate-900">{selectedVet.name}</h1>
+                    <span className={`text-xs uppercase tracking-wider font-bold px-3 py-1 rounded-full border ${getStatusColor(selectedVet.status)}`}>
+                      {getStatusLabel(selectedVet.status)}
+                    </span>
+                  </div>
+                  <p className="text-slate-500 text-sm font-medium">
+                    {selectedVet.branch} • ID: #{selectedVet.id.toUpperCase()} • Assigned: Oct 24, 2025
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                {selectedVet.status === 'pending_review' && (
+                  <>
+                    <button className="bg-white border border-slate-300 text-slate-600 px-5 py-2.5 rounded-lg font-bold hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors shadow-sm">
+                      Decline Referral
+                    </button>
+                    <button
+                      onClick={() => handleStatusChange(selectedVet.id, 'scheduled')}
+                      className="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-md shadow-blue-200 flex items-center gap-2"
+                    >
+                      <CheckCircle size={18} /> Accept & Schedule
+                    </button>
+                  </>
+                )}
+                {selectedVet.status === 'scheduled' && (
+                  <button
+                    onClick={() => handleStatusChange(selectedVet.id, 'evidence_upload')}
+                    className="bg-purple-600 text-white px-6 py-2.5 rounded-lg font-bold hover:bg-purple-700 transition-colors shadow-md shadow-purple-200 flex items-center gap-2"
+                  >
+                    <Upload size={18} /> Start Evidence Upload
+                  </button>
+                )}
+                {selectedVet.status === 'evidence_upload' && (
+                  <button
+                    onClick={() => setShowUploadModal(true)}
+                    className="bg-emerald-600 text-white px-6 py-2.5 rounded-lg font-bold hover:bg-emerald-700 transition-colors shadow-md shadow-emerald-200 flex items-center gap-2"
+                  >
+                    <CheckCircle size={18} /> Finalize Case
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-10 bg-slate-50">
+              <div className="max-w-6xl mx-auto grid grid-cols-3 gap-8">
+                <div className="col-span-2 space-y-6">
+                  <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 className="font-bold text-slate-900 mb-6 flex items-center gap-2 text-lg">
+                      <Activity className="text-blue-500" size={24} />
+                      Psychiatric Evaluation Goals
+                    </h3>
+                    <div className="bg-blue-50 border border-blue-100 p-6 rounded-xl mb-8 relative">
+                      <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 rounded-l-xl"></div>
+                      <p className="text-blue-900 text-base leading-relaxed font-medium">"{selectedVet.insight}"</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-8">
+                      <div>
+                        <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">
+                          Diagnoses to Verify
+                        </label>
+                        <ul className="space-y-3">
+                          {selectedVet.conditions.map((c, i) => (
+                            <li
+                              key={i}
+                              className="flex items-center gap-3 text-sm font-semibold text-slate-700 bg-slate-50 p-2 rounded-lg border border-slate-100"
+                            >
+                              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                              {c}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">
+                          Required Outcome
+                        </label>
+                        <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                          <p className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                            <CheckCircle size={14} className="text-green-500" /> Medical Nexus Letter
+                          </p>
+                          <p className="text-sm font-bold text-slate-900 mt-2 flex items-center gap-2">
+                            <CheckCircle size={14} className="text-green-500" /> DBQ Form (Mental Disorders)
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                    <div className="flex justify-between items-center mb-6">
+                      <h3 className="font-bold text-slate-900 flex items-center gap-2 text-lg">
+                        <File className="text-purple-500" size={24} />
+                        Patient Records
+                      </h3>
+                      <button className="text-sm text-blue-600 font-bold hover:underline flex items-center gap-1">
+                        <Download size={14} /> Download All
+                      </button>
+                    </div>
+
+                    <div className="space-y-3">
+                      {selectedVet.documents.map((doc, i) => (
+                        <div
+                          key={i}
+                          className="flex items-center justify-between p-4 border border-slate-100 rounded-xl hover:bg-slate-50 transition-colors group cursor-pointer"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="bg-red-50 text-red-500 p-2.5 rounded-lg group-hover:bg-white group-hover:shadow-sm transition-all">
+                              <FileText size={20} />
+                            </div>
+                            <div>
+                              <span className="text-sm font-bold text-slate-900 block">{doc}</span>
+                              <span className="text-xs text-slate-400">PDF • 2.4 MB • Uploaded Oct 24</span>
+                            </div>
+                          </div>
+                          <button className="p-2 text-slate-300 group-hover:text-blue-600 transition-colors">
+                            <Download size={20} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-span-1">
+                  <div className="bg-white rounded-2xl border border-slate-200 shadow-sm h-[600px] flex flex-col overflow-hidden">
+                    <div className="p-5 border-b border-slate-100 bg-slate-50/50">
+                      <h3 className="font-bold text-slate-900 flex items-center gap-2">
+                        <MessageSquare size={18} /> Case Chat
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-1">Direct line to TYFYS Case Managers</p>
+                    </div>
+
+                    <div className="flex-1 p-5 space-y-6 overflow-y-auto">
+                      {messages.map((msg) => (
+                        <div key={msg.id} className={`flex gap-3 ${msg.fromMe ? 'flex-row-reverse' : ''}`}>
+                          <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                              msg.fromMe ? 'bg-slate-800 text-white shadow-md' : 'bg-blue-100 text-blue-600 border border-blue-200'
+                            }`}
+                          >
+                            {msg.avatar}
+                          </div>
+                          <div
+                            className={`max-w-[80%] p-4 rounded-2xl ${
+                              msg.fromMe
+                                ? 'bg-blue-600 text-white rounded-tr-none shadow-md shadow-blue-200'
+                                : 'bg-slate-100 text-slate-700 rounded-tl-none'
+                            }`}
+                          >
+                            <p className="text-sm leading-relaxed">{msg.text}</p>
+                            <span className={`text-[10px] mt-2 block opacity-70`}>{msg.time}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="p-4 border-t border-slate-100 bg-white">
+                      <div className="relative">
+                        <input
+                          value={chatInput}
+                          onChange={(e) => setChatInput(e.target.value)}
+                          onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                          type="text"
+                          placeholder="Type a message..."
+                          className="w-full pl-4 pr-12 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                        />
+                        <button
+                          onClick={sendMessage}
+                          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                        >
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+        return (
+          <div className="flex h-screen bg-slate-50 font-sans">
+            <Sidebar />
+            <div className="flex-1 ml-72 h-screen overflow-hidden">
+              {view === 'calendar' ? <CalendarView /> : view === 'messages' ? <MessagesView /> : selectedVet ? <VeteranDetail /> : <DashboardView />}
+            </div>
+
+            {showUploadModal && (
+              <div className="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center backdrop-blur-sm p-4 animate-in">
+                <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 relative">
+                  <div className="flex justify-between items-center mb-8">
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900">Upload Evidence</h3>
+                      <p className="text-slate-500 text-sm">Finalizing case for {selectedVet?.name}</p>
+                    </div>
+                    <button onClick={() => setShowUploadModal(false)} className="text-slate-400 hover:text-slate-600">
+                      <XCircle size={24} />
+                    </button>
+                  </div>
+
+                  {uploadProgress === 0 ? (
+                    <div
+                      onClick={simulateUpload}
+                      className="border-2 border-dashed border-blue-200 bg-blue-50/50 rounded-2xl h-56 flex flex-col items-center justify-center mb-8 cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all group"
+                    >
+                      <div className="bg-white p-4 rounded-full shadow-sm mb-4 group-hover:scale-110 transition-transform">
+                        <Upload size={32} className="text-blue-600" />
+                      </div>
+                      <p className="text-slate-900 font-bold text-lg">Click to Upload Nexus/DBQ</p>
+                      <p className="text-sm text-slate-500 mt-2">or drag and drop PDF files here</p>
+                    </div>
+                  ) : (
+                    <div className="h-56 flex flex-col items-center justify-center mb-8">
+                      <div className="w-full bg-slate-100 rounded-full h-4 mb-4 overflow-hidden relative">
+                        <div className="bg-blue-600 h-4 rounded-full transition-all duration-150" style={{ width: `${uploadProgress}%` }}></div>
+                      </div>
+                      <p className="text-slate-900 font-bold text-lg mt-4">Uploading... {uploadProgress}%</p>
+                      <p className="text-slate-500 text-sm">Encrypting & Storing Securely</p>
+                    </div>
+                  )}
+
+                  <div className="flex justify-end gap-3">
+                    <button onClick={() => setShowUploadModal(false)} className="px-6 py-3 text-slate-600 font-bold hover:bg-slate-100 rounded-xl transition-colors">
+                      Cancel
+                    </button>
+                    <button
+                      disabled={uploadProgress > 0}
+                      onClick={simulateUpload}
+                      className="px-8 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all disabled:opacity-50"
+                    >
+                      {uploadProgress > 0 ? 'Processing...' : 'Upload & Complete'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {toast && (
+              <div className="fixed bottom-8 right-8 bg-slate-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 animate-in z-50 border border-slate-700">
+                <div className="bg-green-500 rounded-full p-1.5 shadow-lg shadow-green-500/20">
+                  <Check size={16} className="text-white" />
+                </div>
+                <div>
+                  <p className="font-bold text-sm">Success</p>
+                  <p className="text-xs text-slate-300">{toast.message}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      };
+
+      createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>
