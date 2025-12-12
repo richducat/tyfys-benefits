@@ -415,21 +415,1179 @@
 
 
                <!-- Contact Form -->
-               <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-slate-100">
-                   <h2 class="font-serif text-2xl font-bold text-navy-800 mb-6">Request Discovery Call</h2>
-                   <!-- Growform Snippet-->
-                   <div class="space-y-6">
-                       <p class="text-slate-600 text-sm">Complete the form below to book your discovery call with our veteran specialists.</p>
-                       <div class="rounded-xl border border-slate-100 shadow-soft p-1 bg-slate-50">
-                           <script type="text/javascript" src="https://embed.growform.co/client/6632b4a3844d19000b9773bd"></script>
-                       </div>
-                   </div>
-                   <!-- End Growform Snippet -->
+               <div class="bg-white p-0 md:p-0 rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+                   <div id="contact-react-form"></div>
                </div>
            </div>
        </div>
    </div>
 
+
+   <script type="module">
+       import React, { useState, useEffect } from "https://esm.sh/react@18.2.0";
+       import { createRoot } from "https://esm.sh/react-dom@18.2.0/client";
+       import {
+           CheckCircle2,
+           ChevronRight,
+           ShieldCheck,
+           Star,
+           Users,
+           ArrowRight,
+           Lock,
+           Activity,
+           User,
+           Mail,
+           Phone,
+           MapPin,
+           Clock,
+           AlertCircle,
+           ClipboardList
+       } from "https://esm.sh/lucide-react@0.344.0";
+
+
+       // --- Data & Content ---
+
+
+       // Defined outside component, but we will dynamically adjust specific steps inside the App component
+       const baseSteps = [
+           {
+               id: 'status',
+               question: "First things first, are you currently a Veteran?",
+               subtext: "We specialize in helping those who have served.",
+               type: 'choice',
+               options: [
+                   { label: 'Yes, I am a Veteran', value: 'veteran' },
+                   { label: 'No, I am a Spouse/Family Member', value: 'spouse' },
+                   { label: 'No, looking for general info', value: 'other' }
+               ]
+           },
+           {
+               id: 'rating',
+               question: "What is your CURRENT VA Disability Rating?",
+               subtext: "Use the slider to select your current rating.",
+               type: 'slider',
+               footerInfo: (
+                   <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mt-6 text-sm text-slate-600">
+                       <p><strong>What if I don't know my rating?</strong> You can validate your rating by getting a copy of your <em>Disability Breakdown Letter</em> from the Veterans Administration.</p>
+                   </div>
+               )
+           },
+           {
+               id: 'conditions',
+               question: "What conditions are you looking to claim or increase?",
+               subtext: "Select all that apply. We find the 'hidden' high-value claims.",
+               type: 'multi-select',
+               options: [
+                   { label: 'Mental Health / PTSD', value: 'ptsd' },
+                   { label: 'Back, Neck & Joints', value: 'musculoskeletal' },
+                   { label: 'Tinnitus / Hearing', value: 'hearing' },
+                   { label: 'Sleep Apnea', value: 'sleep' },
+                   { label: 'PACT Act / Toxic Exposure', value: 'pact' },
+                   { label: 'Secondary Conditions', value: 'secondary' }
+               ],
+               footerInfo: (
+                   <div className="flex gap-4 items-start bg-blue-50/50 p-4 rounded-xl border border-blue-100 mt-8">
+                       <div className="w-12 h-12 rounded-full bg-slate-300 flex-shrink-0 overflow-hidden border-2 border-white shadow-sm">
+                          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Freddy&backgroundColor=b6e3f4" alt="Freddy K" />
+                       </div>
+                       <div>
+                           <p className="text-sm text-slate-700 italic mb-2">"These guys really care about Veterans. Rich spent 45 mins listening to my story. You don't normally get service like that these days."</p>
+                           <p className="text-xs font-bold text-slate-900">- Freddy K, CA</p>
+                       </div>
+                   </div>
+               )
+           },
+           {
+               id: 'goal',
+               question: "What is your primary goal right now?",
+               subtext: "We create a custom Game Plan based on this.",
+               type: 'choice',
+               options: [
+                   { label: 'Increase my current rating', value: 'increase' },
+                   { label: 'Appeal a denial', value: 'appeal' },
+                   { label: 'File a new claim', value: 'new' },
+                   { label: 'Just curious about options', value: 'info' }
+               ]
+           },
+           // DYNAMIC STEP: Readiness Check (Will be modified in render based on 'goal')
+           {
+               id: 'readiness',
+               question: "Document Readiness Check",
+               subtext: "Which of these required documents do you currently have on hand?",
+               type: 'multi-select', // Changed to multi-select for checklist behavior
+               // Default options (will be overridden)
+               options: [
+                   { label: 'DD-214 (Member-4)', value: 'dd214' },
+                   { label: 'VA.gov Login Access', value: 'login' }
+               ],
+               footerInfo: (
+                   <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mt-6 text-sm text-slate-600">
+                       <p><strong>Note:</strong> We build "Fully Developed Claims" which require specific evidence. Select what you have now; our <strong>Stage A Onboarding Team</strong> can help you locate the rest.</p>
+                   </div>
+               )
+           },
+           {
+               id: 'analyzing',
+               type: 'loading',
+               duration: 2500,
+               text: "Analyzing your profile against 38 CFR standards..."
+           },
+           {
+               id: 'contact',
+               type: 'form',
+               question: "Great news. We can help.",
+               subtext: "Your profile matches our criteria for a Fully Developed Claim strategy. Enter your details to book your Free Discovery Call.",
+               buttonText: "Get My Free Consultation"
+           }
+       ];
+
+
+       const testimonials = [
+           {
+               name: "James T.",
+               role: "U.S. Army Veteran",
+               rating: "Increased 30% → 70%",
+               text: "After 15 years at 30% for my back, I didn't think an increase was possible. The team got me proper medical documentation showing deterioration. My only regret is not doing this years ago."
+           },
+           {
+               name: "Christopher L.",
+               role: "Marine Corps Veteran",
+               rating: "Increased 30% → 100% P&T",
+               text: "The psychologist they connected me with documented how PTSD affected my work. The back pay covered the fee ten times over. Life changing."
+           },
+           {
+               name: "Kevin L.",
+               role: "Navy Veteran",
+               rating: "Secondary Claims Success",
+               text: "I only had my back rated at 20% for years. They found the secondary conditions (hip, knee, depression) that I didn't even know I could claim."
+           }
+       ];
+
+
+       // --- Main Component ---
+
+
+       function App() {
+           const [currentStep, setCurrentStep] = useState(0);
+           const [formData, setFormData] = useState({ conditions: [], documents: [] });
+           const [isSubmitting, setIsSubmitting] = useState(false);
+           const [isSuccess, setIsSuccess] = useState(false);
+           const [dynamicSteps, setDynamicSteps] = useState(baseSteps);
+
+
+           // Update steps based on goal selection
+           useEffect(() => {
+               if (formData.goal) {
+                   const newSteps = [...baseSteps];
+                   const readinessIndex = newSteps.findIndex(s => s.id === 'readiness');
+                  
+                   if (readinessIndex !== -1) {
+                       let docOptions = [
+                           { label: 'DD-214 (Member-4 Copy)', value: 'dd214' },
+                           { label: 'Active VA.gov Login', value: 'login' },
+                       ];
+
+
+                       // Add specific docs based on claim type (Playbook logic)
+                       if (formData.goal === 'new') {
+                           docOptions.push({ label: 'Service Treatment Records (STRs)', value: 'strs' });
+                           docOptions.push({ label: 'Private Medical Records', value: 'private_meds' });
+                       } else if (formData.goal === 'increase') {
+                           docOptions.push({ label: 'Current Rating Breakdown Letter', value: 'rating_letter' });
+                           docOptions.push({ label: 'VA Medical Notes (Last 6mo)', value: 'va_notes' });
+                       } else if (formData.goal === 'appeal') {
+                           docOptions.push({ label: 'Copy of Denial Letter', value: 'denial_letter' });
+                           docOptions.push({ label: 'C-File (Claims File)', value: 'cfile' });
+                       } else if (formData.goal === 'info') {
+                           docOptions.push({ label: 'Any Existing Medical Records', value: 'any_records' });
+                       }
+
+
+                       newSteps[readinessIndex] = {
+                           ...newSteps[readinessIndex],
+                           options: docOptions
+                       };
+                       setDynamicSteps(newSteps);
+                   }
+               }
+           }, [formData.goal]);
+
+
+           // Scroll to top on step change
+           useEffect(() => {
+               if (typeof window !== 'undefined') {
+                   window.scrollTo({ top: 0, behavior: 'smooth' });
+               }
+           }, [currentStep]);
+
+
+           // Handle "Analyzing" step auto-advance
+           useEffect(() => {
+               if (dynamicSteps[currentStep]?.type === 'loading') {
+                   const timer = setTimeout(() => {
+                       handleNext();
+                   }, dynamicSteps[currentStep].duration);
+                   return () => clearTimeout(timer);
+               }
+           }, [currentStep, dynamicSteps]);
+
+
+           const handleNext = (data = {}) => {
+               setFormData(prev => ({ ...prev, ...data }));
+               if (currentStep < dynamicSteps.length - 1) {
+                   setCurrentStep(prev => prev + 1);
+               }
+           };
+
+
+           const handleBack = () => {
+               if (currentStep > 0) {
+                   setCurrentStep(prev => prev - 1);
+               }
+           };
+
+
+           const toggleCondition = (value) => {
+               const current = formData.conditions || [];
+               if (current.includes(value)) {
+                   setFormData(prev => ({ ...prev, conditions: current.filter(c => c !== value) }));
+               } else {
+                   setFormData(prev => ({ ...prev, conditions: [...current, value] }));
+               }
+           };
+
+
+           const toggleDocument = (value) => {
+               const current = formData.documents || [];
+               if (current.includes(value)) {
+                   setFormData(prev => ({ ...prev, documents: current.filter(d => d !== value) }));
+               } else {
+                   setFormData(prev => ({ ...prev, documents: [...current, value] }));
+               }
+           };
+
+
+           const handleFinalSubmit = async (contactData) => {
+               setIsSubmitting(true);
+              
+               // Prepare data needed for payload
+               const selectedDocs = formData.documents || [];
+               const contactMethods = [];
+               if (contactData.consent?.bestContact?.text) contactMethods.push('Text');
+               if (contactData.consent?.bestContact?.email) contactMethods.push('Email');
+               if (contactData.consent?.bestContact?.phone) contactMethods.push('Phone');
+
+
+               // Current Date Formatter
+               const now = new Date();
+               const dateString = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+
+
+               // --- SHEET PAYLOAD MAPPING ---
+               // EXACT ORDER AND COLUMN NAMES AS REQUESTED
+               const sheetPayload = {
+                   "Date created": dateString,
+                   "First Name": contactData.firstName || "",
+                   "Last name": contactData.lastName || "",
+                   "Email": contactData.email || "",
+                   "Phone": contactData.phone || "",
+                   "Zip": contactData.zipCode || "",
+                   "Best time to Contact": contactData.bestTime || "",
+                   "Best Form of Contact": contactMethods.join(', ') || "",
+                   "Are You Currently A Veteran": formData.status === 'veteran' ? 'Yes' : 'No',
+                   "Rating Percentage": `${formData.rating || 0}%`,
+                   "Conditions looking to claim for": formData.conditions?.join(', ') || 'None',
+                   "Primary Goal": formData.goal || "",
+                   "Has DD214?": selectedDocs.includes('dd214') ? 'Yes' : 'No',
+                   "Has VA Login": selectedDocs.includes('login') ? 'Yes' : 'No',
+                   "Has Rating breakdown letter": selectedDocs.includes('rating_letter') ? 'Yes' : 'No',
+                   "Has VA Medical Notes": selectedDocs.includes('va_notes') ? 'Yes' : 'No',
+                   "Has Copy of denial letter": selectedDocs.includes('denial_letter') ? 'Yes' : 'No',
+                   "Has C-File": selectedDocs.includes('cfile') ? 'Yes' : 'No',
+                   "Has Service Treatment Records": selectedDocs.includes('strs') ? 'Yes' : 'No'
+               };
+
+
+               console.log("Submitting Payload to Sheet:", sheetPayload);
+
+
+               // Google Sheet Submission
+               // UPDATED URL PER YOUR REQUEST
+               const scriptURL = 'https://script.google.com/macros/s/AKfycbxDs-IJaX15SHb9scERfHOSrFn78WIDRPeY4Kf1QbBJXeJuFOPgosAdtbSnoFZNYV1T2Q/exec';
+              
+               try {
+                   await fetch(scriptURL, {
+                       method: 'POST',
+                       mode: 'no-cors',
+                       headers: {
+                           'Content-Type': 'text/plain',
+                       },
+                       body: JSON.stringify(sheetPayload)
+                   });
+                   console.log("Posted to Google Sheets");
+               } catch (error) {
+                   console.error("Error submitting to Google Sheet", error);
+               }
+
+
+               setIsSubmitting(false);
+               setIsSuccess(true);
+           };
+
+
+           const progress = ((currentStep + 1) / dynamicSteps.length) * 100;
+           const stepData = dynamicSteps[currentStep];
+
+
+           if (isSuccess) {
+               return <SuccessView formData={formData} />;
+           }
+
+
+           return (
+               <div className="min-h-screen flex flex-col lg:flex-row bg-slate-50 font-sans text-slate-900">
+                   <style>{`
+                       @keyframes fadeIn {
+                           from { opacity: 0; transform: translateY(10px); }
+                           to { opacity: 1; transform: translateY(0); }
+                       }
+                       .animate-fade-in {
+                           animation: fadeIn 0.4s ease-out forwards;
+                       }
+                       .custom-scrollbar::-webkit-scrollbar {
+                           width: 4px;
+                       }
+                       .custom-scrollbar::-webkit-scrollbar-track {
+                           background: rgba(255, 255, 255, 0.1);
+                       }
+                       .custom-scrollbar::-webkit-scrollbar-thumb {
+                           background: rgba(255, 255, 255, 0.3);
+                           border-radius: 4px;
+                       }
+                       input[type=range] {
+                           -webkit-appearance: none;
+                           background: transparent;
+                       }
+                       input[type=range]:focus {
+                           outline: none;
+                       }
+                       @keyframes pulse-ring {
+                           0% { transform: scale(0.33); opacity: 1; }
+                           80%, 100% { opacity: 0; }
+                       }
+                       .pulse-ring::before {
+                           content: '';
+                           position: absolute;
+                           left: 0; top: 0;
+                           height: 100%; width: 100%;
+                           border-radius: 50%;
+                           background-color: #22c55e;
+                           animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+                       }
+                   `}</style>
+
+
+                   {/* Left Panel: Form Container */}
+                   <div className="w-full lg:w-2/3 flex flex-col relative z-10">
+                      
+                       {/* Mobile Header */}
+                       <div className="p-4 bg-white border-b border-gray-200 flex items-center justify-between lg:hidden sticky top-0 z-20">
+                           <div className="flex items-center gap-2">
+                               <div className="w-8 h-8 bg-slate-900 rounded flex items-center justify-center text-white font-bold">TY</div>
+                               <span className="font-bold text-slate-900 text-sm">Thank You For Your Service</span>
+                           </div>
+                       </div>
+
+
+                       {/* Main Scrollable Area */}
+                       <div className="flex-1 flex flex-col items-center justify-center p-4 lg:p-8">
+                          
+                           {/* The Card */}
+                           <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden relative">
+                              
+                               {/* Progress Bar inside card */}
+                               <div className="w-full bg-slate-100 h-1.5">
+                                   <div
+                                       className="bg-amber-400 h-1.5 transition-all duration-500 ease-out"
+                                       style={{ width: `${progress}%` }}
+                                   ></div>
+                               </div>
+
+
+                               <div className="p-8 lg:p-12">
+                                   {/* Back Button */}
+                                   {currentStep > 0 && currentStep < dynamicSteps.length - 1 && stepData.type !== 'loading' && (
+                                       <button
+                                           onClick={handleBack}
+                                           className="text-slate-400 hover:text-slate-700 text-sm font-semibold mb-6 flex items-center gap-1 transition-colors"
+                                       >
+                                           ← Back
+                                       </button>
+                                   )}
+
+
+                                   <div className="animate-fade-in w-full">
+                                       {stepData.type === 'loading' ? (
+                                           <LoadingStep text={stepData.text} />
+                                       ) : stepData.type === 'slider' ? (
+                                           <SliderStep
+                                               data={stepData}
+                                               onNext={handleNext}
+                                               initialValue={formData[stepData.id]}
+                                           />
+                                       ) : stepData.type === 'form' ? (
+                                           <ContactStep
+                                               data={stepData}
+                                               onSubmit={handleFinalSubmit}
+                                               isSubmitting={isSubmitting}
+                                               previousAnswers={formData}
+                                           />
+                                       ) : (
+                                           <QuestionStep
+                                               data={stepData}
+                                               onNext={handleNext}
+                                               formData={formData}
+                                               toggleCondition={toggleCondition}
+                                               toggleDocument={toggleDocument}
+                                           />
+                                       )}
+                                   </div>
+                               </div>
+                           </div>
+                          
+                           {/* Trust Footer (Desktop) */}
+                           <div className="hidden lg:flex items-center gap-6 mt-8 text-slate-400 text-xs font-medium">
+                               <span className="flex items-center gap-1.5"><ShieldCheck size={14} /> 256-bit Secure Encryption</span>
+                               <span className="flex items-center gap-1.5"><Lock size={14} /> Privacy Protected</span>
+                           </div>
+
+
+                       </div>
+
+
+                       {/* Mobile Trust Footer */}
+                       <div className="lg:hidden p-4 text-center text-xs text-slate-400 border-t bg-white">
+                           <div className="flex justify-center gap-4">
+                               <span className="flex items-center gap-1"><ShieldCheck size={14}/> HIPAA Compliant</span>
+                               <span className="flex items-center gap-1"><Lock size={14}/> Secure</span>
+                           </div>
+                       </div>
+                   </div>
+
+
+                   {/* Right Panel: Sidebar */}
+                   <div className="hidden lg:flex w-1/3 bg-slate-900 text-white flex-col relative overflow-hidden shadow-2xl z-20">
+                       <div className="absolute top-0 right-0 w-80 h-80 bg-blue-900 rounded-full filter blur-[100px] opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+                       <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-500 rounded-full filter blur-[100px] opacity-10 translate-y-1/2 -translate-x-1/2"></div>
+                      
+                       <div className="relative z-10 flex flex-col h-full p-10">
+                           <div className="mb-10">
+                               <div className="text-2xl font-bold tracking-tight mb-2">Thank You For Your Service</div>
+                               <div className="text-amber-400 font-bold text-xs tracking-widest uppercase opacity-90 border-l-2 border-amber-400 pl-3">Veteran Owned & Operated</div>
+                           </div>
+
+
+                           <div className="grid grid-cols-2 gap-4 mb-10">
+                               <div className="p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-colors">
+                                   <div className="text-3xl font-bold text-white mb-1">98%</div>
+                                   <div className="text-[11px] font-medium text-slate-300 uppercase tracking-wide">Success Rate</div>
+                               </div>
+                               <div className="p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-colors">
+                                   <div className="text-3xl font-bold text-amber-400 mb-1">0%</div>
+                                   <div className="text-[11px] font-medium text-slate-300 uppercase tracking-wide">Fees on Backpay</div>
+                               </div>
+                           </div>
+
+
+                           <div className="flex-1 overflow-y-auto custom-scrollbar pr-2">
+                               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Verified Success Stories</h3>
+                               <div className="space-y-4">
+                                   {testimonials.map((t, idx) => (
+                                       <div key={idx} className="bg-white/5 p-5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors group">
+                                           <div className="flex gap-1 text-amber-400 mb-3 group-hover:scale-105 transition-transform origin-left">
+                                               {[1,2,3,4,5].map(i => <Star key={i} size={12} fill="currentColor" />)}
+                                           </div>
+                                           <p className="text-sm text-slate-200 leading-relaxed mb-4 font-light">"{t.text}"</p>
+                                           <div className="flex items-center gap-3">
+                                               <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-white border border-slate-700">
+                                                   {t.name.substring(0,2)}
+                                               </div>
+                                               <div>
+                                                   <div className="text-sm font-semibold text-white">{t.name}</div>
+                                                   <div className="text-[10px] text-slate-400 uppercase tracking-wide">{t.role}</div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   ))}
+                               </div>
+                           </div>
+
+
+                           <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-widest font-semibold">
+                               <div className="flex items-center gap-2">
+                                   <ShieldCheck size={14} className="text-amber-400" />
+                                   <span>HIPAA Aligned</span>
+                               </div>
+                               <div className="flex items-center gap-2">
+                                   <Users size={14} className="text-amber-400" />
+                                   <span>SDVOSB</span>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           );
+       }
+
+
+       // --- Step Components ---
+
+
+       function SliderStep({ data, onNext, initialValue }) {
+           const [value, setValue] = useState(initialValue || 0);
+
+
+           return (
+               <div>
+                   <h1 className="text-3xl font-bold text-slate-900 mb-2 leading-tight">
+                       {data.question}
+                   </h1>
+                   <p className="text-slate-500 text-lg mb-10">
+                       {data.subtext}
+                   </p>
+
+
+                   <div className="w-full py-6">
+                       <div className="text-center mb-8">
+                           <span className="text-7xl font-extrabold text-blue-900 tracking-tight">
+                               {value}%
+                           </span>
+                           <span className="text-xl text-slate-400 font-medium ml-2">Rating</span>
+                       </div>
+                      
+                       <div className="relative h-12 flex items-center">
+                           <input
+                               type="range"
+                               min="0"
+                               max="100"
+                               step="10"
+                               value={value}
+                               onChange={(e) => setValue(Number(e.target.value))}
+                               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-30"
+                           />
+                          
+                           <div className="w-full h-3 bg-slate-200 rounded-full overflow-hidden relative">
+                                <div
+                                   className="h-full bg-blue-600 transition-all duration-100 ease-out"
+                                   style={{ width: `${value}%` }}
+                               ></div>
+                           </div>
+                          
+                           <div
+                               className="absolute w-8 h-8 bg-white border-4 border-amber-400 rounded-full shadow-lg pointer-events-none transition-all duration-100 ease-out flex items-center justify-center z-20"
+                               style={{ left: `calc(${value}% - 16px)` }}
+                           >
+                               <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
+                           </div>
+                       </div>
+
+
+                       <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-wider mt-4">
+                           <span>0%</span>
+                           <span>50%</span>
+                           <span>100%</span>
+                       </div>
+                   </div>
+
+
+                   {data.footerInfo}
+
+
+                   <div className="mt-10 pt-6 border-t border-slate-100 flex justify-end">
+                        <button
+                           onClick={() => onNext({ [data.id]: value })}
+                           className="bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg shadow-amber-400/20 transition-all hover:-translate-y-1 active:translate-y-0 flex items-center gap-2"
+                       >
+                           Confirm Rating <ChevronRight size={20} />
+                       </button>
+                   </div>
+               </div>
+           );
+       }
+
+
+       function QuestionStep({ data, onNext, formData, toggleCondition, toggleDocument }) {
+           const isMulti = data.type === 'multi-select';
+          
+           // Determine which toggle function and state array to use
+           const isDocumentStep = data.id === 'readiness';
+           const currentArray = isDocumentStep ? (formData.documents || []) : (formData.conditions || []);
+           const toggleFunc = isDocumentStep ? toggleDocument : toggleCondition;
+          
+           // For document step, we allow continuing even if nothing is selected (they might have nothing)
+           // For condition step, they must select at least one
+           const hasSelection = isDocumentStep ? true : currentArray.length > 0;
+
+
+           return (
+               <div>
+                   <h1 className="text-3xl font-bold text-slate-900 mb-2 leading-tight">
+                       {data.question}
+                   </h1>
+                   <p className="text-slate-500 text-lg mb-8">
+                       {data.subtext}
+                   </p>
+
+
+                   <div className={`grid gap-3 ${data.grid ? 'md:grid-cols-2' : 'grid-cols-1'}`}>
+                       {data.options.map((option) => {
+                           const isSelected = currentArray.includes(option.value);
+                          
+                           return (
+                               <button
+                                   key={option.value}
+                                   onClick={() => {
+                                       if (isMulti) {
+                                           toggleFunc(option.value);
+                                       } else {
+                                           onNext({ [data.id]: option.value });
+                                       }
+                                   }}
+                                   className={`
+                                       relative p-4 rounded-xl border-2 text-left transition-all duration-200
+                                       flex items-center justify-between
+                                       ${isSelected
+                                           ? 'border-blue-700 bg-blue-50/50 shadow-md ring-1 ring-blue-700/20'
+                                           : 'border-slate-200 hover:border-blue-400 hover:shadow-md bg-white text-slate-600'
+                                       }
+                                   `}
+                               >
+                                   <span className={`text-lg font-semibold ${isSelected ? 'text-blue-900' : 'text-slate-700'}`}>
+                                       {option.label}
+                                   </span>
+                                  
+                                   {/* Simple clean radio/check circle */}
+                                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${
+                                       isSelected ? 'bg-blue-600 border-blue-600' : 'border-slate-300'
+                                   }`}>
+                                       {isSelected && <div className="w-2 h-2 bg-white rounded-full" />}
+                                   </div>
+                               </button>
+                           );
+                       })}
+                   </div>
+
+
+                   {data.footerInfo}
+
+
+                   {isMulti && (
+                       <div className="mt-8 pt-6 border-t border-slate-100 flex justify-end">
+                           <button
+                               onClick={() => onNext()}
+                               disabled={!hasSelection}
+                               className={`
+                                   flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-lg transition-all
+                                   ${hasSelection
+                                       ? 'bg-amber-400 text-slate-900 hover:bg-amber-500 hover:-translate-y-1 shadow-lg shadow-amber-400/20'
+                                       : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                                   }
+                               `}
+                           >
+                               {isDocumentStep ? 'Confirm & Continue' : 'Continue'} <ChevronRight size={20} />
+                           </button>
+                       </div>
+                   )}
+               </div>
+           );
+       }
+
+
+       function LoadingStep({ text }) {
+           return (
+               <div className="flex flex-col items-center justify-center py-12 text-center">
+                   <div className="relative w-20 h-20 mb-8">
+                       <div className="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
+                       <div className="absolute inset-0 border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
+                       <Activity className="absolute inset-0 m-auto text-blue-600" size={24} />
+                   </div>
+                   <h2 className="text-2xl font-bold text-slate-900 mb-2 animate-pulse">{text}</h2>
+                   <p className="text-slate-500 font-medium">Checking eligibility requirements...</p>
+               </div>
+           );
+       }
+
+
+       function ContactStep({ data, onSubmit, isSubmitting, previousAnswers }) {
+           const [errors, setErrors] = useState({});
+           const [botField, setBotField] = useState("");
+           const [consentState, setConsentState] = useState({
+               privateOrg: false,
+               terms: false,
+               sms: false,
+               bestContact: { text: false, email: false, phone: false }
+           });
+
+
+           const getDynamicHeader = () => {
+               if (previousAnswers?.goal === 'increase') return "Let's Get Your Rating Increased.";
+               if (previousAnswers?.goal === 'appeal') return "Let's Fight That Denial.";
+               if (previousAnswers?.goal === 'new') return "Start Your New Claim Right.";
+               return data.question;
+           };
+
+
+           const handleConsentChange = (field) => {
+               setConsentState(prev => ({ ...prev, [field]: !prev[field] }));
+           };
+
+
+           const handleContactMethodChange = (method) => {
+               setConsentState(prev => ({
+                   ...prev,
+                   bestContact: { ...prev.bestContact, [method]: !prev.bestContact[method] }
+               }));
+           };
+
+
+           const handleLocalSubmit = (e) => {
+               e.preventDefault();
+               const formData = new FormData(e.target);
+               const values = Object.fromEntries(formData.entries());
+               const newErrors = {};
+
+
+               // Consent Validation
+               if (!consentState.privateOrg) {
+                   alert("Please acknowledge that we are a private organization to continue.");
+                   return;
+               }
+               if (!consentState.terms || !consentState.sms) {
+                   alert("Please accept the Terms & SMS Policy to continue.");
+                   return;
+               }
+
+
+               // Honeypot Check (Must stay)
+               if (botField !== "") {
+                   console.warn("Spam blocked: Honeypot");
+                   return;
+               }
+              
+               // --- REMOVED THE 2 SECOND TIME CHECK HERE TO FIX AUTOFILL SUBMISSION ---
+
+
+               const nameRegex = /^[a-zA-Z\s'-]+$/;
+               const forbiddenNames = ['test', 'fake', 'asdf', 'qwerty', 'admin', 'user', 'none', 'null', 'spam'];
+               const isRepeating = (str) => /(.)\1{2,}/.test(str);
+
+
+               if (!nameRegex.test(values.firstName)) newErrors.firstName = "Valid first name required.";
+               else if (forbiddenNames.includes(values.firstName.toLowerCase()) || isRepeating(values.firstName)) newErrors.firstName = "Real first name required.";
+
+
+               if (!nameRegex.test(values.lastName)) newErrors.lastName = "Valid last name required.";
+               else if (forbiddenNames.includes(values.lastName.toLowerCase()) || isRepeating(values.lastName)) newErrors.lastName = "Real last name required.";
+              
+               // Smart Phone Validation: Handles Country Code inputs like +1
+               let cleanPhone = values.phone.replace(/\D/g, '');
+              
+               // If autofill adds country code '1', strip it for validation
+               if (cleanPhone.length === 11 && cleanPhone.startsWith('1')) {
+                   cleanPhone = cleanPhone.substring(1);
+               }
+
+
+               const uniqueDigits = new Set(cleanPhone.split('')).size;
+               const isRepeatingPattern = /(\d\d)\1\1/.test(cleanPhone);
+               const sequences = ['1234567890', '0987654321', '0000000000', '1111111111', '1212121212'];
+              
+               if (cleanPhone.length !== 10) newErrors.phone = "10-digit US phone required.";
+               else if (sequences.includes(cleanPhone) || /^(\d)\1+$/.test(cleanPhone)) newErrors.phone = "Valid phone required.";
+               else if (uniqueDigits <= 2) newErrors.phone = "Valid phone required.";
+               else if (isRepeatingPattern) newErrors.phone = "Valid phone required.";
+               // Relaxed Area code check
+               else if (parseInt(cleanPhone[0]) < 2 || parseInt(cleanPhone[3]) < 2) newErrors.phone = "Valid area code required.";
+
+
+               const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+               const profanityList = ['fuck', 'dick', 'shit', 'piss', 'cunt', 'bitch', 'asshole', 'cock', 'sucker', 'whore'];
+               const lowerEmail = values.email.toLowerCase();
+               const domainPart = lowerEmail.split('@')[1] || '';
+               const userPart = lowerEmail.split('@')[0] || '';
+               const baseDomain = domainPart.split('.')[0];
+
+
+               const allowedDomains = [
+                   'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'msn.com',
+                   'aol.com', 'icloud.com', 'live.com', 'me.com', 'ymail.com',
+                   'comcast.net', 'verizon.net', 'att.net', 'sbcglobal.net', 'cox.net',
+                   'bellsouth.net', 'charter.net', 'earthlink.net', 'mac.com', 'rocketmail.com',
+                   'optonline.net', 'roadrunner.com', 'windstream.net', 'juno.com', 'centurylink.net',
+                   'protonmail.com', 'pm.me', 'zoho.com', 'gmx.com', 'mail.com', 'aim.com',
+                   'frontier.com', 'netzero.net', 'twc.com', 'spectrum.net'
+               ];
+
+
+               const isAllowedDomain = allowedDomains.includes(domainPart);
+               const isMilDomain = domainPart.endsWith('.mil');
+               const isUserRepeated = /^([a-z0-9])\1+$/.test(userPart);
+               const uniqueCharsUser = new Set(userPart.split('')).size;
+
+
+               if (lowerEmail.includes('..') || lowerEmail.startsWith('.') || lowerEmail.endsWith('.')) newErrors.email = "Check for typos.";
+               else if (!emailRegex.test(values.email)) newErrors.email = "Valid email required.";
+               else if (profanityList.some(word => lowerEmail.includes(word))) newErrors.email = "Professional email required.";
+               else if (!isAllowedDomain && !isMilDomain) newErrors.email = "Use a common personal or .mil email.";
+               else if (userPart === baseDomain) newErrors.email = "Valid email required.";
+               else if (isUserRepeated) newErrors.email = "Valid email required.";
+               else if (userPart.length > 5 && uniqueCharsUser < 3) newErrors.email = "Valid email required.";
+
+
+               if (!values.zipCode || values.zipCode.length < 5) newErrors.zipCode = "Valid Zip Code required.";
+
+
+               if (Object.keys(newErrors).length > 0) {
+                   setErrors(newErrors);
+                   return;
+               }
+              
+               // Include consents in final payload
+               onSubmit({ ...values, consent: consentState });
+           };
+
+
+           return (
+               <div>
+                   {/* Status Bar */}
+                   <div className="flex items-center justify-between mb-8 bg-blue-50/50 p-3 rounded-lg border border-blue-100">
+                       <div className="flex items-center gap-2 text-blue-800 text-sm font-bold">
+                           <div className="relative w-2 h-2">
+                               <div className="absolute w-2 h-2 bg-green-500 rounded-full pulse-ring"></div>
+                               <div className="relative w-2 h-2 bg-green-500 rounded-full"></div>
+                           </div>
+                           Online Now
+                       </div>
+                       <div className="text-xs text-blue-600 font-semibold tracking-wide uppercase">
+                           3 Specialists Available
+                       </div>
+                   </div>
+
+
+                   <h1 className="text-3xl font-bold text-slate-900 mb-2">
+                       {getDynamicHeader()}
+                   </h1>
+                   <p className="text-slate-500 text-lg mb-8">
+                       {data.subtext}
+                   </p>
+
+
+                   <form onSubmit={handleLocalSubmit} className="space-y-4" noValidate>
+                      
+                       <div className="opacity-0 absolute -z-10 h-0 w-0 overflow-hidden">
+                           <input type="text" name="website_url" tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} />
+                       </div>
+
+
+                       {/* Name Fields */}
+                       <div className="grid md:grid-cols-2 gap-4">
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">First Name</label>
+                               <div className="relative">
+                                   <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="firstName"
+                                       required
+                                       type="text"
+                                       autoComplete="given-name"
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.firstName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="John"
+                                   />
+                               </div>
+                               {errors.firstName && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.firstName}</p>}
+                           </div>
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Last Name</label>
+                               <div className="relative">
+                                   <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="lastName"
+                                       required
+                                       type="text"
+                                       autoComplete="family-name"
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.lastName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="Doe"
+                                   />
+                               </div>
+                               {errors.lastName && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.lastName}</p>}
+                           </div>
+                       </div>
+
+
+                       {/* Email & Phone */}
+                       <div className="grid md:grid-cols-2 gap-4">
+                            <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Email Address</label>
+                               <div className="relative">
+                                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="email"
+                                       required
+                                       type="email"
+                                       autoComplete="email"
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.email ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="john@example.com"
+                                   />
+                               </div>
+                               {errors.email && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.email}</p>}
+                           </div>
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Phone Number</label>
+                               <div className="relative">
+                                   <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="phone"
+                                       required
+                                       type="tel"
+                                       autoComplete="tel"
+                                       maxLength={14}
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.phone ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="(555) 123-4567"
+                                       onInput={(e) => {
+                                           let v = e.target.value.replace(/\D/g, '');
+                                           // Handle autofill country codes
+                                           if (v.length > 10 && v.startsWith('1')) v = v.substring(1);
+                                          
+                                           if (v.length > 10) v = v.slice(0, 10);
+                                           if (v.length > 6) e.target.value = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+                                           else if (v.length > 3) e.target.value = `(${v.slice(0,3)}) ${v.slice(3)}`;
+                                           else e.target.value = v;
+                                       }}
+                                   />
+                               </div>
+                               {errors.phone && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.phone}</p>}
+                           </div>
+                       </div>
+
+
+                       {/* Zip Code & Time */}
+                       <div className="grid md:grid-cols-2 gap-4">
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Zip Code</label>
+                               <div className="relative">
+                                   <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="zipCode"
+                                       required
+                                       type="text"
+                                       autoComplete="postal-code"
+                                       maxLength={5}
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.zipCode ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="12345"
+                                   />
+                               </div>
+                               {errors.zipCode && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.zipCode}</p>}
+                           </div>
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Best Time To Contact</label>
+                               <div className="relative">
+                                   <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <select name="bestTime" className="w-full pl-11 pr-4 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900 appearance-none">
+                                       <option>Morning (9AM - 12PM)</option>
+                                       <option>Afternoon (12PM - 4PM)</option>
+                                       <option>Evening (4PM - 7PM)</option>
+                                       <option>Anytime</option>
+                                   </select>
+                               </div>
+                           </div>
+                       </div>
+
+
+                       {/* Best Form of Contact Checkboxes */}
+                       <div className="py-2">
+                           <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Best Form Of Contact</label>
+                           <div className="flex gap-4">
+                               {['Text', 'Email', 'Phone'].map(type => (
+                                   <label key={type} className="flex items-center gap-2 cursor-pointer text-slate-700 font-medium text-sm">
+                                       <input
+                                           type="checkbox"
+                                           checked={consentState.bestContact[type.toLowerCase()]}
+                                           onChange={() => handleContactMethodChange(type.toLowerCase())}
+                                           className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                       />
+                                       {type}
+                                   </label>
+                               ))}
+                           </div>
+                       </div>
+
+
+                       <hr className="border-slate-100 my-6" />
+
+
+                       {/* Private Org Consent (Image 1) */}
+                       <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4">
+                           <h4 className="text-xs font-bold text-slate-900 uppercase mb-2">Before You Submit:</h4>
+                           <p className="text-xs text-slate-600 mb-3 leading-relaxed">
+                               By hitting submit you recognize that we are a <strong className="text-slate-900">private organization</strong> that works with United States Veterans looking to file a Disability claim with the Veterans Administration.
+                           </p>
+                           <label className="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-100 transition-colors group">
+                               <div onClick={() => handleConsentChange('privateOrg')} className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0 ${consentState.privateOrg ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
+                                   {consentState.privateOrg && <CheckCircle2 size={12} className="text-white" />}
+                               </div>
+                               <span className={`text-xs font-bold uppercase ${consentState.privateOrg ? 'text-blue-700' : 'text-slate-500'}`}>I understand & wish to continue</span>
+                           </label>
+                       </div>
+
+
+                       {/* Terms & SMS Consent */}
+                       <div className="space-y-3">
+                           <label className="flex items-start gap-3 cursor-pointer">
+                               <input type="checkbox" checked={consentState.terms} onChange={() => handleConsentChange('terms')} className="mt-1 w-4 h-4 rounded border-slate-300 text-blue-600" />
+                               <span className="text-xs text-slate-600">
+                                   Confirm you've read our <a href="#" className="text-blue-600 underline">terms and service</a>.
+                               </span>
+                           </label>
+                           <label className="flex items-start gap-3 cursor-pointer">
+                               <input type="checkbox" checked={consentState.sms} onChange={() => handleConsentChange('sms')} className="mt-1 w-4 h-4 rounded border-slate-300 text-blue-600" />
+                               <span className="text-xs text-slate-600">
+                                   By checking this box, you consent to receive text messages from Thank You For Your Service.
+                               </span>
+                           </label>
+                       </div>
+
+
+                       <div className="pt-4">
+                           <button
+                               type="submit"
+                               disabled={isSubmitting || !consentState.privateOrg || !consentState.terms || !consentState.sms}
+                               className="w-full bg-green-500 hover:bg-green-600 text-white font-bold text-xl py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 group border-b-4 border-green-700 active:border-b-0 active:mt-1"
+                           >
+                               {isSubmitting ? 'Processing...' : (
+                                   <>
+                                       CONTINUE <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                                   </>
+                               )}
+                           </button>
+                          
+                           {/* Trust Signals */}
+                           <div className="text-center mt-6 space-y-4">
+                                {/* William R Testimonial */}
+                               <div className="flex gap-3 items-center justify-center text-left max-w-sm mx-auto">
+                                   <div className="w-10 h-10 rounded-full bg-slate-200 flex-shrink-0 overflow-hidden">
+                                       <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=William&backgroundColor=e6e6e6" alt="William" />
+                                   </div>
+                                   <div>
+                                       <p className="text-[10px] italic text-slate-600">"The free consultation really helped educate me... I was able to take the next steps with confidence."</p>
+                                       <p className="text-[10px] font-bold text-slate-800">- William R, NC</p>
+                                   </div>
+                               </div>
+
+
+                               <div className="text-xs text-slate-500">
+                                   <strong className="text-slate-900 block mb-1">*WE ONLY HIRE AMERICAN.</strong>
+                                   We are American owned & Operated. Your Free Benefits Evaluation is done over the phone with a <strong className="text-slate-900">live U.S. Representative.</strong>
+                               </div>
+                              
+                               <p className="text-[10px] text-slate-400 leading-tight">
+                                   <strong>SMS CONSENT POLICY:</strong> By submitting your phone number, you agree to receive texts and calls about your VA benefits evaluation. Message and data rates may apply. Reply STOP to opt-out. Consent is not a condition of service.
+                               </p>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+           );
+       }
+
+
+       function SuccessView({ formData }) {
+           // Dynamic checklist logic based on Playbook gates
+           const getChecklistItems = () => {
+               // Base items required for all
+               const items = [
+                   "DD-214 (Member-4 Copy)",
+                   "Active VA.gov Login"
+               ];
+
+
+               // Conditional items per Playbook Section 6
+               if (formData.goal === 'new') {
+                   items.push("Service Treatment Records (STRs)");
+                   items.push("Private Medical Records (Diagnosis)");
+               } else if (formData.goal === 'increase') {
+                   items.push("Current Rating Breakdown Letter");
+                   items.push("List of Current Medications");
+               } else if (formData.goal === 'appeal') {
+                   items.push("Copy of Denial Letter (Notification Letter)");
+                   items.push("C-File (Claims File) if available");
+               } else if (formData.goal === 'info') {
+                   items.push("Any existing medical evidence");
+               }
+
+
+               return items;
+           };
+
+
+           const checklistItems = getChecklistItems();
+
+
+           return (
+               <div className="min-h-screen bg-slate-900 flex items-center justify-center p-6 text-center overflow-hidden relative">
+                   {[...Array(20)].map((_, i) => (
+                       <div key={i} className="absolute w-2 h-2 rounded-full animate-bounce" style={{
+                           top: '-10%',
+                           left: `${Math.random() * 100}%`,
+                           backgroundColor: ['#fbbf24', '#3b82f6', '#22c55e'][Math.floor(Math.random() * 3)],
+                           animationDuration: `${2 + Math.random() * 3}s`,
+                           animationDelay: `${Math.random()}s`,
+                       }} />
+                   ))}
+
+
+                   <div className="bg-white rounded-2xl p-8 md:p-12 max-w-lg w-full shadow-2xl animate-fade-in relative z-10">
+                       <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                           <CheckCircle2 size={40} className="text-green-600" />
+                       </div>
+                       <h2 className="text-3xl font-bold text-slate-900 mb-2">Request Received!</h2>
+                       <p className="text-slate-500 font-medium text-sm mb-6 uppercase tracking-wider">Initializing Stage A Review...</p>
+                      
+                       <p className="text-slate-600 mb-8 leading-relaxed">
+                           Thank you for your service. Our Intake Team is reviewing your profile against our <strong>Client Operations Playbook</strong> standards. Expect a call from our "Discovery Team" (Area Code 321) within the next 24 hours.
+                       </p>
+                      
+                       {/* Updated "Checklist" based on Playbook Section 5 & 6 */}
+                       <div className="bg-slate-50 p-6 rounded-xl border border-slate-200 text-left text-sm text-slate-600 mb-8 shadow-sm">
+                           <p className="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                               <ClipboardList size={18} className="text-green-600"/>
+                               Required for your Strategy Session:
+                           </p>
+                           <ul className="space-y-3 ml-1">
+                               {checklistItems.map((item, index) => (
+                                   <li key={index} className="flex items-start gap-2">
+                                       <span className="text-blue-600 font-bold mt-0.5">•</span>
+                                       <span>Locate your <strong>{item}</strong>.</span>
+                                   </li>
+                               ))}
+                           </ul>
+                       </div>
+
+
+                       <a href="https://tyfys.net/assessment-thank-you.html" className="block w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-slate-800 transition-all shadow-lg text-lg">
+                           Next Steps: Document Prep Page
+                       </a>
+                   </div>
+               </div>
+           );
+       }
+
+
+       const rootElement = document.getElementById('contact-react-form');
+       if (rootElement) {
+           const root = createRoot(rootElement);
+           root.render(<App />);
+       }
+   </script>
 
    <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
