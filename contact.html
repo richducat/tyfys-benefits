@@ -423,7 +423,9 @@
    </div>
 
 
-   <script type="module">
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+   <script type="text/babel" data-type="module" data-presets="react">
        import React, { useState, useEffect } from "https://esm.sh/react@18.2.0";
        import { createRoot } from "https://esm.sh/react-dom@18.2.0/client";
        import {
