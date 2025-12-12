@@ -25,6 +25,9 @@
    <link rel="stylesheet" href="apps/navigation.css">
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
    <script src="https://unpkg.com/lucide@latest"></script>
+   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
    <script>
        tailwind.config = {
            theme: {
@@ -71,7 +74,31 @@
        }
        /* Dropdown Menu Styles */
        .group:hover .group-hover\:block { display: block; }
-   </style>
+       .lead-form-app { font-family: 'Inter', sans-serif; }
+       .lead-form-app .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+       .lead-form-app .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
+       .lead-form-app .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 4px; }
+       .lead-form-app input[type=range] { -webkit-appearance: none; background: transparent; }
+       .lead-form-app input[type=range]:focus { outline: none; }
+       @keyframes fadeIn {
+           from { opacity: 0; transform: translateY(10px); }
+           to { opacity: 1; transform: translateY(0); }
+       }
+       .lead-form-app .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+       @keyframes pulse-ring {
+           0% { transform: scale(0.33); opacity: 1; }
+           80%, 100% { opacity: 0; }
+       }
+       .lead-form-app .pulse-ring::before {
+           content: '';
+           position: absolute;
+           left: 0; top: 0;
+           height: 100%; width: 100%;
+           border-radius: 50%;
+           background-color: #22c55e;
+           animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+       }
+    </style>
 </head>
 <body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
 
@@ -448,11 +475,9 @@
                </div>
 
 
-               <!-- Right Column: Growform Embed -->
+               <!-- Right Column: Lead Form -->
                <div class="relative w-full h-full min-h-[500px]">
-                   <!-- Growform Snippet -->
-                   <script type="text/javascript" src="https://embed.growform.co/client/6632b4a3844d19000b9773bd"></script>
-                   <!-- End Growform Snippet -->
+                   <div id="lead-form-root" class="lead-form-app"></div>
                </div>
 
 
@@ -758,8 +783,561 @@
    </footer>
 
 
+   <script type="text/babel" data-presets="env,react">
+       const { useState, useEffect } = React;
+
+       const Icon = ({ children, size = 24, className = "" }) => (
+           <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>{children}</svg>
+       );
+
+       const CheckCircle2 = (props) => <Icon {...props}><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></Icon>;
+       const ChevronRight = (props) => <Icon {...props}><path d="m9 18 6-6-6-6"/></Icon>;
+       const ShieldCheck = (props) => <Icon {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></Icon>;
+       const Star = (props) => <Icon {...props}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></Icon>;
+       const Users = (props) => <Icon {...props}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></Icon>;
+       const ArrowRight = (props) => <Icon {...props}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></Icon>;
+       const Lock = (props) => <Icon {...props}><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></Icon>;
+       const TrendingUp = (props) => <Icon {...props}><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></Icon>;
+       const Activity = (props) => <Icon {...props}><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></Icon>;
+       const User = (props) => <Icon {...props}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></Icon>;
+       const Mail = (props) => <Icon {...props}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></Icon>;
+       const Phone = (props) => <Icon {...props}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></Icon>;
+       const MapPin = (props) => <Icon {...props}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></Icon>;
+       const Clock = (props) => <Icon {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></Icon>;
+       const CheckSquare = (props) => <Icon {...props}><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></Icon>;
+       const Square = (props) => <Icon {...props}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></Icon>;
+       const AlertCircle = (props) => <Icon {...props}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></Icon>;
+       const FileText = (props) => <Icon {...props}><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></Icon>;
+       const ClipboardList = (props) => <Icon {...props}><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></Icon>;
+
+       const baseSteps = [
+           {
+               id: 'status',
+               question: "First things first, are you currently a Veteran?",
+               subtext: "We specialize in helping those who have served.",
+               type: 'choice',
+               options: [
+                   { label: 'Yes, I am a Veteran', value: 'veteran' },
+                   { label: 'No, I am a Spouse/Family Member', value: 'spouse' },
+                   { label: 'No, looking for general info', value: 'other' }
+               ],
+               footerInfo: (
+                   <div className="flex gap-3 items-center bg-slate-50 p-3 rounded-lg border border-slate-200 mt-6">
+                       <div className="bg-white p-1.5 rounded-full shadow-sm text-blue-600"><Users size={16}/></div>
+                       <p className="text-xs text-slate-600"><strong>Did you know?</strong> We are Veteran Owned & Operated. We understand your journey.</p>
+                   </div>
+               )
+           },
+           {
+               id: 'rating',
+               question: "What is your CURRENT VA Disability Rating?",
+               subtext: "Use the slider to select your current rating.",
+               type: 'slider',
+               footerInfo: (
+                   <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 mt-6 flex gap-3 items-start">
+                       <div className="bg-white p-1.5 rounded-full shadow-sm text-blue-600 mt-0.5"><FileText size={16}/></div>
+                       <div className="text-xs text-slate-600 leading-relaxed">
+                           <span className="font-bold text-slate-900 block mb-1">What if I don't know my rating?</span>
+                           You can validate your rating by getting a copy of your <em>Disability Breakdown Letter</em> from the Veterans Administration.
+                       </div>
+                   </div>
+               )
+           },
+           {
+               id: 'conditions',
+               question: "What conditions are you looking to claim or increase?",
+               subtext: "Select all that apply. We find the 'hidden' high-value claims.",
+               type: 'multi-select',
+               options: [
+                   { label: 'Mental Health / PTSD', value: 'ptsd' },
+                   { label: 'Back, Neck & Joints', value: 'musculoskeletal' },
+                   { label: 'Tinnitus / Hearing', value: 'hearing' },
+                   { label: 'Sleep Apnea', value: 'sleep' },
+                   { label: 'PACT Act / Toxic Exposure', value: 'pact' },
+                   { label: 'Secondary Conditions', value: 'secondary' }
+               ],
+               footerInfo: (
+                   <div className="mt-6 bg-slate-50 p-4 rounded-xl border border-slate-200 relative overflow-hidden">
+                       <div className="flex gap-3 items-start relative z-10">
+                           <div className="w-10 h-10 rounded-full bg-slate-300 flex-shrink-0 overflow-hidden border-2 border-white shadow-sm">
+                              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Freddy&backgroundColor=b6e3f4" alt="Freddy K" />
+                           </div>
+                           <div>
+                               <div className="flex gap-0.5 text-amber-400 mb-1">
+                                   {[1,2,3,4,5].map(i => <Star key={i} size={10} fill="currentColor" />)}
+                               </div>
+                               <p className="text-xs text-slate-700 italic mb-2 leading-relaxed">"These guys really care about Veterans. Rich spent 45 mins listening to my story. You don't normally get service like that these days."</p>
+                               <p className="text-[10px] font-bold text-slate-900 uppercase tracking-wide">- Freddy K, CA</p>
+                           </div>
+                       </div>
+                   </div>
+               )
+           },
+           {
+               id: 'goal',
+               question: "What is your primary goal right now?",
+               subtext: "We create a custom Game Plan based on this.",
+               type: 'choice',
+               options: [
+                   { label: 'Increase my current rating', value: 'increase' },
+                   { label: 'Appeal a denial', value: 'appeal' },
+                   { label: 'File a new claim', value: 'new' },
+                   { label: 'Just curious about options', value: 'info' }
+               ]
+           },
+           {
+               id: 'readiness',
+               question: "Document Readiness",
+               subtext: "Select documents you currently have:",
+               type: 'multi-select',
+               options: [
+                   { label: 'DD-214 (Member-4)', value: 'dd214' },
+                   { label: 'VA.gov Login Access', value: 'login' }
+               ],
+               footerInfo: (
+                   <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mt-6 text-xs text-slate-600 flex gap-3 items-start">
+                       <div className="bg-white p-1.5 rounded-full shadow-sm text-green-600 mt-0.5"><CheckSquare size={16}/></div>
+                       <div>
+                           <p className="font-bold text-slate-900 mb-1">Why we ask:</p>
+                           <p>We build "Fully Developed Claims" which require specific evidence. Select what you have now; our <strong>Stage A Onboarding Team</strong> can help you locate the rest.</p>
+                       </div>
+                   </div>
+               )
+           },
+           {
+               id: 'analyzing',
+               type: 'loading',
+               duration: 2500,
+               text: "Analyzing your profile..."
+           },
+           {
+               id: 'contact',
+               type: 'form',
+               question: "Great news. We can help.",
+               subtext: "Enter your details to book your Free Discovery Call.",
+               buttonText: "Get My Free Consultation"
+           }
+       ];
+
+       function App() {
+           const [currentStep, setCurrentStep] = useState(0);
+           const [formData, setFormData] = useState({ conditions: [], documents: [] });
+           const [isSubmitting, setIsSubmitting] = useState(false);
+           const [isSuccess, setIsSuccess] = useState(false);
+           const [dynamicSteps, setDynamicSteps] = useState(baseSteps);
+
+           useEffect(() => {
+               if (formData.goal) {
+                   const newSteps = [...baseSteps];
+                   const readinessIndex = newSteps.findIndex(s => s.id === 'readiness');
+
+                   if (readinessIndex !== -1) {
+                       let docOptions = [
+                           { label: 'DD-214 (Member-4 Copy)', value: 'dd214' },
+                           { label: 'Active VA.gov Login', value: 'login' },
+                       ];
+
+                       if (formData.goal === 'new') {
+                           docOptions.push({ label: 'Service Treatment Records (STRs)', value: 'strs' });
+                           docOptions.push({ label: 'Private Medical Records', value: 'private_meds' });
+                       } else if (formData.goal === 'increase') {
+                           docOptions.push({ label: 'Current Rating Breakdown Letter', value: 'rating_letter' });
+                           docOptions.push({ label: 'VA Medical Notes (Last 6mo)', value: 'va_notes' });
+                       } else if (formData.goal === 'appeal') {
+                           docOptions.push({ label: 'Copy of Denial Letter', value: 'denial_letter' });
+                           docOptions.push({ label: 'C-File (Claims File)', value: 'cfile' });
+                       } else if (formData.goal === 'info') {
+                           docOptions.push({ label: 'Any Existing Medical Records', value: 'any_records' });
+                       }
+
+                       newSteps[readinessIndex] = {
+                           ...newSteps[readinessIndex],
+                           options: docOptions
+                       };
+                       setDynamicSteps(newSteps);
+                   }
+               }
+           }, [formData.goal]);
+
+           useEffect(() => {
+               if (dynamicSteps[currentStep].type === 'loading') {
+                   const timer = setTimeout(() => {
+                       handleNext();
+                   }, dynamicSteps[currentStep].duration);
+                   return () => clearTimeout(timer);
+               }
+           }, [currentStep]);
+
+           const handleNext = (data = {}) => {
+               setFormData(prev => ({ ...prev, ...data }));
+               if (currentStep < dynamicSteps.length - 1) {
+                   setCurrentStep(prev => prev + 1);
+               }
+           };
+
+           const handleBack = () => {
+               if (currentStep > 0) {
+                   setCurrentStep(prev => prev - 1);
+               }
+           };
+
+           const toggleCondition = (value) => {
+               const current = formData.conditions || [];
+               if (current.includes(value)) {
+                   setFormData(prev => ({ ...prev, conditions: current.filter(c => c !== value) }));
+               } else {
+                   setFormData(prev => ({ ...prev, conditions: [...current, value] }));
+               }
+           };
+
+           const toggleDocument = (value) => {
+               const current = formData.documents || [];
+               if (current.includes(value)) {
+                   setFormData(prev => ({ ...prev, documents: current.filter(d => d !== value) }));
+               } else {
+                   setFormData(prev => ({ ...prev, documents: [...current, value] }));
+               }
+           };
+
+           const handleFinalSubmit = async (contactData) => {
+               setIsSubmitting(true);
+
+               const selectedDocs = formData.documents || [];
+               const contactMethods = [];
+               if (contactData.consent?.bestContact?.text) contactMethods.push('Text');
+               if (contactData.consent?.bestContact?.email) contactMethods.push('Email');
+               if (contactData.consent?.bestContact?.phone) contactMethods.push('Phone');
+
+               const now = new Date();
+               const dateString = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+
+               const sheetPayload = {
+                   "Date created": dateString,
+                   "First Name": contactData.firstName || "",
+                   "Last name": contactData.lastName || "",
+                   "Email": contactData.email || "",
+                   "Phone": contactData.phone || "",
+                   "Zip": contactData.zipCode || "",
+                   "Best time to Contact": contactData.bestTime || "",
+                   "Best Form of Contact": contactMethods.join(', ') || "",
+                   "Are You Currently A Veteran": formData.status === 'veteran' ? 'Yes' : 'No',
+                   "Rating Percentage": `${formData.rating || 0}%`,
+                   "Conditions looking to claim for": formData.conditions?.join(', ') || "",
+                   "Primary Goal": formData.goal || "",
+                   "Has DD214?": selectedDocs.includes('dd214') ? 'Yes' : 'No',
+                   "Has VA Login": selectedDocs.includes('login') ? 'Yes' : 'No',
+                   "Has Rating breakdown letter": selectedDocs.includes('rating_letter') ? 'Yes' : 'No',
+                   "Has VA Medical Notes": selectedDocs.includes('va_notes') ? 'Yes' : 'No',
+                   "Has Copy of denial letter": selectedDocs.includes('denial_letter') ? 'Yes' : 'No',
+                   "Has C-File": selectedDocs.includes('cfile') ? 'Yes' : 'No',
+                   "Has Service Treatment Records": selectedDocs.includes('strs') ? 'Yes' : 'No'
+               };
+
+               const scriptURL = 'https://script.google.com/macros/s/AKfycbxDs-IJaX15SHb9scERfHOSrFn78WIDRPeY4Kf1QbBJXeJuFOPgosAdtbSnoFZNYV1T2Q/exec';
+
+               try {
+                   await fetch(scriptURL, {
+                       method: 'POST',
+                       mode: 'no-cors',
+                       headers: { 'Content-Type': 'text/plain' },
+                       body: JSON.stringify(sheetPayload)
+                   });
+               } catch (error) {
+                   console.error("Error", error);
+               }
+
+               setIsSubmitting(false);
+               setIsSuccess(true);
+           };
+
+           const progress = ((currentStep + 1) / dynamicSteps.length) * 100;
+           const stepData = dynamicSteps[currentStep];
+
+           if (isSuccess) return <SuccessView formData={formData} />;
+
+           return (
+               <div className="flex items-center justify-center p-4 min-h-[550px]">
+                   <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden relative">
+                       <div className="p-4 bg-white border-b border-gray-100 flex items-center justify-between">
+                           <div className="flex items-center gap-2">
+                               <div className="w-8 h-8 bg-slate-900 rounded flex items-center justify-center text-white font-bold">TY</div>
+                               <span className="font-bold text-slate-900 text-sm">Thank You For Your Service</span>
+                           </div>
+                           <div className="text-xs text-slate-400 font-medium">Step {currentStep + 1} of {dynamicSteps.length}</div>
+                       </div>
+
+                       <div className="w-full bg-slate-50 h-1.5">
+                           <div className="bg-amber-400 h-1.5 transition-all duration-500 ease-out" style={{ width: `${progress}%` }}></div>
+                       </div>
+
+                       <div className="p-6 md:p-8">
+                           {currentStep > 0 && currentStep < dynamicSteps.length - 1 && stepData.type !== 'loading' && (
+                               <button onClick={handleBack} className="text-slate-400 hover:text-slate-700 text-xs font-bold mb-4 flex items-center gap-1 transition-colors uppercase tracking-wide">← Back</button>
+                           )}
+
+                           <div className="animate-fade-in w-full min-h-[300px] flex flex-col justify-center">
+                               {stepData.type === 'loading' ? (
+                                   <LoadingStep text={stepData.text} />
+                               ) : stepData.type === 'slider' ? (
+                                   <SliderStep data={stepData} onNext={handleNext} initialValue={formData[stepData.id]} />
+                               ) : stepData.type === 'form' ? (
+                                   <ContactStep data={stepData} onSubmit={handleFinalSubmit} isSubmitting={isSubmitting} previousAnswers={formData} />
+                               ) : (
+                                   <QuestionStep data={stepData} onNext={handleNext} formData={formData} toggleCondition={toggleCondition} toggleDocument={toggleDocument} />
+                               )}
+                           </div>
+                       </div>
+
+                       <div className="bg-slate-50 p-4 border-t border-slate-100">
+                           <div className="grid grid-cols-2 gap-3 mb-4">
+                               <div className="flex flex-col items-center justify-center bg-white p-2 rounded-lg border border-slate-200 shadow-sm">
+                                   <span className="text-blue-900 font-black text-lg">98%</span>
+                                   <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">Success Rate</span>
+                               </div>
+                               <div className="flex flex-col items-center justify-center bg-white p-2 rounded-lg border border-slate-200 shadow-sm">
+                                   <span className="text-amber-500 font-black text-lg">0%</span>
+                                   <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">Fees on Backpay</span>
+                               </div>
+                           </div>
+                           <div className="flex justify-between items-center text-[10px] text-slate-400 font-semibold uppercase tracking-wider px-2">
+                               <div className="flex items-center gap-1"><ShieldCheck size={12} className="text-green-600"/> HIPAA Aligned</div>
+                               <div className="flex items-center gap-1"><Users size={12} className="text-blue-600"/> SDVOSB Certified</div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           );
+       }
+
+       function SliderStep({ data, onNext, initialValue }) {
+           const [value, setValue] = useState(initialValue || 0);
+           return (
+               <div>
+                   <h1 className="text-2xl font-bold text-slate-900 mb-2 leading-tight">{data.question}</h1>
+                   <p className="text-slate-500 text-sm mb-6">{data.subtext}</p>
+                   <div className="w-full py-4">
+                       <div className="text-center mb-6">
+                           <span className="text-6xl font-extrabold text-blue-900 tracking-tight">{value}%</span>
+                           <span className="text-lg text-slate-400 font-medium ml-2">Rating</span>
+                       </div>
+                       <div className="relative h-10 flex items-center mb-6">
+                           <input type="range" min="0" max="100" step="10" value={value} onChange={(e) => setValue(Number(e.target.value))} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-30" />
+                           <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden relative">
+                                <div className="h-full bg-blue-600 transition-all duration-100 ease-out" style={{ width: `${value}%` }}></div>
+                           </div>
+                           <div className="absolute w-6 h-6 bg-white border-4 border-amber-400 rounded-full shadow-lg pointer-events-none transition-all duration-100 ease-out flex items-center justify-center z-20" style={{ left: `calc(${value}% - 12px)` }}>
+                               <div className="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
+                           </div>
+                       </div>
+                       <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider"><span>0%</span><span>50%</span><span>100%</span></div>
+                   </div>
+                   {data.footerInfo}
+                   <div className="mt-6 pt-4 border-t border-slate-100">
+                        <button onClick={() => onNext({ [data.id]: value })} className="w-full bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-md py-3 rounded-xl shadow-md transition-all hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">Confirm Rating <ChevronRight size={18} /></button>
+                   </div>
+               </div>
+           );
+       }
+
+       function QuestionStep({ data, onNext, formData, toggleCondition, toggleDocument }) {
+           const isMulti = data.type === 'multi-select';
+           const isDocumentStep = data.id === 'readiness';
+           const currentArray = isDocumentStep ? (formData.documents || []) : (formData.conditions || []);
+           const toggleFunc = isDocumentStep ? toggleDocument : toggleCondition;
+           const hasSelection = isDocumentStep ? true : currentArray.length > 0;
+
+           return (
+               <div>
+                   <h1 className="text-2xl font-bold text-slate-900 mb-2 leading-tight">{data.question}</h1>
+                   <p className="text-slate-500 text-sm mb-6">{data.subtext}</p>
+                   <div className="space-y-2">
+                       {data.options.map((option) => {
+                           const isSelected = currentArray.includes(option.value);
+                           return (
+                               <button key={option.value} onClick={() => { if (isMulti) { toggleFunc(option.value); } else { onNext({ [data.id]: option.value }); } }}
+                                   className={`w-full relative p-3 rounded-lg border-2 text-left transition-all duration-200 flex items-center justify-between ${isSelected ? 'border-blue-700 bg-blue-50/50 shadow-sm ring-1 ring-blue-700/20' : 'border-slate-200 hover:border-blue-400 hover:shadow-sm bg-white text-slate-600'}`}>
+                                   <span className={`text-sm font-semibold ${isSelected ? 'text-blue-900' : 'text-slate-700'}`}>{option.label}</span>
+                                   <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${isSelected ? 'bg-blue-600 border-blue-600' : 'border-slate-300'}`}>{isSelected && <div className="w-1.5 h-1.5 bg-white rounded-full" />}</div>
+                               </button>
+                           );
+                       })}
+                   </div>
+                   {data.footerInfo}
+                   {isMulti && (
+                       <div className="mt-6 pt-4 border-t border-slate-100">
+                           <button onClick={() => onNext()} disabled={!hasSelection} className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-md transition-all ${hasSelection ? 'bg-amber-400 text-slate-900 hover:bg-amber-500 hover:-translate-y-0.5 shadow-md' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}`}>
+                               {isDocumentStep ? 'Confirm & Continue' : 'Continue'} <ChevronRight size={18} />
+                           </button>
+                       </div>
+                   )}
+               </div>
+           );
+       }
+
+       function LoadingStep({ text }) {
+           return (
+               <div className="flex flex-col items-center justify-center py-8 text-center">
+                   <div className="relative w-16 h-16 mb-6">
+                       <div className="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
+                       <div className="absolute inset-0 border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
+                       <Activity className="absolute inset-0 m-auto text-blue-600" size={20} />
+                   </div>
+                   <h2 className="text-xl font-bold text-slate-900 mb-2 animate-pulse">{text}</h2>
+                   <p className="text-slate-500 text-sm font-medium">Checking eligibility requirements...</p>
+               </div>
+           );
+       }
+
+       function ContactStep({ data, onSubmit, isSubmitting, previousAnswers }) {
+           const [errors, setErrors] = useState({});
+           const [botField, setBotField] = useState("");
+           const [consentState, setConsentState] = useState({ privateOrg: false, terms: false, sms: false, bestContact: { text: false, email: false, phone: false } });
+
+           const getDynamicHeader = () => {
+               if (previousAnswers?.goal === 'increase') return "Let's Get Your Rating Increased.";
+               if (previousAnswers?.goal === 'appeal') return "Let's Fight That Denial.";
+               if (previousAnswers?.goal === 'new') return "Start Your New Claim Right.";
+               return data.question;
+           };
+
+           const handleConsentChange = (field) => setConsentState(prev => ({ ...prev, [field]: !prev[field] }));
+           const handleContactMethodChange = (method) => setConsentState(prev => ({ ...prev, bestContact: { ...prev.bestContact, [method]: !prev.bestContact[method] } }));
+
+           const handleLocalSubmit = (e) => {
+               e.preventDefault();
+               const formData = new FormData(e.target);
+               const values = Object.fromEntries(formData.entries());
+               const newErrors = {};
+
+               if (!consentState.privateOrg) { alert("Please acknowledge that we are a private organization to continue."); return; }
+               if (!consentState.terms || !consentState.sms) { alert("Please accept the Terms & SMS Policy to continue."); return; }
+               if (botField !== "") return;
+
+               const nameRegex = /^[a-zA-Z\s'-]+$/;
+               if (!nameRegex.test(values.firstName)) newErrors.firstName = "Valid first name required.";
+               if (!nameRegex.test(values.lastName)) newErrors.lastName = "Valid last name required.";
+
+               let cleanPhone = values.phone.replace(/\D/g, '');
+               if (cleanPhone.length > 10 && cleanPhone.startsWith('1')) cleanPhone = cleanPhone.substring(1);
+               if (cleanPhone.length !== 10) newErrors.phone = "10-digit US phone required.";
+
+               const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+               if (!emailRegex.test(values.email)) newErrors.email = "Valid email required.";
+               if (!values.zipCode || values.zipCode.length < 5) newErrors.zipCode = "Valid Zip Code required.";
+
+               if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+               onSubmit({ ...values, consent: consentState });
+           };
+
+           return (
+               <div>
+                   <h1 className="text-2xl font-bold text-slate-900 mb-2 leading-tight">{getDynamicHeader()}</h1>
+                   <p className="text-slate-500 text-sm mb-6">{data.subtext}</p>
+                   <form onSubmit={handleLocalSubmit} className="space-y-3" noValidate>
+                       <div className="opacity-0 absolute -z-10 h-0 w-0 overflow-hidden"><input type="text" name="website_url" tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} /></div>
+                       <div className="grid grid-cols-2 gap-3">
+                           <div><input name="firstName" required type="text" autoComplete="given-name" className={`w-full p-3 rounded-lg border ${errors.firstName ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="First Name" /></div>
+                           <div><input name="lastName" required type="text" autoComplete="family-name" className={`w-full p-3 rounded-lg border ${errors.lastName ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Last Name" /></div>
+                       </div>
+                       <input name="email" required type="email" autoComplete="email" className={`w-full p-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Email Address" />
+                       <input name="phone" required type="tel" autoComplete="tel" className={`w-full p-3 rounded-lg border ${errors.phone ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Phone Number" onInput={(e) => { let v = e.target.value.replace(/\D/g, ''); if (v.length > 10 && v.startsWith('1')) v = v.substring(1); if (v.length > 10) v = v.slice(0, 10); if (v.length > 6) e.target.value = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`; else if (v.length > 3) e.target.value = `(${v.slice(0,3)}) ${v.slice(3)}`; else e.target.value = v; }} />
+                       <div className="grid grid-cols-2 gap-3">
+                           <input name="zipCode" required type="text" autoComplete="postal-code" maxLength={5} className={`w-full p-3 rounded-lg border ${errors.zipCode ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Zip Code" />
+                           <select name="bestTime" className="w-full p-3 rounded-lg border border-slate-200 focus:border-blue-600 outline-none text-sm bg-white"><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Anytime</option></select>
+                       </div>
+
+                       <div className="pt-2">
+                           <p className="text-xs font-bold text-slate-500 mb-2">Best Contact Method:</p>
+                           <div className="flex gap-4">
+                               {['Text', 'Email', 'Phone'].map(type => (
+                                   <label key={type} className="flex items-center gap-1.5 cursor-pointer text-slate-700 text-xs font-medium">
+                                       <input type="checkbox" checked={consentState.bestContact[type.toLowerCase()]} onChange={() => handleContactMethodChange(type.toLowerCase())} className="w-3.5 h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" /> {type}
+                                   </label>
+                               ))}
+                           </div>
+                       </div>
+
+                       <hr className="border-slate-100 my-4" />
+
+                       <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 mb-2">
+                           <label className="flex items-start gap-2 cursor-pointer group">
+                               <div onClick={() => handleConsentChange('privateOrg')} className={`mt-0.5 w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 ${consentState.privateOrg ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
+                                   {consentState.privateOrg && <CheckCircle2 size={10} className="text-white" />}
+                               </div>
+                               <span className="text-[10px] text-slate-600 leading-tight">
+                                   I understand TYFYS is a <strong>private organization</strong>, not the VA.
+                               </span>
+                           </label>
+                       </div>
+
+                       <div className="space-y-2">
+                           <label className="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked={consentState.terms} onChange={() => handleConsentChange('terms')} className="mt-0.5 w-3.5 h-3.5 rounded border-slate-300" /><span className="text-[10px] text-slate-500">I agree to the <a href="#" className="text-blue-600 underline">terms</a>.</span></label>
+                           <label className="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked={consentState.sms} onChange={() => handleConsentChange('sms')} className="mt-0.5 w-3.5 h-3.5 rounded border-slate-300" /><span className="text-[10px] text-slate-500">I consent to receive SMS updates. Reply STOP to opt-out.</span></label>
+                       </div>
+
+                       <button type="submit" disabled={isSubmitting || !consentState.privateOrg || !consentState.terms || !consentState.sms} className="w-full bg-green-500 hover:bg-green-600 text-white font-bold text-lg py-3 rounded-xl shadow-md transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed mt-2">
+                           {isSubmitting ? 'Processing...' : 'Get My Consultation'}
+                       </button>
+
+                       <div className="mt-6 text-center space-y-4">
+                           <div className="flex gap-2 items-center justify-center text-left bg-slate-50 p-2 rounded-lg border border-slate-100">
+                               <div className="w-8 h-8 rounded-full bg-slate-300 flex-shrink-0 overflow-hidden border border-white shadow-sm">
+                                   <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=William&backgroundColor=e6e6e6" alt="William" />
+                               </div>
+                               <div>
+                                   <p className="text-[10px] text-slate-600 italic leading-tight">"The free consultation really helped educate me... I was able to take the next steps with confidence."</p>
+                                   <p className="text-[9px] font-bold text-slate-800 mt-0.5">- William R, NC</p>
+                               </div>
+                           </div>
+
+                           <div className="text-[10px] text-slate-500 px-2">
+                               <strong className="text-slate-900 block mb-1 uppercase tracking-wide">*WE ONLY HIRE AMERICAN.</strong>
+                               We are American owned & Operated. Your Free Benefits Evaluation is done over the phone with a <strong className="text-slate-900">live U.S. Representative.</strong>
+                           </div>
+
+                           <p className="text-[9px] text-slate-400 leading-tight px-2 pb-2">
+                               <strong>SMS CONSENT POLICY:</strong> By submitting your phone number, you agree to receive texts and calls about your VA benefits evaluation. Message and data rates may apply. Reply STOP to opt-out. Consent is not a condition of service.
+                           </p>
+                       </div>
+                   </form>
+               </div>
+           );
+       }
+
+       function SuccessView({ formData }) {
+           const getChecklistItems = () => {
+               const items = ["DD-214 (Member-4 Copy)", "Active VA.gov Login"];
+               if (formData.goal === 'new') { items.push("Service Treatment Records (STRs)"); items.push("Private Medical Records (Diagnosis)"); }
+               else if (formData.goal === 'increase') { items.push("Current Rating Breakdown Letter"); items.push("List of Current Medications"); }
+               else if (formData.goal === 'appeal') { items.push("Copy of Denial Letter"); items.push("C-File (Claims File)"); }
+               else if (formData.goal === 'info') { items.push("Any existing medical evidence"); }
+               return items;
+           };
+           const checklistItems = getChecklistItems();
+           return (
+               <div className="flex items-center justify-center p-4 min-h-[550px]">
+                   <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden p-8 text-center relative">
+                       {[...Array(15)].map((_, i) => (<div key={i} className="absolute w-1.5 h-1.5 rounded-full animate-bounce" style={{ top: '-10%', left: `${Math.random() * 100}%`, backgroundColor: ['#fbbf24', '#3b82f6', '#22c55e'][Math.floor(Math.random() * 3)], animationDuration: `${2 + Math.random() * 3}s`, animationDelay: `${Math.random()}s`, }} />))}
+
+                       <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><CheckCircle2 size={32} className="text-green-600" /></div>
+                       <h2 className="text-2xl font-bold text-slate-900 mb-2">Request Received!</h2>
+                       <p className="text-slate-500 text-sm mb-6">Our Intake Team is reviewing your profile.</p>
+
+                       <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-left text-xs text-slate-600 mb-6 shadow-sm">
+                           <p className="font-bold text-slate-900 mb-2 flex items-center gap-1.5"><ClipboardList size={14} className="text-green-600"/> Prep for your Call:</p>
+                           <ul className="space-y-2 ml-1">{checklistItems.map((item, index) => (<li key={index} className="flex items-start gap-1.5"><span className="text-blue-600 font-bold mt-0.5">•</span><span>Locate your <strong>{item}</strong>.</span></li>))}</ul>
+                       </div>
+                       <a href="https://tyfys.net/assessment-thank-you.html" className="block w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-all shadow-lg text-sm">Next Steps: Document Prep Page</a>
+                   </div>
+               </div>
+           );
+       }
+
+       const root = ReactDOM.createRoot(document.getElementById('lead-form-root'));
+       root.render(<App />);
+   </script>
    <script src="apps/mobile-nav.js"></script>
-<script>
+   <script>
        // Initialize Icons
        lucide.createIcons();
    </script>
