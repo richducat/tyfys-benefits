@@ -9,14 +9,14 @@
   const claimTypes = [
     {
       label: 'Mental Health & PTSD',
-      href: 'claims_mental_health.html',
+      href: 'mental-health-ptsd.html',
       group: 'VA Claims',
       icon: 'brain',
       description: 'Therapy DBQs, stressor statements, and nexus support.'
     },
     {
       label: 'Back, Neck & Joints',
-      href: 'claims_musculoskeletal.html',
+      href: 'back-neck-joints.html',
       group: 'VA Claims',
       icon: 'bone',
       description: 'Orthopedic exams, ROM charts, and pain documentation.'
