@@ -818,7 +818,6 @@
                type: 'choice',
                options: [
                    { label: 'Yes, I am a Veteran', value: 'veteran' },
-                   { label: 'Enlisted - I am filing for benefits before discharge', value: 'enlisted_pre_discharge' },
                    { label: 'No, I am a Spouse/Family Member', value: 'spouse' },
                    { label: 'No, looking for general info', value: 'other' }
                ],
@@ -1012,19 +1011,18 @@
                const now = new Date();
                const dateString = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
 
-                const sheetPayload = {
-                    "Date created": dateString,
-                    "First Name": contactData.firstName || "",
-                    "Last name": contactData.lastName || "",
-                    "Email": contactData.email || "",
-                    "Phone": contactData.phone || "",
-                    "Zip": contactData.zipCode || "",
-                    "Best time to Contact": contactData.bestTime || "",
-                    "VA Claim Goals": contactData.claimGoals || "",
-                    "Best Form of Contact": contactMethods.join(', ') || "",
-                    "Are You Currently A Veteran": formData.status === 'veteran' ? 'Yes' : 'No',
-                    "Rating Percentage": `${formData.rating || 0}%`,
-                    "Conditions looking to claim for": formData.conditions?.join(', ') || "",
+               const sheetPayload = {
+                   "Date created": dateString,
+                   "First Name": contactData.firstName || "",
+                   "Last name": contactData.lastName || "",
+                   "Email": contactData.email || "",
+                   "Phone": contactData.phone || "",
+                   "Zip": contactData.zipCode || "",
+                   "Best time to Contact": contactData.bestTime || "",
+                   "Best Form of Contact": contactMethods.join(', ') || "",
+                   "Are You Currently A Veteran": formData.status === 'veteran' ? 'Yes' : 'No',
+                   "Rating Percentage": `${formData.rating || 0}%`,
+                   "Conditions looking to claim for": formData.conditions?.join(', ') || "",
                    "Primary Goal": formData.goal || "",
                    "Has DD214?": selectedDocs.includes('dd214') ? 'Yes' : 'No',
                    "Has VA Login": selectedDocs.includes('login') ? 'Yes' : 'No',
@@ -1243,18 +1241,13 @@
                        </div>
                        <input name="email" required type="email" autoComplete="email" className={`w-full p-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Email Address" />
                        <input name="phone" required type="tel" autoComplete="tel" className={`w-full p-3 rounded-lg border ${errors.phone ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Phone Number" onInput={(e) => { let v = e.target.value.replace(/\D/g, ''); if (v.length > 10 && v.startsWith('1')) v = v.substring(1); if (v.length > 10) v = v.slice(0, 10); if (v.length > 6) e.target.value = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`; else if (v.length > 3) e.target.value = `(${v.slice(0,3)}) ${v.slice(3)}`; else e.target.value = v; }} />
-                        <div className="grid grid-cols-2 gap-3">
-                            <input name="zipCode" required type="text" autoComplete="postal-code" maxLength={5} className={`w-full p-3 rounded-lg border ${errors.zipCode ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Zip Code" />
-                            <select name="bestTime" className="w-full p-3 rounded-lg border border-slate-200 focus:border-blue-600 outline-none text-sm bg-white"><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Anytime</option></select>
-                        </div>
+                       <div className="grid grid-cols-2 gap-3">
+                           <input name="zipCode" required type="text" autoComplete="postal-code" maxLength={5} className={`w-full p-3 rounded-lg border ${errors.zipCode ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Zip Code" />
+                           <select name="bestTime" className="w-full p-3 rounded-lg border border-slate-200 focus:border-blue-600 outline-none text-sm bg-white"><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Anytime</option></select>
+                       </div>
 
-                        <div className="space-y-1">
-                            <label className="text-xs font-bold text-slate-600" htmlFor="claimGoals">What are your VA Claim goals?</label>
-                            <textarea id="claimGoals" name="claimGoals" rows="3" className="w-full p-3 rounded-lg border border-slate-200 focus:border-blue-600 outline-none text-sm" placeholder="Share any specific outcomes or questions you have"></textarea>
-                        </div>
-
-                        <div className="pt-2">
-                            <p className="text-xs font-bold text-slate-500 mb-2">Best Contact Method:</p>
+                       <div className="pt-2">
+                           <p className="text-xs font-bold text-slate-500 mb-2">Best Contact Method:</p>
                            <div className="flex gap-4">
                                {['Text', 'Email', 'Phone'].map(type => (
                                    <label key={type} className="flex items-center gap-1.5 cursor-pointer text-slate-700 text-xs font-medium">
