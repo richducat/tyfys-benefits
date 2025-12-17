@@ -504,6 +504,7 @@
                question: "What is your primary goal right now?",
                subtext: "We create a custom Game Plan based on this.",
                type: 'choice',
+               requireContinue: true,
                options: [
                    { label: 'Increase my current rating', value: 'increase' },
                    { label: 'Appeal a denial', value: 'appeal' },
@@ -1021,6 +1022,15 @@
 
        function QuestionStep({ data, onNext, formData, toggleCondition, toggleDocument }) {
            const isMulti = data.type === 'multi-select';
+           const requiresConfirm = data.requireContinue && !isMulti;
+
+           const [selectedSingle, setSelectedSingle] = useState(requiresConfirm ? formData[data.id] || null : null);
+
+           useEffect(() => {
+               if (requiresConfirm) {
+                   setSelectedSingle(formData[data.id] || null);
+               }
+           }, [requiresConfirm, formData, data.id]);
           
            // Determine which toggle function and state array to use
            const isDocumentStep = data.id === 'readiness';
@@ -1044,7 +1054,11 @@
 
                    <div className={`grid gap-3 ${data.grid ? 'md:grid-cols-2' : 'grid-cols-1'}`}>
                        {data.options.map((option) => {
-                           const isSelected = currentArray.includes(option.value);
+                           const isSelected = isMulti
+                               ? currentArray.includes(option.value)
+                               : requiresConfirm
+                                   ? selectedSingle === option.value
+                                   : false;
                           
                            return (
                                <button
@@ -1052,6 +1066,8 @@
                                    onClick={() => {
                                        if (isMulti) {
                                            toggleFunc(option.value);
+                                       } else if (requiresConfirm) {
+                                           setSelectedSingle(option.value);
                                        } else {
                                            onNext({ [data.id]: option.value });
                                        }
@@ -1084,16 +1100,20 @@
                    {data.footerInfo}
 
 
-                   {isMulti && (
+                   {(isMulti || requiresConfirm) && (
                        <div className="mt-8 pt-6 border-t border-slate-100 flex justify-end">
                            <button
-                               onClick={() => onNext()}
-                               disabled={!hasSelection}
+                               onClick={() => onNext(requiresConfirm ? { [data.id]: selectedSingle } : {})}
+                               disabled={requiresConfirm ? !selectedSingle : !hasSelection}
                                className={`
                                    flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-lg transition-all
-                                   ${hasSelection
-                                       ? 'bg-amber-400 text-slate-900 hover:bg-amber-500 hover:-translate-y-1 shadow-lg shadow-amber-400/20'
-                                       : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                                   ${requiresConfirm
+                                       ? selectedSingle
+                                           ? 'bg-amber-400 text-slate-900 hover:bg-amber-500 hover:-translate-y-1 shadow-lg shadow-amber-400/20'
+                                           : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                                       : hasSelection
+                                           ? 'bg-amber-400 text-slate-900 hover:bg-amber-500 hover:-translate-y-1 shadow-lg shadow-amber-400/20'
+                                           : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                                    }
                                `}
                            >
