@@ -969,9 +969,22 @@
        function App() {
            const [currentStep, setCurrentStep] = useState(0);
            const [formData, setFormData] = useState({ conditions: [], documents: [] });
+           const [gclid, setGclid] = useState("");
            const [isSubmitting, setIsSubmitting] = useState(false);
            const [isSuccess, setIsSuccess] = useState(false);
            const [dynamicSteps, setDynamicSteps] = useState(baseSteps);
+
+           useEffect(() => {
+               const params = new URLSearchParams(window.location.search);
+               const gclidParam = params.get('gclid') || params.get('GCLID');
+               const storedGclid = localStorage.getItem('gclid');
+               const finalGclid = gclidParam || storedGclid || "";
+
+               if (finalGclid) {
+                   setGclid(finalGclid);
+                   if (gclidParam) localStorage.setItem('gclid', gclidParam);
+               }
+           }, []);
 
            useEffect(() => {
                if (formData.goal) {
@@ -1049,6 +1062,10 @@
            const handleFinalSubmit = async (contactData) => {
                setIsSubmitting(true);
 
+               const formattedFirstName = (contactData.firstName || "").trim();
+               const formattedLastName = (contactData.lastName || "").trim();
+               const fullName = [formattedFirstName, formattedLastName].filter(Boolean).join(' ');
+
                const selectedDocs = formData.documents || [];
                const contactMethods = [];
                if (contactData.consent?.bestContact?.text) contactMethods.push('Text');
@@ -1060,13 +1077,15 @@
 
                const sheetPayload = {
                    "Date created": dateString,
-                   "First Name": contactData.firstName || "",
-                   "Last name": contactData.lastName || "",
+                   "Full Name": fullName,
+                   "First Name": formattedFirstName,
+                   "Last name": formattedLastName,
                    "Email": contactData.email || "",
                    "Phone": contactData.phone || "",
                    "Zip": contactData.zipCode || "",
                    "Best time to Contact": contactData.bestTime || "",
                    "Best Form of Contact": contactMethods.join(', ') || "",
+                   "GCLID": gclid || "",
                    "Are You Currently A Veteran": formData.status === 'veteran' ? 'Yes' : 'No',
                    "Rating Percentage": `${formData.rating || 0}%`,
                    "Conditions looking to claim for": formData.conditions?.join(', ') || "",
