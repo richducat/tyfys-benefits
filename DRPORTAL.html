@@ -31,14 +31,10 @@
 </head>
 <body class="bg-slate-50">
   <div id="root"></div>
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/lucide-react@0.456.0/dist/lucide-react.umd.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script type="text/babel" data-presets="react">
-    const { useEffect, useState } = React;
-    const { createRoot } = ReactDOM;
-    const { Search, MapPin, Stethoscope, Phone, Globe, Mail, Copy, CheckCircle, AlertCircle, FileText, Video, X, Plus, UserPlus, Save, Database, Building, ExternalLink, Trash2, Shield, ShieldCheck } = LucideReact;
+  <script type="module">
+    import React, { useEffect, useState } from 'https://esm.sh/react@18.2.0';
+    import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
+    import { Search, MapPin, Stethoscope, Phone, Globe, Mail, Copy, CheckCircle, AlertCircle, FileText, Video, X, Plus, UserPlus, Save, Database, Building, ExternalLink, Trash2, Shield, ShieldCheck } from 'https://esm.sh/lucide-react@0.456.0?dev';
 
     const ProviderCard = ({ provider, copyToClipboard, isAdmin, onDelete }) => {
       const isResource = Array.isArray(provider.specialty)
