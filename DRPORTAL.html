@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1PEBFCV9Q"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     gtag('config', 'G-L1PEBFCV9Q');
+   </script>
+
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <title>TYFYS Provider Finder | DRPORTAL</title>
+   <meta name="description" content="Find VA disability DBQ and nexus letter providers, including telehealth networks and local specialists.">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+   <script src="https://cdn.tailwindcss.com"></script>
+   <style>
+     body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+     .animate-bounce-in { animation: bounceIn 0.4s ease; }
+     @keyframes bounceIn {
+       0% { opacity: 0; transform: scale(0.95) translateY(10px); }
+       60% { opacity: 1; transform: scale(1.02) translateY(-4px); }
+       100% { opacity: 1; transform: scale(1) translateY(0); }
+     }
+   </style>
+</head>
+<body class="bg-slate-50">
+  <div id="root"></div>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/lucide-react@0.456.0/dist/lucide-react.umd.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel" data-presets="react">
+    const { useEffect, useState } = React;
+    const { createRoot } = ReactDOM;
+    const { Search, MapPin, Stethoscope, Phone, Globe, Mail, Copy, CheckCircle, AlertCircle, FileText, Video, X, Plus, UserPlus, Save, Database, Building, ExternalLink, Trash2, Shield, ShieldCheck } = LucideReact;
+
+    const ProviderCard = ({ provider, copyToClipboard, isAdmin, onDelete }) => {
+      const isResource = Array.isArray(provider.specialty)
+        ? provider.specialty.includes('Resource')
+        : provider.specialty === 'Resource';
+
+      return (
+        <div className={`relative rounded-lg shadow-md border p-5 hover:shadow-xl transition-shadow duration-200 ${isResource ? 'bg-amber-50 border-amber-200' : 'bg-white border-slate-200'}`}>
+          {isAdmin && (
+            <button
+              onClick={onDelete}
+              className="absolute top-2 right-2 p-1.5 bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition-colors z-10"
+              title="Remove Provider"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          )}
+
+          <div className="flex justify-between items-start mb-3 pr-8">
+            <div>
+              <div className="flex items-center gap-2">
+                {isResource && <Database className="w-5 h-5 text-amber-600" />}
+                <h4 className={`font-bold text-lg ${isResource ? 'text-amber-900' : 'text-blue-900'}`}>{provider.name}</h4>
+                {isAdmin && <ShieldCheck className="w-4 h-4 text-green-500" title="Verified in Database" />}
+              </div>
+              <p className="text-sm text-slate-600 flex items-center gap-1">
+                <MapPin className="w-3 h-3" /> {provider.county}, {provider.state}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-1 max-w-[40%] justify-end">
+              {Array.isArray(provider.specialty)
+                ? provider.specialty.map((spec, idx) => (
+                    <span
+                      key={idx}
+                      className={`text-[10px] px-2 py-1 rounded border whitespace-nowrap ${isResource ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-700 border-blue-100'}`}
+                    >
+                      {spec}
+                    </span>
+                  ))
+                : (
+                  <span className={`text-[10px] px-2 py-1 rounded border whitespace-nowrap ${isResource ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-700 border-blue-100'}`}>
+                    {provider.specialty}
+                  </span>
+                )}
+            </div>
+          </div>
+
+          <div className="space-y-2 mb-4">
+            <div className="flex items-start gap-2 text-sm">
+              <FileText className="w-4 h-4 text-slate-400 mt-0.5" />
+              <span className="font-medium text-slate-700">Services:</span>
+              <span className="text-slate-600">{provider.services || provider.notes}</span>
+            </div>
+            <div className={`flex items-start gap-2 text-sm p-2 rounded ${isResource ? 'bg-white' : 'bg-slate-50'}`}>
+              <CheckCircle className={`w-4 h-4 mt-0.5 min-w-[16px] ${isResource ? 'text-amber-600' : 'text-green-600'}`} />
+              <span className="text-slate-600 italic text-xs">{provider.notes}</span>
+            </div>
+          </div>
+
+          <div className="flex gap-3 mt-4 pt-4 border-t border-slate-100 items-center flex-wrap">
+            {provider.phone && (
+              <a
+                href={`tel:${provider.phone}`}
+                className="flex items-center gap-2 text-sm bg-blue-50 text-blue-700 hover:bg-blue-100 font-medium px-3 py-1.5 rounded-md transition-colors"
+              >
+                <Phone className="w-4 h-4" /> Call
+              </a>
+            )}
+            {provider.email && (
+              <a
+                href={`mailto:${provider.email}`}
+                className="flex items-center gap-2 text-sm bg-slate-50 text-slate-700 hover:bg-slate-100 font-medium px-3 py-1.5 rounded-md transition-colors"
+              >
+                <Mail className="w-4 h-4" /> Email
+              </a>
+            )}
+            {provider.contact && !provider.contact.includes('@') && (
+              <a
+                href={`https://${provider.contact.replace('https://', '').replace('http://', '')}`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-sm bg-slate-50 text-slate-700 hover:bg-slate-100 font-medium px-3 py-1.5 rounded-md transition-colors"
+              >
+                <Globe className="w-4 h-4" /> {isResource ? 'Resource' : 'Web'} <ExternalLink className="w-3 h-3 opacity-50" />
+              </a>
+            )}
+
+            <button
+              onClick={() => copyToClipboard(`${provider.name}\n${provider.phone || 'No Phone'}\n${provider.email || 'No Email'}\n${provider.contact}`)}
+              className="ml-auto flex items-center gap-1 text-xs text-slate-400 hover:text-slate-600"
+            >
+              <Copy className="w-3 h-3" /> Copy
+            </button>
+          </div>
+        </div>
+      );
+    };
+
+    const NationalProviderCard = ({ provider, copyToClipboard, isAdmin, onDelete }) => {
+      const isNetwork = Array.isArray(provider.specialty)
+        ? provider.specialty.includes('Network')
+        : provider.specialty === 'Network';
+
+      return (
+        <div className={`relative rounded border p-3 transition-colors ${isNetwork ? 'bg-purple-50 border-purple-200 hover:border-purple-300' : 'bg-slate-50 border-slate-200 hover:border-blue-300'}`}>
+          {isAdmin && (
+            <button
+              onClick={onDelete}
+              className="absolute top-1 right-1 p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors"
+              title="Remove"
+            >
+              <X className="w-3 h-3" />
+            </button>
+          )}
+
+          <div className="flex justify-between items-center mb-2 pr-4">
+            <h5 className={`font-bold text-sm ${isNetwork ? 'text-purple-900' : 'text-slate-800'}`}>{provider.name}</h5>
+            {isNetwork ? <Building className="w-3 h-3 text-purple-500" /> : <Video className="w-3 h-3 text-blue-500" />}
+          </div>
+          <div className="flex flex-wrap gap-1 mb-2">
+            {Array.isArray(provider.specialty)
+              ? provider.specialty.slice(0, 2).map((s, i) => (
+                  <span
+                    key={i}
+                    className={`text-[10px] border px-1.5 rounded ${isNetwork ? 'bg-white border-purple-100 text-purple-600' : 'bg-white border-slate-200 text-slate-500'}`}
+                  >
+                    {s}
+                  </span>
+                ))
+              : (
+                <span className={`text-[10px] border px-1.5 rounded ${isNetwork ? 'bg-white border-purple-100 text-purple-600' : 'bg-white border-slate-200 text-slate-500'}`}>
+                  {provider.specialty}
+                </span>
+              )}
+          </div>
+          <p className="text-xs text-slate-600 mb-2">{provider.notes.substring(0, 60)}...</p>
+          <div className="flex gap-2 mt-2 pt-2 border-t border-slate-200 flex-wrap">
+            {provider.phone && (
+              <a
+                href={`tel:${provider.phone}`}
+                className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:underline"
+              >
+                <Phone className="w-3 h-3" /> Call
+              </a>
+            )}
+            {provider.email && (
+              <a
+                href={`mailto:${provider.email}`}
+                className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:underline"
+              >
+                <Mail className="w-3 h-3" /> Email
+              </a>
+            )}
+            {!provider.phone && !provider.email && (
+              <button
+                onClick={() => copyToClipboard(provider.contact)}
+                className={`text-[10px] font-bold hover:underline ${isNetwork ? 'text-purple-600' : 'text-blue-600'}`}
+              >
+                Copy Contact
+              </button>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const ProviderFinder = () => {
+      const [selectedState, setSelectedState] = useState('');
+      const [selectedCondition, setSelectedCondition] = useState('All');
+      const [searchQuery, setSearchQuery] = useState('');
+      const [showNational, setShowNational] = useState(true);
+      const [showAddModal, setShowAddModal] = useState(false);
+      const [toast, setToast] = useState(null);
+      const [isAdmin, setIsAdmin] = useState(false);
+      const [nationalTab, setNationalTab] = useState('doctors');
+
+      const initialProviders = [
+        { id: 'az-1', name: 'David Anaise, MD, JD', state: 'Arizona', county: 'Pima (Tucson)', type: 'Local', specialty: ['General', 'Nexus Letters', 'Complex Cases'], services: 'Nexus Letters (File Reviews), Complex Medical Arguments', contact: 'danaise.com', phone: '520-219-2379', email: '', notes: 'Retired surgeon & lawyer. Top nexus letter doctor for complex arguments.' },
+        { id: 'az-2', name: 'Prashant Sharma, MD', state: 'Arizona', county: 'Maricopa (Phoenix)', type: 'Local', specialty: ['Mental Health', 'Psychiatry'], services: 'Nexus Letters & DBQs', contact: 'concisepsych.com', phone: '', email: '', notes: 'Offers concise psych evaluations.' },
+        { id: 'az-3', name: 'Dr. Paul Saiz, MD', state: 'Arizona', county: 'Statewide', type: 'Local', specialty: ['Orthopedic', 'Spine'], services: 'Spine trauma, Disability evaluation', contact: 'Search Web', phone: '575-526-0777', email: '', notes: 'Certified Independent Medical Examiner (CIME). Specializes in spine.' },
+        { id: 'ca-1', name: 'Thomas Grieder, MD, PhD', state: 'California', county: 'Los Angeles', type: 'Local', specialty: ['Mental Health', 'Psychiatry'], services: 'Nexus Letters & DBQs', contact: 'ptsdmedicalopinion.com', phone: '', email: '', notes: 'Former VA PTSD examiner.' },
+        { id: 'ca-2', name: 'Victoria A. Cassano, MD, MPH', state: 'California', county: 'San Diego / San Francisco', type: 'Local', specialty: ['Toxic Exposure', 'Occupational Med'], services: 'Nexus Letters (Toxic Exposure)', contact: 'drcassano.com/veterans', phone: '', email: '', notes: 'Ret. Navy Capt. Expert in Camp Lejeune, Burn Pits.' },
+        { id: 'ca-4', name: 'Dr. Emin Gharibian, Psy.D.', state: 'California', county: 'Statewide', type: 'Local', specialty: ['Mental Health', 'Neuropsychology', 'TBI'], services: 'Forensic Neuropsychology, PTSD, Dementia', contact: 'verdugopsych.com', phone: '818-533-1532', email: '', notes: 'Former trainee at Patton State Hospital (forensic facility).' },
+        { id: 'ca-5', name: 'Dr. Michael R. Klein, Jr., MD', state: 'California', county: 'Sacramento / Statewide', type: 'Local', specialty: ['Orthopedic'], services: 'Disability Evaluation, Consultant to VA', contact: 'mrkmedconsultants.com', phone: '916-489-4400', email: '', notes: 'Founded MRK Medical Consultants. Decades of experience.' },
+        { id: 'ca-8', name: 'Dr. Peter Laimins, MD', state: 'California', county: 'Palo Alto / Statewide', type: 'Local', specialty: ['Orthopedic'], services: 'QME Disability Evaluations', contact: '', phone: '650-323-9680', email: '', notes: 'Qualified Medical Evaluator (QME). Orthopedic Specialist.' },
+        { id: 'ca-9', name: 'Dr. Adam Brooks, MD', state: 'California', county: 'Los Angeles / Statewide', type: 'Local', specialty: ['Internal Medicine'], services: 'QME Disability Evaluations', contact: '', phone: '800-418-7771', email: '', notes: 'Qualified Medical Evaluator (QME). Internal Medicine.' },
+        { id: 'ca-10', name: 'Dr. Paul Burton, MD', state: 'California', county: 'Redlands / Statewide', type: 'Local', specialty: ['Orthopedic'], services: 'QME Disability Evaluations', contact: '', phone: '909-793-9690', email: '', notes: 'Qualified Medical Evaluator (QME). Orthopedic.' },
+        { id: 'co-1', name: 'Brett Vallette, PhD', state: 'Colorado', county: 'Boulder (Superior)', type: 'Local', specialty: ['Mental Health', 'TBI', 'PTSD'], services: 'Nexus Letters, IMOs, DBQ exams', contact: 'VeteransPsychEvaluations.com', phone: '303-465-3147', email: 'info@VeteransPsychEvaluations.com', notes: '25+ years conducting psych C&P exams.' },
+        { id: 'co-2', name: 'Ashley Gardner, PA-C', state: 'Colorado', county: 'Denver (Telehealth)', type: 'Local', specialty: ['General Medical'], services: 'Nexus letters & DBQs', contact: 'JGardnerAndAssociates.com', phone: '970-823-4826', email: 'info@JGardnerAndAssociates.com', notes: 'Veteran-led team, MD oversight.' },
+        { id: 'ct-1', name: 'Dr. Quinn Austin-Small, Ph.D.', state: 'Connecticut', county: 'Telehealth', type: 'Local', specialty: ['Mental Health', 'Psychology'], services: 'Nexus Letters, DBQs', contact: 'qasphd.com', phone: '860-306-7243', email: '', notes: 'Clinical Psychologist specializing in veteran evaluations.' },
+        { id: 'fl-1', name: 'Primary Care of Orange City', state: 'Florida', county: 'Volusia (Orange City)', type: 'Local', specialty: ['General', 'Physical'], services: 'Full DBQ exams & Nexus letters', contact: 'primarycareoforangecity.com', phone: '386-241-0274', email: '', notes: 'Emphasizes precise, thorough DBQs.' },
+        { id: 'fl-2', name: 'Vet Resource Group', state: 'Florida', county: 'Miami-Dade', type: 'Local', specialty: ['General', 'Multiple Specialties'], services: 'Nexus letters, IMEs, DBQs', contact: 'vetresourcegroup.com', phone: '877-826-3987', email: 'info@vetresourcegroup.com', notes: 'Network connecting veterans to qualified doctors.' },
+        { id: 'fl-3', name: 'Widalys Santiago Miranda, MD', state: 'Florida', county: 'Escambia (Pensacola)', type: 'Local', specialty: ['General', 'Family Medicine'], services: 'Nexus letters & IMOs', contact: 'literalmed.com', phone: '', email: 'literalmed@gmail.com', notes: 'Literal Med, LLC. Detailed record reviews.' },
+        { id: 'ga-2', name: 'K&D Veterans Medical Assessment', state: 'Georgia', county: 'Metro Atlanta', type: 'Local', specialty: ['General'], services: 'DBQs, IMOs, Nexus letters', contact: 'kdvma.com', phone: '470-865-8933', email: '', notes: 'Direct physician-signed DBQs/IMOs.' },
+        { id: 'nv-1', name: 'Leah Wingeart, Psy.D.', state: 'Nevada', county: 'Clark (Las Vegas)', type: 'Local', specialty: ['Mental Health'], services: 'Nexus letters & DBQs', contact: 'shrinkwraptlasvegas.com', phone: '702-342-1252', email: 'drwingeart@gmail.com', notes: 'ShrinkWrapt Las Vegas. Forensic expertise.' },
+        { id: 'nv-2', name: 'Jerald "Jay" Cook, MD', state: 'Nevada', county: 'Douglas (Stateline)', type: 'Local', specialty: ['Toxic Exposure', 'Occupational Med'], services: 'Nexus letters', contact: 'medfitconsulting.com', phone: '858-858-9052', email: '', notes: 'Navy veteran. Expert in exposures/lifestyle medicine.' },
+        { id: 'ny-1', name: 'David Anaise, MD, JD', state: 'New York', county: 'New York City / Statewide', type: 'Local', specialty: ['General', 'Nexus Letters'], services: 'Nexus Letters (File Reviews only)', contact: 'danaise.com', phone: '520-219-2379', email: '', notes: 'Often handles NY cases. Retired surgeon & lawyer.' },
+        { id: 'ny-2', name: 'Dr. Eytan Raz, MD', state: 'New York', county: 'New York City', type: 'Local', specialty: ['Radiology'], services: 'Authorized Provider (NY WCB)', contact: '', phone: '212-263-5668', email: '', notes: 'NY Workers Comp Board Authorized. Neuroradiology.' },
+        { id: 'ny-3', name: 'Dr. Jonathan Patrick Riley, MD', state: 'New York', county: 'New York City', type: 'Local', specialty: ['Neurosurgery'], services: 'Authorized Provider (NY WCB)', contact: '', phone: '212-746-2363', email: '', notes: 'NY Workers Comp Board Authorized. Neurosurgery.' },
+        { id: 'nc-1', name: 'Mark D. Worthen, Psy.D.', state: 'North Carolina', county: 'Mecklenburg (Charlotte)', type: 'Local', specialty: ['Mental Health', 'Forensic Psychology'], services: 'IMEs, Nexus opinions, DBQs', contact: 'drworthen.net', phone: '980-391-6309', email: '', notes: 'Forensic competence. Will not write nexus without review.' },
+        { id: 'nc-3', name: 'Roy Etheridge, Ph.D.', state: 'North Carolina', county: 'Wake (Cary)', type: 'Local', specialty: ['Mental Health'], services: 'Nexus letters & IMEs', contact: 'etheridgepsychology.com', phone: '919-600-4906', email: '', notes: 'Former VA contractor.' },
+        { id: 'oh-1', name: 'Todd B. Finnerty, Psy.D.', state: 'Ohio', county: 'Franklin (Columbus)', type: 'Local', specialty: ['Mental Health'], services: 'Nexus letters ($600) & DBQs', contact: 'nexusletters.com', phone: '330-495-8809', email: 'toddfinnerty@toddfinnerty.com', notes: 'Adheres to APA Forensic Guidelines. Prolific & Authoritative.' },
+        { id: 'ok-1', name: 'John W. Ellis, MD', state: 'Oklahoma', county: 'Oklahoma City', type: 'Local', specialty: ['General', 'Legal Medicine'], services: 'IMOs, DBQs, Nexus letters', contact: 'ellisclinic.com', phone: '844-625-5300', email: '', notes: 'The Ellis Clinic. Historically high-volume IMO doctor.' },
+        { id: 'sc-1', name: 'Nicole Y. Edwards, D.O.', state: 'South Carolina', county: 'Richland (Columbia)', type: 'Local', specialty: ['General', 'Family Medicine'], services: 'C&P exams, DBQs, Nexus letters', contact: 'abundantcandp.com', phone: '803-995-7206', email: '', notes: 'High success in achieving increases.' },
+        { id: 'sc-2', name: 'David Geier, MD', state: 'South Carolina', county: 'Charleston', type: 'Local', specialty: ['Orthopedic', 'Sports Medicine'], services: 'Nexus letters & IMOs (Records)', contact: 'drdavidgeier.com', phone: '843-970-3485', email: '', notes: 'Explicitly offers orthopedic nexus letters. High credibility.' },
+        { id: 'wa-1', name: 'Suzanne Best, Ph.D.', state: 'Washington', county: 'King (Seattle)', type: 'Local', specialty: ['Mental Health', 'PTSD'], services: 'DBQ Exams only', contact: 'suzannebestphd.com', phone: '503-468-6880', email: '', notes: 'Forensic evaluations for claims/appeals.' },
+        { id: 'wa-3', name: 'Dr. Mark Leadbetter, MD', state: 'Washington', county: 'Onalaska', type: 'Local', specialty: ['Orthopedic'], services: 'L&I Approved Examiner', contact: '', phone: '360-978-6622', email: '', notes: 'L&I Approved. Orthopedics.' },
+        { id: 'wa-4', name: 'Dr. Bruce Kite, MD', state: 'Washington', county: 'Yakima', type: 'Local', specialty: ['Neurology'], services: 'L&I Approved Examiner', contact: '', phone: '509-575-1000', email: '', notes: 'L&I Approved. Neurology.' },
+        { id: 'wi-1', name: 'Christine Erickson, Au.D.', state: 'Wisconsin', county: 'Dane / Waukesha', type: 'Local', specialty: ['Audiology', 'Hearing Loss'], services: 'Nexus letters & DBQs', contact: 'advancedaudiologyusa.com', phone: '608-577-1692', email: 'info@advancedaudiologyusa.com', notes: 'Forensic Audiologist. Can do remote Nexus.' },
+        { id: 'nat-brennes', name: 'Dr. William Andrew Brennes', state: 'National', county: 'Nationwide', type: 'National', specialty: ['General', 'Nexus Letters'], services: 'Nexus Letters, Claims Review', contact: 'nexusletterdoctor.com', phone: '', email: '', notes: 'Veteran-recommended. "Affordable" pricing. Offers claims review.' },
+        { id: 'nat-thompson', name: 'Tara Thompson, MPAS, PA-C', state: 'National', county: 'Nationwide', type: 'National', specialty: ['General'], services: 'Nexus Letters', contact: 'mrpyprofessionalservices.com', phone: '', email: '', notes: 'MRPY Professional Services. PA-C Nexus provider.' },
+        { id: 'nat-emra', name: 'Elite Medical Review Associates', state: 'National', county: 'Nationwide', type: 'National', specialty: ['Consulting', 'Multiple Specialties'], services: 'Nexus Letters, Appeals', contact: 'vanexusletters.org', phone: '', email: '', notes: 'Veteran-focused medical consulting firm.' },
+        { id: 'nat-mednick', name: 'Mednick Associates', state: 'National', county: 'Nationwide', type: 'National', specialty: ['Legal', 'Medical Experts'], services: 'Nexus Letters (Attorneys Only)', contact: 'mednickassociates.com', phone: '203-966-3000', email: 'info@mednickassociates.com', notes: 'Works primarily with attorneys. Veteran owned.' },
+        { id: 'nat-4', name: 'MedConnectVA', state: 'National', county: 'Nationwide', type: 'National', specialty: ['Oncology', 'Infectious Disease', 'Neurology', 'Pulmonology'], services: 'Written Nexus Opinions (Record Review)', contact: 'medconnectva.com', phone: '888-482-3627', email: '', notes: 'Complex/Rare diseases. 50+ specialties. No clinic bottlenecks.' },
+        { id: 'nat-ame', name: 'American Medical Experts', state: 'National', county: 'Nationwide', type: 'National', specialty: ['Complex Cases', 'Expert Witness'], services: 'Full Case Review, Nexus, IMEs', contact: 'americanmedicalexperts.com', phone: '888-678-2227', email: '', notes: 'Premium pricing, high quality specialists.' },
+        { id: 'net-prime', name: 'Prime Health Services (Access Point)', state: 'National', county: 'Network Leasing', type: 'National', specialty: ['Network', 'Workers Comp', 'Ortho'], services: 'Direct Contracted Network', contact: 'primehealthservices.com', phone: '866-348-3887', email: '', notes: 'Contact to lease network of 50 state providers.' },
+        { id: 'net-corvel', name: 'CorVel (Access Point)', state: 'National', county: 'Network Leasing', type: 'National', specialty: ['Network', 'General'], services: '20,000+ Providers', contact: 'corvel.com', phone: '800-267-8350', email: '', notes: 'Handles scheduling/QA. Monitors provider quality.' },
+        { id: 'net-seak', name: 'SEAK National Directory (Access Point)', state: 'National', county: 'Resource Directory', type: 'National', specialty: ['Resource', 'IME'], services: 'Independent Medical Examiners Directory', contact: 'seakexperts.com', phone: '508-457-1111', email: '', notes: 'Direct contact to thousands of self-selected IME doctors.' },
+        { id: 'nat-8', name: 'Xterra Health', state: 'National', county: 'Nationwide', type: 'National', specialty: ['General', 'Cardiology', 'Psych'], services: 'Nexus letters, IMOs', contact: 'xterrahealth.com', phone: '220-270-6090', email: '', notes: 'Mission to offer affordable access.' }
+      ];
+
+      const [providersData, setProvidersData] = useState(initialProviders);
+      const [filteredProviders, setFilteredProviders] = useState([]);
+      const [nationalProviders, setNationalProviders] = useState([]);
+      const [newProvider, setNewProvider] = useState({
+        name: '',
+        state: '',
+        county: '',
+        specialty: 'General',
+        services: '',
+        contact: '',
+        phone: '',
+        email: '',
+        notes: '',
+        type: 'Local',
+        category: 'Doctor'
+      });
+
+      const states = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+      ];
+
+      const conditions = [
+        'All', 'Mental Health', 'PTSD', 'General', 'Toxic Exposure', 'Sleep Apnea', 'Audiology', 'Orthopedic', 'Spine', 'TBI', 'Internal Medicine', 'Resource', 'Network'
+      ];
+
+      useEffect(() => {
+        let results = providersData.filter((p) => {
+          const matchesState = selectedState ? p.state === selectedState : true;
+
+          let matchesCondition = true;
+          if (selectedCondition !== 'All') {
+            const specialtyString = Array.isArray(p.specialty) ? p.specialty.join(' ').toLowerCase() : p.specialty.toLowerCase();
+            const conditionLower = selectedCondition.toLowerCase();
+
+            if (conditionLower === 'general') {
+              matchesCondition = specialtyString.includes('general') || specialtyString.includes('family') || specialtyString.includes('internal');
+            } else {
+              matchesCondition = specialtyString.includes(conditionLower);
+            }
+          }
+
+          const matchesSearch = searchQuery
+            ? p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              p.county.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              p.services.toLowerCase().includes(searchQuery.toLowerCase())
+            : true;
+
+          return matchesState && matchesCondition && matchesSearch && p.type === 'Local';
+        });
+
+        setFilteredProviders(results);
+
+        let nationalResults = providersData.filter((p) => {
+          const isNetworkOrResource = Array.isArray(p.specialty)
+            ? p.specialty.some((s) => ['Network', 'Resource', 'Consulting'].includes(s))
+            : ['Network', 'Resource', 'Consulting'].includes(p.specialty);
+
+          const matchesTab = nationalTab === 'doctors' ? !isNetworkOrResource : isNetworkOrResource;
+          if (!matchesTab) return false;
+
+          let matchesCondition = true;
+          if (selectedCondition !== 'All') {
+            const specialtyString = Array.isArray(p.specialty) ? p.specialty.join(' ').toLowerCase() : p.specialty.toLowerCase();
+            const conditionLower = selectedCondition.toLowerCase();
+            if (conditionLower === 'general') {
+              matchesCondition = specialtyString.includes('general') || specialtyString.includes('all');
+            } else {
+              matchesCondition = specialtyString.includes(conditionLower) || specialtyString.includes('all');
+            }
+          }
+
+          const matchesSearch = searchQuery
+            ? p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.services.toLowerCase().includes(searchQuery.toLowerCase())
+            : true;
+
+          return p.type === 'National' && matchesCondition && matchesSearch;
+        });
+
+        setNationalProviders(nationalResults);
+      }, [selectedState, selectedCondition, searchQuery, providersData, nationalTab]);
+
+      const copyToClipboard = (text) => {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          showToast(`Copied: ${text.substring(0, 20)}...`);
+        } catch (err) {
+          console.error('Unable to copy', err);
+        }
+        document.body.removeChild(textArea);
+      };
+
+      const deleteProvider = (id) => {
+        if (window.confirm('Are you sure you want to remove this provider?')) {
+          setProvidersData(providersData.filter((p) => p.id !== id));
+          showToast('Provider removed.');
+        }
+      };
+
+      const showToast = (message) => {
+        setToast({ message });
+        setTimeout(() => setToast(null), 3000);
+      };
+
+      const clearFilters = () => {
+        setSelectedState('');
+        setSelectedCondition('All');
+        setSearchQuery('');
+      };
+
+      const handleAddSubmit = (e) => {
+        e.preventDefault();
+        if (!newProvider.name || !newProvider.state) {
+          showToast('Name and State are required.');
+          return;
+        }
+
+        const newEntry = {
+          ...newProvider,
+          id: `new-${Date.now()}`,
+          specialty: newProvider.category === 'Network' ? ['Network', newProvider.specialty] : [newProvider.specialty],
+          type: newProvider.state === 'Nationwide' ? 'National' : 'Local'
+        };
+
+        setProvidersData([...providersData, newEntry]);
+        setShowAddModal(false);
+        showToast('New Provider Added Successfully!');
+        setNewProvider({ name: '', state: '', county: '', specialty: 'General', services: '', contact: '', phone: '', email: '', notes: '', type: 'Local', category: 'Doctor' });
+      };
+
+      return (
+        <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+          {toast && (
+            <div className="fixed top-5 right-5 z-50 bg-slate-800 text-white px-4 py-2 rounded-lg shadow-xl flex items-center gap-2 animate-bounce-in">
+              <CheckCircle className="w-4 h-4 text-green-400" />
+              <span className="text-sm font-medium">{toast.message}</span>
+            </div>
+          )}
+
+          <header className="bg-slate-900 text-white p-6 shadow-md border-b-4 border-red-600">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
+              <div className="mb-4 md:mb-0">
+                <h1 className="text-3xl font-bold flex items-center gap-2">
+                  <span className="text-red-500">★</span> Thank You For Your Service
+                </h1>
+                <p className="text-slate-400 mt-1">DBQ & Nexus Letter Provider Directory</p>
+              </div>
+              <div className="flex flex-col md:flex-row gap-4 items-center">
+                <div className="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-full border border-slate-700">
+                  <span className={`text-xs font-bold ${isAdmin ? 'text-red-400' : 'text-slate-400'}`}>Admin Mode</span>
+                  <button
+                    onClick={() => setIsAdmin(!isAdmin)}
+                    className={`w-10 h-5 flex items-center bg-slate-600 rounded-full p-1 duration-300 ease-in-out ${isAdmin ? 'bg-red-600' : ''}`}
+                  >
+                    <div className={`bg-white w-3 h-3 rounded-full shadow-md transform duration-300 ease-in-out ${isAdmin ? 'translate-x-5' : ''}`}></div>
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => setShowAddModal(true)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow font-medium flex items-center gap-2 transition-colors"
+                >
+                  <Plus className="w-4 h-4" /> Add New Provider
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <main className="max-w-6xl mx-auto p-6">
+            <section className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-slate-200">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-semibold flex items-center gap-2">
+                  <Search className="w-5 h-5 text-blue-600" />
+                  Find a Provider
+                </h2>
+                {(selectedState || selectedCondition !== 'All' || searchQuery) && (
+                  <button
+                    onClick={clearFilters}
+                    className="text-sm text-red-600 hover:bg-red-50 px-3 py-1 rounded flex items-center gap-1 transition-colors"
+                  >
+                    <X className="w-4 h-4" /> Clear Filters
+                  </button>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="relative">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Veteran's Location (State)</label>
+                  <div className="relative">
+                    <MapPin className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
+                    <select
+                      className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none appearance-none bg-white cursor-pointer"
+                      value={selectedState}
+                      onChange={(e) => setSelectedState(e.target.value)}
+                    >
+                      <option value="">Select a State...</option>
+                      {states.map((state) => (
+                        <option key={state} value={state}>
+                          {state}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Medical Condition / Specialty</label>
+                  <div className="relative">
+                    <Stethoscope className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
+                    <select
+                      className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none appearance-none bg-white cursor-pointer"
+                      value={selectedCondition}
+                      onChange={(e) => setSelectedCondition(e.target.value)}
+                    >
+                      {conditions.map((cond) => (
+                        <option key={cond} value={cond}>
+                          {cond}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Search by Name/City</label>
+                  <div className="relative">
+                    <Search className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder="e.g. Smith, Tucson..."
+                      className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2 space-y-6">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-xl font-bold text-slate-800">
+                    {selectedState ? `Providers in ${selectedState}` : 'Select a State to see local providers'}
+                  </h3>
+                  <span className="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">{filteredProviders.length} Local Found</span>
+                </div>
+
+                {filteredProviders.length > 0 ? (
+                  filteredProviders.map((provider) => (
+                    <ProviderCard
+                      key={provider.id}
+                      provider={provider}
+                      copyToClipboard={copyToClipboard}
+                      isAdmin={isAdmin}
+                      onDelete={() => deleteProvider(provider.id)}
+                    />
+                  ))
+                ) : (
+                  selectedState && (
+                    <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                      <div className="flex items-start">
+                        <AlertCircle className="w-5 h-5 text-yellow-600 mt-0.5 mr-3" />
+                        <div>
+                          <h4 className="font-bold text-yellow-800">No In-Person Provider Listed</h4>
+                          <p className="text-yellow-700 text-sm mt-1">
+                            We don't have a specific in-person provider listed for <strong>{selectedState}</strong> matching <strong>{selectedCondition}</strong> criteria.
+                          </p>
+                          <p className="text-yellow-800 font-medium text-sm mt-2">
+                            Please refer to the National Telehealth Providers list on the right or use the "Add New Provider" button if you know a local doctor.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                )}
+
+                {!selectedState && filteredProviders.length === 0 && searchQuery && (
+                  <div className="text-center py-10 text-slate-500">
+                    <Search className="w-12 h-12 mx-auto text-slate-300 mb-2" />
+                    <p>No local providers found for "{searchQuery}". Check the National list.</p>
+                  </div>
+                )}
+              </div>
+
+              <div className="lg:col-span-1">
+                <div className="bg-slate-800 text-white rounded-t-xl overflow-hidden shadow-lg">
+                  <div className="p-4 flex justify-between items-center border-b border-slate-700">
+                    <h3 className="font-bold flex items-center gap-2">
+                      <Globe className="w-5 h-5 text-blue-300" />
+                      National / Networks
+                    </h3>
+                    <button
+                      onClick={() => setShowNational(!showNational)}
+                      className="text-xs bg-slate-700 hover:bg-slate-600 px-2 py-1 rounded transition-colors"
+                    >
+                      {showNational ? 'Hide' : 'Show'}
+                    </button>
+                  </div>
+
+                  {showNational && (
+                    <div className="flex text-sm font-medium text-center bg-slate-700">
+                      <button
+                        className={`flex-1 py-2 ${nationalTab === 'doctors' ? 'bg-white text-slate-900 border-t-2 border-red-500' : 'text-slate-300 hover:bg-slate-600'}`}
+                        onClick={() => setNationalTab('doctors')}
+                      >
+                        Telehealth Doctors
+                      </button>
+                      <button
+                        className={`flex-1 py-2 ${nationalTab === 'networks' ? 'bg-white text-slate-900 border-t-2 border-purple-500' : 'text-slate-300 hover:bg-slate-600'}`}
+                        onClick={() => setNationalTab('networks')}
+                      >
+                        Networks & Resources
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {showNational && (
+                  <div className="bg-white border border-slate-200 border-t-0 rounded-b-xl shadow-lg p-4 space-y-4 max-h-[800px] overflow-y-auto">
+                    {nationalProviders.length > 0 ? (
+                      nationalProviders.map((provider) => (
+                        <NationalProviderCard
+                          key={provider.id}
+                          provider={provider}
+                          copyToClipboard={copyToClipboard}
+                          isAdmin={isAdmin}
+                          onDelete={() => deleteProvider(provider.id)}
+                        />
+                      ))
+                    ) : (
+                      <div className="text-center py-8">
+                        <p className="text-sm text-slate-400">No providers found in this category.</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </main>
+
+          {showAddModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+              <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden animate-bounce-in">
+                <div className="bg-slate-900 text-white p-4 flex justify-between items-center">
+                  <h3 className="text-lg font-bold flex items-center gap-2">
+                    <UserPlus className="w-5 h-5 text-red-500" />
+                    Add New Provider
+                  </h3>
+                  <button onClick={() => setShowAddModal(false)} className="text-slate-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                <form onSubmit={handleAddSubmit} className="p-6 space-y-4">
+                  <div className="flex gap-4 p-1 bg-slate-100 rounded-lg">
+                    <label className={`flex-1 text-center py-2 rounded cursor-pointer text-sm font-medium ${newProvider.category === 'Doctor' ? 'bg-white shadow text-blue-700' : 'text-slate-500'}`}>
+                      <input
+                        type="radio"
+                        name="category"
+                        className="hidden"
+                        checked={newProvider.category === 'Doctor'}
+                        onChange={() => setNewProvider({ ...newProvider, category: 'Doctor' })}
+                      />
+                      Individual Doctor
+                    </label>
+                    <label className={`flex-1 text-center py-2 rounded cursor-pointer text-sm font-medium ${newProvider.category === 'Network' ? 'bg-white shadow text-purple-700' : 'text-slate-500'}`}>
+                      <input
+                        type="radio"
+                        name="category"
+                        className="hidden"
+                        checked={newProvider.category === 'Network'}
+                        onChange={() => setNewProvider({ ...newProvider, category: 'Network' })}
+                      />
+                      Network / Resource
+                    </label>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Provider Name *</label>
+                    <input
+                      required
+                      type="text"
+                      className="w-full border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      placeholder="e.g. Dr. John Doe, MD"
+                      value={newProvider.name}
+                      onChange={(e) => setNewProvider({ ...newProvider, name: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">State *</label>
+                      <select
+                        required
+                        className="w-full border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                        value={newProvider.state}
+                        onChange={(e) => setNewProvider({ ...newProvider, state: e.target.value })}
+                      >
+                        <option value="">Select State...</option>
+                        <option value="Nationwide">Nationwide (Telehealth)</option>
+                        {states.map((s) => (
+                          <option key={s} value={s}>
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">City/County</label>
+                      <input
+                        type="text"
+                        className="w-full border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="e.g. Austin / Travis"
+                        value={newProvider.county}
+                        onChange={(e) => setNewProvider({ ...newProvider, county: e.target.value })}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">Specialty</label>
+                      <select
+                        className="w-full border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                        value={newProvider.specialty}
+                        onChange={(e) => setNewProvider({ ...newProvider, specialty: e.target.value })}
+                      >
+                        {conditions.map((c) => (
+                          <option key={c} value={c}>
+                            {c}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
+                      <input
+                        type="text"
+                        className="w-full border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="555-000-0000"
+                        value={newProvider.phone}
+                        onChange={(e) => setNewProvider({ ...newProvider, phone: e.target.value })}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                    <input
+                      type="email"
+                      className="w-full border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      placeholder="doctor@example.com"
+                      value={newProvider.email}
+                      onChange={(e) => setNewProvider({ ...newProvider, email: e.target.value })}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Website</label>
+                    <input
+                      type="text"
+                      className="w-full border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      placeholder="website.com"
+                      value={newProvider.contact}
+                      onChange={(e) => setNewProvider({ ...newProvider, contact: e.target.value })}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Services & Notes</label>
+                    <textarea
+                      className="w-full border border-slate-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 outline-none h-20"
+                      placeholder="e.g. Nexus letters only, specializes in Sleep Apnea..."
+                      value={newProvider.notes}
+                      onChange={(e) => setNewProvider({ ...newProvider, notes: e.target.value })}
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg shadow-lg flex justify-center items-center gap-2 mt-4"
+                  >
+                    <Save className="w-5 h-5" /> Save Provider
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+
+          <footer className="mt-12 bg-slate-900 text-slate-400 py-8 text-center">
+            <p className="text-sm">© 2025 Thank You For Your Service. All rights reserved.</p>
+            <p className="text-xs mt-2 text-slate-600">
+              Disclaimer: This tool is a directory. Please verify all provider credentials and VA accreditation before proceeding.
+            </p>
+          </footer>
+        </div>
+      );
+    };
+
+    const root = createRoot(document.getElementById('root'));
+    root.render(<ProviderFinder />);
+  </script>
+</body>
+</html>
