@@ -1281,8 +1281,8 @@
                if (botField !== "") return;
 
                const nameRegex = /^[a-zA-Z\s'-]+$/;
-               if (!nameRegex.test(values.firstName)) newErrors.firstName = "Valid first name required.";
-               if (!nameRegex.test(values.lastName)) newErrors.lastName = "Valid last name required.";
+               if (!nameRegex.test(values.firstName) || values.firstName.trim().length < 2) newErrors.firstName = "Valid first name required.";
+               if (!nameRegex.test(values.lastName) || values.lastName.trim().length < 2) newErrors.lastName = "Valid last name required.";
 
                let cleanPhone = values.phone.replace(/\D/g, '');
                if (cleanPhone.length > 10 && cleanPhone.startsWith('1')) cleanPhone = cleanPhone.substring(1);
@@ -1290,7 +1290,13 @@
 
                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                if (!emailRegex.test(values.email)) newErrors.email = "Valid email required.";
-               if (!values.zipCode || values.zipCode.length < 5) newErrors.zipCode = "Valid Zip Code required.";
+               const zipRegex = /^\d{5}$/;
+               if (!zipRegex.test(values.zipCode || "")) newErrors.zipCode = "Valid 5-digit Zip Code required.";
+
+               if (!consentState.bestContact.text && !consentState.bestContact.email && !consentState.bestContact.phone) {
+                   alert("Please choose at least one best contact method.");
+                   return;
+               }
 
                if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
                onSubmit({ ...values, consent: consentState });
