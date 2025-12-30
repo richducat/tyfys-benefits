@@ -34,6 +34,11 @@ body.grayscale-mode {
   align-items: center;
   gap: 0.8rem;
   flex-wrap: nowrap;
+  margin-left: 1.5rem;
+}
+
+[data-site-nav] .flex.flex-col > span {
+  white-space: nowrap;
 }
 
 [data-site-nav] .flex.flex-col > span {
