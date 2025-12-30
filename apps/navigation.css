@@ -36,6 +36,10 @@ body.grayscale-mode {
   flex-wrap: nowrap;
 }
 
+[data-site-nav] .flex.flex-col > span {
+  white-space: nowrap;
+}
+
 [data-site-nav] .nav-pill {
   display: inline-flex;
   align-items: center;
@@ -46,6 +50,7 @@ body.grayscale-mode {
   font-weight: 600;
   font-size: 0.9rem;
   line-height: 1;
+  white-space: nowrap;
 }
 
 [data-site-nav] .nav-cta {
@@ -59,6 +64,7 @@ body.grayscale-mode {
   font-weight: 700;
   font-size: 0.9rem;
   line-height: 1;
+  white-space: nowrap;
 }
 
 [data-site-nav].is-scrolled {
@@ -78,6 +84,7 @@ body.grayscale-mode {
   font-weight: 600;
   color: #0f172a;
   transition: color 200ms ease;
+  white-space: nowrap;
 }
 
 [data-site-nav] .nav-link::after {
