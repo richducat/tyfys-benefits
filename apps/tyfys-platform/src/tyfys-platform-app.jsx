@@ -655,7 +655,7 @@ function ContactStep({ onNext, initialData, part }) {
     const timeElapsed = Date.now() - startTime;
     if (timeElapsed < 2000) {
       console.log("Spam detected: Submission too fast");
-      newErrors.form = "Please take a moment before continuing.";
+      return false; // Silently fail
     }
 
     if (part === 1) {
@@ -852,7 +852,6 @@ function ContactStep({ onNext, initialData, part }) {
       )}
 
       <div className="flex flex-col gap-3">
-        {errors.form && <p className="text-red-500 text-xs text-center">{errors.form}</p>}
         <button
           onClick={handleSubmit}
           className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-slate-900 font-black text-xl py-4 rounded-xl shadow-lg transition-all hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 border-b-4 border-yellow-600 active:border-b-0 active:mt-1"

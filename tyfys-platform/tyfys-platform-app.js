@@ -350,7 +350,7 @@
       const timeElapsed = Date.now() - startTime;
       if (timeElapsed < 2e3) {
         console.log("Spam detected: Submission too fast");
-        newErrors.form = "Please take a moment before continuing.";
+        return false;
       }
       if (part === 1) {
         if (!localData.firstName) newErrors.firstName = "First Name is required";
@@ -490,7 +490,7 @@
         className: `mt-0.5 w-6 h-6 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors ${localData.terms ? "border-blue-600 bg-blue-600" : "border-slate-300 bg-white"}`
       },
       localData.terms && /* @__PURE__ */ React.createElement(Icons.Check, { size: 16, className: "text-white" })
-    ), /* @__PURE__ */ React.createElement("input", { type: "checkbox", name: "terms", className: "hidden", checked: localData.terms || false, onChange: handleChange }), /* @__PURE__ */ React.createElement("span", { className: "text-sm text-slate-600 leading-tight" }, "I agree to the Terms & Conditions.")), errors.terms && /* @__PURE__ */ React.createElement("p", { className: "text-red-500 text-xs pl-9" }, errors.terms))), /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-3" }, errors.form && /* @__PURE__ */ React.createElement("p", { className: "text-red-500 text-xs text-center" }, errors.form), /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ React.createElement("input", { type: "checkbox", name: "terms", className: "hidden", checked: localData.terms || false, onChange: handleChange }), /* @__PURE__ */ React.createElement("span", { className: "text-sm text-slate-600 leading-tight" }, "I agree to the Terms & Conditions.")), errors.terms && /* @__PURE__ */ React.createElement("p", { className: "text-red-500 text-xs pl-9" }, errors.terms))), /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-3" }, /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: handleSubmit,
