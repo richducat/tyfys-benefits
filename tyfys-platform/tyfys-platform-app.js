@@ -347,11 +347,6 @@
         console.log("Spam detected: Honeypot filled");
         return false;
       }
-      const timeElapsed = Date.now() - startTime;
-      if (timeElapsed < 2e3) {
-        console.log("Spam detected: Submission too fast");
-        return false;
-      }
       if (part === 1) {
         if (!localData.firstName) newErrors.firstName = "First Name is required";
         if (!localData.lastName) newErrors.lastName = "Last Name is required";
