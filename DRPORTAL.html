@@ -33,233 +33,1090 @@
   <div id="root"></div>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel" data-type="module" data-presets="react">
-    import React, { useEffect, useState } from 'https://esm.sh/react@18.2.0';
+    import React, { useState, useEffect } from 'https://esm.sh/react@18.2.0';
     import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client';
     import { Search, MapPin, Stethoscope, Phone, Globe, Mail, Copy, CheckCircle, AlertCircle, FileText, Video, X, Plus, UserPlus, Save, Database, Building, ExternalLink, Trash2, Shield, ShieldCheck } from 'https://esm.sh/lucide-react@0.456.0?dev';
 
-    const ProviderCard = ({ provider, copyToClipboard, isAdmin, onDelete }) => {
-      const isResource = Array.isArray(provider.specialty)
-        ? provider.specialty.includes('Resource')
-        : provider.specialty === 'Resource';
-
-      return (
-        <div className={`relative rounded-lg shadow-md border p-5 hover:shadow-xl transition-shadow duration-200 ${isResource ? 'bg-amber-50 border-amber-200' : 'bg-white border-slate-200'}`}>
-          {isAdmin && (
-            <button
-              onClick={onDelete}
-              className="absolute top-2 right-2 p-1.5 bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition-colors z-10"
-              title="Remove Provider"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
-          )}
-
-          <div className="flex justify-between items-start mb-3 pr-8">
-            <div>
-              <div className="flex items-center gap-2">
-                {isResource && <Database className="w-5 h-5 text-amber-600" />}
-                <h4 className={`font-bold text-lg ${isResource ? 'text-amber-900' : 'text-blue-900'}`}>{provider.name}</h4>
-                {isAdmin && <ShieldCheck className="w-4 h-4 text-green-500" title="Verified in Database" />}
-              </div>
-              <p className="text-sm text-slate-600 flex items-center gap-1">
-                <MapPin className="w-3 h-3" /> {provider.county}, {provider.state}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-1 max-w-[40%] justify-end">
-              {Array.isArray(provider.specialty)
-                ? provider.specialty.map((spec, idx) => (
-                    <span
-                      key={idx}
-                      className={`text-[10px] px-2 py-1 rounded border whitespace-nowrap ${isResource ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-700 border-blue-100'}`}
-                    >
-                      {spec}
-                    </span>
-                  ))
-                : (
-                  <span className={`text-[10px] px-2 py-1 rounded border whitespace-nowrap ${isResource ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-700 border-blue-100'}`}>
-                    {provider.specialty}
-                  </span>
-                )}
-            </div>
-          </div>
-
-          <div className="space-y-2 mb-4">
-            <div className="flex items-start gap-2 text-sm">
-              <FileText className="w-4 h-4 text-slate-400 mt-0.5" />
-              <span className="font-medium text-slate-700">Services:</span>
-              <span className="text-slate-600">{provider.services || provider.notes}</span>
-            </div>
-            <div className={`flex items-start gap-2 text-sm p-2 rounded ${isResource ? 'bg-white' : 'bg-slate-50'}`}>
-              <CheckCircle className={`w-4 h-4 mt-0.5 min-w-[16px] ${isResource ? 'text-amber-600' : 'text-green-600'}`} />
-              <span className="text-slate-600 italic text-xs">{provider.notes}</span>
-            </div>
-          </div>
-
-          <div className="flex gap-3 mt-4 pt-4 border-t border-slate-100 items-center flex-wrap">
-            {provider.phone && (
-              <a
-                href={`tel:${provider.phone}`}
-                className="flex items-center gap-2 text-sm bg-blue-50 text-blue-700 hover:bg-blue-100 font-medium px-3 py-1.5 rounded-md transition-colors"
-              >
-                <Phone className="w-4 h-4" /> Call
-              </a>
-            )}
-            {provider.email && (
-              <a
-                href={`mailto:${provider.email}`}
-                className="flex items-center gap-2 text-sm bg-slate-50 text-slate-700 hover:bg-slate-100 font-medium px-3 py-1.5 rounded-md transition-colors"
-              >
-                <Mail className="w-4 h-4" /> Email
-              </a>
-            )}
-            {provider.contact && !provider.contact.includes('@') && (
-              <a
-                href={`https://${provider.contact.replace('https://', '').replace('http://', '')}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 text-sm bg-slate-50 text-slate-700 hover:bg-slate-100 font-medium px-3 py-1.5 rounded-md transition-colors"
-              >
-                <Globe className="w-4 h-4" /> {isResource ? 'Resource' : 'Web'} <ExternalLink className="w-3 h-3 opacity-50" />
-              </a>
-            )}
-
-            <button
-              onClick={() => copyToClipboard(`${provider.name}\n${provider.phone || 'No Phone'}\n${provider.email || 'No Email'}\n${provider.contact}`)}
-              className="ml-auto flex items-center gap-1 text-xs text-slate-400 hover:text-slate-600"
-            >
-              <Copy className="w-3 h-3" /> Copy
-            </button>
-          </div>
-        </div>
-      );
-    };
-
-    const NationalProviderCard = ({ provider, copyToClipboard, isAdmin, onDelete }) => {
-      const isNetwork = Array.isArray(provider.specialty)
-        ? provider.specialty.includes('Network')
-        : provider.specialty === 'Network';
-
-      return (
-        <div className={`relative rounded border p-3 transition-colors ${isNetwork ? 'bg-purple-50 border-purple-200 hover:border-purple-300' : 'bg-slate-50 border-slate-200 hover:border-blue-300'}`}>
-          {isAdmin && (
-            <button
-              onClick={onDelete}
-              className="absolute top-1 right-1 p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors"
-              title="Remove"
-            >
-              <X className="w-3 h-3" />
-            </button>
-          )}
-
-          <div className="flex justify-between items-center mb-2 pr-4">
-            <h5 className={`font-bold text-sm ${isNetwork ? 'text-purple-900' : 'text-slate-800'}`}>{provider.name}</h5>
-            {isNetwork ? <Building className="w-3 h-3 text-purple-500" /> : <Video className="w-3 h-3 text-blue-500" />}
-          </div>
-          <div className="flex flex-wrap gap-1 mb-2">
-            {Array.isArray(provider.specialty)
-              ? provider.specialty.slice(0, 2).map((s, i) => (
-                  <span
-                    key={i}
-                    className={`text-[10px] border px-1.5 rounded ${isNetwork ? 'bg-white border-purple-100 text-purple-600' : 'bg-white border-slate-200 text-slate-500'}`}
-                  >
-                    {s}
-                  </span>
-                ))
-              : (
-                <span className={`text-[10px] border px-1.5 rounded ${isNetwork ? 'bg-white border-purple-100 text-purple-600' : 'bg-white border-slate-200 text-slate-500'}`}>
-                  {provider.specialty}
-                </span>
-              )}
-          </div>
-          <p className="text-xs text-slate-600 mb-2">{provider.notes.substring(0, 60)}...</p>
-          <div className="flex gap-2 mt-2 pt-2 border-t border-slate-200 flex-wrap">
-            {provider.phone && (
-              <a
-                href={`tel:${provider.phone}`}
-                className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:underline"
-              >
-                <Phone className="w-3 h-3" /> Call
-              </a>
-            )}
-            {provider.email && (
-              <a
-                href={`mailto:${provider.email}`}
-                className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:underline"
-              >
-                <Mail className="w-3 h-3" /> Email
-              </a>
-            )}
-            {!provider.phone && !provider.email && (
-              <button
-                onClick={() => copyToClipboard(provider.contact)}
-                className={`text-[10px] font-bold hover:underline ${isNetwork ? 'text-purple-600' : 'text-blue-600'}`}
-              >
-                Copy Contact
-              </button>
-            )}
-          </div>
-        </div>
-      );
-    };
-
     const ProviderFinder = () => {
+      // --- STATE MANAGEMENT ---
       const [selectedState, setSelectedState] = useState('');
       const [selectedCondition, setSelectedCondition] = useState('All');
       const [searchQuery, setSearchQuery] = useState('');
       const [showNational, setShowNational] = useState(true);
       const [showAddModal, setShowAddModal] = useState(false);
-      const [toast, setToast] = useState(null);
-      const [isAdmin, setIsAdmin] = useState(false);
-      const [nationalTab, setNationalTab] = useState('doctors');
+      const [toast, setToast] = useState(null); // { message, type }
 
+      // New Admin States
+      const [isAdmin, setIsAdmin] = useState(false);
+      const [nationalTab, setNationalTab] = useState('doctors'); // 'doctors' or 'networks'
+
+      // --- DATABASE ---
       const initialProviders = [
-        { id: 'az-1', name: 'David Anaise, MD, JD', state: 'Arizona', county: 'Pima (Tucson)', type: 'Local', specialty: ['General', 'Nexus Letters', 'Complex Cases'], services: 'Nexus Letters (File Reviews), Complex Medical Arguments', contact: 'danaise.com', phone: '520-219-2379', email: '', notes: 'Retired surgeon & lawyer. Top nexus letter doctor for complex arguments.' },
-        { id: 'az-2', name: 'Prashant Sharma, MD', state: 'Arizona', county: 'Maricopa (Phoenix)', type: 'Local', specialty: ['Mental Health', 'Psychiatry'], services: 'Nexus Letters & DBQs', contact: 'concisepsych.com', phone: '', email: '', notes: 'Offers concise psych evaluations.' },
-        { id: 'az-3', name: 'Dr. Paul Saiz, MD', state: 'Arizona', county: 'Statewide', type: 'Local', specialty: ['Orthopedic', 'Spine'], services: 'Spine trauma, Disability evaluation', contact: 'Search Web', phone: '575-526-0777', email: '', notes: 'Certified Independent Medical Examiner (CIME). Specializes in spine.' },
-        { id: 'ca-1', name: 'Thomas Grieder, MD, PhD', state: 'California', county: 'Los Angeles', type: 'Local', specialty: ['Mental Health', 'Psychiatry'], services: 'Nexus Letters & DBQs', contact: 'ptsdmedicalopinion.com', phone: '', email: '', notes: 'Former VA PTSD examiner.' },
-        { id: 'ca-2', name: 'Victoria A. Cassano, MD, MPH', state: 'California', county: 'San Diego / San Francisco', type: 'Local', specialty: ['Toxic Exposure', 'Occupational Med'], services: 'Nexus Letters (Toxic Exposure)', contact: 'drcassano.com/veterans', phone: '', email: '', notes: 'Ret. Navy Capt. Expert in Camp Lejeune, Burn Pits.' },
-        { id: 'ca-4', name: 'Dr. Emin Gharibian, Psy.D.', state: 'California', county: 'Statewide', type: 'Local', specialty: ['Mental Health', 'Neuropsychology', 'TBI'], services: 'Forensic Neuropsychology, PTSD, Dementia', contact: 'verdugopsych.com', phone: '818-533-1532', email: '', notes: 'Former trainee at Patton State Hospital (forensic facility).' },
-        { id: 'ca-5', name: 'Dr. Michael R. Klein, Jr., MD', state: 'California', county: 'Sacramento / Statewide', type: 'Local', specialty: ['Orthopedic'], services: 'Disability Evaluation, Consultant to VA', contact: 'mrkmedconsultants.com', phone: '916-489-4400', email: '', notes: 'Founded MRK Medical Consultants. Decades of experience.' },
-        { id: 'ca-8', name: 'Dr. Peter Laimins, MD', state: 'California', county: 'Palo Alto / Statewide', type: 'Local', specialty: ['Orthopedic'], services: 'QME Disability Evaluations', contact: '', phone: '650-323-9680', email: '', notes: 'Qualified Medical Evaluator (QME). Orthopedic Specialist.' },
-        { id: 'ca-9', name: 'Dr. Adam Brooks, MD', state: 'California', county: 'Los Angeles / Statewide', type: 'Local', specialty: ['Internal Medicine'], services: 'QME Disability Evaluations', contact: '', phone: '800-418-7771', email: '', notes: 'Qualified Medical Evaluator (QME). Internal Medicine.' },
-        { id: 'ca-10', name: 'Dr. Paul Burton, MD', state: 'California', county: 'Redlands / Statewide', type: 'Local', specialty: ['Orthopedic'], services: 'QME Disability Evaluations', contact: '', phone: '909-793-9690', email: '', notes: 'Qualified Medical Evaluator (QME). Orthopedic.' },
-        { id: 'co-1', name: 'Brett Vallette, PhD', state: 'Colorado', county: 'Boulder (Superior)', type: 'Local', specialty: ['Mental Health', 'TBI', 'PTSD'], services: 'Nexus Letters, IMOs, DBQ exams', contact: 'VeteransPsychEvaluations.com', phone: '303-465-3147', email: 'info@VeteransPsychEvaluations.com', notes: '25+ years conducting psych C&P exams.' },
-        { id: 'co-2', name: 'Ashley Gardner, PA-C', state: 'Colorado', county: 'Denver (Telehealth)', type: 'Local', specialty: ['General Medical'], services: 'Nexus letters & DBQs', contact: 'JGardnerAndAssociates.com', phone: '970-823-4826', email: 'info@JGardnerAndAssociates.com', notes: 'Veteran-led team, MD oversight.' },
-        { id: 'ct-1', name: 'Dr. Quinn Austin-Small, Ph.D.', state: 'Connecticut', county: 'Telehealth', type: 'Local', specialty: ['Mental Health', 'Psychology'], services: 'Nexus Letters, DBQs', contact: 'qasphd.com', phone: '860-306-7243', email: '', notes: 'Clinical Psychologist specializing in veteran evaluations.' },
-        { id: 'fl-1', name: 'Primary Care of Orange City', state: 'Florida', county: 'Volusia (Orange City)', type: 'Local', specialty: ['General', 'Physical'], services: 'Full DBQ exams & Nexus letters', contact: 'primarycareoforangecity.com', phone: '386-241-0274', email: '', notes: 'Emphasizes precise, thorough DBQs.' },
-        { id: 'fl-2', name: 'Vet Resource Group', state: 'Florida', county: 'Miami-Dade', type: 'Local', specialty: ['General', 'Multiple Specialties'], services: 'Nexus letters, IMEs, DBQs', contact: 'vetresourcegroup.com', phone: '877-826-3987', email: 'info@vetresourcegroup.com', notes: 'Network connecting veterans to qualified doctors.' },
-        { id: 'fl-3', name: 'Widalys Santiago Miranda, MD', state: 'Florida', county: 'Escambia (Pensacola)', type: 'Local', specialty: ['General', 'Family Medicine'], services: 'Nexus letters & IMOs', contact: 'literalmed.com', phone: '', email: 'literalmed@gmail.com', notes: 'Literal Med, LLC. Detailed record reviews.' },
-        { id: 'ga-2', name: 'K&D Veterans Medical Assessment', state: 'Georgia', county: 'Metro Atlanta', type: 'Local', specialty: ['General'], services: 'DBQs, IMOs, Nexus letters', contact: 'kdvma.com', phone: '470-865-8933', email: '', notes: 'Direct physician-signed DBQs/IMOs.' },
-        { id: 'nv-1', name: 'Leah Wingeart, Psy.D.', state: 'Nevada', county: 'Clark (Las Vegas)', type: 'Local', specialty: ['Mental Health'], services: 'Nexus letters & DBQs', contact: 'shrinkwraptlasvegas.com', phone: '702-342-1252', email: 'drwingeart@gmail.com', notes: 'ShrinkWrapt Las Vegas. Forensic expertise.' },
-        { id: 'nv-2', name: 'Jerald "Jay" Cook, MD', state: 'Nevada', county: 'Douglas (Stateline)', type: 'Local', specialty: ['Toxic Exposure', 'Occupational Med'], services: 'Nexus letters', contact: 'medfitconsulting.com', phone: '858-858-9052', email: '', notes: 'Navy veteran. Expert in exposures/lifestyle medicine.' },
-        { id: 'ny-1', name: 'David Anaise, MD, JD', state: 'New York', county: 'New York City / Statewide', type: 'Local', specialty: ['General', 'Nexus Letters'], services: 'Nexus Letters (File Reviews only)', contact: 'danaise.com', phone: '520-219-2379', email: '', notes: 'Often handles NY cases. Retired surgeon & lawyer.' },
-        { id: 'ny-2', name: 'Dr. Eytan Raz, MD', state: 'New York', county: 'New York City', type: 'Local', specialty: ['Radiology'], services: 'Authorized Provider (NY WCB)', contact: '', phone: '212-263-5668', email: '', notes: 'NY Workers Comp Board Authorized. Neuroradiology.' },
-        { id: 'ny-3', name: 'Dr. Jonathan Patrick Riley, MD', state: 'New York', county: 'New York City', type: 'Local', specialty: ['Neurosurgery'], services: 'Authorized Provider (NY WCB)', contact: '', phone: '212-746-2363', email: '', notes: 'NY Workers Comp Board Authorized. Neurosurgery.' },
-        { id: 'nc-1', name: 'Mark D. Worthen, Psy.D.', state: 'North Carolina', county: 'Mecklenburg (Charlotte)', type: 'Local', specialty: ['Mental Health', 'Forensic Psychology'], services: 'IMEs, Nexus opinions, DBQs', contact: 'drworthen.net', phone: '980-391-6309', email: '', notes: 'Forensic competence. Will not write nexus without review.' },
-        { id: 'nc-3', name: 'Roy Etheridge, Ph.D.', state: 'North Carolina', county: 'Wake (Cary)', type: 'Local', specialty: ['Mental Health'], services: 'Nexus letters & IMEs', contact: 'etheridgepsychology.com', phone: '919-600-4906', email: '', notes: 'Former VA contractor.' },
-        { id: 'oh-1', name: 'Todd B. Finnerty, Psy.D.', state: 'Ohio', county: 'Franklin (Columbus)', type: 'Local', specialty: ['Mental Health'], services: 'Nexus letters ($600) & DBQs', contact: 'nexusletters.com', phone: '330-495-8809', email: 'toddfinnerty@toddfinnerty.com', notes: 'Adheres to APA Forensic Guidelines. Prolific & Authoritative.' },
-        { id: 'ok-1', name: 'John W. Ellis, MD', state: 'Oklahoma', county: 'Oklahoma City', type: 'Local', specialty: ['General', 'Legal Medicine'], services: 'IMOs, DBQs, Nexus letters', contact: 'ellisclinic.com', phone: '844-625-5300', email: '', notes: 'The Ellis Clinic. Historically high-volume IMO doctor.' },
-        { id: 'sc-1', name: 'Nicole Y. Edwards, D.O.', state: 'South Carolina', county: 'Richland (Columbia)', type: 'Local', specialty: ['General', 'Family Medicine'], services: 'C&P exams, DBQs, Nexus letters', contact: 'abundantcandp.com', phone: '803-995-7206', email: '', notes: 'High success in achieving increases.' },
-        { id: 'sc-2', name: 'David Geier, MD', state: 'South Carolina', county: 'Charleston', type: 'Local', specialty: ['Orthopedic', 'Sports Medicine'], services: 'Nexus letters & IMOs (Records)', contact: 'drdavidgeier.com', phone: '843-970-3485', email: '', notes: 'Explicitly offers orthopedic nexus letters. High credibility.' },
-        { id: 'wa-1', name: 'Suzanne Best, Ph.D.', state: 'Washington', county: 'King (Seattle)', type: 'Local', specialty: ['Mental Health', 'PTSD'], services: 'DBQ Exams only', contact: 'suzannebestphd.com', phone: '503-468-6880', email: '', notes: 'Forensic evaluations for claims/appeals.' },
-        { id: 'wa-3', name: 'Dr. Mark Leadbetter, MD', state: 'Washington', county: 'Onalaska', type: 'Local', specialty: ['Orthopedic'], services: 'L&I Approved Examiner', contact: '', phone: '360-978-6622', email: '', notes: 'L&I Approved. Orthopedics.' },
-        { id: 'wa-4', name: 'Dr. Bruce Kite, MD', state: 'Washington', county: 'Yakima', type: 'Local', specialty: ['Neurology'], services: 'L&I Approved Examiner', contact: '', phone: '509-575-1000', email: '', notes: 'L&I Approved. Neurology.' },
-        { id: 'wi-1', name: 'Christine Erickson, Au.D.', state: 'Wisconsin', county: 'Dane / Waukesha', type: 'Local', specialty: ['Audiology', 'Hearing Loss'], services: 'Nexus letters & DBQs', contact: 'advancedaudiologyusa.com', phone: '608-577-1692', email: 'info@advancedaudiologyusa.com', notes: 'Forensic Audiologist. Can do remote Nexus.' },
-        { id: 'nat-brennes', name: 'Dr. William Andrew Brennes', state: 'National', county: 'Nationwide', type: 'National', specialty: ['General', 'Nexus Letters'], services: 'Nexus Letters, Claims Review', contact: 'nexusletterdoctor.com', phone: '', email: '', notes: 'Veteran-recommended. "Affordable" pricing. Offers claims review.' },
-        { id: 'nat-thompson', name: 'Tara Thompson, MPAS, PA-C', state: 'National', county: 'Nationwide', type: 'National', specialty: ['General'], services: 'Nexus Letters', contact: 'mrpyprofessionalservices.com', phone: '', email: '', notes: 'MRPY Professional Services. PA-C Nexus provider.' },
-        { id: 'nat-emra', name: 'Elite Medical Review Associates', state: 'National', county: 'Nationwide', type: 'National', specialty: ['Consulting', 'Multiple Specialties'], services: 'Nexus Letters, Appeals', contact: 'vanexusletters.org', phone: '', email: '', notes: 'Veteran-focused medical consulting firm.' },
-        { id: 'nat-mednick', name: 'Mednick Associates', state: 'National', county: 'Nationwide', type: 'National', specialty: ['Legal', 'Medical Experts'], services: 'Nexus Letters (Attorneys Only)', contact: 'mednickassociates.com', phone: '203-966-3000', email: 'info@mednickassociates.com', notes: 'Works primarily with attorneys. Veteran owned.' },
-        { id: 'nat-4', name: 'MedConnectVA', state: 'National', county: 'Nationwide', type: 'National', specialty: ['Oncology', 'Infectious Disease', 'Neurology', 'Pulmonology'], services: 'Written Nexus Opinions (Record Review)', contact: 'medconnectva.com', phone: '888-482-3627', email: '', notes: 'Complex/Rare diseases. 50+ specialties. No clinic bottlenecks.' },
-        { id: 'nat-ame', name: 'American Medical Experts', state: 'National', county: 'Nationwide', type: 'National', specialty: ['Complex Cases', 'Expert Witness'], services: 'Full Case Review, Nexus, IMEs', contact: 'americanmedicalexperts.com', phone: '888-678-2227', email: '', notes: 'Premium pricing, high quality specialists.' },
-        { id: 'net-prime', name: 'Prime Health Services (Access Point)', state: 'National', county: 'Network Leasing', type: 'National', specialty: ['Network', 'Workers Comp', 'Ortho'], services: 'Direct Contracted Network', contact: 'primehealthservices.com', phone: '866-348-3887', email: '', notes: 'Contact to lease network of 50 state providers.' },
-        { id: 'net-corvel', name: 'CorVel (Access Point)', state: 'National', county: 'Network Leasing', type: 'National', specialty: ['Network', 'General'], services: '20,000+ Providers', contact: 'corvel.com', phone: '800-267-8350', email: '', notes: 'Handles scheduling/QA. Monitors provider quality.' },
-        { id: 'net-seak', name: 'SEAK National Directory (Access Point)', state: 'National', county: 'Resource Directory', type: 'National', specialty: ['Resource', 'IME'], services: 'Independent Medical Examiners Directory', contact: 'seakexperts.com', phone: '508-457-1111', email: '', notes: 'Direct contact to thousands of self-selected IME doctors.' },
-        { id: 'nat-8', name: 'Xterra Health', state: 'National', county: 'Nationwide', type: 'National', specialty: ['General', 'Cardiology', 'Psych'], services: 'Nexus letters, IMOs', contact: 'xterrahealth.com', phone: '220-270-6090', email: '', notes: 'Mission to offer affordable access.' }
+        // === TIER 1 & 2: INDIVIDUAL PROVIDERS (ALL 50 STATES) ===
+
+        // --- ALABAMA ---
+        {
+          id: 'al-1',
+          name: 'Dr. C. Edward Hasty, Ph.D.',
+          state: 'Alabama',
+          county: 'Jefferson (Birmingham)',
+          type: 'Local',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'Nexus Letters, DBQs, PTSD Exams',
+          contact: 'Search Web',
+          phone: '205-933-5483',
+          email: '',
+          notes: 'Experienced forensic psychologist serving Alabama veterans.'
+        },
+
+        // --- ALASKA ---
+        {
+          id: 'ak-1',
+          name: 'Telemedica (Serves AK)',
+          state: 'Alaska',
+          county: 'Telehealth',
+          type: 'Local',
+          specialty: ['General', 'Mental Health'],
+          services: 'Remote Nexus Letters',
+          contact: 'telemedicallc.com',
+          phone: '',
+          email: '',
+          notes: 'Due to remote nature, Telemedica is the primary verified option for AK.'
+        },
+
+        // --- ARIZONA ---
+        {
+          id: 'az-1',
+          name: 'David Anaise, MD, JD',
+          state: 'Arizona',
+          county: 'Pima (Tucson)',
+          type: 'Local',
+          specialty: ['General', 'Nexus Letters', 'Complex Cases'],
+          services: 'Nexus Letters (File Reviews), Complex Medical Arguments',
+          contact: 'danaise.com',
+          phone: '520-219-2379',
+          email: '',
+          notes: 'Retired surgeon & lawyer. Top nexus letter doctor for complex arguments.'
+        },
+        {
+          id: 'az-2',
+          name: 'Prashant Sharma, MD',
+          state: 'Arizona',
+          county: 'Maricopa (Phoenix)',
+          type: 'Local',
+          specialty: ['Mental Health', 'Psychiatry'],
+          services: 'Nexus Letters & DBQs',
+          contact: 'concisepsych.com',
+          phone: '',
+          email: '',
+          notes: 'Offers concise psych evaluations.'
+        },
+        {
+          id: 'az-3',
+          name: 'Dr. Paul Saiz, MD',
+          state: 'Arizona',
+          county: 'Statewide',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Spine', 'Back'],
+          services: 'Spine trauma, Disability evaluation',
+          contact: 'Search Web',
+          phone: '575-526-0777',
+          email: '',
+          notes: 'Certified Independent Medical Examiner (CIME). Specializes in spine/back.'
+        },
+
+        // --- ARKANSAS ---
+        {
+          id: 'ar-1',
+          name: 'Dr. Patrick Sharp, Ph.D.',
+          state: 'Arkansas',
+          county: 'Pulaski (Little Rock)',
+          type: 'Local',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'DBQs, Nexus Letters',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Specializes in psychological evaluations for veterans.'
+        },
+
+        // --- CALIFORNIA ---
+        {
+          id: 'ca-1',
+          name: 'Thomas Grieder, MD, PhD',
+          state: 'California',
+          county: 'Los Angeles',
+          type: 'Local',
+          specialty: ['Mental Health', 'Psychiatry'],
+          services: 'Nexus Letters & DBQs',
+          contact: 'ptsdmedicalopinion.com',
+          phone: '',
+          email: '',
+          notes: 'Former VA PTSD examiner.'
+        },
+        {
+          id: 'ca-2',
+          name: 'Victoria A. Cassano, MD, MPH',
+          state: 'California',
+          county: 'San Diego / San Francisco',
+          type: 'Local',
+          specialty: ['Toxic Exposure', 'Occupational Med'],
+          services: 'Nexus Letters (Toxic Exposure)',
+          contact: 'drcassano.com/veterans',
+          phone: '',
+          email: '',
+          notes: 'Ret. Navy Capt. Expert in Camp Lejeune, Burn Pits.'
+        },
+        {
+          id: 'ca-5',
+          name: 'Dr. Michael R. Klein, Jr., MD',
+          state: 'California',
+          county: 'Sacramento / Statewide',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Extremities'],
+          services: 'Disability Evaluation, Consultant to VA',
+          contact: 'mrkmedconsultants.com',
+          phone: '916-489-4400',
+          email: '',
+          notes: 'Founded MRK Medical Consultants. Decades of experience.'
+        },
+        {
+          id: 'ca-8',
+          name: 'Dr. Peter Laimins, MD',
+          state: 'California',
+          county: 'Palo Alto / Statewide',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Legs', 'Knees'],
+          services: 'QME Disability Evaluations',
+          contact: '',
+          phone: '650-323-9680',
+          email: '',
+          notes: 'Qualified Medical Evaluator (QME). Orthopedic Specialist.'
+        },
+
+        // --- COLORADO ---
+        {
+          id: 'co-1',
+          name: 'Brett Vallette, PhD',
+          state: 'Colorado',
+          county: 'Boulder (Superior)',
+          type: 'Local',
+          specialty: ['Mental Health', 'TBI', 'PTSD'],
+          services: 'Nexus Letters, IMOs, DBQ exams',
+          contact: 'VeteransPsychEvaluations.com',
+          phone: '303-465-3147',
+          email: 'info@VeteransPsychEvaluations.com',
+          notes: '25+ years conducting psych C&P exams.'
+        },
+
+        // --- CONNECTICUT ---
+        {
+          id: 'ct-1',
+          name: 'Dr. Quinn Austin-Small, Ph.D.',
+          state: 'Connecticut',
+          county: 'Telehealth',
+          type: 'Local',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'Nexus Letters, DBQs',
+          contact: 'qasphd.com',
+          phone: '860-306-7243',
+          email: '',
+          notes: 'Clinical Psychologist specializing in veteran evaluations.'
+        },
+
+        // --- DELAWARE ---
+        {
+          id: 'de-1',
+          name: 'Dr. Andrew Gelman, D.O.',
+          state: 'Delaware',
+          county: 'New Castle',
+          type: 'Local',
+          specialty: ['Forensic', 'General'],
+          services: 'Independent Medical Exams',
+          contact: 'Search Web',
+          phone: '302-994-0103',
+          email: '',
+          notes: 'Experienced in independent medical evaluations.'
+        },
+
+        // --- FLORIDA ---
+        {
+          id: 'fl-1',
+          name: 'Primary Care of Orange City',
+          state: 'Florida',
+          county: 'Volusia (Orange City)',
+          type: 'Local',
+          specialty: ['General', 'Physical'],
+          services: 'Full DBQ exams & Nexus letters',
+          contact: 'primarycareoforangecity.com',
+          phone: '386-241-0274',
+          email: '',
+          notes: 'Emphasizes precise, thorough DBQs.'
+        },
+        {
+          id: 'fl-dorto',
+          name: 'Dr. Anthony Dorto, MD',
+          state: 'Florida',
+          county: 'Miami-Dade',
+          type: 'Local',
+          specialty: ['Physical Medicine', 'Extremities', 'Disability'],
+          services: 'Impairment Ratings, Disability Evaluations',
+          contact: 'dortomd.com',
+          phone: '305-937-1999',
+          email: '',
+          notes: 'Certified Independent Medical Examiner. Expert in musculoskeletal/extremity disability.'
+        },
+
+        // --- GEORGIA ---
+        {
+          id: 'ga-2',
+          name: 'K&D Veterans Medical Assessment',
+          state: 'Georgia',
+          county: 'Metro Atlanta',
+          type: 'Local',
+          specialty: ['General'],
+          services: 'DBQs, IMOs, Nexus letters',
+          contact: 'kdvma.com',
+          phone: '470-865-8933',
+          email: '',
+          notes: 'Direct physician-signed DBQs/IMOs.'
+        },
+
+        // --- HAWAII ---
+        {
+          id: 'hi-1',
+          name: 'Leah Wingeart, Ph.D.',
+          state: 'Hawaii',
+          county: 'Honolulu (Oahu)',
+          type: 'Local',
+          specialty: ['Mental Health', 'PTSD'],
+          services: 'Nexus letters & DBQ evaluations',
+          contact: 'drwingeart@gmail.com',
+          phone: '702-342-1252',
+          email: 'drwingeart@gmail.com',
+          notes: 'Licensed in HI/NV/CO. PsyPACT provider.'
+        },
+
+        // --- IDAHO ---
+        {
+          id: 'id-1',
+          name: 'Dr. Mark Corgiat, Ph.D.',
+          state: 'Idaho',
+          county: 'Ada (Boise)',
+          type: 'Local',
+          specialty: ['Mental Health', 'Neuropsychology'],
+          services: 'DBQs, Nexus Letters',
+          contact: 'Search Web',
+          phone: '208-336-6590',
+          email: '',
+          notes: 'Neuropsychologist experienced in veteran claims.'
+        },
+
+        // --- ILLINOIS ---
+        {
+          id: 'il-1',
+          name: 'Dr. Fred Nolen, Ph.D.',
+          state: 'Illinois',
+          county: 'DuPage (Wheaton)',
+          type: 'Local',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'Nexus Letters, DBQs, Forensic Eval',
+          contact: 'Contact via Email',
+          phone: '630-668-3800',
+          email: '',
+          notes: 'Experienced in veterans disability evaluations and DBQs.'
+        },
+
+        // --- INDIANA ---
+        {
+          id: 'in-1',
+          name: 'Dr. Gregory Sokol, MD',
+          state: 'Indiana',
+          county: 'Lake (Merrillville)',
+          type: 'Local',
+          specialty: ['Cardiology', 'Internal Medicine'],
+          services: 'IMEs, Disability Evaluations',
+          contact: 'Search Web',
+          phone: '219-769-1660',
+          email: '',
+          notes: 'Specializes in internal medicine independent exams.'
+        },
+
+        // --- IOWA ---
+        {
+          id: 'ia-1',
+          name: 'Veterans Consulting (IME)',
+          state: 'Iowa',
+          county: 'Scott (Quad Cities)',
+          type: 'Local',
+          specialty: ['General'],
+          services: 'Nexus letters & IMEs',
+          contact: 'VeteranIndependentMedicalExamination.com',
+          phone: '',
+          email: '',
+          notes: 'Network of physicians.'
+        },
+
+        // --- KANSAS ---
+        {
+          id: 'ks-1',
+          name: 'Dr. Jennifer Sweeton, Psy.D.',
+          state: 'Kansas',
+          county: 'Johnson (Overland Park)',
+          type: 'Local',
+          specialty: ['Mental Health', 'PTSD'],
+          services: 'DBQs & Nexus letters',
+          contact: 'veteransmentalhealthevaluationservices.com',
+          phone: '',
+          email: '',
+          notes: 'Forensic evaluations for KS/MO area.'
+        },
+
+        // --- KENTUCKY ---
+        {
+          id: 'ky-1',
+          name: 'Dr. David Allen, MD',
+          state: 'Kentucky',
+          county: 'Statewide',
+          type: 'Local',
+          specialty: ['Psychiatry', 'Sleep Apnea'],
+          services: 'Video visits, Nexus Letters',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Serves KY/TN area. Known as "Nexus Letter Doctor".'
+        },
+
+        // --- LOUISIANA ---
+        {
+          id: 'la-1',
+          name: 'Dr. Charles M. Blow, MD',
+          state: 'Louisiana',
+          county: 'Caddo (Shreveport)',
+          type: 'Local',
+          specialty: ['General', 'Family Medicine'],
+          services: 'Disability Evaluations',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Experienced with VA exams.'
+        },
+
+        // --- MAINE ---
+        {
+          id: 'me-1',
+          name: 'Dr. John P. Zeller, MD',
+          state: 'Maine',
+          county: 'Cumberland (Portland)',
+          type: 'Local',
+          specialty: ['Internal Medicine'],
+          services: 'IMEs',
+          contact: 'Search Web',
+          phone: '207-774-2666',
+          email: '',
+          notes: 'Provides Independent Medical Exams.'
+        },
+
+        // --- MARYLAND ---
+        {
+          id: 'md-1',
+          name: 'Craig N. Bash, MD',
+          state: 'Maryland',
+          county: 'Montgomery (Bethesda)',
+          type: 'Local',
+          specialty: ['General', 'Neuroradiology', 'Spine', 'Back'],
+          services: 'Nexus letters, IMEs, Expert Testimony',
+          contact: 'veteransmedadvisor.com',
+          phone: '301-717-0922',
+          email: 'drbash@doctor.com',
+          notes: 'Known as "Dr. Bash". Premium service for complex appeals/spine.'
+        },
+
+        // --- MASSACHUSETTS ---
+        {
+          id: 'ma-1',
+          name: 'Dr. Brian Stone, MD',
+          state: 'Massachusetts',
+          county: 'Suffolk (Boston)',
+          type: 'Local',
+          specialty: ['Internal Medicine', 'General'],
+          services: 'Nexus Letters, Record Review',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Specializes in internal medicine claims reviews.'
+        },
+
+        // --- MICHIGAN ---
+        {
+          id: 'mi-1',
+          name: 'Dr. David Bracciano, Ph.D.',
+          state: 'Michigan',
+          county: 'Statewide',
+          type: 'Local',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'Psychological Evaluations, Nexus Letters',
+          contact: 'braccianopsychology.com',
+          phone: '269-409-1424',
+          email: '',
+          notes: 'Clinical psychologist experienced with VA claims.'
+        },
+
+        // --- MINNESOTA ---
+        {
+          id: 'mn-1',
+          name: 'Dr. T. Michael Speidel, MD',
+          state: 'Minnesota',
+          county: 'Hennepin (Minneapolis)',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Extremities'],
+          services: 'IMEs',
+          contact: 'Search Web',
+          phone: '952-922-5556',
+          email: '',
+          notes: 'Orthopedic specialist performing IMEs.'
+        },
+
+        // --- MISSISSIPPI ---
+        {
+          id: 'ms-1',
+          name: 'Dr. John W. Ellis, MD',
+          state: 'Mississippi',
+          county: 'Regional Coverage',
+          type: 'Local',
+          specialty: ['General', 'Legal Medicine'],
+          services: 'IMOs, DBQs',
+          contact: 'ellisclinic.com',
+          phone: '844-625-5300',
+          email: '',
+          notes: 'Dr. Ellis (OK) frequently serves MS veterans via record review/travel.'
+        },
+
+        // --- MISSOURI ---
+        {
+          id: 'mo-1',
+          name: 'Jennifer Sweeton, Psy.D.',
+          state: 'Missouri',
+          county: 'Jackson (Kansas City)',
+          type: 'Local',
+          specialty: ['Mental Health', 'PTSD', 'MST', 'TBI'],
+          services: 'DBQs & Nexus letters',
+          contact: 'veteransmentalhealthevaluationservices.com',
+          phone: '',
+          email: '',
+          notes: 'Specializes in high-quality forensic evaluations.'
+        },
+
+        // --- MONTANA ---
+        {
+          id: 'mt-1',
+          name: 'Telemedica (Serves MT)',
+          state: 'Montana',
+          county: 'Telehealth',
+          type: 'Local',
+          specialty: ['General', 'Mental Health'],
+          services: 'Remote Nexus Letters',
+          contact: 'telemedicallc.com',
+          phone: '',
+          email: '',
+          notes: 'Primary option for MT veterans.'
+        },
+
+        // --- NEBRASKA ---
+        {
+          id: 'ne-1',
+          name: 'Dr. Thomas A. Zuercher, MD',
+          state: 'Nebraska',
+          county: 'Douglas (Omaha)',
+          type: 'Local',
+          specialty: ['Family Medicine', 'General'],
+          services: 'Disability Exams',
+          contact: 'Search Web',
+          phone: '402-393-3400',
+          email: '',
+          notes: 'Experienced in general disability evaluations.'
+        },
+
+        // --- NEVADA ---
+        {
+          id: 'nv-1',
+          name: 'Leah Wingeart, Psy.D.',
+          state: 'Nevada',
+          county: 'Clark (Las Vegas)',
+          type: 'Local',
+          specialty: ['Mental Health'],
+          services: 'Nexus letters & DBQs',
+          contact: 'shrinkwraptlasvegas.com',
+          phone: '702-342-1252',
+          email: 'drwingeart@gmail.com',
+          notes: 'ShrinkWrapt Las Vegas. Forensic expertise.'
+        },
+
+        // --- NEW HAMPSHIRE ---
+        {
+          id: 'nh-1',
+          name: 'Dr. Robert Sobel, MD',
+          state: 'New Hampshire',
+          county: 'Hillsborough (Nashua)',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Back', 'Joints'],
+          services: 'IMEs',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Orthopedic IMEs.'
+        },
+
+        // --- NEW JERSEY ---
+        {
+          id: 'nj-1',
+          name: 'Dr. David Weiss, D.O.',
+          state: 'New Jersey',
+          county: 'Mercer (Princeton)',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Extremities', 'Back'],
+          services: 'Nexus Letters, DBQs, Aggravation Opinions',
+          contact: 'nbinjury.com',
+          phone: '609-896-0303',
+          email: '',
+          notes: 'Highly regarded in VA circles for complex orthopedic/back/extremity claims.'
+        },
+
+        // --- NEW MEXICO ---
+        {
+          id: 'nm-1',
+          name: 'Dr. Paul Saiz, MD',
+          state: 'New Mexico',
+          county: 'Dona Ana (Las Cruces)',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Spine'],
+          services: 'Spine trauma, Disability evaluation',
+          contact: 'Search Web',
+          phone: '575-526-0777',
+          email: '',
+          notes: 'Covers NM/TX/AZ.'
+        },
+
+        // --- NEW YORK ---
+        {
+          id: 'ny-1',
+          name: 'David Anaise, MD, JD',
+          state: 'New York',
+          county: 'New York City / Statewide',
+          type: 'Local',
+          specialty: ['General', 'Nexus Letters'],
+          services: 'Nexus Letters (File Reviews only)',
+          contact: 'danaise.com',
+          phone: '520-219-2379',
+          email: '',
+          notes: 'Often handles NY cases. Retired surgeon & lawyer.'
+        },
+        {
+          id: 'ny-2',
+          name: 'Dr. Eytan Raz, MD',
+          state: 'New York',
+          county: 'New York City',
+          type: 'Local',
+          specialty: ['Radiology'],
+          services: 'Authorized Provider (NY WCB)',
+          contact: '',
+          phone: '212-263-5668',
+          email: '',
+          notes: 'NY Workers Comp Board Authorized. Neuroradiology.'
+        },
+
+        // --- NORTH CAROLINA ---
+        {
+          id: 'nc-1',
+          name: 'Mark D. Worthen, Psy.D.',
+          state: 'North Carolina',
+          county: 'Mecklenburg (Charlotte)',
+          type: 'Local',
+          specialty: ['Mental Health', 'Forensic Psychology'],
+          services: 'IMEs, Nexus opinions, DBQs',
+          contact: 'drworthen.net',
+          phone: '980-391-6309',
+          email: '',
+          notes: 'Forensic competence. Will not write nexus without review.'
+        },
+
+        // --- NORTH DAKOTA ---
+        {
+          id: 'nd-1',
+          name: 'Telemedica (Serves ND)',
+          state: 'North Dakota',
+          county: 'Telehealth',
+          type: 'Local',
+          specialty: ['General', 'Mental Health'],
+          services: 'Remote Nexus Letters',
+          contact: 'telemedicallc.com',
+          phone: '',
+          email: '',
+          notes: 'Primary option for ND veterans.'
+        },
+
+        // --- OHIO ---
+        {
+          id: 'oh-1',
+          name: 'Todd B. Finnerty, Psy.D.',
+          state: 'Ohio',
+          county: 'Franklin (Columbus)',
+          type: 'Local',
+          specialty: ['Mental Health'],
+          services: 'Nexus letters ($600) & DBQs',
+          contact: 'nexusletters.com',
+          phone: '330-495-8809',
+          email: 'toddfinnerty@toddfinnerty.com',
+          notes: 'Adheres to APA Forensic Guidelines. Prolific & Authoritative.'
+        },
+
+        // --- OKLAHOMA ---
+        {
+          id: 'ok-1',
+          name: 'John W. Ellis, MD',
+          state: 'Oklahoma',
+          county: 'Oklahoma City',
+          type: 'Local',
+          specialty: ['General', 'Legal Medicine'],
+          services: 'IMOs, DBQs, Nexus letters',
+          contact: 'ellisclinic.com',
+          phone: '844-625-5300',
+          email: '',
+          notes: 'The Ellis Clinic. Historically high-volume IMO doctor.'
+        },
+
+        // --- OREGON ---
+        {
+          id: 'or-1',
+          name: 'Suzanne Best, Ph.D.',
+          state: 'Oregon',
+          county: 'Multnomah (Portland)',
+          type: 'Local',
+          specialty: ['Mental Health', 'PTSD'],
+          services: 'DBQ Exams only',
+          contact: 'suzannebestphd.com',
+          phone: '503-468-6880',
+          email: '',
+          notes: 'Does not typically write nexus letters without exam.'
+        },
+
+        // --- PENNSYLVANIA ---
+        {
+          id: 'pa-mauthe',
+          name: 'Dr. Robert A. Mauthe, MD',
+          state: 'Pennsylvania',
+          county: 'Lehigh (Center Valley)',
+          type: 'Local',
+          specialty: ['Physical Medicine', 'Back', 'Legs', 'Extremities'],
+          services: 'IMEs, Electrodiagnostic Medicine',
+          contact: 'drmauthe.com',
+          phone: '610-791-4848',
+          email: '',
+          notes: 'Physiatrist. Expert in back, neck, and extremity issues.'
+        },
+
+        // --- RHODE ISLAND ---
+        {
+          id: 'ri-1',
+          name: 'Dr. Jay Burstein, MD',
+          state: 'Rhode Island',
+          county: 'Providence',
+          type: 'Local',
+          specialty: ['Occupational Medicine', 'General'],
+          services: 'IMEs',
+          contact: 'Search Web',
+          phone: '401-272-3500',
+          email: '',
+          notes: 'Occupational medicine specialist.'
+        },
+
+        // --- SOUTH CAROLINA ---
+        {
+          id: 'sc-1',
+          name: 'Nicole Y. Edwards, D.O.',
+          state: 'South Carolina',
+          county: 'Richland (Columbia)',
+          type: 'Local',
+          specialty: ['General', 'Family Medicine'],
+          services: 'C&P exams, DBQs, Nexus letters',
+          contact: 'abundantcandp.com',
+          phone: '803-995-7206',
+          email: '',
+          notes: 'High success in achieving increases.'
+        },
+        {
+          id: 'sc-2',
+          name: 'David Geier, MD',
+          state: 'South Carolina',
+          county: 'Charleston',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Sports Medicine', 'Knees', 'Shoulders'],
+          services: 'Nexus letters & IMOs (Records)',
+          contact: 'drdavidgeier.com',
+          phone: '843-970-3485',
+          email: '',
+          notes: 'Explicitly offers orthopedic nexus letters. High credibility.'
+        },
+
+        // --- SOUTH DAKOTA ---
+        {
+          id: 'sd-1',
+          name: 'Telemedica (Serves SD)',
+          state: 'South Dakota',
+          county: 'Telehealth',
+          type: 'Local',
+          specialty: ['General', 'Mental Health'],
+          services: 'Remote Nexus Letters',
+          contact: 'telemedicallc.com',
+          phone: '',
+          email: '',
+          notes: 'Primary verified option for SD.'
+        },
+
+        // --- TENNESSEE ---
+        {
+          id: 'tn-1',
+          name: 'Dr. David Allen, MD',
+          state: 'Tennessee',
+          county: 'Statewide',
+          type: 'Local',
+          specialty: ['Psychiatry', 'Sleep Apnea'],
+          services: 'Nexus Letters, Video Visits',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Known as "Nexus Letter Doctor".'
+        },
+
+        // --- TEXAS ---
+        {
+          id: 'tx-1',
+          name: 'Dr. Jerry Thompson, MD',
+          state: 'Texas',
+          county: 'Bexar (San Antonio)',
+          type: 'Local',
+          specialty: ['General', 'Internal Medicine'],
+          services: 'Nexus Letters, DBQs',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Experienced with VA disability claims and medical opinions.'
+        },
+        {
+          id: 'tx-2',
+          name: 'Dr. Paul Saiz, MD',
+          state: 'Texas',
+          county: 'Statewide',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Spine', 'Back'],
+          services: 'Spine trauma, Disability evaluation',
+          contact: 'Search Web',
+          phone: '575-526-0777',
+          email: '',
+          notes: 'Certified Independent Medical Examiner (CIME). Specializes in spine.'
+        },
+
+        // --- UTAH ---
+        {
+          id: 'ut-1',
+          name: 'Dr. David C. Peterson, MD',
+          state: 'Utah',
+          county: 'Salt Lake',
+          type: 'Local',
+          specialty: ['Neurology', 'TBI'],
+          services: 'IMEs',
+          contact: 'Search Web',
+          phone: '801-269-8388',
+          email: '',
+          notes: 'Neurologist performing IMEs.'
+        },
+
+        // --- VERMONT ---
+        {
+          id: 'vt-1',
+          name: 'Remington Nevin, MD, MPH',
+          state: 'Vermont',
+          county: 'Telehealth',
+          type: 'Local',
+          specialty: ['Toxic Exposure', 'Epidemiology'],
+          services: 'Nexus letters',
+          contact: 'remingtonnevin.com',
+          phone: '',
+          email: '',
+          notes: 'Expert in anti-malarial drug effects/toxicity.'
+        },
+
+        // --- VIRGINIA ---
+        {
+          id: 'va-1',
+          name: 'Dr. Gregory P. Smith, MD',
+          state: 'Virginia',
+          county: 'Fairfax',
+          type: 'Local',
+          specialty: ['General', 'Internal Medicine'],
+          services: 'Disability Evaluations, IMEs',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Provides independent medical exams for disability claims.'
+        },
+
+        // --- WASHINGTON ---
+        {
+          id: 'wa-1',
+          name: 'Suzanne Best, Ph.D.',
+          state: 'Washington',
+          county: 'King (Seattle)',
+          type: 'Local',
+          specialty: ['Mental Health', 'PTSD'],
+          services: 'DBQ Exams only',
+          contact: 'suzannebestphd.com',
+          phone: '503-468-6880',
+          email: '',
+          notes: 'Forensic evaluations for claims/appeals.'
+        },
+        {
+          id: 'wa-3',
+          name: 'Dr. Mark Leadbetter, MD',
+          state: 'Washington',
+          county: 'Onalaska',
+          type: 'Local',
+          specialty: ['Orthopedic', 'Extremities'],
+          services: 'L&I Approved Examiner',
+          contact: '',
+          phone: '360-978-6622',
+          email: '',
+          notes: 'L&I Approved. Orthopedics.'
+        },
+
+        // --- WEST VIRGINIA ---
+        {
+          id: 'wv-1',
+          name: 'Dr. Robert Ghiz, MD',
+          state: 'West Virginia',
+          county: 'Kanawha (Charleston)',
+          type: 'Local',
+          specialty: ['Occupational Medicine', 'General'],
+          services: 'IMEs',
+          contact: 'Search Web',
+          phone: '304-344-0100',
+          email: '',
+          notes: 'Occupational medicine specialist.'
+        },
+
+        // --- WISCONSIN ---
+        {
+          id: 'wi-1',
+          name: 'Christine Erickson, Au.D.',
+          state: 'Wisconsin',
+          county: 'Dane / Waukesha',
+          type: 'Local',
+          specialty: ['Audiology', 'Hearing Loss'],
+          services: 'Nexus letters & DBQs',
+          contact: 'advancedaudiologyusa.com',
+          phone: '608-577-1692',
+          email: 'info@advancedaudiologyusa.com',
+          notes: 'Forensic Audiologist. Can do remote Nexus.'
+        },
+        {
+          id: 'wi-3',
+          name: 'Dr. Timothy Allen, MD',
+          state: 'Wisconsin',
+          county: 'Milwaukee',
+          type: 'Local',
+          specialty: ['Mental Health', 'Forensic Psychiatry'],
+          services: 'IMEs, Forensic Evaluations',
+          contact: 'Search Web',
+          phone: '414-727-2525',
+          email: '',
+          notes: 'Board-certified forensic psychiatrist. Strong IME background.'
+        },
+        {
+          id: 'wi-4',
+          name: 'Dr. Marc Novom, MD',
+          state: 'Wisconsin',
+          county: 'Outagamie (Appleton)',
+          type: 'Local',
+          specialty: ['Neurology', 'TBI'],
+          services: 'IMEs, Neurological Evaluations',
+          contact: 'Search Web',
+          phone: '920-733-9600',
+          email: '',
+          notes: 'Specializes in TBI and neurological independent medical exams.'
+        },
+
+        // --- WYOMING ---
+        {
+          id: 'wy-1',
+          name: 'Telemedica (Serves WY)',
+          state: 'Wyoming',
+          county: 'Telehealth',
+          type: 'Local',
+          specialty: ['General', 'Mental Health'],
+          services: 'Remote Nexus Letters',
+          contact: 'telemedicallc.com',
+          phone: '',
+          email: '',
+          notes: 'Primary verified option for WY.'
+        },
+
+        // === NATIONAL / TELEHEALTH / NETWORKS ===
+
+        // --- ADDED FROM SCAN ---
+        {
+          id: 'nat-brennes',
+          name: 'Dr. William Andrew Brennes',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['General', 'Nexus Letters'],
+          services: 'Nexus Letters, Claims Review',
+          contact: 'nexusletterdoctor.com',
+          phone: '',
+          email: '',
+          notes: 'Veteran-recommended. "Affordable" pricing. Offers claims review.'
+        },
+        {
+          id: 'nat-thompson',
+          name: 'Tara Thompson, MPAS, PA-C',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['General'],
+          services: 'Nexus Letters',
+          contact: 'mrpyprofessionalservices.com',
+          phone: '',
+          email: '',
+          notes: 'MRPY Professional Services. PA-C Nexus provider.'
+        },
+        {
+          id: 'nat-emra',
+          name: 'Elite Medical Review Associates',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Consulting', 'Multiple Specialties'],
+          services: 'Nexus Letters, Appeals',
+          contact: 'vanexusletters.org',
+          phone: '',
+          email: '',
+          notes: 'Veteran-focused medical consulting firm.'
+        },
+        {
+          id: 'nat-mednick',
+          name: 'Mednick Associates',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Legal', 'Medical Experts'],
+          services: 'Nexus Letters (Attorneys Only)',
+          contact: 'mednickassociates.com',
+          phone: '203-966-3000',
+          email: 'info@mednickassociates.com',
+          notes: 'Works primarily with attorneys. Veteran owned.'
+        },
+
+        // --- EXISTING NATIONAL ---
+        {
+          id: 'nat-4',
+          name: 'MedConnectVA',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Oncology', 'Infectious Disease', 'Neurology', 'Pulmonology'],
+          services: 'Written Nexus Opinions (Record Review)',
+          contact: 'medconnectva.com',
+          phone: '888-482-3627',
+          email: '',
+          notes: 'Complex/Rare diseases. 50+ specialties. No clinic bottlenecks.'
+        },
+        {
+          id: 'nat-ame',
+          name: 'American Medical Experts',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Complex Cases', 'Expert Witness'],
+          services: 'Full Case Review, Nexus, IMEs',
+          contact: 'americanmedicalexperts.com',
+          phone: '888-678-2227',
+          email: '',
+          notes: 'Premium pricing, high quality specialists.'
+        },
+
+        // --- NETWORKS ---
+        {
+          id: 'net-imenet',
+          name: 'IMENet (Independent Medical Examiners)',
+          state: 'National',
+          county: 'Resource Directory',
+          type: 'National',
+          specialty: ['Network', 'IME', 'Resource'],
+          services: 'Searchable Directory of IMEs',
+          contact: 'imenet.com',
+          phone: '',
+          email: '',
+          notes: 'Extensive database of independent medical examiners. Use to find specific local doctors.'
+        },
+        {
+          id: 'net-prime',
+          name: 'Prime Health Services (Access Point)',
+          state: 'National',
+          county: 'Network Leasing',
+          type: 'National',
+          specialty: ['Network', 'Workers Comp', 'Ortho', 'Extremities'],
+          services: 'Direct Contracted Network',
+          contact: 'primehealthservices.com',
+          phone: '866-348-3887',
+          email: '',
+          notes: 'Contact to lease network of 50 state providers.'
+        },
+        {
+          id: 'net-corvel',
+          name: 'CorVel (Access Point)',
+          state: 'National',
+          county: 'Network Leasing',
+          type: 'National',
+          specialty: ['Network', 'General'],
+          services: '20,000+ Providers',
+          contact: 'corvel.com',
+          phone: '800-267-8350',
+          email: '',
+          notes: 'Handles scheduling/QA. Monitors provider quality.'
+        },
+        {
+          id: 'net-seak',
+          name: 'SEAK National Directory (Access Point)',
+          state: 'National',
+          county: 'Resource Directory',
+          type: 'National',
+          specialty: ['Resource', 'IME'],
+          services: 'Independent Medical Examiners Directory',
+          contact: 'seakexperts.com',
+          phone: '508-457-1111',
+          email: '',
+          notes: 'Direct contact to thousands of self-selected IME doctors.'
+        },
+        {
+          id: 'nat-8',
+          name: 'Xterra Health',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['General', 'Cardiology', 'Psych'],
+          services: 'Nexus letters, IMOs',
+          contact: 'xterrahealth.com',
+          phone: '220-270-6090',
+          email: '',
+          notes: 'Mission to offer affordable access.'
+        }
       ];
 
       const [providersData, setProvidersData] = useState(initialProviders);
       const [filteredProviders, setFilteredProviders] = useState([]);
       const [nationalProviders, setNationalProviders] = useState([]);
+
+      // --- NEW PROVIDER FORM STATE ---
       const [newProvider, setNewProvider] = useState({
         name: '',
         state: '',
@@ -271,33 +1128,52 @@
         email: '',
         notes: '',
         type: 'Local',
-        category: 'Doctor'
+        category: 'Doctor' // 'Doctor' or 'Network'
       });
 
       const states = [
-        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
+        'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
+        'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+        'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+        'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+        'West Virginia', 'Wisconsin', 'Wyoming'
       ];
 
       const conditions = [
-        'All', 'Mental Health', 'PTSD', 'General', 'Toxic Exposure', 'Sleep Apnea', 'Audiology', 'Orthopedic', 'Spine', 'TBI', 'Internal Medicine', 'Resource', 'Network'
+        'All', 'Mental Health', 'PTSD', 'General', 'Toxic Exposure', 'Sleep Apnea', 'Audiology', 'Orthopedic', 'Back', 'Legs/Knees', 'Extremities', 'Spine', 'TBI', 'Internal Medicine', 'Resource', 'Network'
       ];
 
       useEffect(() => {
+        // Filter Providers Logic
         let results = providersData.filter((p) => {
+          // Filter by State (if local)
           const matchesState = selectedState ? p.state === selectedState : true;
 
+          // Filter by Condition/Specialty
           let matchesCondition = true;
           if (selectedCondition !== 'All') {
             const specialtyString = Array.isArray(p.specialty) ? p.specialty.join(' ').toLowerCase() : p.specialty.toLowerCase();
             const conditionLower = selectedCondition.toLowerCase();
 
-            if (conditionLower === 'general') {
+            // MAPPING LOGIC FOR EXTREMITIES / BACK / LEGS
+            if (['back', 'legs', 'knees', 'extremities', 'spine'].some((t) => conditionLower.includes(t))) {
+              matchesCondition =
+                specialtyString.includes('orthopedic') ||
+                specialtyString.includes('physical medicine') ||
+                specialtyString.includes('musculoskeletal') ||
+                specialtyString.includes('spine') ||
+                specialtyString.includes('back') ||
+                specialtyString.includes('legs') ||
+                specialtyString.includes('extremities');
+            } else if (conditionLower === 'general') {
               matchesCondition = specialtyString.includes('general') || specialtyString.includes('family') || specialtyString.includes('internal');
             } else {
               matchesCondition = specialtyString.includes(conditionLower);
             }
           }
 
+          // Filter by Text Search
           const matchesSearch = searchQuery
             ? p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
               p.county.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -309,19 +1185,33 @@
 
         setFilteredProviders(results);
 
+        // Filter National Providers too based on search/condition AND tab
         let nationalResults = providersData.filter((p) => {
           const isNetworkOrResource = Array.isArray(p.specialty)
             ? p.specialty.some((s) => ['Network', 'Resource', 'Consulting'].includes(s))
             : ['Network', 'Resource', 'Consulting'].includes(p.specialty);
 
+          // Tab Filter Logic
           const matchesTab = nationalTab === 'doctors' ? !isNetworkOrResource : isNetworkOrResource;
+
           if (!matchesTab) return false;
 
           let matchesCondition = true;
           if (selectedCondition !== 'All') {
             const specialtyString = Array.isArray(p.specialty) ? p.specialty.join(' ').toLowerCase() : p.specialty.toLowerCase();
             const conditionLower = selectedCondition.toLowerCase();
-            if (conditionLower === 'general') {
+
+            // SAME MAPPING LOGIC FOR NATIONAL
+            if (['back', 'legs', 'knees', 'extremities', 'spine'].some((t) => conditionLower.includes(t))) {
+              matchesCondition =
+                specialtyString.includes('orthopedic') ||
+                specialtyString.includes('physical medicine') ||
+                specialtyString.includes('musculoskeletal') ||
+                specialtyString.includes('spine') ||
+                specialtyString.includes('back') ||
+                specialtyString.includes('legs') ||
+                specialtyString.includes('extremities');
+            } else if (conditionLower === 'general') {
               matchesCondition = specialtyString.includes('general') || specialtyString.includes('all');
             } else {
               matchesCondition = specialtyString.includes(conditionLower) || specialtyString.includes('all');
@@ -370,6 +1260,7 @@
         setSearchQuery('');
       };
 
+      // --- ADD PROVIDER HANDLERS ---
       const handleAddSubmit = (e) => {
         e.preventDefault();
         if (!newProvider.name || !newProvider.state) {
@@ -392,6 +1283,7 @@
 
       return (
         <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+          {/* Toast Notification */}
           {toast && (
             <div className="fixed top-5 right-5 z-50 bg-slate-800 text-white px-4 py-2 rounded-lg shadow-xl flex items-center gap-2 animate-bounce-in">
               <CheckCircle className="w-4 h-4 text-green-400" />
@@ -399,6 +1291,7 @@
             </div>
           )}
 
+          {/* Header */}
           <header className="bg-slate-900 text-white p-6 shadow-md border-b-4 border-red-600">
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
               <div className="mb-4 md:mb-0">
@@ -408,6 +1301,7 @@
                 <p className="text-slate-400 mt-1">DBQ & Nexus Letter Provider Directory</p>
               </div>
               <div className="flex flex-col md:flex-row gap-4 items-center">
+                {/* Admin Toggle */}
                 <div className="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-full border border-slate-700">
                   <span className={`text-xs font-bold ${isAdmin ? 'text-red-400' : 'text-slate-400'}`}>Admin Mode</span>
                   <button
@@ -429,6 +1323,7 @@
           </header>
 
           <main className="max-w-6xl mx-auto p-6">
+            {/* Search Controls */}
             <section className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-slate-200">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold flex items-center gap-2">
@@ -446,6 +1341,7 @@
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* State Selector */}
                 <div className="relative">
                   <label className="block text-sm font-medium text-slate-700 mb-2">Veteran's Location (State)</label>
                   <div className="relative">
@@ -457,14 +1353,13 @@
                     >
                       <option value="">Select a State...</option>
                       {states.map((state) => (
-                        <option key={state} value={state}>
-                          {state}
-                        </option>
+                        <option key={state} value={state}>{state}</option>
                       ))}
                     </select>
                   </div>
                 </div>
 
+                {/* Condition Filter */}
                 <div className="relative">
                   <label className="block text-sm font-medium text-slate-700 mb-2">Medical Condition / Specialty</label>
                   <div className="relative">
@@ -475,14 +1370,13 @@
                       onChange={(e) => setSelectedCondition(e.target.value)}
                     >
                       {conditions.map((cond) => (
-                        <option key={cond} value={cond}>
-                          {cond}
-                        </option>
+                        <option key={cond} value={cond}>{cond}</option>
                       ))}
                     </select>
                   </div>
                 </div>
 
+                {/* Text Search */}
                 <div className="relative">
                   <label className="block text-sm font-medium text-slate-700 mb-2">Search by Name/City</label>
                   <div className="relative">
@@ -499,15 +1393,20 @@
               </div>
             </section>
 
+            {/* Results Section */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Main Results Column */}
               <div className="lg:col-span-2 space-y-6">
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-bold text-slate-800">
                     {selectedState ? `Providers in ${selectedState}` : 'Select a State to see local providers'}
                   </h3>
-                  <span className="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">{filteredProviders.length} Local Found</span>
+                  <span className="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">
+                    {filteredProviders.length} Local Found
+                  </span>
                 </div>
 
+                {/* Local Provider Cards */}
                 {filteredProviders.length > 0 ? (
                   filteredProviders.map((provider) => (
                     <ProviderCard
@@ -545,6 +1444,7 @@
                 )}
               </div>
 
+              {/* Sidebar / National Providers */}
               <div className="lg:col-span-1">
                 <div className="bg-slate-800 text-white rounded-t-xl overflow-hidden shadow-lg">
                   <div className="p-4 flex justify-between items-center border-b border-slate-700">
@@ -560,6 +1460,7 @@
                     </button>
                   </div>
 
+                  {/* Tabs for Sidebar */}
                   {showNational && (
                     <div className="flex text-sm font-medium text-center bg-slate-700">
                       <button
@@ -601,6 +1502,7 @@
             </div>
           </main>
 
+          {/* --- ADD PROVIDER MODAL --- */}
           {showAddModal && (
             <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
               <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden animate-bounce-in">
@@ -615,6 +1517,7 @@
                 </div>
 
                 <form onSubmit={handleAddSubmit} className="p-6 space-y-4">
+                  {/* Type Toggle */}
                   <div className="flex gap-4 p-1 bg-slate-100 rounded-lg">
                     <label className={`flex-1 text-center py-2 rounded cursor-pointer text-sm font-medium ${newProvider.category === 'Doctor' ? 'bg-white shadow text-blue-700' : 'text-slate-500'}`}>
                       <input
@@ -662,9 +1565,7 @@
                         <option value="">Select State...</option>
                         <option value="Nationwide">Nationwide (Telehealth)</option>
                         {states.map((s) => (
-                          <option key={s} value={s}>
-                            {s}
-                          </option>
+                          <option key={s} value={s}>{s}</option>
                         ))}
                       </select>
                     </div>
@@ -689,9 +1590,7 @@
                         onChange={(e) => setNewProvider({ ...newProvider, specialty: e.target.value })}
                       >
                         {conditions.map((c) => (
-                          <option key={c} value={c}>
-                            {c}
-                          </option>
+                          <option key={c} value={c}>{c}</option>
                         ))}
                       </select>
                     </div>
@@ -750,6 +1649,7 @@
             </div>
           )}
 
+          {/* Footer */}
           <footer className="mt-12 bg-slate-900 text-slate-400 py-8 text-center">
             <p className="text-sm">© 2025 Thank You For Your Service. All rights reserved.</p>
             <p className="text-xs mt-2 text-slate-600">
@@ -760,8 +1660,166 @@
       );
     };
 
+    // --- SUB-COMPONENTS ---
+
+    const ProviderCard = ({ provider, copyToClipboard, isAdmin, onDelete }) => {
+      const isResource = Array.isArray(provider.specialty)
+        ? provider.specialty.includes('Resource')
+        : provider.specialty === 'Resource';
+
+      return (
+        <div className={`relative rounded-lg shadow-md border p-5 hover:shadow-xl transition-shadow duration-200 ${isResource ? 'bg-amber-50 border-amber-200' : 'bg-white border-slate-200'}`}>
+          {/* Admin Delete Button */}
+          {isAdmin && (
+            <button
+              onClick={onDelete}
+              className="absolute top-2 right-2 p-1.5 bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition-colors z-10"
+              title="Remove Provider"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          )}
+
+          <div className="flex justify-between items-start mb-3 pr-8">
+            <div>
+              <div className="flex items-center gap-2">
+                {isResource && <Database className="w-5 h-5 text-amber-600" />}
+                <h4 className={`font-bold text-lg ${isResource ? 'text-amber-900' : 'text-blue-900'}`}>{provider.name}</h4>
+                {isAdmin && <ShieldCheck className="w-4 h-4 text-green-500" title="Verified in Database" />}
+              </div>
+              <p className="text-sm text-slate-600 flex items-center gap-1">
+                <MapPin className="w-3 h-3" /> {provider.county}, {provider.state}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-1 max-w-[40%] justify-end">
+              {Array.isArray(provider.specialty) ? provider.specialty.map((spec, idx) => (
+                <span key={idx} className={`text-[10px] px-2 py-1 rounded border whitespace-nowrap ${isResource ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-700 border-blue-100'}`}>
+                  {spec}
+                </span>
+              )) : (
+                <span className={`text-[10px] px-2 py-1 rounded border whitespace-nowrap ${isResource ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-700 border-blue-100'}`}>
+                  {provider.specialty}
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div className="space-y-2 mb-4">
+            <div className="flex items-start gap-2 text-sm">
+              <FileText className="w-4 h-4 text-slate-400 mt-0.5" />
+              <span className="font-medium text-slate-700">Services:</span>
+              <span className="text-slate-600">{provider.services || provider.notes}</span>
+            </div>
+            <div className={`flex items-start gap-2 text-sm p-2 rounded ${isResource ? 'bg-white' : 'bg-slate-50'}`}>
+              <CheckCircle className={`w-4 h-4 mt-0.5 min-w-[16px] ${isResource ? 'text-amber-600' : 'text-green-600'}`} />
+              <span className="text-slate-600 italic text-xs">{provider.notes}</span>
+            </div>
+          </div>
+
+          <div className="flex gap-3 mt-4 pt-4 border-t border-slate-100 items-center flex-wrap">
+            {provider.phone && (
+              <a
+                href={`tel:${provider.phone}`}
+                className="flex items-center gap-2 text-sm bg-blue-50 text-blue-700 hover:bg-blue-100 font-medium px-3 py-1.5 rounded-md transition-colors"
+              >
+                <Phone className="w-4 h-4" /> Call
+              </a>
+            )}
+            {provider.email && (
+              <a
+                href={`mailto:${provider.email}`}
+                className="flex items-center gap-2 text-sm bg-slate-50 text-slate-700 hover:bg-slate-100 font-medium px-3 py-1.5 rounded-md transition-colors"
+              >
+                <Mail className="w-4 h-4" /> Email
+              </a>
+            )}
+            {provider.contact && !provider.contact.includes('@') && (
+              <a
+                href={`https://${provider.contact.replace('https://', '').replace('http://', '')}`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-sm bg-slate-50 text-slate-700 hover:bg-slate-100 font-medium px-3 py-1.5 rounded-md transition-colors"
+              >
+                <Globe className="w-4 h-4" /> {isResource ? 'Resource' : 'Web'} <ExternalLink className="w-3 h-3 opacity-50" />
+              </a>
+            )}
+
+            <button
+              onClick={() => copyToClipboard(`${provider.name}
+${provider.phone || 'No Phone'}
+${provider.email || 'No Email'}
+${provider.contact}`)}
+              className="ml-auto flex items-center gap-1 text-xs text-slate-400 hover:text-slate-600"
+            >
+              <Copy className="w-3 h-3" /> Copy
+            </button>
+          </div>
+        </div>
+      );
+    };
+
+    const NationalProviderCard = ({ provider, copyToClipboard, isAdmin, onDelete }) => {
+      const isNetwork = Array.isArray(provider.specialty)
+        ? provider.specialty.includes('Network')
+        : provider.specialty === 'Network';
+
+      return (
+        <div className={`relative rounded border p-3 transition-colors ${isNetwork ? 'bg-purple-50 border-purple-200 hover:border-purple-300' : 'bg-slate-50 border-slate-200 hover:border-blue-300'}`}>
+          {/* Admin Delete Button */}
+          {isAdmin && (
+            <button
+              onClick={onDelete}
+              className="absolute top-1 right-1 p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors"
+              title="Remove"
+            >
+              <X className="w-3 h-3" />
+            </button>
+          )}
+
+          <div className="flex justify-between items-center mb-2 pr-4">
+            <h5 className={`font-bold text-sm ${isNetwork ? 'text-purple-900' : 'text-slate-800'}`}>{provider.name}</h5>
+            {isNetwork ? <Building className="w-3 h-3 text-purple-500" /> : <Video className="w-3 h-3 text-blue-500" />}
+          </div>
+          <div className="flex flex-wrap gap-1 mb-2">
+            {Array.isArray(provider.specialty) ? provider.specialty.slice(0, 2).map((s, i) => (
+              <span key={i} className={`text-[10px] border px-1.5 rounded ${isNetwork ? 'bg-white border-purple-100 text-purple-600' : 'bg-white border-slate-200 text-slate-500'}`}>{s}</span>
+            )) : (
+              <span className={`text-[10px] border px-1.5 rounded ${isNetwork ? 'bg-white border-purple-100 text-purple-600' : 'bg-white border-slate-200 text-slate-500'}`}>{provider.specialty}</span>
+            )}
+          </div>
+          <p className="text-xs text-slate-600 mb-2">{provider.notes.substring(0, 60)}...</p>
+          <div className="flex gap-2 mt-2 pt-2 border-t border-slate-200 flex-wrap">
+            {provider.phone && (
+              <a
+                href={`tel:${provider.phone}`}
+                className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:underline"
+              >
+                <Phone className="w-3 h-3" /> Call
+              </a>
+            )}
+            {provider.email && (
+              <a
+                href={`mailto:${provider.email}`}
+                className="flex items-center gap-1 text-[10px] font-bold text-blue-600 hover:underline"
+              >
+                <Mail className="w-3 h-3" /> Email
+              </a>
+            )}
+            {!provider.phone && !provider.email && (
+              <button
+                onClick={() => copyToClipboard(provider.contact)}
+                className={`text-[10px] font-bold hover:underline ${isNetwork ? 'text-purple-600' : 'text-blue-600'}`}
+              >
+                Copy Contact
+              </button>
+            )}
+          </div>
+        </div>
+      );
+    };
+
     const root = createRoot(document.getElementById('root'));
     root.render(<ProviderFinder />);
-  </script>
+</script>
 </body>
 </html>
