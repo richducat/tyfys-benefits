@@ -644,10 +644,17 @@ function ContactStep({ onNext, initialData, part }) {
     const newErrors = {};
 
     // SECURITY: Bot Detection (Honeypot)
-    // If the hidden field 'website_hp' has a value, it's a bot.
+    // If the hidden field 'website_hp' has a value, it's likely a bot.
+    // Allow known browser autofill values to avoid blocking real users.
     if (localData.website_hp) {
-      console.log("Spam detected: Honeypot filled");
-      return false; // Silently fail
+      const honeypotValue = localData.website_hp.trim();
+      const allowedValues = [localData.email, localData.firstName, localData.lastName, localData.phone]
+        .filter(Boolean)
+        .map((value) => value.trim());
+      if (!allowedValues.includes(honeypotValue)) {
+        console.log("Spam detected: Honeypot filled");
+        return false; // Silently fail
+      }
     }
 
     // SECURITY: Time-based Validation

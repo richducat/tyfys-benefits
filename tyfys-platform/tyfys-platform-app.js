@@ -344,8 +344,12 @@
     const validate = () => {
       const newErrors = {};
       if (localData.website_hp) {
-        console.log("Spam detected: Honeypot filled");
-        return false;
+        const honeypotValue = localData.website_hp.trim();
+        const allowedValues = [localData.email, localData.firstName, localData.lastName, localData.phone].filter(Boolean).map((value) => value.trim());
+        if (!allowedValues.includes(honeypotValue)) {
+          console.log("Spam detected: Honeypot filled");
+          return false;
+        }
       }
       if (part === 1) {
         if (!localData.firstName) newErrors.firstName = "First Name is required";
