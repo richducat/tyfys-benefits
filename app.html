@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1PEBFCV9Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1PEBFCV9Q');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="TYFYS App portal for veterans to manage their claim strategy." />
+    <title>TYFYS App | Veteran Operating System</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="apps/navigation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 50: '#f0f4ff', 100: '#e0eaff', 700: '#2d4a9e', 800: '#1e3a8a', 900: '#0f172a' },
+                        gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(245, 158, 11, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script defer src="tyfys-platform/vendor/react.production.min.js"></script>
+    <script defer src="tyfys-platform/vendor/react-dom.production.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        #root {
+            height: calc(100vh - 5rem);
+        }
+        #root .h-screen {
+            height: 100%;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+
+        /* Animations */
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .animate-slideInRight { animation: slideInRight 0.3s ease-out forwards; }
+        @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        .animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Utilities */
+        .chat-bubble { position: relative; }
+        .chat-bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -8px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid white;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
+    <nav class="sticky top-0 z-50 transition-all duration-500 bg-transparent" data-site-nav>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <span class="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-white/80 shadow-lg ring-1 ring-white/60 backdrop-blur">
+                            <i data-lucide="shield-check" class="h-6 w-6 text-navy-800"></i>
+                        </span>
+                        <div class="flex flex-col">
+                            <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+                            <span class="text-[11px] text-gold-600 font-bold uppercase tracking-[0.25em] mt-1">Veteran Owned & Operated</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="hidden lg:flex items-center gap-6 nav-actions">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="about_us.html" class="nav-link">About Us</a>
+                    <a href="mission_team.html" class="nav-link">Our Team</a>
+                    <a href="process.html" class="nav-link">Our Process</a>
+
+                    <div class="relative nav-dropdown">
+                        <button class="nav-link flex items-center gap-2" type="button">
+                            VA Claims <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="nav-mega absolute left-0 top-12 w-[28rem] bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-slate-100 p-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <a href="mental-health-ptsd.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                    <div class="h-10 w-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                                        <i data-lucide="brain" class="h-5 w-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Mental Health & PTSD</p>
+                                        <p class="text-sm text-slate-500">Therapy DBQs, stressor statements, and nexus support.</p>
+                                    </div>
+                                </a>
+                                <a href="back-neck-joints.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                    <div class="h-10 w-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                                        <i data-lucide="bone" class="h-5 w-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Back, Neck & Joints</p>
+                                        <p class="text-sm text-slate-500">Orthopedic exams, ROM charts, and pain documentation.</p>
+                                    </div>
+                                </a>
+                                <a href="intake-portal.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                    <div class="h-10 w-10 rounded-xl bg-navy-50 text-navy-800 flex items-center justify-center">
+                                        <i data-lucide="clipboard-list" class="h-5 w-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Intake</p>
+                                        <p class="text-sm text-slate-500">Start your VA claim intake with our team.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative nav-dropdown">
+                        <button class="nav-link flex items-center gap-2" type="button">
+                            Resources <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                        </button>
+                        <div class="nav-mega absolute left-0 top-12 w-[34rem] bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-slate-100 p-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <a href="calculator.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                    <div class="h-10 w-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                                        <i data-lucide="calculator" class="h-5 w-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Backpay Calculator</p>
+                                        <p class="text-sm text-slate-500">Project potential monthly increases instantly.</p>
+                                    </div>
+                                </a>
+                                <a href="comparison.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                    <div class="h-10 w-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center">
+                                        <i data-lucide="scale" class="h-5 w-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Compare: VSO vs. Us</p>
+                                        <p class="text-sm text-slate-500">Understand how private evidence accelerates claims.</p>
+                                    </div>
+                                </a>
+                                <a href="education.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                    <div class="h-10 w-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                                        <i data-lucide="graduation-cap" class="h-5 w-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Briefing Room</p>
+                                        <p class="text-sm text-slate-500">Step-by-step guides to avoid VA claim pitfalls.</p>
+                                    </div>
+                                </a>
+                                <a href="blog.html" class="nav-card rounded-xl p-4 flex gap-3 hover:no-underline">
+                                    <div class="h-10 w-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+                                        <i data-lucide="book-open" class="h-5 w-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-900">Blog</p>
+                                        <p class="text-sm text-slate-500">Expert commentary on ratings, appeals, and benefits.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="nav-pill border border-slate-200 bg-white/70 text-slate-800 shadow-sm hover:border-slate-300 hover:-translate-y-0.5 transition" data-command-trigger>
+                        <i data-lucide="search" class="h-4 w-4"></i>
+                        <span class="text-sm">Cmd/Ctrl + K</span>
+                    </button>
+
+                    <div class="relative">
+                        <button type="button" class="nav-pill border border-slate-200 bg-white/70 text-slate-800 shadow-sm hover:border-slate-300 hover:-translate-y-0.5 transition" data-accessibility-toggle aria-expanded="false">
+                            <i data-lucide="accessibility" class="h-4 w-4"></i>
+                            <span class="text-sm">Accessibility</span>
+                        </button>
+                        <div data-accessibility-panel class="hidden absolute right-0 mt-3 w-72 rounded-2xl bg-white shadow-xl border border-slate-200 p-4 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-semibold text-slate-900">Assistive Toolbar</p>
+                                <span class="text-xs text-slate-500">Live page controls</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button type="button" class="accessibility-button" data-font-increase>
+                                    <i data-lucide="plus" class="h-4 w-4"></i>
+                                    <span>A+ Font</span>
+                                </button>
+                                <button type="button" class="accessibility-button" data-font-decrease>
+                                    <i data-lucide="minus" class="h-4 w-4"></i>
+                                    <span>A- Font</span>
+                                </button>
+                                <button type="button" class="accessibility-button" data-contrast-toggle>
+                                    <i data-lucide="contrast" class="h-4 w-4"></i>
+                                    <span>High Contrast</span>
+                                </button>
+                                <button type="button" class="accessibility-button" data-grayscale-toggle>
+                                    <i data-lucide="palette" class="h-4 w-4"></i>
+                                    <span>Grayscale</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="contact.html" class="nav-cta bg-navy-800 hover:bg-navy-900 text-white transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        Book Discovery Call <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-3 lg:hidden">
+                    <button type="button" class="p-2 rounded-full bg-white/70 border border-white/70 shadow-sm text-navy-800" data-command-trigger aria-label="Open command palette">
+                        <i data-lucide="search" class="h-5 w-5"></i>
+                    </button>
+                    <button type="button" class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/80 text-navy-800 shadow border border-white/80 font-semibold" data-mobile-menu-toggle aria-expanded="false" aria-label="Open navigation">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                        <span class="text-sm">Menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden pointer-events-none fixed inset-0 z-40" data-mobile-drawer-container>
+            <div class="absolute inset-0 bg-slate-900/40 opacity-0 transition-opacity duration-200" data-mobile-overlay></div>
+            <div class="absolute right-0 top-0 h-full w-full max-w-sm bg-white shadow-2xl transform translate-x-full transition-transform duration-200" data-mobile-drawer>
+                <div class="flex items-center justify-between p-6 border-b border-slate-200">
+                    <div class="flex items-center gap-3">
+                        <span class="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-white shadow-lg ring-1 ring-slate-200">
+                            <i data-lucide="shield-check" class="h-6 w-6 text-navy-800"></i>
+                        </span>
+                        <div class="flex flex-col">
+                            <span class="font-serif font-bold text-lg text-slate-900 leading-none">Thank You For Your Service</span>
+                            <span class="text-[11px] text-gold-600 font-bold uppercase tracking-[0.25em] mt-1">Veteran Owned</span>
+                        </div>
+                    </div>
+                    <button type="button" class="text-slate-500 hover:text-slate-700" aria-label="Close navigation" data-mobile-close>
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+                <div class="p-6 space-y-6 overflow-y-auto h-full">
+                    <div class="space-y-3">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-[0.3em]">Primary</p>
+                        <div class="grid gap-3">
+                            <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center"><i data-lucide="home"></i></span>
+                                <span class="font-semibold text-slate-900">Home</span>
+                            </a>
+                            <a href="about_us.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center"><i data-lucide="info"></i></span>
+                                <span class="font-semibold text-slate-900">About Us</span>
+                            </a>
+                            <a href="mission_team.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center"><i data-lucide="users"></i></span>
+                                <span class="font-semibold text-slate-900">Our Team</span>
+                            </a>
+                            <a href="process.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center"><i data-lucide="route"></i></span>
+                                <span class="font-semibold text-slate-900">Our Process</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-[0.3em]">VA Claims</p>
+                        <div class="grid gap-3">
+                            <a href="mental-health-ptsd.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center"><i data-lucide="brain"></i></span>
+                                <div>
+                                    <p class="font-semibold text-slate-900">Mental Health & PTSD</p>
+                                    <p class="text-xs text-slate-500">Therapy DBQs, stressor statements, and nexus support.</p>
+                                </div>
+                            </a>
+                            <a href="back-neck-joints.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center"><i data-lucide="bone"></i></span>
+                                <div>
+                                    <p class="font-semibold text-slate-900">Back, Neck & Joints</p>
+                                    <p class="text-xs text-slate-500">Orthopedic exams, ROM charts, and pain documentation.</p>
+                                </div>
+                            </a>
+                            <a href="intake-portal.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-navy-50 text-navy-800 flex items-center justify-center"><i data-lucide="clipboard-list"></i></span>
+                                <div>
+                                    <p class="font-semibold text-slate-900">Intake</p>
+                                    <p class="text-xs text-slate-500">Start your VA claim intake with our team.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-[0.3em]">Resources</p>
+                        <div class="grid gap-3">
+                            <a href="calculator.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center"><i data-lucide="calculator"></i></span>
+                                <div>
+                                    <p class="font-semibold text-slate-900">Backpay Calculator</p>
+                                    <p class="text-xs text-slate-500">Project potential monthly increases instantly.</p>
+                                </div>
+                            </a>
+                            <a href="comparison.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center"><i data-lucide="scale"></i></span>
+                                <div>
+                                    <p class="font-semibold text-slate-900">Compare: VSO vs. Us</p>
+                                    <p class="text-xs text-slate-500">Understand how private evidence accelerates claims.</p>
+                                </div>
+                            </a>
+                            <a href="education.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center"><i data-lucide="graduation-cap"></i></span>
+                                <div>
+                                    <p class="font-semibold text-slate-900">Briefing Room</p>
+                                    <p class="text-xs text-slate-500">Step-by-step guides to avoid VA claim pitfalls.</p>
+                                </div>
+                            </a>
+                            <a href="blog.html" class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-slate-300 shadow-sm" data-mobile-cta>
+                                <span class="h-9 w-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center"><i data-lucide="book-open"></i></span>
+                                <div>
+                                    <p class="font-semibold text-slate-900">Blog</p>
+                                    <p class="text-xs text-slate-500">Expert commentary on ratings, appeals, and benefits.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pb-10">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-[0.3em]">Actions</p>
+                        <a href="contact.html" class="flex items-center gap-3 p-4 rounded-2xl bg-navy-800 text-white shadow-lg" data-mobile-cta>
+                            <span class="h-9 w-9 rounded-xl bg-white/20 flex items-center justify-center"><i data-lucide="phone"></i></span>
+                            <div>
+                                <p class="font-semibold">Book Discovery Call</p>
+                                <p class="text-xs text-white/70">Talk with our team about your claim strategy.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-start justify-center p-4" data-command-palette>
+            <div class="command-panel w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+                <div class="flex items-center gap-3 px-5 py-4 border-b border-slate-200">
+                    <i data-lucide="search" class="h-5 w-5 text-slate-500"></i>
+                    <input type="search" placeholder="Search pages..." class="flex-1 text-sm focus:outline-none" data-command-input />
+                    <button type="button" class="text-slate-500" data-command-close>
+                        <i data-lucide="x" class="h-5 w-5"></i>
+                    </button>
+                </div>
+                <div class="max-h-[50vh] overflow-y-auto" data-command-results></div>
+                <div class="flex items-center justify-between px-5 py-3 text-xs text-slate-500 bg-slate-50 border-t border-slate-200">
+                    <span class="inline-flex items-center gap-1"><i data-lucide="mouse-pointer" class="h-3.5 w-3.5"></i> Enter to open</span>
+                    <span class="inline-flex items-center gap-1"><i data-lucide="command" class="h-3.5 w-3.5"></i> ESC to close</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 min-h-0 overflow-hidden">
+        <div id="root"></div>
+    </main>
+
+    <script src="apps/mobile-nav.js"></script>
+    <script src="tyfys-platform/tyfys-platform-app.js" defer></script>
+</body>
+</html>
