@@ -37,8 +37,45 @@
   <div id="root"></div>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel" data-presets="react">
-    const { useState, useEffect } = React;
-    const { Search, MapPin, Stethoscope, Phone, Globe, Mail, Copy, CheckCircle, AlertCircle, FileText, Video, X, Plus, UserPlus, Save, Database, Building, ExternalLink, Trash2, Shield, ShieldCheck } = lucideReact;
+    const rootElement = document.getElementById('root');
+    if (!window.React || !window.ReactDOM) {
+      rootElement.innerHTML = `
+        <div class="min-h-screen bg-slate-50 font-sans text-slate-800 flex items-center justify-center px-6">
+          <div class="max-w-lg text-center bg-white border border-slate-200 shadow-lg rounded-2xl p-8">
+            <h1 class="text-2xl font-bold text-slate-900">Provider Finder is unavailable</h1>
+            <p class="mt-3 text-slate-600">
+              We couldn&apos;t load the required scripts. Please check your connection or content blockers and refresh the page.
+            </p>
+          </div>
+        </div>
+      `;
+    } else {
+      const { useState, useEffect } = React;
+      const iconFallback = (props) => <span aria-hidden="true" {...props} />;
+      const lucideIcons = window.lucideReact || {};
+      const {
+        Search = iconFallback,
+        MapPin = iconFallback,
+        Stethoscope = iconFallback,
+        Phone = iconFallback,
+        Globe = iconFallback,
+        Mail = iconFallback,
+        Copy = iconFallback,
+        CheckCircle = iconFallback,
+        AlertCircle = iconFallback,
+        FileText = iconFallback,
+        Video = iconFallback,
+        X = iconFallback,
+        Plus = iconFallback,
+        UserPlus = iconFallback,
+        Save = iconFallback,
+        Database = iconFallback,
+        Building = iconFallback,
+        ExternalLink = iconFallback,
+        Trash2 = iconFallback,
+        Shield = iconFallback,
+        ShieldCheck = iconFallback
+      } = lucideIcons;
 
     const ProviderFinder = () => {
       // --- STATE MANAGEMENT ---
@@ -1346,7 +1383,7 @@
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* State Selector */}
                 <div className="relative">
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Veteran's Location (State)</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Veteran&apos;s Location (State)</label>
                   <div className="relative">
                     <MapPin className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
                     <select
@@ -1428,7 +1465,7 @@
                         <div>
                           <h4 className="font-bold text-yellow-800">No In-Person Provider Listed</h4>
                           <p className="text-yellow-700 text-sm mt-1">
-                            We don't have a specific in-person provider listed for <strong>{selectedState}</strong> matching <strong>{selectedCondition}</strong> criteria.
+                            We don&apos;t have a specific in-person provider listed for <strong>{selectedState}</strong> matching <strong>{selectedCondition}</strong> criteria.
                           </p>
                           <p className="text-yellow-800 font-medium text-sm mt-2">
                             Please refer to the National Telehealth Providers list on the right or use the "Add New Provider" button if you know a local doctor.
@@ -1821,8 +1858,9 @@ ${provider.contact}`)}
       );
     };
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<ProviderFinder />);
-</script>
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<ProviderFinder />);
+    }
+  </script>
 </body>
 </html>
