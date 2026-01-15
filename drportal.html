@@ -1771,6 +1771,59 @@
               </div>
             </section>
 
+            {/* Medical Provider Map */}
+            <section className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-slate-200">
+              <div className="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                  <h2 className="text-xl font-semibold text-slate-800">Medical Provider Map</h2>
+                  <p className="text-sm text-slate-500 mt-1">
+                    Quick reference guide for which specialists handle DBQs, Nexus Letters, and IMOs.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 text-[11px]">
+                  <span className="px-2 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700">Legend: DBQ</span>
+                  <span className="px-2 py-1 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700">NEXUS</span>
+                  <span className="px-2 py-1 rounded-full border border-amber-200 bg-amber-50 text-amber-700">IMO</span>
+                </div>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-slate-600">
+                <span className="px-2 py-1 rounded-full border border-slate-200">GEN</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">MSK</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">NEU</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">SLEEP</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">RESP</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">ENT/AUD</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">EXP</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">IMG</span>
+              </div>
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <div className="rounded-lg border border-slate-200 p-4 bg-slate-50">
+                  <h3 className="font-semibold text-slate-800">Specialist Highlights</h3>
+                  <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                    <li><strong>Dr. Nicole Edwards, MD</strong> — DBQ/NEXUS • GEN/MSK/RESP (broad gen-med DBQs + record review).</li>
+                    <li><strong>Dr. John Ellis, MD (Ellis Clinic)</strong> — DBQ/IME • MSK + ENT/AUD (neck/back with radiculopathy; hearing/tinnitus).</li>
+                    <li><strong>Dr. Craig Bash, MD</strong> — IMO/NEXUS • NEU/SLEEP (TBI, migraines; imaging review; some OSA secondary).</li>
+                    <li><strong>Dr. David Anaise, MD</strong> — IMO/NEXUS • SLEEP + complex multi-system (secondary links, denials).</li>
+                    <li><strong>Dr. Victoria A. Cassano, MD</strong> — IMO/NEXUS • EXP (toxic exposure / occupational-environmental medicine).</li>
+                    <li><strong>Dr. Cook, MD (MedFit)</strong> — IME/IMO/NEXUS • EXP/MSK (occupational medicine + toxicology).</li>
+                    <li><strong>Dr. Thomas Seiter, MD / Marian Medical</strong> — IMG (radiology 2nd opinions + gait analysis).</li>
+                  </ul>
+                </div>
+                <div className="rounded-lg border border-slate-200 p-4 bg-slate-50">
+                  <h3 className="font-semibold text-slate-800">Networks & Broad Coverage</h3>
+                  <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                    <li><strong>Northside Family Practice (Parman/Mitchell)</strong> — IME/DBQ support • GEN.</li>
+                    <li><strong>K&amp;D Veterans Medical Assessment (KD-VMA)</strong> — DBQ/IMO • GEN multi-condition.</li>
+                    <li><strong>MedConnectVA</strong> — NEXUS/IMO • specialty-match (50+ specialties).</li>
+                    <li><strong>Valor 4 Vet</strong> — DBQ/NEXUS • online DBQs (migraines, sleep apnea, ED).</li>
+                    <li><strong>MyVeteranNexusLetter (J. Gardner, PA-C)</strong> — NEXUS only • GEN.</li>
+                    <li><strong>Other local MD/PA/FNP options</strong> — GEN coverage/availability (Ghouri noted for OSA secondary to PTSD).</li>
+                    <li><strong>Records-only helpers</strong> — MedConnectVA and other record-review specialists.</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
             {/* Results Section */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Main Results Column */}
@@ -2183,12 +2236,22 @@ ${provider.contact}`)}
                 <Mail className="w-3 h-3" /> Email
               </a>
             )}
-            {!provider.phone && !provider.email && (
+            {provider.contact && !provider.contact.includes('@') && (
+              <a
+                href={`https://${provider.contact.replace('https://', '').replace('http://', '')}`}
+                target="_blank"
+                rel="noreferrer"
+                className={`flex items-center gap-1 text-[10px] font-bold hover:underline ${isNetwork ? 'text-purple-600' : 'text-blue-600'}`}
+              >
+                <Globe className="w-3 h-3" /> Website
+              </a>
+            )}
+            {!provider.phone && !provider.email && !provider.contact && (
               <button
-                onClick={() => copyToClipboard(provider.contact)}
+                onClick={() => copyToClipboard(provider.name)}
                 className={`text-[10px] font-bold hover:underline ${isNetwork ? 'text-purple-600' : 'text-blue-600'}`}
               >
-                Copy Contact
+                Copy Provider
               </button>
             )}
           </div>
