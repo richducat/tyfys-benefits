@@ -1159,7 +1159,7 @@
           notes: 'Premium pricing, high quality specialists.'
         },
         {
-          id: 'nat-richard-smith',
+a          id: 'nat-richard-smith',
           name: 'Dr. Richard Smith, MD',
           state: 'National',
           county: 'Location TBD',
@@ -1484,6 +1484,19 @@
           phone: '508-457-1111',
           email: '',
           notes: 'SEAK is an ACCME-accredited training company founded in 1980. IMENet hosts the SEAK directory of IME providers.'
+        },
+        {
+          id: 'net-valor4vet',
+          name: 'Valor4Vet',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Network', 'Nexus Letters'],
+          services: 'DBQs, Nexus Letters, IMOs',
+          contact: 'valor4vet.com',
+          phone: '',
+          email: '',
+          notes: 'Network of veteran-focused providers.'
         },
         {
           id: 'net-vime',
@@ -1966,9 +1979,11 @@
                   <ul className="mt-3 space-y-2 text-sm text-slate-700">
                     <li><strong>Northside Family Practice (Parman/Mitchell)</strong> — IME/DBQ support • GEN.</li>
                     <li><strong>K&amp;D Veterans Medical Assessment (KD-VMA)</strong> — DBQ/IMO • GEN multi-condition.</li>
-                    <li><strong>MyVeteranNexusLetter (J. Gardner, PA-C)</strong> — NEXUS only • GEN + optional audiology/psychiatry.</li>
+                    <li><strong>MedConnectVA</strong> — NEXUS/IMO • specialty-match (50+ specialties).</li>
+                    <li><strong>Valor 4 Vet</strong> — DBQ/NEXUS • online DBQs (migraines, sleep apnea, ED).</li>
+                    <li><strong>MyVeteranNexusLetter (J. Gardner, PA-C)</strong> — NEXUS only • GEN.</li>
                     <li><strong>Other local MD/PA/FNP options</strong> — GEN coverage/availability (Ghouri noted for OSA secondary to PTSD).</li>
-                    <li><strong>Records-only helpers</strong> — Mediscope (RN/LNC) + VA-PAC (PA-C).</li>
+                    <li><strong>Records-only helpers</strong> — MedConnectVA and other record-review specialists.</li>
                   </ul>
                 </div>
               </div>
@@ -2247,6 +2262,8 @@
       const isResource = Array.isArray(provider.specialty)
         ? provider.specialty.includes('Resource')
         : provider.specialty === 'Resource';
+      const providerNotes = provider.notes || '';
+      const providerServices = provider.services || providerNotes || 'Details available upon request.';
 
       return (
         <div className={`relative rounded-lg shadow-md border p-5 hover:shadow-xl transition-shadow duration-200 ${isResource ? 'bg-amber-50 border-amber-200' : 'bg-white border-slate-200'}`}>
@@ -2289,11 +2306,11 @@
             <div className="flex items-start gap-2 text-sm">
               <FileText className="w-4 h-4 text-slate-400 mt-0.5" />
               <span className="font-medium text-slate-700">Services:</span>
-              <span className="text-slate-600">{provider.services || provider.notes}</span>
+              <span className="text-slate-600">{providerServices}</span>
             </div>
             <div className={`flex items-start gap-2 text-sm p-2 rounded ${isResource ? 'bg-white' : 'bg-slate-50'}`}>
               <CheckCircle className={`w-4 h-4 mt-0.5 min-w-[16px] ${isResource ? 'text-amber-600' : 'text-green-600'}`} />
-              <span className="text-slate-600 italic text-xs">{provider.notes}</span>
+              <span className="text-slate-600 italic text-xs">{providerNotes || 'Details forthcoming.'}</span>
             </div>
           </div>
 
@@ -2343,6 +2360,8 @@ ${provider.contact}`)}
       const isNetwork = Array.isArray(provider.specialty)
         ? provider.specialty.includes('Network')
         : provider.specialty === 'Network';
+      const providerNotes = provider.notes || '';
+      const previewNotes = providerNotes ? `${providerNotes.substring(0, 60)}...` : 'Details forthcoming.';
 
       return (
         <div className={`relative rounded border p-3 transition-colors ${isNetwork ? 'bg-purple-50 border-purple-200 hover:border-purple-300' : 'bg-slate-50 border-slate-200 hover:border-blue-300'}`}>
@@ -2368,7 +2387,7 @@ ${provider.contact}`)}
               <span className={`text-[10px] border px-1.5 rounded ${isNetwork ? 'bg-white border-purple-100 text-purple-600' : 'bg-white border-slate-200 text-slate-500'}`}>{provider.specialty}</span>
             )}
           </div>
-          <p className="text-xs text-slate-600 mb-2">{provider.notes.substring(0, 60)}...</p>
+          <p className="text-xs text-slate-600 mb-2">{previewNotes}</p>
           <div className="flex gap-2 mt-2 pt-2 border-t border-slate-200 flex-wrap">
             {provider.phone && (
               <a
