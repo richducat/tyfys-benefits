@@ -885,12 +885,6 @@
       // --- COMPONENT: PROFILE VIEW ---
       const ProviderProfile = ({ provider, onBack, copyFn, isAdmin, adminState, updateAdmin, showToast }) => {
         const isResource = provider.specialty.includes('Resource');
-        const hasPhone = Boolean(provider.phone);
-        const contactValue = provider.email || provider.contact;
-        const hasContact = Boolean(contactValue);
-        const isEmailContact = Boolean(provider.email || (provider.contact && provider.contact.includes('@')));
-        const phoneLabel = provider.phone || 'Not Listed';
-        const contactLabel = contactValue || 'Not Listed';
 
         const handleSaveNote = () => {
           showToast("Admin notes saved to backend.");
@@ -942,45 +936,48 @@
                   </div>
 
                   {/* Action Bar */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                <button
-                  type="button"
-                  disabled={!hasPhone}
-                  onClick={() => hasPhone && (window.location.href = `tel:${cleanPhone(provider.phone)}`)}
-                  className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl transition-colors ${hasPhone ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-slate-50 text-slate-400 border border-slate-200 cursor-not-allowed'}`}
-                >
-                  <Phone className="w-6 h-6" /> <span className="font-bold text-sm">Call</span>
-                </button>
-                <button
-                  type="button"
-                  disabled={!hasPhone}
-                  onClick={() => hasPhone && (window.location.href = `sms:${cleanPhone(provider.phone)}`)}
-                  className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl transition-colors ${hasPhone ? 'bg-green-50 text-green-700 hover:bg-green-100' : 'bg-slate-50 text-slate-400 border border-slate-200 cursor-not-allowed'}`}
-                >
-                  <MessageSquare className="w-6 h-6" /> <span className="font-bold text-sm">Text</span>
-                </button>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                    {provider.phone ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => window.location.href = `tel:${cleanPhone(provider.phone)}`}
+                          className="flex flex-col items-center justify-center gap-2 bg-blue-50 text-blue-700 p-4 rounded-xl hover:bg-blue-100 transition-colors"
+                        >
+                          <Phone className="w-6 h-6" /> <span className="font-bold text-sm">Call</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => window.location.href = `sms:${cleanPhone(provider.phone)}`}
+                          className="flex flex-col items-center justify-center gap-2 bg-green-50 text-green-700 p-4 rounded-xl hover:bg-green-100 transition-colors"
+                        >
+                          <MessageSquare className="w-6 h-6" /> <span className="font-bold text-sm">Text</span>
+                        </button>
+                      </>
+                    ) : (
+                      <div className="col-span-2 flex flex-col items-center justify-center gap-2 bg-slate-50 text-slate-400 p-4 rounded-xl border border-slate-200">
+                        <Phone className="w-6 h-6" /> <span className="font-bold text-sm">No Phone</span>
+                      </div>
+                    )}
 
-                <button
-                  type="button"
-                  disabled={!hasContact}
-                  onClick={() => {
-                    if (!hasContact) return;
-                    if (isEmailContact) {
-                      copyFn(contactValue);
-                      return;
-                    }
-                    window.open(`https://${contactValue.replace(/^https?:\/\//, '')}`, '_blank');
-                  }}
-                  className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl border transition-colors ${hasContact ? 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100' : 'bg-slate-50 text-slate-400 border-slate-200 cursor-not-allowed'}`}
-                >
-                  {isEmailContact ? <Mail className="w-6 h-6" /> : <Globe className="w-6 h-6" />}
-                  <span className="font-bold text-sm">{isEmailContact ? 'Email' : 'Website'}</span>
-                </button>
+                    {provider.contact && !provider.contact.includes('@') ? (
+                      <button
+                        type="button"
+                        onClick={() => window.open(`https://${provider.contact.replace(/^https?:\/\//, '')}`, '_blank')}
+                        className="flex flex-col items-center justify-center gap-2 bg-slate-50 text-slate-700 p-4 rounded-xl border border-slate-200 hover:bg-slate-100 transition-colors"
+                      >
+                        <Globe className="w-6 h-6" /> <span className="font-bold text-sm">Website</span>
+                      </button>
+                    ) : (
+                      <button type="button" onClick={() => copyFn(provider.contact)} className="flex flex-col items-center justify-center gap-2 bg-slate-50 text-slate-700 p-4 rounded-xl border border-slate-200 hover:bg-slate-100 transition-colors">
+                        <Mail className="w-6 h-6" /> <span className="font-bold text-sm">Email</span>
+                      </button>
+                    )}
 
-                <button type="button" onClick={() => copyFn(`${provider.name}\n${provider.phone || ''}`)} className="flex flex-col items-center justify-center gap-2 bg-white text-slate-600 p-4 rounded-xl border border-slate-200 hover:shadow-md transition-all">
-                  <Copy className="w-6 h-6" /> <span className="font-bold text-sm">Copy Info</span>
-                </button>
-              </div>
+                    <button type="button" onClick={() => copyFn(`${provider.name}\n${provider.phone || ''}`)} className="flex flex-col items-center justify-center gap-2 bg-white text-slate-600 p-4 rounded-xl border border-slate-200 hover:shadow-md transition-all">
+                      <Copy className="w-6 h-6" /> <span className="font-bold text-sm">Copy Info</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -996,14 +993,14 @@
                       <Smartphone className="w-5 h-5 text-slate-400 mt-0.5" />
                       <div>
                         <p className="text-xs text-slate-500 font-bold uppercase mb-1">Phone Number</p>
-                        <p className="text-slate-900 font-medium select-all">{phoneLabel}</p>
+                        <p className="text-slate-900 font-medium select-all">{provider.phone || 'Not Listed'}</p>
                       </div>
                     </div>
                     <div className="bg-slate-50 p-4 rounded-lg border border-slate-100 flex items-start gap-3">
                       <AtSign className="w-5 h-5 text-slate-400 mt-0.5" />
                       <div className="w-full">
                         <p className="text-xs text-slate-500 font-bold uppercase mb-1">Email / Web</p>
-                        <p className="text-slate-900 font-medium select-all break-all">{contactLabel}</p>
+                        <p className="text-slate-900 font-medium select-all break-all">{provider.email || provider.contact}</p>
                       </div>
                     </div>
                   </div>
