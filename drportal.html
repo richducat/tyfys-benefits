@@ -2255,6 +2255,8 @@ a          id: 'nat-richard-smith',
       const isResource = Array.isArray(provider.specialty)
         ? provider.specialty.includes('Resource')
         : provider.specialty === 'Resource';
+      const providerNotes = provider.notes || '';
+      const providerServices = provider.services || providerNotes || 'Details available upon request.';
 
       return (
         <div className={`relative rounded-lg shadow-md border p-5 hover:shadow-xl transition-shadow duration-200 ${isResource ? 'bg-amber-50 border-amber-200' : 'bg-white border-slate-200'}`}>
@@ -2297,11 +2299,11 @@ a          id: 'nat-richard-smith',
             <div className="flex items-start gap-2 text-sm">
               <FileText className="w-4 h-4 text-slate-400 mt-0.5" />
               <span className="font-medium text-slate-700">Services:</span>
-              <span className="text-slate-600">{provider.services || provider.notes}</span>
+              <span className="text-slate-600">{providerServices}</span>
             </div>
             <div className={`flex items-start gap-2 text-sm p-2 rounded ${isResource ? 'bg-white' : 'bg-slate-50'}`}>
               <CheckCircle className={`w-4 h-4 mt-0.5 min-w-[16px] ${isResource ? 'text-amber-600' : 'text-green-600'}`} />
-              <span className="text-slate-600 italic text-xs">{provider.notes}</span>
+              <span className="text-slate-600 italic text-xs">{providerNotes || 'Details forthcoming.'}</span>
             </div>
           </div>
 
@@ -2351,6 +2353,8 @@ ${provider.contact}`)}
       const isNetwork = Array.isArray(provider.specialty)
         ? provider.specialty.includes('Network')
         : provider.specialty === 'Network';
+      const providerNotes = provider.notes || '';
+      const previewNotes = providerNotes ? `${providerNotes.substring(0, 60)}...` : 'Details forthcoming.';
 
       return (
         <div className={`relative rounded border p-3 transition-colors ${isNetwork ? 'bg-purple-50 border-purple-200 hover:border-purple-300' : 'bg-slate-50 border-slate-200 hover:border-blue-300'}`}>
@@ -2376,7 +2380,7 @@ ${provider.contact}`)}
               <span className={`text-[10px] border px-1.5 rounded ${isNetwork ? 'bg-white border-purple-100 text-purple-600' : 'bg-white border-slate-200 text-slate-500'}`}>{provider.specialty}</span>
             )}
           </div>
-          <p className="text-xs text-slate-600 mb-2">{provider.notes.substring(0, 60)}...</p>
+          <p className="text-xs text-slate-600 mb-2">{previewNotes}</p>
           <div className="flex gap-2 mt-2 pt-2 border-t border-slate-200 flex-wrap">
             {provider.phone && (
               <a
