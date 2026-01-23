@@ -20,9 +20,9 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
    <script src="https://cdn.tailwindcss.com"></script>
-   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-   <script src="https://unpkg.com/lucide-react@0.456.0/dist/umd/lucide-react.production.min.js" crossorigin></script>
+   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+   <script src="https://unpkg.com/lucide-react@0.456.0/dist/umd/lucide-react.production.min.js"></script>
    <style>
      body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
      .animate-bounce-in { animation: bounceIn 0.4s ease; }
@@ -34,7 +34,22 @@
    </style>
 </head>
 <body class="bg-slate-50">
-  <div id="root"></div>
+  <div id="root">
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#f8fafc;color:#0f172a;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+      <div style="max-width:560px;text-align:center;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 20px 40px rgba(15,23,42,0.12);padding:32px;">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 12px;">Loading Provider Portal</h1>
+        <p style="margin:0;color:#475569;">Please wait while the directory loads.</p>
+      </div>
+    </div>
+  </div>
+  <noscript>
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:#f8fafc;color:#0f172a;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+      <div style="max-width:560px;text-align:center;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 20px 40px rgba(15,23,42,0.12);padding:32px;">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 12px;">JavaScript Required</h1>
+        <p style="margin:0;color:#475569;">Please enable JavaScript to access the Provider Portal.</p>
+      </div>
+    </div>
+  </noscript>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel" data-presets="react">
     const rootElement = document.getElementById('root');
@@ -89,6 +104,9 @@
       // New Admin States
       const [isAdmin, setIsAdmin] = useState(false);
       const [nationalTab, setNationalTab] = useState('doctors'); // 'doctors' or 'networks'
+      const [isAuthenticated, setIsAuthenticated] = useState(false);
+      const [loginForm, setLoginForm] = useState({ username: '', password: '' });
+      const [loginError, setLoginError] = useState('');
 
       // --- DATABASE ---
       const initialProviders = [
@@ -107,6 +125,19 @@
           phone: '205-933-5483',
           email: '',
           notes: 'Experienced forensic psychologist serving Alabama veterans.'
+        },
+        {
+          id: 'al-2',
+          name: 'Joey Sasser, DO',
+          state: 'Alabama',
+          county: 'Houston (Dothan)',
+          type: 'Local',
+          specialty: ['General', 'Musculoskeletal'],
+          services: 'DBQs, Exams',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'General/osteopathic medicine. 3144 Ross Clarke Cir.'
         },
 
         // --- ALASKA ---
@@ -163,6 +194,19 @@
           phone: '575-526-0777',
           email: '',
           notes: 'Certified Independent Medical Examiner (CIME). Specializes in spine/back.'
+        },
+        {
+          id: 'az-4',
+          name: 'Aws Al Jandeel, MD',
+          state: 'Arizona',
+          county: 'Pima (Tucson)',
+          type: 'Local',
+          specialty: ['General', 'Internal Medicine'],
+          services: 'DBQs, IMOs',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Internal medicine DBQs for HTN, diabetes, GERD/IBS. 1 S Church Ave, #1200.'
         },
 
         // --- ARKANSAS ---
@@ -321,6 +365,19 @@
           email: '',
           notes: 'Direct physician-signed DBQs/IMOs.'
         },
+        {
+          id: 'ga-3',
+          name: 'Michelle E. Mason-Woodard, MD',
+          state: 'Georgia',
+          county: 'Columbia (Martinez)',
+          type: 'Local',
+          specialty: ['General', 'Family Medicine'],
+          services: 'DBQs, Exams',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Family medicine for broad physical conditions. 3925 Roberts Rd.'
+        },
 
         // --- HAWAII ---
         {
@@ -470,6 +527,19 @@
           phone: '301-717-0922',
           email: 'drbash@doctor.com',
           notes: 'Known as "Dr. Bash". Premium service for complex appeals/spine.'
+        },
+        {
+          id: 'md-2',
+          name: 'Melinda Jorge, MD',
+          state: 'Maryland',
+          county: 'Prince George (Lanham)',
+          type: 'Local',
+          specialty: ['General', 'Family Medicine'],
+          services: 'DBQs, Exams',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Primary care + chronic conditions. 4600 Forbes Blvd Ste. A26-301.'
         },
 
         // --- MASSACHUSETTS ---
@@ -709,6 +779,19 @@
           email: 'toddfinnerty@toddfinnerty.com',
           notes: 'Adheres to APA Forensic Guidelines. Prolific & Authoritative.'
         },
+        {
+          id: 'oh-2',
+          name: 'LaShelle Henderson, MSN, FNP-BC, PMHNP-BC',
+          state: 'Ohio',
+          county: 'Cuyahoga (Richmond Heights)',
+          type: 'Local',
+          specialty: ['Mental Health', 'General'],
+          services: 'DBQs, IMOs, Med Management',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'PTSD/depression/anxiety, insomnia. 5241 Wilson Mills Rd Suite 35C.'
+        },
 
         // --- OKLAHOMA ---
         {
@@ -900,6 +983,19 @@
           email: '',
           notes: 'Provides independent medical exams for disability claims.'
         },
+        {
+          id: 'va-2',
+          name: 'Nicole Munshower, PA-C',
+          state: 'Virginia',
+          county: 'Chesapeake',
+          type: 'Local',
+          specialty: ['Musculoskeletal'],
+          services: 'DBQs, Exams',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'Back/neck, knee/shoulder, joint ROM/pain. 1011 Eden Way, Suite G.'
+        },
 
         // --- WASHINGTON ---
         {
@@ -1058,19 +1154,6 @@
 
         // --- EXISTING NATIONAL ---
         {
-          id: 'nat-4',
-          name: 'MedConnectVA',
-          state: 'National',
-          county: 'Nationwide',
-          type: 'National',
-          specialty: ['Oncology', 'Infectious Disease', 'Neurology', 'Pulmonology'],
-          services: 'Written Nexus Opinions (Record Review)',
-          contact: 'medconnectva.com',
-          phone: '888-482-3627',
-          email: '',
-          notes: 'Complex/Rare diseases. 50+ specialties. No clinic bottlenecks.'
-        },
-        {
           id: 'nat-ame',
           name: 'American Medical Experts',
           state: 'National',
@@ -1082,6 +1165,279 @@
           phone: '888-678-2227',
           email: '',
           notes: 'Premium pricing, high quality specialists.'
+        },
+        {
+          id: 'nat-richard-smith',
+          name: 'Dr. Richard Smith, MD',
+          state: 'National',
+          county: 'Location TBD',
+          type: 'National',
+          specialty: ['Mental Health', 'Psychiatry'],
+          services: 'DBQs, IMOs',
+          contact: 'Search Web',
+          phone: '',
+          email: '',
+          notes: 'PTSD, depression/anxiety, insomnia. Location to be verified.'
+        },
+        {
+          id: 'nat-valette',
+          name: 'Dr. Brett Valette, Ph.D.',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'Nexus Letters, PTSD Evaluations, IMOs',
+          contact: 'veteranspsychevaluations.com',
+          phone: '',
+          email: '',
+          notes: 'Veterans Psych Evaluations.'
+        },
+        {
+          id: 'nat-seiter',
+          name: 'Dr. Thomas Seiter, MD',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['General'],
+          services: 'Nexus Letters, IMOs, DBQs',
+          contact: 'marian-medical.com',
+          phone: '',
+          email: '',
+          notes: 'Marian Medical, LLC.'
+        },
+        {
+          id: 'nat-cook',
+          name: 'Dr. Cook, MD',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['General'],
+          services: 'Nexus Letters, DBQs, IMOs',
+          contact: 'medfitconsulting.com',
+          phone: '',
+          email: '',
+          notes: 'MedFit Consulting.'
+        },
+        {
+          id: 'nat-canty',
+          name: 'Arrica Canty, RN, BSN, CLNC',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['General', 'Case Review'],
+          services: 'Nexus Letters, Medical Record Review',
+          contact: 'mediscopeconsultants.com',
+          phone: '',
+          email: '',
+          notes: 'Mediscope Consultants.'
+        },
+        {
+          id: 'nat-star-medical',
+          name: 'Star Medical Clinic PLLC',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['General', 'Clinic'],
+          services: 'Nexus Letters, DBQs, IMOs',
+          contact: 'starmedicalclinic.com',
+          phone: '',
+          email: '',
+          notes: 'Clinic-based veteran medical evaluations.'
+        },
+        {
+          id: 'nat-vapac',
+          name: 'Brian Hill, PA, PhD',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['General'],
+          services: 'Nexus Letters, Claims Review',
+          contact: 'va-pac.com',
+          phone: '',
+          email: '',
+          notes: 'VA-PAC.'
+        },
+        {
+          id: 'nat-northside',
+          name: 'Northside Family Practice',
+          state: 'National',
+          county: 'Woodstock, GA',
+          type: 'National',
+          specialty: ['General', 'Family Medicine'],
+          services: 'DBQs, Nexus Letters, IMOs',
+          contact: 'northsidefamilypractice.com/services',
+          phone: '',
+          email: '',
+          notes: 'Dr. Mitchell or Dr. Parman.'
+        },
+        {
+          id: 'nat-moering',
+          name: 'Dr. Robert Moering, Psy.D.',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Mental Health', 'Forensic Psychology'],
+          services: 'IMOs, Nexus Letters, Psychological Evaluations',
+          contact: 'flpfs.com',
+          phone: '',
+          email: '',
+          notes: 'Florida Psychological & Forensic Services LLC.'
+        },
+        {
+          id: 'nat-etheridge',
+          name: 'Dr. Roy Etheridge, Ph.D.',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'Nexus Letters, Psychological Evaluations',
+          contact: 'etheridgepsychology.com',
+          phone: '',
+          email: '',
+          notes: 'Clinical psychologist specializing in evaluations.'
+        },
+        {
+          id: 'nat-garbelman',
+          name: 'Dr. Jeffrey Garbelman, Psy.D.',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'Nexus Letters, Veterans Benefit Claims',
+          contact: 'ipcwisconsin.com/veterans-benefit-claims/',
+          phone: '',
+          email: '',
+          notes: 'Psychological evaluations for veteran claims.'
+        },
+        {
+          id: 'nat-sumter',
+          name: 'Dr. Dezmond Sumter, MD',
+          state: 'National',
+          county: 'Columbia, SC',
+          type: 'National',
+          specialty: ['General'],
+          services: 'Nexus Letters, IMOs',
+          contact: '',
+          phone: '',
+          email: 'premierphysiciangroup@gmail.com',
+          notes: 'Columbia, SC area.'
+        },
+        {
+          id: 'nat-ghouri',
+          name: 'Dr. Mohommad Ghouri',
+          state: 'National',
+          county: 'Columbus, GA',
+          type: 'National',
+          specialty: ['General', 'Sleep Apnea'],
+          services: 'Nexus Letters (Sleep Apnea secondary to PTSD)',
+          contact: '',
+          phone: '',
+          email: '',
+          notes: 'Columbus, GA area. Contact TYFYS for details.'
+        },
+        {
+          id: 'nat-allen',
+          name: 'Dr. Jessica Allen, MD',
+          state: 'National',
+          county: 'Durham, NC',
+          type: 'National',
+          specialty: ['Mental Health', 'Psychiatry'],
+          services: 'Nexus Letters, Psychiatric Evaluations',
+          contact: 'ptsdnc.com',
+          phone: '',
+          email: '',
+          notes: 'Psychiatrist based in Durham, NC.'
+        },
+        {
+          id: 'nat-bucholz',
+          name: 'Leah Bucholz, PA',
+          state: 'National',
+          county: 'San Antonio, TX',
+          type: 'National',
+          specialty: ['General'],
+          services: 'Nexus Letters, DBQs, IMOs',
+          contact: '',
+          phone: '',
+          email: '',
+          notes: 'Prestige World Wide Medical Consulting (Veteran).'
+        },
+        {
+          id: 'nat-levada-broughton',
+          name: 'Rick Levada & Krystal Broughton, PAs',
+          state: 'National',
+          county: 'San Antonio, TX',
+          type: 'National',
+          specialty: ['General'],
+          services: 'Nexus Letters, DBQs, IMOs',
+          contact: '',
+          phone: '',
+          email: '',
+          notes: 'San Antonio, TX area.'
+        },
+        {
+          id: 'nat-rowland',
+          name: 'Adam Rowland, FNP',
+          state: 'National',
+          county: 'Iowa',
+          type: 'National',
+          specialty: ['General'],
+          services: 'Nexus Letters, DBQs',
+          contact: '',
+          phone: '',
+          email: '',
+          notes: 'Veteran provider based in Iowa.'
+        },
+        {
+          id: 'nat-hawkins',
+          name: 'Hawkins Psychiatry',
+          state: 'National',
+          county: 'Arlington, TX',
+          type: 'National',
+          specialty: ['Mental Health', 'Psychiatry'],
+          services: 'Nexus Letters, Psychiatric Evaluations',
+          contact: 'hawkinspsychiatry.com/nexus-letters/',
+          phone: '',
+          email: '',
+          notes: 'Dr. Hawkins (Veteran).'
+        },
+        {
+          id: 'nat-watertown',
+          name: 'Watertown Psychological Assessment, LLC',
+          state: 'National',
+          county: 'Milwaukee, WI',
+          type: 'National',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'Mental Health Nexus Letters',
+          contact: 'wpapsychology.com',
+          phone: '',
+          email: '',
+          notes: 'Dr. Jeffrey Garbelman.'
+        },
+        {
+          id: 'nat-sharp-assessments',
+          name: 'Sharp Assessments',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Mental Health', 'Psychology'],
+          services: 'Mental Health Nexus Letters',
+          contact: 'sharpassessmentsgroup.com',
+          phone: '',
+          email: '',
+          notes: 'Mental health evaluations for veterans.'
+        },
+        {
+          id: 'nat-gardner',
+          name: 'Jacqueline Gardner, MSOM, MMS, PA-C',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['General'],
+          services: 'Nexus Letters, DBQs',
+          contact: 'myveterannexusletter.com',
+          phone: '',
+          email: '',
+          notes: 'Veteran nexus letter services.'
         },
 
         // --- NETWORKS ---
@@ -1132,10 +1488,75 @@
           type: 'National',
           specialty: ['Resource', 'IME'],
           services: 'Independent Medical Examiners Directory',
-          contact: 'seakexperts.com',
+          contact: 'imenet.com',
           phone: '508-457-1111',
           email: '',
-          notes: 'Direct contact to thousands of self-selected IME doctors.'
+          notes: 'SEAK is an ACCME-accredited training company founded in 1980. IMENet hosts the SEAK directory of IME providers.'
+        },
+        {
+          id: 'net-vime',
+          name: 'Veteran Independent Medical Examination',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Network', 'Nexus Letters'],
+          services: 'Nexus Letters, IMOs',
+          contact: 'veteranindependentmedicalexamination.com/nexus-letters',
+          phone: '',
+          email: '',
+          notes: 'Network of providers for veteran nexus letters.'
+        },
+        {
+          id: 'net-qdsi',
+          name: 'QDSI',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Network', 'Medical Experts'],
+          services: 'Nexus Letters, IMOs, Expert Opinions',
+          contact: 'qdsi.com',
+          phone: '',
+          email: '',
+          notes: 'Medical experts network supporting veteran claims.'
+        },
+        {
+          id: 'net-veteranratings',
+          name: 'Veteran Ratings',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Network', 'Nexus Letters'],
+          services: 'Nexus Letters, DBQs',
+          contact: 'veteranratings.com',
+          phone: '',
+          email: '',
+          notes: 'Network for veteran disability evaluations.'
+        },
+        {
+          id: 'net-ree',
+          name: 'REE Medical',
+          state: 'National',
+          county: 'Nationwide',
+          type: 'National',
+          specialty: ['Network', 'Nexus Letters'],
+          services: 'DBQs, Nexus Letters',
+          contact: 'reemedical.com',
+          phone: '',
+          email: '',
+          notes: 'Nationwide network of medical providers.'
+        },
+        {
+          id: 'net-vmag',
+          name: 'Veterans Medical Assistance Group',
+          state: 'National',
+          county: 'San Antonio, TX',
+          type: 'National',
+          specialty: ['Network', 'Nexus Letters'],
+          services: 'Nexus Letters, DBQs, IMOs',
+          contact: 'vmag4vets.com',
+          phone: '',
+          email: '',
+          notes: 'Various doctors serving the San Antonio, TX area.'
         },
         {
           id: 'nat-8',
@@ -1321,6 +1742,76 @@
         setNewProvider({ name: '', state: '', county: '', specialty: 'General', services: '', contact: '', phone: '', email: '', notes: '', type: 'Local', category: 'Doctor' });
       };
 
+      const allowedUsers = ['Richard', 'Karen', 'Devin', 'Ammar'];
+
+      const handleLoginSubmit = (event) => {
+        event.preventDefault();
+        const normalizedUsername = loginForm.username.trim();
+        const isValidUser = allowedUsers.some((name) => name.toLowerCase() === normalizedUsername.toLowerCase());
+        const isValidPassword = loginForm.password === 'password';
+
+        if (isValidUser && isValidPassword) {
+          setIsAuthenticated(true);
+          setLoginError('');
+        } else {
+          setLoginError('Invalid username or password.');
+        }
+      };
+
+      if (!isAuthenticated) {
+        return (
+          <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
+            <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl shadow-xl p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <Shield className="w-6 h-6 text-red-500" />
+                <h1 className="text-2xl font-bold text-slate-900">Provider Portal Login</h1>
+              </div>
+              <p className="text-sm text-slate-600 mb-6">
+                Enter your credentials to access the DBQ & Nexus Letter Provider Directory.
+              </p>
+              <form onSubmit={handleLoginSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Username</label>
+                  <input
+                    type="text"
+                    value={loginForm.username}
+                    onChange={(event) => setLoginForm({ ...loginForm, username: event.target.value })}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+                    placeholder="Enter your username"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Password</label>
+                  <input
+                    type="password"
+                    value={loginForm.password}
+                    onChange={(event) => setLoginForm({ ...loginForm, password: event.target.value })}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+                    placeholder="Enter your password"
+                    required
+                  />
+                </div>
+                {loginError && (
+                  <div className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
+                    {loginError}
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-lg shadow transition-colors"
+                >
+                  Sign In
+                </button>
+              </form>
+              <div className="mt-6 text-xs text-slate-500">
+                Authorized users only. Contact admin if you need access.
+              </div>
+            </div>
+          </div>
+        );
+      }
+
       return (
         <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
           {/* Toast Notification */}
@@ -1429,6 +1920,64 @@
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
                   </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Medical Provider Map */}
+            <section className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-slate-200">
+              <div className="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                  <h2 className="text-xl font-semibold text-slate-800">Medical Provider Map</h2>
+                  <p className="text-sm text-slate-500 mt-1">
+                    Quick reference guide for which specialists handle DBQs, Nexus Letters, and IMOs.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 text-[11px]">
+                  <span className="px-2 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700">Legend: DBQ</span>
+                  <span className="px-2 py-1 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700">NEXUS</span>
+                  <span className="px-2 py-1 rounded-full border border-amber-200 bg-amber-50 text-amber-700">IMO</span>
+                </div>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-slate-600">
+                <span className="px-2 py-1 rounded-full border border-slate-200">GEN</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">MSK</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">NEU</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">SLEEP</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">RESP</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">ENT/AUD</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">EXP</span>
+                <span className="px-2 py-1 rounded-full border border-slate-200">IMG</span>
+              </div>
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <div className="rounded-lg border border-slate-200 p-4 bg-slate-50">
+                  <h3 className="font-semibold text-slate-800">Specialist Highlights</h3>
+                  <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                    <li><strong>Dr. Nicole Edwards, MD</strong> — DBQ/NEXUS • GEN/MSK/RESP (broad gen-med DBQs + record review).</li>
+                    <li><strong>Dr. John Ellis, MD (Ellis Clinic)</strong> — DBQ/IME • MSK + ENT/AUD (neck/back with radiculopathy; hearing/tinnitus).</li>
+                    <li><strong>Dr. Craig Bash, MD</strong> — IMO/NEXUS • NEU/SLEEP (TBI, migraines; imaging review; some OSA secondary).</li>
+                    <li><strong>Dr. David Anaise, MD</strong> — IMO/NEXUS • SLEEP + complex multi-system (secondary links, denials).</li>
+                    <li><strong>Dr. Victoria A. Cassano, MD</strong> — IMO/NEXUS • EXP (toxic exposure / occupational-environmental medicine).</li>
+                    <li><strong>Dr. Cook, MD (MedFit)</strong> — IME/IMO/NEXUS • EXP/MSK (occupational medicine + toxicology).</li>
+                    <li><strong>Dr. Thomas Seiter, MD / Marian Medical</strong> — IMG (radiology 2nd opinions + gait analysis).</li>
+                    <li><strong>Nicole Munshower, PA-C</strong> — DBQ/Exam • MSK (back/neck; knee/shoulder; joint ROM/pain/function).</li>
+                    <li><strong>LaShelle Henderson, MSN, FNP-BC, PMHNP-BC</strong> — DBQ/IMO • MH + GEN (PTSD/depression/anxiety; insomnia).</li>
+                    <li><strong>Aws Al Jandeel, MD</strong> — DBQ/IMO • GEN (internal medicine: HTN, diabetes, GERD/IBS).</li>
+                    <li><strong>Melinda Jorge, MD</strong> — DBQ/Exam • GEN (family medicine: primary care + chronic conditions).</li>
+                    <li><strong>Michelle E. Mason-Woodard, MD</strong> — DBQ/Exam • GEN (family medicine: broad physical conditions).</li>
+                    <li><strong>Joey Sasser, DO</strong> — DBQ/Exam • GEN/MSK (general/osteopathic medicine: broad physical DBQs).</li>
+                    <li><strong>Dr. Richard Smith (Psychiatry)</strong> — DBQ/IMO • MH (PTSD, depression/anxiety, insomnia).</li>
+                  </ul>
+                </div>
+                <div className="rounded-lg border border-slate-200 p-4 bg-slate-50">
+                  <h3 className="font-semibold text-slate-800">Networks & Broad Coverage</h3>
+                  <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                    <li><strong>Northside Family Practice (Parman/Mitchell)</strong> — IME/DBQ support • GEN.</li>
+                    <li><strong>K&amp;D Veterans Medical Assessment (KD-VMA)</strong> — DBQ/IMO • GEN multi-condition.</li>
+                    <li><strong>MyVeteranNexusLetter (J. Gardner, PA-C)</strong> — NEXUS only • GEN + optional audiology/psychiatry.</li>
+                    <li><strong>Other local MD/PA/FNP options</strong> — GEN coverage/availability (Ghouri noted for OSA secondary to PTSD).</li>
+                    <li><strong>Records-only helpers</strong> — Mediscope (RN/LNC) + VA-PAC (PA-C).</li>
+                  </ul>
                 </div>
               </div>
             </section>
@@ -1845,12 +2394,22 @@ ${provider.contact}`)}
                 <Mail className="w-3 h-3" /> Email
               </a>
             )}
-            {!provider.phone && !provider.email && (
+            {provider.contact && !provider.contact.includes('@') && (
+              <a
+                href={`https://${provider.contact.replace('https://', '').replace('http://', '')}`}
+                target="_blank"
+                rel="noreferrer"
+                className={`flex items-center gap-1 text-[10px] font-bold hover:underline ${isNetwork ? 'text-purple-600' : 'text-blue-600'}`}
+              >
+                <Globe className="w-3 h-3" /> Website
+              </a>
+            )}
+            {!provider.phone && !provider.email && !provider.contact && (
               <button
-                onClick={() => copyToClipboard(provider.contact)}
+                onClick={() => copyToClipboard(provider.name)}
                 className={`text-[10px] font-bold hover:underline ${isNetwork ? 'text-purple-600' : 'text-blue-600'}`}
               >
-                Copy Contact
+                Copy Provider
               </button>
             )}
           </div>
