@@ -2428,8 +2428,12 @@ ${provider.contact}`)}
       );
     };
 
-      const root = ReactDOM.createRoot(rootElement);
-      root.render(<ProviderFinder />);
+      if (ReactDOM.createRoot) {
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<ProviderFinder />);
+      } else {
+        ReactDOM.render(<ProviderFinder />, rootElement);
+      }
     }
   </script>
 </body>
