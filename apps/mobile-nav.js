@@ -81,6 +81,30 @@
     return Math.min(Math.max(value, min), max);
   }
 
+  function loadZohoChatbot() {
+    window.$zoho = window.$zoho || {};
+    window.$zoho.salesiq = window.$zoho.salesiq || {
+      widgetcode:
+        'siq35bf0a29016e5b6eae510612bb880161a4e56e656f3acdb27e7710a7382ec6a67487e3bc88487509391c82b8bc489eba',
+      values: {},
+      ready: function () {}
+    };
+
+    if (document.getElementById('zsiqscript')) return;
+
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.id = 'zsiqscript';
+    script.defer = true;
+    script.src = 'https://salesiq.zoho.com/widget';
+    const firstScript = document.getElementsByTagName('script')[0];
+    if (firstScript?.parentNode) {
+      firstScript.parentNode.insertBefore(script, firstScript);
+    } else if (document.head) {
+      document.head.appendChild(script);
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('[data-site-nav]');
     if (!nav) return;
@@ -319,6 +343,8 @@
         closePalette();
       }
     });
+
+    loadZohoChatbot();
 
     // Re-render lucide icons after DOM is ready
     renderIcons();
