@@ -1,0 +1,8 @@
+{
+  "name": "tyfys-onboarding-api",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "stripe": "^17.7.0"
+  }
+}
