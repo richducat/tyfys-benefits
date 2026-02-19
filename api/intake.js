@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
       First_Name: firstName || undefined,
       Email: email || undefined,
       Phone: phone || undefined,
-      Lead_Source: 'vaclaimteam.com',
+      Lead_Source: 'tyfys.net',
       Description: safeString(body.summary || '', 10000),
       // Store a stable fingerprint to help de-dupe later.
       // (We can add a proper custom field in Zoho after.)

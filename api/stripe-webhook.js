@@ -30,10 +30,10 @@ module.exports = async (req, res) => {
         // Minimal Deal payload; we can enrich with custom fields later.
         const deal = {
           Deal_Name: `TYFYS subscription — ${leadId}`,
-          Stage: 'Paid',
+          Stage: 'Payment complete',
           Amount: session?.amount_total ? Number(session.amount_total) / 100 : undefined,
           Description: `Paid via Stripe Checkout. plan=${plan} session=${session.id} customer=${session.customer}`,
-          Lead_Source: 'vaclaimteam.com',
+          Lead_Source: 'tyfys.net',
         };
 
         const dealId = await zohoCreateDeal({ deal });
