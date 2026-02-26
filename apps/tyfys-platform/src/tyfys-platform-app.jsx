@@ -1314,9 +1314,12 @@ function TYFYSPlatform() {
   }
 
   // Auto-advance logic for loading screen
-  if (!onboardingComplete && ONBOARDING_STEPS[onboardingStep].type === "loading") {
-    setTimeout(() => completeOnboarding(), 2000);
-  }
+  useEffect(() => {
+    if (!onboardingComplete && ONBOARDING_STEPS[onboardingStep] && ONBOARDING_STEPS[onboardingStep].type === "loading") {
+      const timer = setTimeout(() => completeOnboarding(), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [onboardingComplete, onboardingStep, completeOnboarding]);
 
   return (
     <div className="flex h-screen bg-slate-50 font-sans overflow-hidden relative">
@@ -1392,10 +1395,10 @@ function TYFYSPlatform() {
                         optionsToRender =
                           categories.length > 0
                             ? categories.flatMap((cat) =>
-                                DISABILITY_DATA[cat]
-                                  ? DISABILITY_DATA[cat].map((c) => ({ label: c.name, value: c.name }))
-                                  : []
-                              )
+                              DISABILITY_DATA[cat]
+                                ? DISABILITY_DATA[cat].map((c) => ({ label: c.name, value: c.name }))
+                                : []
+                            )
                             : [{ label: "Please select a category first", value: "" }];
                       } else if (q.type === "select" || q.type === "multi_select") {
                         if (typeof q.options[0] === "string") {
@@ -1523,8 +1526,8 @@ function TYFYSPlatform() {
                         {i === 1
                           ? "Do you have a copy of your denial letter?"
                           : i === 2
-                          ? "Do you have a current private diagnosis?"
-                          : "Can you start the process within 48 hours?"}
+                            ? "Do you have a current private diagnosis?"
+                            : "Can you start the process within 48 hours?"}
                       </p>
                       <div className="flex gap-2">
                         <button className="flex-1 py-2 border border-slate-300 bg-white rounded hover:border-blue-500 hover:text-blue-600 text-sm font-medium">
@@ -1699,8 +1702,8 @@ function TYFYSPlatform() {
                         {userProfile.firstName
                           ? `${userProfile.firstName} ${userProfile.lastName}`
                           : userProfile.branch
-                          ? `${userProfile.branch} Veteran`
-                          : "Veteran Profile"}
+                            ? `${userProfile.branch} Veteran`
+                            : "Veteran Profile"}
                       </h1>
 
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

@@ -343,7 +343,7 @@ burn pits). Line ${line} of 20.
 }
 
 const trackerConfig = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../../config/tracker-stages.json'), 'utf-8')
+  fs.readFileSync(path.resolve(__dirname, '../../../config/tracker-stages.json'), 'utf-8')
 );
 
 const trackers = new Map();
