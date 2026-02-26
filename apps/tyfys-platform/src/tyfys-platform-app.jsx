@@ -3,6 +3,84 @@ const ReactDOM = window.ReactDOM;
 const { useState, useEffect, useRef } = React;
 
 const shouldSkipLanding = document.body.dataset.page === "sign-up";
+const PAYMENT_STATE_KEY = "tyfys.paymentState";
+const LEAD_PREFILL_KEY = "tyfys.leadPrefill";
+const DEFAULT_PAYMENT_STATE = {
+  completed: false,
+  planName: "",
+  paidAt: ""
+};
+
+const loadPaymentState = () => {
+  try {
+    const raw = window.localStorage.getItem(PAYMENT_STATE_KEY);
+    if (!raw) return DEFAULT_PAYMENT_STATE;
+    const parsed = JSON.parse(raw);
+    return {
+      completed: Boolean(parsed?.completed),
+      planName: parsed?.planName || "",
+      paidAt: parsed?.paidAt || ""
+    };
+  } catch (error) {
+    return DEFAULT_PAYMENT_STATE;
+  }
+};
+
+const savePaymentState = (state) => {
+  try {
+    window.localStorage.setItem(PAYMENT_STATE_KEY, JSON.stringify(state));
+  } catch (error) {
+    // No-op when storage is unavailable.
+  }
+};
+
+const mapLeadCategories = (conditions) => {
+  const conditionMap = {
+    ptsd: "Mental Health",
+    musculoskeletal: "Musculoskeletal (Ortho)",
+    hearing: "Hearing",
+    sleep: "Sleep & Respiratory"
+  };
+
+  const input = Array.isArray(conditions) ? conditions : [];
+  return [...new Set(input.map((item) => conditionMap[item]).filter(Boolean))];
+};
+
+const loadLeadPrefill = () => {
+  try {
+    const raw = window.localStorage.getItem(LEAD_PREFILL_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return null;
+    return parsed;
+  } catch (error) {
+    return null;
+  }
+};
+
+const clearLeadPrefill = () => {
+  try {
+    window.localStorage.removeItem(LEAD_PREFILL_KEY);
+  } catch (error) {
+    // No-op when storage is unavailable.
+  }
+};
+
+const mapLeadPrefillToProfile = (leadPrefill) => {
+  if (!leadPrefill || typeof leadPrefill !== "object") return {};
+
+  return {
+    firstName: leadPrefill.firstName || "",
+    lastName: leadPrefill.lastName || "",
+    email: leadPrefill.email || "",
+    phone: leadPrefill.phone || "",
+    zip: leadPrefill.zip || "",
+    rating: Number(leadPrefill.rating || 0),
+    pain_categories: mapLeadCategories(leadPrefill.conditions),
+    privateOrg: Boolean(leadPrefill.privateOrg),
+    terms: Boolean(leadPrefill.terms)
+  };
+};
 
 // --- ICONS ---
 // Fix: Added ...props to allow size/onClick/etc to pass through
@@ -1053,10 +1131,21 @@ function ProfileEditModal({ userProfile, onClose, onSave }) {
 
 // --- MAIN COMPONENT ---
 function TYFYSPlatform() {
+  const leadPrefill = loadLeadPrefill();
+  const urlParams = new URLSearchParams(window.location.search);
+  const hasAutoStartParam = urlParams.get("autostart") === "1";
+  const hasLeadPrefill = Boolean(
+    leadPrefill && (leadPrefill.firstName || leadPrefill.lastName || leadPrefill.email || leadPrefill.phone)
+  );
+  const prefilledContactStep = ONBOARDING_STEPS.findIndex((step) => step.id === "contact_name");
+  const prefilledProfile = mapLeadPrefillToProfile(leadPrefill);
+
   // STATE
-  const [hasStarted, setHasStarted] = useState(shouldSkipLanding); // Landing state
+  const [hasStarted, setHasStarted] = useState(shouldSkipLanding || hasAutoStartParam || hasLeadPrefill);
   const [onboardingComplete, setOnboardingComplete] = useState(false);
-  const [onboardingStep, setOnboardingStep] = useState(0);
+  const [onboardingStep, setOnboardingStep] = useState(
+    hasLeadPrefill && prefilledContactStep >= 0 ? prefilledContactStep : 0
+  );
   const [userProfile, setUserProfile] = useState({
     pain_categories: [],
     pain_points: [],
@@ -1066,12 +1155,14 @@ function TYFYSPlatform() {
     phone: "",
     zip: "",
     privateOrg: false,
-    terms: false
+    terms: false,
+    ...prefilledProfile
   });
   const [activeView, setActiveView] = useState("welcome_guide");
+  const [paymentState, setPaymentState] = useState(() => loadPaymentState());
   const [isMember, setIsMember] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [currentRating, setCurrentRating] = useState(0);
+  const [currentRating, setCurrentRating] = useState(Number(prefilledProfile.rating || 0));
   const [hasSpouse, setHasSpouse] = useState(false);
   const [childCount, setChildCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -1107,6 +1198,7 @@ function TYFYSPlatform() {
   const [docWizardCondition, setDocWizardCondition] = useState("");
 
   const [expandCalcHelp, setExpandCalcHelp] = useState(false);
+  const hasPaid = paymentState.completed;
 
   const chatEndRef = useRef(null);
   const botMemory = useRef({ hasPitchedNexus: false, hasWelcomed: false, viewGuidesSent: new Set() });
@@ -1117,6 +1209,9 @@ function TYFYSPlatform() {
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
+  useEffect(() => {
+    savePaymentState(paymentState);
+  }, [paymentState]);
 
   const addMessage = (sender, text) => setMessages((prev) => [...prev, { sender, text }]);
 
@@ -1165,6 +1260,7 @@ function TYFYSPlatform() {
 
   const completeOnboarding = () => {
     setOnboardingComplete(true);
+    clearLeadPrefill();
     if (userProfile.pain_points && userProfile.pain_points.length > 0) {
       const newClaims = [];
       userProfile.pain_points.forEach((point) => {
@@ -1195,6 +1291,23 @@ function TYFYSPlatform() {
     setIsBotOpen(true);
     // Updated profile save message
     addMessage("bot", "I've carefully updated your profile details. This will help us take better care of your specific needs.");
+  };
+
+  const handlePaymentComplete = ({ planName, unlockPremium = false }) => {
+    if (unlockPremium) {
+      setIsMember(true);
+    }
+    setPaymentState({
+      completed: true,
+      planName,
+      paidAt: new Date().toISOString()
+    });
+    setActiveView("intake_portal");
+    setIsBotOpen(true);
+    addMessage(
+      "bot",
+      `Payment confirmed for ${planName}. First step now is your intake portal. I opened it for you.`
+    );
   };
 
   // Calculator Logic
@@ -1600,6 +1713,13 @@ function TYFYSPlatform() {
           >
             <Icons.Map className="w-5 h-5" /> Mission Control
           </button>
+          <button
+            onClick={() => hasPaid && setActiveView("intake_portal")}
+            disabled={!hasPaid}
+            className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "intake_portal" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"} ${!hasPaid ? "cursor-not-allowed opacity-60" : ""}`}
+          >
+            <Icons.FileText className="w-5 h-5" /> Intake Portal {!hasPaid && <Icons.Lock className="w-3 h-3 ml-auto opacity-70" />}
+          </button>
 
           <p className="px-4 py-2 mt-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Tools</p>
           <button
@@ -1659,6 +1779,7 @@ function TYFYSPlatform() {
               {activeView === "calculator" && "Disability Strategy Calculator"}
               {activeView === "doc_wizard" && "Document Resource Finder"}
               {activeView === "strategy" && "Strategic Roadmap"}
+              {activeView === "intake_portal" && "Post-Payment Intake Portal"}
               {activeView === "ai_claims" && "TYFYS Claims Assistant"}
             </h2>
           </div>
@@ -1846,6 +1967,24 @@ function TYFYSPlatform() {
                     <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                       <h3 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wider text-slate-400">Next Steps</h3>
                       <div className="space-y-2">
+                        <button
+                          onClick={() => (hasPaid ? setActiveView("intake_portal") : setActiveView("strategy"))}
+                          className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-200 transition-all group text-left"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${hasPaid ? "bg-emerald-50 text-emerald-600" : "bg-slate-100 text-slate-400"}`}>
+                              <Icons.FileText className="w-4 h-4" />
+                            </div>
+                            <span className={`text-sm font-bold ${hasPaid ? "text-emerald-700" : "text-slate-700"}`}>
+                              {hasPaid ? "Complete Intake Portal" : "Pay to Unlock Intake Portal"}
+                            </span>
+                          </div>
+                          {hasPaid ? (
+                            <Icons.ChevronRight className="w-4 h-4 text-emerald-400" />
+                          ) : (
+                            <Icons.Lock className="w-4 h-4 text-slate-300" />
+                          )}
+                        </button>
                         <button
                           onClick={() => setActiveView("doc_wizard")}
                           className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-200 transition-all group text-left"
@@ -2282,8 +2421,10 @@ function TYFYSPlatform() {
                         </p>
                         <button
                           onClick={() => {
-                            setIsMember(true);
-                            addMessage("bot", "Welcome to Premium! I've unlocked all tools.");
+                            handlePaymentComplete({
+                              planName: "Premium Membership",
+                              unlockPremium: true
+                            });
                           }}
                           className="w-full bg-white text-blue-900 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
                         >
@@ -2332,8 +2473,9 @@ function TYFYSPlatform() {
                       </ul>
                       <button
                         onClick={() => {
-                          setIsBotOpen(true);
-                          addMessage("bot", "Great choice. I'll get the paperwork started for the Standard Package.");
+                          handlePaymentComplete({
+                            planName: "Standard Package"
+                          });
                         }}
                         className="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-slate-200 transition-all shadow-lg"
                       >
@@ -2381,8 +2523,9 @@ function TYFYSPlatform() {
                       </ul>
                       <button
                         onClick={() => {
-                          setIsBotOpen(true);
-                          addMessage("bot", "Smart move. The Multi-Claim package maximizes your ROI. Let's proceed.");
+                          handlePaymentComplete({
+                            planName: "Multi-Claim Package"
+                          });
                         }}
                         className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-900/50"
                       >
@@ -2390,6 +2533,44 @@ function TYFYSPlatform() {
                       </button>
                     </div>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {activeView === "intake_portal" && (
+              <div className="space-y-6 animate-fadeIn">
+                <div className="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm">
+                  <p className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2">First Activity After Payment</p>
+                  <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-3">Complete Your Intake Portal</h2>
+                  <p className="text-slate-600 max-w-3xl">
+                    {hasPaid
+                      ? `Payment confirmed for ${paymentState.planName || "your plan"}. Start here so our team can review your profile and prepare your claim workflow.`
+                      : "Complete a plan payment first to unlock this intake step."}
+                  </p>
+                  <div className="flex flex-wrap gap-3 mt-5">
+                    <a
+                      href="intake-portal.html"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-colors"
+                    >
+                      Open Intake in New Tab <Icons.ArrowRight className="w-4 h-4" />
+                    </a>
+                    <button
+                      onClick={() => setActiveView("welcome_guide")}
+                      className="px-4 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:border-slate-400 transition-colors"
+                    >
+                      Return to Dashboard
+                    </button>
+                  </div>
+                </div>
+                <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                  <iframe
+                    title="TYFYS Intake Portal"
+                    src="intake-portal.html"
+                    className="w-full h-[76vh] min-h-[640px] border-0"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             )}
