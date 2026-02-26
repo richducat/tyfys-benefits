@@ -351,6 +351,11 @@
           return false;
         }
       }
+      const timeElapsed = Date.now() - startTime;
+      if (timeElapsed < 2e3) {
+        console.log("Spam detected: Submission too fast");
+        return false;
+      }
       if (part === 1) {
         if (!localData.firstName) newErrors.firstName = "First Name is required";
         if (!localData.lastName) newErrors.lastName = "Last Name is required";
@@ -746,9 +751,12 @@
     if (!hasStarted) {
       return /* @__PURE__ */ React.createElement(LandingOverlay, { onStart: () => setHasStarted(true) });
     }
-    if (!onboardingComplete && ONBOARDING_STEPS[onboardingStep].type === "loading") {
-      setTimeout(() => completeOnboarding(), 2e3);
-    }
+    useEffect(() => {
+      if (!onboardingComplete && ONBOARDING_STEPS[onboardingStep] && ONBOARDING_STEPS[onboardingStep].type === "loading") {
+        const timer = setTimeout(() => completeOnboarding(), 2e3);
+        return () => clearTimeout(timer);
+      }
+    }, [onboardingComplete, onboardingStep, completeOnboarding]);
     return /* @__PURE__ */ React.createElement("div", { className: "flex h-screen bg-slate-50 font-sans overflow-hidden relative" }, isSidebarOpen && /* @__PURE__ */ React.createElement("div", { className: "fixed inset-0 bg-black/50 z-20 md:hidden", onClick: () => setIsSidebarOpen(false) }), !onboardingComplete && /* @__PURE__ */ React.createElement("div", { className: "fixed inset-0 z-[60] bg-slate-900 flex flex-col items-center justify-center p-4" }, /* @__PURE__ */ React.createElement("div", { className: "w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-slate-200" }, /* @__PURE__ */ React.createElement("div", { className: "p-6 bg-slate-900 flex flex-col gap-4" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("div", { className: "w-10 h-10 bg-yellow-500 rounded flex items-center justify-center text-slate-900 font-black text-lg shadow-md" }, "TY"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", { className: "font-bold text-white text-xl block leading-none" }, "Thank You"), /* @__PURE__ */ React.createElement("span", { className: "text-xs text-slate-400 uppercase tracking-wider font-semibold" }, "For Your Service"))), /* @__PURE__ */ React.createElement("div", { className: "text-sm text-slate-400 font-medium bg-slate-800 px-3 py-1.5 rounded-md" }, "Step ", onboardingStep + 1, "/", ONBOARDING_STEPS.length)), ONBOARDING_STEPS[onboardingStep].guideText && /* @__PURE__ */ React.createElement("div", { className: "flex gap-4 mt-2 animate-slide-up" }, /* @__PURE__ */ React.createElement("div", { className: "w-12 h-12 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center flex-shrink-0 relative" }, /* @__PURE__ */ React.createElement(Icons.User, { size: 24, className: "text-blue-600 w-6 h-6" }), /* @__PURE__ */ React.createElement("div", { className: "absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-slate-900" })), /* @__PURE__ */ React.createElement("div", { className: "chat-bubble p-4 rounded-tr-xl rounded-b-xl text-base text-slate-700 shadow-sm flex-1 leading-relaxed border border-slate-200 bg-white" }, ONBOARDING_STEPS[onboardingStep].guideText))), /* @__PURE__ */ React.createElement("div", { className: "w-full bg-slate-100 h-2" }, /* @__PURE__ */ React.createElement(
       "div",
       {
