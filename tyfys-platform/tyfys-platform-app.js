@@ -3,7 +3,6 @@
   var React = window.React;
   var ReactDOM = window.ReactDOM;
   var { useState, useEffect, useRef } = React;
-  var shouldSkipLanding = document.body.dataset.page === "sign-up";
   var PAYMENT_STATE_KEY = "tyfys.paymentState";
   var LEAD_PREFILL_KEY = "tyfys.leadPrefill";
   var DEFAULT_PAYMENT_STATE = {
@@ -597,14 +596,12 @@
   }
   function TYFYSPlatform() {
     const leadPrefill = loadLeadPrefill();
-    const urlParams = new URLSearchParams(window.location.search);
-    const hasAutoStartParam = urlParams.get("autostart") === "1";
     const hasLeadPrefill = Boolean(
       leadPrefill && (leadPrefill.firstName || leadPrefill.lastName || leadPrefill.email || leadPrefill.phone)
     );
     const prefilledContactStep = ONBOARDING_STEPS.findIndex((step) => step.id === "contact_name");
     const prefilledProfile = mapLeadPrefillToProfile(leadPrefill);
-    const [hasStarted, setHasStarted] = useState(shouldSkipLanding || hasAutoStartParam || hasLeadPrefill);
+    const [hasStarted, setHasStarted] = useState(false);
     const [onboardingComplete, setOnboardingComplete] = useState(false);
     const [onboardingStep, setOnboardingStep] = useState(
       hasLeadPrefill && prefilledContactStep >= 0 ? prefilledContactStep : 0
