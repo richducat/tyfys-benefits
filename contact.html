@@ -575,6 +575,7 @@
            const [formData, setFormData] = useState({ conditions: [], documents: [] });
            const [isSubmitting, setIsSubmitting] = useState(false);
            const [isSuccess, setIsSuccess] = useState(false);
+           const [submitError, setSubmitError] = useState('');
            const [dynamicSteps, setDynamicSteps] = useState(baseSteps);
 
 
@@ -672,6 +673,7 @@
 
            const handleFinalSubmit = async (contactData) => {
                setIsSubmitting(true);
+               setSubmitError('');
               
                // Prepare data needed for payload
                const selectedDocs = formData.documents || [];
@@ -719,23 +721,33 @@
                const scriptURL = 'https://script.google.com/macros/s/AKfycbxDs-IJaX15SHb9scERfHOSrFn78WIDRPeY4Kf1QbBJXeJuFOPgosAdtbSnoFZNYV1T2Q/exec';
               
                try {
-                   await fetch(scriptURL, {
+                   const response = await fetch(scriptURL, {
                        method: 'POST',
-                       mode: 'no-cors',
+                       mode: 'cors',
                        headers: {
-                           'Content-Type': 'text/plain',
+                           'Content-Type': 'text/plain;charset=utf-8',
                        },
                        body: JSON.stringify(sheetPayload)
                    });
-                   console.log("Posted to Google Sheets");
+
+                   if (!response.ok) {
+                       throw new Error(`Google Sheet script returned ${response.status}`);
+                   }
+
+                   const result = await response.json().catch(() => ({}));
+                   if (result?.result && result.result !== 'success') {
+                       throw new Error(`Unexpected Google Sheet response: ${result.result}`);
+                   }
+
+                   console.log("Posted to Google Sheets:", result);
+                   setIsSuccess(true);
+                   window.location.href = 'https://tyfys.net/assessment-thank-you.html';
                } catch (error) {
                    console.error("Error submitting to Google Sheet", error);
+                   setSubmitError("We could not submit your request right now. Please try again or call 321-248-2805.");
+               } finally {
+                   setIsSubmitting(false);
                }
-
-
-               setIsSubmitting(false);
-               setIsSuccess(true);
-               window.location.href = 'https://tyfys.net/assessment-thank-you.html';
            };
 
 
@@ -1492,6 +1504,10 @@
                                    </>
                                )}
                            </button>
+
+                           {submitError && (
+                               <p className="mt-3 text-sm font-semibold text-red-600">{submitError}</p>
+                           )}
                           
                            {/* Trust Signals */}
                            <div className="text-center mt-6 space-y-4">
