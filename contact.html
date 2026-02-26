@@ -856,6 +856,7 @@
                                                data={stepData}
                                                onSubmit={handleFinalSubmit}
                                                isSubmitting={isSubmitting}
+                                               submitError={submitError}
                                                previousAnswers={formData}
                                            />
                                        ) : (
@@ -1153,7 +1154,7 @@
        }
 
 
-       function ContactStep({ data, onSubmit, isSubmitting, previousAnswers }) {
+       function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswers }) {
            const [errors, setErrors] = useState({});
            const [botField, setBotField] = useState("");
            const [consentState, setConsentState] = useState({
