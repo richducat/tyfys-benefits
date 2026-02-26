@@ -963,12 +963,16 @@
            }
        ];
 
+       const LEAD_PREFILL_KEY = 'tyfys.leadPrefill';
+       const APP_REDIRECT_URL = 'https://tyfys.net/app.html?autostart=1&source=homepage';
+
        function App() {
            const [currentStep, setCurrentStep] = useState(0);
            const [formData, setFormData] = useState({ conditions: [], documents: [] });
            const [gclid, setGclid] = useState("");
            const [isSubmitting, setIsSubmitting] = useState(false);
            const [isSuccess, setIsSuccess] = useState(false);
+           const [submitError, setSubmitError] = useState('');
            const [dynamicSteps, setDynamicSteps] = useState(baseSteps);
 
            useEffect(() => {
@@ -1058,6 +1062,7 @@
 
            const handleFinalSubmit = async (contactData) => {
                setIsSubmitting(true);
+               setSubmitError('');
 
                const formattedFirstName = (contactData.firstName || "").trim();
                const formattedLastName = (contactData.lastName || "").trim();
@@ -1071,6 +1076,25 @@
 
                const now = new Date();
                const dateString = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+
+               const leadPrefill = {
+                   firstName: formattedFirstName,
+                   lastName: formattedLastName,
+                   email: contactData.email || "",
+                   phone: contactData.phone || "",
+                   zip: contactData.zipCode || "",
+                   bestTime: contactData.bestTime || "",
+                   bestContact: contactMethods,
+                   status: formData.status || "",
+                   rating: Number(formData.rating || 0),
+                   conditions: formData.conditions || [],
+                   goal: formData.goal || "",
+                   documents: selectedDocs,
+                   privateOrg: Boolean(contactData.consent?.privateOrg),
+                   terms: Boolean(contactData.consent?.terms),
+                   gclid: gclid || "",
+                   submittedAt: now.toISOString()
+               };
 
                const sheetPayload = {
                    "Date created": dateString,
@@ -1099,19 +1123,36 @@
                const scriptURL = 'https://script.google.com/macros/s/AKfycbxDs-IJaX15SHb9scERfHOSrFn78WIDRPeY4Kf1QbBJXeJuFOPgosAdtbSnoFZNYV1T2Q/exec';
 
                try {
-                   await fetch(scriptURL, {
+                   const response = await fetch(scriptURL, {
                        method: 'POST',
-                       mode: 'no-cors',
-                       headers: { 'Content-Type': 'text/plain' },
+                       mode: 'cors',
+                       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                        body: JSON.stringify(sheetPayload)
                    });
-               } catch (error) {
-                   console.error("Error", error);
-               }
 
-               setIsSubmitting(false);
-               setIsSuccess(true);
-               window.location.href = 'https://tyfys.net/assessment-thank-you.html';
+                   if (!response.ok) {
+                       throw new Error(`Google Sheet script returned ${response.status}`);
+                   }
+
+                   const result = await response.json().catch(() => ({}));
+                   if (result?.result && result.result !== 'success') {
+                       throw new Error(`Unexpected Google Sheet response: ${result.result}`);
+                   }
+
+                   try {
+                       localStorage.setItem(LEAD_PREFILL_KEY, JSON.stringify(leadPrefill));
+                   } catch (storageError) {
+                       console.error('Unable to save lead prefill payload', storageError);
+                   }
+
+                   setIsSuccess(true);
+                   window.location.href = APP_REDIRECT_URL;
+               } catch (error) {
+                   console.error("Error submitting homepage lead", error);
+                   setSubmitError("We could not submit your request right now. Please try again or call 321-248-2805.");
+               } finally {
+                   setIsSubmitting(false);
+               }
            };
 
            const progress = ((currentStep + 1) / dynamicSteps.length) * 100;
@@ -1145,7 +1186,7 @@
                                ) : stepData.type === 'slider' ? (
                                    <SliderStep data={stepData} onNext={handleNext} initialValue={formData[stepData.id]} />
                                ) : stepData.type === 'form' ? (
-                                   <ContactStep data={stepData} onSubmit={handleFinalSubmit} isSubmitting={isSubmitting} previousAnswers={formData} />
+                                   <ContactStep data={stepData} onSubmit={handleFinalSubmit} isSubmitting={isSubmitting} submitError={submitError} previousAnswers={formData} />
                                ) : (
                                    <QuestionStep data={stepData} onNext={handleNext} formData={formData} toggleCondition={toggleCondition} toggleDocument={toggleDocument} />
                                )}
@@ -1252,7 +1293,7 @@
            );
        }
 
-       function ContactStep({ data, onSubmit, isSubmitting, previousAnswers }) {
+       function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswers }) {
            const [errors, setErrors] = useState({});
            const [botField, setBotField] = useState("");
            const [consentState, setConsentState] = useState({ privateOrg: false, terms: false, sms: false, bestContact: { text: false, email: false, phone: false } });
@@ -1331,7 +1372,14 @@
 
                        <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 mb-2">
                            <label className="flex items-start gap-2 cursor-pointer group">
-                              <div onClick={() => handleConsentChange('privateOrg')} className={`mt-0.5 w-[21px] h-[21px] rounded-full border flex items-center justify-center flex-shrink-0 ${consentState.privateOrg ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
+                              <input
+                                  type="checkbox"
+                                  checked={consentState.privateOrg}
+                                  onChange={() => handleConsentChange('privateOrg')}
+                                  className="sr-only"
+                                  aria-label="I understand and wish to continue"
+                              />
+                              <div className={`mt-0.5 w-[21px] h-[21px] rounded-full border flex items-center justify-center flex-shrink-0 ${consentState.privateOrg ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
                                   {consentState.privateOrg && <CheckCircle2 size={10} className="text-white" />}
                               </div>
                                <span className="text-[10px] text-slate-600 leading-tight">
@@ -1345,9 +1393,17 @@
                           <label className="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked={consentState.sms} onChange={() => handleConsentChange('sms')} className="mt-0.5 w-[18px] h-[18px] rounded border-slate-300" /><span className="text-[10px] text-slate-500">I consent to receive SMS updates. Reply STOP to opt-out.</span></label>
                        </div>
 
+                       {(!consentState.privateOrg || !consentState.terms || !consentState.sms) && (
+                           <p className="text-[10px] text-slate-500">Check all 3 consent boxes to enable Continue.</p>
+                       )}
+
                        <button type="submit" disabled={isSubmitting || !consentState.privateOrg || !consentState.terms || !consentState.sms} className="primary-action w-full bg-green-500 hover:bg-green-600 text-white font-bold text-lg py-3 rounded-xl shadow-md transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed mt-2">
                            {isSubmitting ? 'Processing...' : 'Get My Consultation'}
                        </button>
+
+                       {submitError && (
+                           <p className="text-sm font-semibold text-red-600">{submitError}</p>
+                       )}
 
                        <div className="mt-6 text-center space-y-4">
                            <div className="flex gap-2 items-center justify-center text-left bg-slate-50 p-2 rounded-lg border border-slate-100">
