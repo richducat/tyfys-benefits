@@ -964,7 +964,7 @@
        ];
 
        const LEAD_PREFILL_KEY = 'tyfys.leadPrefill';
-       const APP_REDIRECT_URL = 'https://tyfys.net/app.html?autostart=1&source=homepage';
+       const APP_REDIRECT_URL = 'https://tyfys.net/sign-up.html?autostart=1&source=homepage';
 
        function App() {
            const [currentStep, setCurrentStep] = useState(0);
@@ -1296,7 +1296,12 @@
        function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswers }) {
            const [errors, setErrors] = useState({});
            const [botField, setBotField] = useState("");
-           const [consentState, setConsentState] = useState({ privateOrg: false, terms: false, sms: false, bestContact: { text: false, email: false, phone: false } });
+           const [consentState, setConsentState] = useState({
+               privateOrg: false,
+               terms: false,
+               sms: false,
+               bestContact: { text: false, email: false, phone: false }
+           });
 
            const getDynamicHeader = () => {
                if (previousAnswers?.goal === 'increase') return "Let's Get Your Rating Increased.";
@@ -1305,8 +1310,16 @@
                return data.question;
            };
 
-           const handleConsentChange = (field) => setConsentState(prev => ({ ...prev, [field]: !prev[field] }));
-           const handleContactMethodChange = (method) => setConsentState(prev => ({ ...prev, bestContact: { ...prev.bestContact, [method]: !prev.bestContact[method] } }));
+           const handleConsentChange = (field) => {
+               setConsentState(prev => ({ ...prev, [field]: !prev[field] }));
+           };
+
+           const handleContactMethodChange = (method) => {
+               setConsentState(prev => ({
+                   ...prev,
+                   bestContact: { ...prev.bestContact, [method]: !prev.bestContact[method] }
+               }));
+           };
 
            const handleLocalSubmit = (e) => {
                e.preventDefault();
@@ -1314,116 +1327,317 @@
                const values = Object.fromEntries(formData.entries());
                const newErrors = {};
 
-               if (!consentState.privateOrg) { alert("Please acknowledge that we are a private organization to continue."); return; }
-               if (!consentState.terms || !consentState.sms) { alert("Please accept the Terms & SMS Policy to continue."); return; }
-               if (botField !== "") return;
+               if (!consentState.privateOrg) {
+                   alert("Please acknowledge that we are a private organization to continue.");
+                   return;
+               }
+               if (!consentState.terms || !consentState.sms) {
+                   alert("Please accept the Terms & SMS Policy to continue.");
+                   return;
+               }
+
+               if (botField !== "") {
+                   console.warn("Spam blocked: Honeypot");
+                   return;
+               }
 
                const nameRegex = /^[a-zA-Z\s'-]+$/;
-               if (!nameRegex.test(values.firstName) || values.firstName.trim().length < 2) newErrors.firstName = "Valid first name required.";
-               if (!nameRegex.test(values.lastName) || values.lastName.trim().length < 2) newErrors.lastName = "Valid last name required.";
+               const forbiddenNames = ['test', 'fake', 'asdf', 'qwerty', 'admin', 'user', 'none', 'null', 'spam'];
+               const isRepeating = (str) => /(.)\1{2,}/.test(str);
+
+               if (!nameRegex.test(values.firstName)) newErrors.firstName = "Valid first name required.";
+               else if (forbiddenNames.includes(values.firstName.toLowerCase()) || isRepeating(values.firstName)) newErrors.firstName = "Real first name required.";
+
+               if (!nameRegex.test(values.lastName)) newErrors.lastName = "Valid last name required.";
+               else if (forbiddenNames.includes(values.lastName.toLowerCase()) || isRepeating(values.lastName)) newErrors.lastName = "Real last name required.";
 
                let cleanPhone = values.phone.replace(/\D/g, '');
-               if (cleanPhone.length > 10 && cleanPhone.startsWith('1')) cleanPhone = cleanPhone.substring(1);
+               if (cleanPhone.length === 11 && cleanPhone.startsWith('1')) {
+                   cleanPhone = cleanPhone.substring(1);
+               }
+
+               const uniqueDigits = new Set(cleanPhone.split('')).size;
+               const isRepeatingPattern = /(\d\d)\1\1/.test(cleanPhone);
+               const sequences = ['1234567890', '0987654321', '0000000000', '1111111111', '1212121212'];
+
                if (cleanPhone.length !== 10) newErrors.phone = "10-digit US phone required.";
+               else if (sequences.includes(cleanPhone) || /^(\d)\1+$/.test(cleanPhone)) newErrors.phone = "Valid phone required.";
+               else if (uniqueDigits <= 2) newErrors.phone = "Valid phone required.";
+               else if (isRepeatingPattern) newErrors.phone = "Valid phone required.";
+               else if (parseInt(cleanPhone[0]) < 2 || parseInt(cleanPhone[3]) < 2) newErrors.phone = "Valid area code required.";
 
                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-               if (!emailRegex.test(values.email)) newErrors.email = "Valid email required.";
-               const zipRegex = /^\d{5}$/;
-               if (!zipRegex.test(values.zipCode || "")) newErrors.zipCode = "Valid 5-digit Zip Code required.";
+               const profanityList = ['fuck', 'dick', 'shit', 'piss', 'cunt', 'bitch', 'asshole', 'cock', 'sucker', 'whore'];
+               const lowerEmail = values.email.toLowerCase();
+               const domainPart = lowerEmail.split('@')[1] || '';
+               const userPart = lowerEmail.split('@')[0] || '';
+               const baseDomain = domainPart.split('.')[0];
+
+               const allowedDomains = [
+                   'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'msn.com',
+                   'aol.com', 'icloud.com', 'live.com', 'me.com', 'ymail.com',
+                   'comcast.net', 'verizon.net', 'att.net', 'sbcglobal.net', 'cox.net',
+                   'bellsouth.net', 'charter.net', 'earthlink.net', 'mac.com', 'rocketmail.com',
+                   'optonline.net', 'roadrunner.com', 'windstream.net', 'juno.com', 'centurylink.net',
+                   'protonmail.com', 'pm.me', 'zoho.com', 'gmx.com', 'mail.com', 'aim.com',
+                   'frontier.com', 'netzero.net', 'twc.com', 'spectrum.net'
+               ];
+
+               const isAllowedDomain = allowedDomains.includes(domainPart);
+               const isMilDomain = domainPart.endsWith('.mil');
+               const isUserRepeated = /^([a-z0-9])\1+$/.test(userPart);
+               const uniqueCharsUser = new Set(userPart.split('')).size;
+
+               if (lowerEmail.includes('..') || lowerEmail.startsWith('.') || lowerEmail.endsWith('.')) newErrors.email = "Check for typos.";
+               else if (!emailRegex.test(values.email)) newErrors.email = "Valid email required.";
+               else if (profanityList.some(word => lowerEmail.includes(word))) newErrors.email = "Professional email required.";
+               else if (!isAllowedDomain && !isMilDomain) newErrors.email = "Use a common personal or .mil email.";
+               else if (userPart === baseDomain) newErrors.email = "Valid email required.";
+               else if (isUserRepeated) newErrors.email = "Valid email required.";
+               else if (userPart.length > 5 && uniqueCharsUser < 3) newErrors.email = "Valid email required.";
+
+               if (!values.zipCode || values.zipCode.length < 5) newErrors.zipCode = "Valid Zip Code required.";
 
                if (!consentState.bestContact.text && !consentState.bestContact.email && !consentState.bestContact.phone) {
                    alert("Please choose at least one best contact method.");
                    return;
                }
 
-               if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+               if (Object.keys(newErrors).length > 0) {
+                   setErrors(newErrors);
+                   return;
+               }
+
                onSubmit({ ...values, consent: consentState });
            };
 
            return (
                <div>
-                   <h1 className="text-2xl font-bold text-slate-900 mb-2 leading-tight">{getDynamicHeader()}</h1>
-                   <p className="text-slate-500 text-sm mb-6">{data.subtext}</p>
-                   <form onSubmit={handleLocalSubmit} className="space-y-3" noValidate>
-                       <div className="opacity-0 absolute -z-10 h-0 w-0 overflow-hidden"><input type="text" name="website_url" tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} /></div>
-                       <div className="grid grid-cols-2 gap-3">
-                           <div><input name="firstName" required type="text" autoComplete="given-name" className={`w-full p-3 rounded-lg border ${errors.firstName ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="First Name" /></div>
-                           <div><input name="lastName" required type="text" autoComplete="family-name" className={`w-full p-3 rounded-lg border ${errors.lastName ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Last Name" /></div>
+                   <div className="flex items-center justify-between mb-8 bg-blue-50/50 p-3 rounded-lg border border-blue-100">
+                       <div className="flex items-center gap-2 text-blue-800 text-sm font-bold">
+                           <div className="relative w-2 h-2">
+                               <div className="absolute w-2 h-2 bg-green-500 rounded-full pulse-ring"></div>
+                               <div className="relative w-2 h-2 bg-green-500 rounded-full"></div>
+                           </div>
+                           Online Now
                        </div>
-                       <input name="email" required type="email" autoComplete="email" className={`w-full p-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Email Address" />
-                       <input name="phone" required type="tel" autoComplete="tel" className={`w-full p-3 rounded-lg border ${errors.phone ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Phone Number" onInput={(e) => { let v = e.target.value.replace(/\D/g, ''); if (v.length > 10 && v.startsWith('1')) v = v.substring(1); if (v.length > 10) v = v.slice(0, 10); if (v.length > 6) e.target.value = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`; else if (v.length > 3) e.target.value = `(${v.slice(0,3)}) ${v.slice(3)}`; else e.target.value = v; }} />
-                       <div className="grid grid-cols-2 gap-3">
-                           <input name="zipCode" required type="text" autoComplete="postal-code" maxLength={5} className={`w-full p-3 rounded-lg border ${errors.zipCode ? 'border-red-500' : 'border-slate-200'} focus:border-blue-600 outline-none text-sm`} placeholder="Zip Code" />
-                           <select name="bestTime" className="w-full p-3 rounded-lg border border-slate-200 focus:border-blue-600 outline-none text-sm bg-white"><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Anytime</option></select>
+                       <div className="text-xs text-blue-600 font-semibold tracking-wide uppercase">
+                           3 Specialists Available
+                       </div>
+                   </div>
+
+                   <h1 className="text-3xl font-bold text-slate-900 mb-2">
+                       {getDynamicHeader()}
+                   </h1>
+                   <p className="text-slate-500 text-lg mb-8">
+                       {data.subtext}
+                   </p>
+
+                   <form onSubmit={handleLocalSubmit} className="space-y-4" noValidate>
+                       <div className="opacity-0 absolute -z-10 h-0 w-0 overflow-hidden">
+                           <input type="text" name="website_url" tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} />
                        </div>
 
-                       <div className="pt-2">
-                           <p className="text-xs font-bold text-slate-500 mb-2">Best Contact Method:</p>
-                          <div className="flex gap-4">
-                              {['Text', 'Email', 'Phone'].map(type => (
-                                  <label key={type} className="flex items-center gap-1.5 cursor-pointer text-slate-700 text-xs font-medium">
-                                      <input type="checkbox" checked={consentState.bestContact[type.toLowerCase()]} onChange={() => handleContactMethodChange(type.toLowerCase())} className="w-[18px] h-[18px] rounded border-gray-300 text-blue-600 focus:ring-blue-500" /> {type}
-                                  </label>
-                              ))}
-                          </div>
+                       <div className="grid md:grid-cols-2 gap-4">
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">First Name</label>
+                               <div className="relative">
+                                   <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="firstName"
+                                       required
+                                       type="text"
+                                       autoComplete="given-name"
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.firstName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="John"
+                                   />
+                               </div>
+                               {errors.firstName && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.firstName}</p>}
+                           </div>
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Last Name</label>
+                               <div className="relative">
+                                   <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="lastName"
+                                       required
+                                       type="text"
+                                       autoComplete="family-name"
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.lastName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="Doe"
+                                   />
+                               </div>
+                               {errors.lastName && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.lastName}</p>}
+                           </div>
                        </div>
 
-                       <hr className="border-slate-100 my-4" />
+                       <div className="grid md:grid-cols-2 gap-4">
+                            <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Email Address</label>
+                               <div className="relative">
+                                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="email"
+                                       required
+                                       type="email"
+                                       autoComplete="email"
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.email ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="john@example.com"
+                                   />
+                               </div>
+                               {errors.email && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.email}</p>}
+                           </div>
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Phone Number</label>
+                               <div className="relative">
+                                   <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="phone"
+                                       required
+                                       type="tel"
+                                       autoComplete="tel"
+                                       maxLength={14}
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.phone ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="(555) 123-4567"
+                                       onInput={(e) => {
+                                           let v = e.target.value.replace(/\D/g, '');
+                                           if (v.length > 10 && v.startsWith('1')) v = v.substring(1);
+                                           if (v.length > 10) v = v.slice(0, 10);
+                                           if (v.length > 6) e.target.value = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+                                           else if (v.length > 3) e.target.value = `(${v.slice(0,3)}) ${v.slice(3)}`;
+                                           else e.target.value = v;
+                                       }}
+                                   />
+                               </div>
+                               {errors.phone && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.phone}</p>}
+                           </div>
+                       </div>
 
-                       <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 mb-2">
-                           <label className="flex items-start gap-2 cursor-pointer group">
-                              <input
-                                  type="checkbox"
-                                  checked={consentState.privateOrg}
-                                  onChange={() => handleConsentChange('privateOrg')}
-                                  className="sr-only"
-                                  aria-label="I understand and wish to continue"
-                              />
-                              <div className={`mt-0.5 w-[21px] h-[21px] rounded-full border flex items-center justify-center flex-shrink-0 ${consentState.privateOrg ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
-                                  {consentState.privateOrg && <CheckCircle2 size={10} className="text-white" />}
-                              </div>
-                               <span className="text-[10px] text-slate-600 leading-tight">
-                                   I understand TYFYS is a <strong>private organization</strong>, not the VA.
+                       <div className="grid md:grid-cols-2 gap-4">
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Zip Code</label>
+                               <div className="relative">
+                                   <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <input
+                                       name="zipCode"
+                                       required
+                                       type="text"
+                                       autoComplete="postal-code"
+                                       maxLength={5}
+                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.zipCode ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       placeholder="12345"
+                                   />
+                               </div>
+                               {errors.zipCode && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.zipCode}</p>}
+                           </div>
+                           <div className="relative group">
+                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Best Time To Contact</label>
+                               <div className="relative">
+                                   <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                                   <select name="bestTime" className="w-full pl-11 pr-4 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900 appearance-none">
+                                       <option>Morning (9AM - 12PM)</option>
+                                       <option>Afternoon (12PM - 4PM)</option>
+                                       <option>Evening (4PM - 7PM)</option>
+                                       <option>Anytime</option>
+                                   </select>
+                               </div>
+                           </div>
+                       </div>
+
+                       <div className="py-2">
+                           <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Best Form Of Contact</label>
+                           <div className="flex gap-4">
+                               {['Text', 'Email', 'Phone'].map(type => (
+                                   <label key={type} className="flex items-center gap-2 cursor-pointer text-slate-700 font-medium text-sm">
+                                       <input
+                                           type="checkbox"
+                                           checked={consentState.bestContact[type.toLowerCase()]}
+                                           onChange={() => handleContactMethodChange(type.toLowerCase())}
+                                           className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                       />
+                                       {type}
+                                   </label>
+                               ))}
+                           </div>
+                       </div>
+
+                       <hr className="border-slate-100 my-6" />
+
+                       <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4">
+                           <h4 className="text-xs font-bold text-slate-900 uppercase mb-2">Before You Submit:</h4>
+                           <p className="text-xs text-slate-600 mb-3 leading-relaxed">
+                               By hitting submit you recognize that we are a <strong className="text-slate-900">private organization</strong> that works with United States Veterans looking to file a Disability claim with the Veterans Administration.
+                           </p>
+                           <label className="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-100 transition-colors group">
+                               <input
+                                   type="checkbox"
+                                   checked={consentState.privateOrg}
+                                   onChange={() => handleConsentChange('privateOrg')}
+                                   className="sr-only"
+                                   aria-label="I understand and wish to continue"
+                               />
+                               <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0 ${consentState.privateOrg ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
+                                   {consentState.privateOrg && <CheckCircle2 size={12} className="text-white" />}
+                               </div>
+                               <span className={`text-xs font-bold uppercase ${consentState.privateOrg ? 'text-blue-700' : 'text-slate-500'}`}>I understand & wish to continue</span>
+                           </label>
+                       </div>
+
+                       <div className="space-y-3">
+                           <label className="flex items-start gap-3 cursor-pointer">
+                               <input type="checkbox" checked={consentState.terms} onChange={() => handleConsentChange('terms')} className="mt-1 w-4 h-4 rounded border-slate-300 text-blue-600" />
+                               <span className="text-xs text-slate-600">
+                                   Confirm you've read our <a href="sms-terms.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">terms and service</a>.
+                               </span>
+                           </label>
+                           <label className="flex items-start gap-3 cursor-pointer">
+                               <input type="checkbox" checked={consentState.sms} onChange={() => handleConsentChange('sms')} className="mt-1 w-4 h-4 rounded border-slate-300 text-blue-600" />
+                               <span className="text-xs text-slate-600">
+                                   By checking this box, you consent to receive text messages from Thank You For Your Service.
                                </span>
                            </label>
                        </div>
 
-                       <div className="space-y-2">
-                          <label className="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked={consentState.terms} onChange={() => handleConsentChange('terms')} className="mt-0.5 w-[18px] h-[18px] rounded border-slate-300" /><span className="text-[10px] text-slate-500">I agree to the <a href="sms-terms.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">terms</a>.</span></label>
-                          <label className="flex items-start gap-2 cursor-pointer"><input type="checkbox" checked={consentState.sms} onChange={() => handleConsentChange('sms')} className="mt-0.5 w-[18px] h-[18px] rounded border-slate-300" /><span className="text-[10px] text-slate-500">I consent to receive SMS updates. Reply STOP to opt-out.</span></label>
-                       </div>
+                       <div className="pt-4">
+                           {(!consentState.privateOrg || !consentState.terms || !consentState.sms) && (
+                               <p className="mb-3 text-xs text-slate-500">Check all 3 consent boxes to enable Continue.</p>
+                           )}
+                           <button
+                               type="submit"
+                               disabled={isSubmitting || !consentState.privateOrg || !consentState.terms || !consentState.sms}
+                               className="w-full bg-green-500 hover:bg-green-600 text-white font-bold text-xl py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 group border-b-4 border-green-700 active:border-b-0 active:mt-1"
+                           >
+                               {isSubmitting ? 'Processing...' : (
+                                   <>
+                                       CONTINUE <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                                   </>
+                               )}
+                           </button>
 
-                       {(!consentState.privateOrg || !consentState.terms || !consentState.sms) && (
-                           <p className="text-[10px] text-slate-500">Check all 3 consent boxes to enable Continue.</p>
-                       )}
-
-                       <button type="submit" disabled={isSubmitting || !consentState.privateOrg || !consentState.terms || !consentState.sms} className="primary-action w-full bg-green-500 hover:bg-green-600 text-white font-bold text-lg py-3 rounded-xl shadow-md transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed mt-2">
-                           {isSubmitting ? 'Processing...' : 'Get My Consultation'}
-                       </button>
-
-                       {submitError && (
-                           <p className="text-sm font-semibold text-red-600">{submitError}</p>
-                       )}
-
-                       <div className="mt-6 text-center space-y-4">
-                           <div className="flex gap-2 items-center justify-center text-left bg-slate-50 p-2 rounded-lg border border-slate-100">
-                               <div className="w-8 h-8 rounded-full bg-slate-300 flex-shrink-0 overflow-hidden border border-white shadow-sm">
-                                   <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=William&backgroundColor=e6e6e6" alt="William" />
+                           {submitError && (
+                               <p className="mt-3 text-sm font-semibold text-red-600">{submitError}</p>
+                           )}
+                          
+                           <div className="text-center mt-6 space-y-4">
+                               <div className="flex gap-3 items-center justify-center text-left max-w-sm mx-auto">
+                                   <div className="w-10 h-10 rounded-full bg-slate-200 flex-shrink-0 overflow-hidden">
+                                       <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=William&backgroundColor=e6e6e6" alt="William" />
+                                   </div>
+                                   <div>
+                                       <p className="text-[10px] italic text-slate-600">"The free consultation really helped educate me... I was able to take the next steps with confidence."</p>
+                                       <p className="text-[10px] font-bold text-slate-800">- William R, NC</p>
+                                   </div>
                                </div>
-                               <div>
-                                   <p className="text-[10px] text-slate-600 italic leading-tight">"The free consultation really helped educate me... I was able to take the next steps with confidence."</p>
-                                   <p className="text-[9px] font-bold text-slate-800 mt-0.5">- William R, NC</p>
+
+                               <div className="text-xs text-slate-500">
+                                   <strong className="text-slate-900 block mb-1">*WE ONLY HIRE AMERICAN.</strong>
+                                   We are American owned & Operated. Your Free Benefits Evaluation is done over the phone with a <strong className="text-slate-900">live U.S. Representative.</strong>
                                </div>
+                              
+                               <p className="text-[10px] text-slate-400 leading-tight">
+                                   <strong>SMS CONSENT POLICY:</strong> By submitting your phone number, you agree to receive texts and calls about your VA benefits evaluation. Message and data rates may apply. Reply STOP to opt-out. Consent is not a condition of service.
+                               </p>
                            </div>
-
-                           <div className="text-[10px] text-slate-500 px-2">
-                               <strong className="text-slate-900 block mb-1 uppercase tracking-wide">*WE ONLY HIRE AMERICAN.</strong>
-                               We are American owned & Operated. Your Free Benefits Evaluation is done over the phone with a <strong className="text-slate-900">live U.S. Representative.</strong>
-                           </div>
-
-                           <p className="text-[9px] text-slate-400 leading-tight px-2 pb-2">
-                               <strong>SMS CONSENT POLICY:</strong> By submitting your phone number, you agree to receive texts and calls about your VA benefits evaluation. Message and data rates may apply. Reply STOP to opt-out. Consent is not a condition of service.
-                           </p>
                        </div>
                    </form>
                </div>

@@ -517,7 +517,7 @@
             const username = document.getElementById('intake-username').value.trim();
             const password = document.getElementById('intake-password').value;
 
-            if (username === 'admin' && password === 'stateboys') {
+            if (username === 'staff' && password === 'password') {
                 sessionStorage.setItem('intakePortalAuth', 'true');
                 loginError.classList.add('hidden');
                 unlockPortal();
