@@ -1468,7 +1468,14 @@
                                By hitting submit you recognize that we are a <strong className="text-slate-900">private organization</strong> that works with United States Veterans looking to file a Disability claim with the Veterans Administration.
                            </p>
                            <label className="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-100 transition-colors group">
-                               <div onClick={() => handleConsentChange('privateOrg')} className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0 ${consentState.privateOrg ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
+                               <input
+                                   type="checkbox"
+                                   checked={consentState.privateOrg}
+                                   onChange={() => handleConsentChange('privateOrg')}
+                                   className="sr-only"
+                                   aria-label="I understand and wish to continue"
+                               />
+                               <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0 ${consentState.privateOrg ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
                                    {consentState.privateOrg && <CheckCircle2 size={12} className="text-white" />}
                                </div>
                                <span className={`text-xs font-bold uppercase ${consentState.privateOrg ? 'text-blue-700' : 'text-slate-500'}`}>I understand & wish to continue</span>
@@ -1494,6 +1501,9 @@
 
 
                        <div className="pt-4">
+                           {(!consentState.privateOrg || !consentState.terms || !consentState.sms) && (
+                               <p className="mb-3 text-xs text-slate-500">Check all 3 consent boxes to enable Continue.</p>
+                           )}
                            <button
                                type="submit"
                                disabled={isSubmitting || !consentState.privateOrg || !consentState.terms || !consentState.sms}
