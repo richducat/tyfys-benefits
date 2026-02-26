@@ -1308,11 +1308,6 @@ function TYFYSPlatform() {
   const formatMoney = (amount) =>
     new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount || 0);
 
-  // --- RENDERING ---
-  if (!hasStarted) {
-    return <LandingOverlay onStart={() => setHasStarted(true)} />;
-  }
-
   // Auto-advance logic for loading screen
   useEffect(() => {
     if (!onboardingComplete && ONBOARDING_STEPS[onboardingStep] && ONBOARDING_STEPS[onboardingStep].type === "loading") {
@@ -1320,6 +1315,11 @@ function TYFYSPlatform() {
       return () => clearTimeout(timer);
     }
   }, [onboardingComplete, onboardingStep, completeOnboarding]);
+
+  // --- RENDERING ---
+  if (!hasStarted) {
+    return <LandingOverlay onStart={() => setHasStarted(true)} />;
+  }
 
   return (
     <div className="flex h-screen bg-slate-50 font-sans overflow-hidden relative">
