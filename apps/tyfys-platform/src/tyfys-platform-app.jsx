@@ -5,6 +5,7 @@ const { useState, useEffect, useRef } = React;
 const PAYMENT_STATE_KEY = "tyfys.paymentState";
 const LEAD_PREFILL_KEY = "tyfys.leadPrefill";
 const CHECKOUT_PENDING_KEY = "tyfys.checkoutPending";
+const HAS_STARTED_KEY = "tyfys.hasStarted";
 const DEFAULT_PAYMENT_STATE = {
   completed: false,
   planName: "",
@@ -57,6 +58,22 @@ const saveCheckoutPending = (state) => {
 const clearCheckoutPending = () => {
   try {
     window.localStorage.removeItem(CHECKOUT_PENDING_KEY);
+  } catch (error) {
+    // No-op when storage is unavailable.
+  }
+};
+
+const loadHasStarted = () => {
+  try {
+    return window.sessionStorage.getItem(HAS_STARTED_KEY) === "1";
+  } catch (error) {
+    return false;
+  }
+};
+
+const saveHasStarted = () => {
+  try {
+    window.sessionStorage.setItem(HAS_STARTED_KEY, "1");
   } catch (error) {
     // No-op when storage is unavailable.
   }
@@ -1089,7 +1106,10 @@ function LandingOverlay({ onStart }) {
           <strong className="text-white">NOTICE:</strong> We are a private organization of medical and legal experts. We are not the VA.
         </div>
         <button
+          type="button"
           onClick={onStart}
+          onTouchEnd={onStart}
+          style={{ touchAction: "manipulation" }}
           className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold text-2xl py-6 px-12 rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center gap-3 mx-auto"
         >
           Initialize System <Icons.ChevronRight className="w-8 h-8" />
@@ -1175,7 +1195,7 @@ function TYFYSPlatform() {
   const prefilledProfile = mapLeadPrefillToProfile(leadPrefill);
 
   // STATE
-  const [hasStarted, setHasStarted] = useState(false);
+  const [hasStarted, setHasStarted] = useState(() => loadHasStarted());
   const [onboardingComplete, setOnboardingComplete] = useState(false);
   const [onboardingStep, setOnboardingStep] = useState(
     hasLeadPrefill && prefilledContactStep >= 0 ? prefilledContactStep : 0
@@ -1234,6 +1254,11 @@ function TYFYSPlatform() {
 
   const [expandCalcHelp, setExpandCalcHelp] = useState(false);
   const hasPaid = paymentState.completed;
+
+  const startSystem = () => {
+    setHasStarted(true);
+    saveHasStarted();
+  };
   const checkoutLeadId = `${userProfile.branch?.substring(0, 3).toUpperCase() || "VET"}-8821`;
 
   const chatEndRef = useRef(null);
@@ -1557,7 +1582,7 @@ function TYFYSPlatform() {
 
   // --- RENDERING ---
   if (!hasStarted) {
-    return <LandingOverlay onStart={() => setHasStarted(true)} />;
+    return <LandingOverlay onStart={startSystem} />;
   }
 
   return (
