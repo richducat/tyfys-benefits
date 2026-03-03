@@ -4,6 +4,7 @@ const { useState, useEffect, useRef } = React;
 
 const PAYMENT_STATE_KEY = "tyfys.paymentState";
 const LEAD_PREFILL_KEY = "tyfys.leadPrefill";
+const CHECKOUT_PENDING_KEY = "tyfys.checkoutPending";
 const DEFAULT_PAYMENT_STATE = {
   completed: false,
   planName: "",
@@ -31,6 +32,42 @@ const savePaymentState = (state) => {
   } catch (error) {
     // No-op when storage is unavailable.
   }
+};
+
+const loadCheckoutPending = () => {
+  try {
+    const raw = window.localStorage.getItem(CHECKOUT_PENDING_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return null;
+    return parsed;
+  } catch (error) {
+    return null;
+  }
+};
+
+const saveCheckoutPending = (state) => {
+  try {
+    window.localStorage.setItem(CHECKOUT_PENDING_KEY, JSON.stringify(state));
+  } catch (error) {
+    // No-op when storage is unavailable.
+  }
+};
+
+const clearCheckoutPending = () => {
+  try {
+    window.localStorage.removeItem(CHECKOUT_PENDING_KEY);
+  } catch (error) {
+    // No-op when storage is unavailable.
+  }
+};
+
+const planNameFromCode = (planCode) => {
+  const normalized = String(planCode || "").toLowerCase();
+  if (normalized === "250_monthly" || normalized === "pro_monthly") return "Premium Membership";
+  if (normalized === "35_monthly" || normalized === "lite_monthly") return "Starter Membership";
+  if (normalized === "250_yearly_special" || normalized === "special_yearly") return "Premium Annual";
+  return "";
 };
 
 const mapLeadCategories = (conditions) => {
@@ -1157,6 +1194,7 @@ function TYFYSPlatform() {
   });
   const [activeView, setActiveView] = useState("welcome_guide");
   const [paymentState, setPaymentState] = useState(() => loadPaymentState());
+  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
   const [isMember, setIsMember] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentRating, setCurrentRating] = useState(Number(prefilledProfile.rating || 0));
@@ -1196,6 +1234,7 @@ function TYFYSPlatform() {
 
   const [expandCalcHelp, setExpandCalcHelp] = useState(false);
   const hasPaid = paymentState.completed;
+  const checkoutLeadId = `${userProfile.branch?.substring(0, 3).toUpperCase() || "VET"}-8821`;
 
   const chatEndRef = useRef(null);
   const botMemory = useRef({ hasPitchedNexus: false, hasWelcomed: false, viewGuidesSent: new Set() });
@@ -1209,6 +1248,39 @@ function TYFYSPlatform() {
   useEffect(() => {
     savePaymentState(paymentState);
   }, [paymentState]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const checkoutStatus = params.get("checkout");
+    if (!checkoutStatus) return;
+
+    const pending = loadCheckoutPending();
+    const planFromQuery = params.get("plan");
+    const fallbackPlanName = pending?.planName || planNameFromCode(planFromQuery) || "your selected plan";
+    const fallbackUnlockPremium =
+      typeof pending?.unlockPremium === "boolean"
+        ? pending.unlockPremium
+        : planFromQuery === "250_monthly" || planFromQuery === "pro_monthly";
+
+    if (checkoutStatus === "success") {
+      handlePaymentComplete({
+        planName: fallbackPlanName,
+        unlockPremium: fallbackUnlockPremium
+      });
+      clearCheckoutPending();
+    } else if (checkoutStatus === "cancel") {
+      clearCheckoutPending();
+      setIsBotOpen(true);
+      addMessage("bot", "Checkout was canceled. No charge was made, and your account is still on the standard plan.");
+    }
+
+    setIsCheckoutLoading(false);
+    params.delete("checkout");
+    params.delete("session_id");
+    params.delete("leadId");
+    const query = params.toString();
+    window.history.replaceState({}, "", `${window.location.pathname}${query ? `?${query}` : ""}`);
+  }, []);
 
   const addMessage = (sender, text) => setMessages((prev) => [...prev, { sender, text }]);
 
@@ -1230,14 +1302,16 @@ function TYFYSPlatform() {
 
   // Onboarding Handlers
   const handleOnboardingAnswer = (qid, value) => {
-    let newData = { ...userProfile };
-    if (Array.isArray(newData[qid])) {
-      if (newData[qid].includes(value)) newData[qid] = newData[qid].filter((item) => item !== value);
-      else newData[qid] = [...newData[qid], value];
-    } else {
-      newData[qid] = value;
-    }
-    setUserProfile(newData);
+    setUserProfile((prev) => {
+      const newData = { ...prev };
+      if (Array.isArray(newData[qid])) {
+        if (newData[qid].includes(value)) newData[qid] = newData[qid].filter((item) => item !== value);
+        else newData[qid] = [...newData[qid], value];
+      } else {
+        newData[qid] = value;
+      }
+      return newData;
+    });
     if (qid === "rating") setCurrentRating(Number(value));
   };
 
@@ -1294,6 +1368,7 @@ function TYFYSPlatform() {
     if (unlockPremium) {
       setIsMember(true);
     }
+    setIsCheckoutLoading(false);
     setPaymentState({
       completed: true,
       planName,
@@ -1305,6 +1380,53 @@ function TYFYSPlatform() {
       "bot",
       `Payment confirmed for ${planName}. First step now is your intake portal. I opened it for you.`
     );
+  };
+
+  const startSecureCheckout = async ({ planName, planCode, unlockPremium = false }) => {
+    if (!planCode) {
+      setShowSpecialistModal(true);
+      setIsBotOpen(true);
+      addMessage(
+        "bot",
+        `This ${planName} checkout is handled by a specialist. Use "Book Discovery Call" and we will complete enrollment with you directly.`
+      );
+      return;
+    }
+
+    setIsCheckoutLoading(true);
+    saveCheckoutPending({
+      planName,
+      planCode,
+      unlockPremium,
+      leadId: checkoutLeadId,
+      requestedAt: new Date().toISOString()
+    });
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          leadId: checkoutLeadId,
+          plan: planCode
+        })
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload?.url) {
+        throw new Error(payload?.error || "Unable to start checkout");
+      }
+
+      window.location.href = payload.url;
+    } catch (error) {
+      clearCheckoutPending();
+      setIsCheckoutLoading(false);
+      setIsBotOpen(true);
+      addMessage(
+        "bot",
+        "Secure checkout is temporarily unavailable. Please book a discovery call and we will complete enrollment manually."
+      );
+    }
   };
 
   // Calculator Logic
@@ -1426,6 +1548,13 @@ function TYFYSPlatform() {
     }
   }, [onboardingComplete, onboardingStep, completeOnboarding]);
 
+  useEffect(() => {
+    document.body.classList.toggle("onboarding-active", !onboardingComplete);
+    return () => {
+      document.body.classList.remove("onboarding-active");
+    };
+  }, [onboardingComplete]);
+
   // --- RENDERING ---
   if (!hasStarted) {
     return <LandingOverlay onStart={() => setHasStarted(true)} />;
@@ -1440,8 +1569,8 @@ function TYFYSPlatform() {
 
       {/* NEW ONBOARDING MODAL */}
       {!onboardingComplete && (
-        <div className="fixed inset-0 z-[60] bg-slate-900 flex flex-col items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-slate-200">
+        <div className="fixed inset-0 z-[60] bg-slate-900/95 flex flex-col items-center justify-start md:justify-center p-2 sm:p-4 overflow-y-auto">
+          <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-slate-200 max-h-[calc(100dvh-1rem)] flex flex-col my-1 sm:my-2">
             {/* Header */}
             <div className="p-6 bg-slate-900 flex flex-col gap-4">
               <div className="flex items-center justify-between">
@@ -1480,7 +1609,10 @@ function TYFYSPlatform() {
               ></div>
             </div>
 
-            <div className="p-8 md:p-10 bg-slate-50 min-h-[400px] flex flex-col justify-center">
+            <div
+              className={`p-6 md:p-10 bg-slate-50 min-h-0 flex-1 overflow-y-auto ${ONBOARDING_STEPS[onboardingStep].type === "loading" ? "flex flex-col justify-center" : "flex flex-col justify-start"} pb-28 md:pb-10`}
+              style={{ paddingBottom: "max(7rem, env(safe-area-inset-bottom) + 5.5rem)" }}
+            >
               {ONBOARDING_STEPS[onboardingStep].type === "loading" ? (
                 <LoadingStep text={ONBOARDING_STEPS[onboardingStep].text} />
               ) : ONBOARDING_STEPS[onboardingStep].type &&
@@ -1526,12 +1658,14 @@ function TYFYSPlatform() {
                           {q.type === "boolean" && (
                             <div className="flex gap-4">
                               <button
+                                type="button"
                                 onClick={() => handleOnboardingAnswer(q.id, true)}
                                 className={`flex-1 py-4 rounded-xl border-2 text-lg font-bold transition-all ${userProfile[q.id] === true ? "border-blue-600 bg-blue-50 text-blue-900" : "border-slate-200 bg-white text-slate-500 hover:border-blue-400"}`}
                               >
                                 Yes
                               </button>
                               <button
+                                type="button"
                                 onClick={() => handleOnboardingAnswer(q.id, false)}
                                 className={`flex-1 py-4 rounded-xl border-2 text-lg font-bold transition-all ${userProfile[q.id] === false ? "border-blue-600 bg-blue-50 text-blue-900" : "border-slate-200 bg-white text-slate-500 hover:border-blue-400"}`}
                               >
@@ -1574,6 +1708,7 @@ function TYFYSPlatform() {
                                   return (
                                     <button
                                       key={opt.value}
+                                      type="button"
                                       onClick={() => handleOnboardingAnswer(q.id, opt.value)}
                                       className={`w-full relative p-4 rounded-xl border-2 text-left transition-all flex items-center justify-between group ${isSelected ? "border-blue-600 bg-blue-50 shadow-sm" : "border-slate-200 bg-white hover:border-blue-400"}`}
                                     >
@@ -2418,14 +2553,16 @@ function TYFYSPlatform() {
                         </p>
                         <button
                           onClick={() => {
-                            handlePaymentComplete({
+                            startSecureCheckout({
                               planName: "Premium Membership",
+                              planCode: "250_monthly",
                               unlockPremium: true
                             });
                           }}
+                          disabled={isCheckoutLoading}
                           className="w-full bg-white text-blue-900 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
                         >
-                          Join Premium
+                          {isCheckoutLoading ? "Redirecting..." : "Join Premium"}
                         </button>
                       </div>
                     </div>
@@ -2470,13 +2607,14 @@ function TYFYSPlatform() {
                       </ul>
                       <button
                         onClick={() => {
-                          handlePaymentComplete({
+                          startSecureCheckout({
                             planName: "Standard Package"
                           });
                         }}
+                        disabled={isCheckoutLoading}
                         className="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-slate-200 transition-all shadow-lg"
                       >
-                        Select Plan
+                        {isCheckoutLoading ? "Redirecting..." : "Request This Plan"}
                       </button>
                     </div>
 
@@ -2520,13 +2658,14 @@ function TYFYSPlatform() {
                       </ul>
                       <button
                         onClick={() => {
-                          handlePaymentComplete({
+                          startSecureCheckout({
                             planName: "Multi-Claim Package"
                           });
                         }}
+                        disabled={isCheckoutLoading}
                         className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-900/50"
                       >
-                        Select Plan
+                        {isCheckoutLoading ? "Redirecting..." : "Request This Plan"}
                       </button>
                     </div>
                   </div>

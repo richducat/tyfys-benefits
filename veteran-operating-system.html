@@ -7,6 +7,17 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            safelist: [
+                'border-blue-600',
+                'bg-blue-50',
+                'text-blue-900',
+                'shadow-sm',
+                'hover:border-blue-400'
+            ]
+        }
+    </script>
 
     <!-- React & ReactDOM -->
     <script defer src="tyfys-platform/vendor/react.production.min.js"></script>
@@ -49,10 +60,43 @@
             border-right: 10px solid white;
         }
     </style>
+
+   <!-- TYFYS Structured Data -->
+   <script type="application/ld+json" data-tyfys-schema="organization">
+   {
+     "@context": "https://schema.org",
+     "@type": "Organization",
+     "name": "Thank You For Your Service (TYFYS)",
+     "url": "https://tyfys.net",
+     "logo": "https://tyfys.net/logo.png",
+     "sameAs": []
+   }
+   </script>
+   <script type="application/ld+json" data-tyfys-schema="localbusiness">
+   {
+     "@context": "https://schema.org",
+     "@type": "LocalBusiness",
+     "name": "TYFYS",
+     "url": "https://tyfys.net",
+     "telephone": "321-248-2805",
+     "address": {
+       "@type": "PostalAddress",
+       "addressCountry": "US"
+     },
+     "areaServed": {
+       "@type": "AdministrativeArea",
+       "name": "United States"
+     },
+     "description": "Neutral coordination of private medical evidence (DBQs and independent medical opinions) to support veterans disability claims."
+   }
+   </script>
+   <!-- /TYFYS Structured Data -->
 </head>
 <body class="bg-slate-50 text-slate-900 overflow-hidden">
     <div id="root"></div>
 
     <script src="tyfys-platform/tyfys-platform-app.js" defer></script>
+
+   <script src="apps/seo-sitewide.js"></script>
 </body>
 </html>
