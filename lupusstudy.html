@@ -599,10 +599,7 @@
       }
 
       function showSuccess() {
-        wizardForm.classList.add('hidden');
-        progressWrap.classList.add('hidden');
-        wizardSuccess.classList.remove('hidden');
-        window.lucide && window.lucide.createIcons();
+        window.location.assign('/clinic');
       }
 
       scrollButtons.forEach((button) => {
