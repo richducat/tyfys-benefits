@@ -15,12 +15,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="TYFYS App portal for veterans to manage their claim strategy." />
     <title>TYFYS App | Veteran Operating System</title>
+    <link rel="icon" type="image/png" href="logo.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="apps/navigation.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            safelist: [
+                'border-blue-600',
+                'bg-blue-50',
+                'text-blue-900',
+                'shadow-sm',
+                'hover:border-blue-400'
+            ],
             theme: {
                 extend: {
                     colors: {
@@ -80,7 +88,49 @@
             border-bottom: 10px solid transparent;
             border-right: 10px solid white;
         }
+
+        /* Hide third-party chat launchers while onboarding modal is visible. */
+        body.onboarding-active #zsiq_float,
+        body.onboarding-active #zsiq_floatmain,
+        body.onboarding-active [id^="zsiq_"],
+        body.onboarding-active [class*="zsiq"],
+        body.onboarding-active iframe[src*="salesiq"] {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
     </style>
+
+   <!-- TYFYS Structured Data -->
+   <script type="application/ld+json" data-tyfys-schema="organization">
+   {
+     "@context": "https://schema.org",
+     "@type": "Organization",
+     "name": "Thank You For Your Service (TYFYS)",
+     "url": "https://tyfys.net",
+     "logo": "https://tyfys.net/logo.png",
+     "sameAs": []
+   }
+   </script>
+   <script type="application/ld+json" data-tyfys-schema="localbusiness">
+   {
+     "@context": "https://schema.org",
+     "@type": "LocalBusiness",
+     "name": "TYFYS",
+     "url": "https://tyfys.net",
+     "telephone": "321-248-2805",
+     "address": {
+       "@type": "PostalAddress",
+       "addressCountry": "US"
+     },
+     "areaServed": {
+       "@type": "AdministrativeArea",
+       "name": "United States"
+     },
+     "description": "Neutral coordination of private medical evidence (DBQs and independent medical opinions) to support veterans disability claims."
+   }
+   </script>
+   <!-- /TYFYS Structured Data -->
 </head>
 <body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
     <nav class="sticky top-0 z-50 transition-all duration-500 bg-transparent" data-site-nav>
@@ -378,5 +428,7 @@
 
     <script src="apps/mobile-nav.js"></script>
     <script src="tyfys-platform/tyfys-platform-app.js" defer></script>
+
+   <script src="apps/seo-sitewide.js"></script>
 </body>
 </html>
