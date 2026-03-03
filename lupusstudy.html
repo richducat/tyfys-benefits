@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1PEBFCV9Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-L1PEBFCV9Q');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Veterans with lupus skin symptoms may qualify for a clinical dermatology study. Learn benefits, eligibility, and complete a short questionnaire.">
+  <meta name="keywords" content="veterans lupus study, cutaneous lupus research, lupus skin symptoms, clinical trial veterans">
+  <link rel="canonical" href="https://tyfys.net/lupusstudy">
+  <title>Lupus Study for Veterans | TYFYS</title>
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="apps/navigation.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Merriweather:wght@300;400;700;900&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50: '#f0f4ff', 100: '#e0eaff', 700: '#2d4a9e', 800: '#1e3a8a', 900: '#0f172a' },
+            gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Merriweather', 'serif']
+          },
+          boxShadow: {
+            soft: '0 4px 20px -2px rgba(0, 0, 0, 0.05)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .hero-pattern {
+      background-color: #f8fafc;
+      background-image: radial-gradient(rgba(30, 58, 138, 0.08) 1px, transparent 1px);
+      background-size: 26px 26px;
+    }
+    .wizard-step { display: none; }
+    .wizard-step.active { display: block; }
+    .option-button {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.9rem;
+      padding: 0.95rem 1rem;
+      text-align: left;
+      font-weight: 700;
+      color: #0f172a;
+      background: #fff;
+      transition: all 160ms ease;
+    }
+    .option-button:hover {
+      border-color: #1e3a8a;
+      background: #eff6ff;
+      transform: translateY(-1px);
+    }
+    .chip {
+      border: 1px solid #e2e8f0;
+      border-radius: 0.9rem;
+      padding: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 600;
+      color: #1e293b;
+      background: #fff;
+    }
+  </style>
+
+  <!-- TYFYS Structured Data -->
+  <script type="application/ld+json" data-tyfys-schema="organization">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Thank You For Your Service (TYFYS)",
+    "url": "https://tyfys.net",
+    "logo": "https://tyfys.net/logo.png",
+    "sameAs": []
+  }
+  </script>
+  <script type="application/ld+json" data-tyfys-schema="localbusiness">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "TYFYS",
+    "url": "https://tyfys.net",
+    "telephone": "321-248-2805",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "United States"
+    },
+    "description": "Veteran outreach and education, including awareness of eligible healthcare research opportunities."
+  }
+  </script>
+  <!-- /TYFYS Structured Data -->
+</head>
+<body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-3">
+        <span class="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-white shadow ring-1 ring-slate-200">
+          <i data-lucide="shield-check" class="h-6 w-6 text-navy-800"></i>
+        </span>
+        <div class="flex flex-col">
+          <span class="font-serif font-bold text-xl text-slate-900 tracking-tight leading-none">Thank You For Your Service</span>
+          <span class="text-[11px] text-gold-600 font-bold uppercase tracking-[0.25em] mt-1">Veteran Owned &amp; Operated</span>
+        </div>
+      </a>
+      <button type="button" data-scroll-form class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white font-semibold px-5 py-2.5 rounded-full transition shadow">
+        Check Eligibility
+        <i data-lucide="clock-3" class="h-4 w-4"></i>
+      </button>
+    </div>
+  </nav>
+
+  <main class="flex-1">
+    <section class="hero-pattern border-b border-slate-200 py-12 md:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+          <div>
+            <div class="inline-flex items-center gap-2 bg-navy-50 text-navy-800 px-3 py-1 rounded-full text-sm font-semibold mb-6">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-navy-400 opacity-70"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-navy-700"></span>
+              </span>
+              Research Study for Veterans
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+              Veterans With Lupus Skin Symptoms May Qualify for a Clinical Study
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 mb-8 max-w-xl">
+              If you have experienced lupus-related rashes, lesions, sores, or scarring, you may qualify for a dermatology research study evaluating a new treatment for cutaneous lupus.
+            </p>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+              <button type="button" data-scroll-form class="inline-flex items-center justify-center gap-2 bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg transition">
+                Check If You Qualify
+                <i data-lucide="arrow-right" class="h-5 w-5"></i>
+              </button>
+              <div class="inline-flex items-center gap-2 text-slate-500 text-sm font-semibold">
+                <i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500"></i>
+                Takes under 2 minutes
+              </div>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-2xl border border-slate-200 relative z-10">
+              <h2 class="text-2xl font-bold text-slate-900 mb-5 flex items-center gap-2">
+                <i data-lucide="award" class="h-6 w-6 text-gold-500"></i>
+                Participants may receive:
+              </h2>
+              <ul class="space-y-4">
+                <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-navy-700 mt-0.5"></i><span>$115 per visit compensation</span></li>
+                <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-navy-700 mt-0.5"></i><span>Up to $50 travel + $50 meal reimbursement</span></li>
+                <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-navy-700 mt-0.5"></i><span>No-cost dermatology exams and lab testing</span></li>
+                <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-navy-700 mt-0.5"></i><span>Potential access to a new lupus treatment</span></li>
+                <li class="flex gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-navy-700 mt-0.5"></i><span>Opportunity to continue treatment (up to 2 years)</span></li>
+              </ul>
+            </div>
+            <div class="absolute -top-10 -right-8 w-52 h-52 bg-navy-100 rounded-full blur-3xl opacity-70"></div>
+            <div class="absolute -bottom-10 -left-8 w-52 h-52 bg-gold-100 rounded-full blur-3xl opacity-60"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-4">Why Veterans Are Being Contacted</h2>
+          <div class="w-20 h-1 bg-gold-500 mx-auto rounded-full"></div>
+        </div>
+        <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
+          <p>At <strong>Thank You For Your Service</strong>, we periodically review our veteran records to identify opportunities that may benefit members of our community.</p>
+          <p>During that process, we noticed you may have previously mentioned lupus or lupus-related skin symptoms.</p>
+          <p>Because of that, we wanted to make you aware of a clinical research study being conducted by a dermatology research team.</p>
+          <p class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-slate-900 font-semibold">This study is designed for individuals with cutaneous lupus, a form of lupus that affects the skin.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-slate-50 border-y border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+          <div>
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-6">What Is Cutaneous Lupus?</h2>
+            <p class="text-lg text-slate-600 mb-8">Cutaneous lupus erythematosus (CLE) is an autoimmune disease that affects the skin. Symptoms can be persistent and difficult to manage with standard care.</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="chip"><span class="w-2 h-2 rounded-full bg-navy-800"></span>Persistent rashes</div>
+              <div class="chip"><span class="w-2 h-2 rounded-full bg-navy-800"></span>Sores or lesions</div>
+              <div class="chip"><span class="w-2 h-2 rounded-full bg-navy-800"></span>Scarring</div>
+              <div class="chip"><span class="w-2 h-2 rounded-full bg-navy-800"></span>Discoloration</div>
+              <div class="chip"><span class="w-2 h-2 rounded-full bg-navy-800"></span>Hair loss</div>
+              <div class="chip"><span class="w-2 h-2 rounded-full bg-navy-800"></span>Skin inflammation</div>
+            </div>
+            <p class="mt-8 text-slate-600 italic">Many people continue to experience these symptoms even after trying common treatments like hydroxychloroquine (Plaquenil).</p>
+            <button type="button" data-scroll-form class="mt-7 inline-flex items-center gap-2 text-navy-800 font-bold hover:text-navy-900">
+              Check your eligibility status
+              <i data-lucide="arrow-right" class="h-5 w-5"></i>
+            </button>
+          </div>
+
+          <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-soft">
+            <div class="bg-navy-800 text-white p-6 rounded-2xl mb-6">
+              <h3 class="text-xl font-bold mb-2">New Treatment Evaluation</h3>
+              <p>This research study is evaluating a medication designed to help reduce inflammation and disease activity in people living with lupus skin conditions.</p>
+            </div>
+            <div class="space-y-4">
+              <div class="flex gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <div class="bg-navy-100 p-2 rounded-lg h-fit text-navy-800"><i data-lucide="flask-conical" class="h-6 w-6"></i></div>
+                <div>
+                  <h4 class="font-bold text-slate-900">Investigational Study</h4>
+                  <p class="text-sm text-slate-600">The study focuses on the safety and effectiveness of a new dermatological approach.</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                <div class="bg-navy-100 p-2 rounded-lg h-fit text-navy-800"><i data-lucide="users" class="h-6 w-6"></i></div>
+                <div>
+                  <h4 class="font-bold text-slate-900">Dermatology Experts</h4>
+                  <p class="text-sm text-slate-600">Care provided by specialists familiar with complex autoimmune skin conditions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="font-serif text-4xl font-bold text-slate-900 mb-4">Study Benefits</h2>
+          <p class="text-xl text-slate-600 max-w-3xl mx-auto">Participants may receive several benefits while contributing to the advancement of lupus care.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <article class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition">
+            <div class="w-14 h-14 bg-gold-100 text-gold-600 rounded-2xl flex items-center justify-center mb-6 text-2xl font-bold">$</div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Compensation</h3>
+            <ul class="space-y-3 mb-6 text-slate-600">
+              <li class="flex justify-between border-b border-slate-100 pb-2"><span>Per Visit</span><strong class="text-slate-900">$115</strong></li>
+              <li class="flex justify-between border-b border-slate-100 pb-2"><span>Travel (up to)</span><strong class="text-slate-900">$50</strong></li>
+              <li class="flex justify-between border-b border-slate-100 pb-2"><span>Meals (up to)</span><strong class="text-slate-900">$50</strong></li>
+            </ul>
+            <div class="bg-emerald-50 text-emerald-700 p-4 rounded-xl text-center border border-emerald-100">
+              <p class="text-sm uppercase tracking-wider font-bold mb-1">Total Possible</p>
+              <p class="text-2xl font-black">$215 per visit</p>
+            </div>
+          </article>
+
+          <article class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition">
+            <div class="w-14 h-14 bg-navy-50 text-navy-800 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="stethoscope" class="h-7 w-7"></i></div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">No-Cost Care</h3>
+            <p class="text-slate-600 mb-6">Receive professional medical services at no cost, including:</p>
+            <ul class="space-y-2 text-slate-700 font-medium">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="h-4 w-4 text-navy-700"></i>Dermatology exams</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="h-4 w-4 text-navy-700"></i>Laboratory testing</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="h-4 w-4 text-navy-700"></i>ECG and vital monitoring</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="h-4 w-4 text-navy-700"></i>Skin assessments</li>
+            </ul>
+          </article>
+
+          <article class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition">
+            <div class="w-14 h-14 bg-navy-50 text-navy-800 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="calendar" class="h-7 w-7"></i></div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Long-Term Option</h3>
+            <p class="text-slate-600 mb-6">Participants who complete the first year may have the opportunity to join a 2-year long-term extension study.</p>
+            <p class="text-slate-900 font-bold bg-navy-50 p-4 rounded-xl border border-navy-100">Continue receiving study medication at no cost for up to 2 additional years.</p>
+          </article>
+        </div>
+
+        <div class="text-center mt-12">
+          <button type="button" data-scroll-form class="inline-flex items-center justify-center bg-navy-800 hover:bg-navy-900 text-white px-10 py-4 rounded-xl font-bold text-lg shadow-lg transition">
+            Check Eligibility Now
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-navy-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">What Participation Looks Like</h2>
+          <p class="text-slate-300">A clear, structured path from eligibility to treatment</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <article class="relative p-8 rounded-2xl bg-slate-800 border border-slate-700">
+            <div class="text-gold-500 font-black text-5xl opacity-25 absolute top-4 right-4">1</div>
+            <h3 class="text-xl font-bold mb-4">1. Screening Appointment</h3>
+            <p class="text-slate-300 leading-relaxed">The research team will review medical history, skin symptoms, and prior treatments. A skin biopsy may be performed to confirm diagnosis.</p>
+          </article>
+          <article class="relative p-8 rounded-2xl bg-slate-800 border border-slate-700">
+            <div class="text-gold-500 font-black text-5xl opacity-25 absolute top-4 right-4">2</div>
+            <h3 class="text-xl font-bold mb-4">2. Study Treatment Phase</h3>
+            <p class="text-slate-300 leading-relaxed">Participants receive either the investigational medication or a placebo initially. Later, all participants transition to the study medication.</p>
+          </article>
+          <article class="relative p-8 rounded-2xl bg-slate-800 border border-slate-700">
+            <div class="text-gold-500 font-black text-5xl opacity-25 absolute top-4 right-4">3</div>
+            <h3 class="text-xl font-bold mb-4">3. Monitoring Visits</h3>
+            <p class="text-slate-300 leading-relaxed">Regular visits where doctors monitor your skin symptoms, overall health, and laboratory results to ensure safety and track progress.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-navy-50 rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-12 border border-navy-100">
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900 mb-8 text-center">Who May Qualify</h2>
+          <div class="grid sm:grid-cols-2 gap-5 mb-8">
+            <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-slate-200"><i data-lucide="check-circle-2" class="h-5 w-5 text-emerald-500"></i><span class="font-semibold text-slate-800">18 years of age or older</span></div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-slate-200"><i data-lucide="check-circle-2" class="h-5 w-5 text-emerald-500"></i><span class="font-semibold text-slate-800">Diagnosed with cutaneous or discoid lupus</span></div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-slate-200"><i data-lucide="check-circle-2" class="h-5 w-5 text-emerald-500"></i><span class="font-semibold text-slate-800">Currently have rashes or lesions</span></div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-slate-200"><i data-lucide="check-circle-2" class="h-5 w-5 text-emerald-500"></i><span class="font-semibold text-slate-800">Symptoms have not improved with standard care</span></div>
+          </div>
+          <div class="text-center text-slate-600 bg-white p-4 rounded-xl text-sm border border-slate-200 mb-8">* Final eligibility is confirmed by the study doctor during your screening visit.</div>
+
+          <div class="p-6 bg-white rounded-2xl border border-navy-100 mb-10">
+            <h3 class="font-bold text-slate-900 mb-2 flex items-center gap-2"><i data-lucide="info" class="h-5 w-5 text-navy-700"></i>TYFYS Role</h3>
+            <p class="text-slate-600">Thank You For Your Service helps identify veterans who may qualify for research and connects them with study teams. All medical eligibility decisions are made by the clinical staff.</p>
+          </div>
+
+          <div class="text-center">
+            <button type="button" data-scroll-form class="inline-flex items-center justify-center bg-navy-800 hover:bg-navy-900 text-white px-10 py-4 rounded-xl font-bold text-lg shadow">
+              Start Eligibility Check
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="eligibility-form" class="py-16 md:py-24 bg-slate-50 border-t border-slate-200 scroll-mt-24">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
+          <div class="bg-navy-800 px-8 py-6 text-white text-center">
+            <h2 class="text-2xl font-bold mb-1">Eligibility Questionnaire</h2>
+            <p class="text-slate-200">Most veterans complete this in under 2 minutes.</p>
+          </div>
+
+          <div class="h-1.5 w-full bg-slate-100" id="progressWrap">
+            <div class="h-full bg-gold-500 transition-all duration-300" id="progressBar" style="width: 0%;"></div>
+          </div>
+
+          <div class="p-8 md:p-10">
+            <div id="wizardForm" class="min-h-[430px] flex flex-col justify-between">
+              <div>
+                <div class="wizard-step active" data-step="0">
+                  <h3 class="text-xl font-bold text-slate-900 mb-6">Step 1: Contact Information</h3>
+                  <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label for="firstName" class="block text-sm font-bold text-slate-700 mb-2">First Name</label>
+                      <input id="firstName" type="text" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-700 outline-none" placeholder="John">
+                    </div>
+                    <div>
+                      <label for="lastName" class="block text-sm font-bold text-slate-700 mb-2">Last Name</label>
+                      <input id="lastName" type="text" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-700 outline-none" placeholder="Doe">
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="phoneNumber" class="block text-sm font-bold text-slate-700 mb-2">Phone Number</label>
+                    <input id="phoneNumber" type="tel" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-700 outline-none" placeholder="(555) 000-0000">
+                  </div>
+                  <div>
+                    <p class="block text-sm font-bold text-slate-700 mb-2">Preferred contact method</p>
+                    <div class="flex flex-wrap gap-4">
+                      <label class="flex items-center gap-2 cursor-pointer p-3 border rounded-xl border-slate-200"><input type="radio" name="contact_method" value="Phone" class="w-4 h-4 text-navy-800"> <span class="font-medium text-slate-700">Phone</span></label>
+                      <label class="flex items-center gap-2 cursor-pointer p-3 border rounded-xl border-slate-200"><input type="radio" name="contact_method" value="Text" class="w-4 h-4 text-navy-800"> <span class="font-medium text-slate-700">Text</span></label>
+                      <label class="flex items-center gap-2 cursor-pointer p-3 border rounded-xl border-slate-200"><input type="radio" name="contact_method" value="Email" class="w-4 h-4 text-navy-800"> <span class="font-medium text-slate-700">Email</span></label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="wizard-step" data-step="1">
+                  <h3 class="text-xl font-bold text-slate-900 mb-5">Step 2: Lupus Diagnosis</h3>
+                  <p class="text-slate-600 mb-4">Have you ever been diagnosed by a doctor with cutaneous lupus or discoid lupus?</p>
+                  <div class="space-y-3">
+                    <button type="button" class="option-button" data-next-step="2">Yes <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                    <button type="button" class="option-button" data-next-step="2">No <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                    <button type="button" class="option-button" data-next-step="2">Not sure <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                  </div>
+                </div>
+
+                <div class="wizard-step" data-step="2">
+                  <h3 class="text-xl font-bold text-slate-900 mb-5">Step 3: Current Symptoms</h3>
+                  <p class="text-slate-600 mb-4">Do you currently experience any of the following? (Select all that apply)</p>
+                  <div class="grid gap-3">
+                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200"><input type="checkbox" class="w-5 h-5 rounded text-navy-800"> <span class="font-medium text-slate-700">Skin rash</span></label>
+                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200"><input type="checkbox" class="w-5 h-5 rounded text-navy-800"> <span class="font-medium text-slate-700">Skin lesions or sores</span></label>
+                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200"><input type="checkbox" class="w-5 h-5 rounded text-navy-800"> <span class="font-medium text-slate-700">Scarring from lupus</span></label>
+                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200"><input type="checkbox" class="w-5 h-5 rounded text-navy-800"> <span class="font-medium text-slate-700">Skin discoloration</span></label>
+                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200"><input type="checkbox" class="w-5 h-5 rounded text-navy-800"> <span class="font-medium text-slate-700">Hair loss related to lupus</span></label>
+                    <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200"><input type="checkbox" class="w-5 h-5 rounded text-navy-800"> <span class="font-medium text-slate-700">None currently</span></label>
+                  </div>
+                </div>
+
+                <div class="wizard-step" data-step="3">
+                  <h3 class="text-xl font-bold text-slate-900 mb-5">Step 4: Biopsy History</h3>
+                  <p class="text-slate-600 mb-4">Have you ever had a skin biopsy for lupus?</p>
+                  <div class="space-y-3">
+                    <button type="button" class="option-button" data-next-step="4">Yes <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                    <button type="button" class="option-button" data-next-step="4">No <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                    <button type="button" class="option-button" data-next-step="4">Not sure <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                  </div>
+                </div>
+
+                <div class="wizard-step" data-step="4">
+                  <h3 class="text-xl font-bold text-slate-900 mb-5">Step 5: Treatment History</h3>
+                  <p class="text-slate-600 mb-4">Have you taken hydroxychloroquine (Plaquenil) or similar lupus medications?</p>
+                  <div class="space-y-3">
+                    <button type="button" class="option-button" data-next-step="5">Yes <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                    <button type="button" class="option-button" data-next-step="5">No <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                    <button type="button" class="option-button" data-next-step="5">Not sure <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                  </div>
+                </div>
+
+                <div class="wizard-step" data-step="5">
+                  <h3 class="text-xl font-bold text-slate-900 mb-5">Step 6: Medical History</h3>
+                  <p class="text-slate-600 mb-4">Have you ever been diagnosed with any of the following?</p>
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 border border-slate-200 rounded-xl">
+                      <span class="font-bold text-slate-900">HIV</span>
+                      <div class="flex gap-4 text-sm">
+                        <label class="flex items-center gap-1"><input type="radio" name="cond-hiv"> Yes</label>
+                        <label class="flex items-center gap-1"><input type="radio" name="cond-hiv"> No</label>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-between p-4 border border-slate-200 rounded-xl">
+                      <span class="font-bold text-slate-900">Hepatitis B or C</span>
+                      <div class="flex gap-4 text-sm">
+                        <label class="flex items-center gap-1"><input type="radio" name="cond-hep"> Yes</label>
+                        <label class="flex items-center gap-1"><input type="radio" name="cond-hep"> No</label>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-between p-4 border border-slate-200 rounded-xl">
+                      <span class="font-bold text-slate-900">Tuberculosis</span>
+                      <div class="flex gap-4 text-sm">
+                        <label class="flex items-center gap-1"><input type="radio" name="cond-tb"> Yes</label>
+                        <label class="flex items-center gap-1"><input type="radio" name="cond-tb"> No</label>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-between p-4 border border-slate-200 rounded-xl">
+                      <span class="font-bold text-slate-900">Cancer (other than simple skin cancer)</span>
+                      <div class="flex gap-4 text-sm">
+                        <label class="flex items-center gap-1"><input type="radio" name="cond-cancer"> Yes</label>
+                        <label class="flex items-center gap-1"><input type="radio" name="cond-cancer"> No</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="wizard-step" data-step="6">
+                  <h3 class="text-xl font-bold text-slate-900 mb-5">Step 7: Clinic Logistics</h3>
+                  <p class="text-slate-600 mb-4">Would you be willing to attend visits at a dermatology research clinic if you qualify?</p>
+                  <div class="space-y-3">
+                    <button type="button" class="option-button" data-submit="true">Yes <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                    <button type="button" class="option-button" data-submit="true">Maybe <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                    <button type="button" class="option-button" data-submit="true">No <i data-lucide="chevron-right" class="h-4 w-4 text-slate-500"></i></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between mt-10 pt-6 border-t border-slate-200">
+                <button type="button" id="prevBtn" class="text-slate-500 font-bold hover:text-slate-800 transition">Back</button>
+                <button type="button" id="nextBtn" class="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-900 text-white px-7 py-3 rounded-xl font-bold shadow transition">
+                  Next
+                  <i data-lucide="chevron-right" class="h-4 w-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <div id="wizardSuccess" class="hidden text-center py-8 md:py-10">
+              <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="check-circle-2" class="h-12 w-12"></i>
+              </div>
+              <h2 class="text-3xl font-black text-slate-900 mb-4">You May Qualify!</h2>
+              <p class="text-lg text-slate-600 mb-8 max-w-md mx-auto">Based on your answers, you may qualify for the lupus study. The next step is a short verification call with the research clinic.</p>
+
+              <div class="bg-slate-50 rounded-2xl p-7 border border-slate-200 mb-8">
+                <h3 class="font-bold text-slate-900 mb-4 text-xl">Schedule Your Call with Daniel</h3>
+                <div class="bg-white border border-slate-200 rounded-xl h-56 flex flex-col items-center justify-center space-y-4">
+                  <div class="w-16 h-16 bg-navy-50 rounded-full flex items-center justify-center text-navy-800">
+                    <i data-lucide="calendar" class="h-8 w-8"></i>
+                  </div>
+                  <p class="text-slate-400 italic">Calendar Scheduling Widget Placeholder</p>
+                  <button type="button" class="bg-navy-800 text-white px-6 py-2 rounded-lg font-bold">Open Calendar</button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-center gap-2 text-slate-500 text-sm">
+                <i data-lucide="phone" class="h-4 w-4"></i>
+                <span>Questions? Call us at 321-248-2805</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="col-span-1 md:col-span-2">
+          <div class="flex items-center gap-3 mb-6">
+            <i data-lucide="shield" class="h-8 w-8 text-gold-500"></i>
+            <span class="text-white font-serif font-bold text-2xl">Thank You For Your Service</span>
+          </div>
+          <p class="text-slate-400 mb-6 max-w-sm leading-relaxed">
+            TYFYS helps veterans identify healthcare opportunities and connect with approved research programs and support resources.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-slate-400 hover:text-gold-500 transition" aria-label="Facebook"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+            <a href="#" class="text-slate-400 hover:text-gold-500 transition" aria-label="LinkedIn"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+          <ul class="space-y-4 text-sm">
+            <li><a href="index.html" class="hover:text-gold-500 transition">Home</a></li>
+            <li><a href="about_us.html" class="hover:text-gold-500 transition">About Us</a></li>
+            <li><a href="mission_team.html" class="hover:text-gold-500 transition">Our Team</a></li>
+            <li><a href="process.html" class="hover:text-gold-500 transition">Our Process</a></li>
+            <li><a href="education.html" class="hover:text-gold-500 transition">Briefing Room</a></li>
+            <li><a href="contact.html" class="hover:text-gold-500 transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-lg mb-6">Contact</h4>
+          <ul class="space-y-4 text-sm">
+            <li class="flex items-start"><i data-lucide="map-pin" class="h-5 w-5 mr-3 text-gold-500"></i>11845 SW Bennington Cir<br>Port Saint Lucie, FL 34987</li>
+            <li class="flex items-center"><i data-lucide="mail" class="h-5 w-5 mr-3 text-gold-500"></i>support@thankyouforyourservice.co</li>
+            <li class="flex items-center"><i data-lucide="phone" class="h-5 w-5 mr-3 text-gold-500"></i>321-248-2805</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+        &copy; 2026 Thank You For Your Service. All rights reserved. This page provides information about clinical research and is not a substitute for professional medical advice.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const formSection = document.getElementById('eligibility-form');
+      const scrollButtons = document.querySelectorAll('[data-scroll-form]');
+      const steps = Array.from(document.querySelectorAll('.wizard-step'));
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const progressBar = document.getElementById('progressBar');
+      const progressWrap = document.getElementById('progressWrap');
+      const wizardForm = document.getElementById('wizardForm');
+      const wizardSuccess = document.getElementById('wizardSuccess');
+      const totalSteps = steps.length;
+      const autoAdvanceSteps = new Set([1, 3, 4, 6]);
+
+      let currentStep = 0;
+
+      function updateWizard() {
+        steps.forEach((step, index) => {
+          step.classList.toggle('active', index === currentStep);
+        });
+
+        const progress = (currentStep / totalSteps) * 100;
+        progressBar.style.width = progress + '%';
+
+        if (currentStep === 0) {
+          prevBtn.classList.add('invisible');
+        } else {
+          prevBtn.classList.remove('invisible');
+        }
+
+        if (autoAdvanceSteps.has(currentStep)) {
+          nextBtn.classList.add('hidden');
+        } else {
+          nextBtn.classList.remove('hidden');
+        }
+
+        window.lucide && window.lucide.createIcons();
+      }
+
+      function showSuccess() {
+        wizardForm.classList.add('hidden');
+        progressWrap.classList.add('hidden');
+        wizardSuccess.classList.remove('hidden');
+        window.lucide && window.lucide.createIcons();
+      }
+
+      scrollButtons.forEach((button) => {
+        button.addEventListener('click', function () {
+          formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      prevBtn.addEventListener('click', function () {
+        if (currentStep > 0) {
+          currentStep -= 1;
+          updateWizard();
+        }
+      });
+
+      nextBtn.addEventListener('click', function () {
+        if (currentStep < totalSteps - 1) {
+          currentStep += 1;
+          updateWizard();
+        }
+      });
+
+      document.querySelectorAll('[data-next-step]').forEach((button) => {
+        button.addEventListener('click', function () {
+          const targetStep = Number(button.getAttribute('data-next-step'));
+          if (!Number.isNaN(targetStep)) {
+            currentStep = targetStep;
+            updateWizard();
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-submit="true"]').forEach((button) => {
+        button.addEventListener('click', function () {
+          showSuccess();
+        });
+      });
+
+      updateWizard();
+    })();
+  </script>
+
+  <script>
+    if (window.lucide?.createIcons) {
+      window.lucide.createIcons();
+    }
+  </script>
+
+  <script src="apps/seo-sitewide.js"></script>
+</body>
+</html>
