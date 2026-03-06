@@ -81,14 +81,13 @@ const Header = ({ user }) => (
 const BottomNav = ({ activeTab, setActiveTab }) => (
   <nav className="bg-white border-t border-slate-200 fixed bottom-0 w-full z-50 pb-safe shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
     <div className="flex justify-around items-center max-w-md mx-auto h-20 pb-2">
-      {[{ id: 'ops', icon: Shield, label: 'Ops Center' }, { id: 'sarah', icon: MessageCircle, label: 'Ask Sarah' }, { id: 'life', icon: Layout, label: 'Life' }, { id: 'exams', icon: Activity, label: 'Exams' }, { id: 'dossier', icon: User, label: 'Dossier' }].map((tab) => (
+      {[{ id: 'ops', icon: Shield, label: 'Ops Center' }, { id: 'angela', icon: MessageCircle, label: 'Ask Angela' }, { id: 'life', icon: Layout, label: 'Life' }, { id: 'exams', icon: Activity, label: 'Exams' }, { id: 'dossier', icon: User, label: 'Dossier' }].map((tab) => (
         <button
           key={tab.id}
           type="button"
           onClick={() => setActiveTab(tab.id)}
-          className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-all active:scale-95 ${
-            activeTab === tab.id ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
-          }`}
+          className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-all active:scale-95 ${activeTab === tab.id ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+            }`}
         >
           <div className={`p-1.5 rounded-xl transition-all ${activeTab === tab.id ? 'bg-blue-50' : ''}`}>
             <tab.icon className={`h-6 w-6 ${activeTab === tab.id ? 'stroke-[2.5px]' : 'stroke-2'}`} />
@@ -235,9 +234,8 @@ const Onboarding = ({ onComplete }) => {
                   key={branch}
                   type="button"
                   onClick={() => setData({ ...data, branch })}
-                  className={`p-4 rounded-2xl border-2 font-bold text-sm transition-all ${
-                    data.branch === branch ? 'border-blue-600 bg-blue-600 text-white shadow-lg' : 'bg-white border-slate-200 text-slate-600'
-                  }`}
+                  className={`p-4 rounded-2xl border-2 font-bold text-sm transition-all ${data.branch === branch ? 'border-blue-600 bg-blue-600 text-white shadow-lg' : 'bg-white border-slate-200 text-slate-600'
+                    }`}
                 >
                   {branch}
                 </button>
@@ -306,9 +304,8 @@ const Onboarding = ({ onComplete }) => {
                 key={option.id}
                 type="button"
                 onClick={() => setData({ ...data, goal: option.id })}
-                className={`w-full p-5 rounded-2xl border-2 text-left transition-all ${
-                  data.goal === option.id ? 'border-green-500 bg-green-50 shadow-md' : 'border-slate-200 bg-white'
-                }`}
+                className={`w-full p-5 rounded-2xl border-2 text-left transition-all ${data.goal === option.id ? 'border-green-500 bg-green-50 shadow-md' : 'border-slate-200 bg-white'
+                  }`}
               >
                 <h3 className="font-bold text-slate-900">{option.label}</h3>
                 <p className="text-sm text-slate-500 mt-1">{option.desc}</p>
@@ -352,9 +349,8 @@ const OpsCenter = ({ onNavigate, user }) => {
           <button
             type="button"
             onClick={() => setFocusMode(!focusMode)}
-            className={`text-[10px] font-bold px-3 py-1 rounded-full border transition-all ${
-              focusMode ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-white text-slate-500 border-slate-200'
-            }`}
+            className={`text-[10px] font-bold px-3 py-1 rounded-full border transition-all ${focusMode ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-white text-slate-500 border-slate-200'
+              }`}
           >
             {focusMode ? 'FOCUS ON' : 'FOCUS OFF'}
           </button>
@@ -368,13 +364,12 @@ const OpsCenter = ({ onNavigate, user }) => {
           {TRACKER_STAGES.map((stage) => (
             <div key={stage.id} onClick={() => setActiveStageInfo(stage)} className="flex flex-col items-center gap-1 w-1/5 cursor-pointer z-10 group">
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all ${
-                  stage.id === currentStage
-                    ? 'bg-blue-600 border-blue-600 shadow-lg scale-110'
-                    : stage.id < currentStage
-                      ? 'bg-green-500 border-green-500'
-                      : 'bg-white border-slate-200 group-hover:border-blue-300'
-                }`}
+                className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all ${stage.id === currentStage
+                  ? 'bg-blue-600 border-blue-600 shadow-lg scale-110'
+                  : stage.id < currentStage
+                    ? 'bg-green-500 border-green-500'
+                    : 'bg-white border-slate-200 group-hover:border-blue-300'
+                  }`}
               >
                 {stage.id < currentStage ? (
                   <CheckCircle className="h-4 w-4 text-white" />
@@ -430,14 +425,12 @@ const OpsCenter = ({ onNavigate, user }) => {
               <div
                 key={item.id}
                 onClick={() => toggleItem(item.id)}
-                className={`p-4 border-b border-slate-100 flex items-start gap-4 cursor-pointer hover:bg-slate-50 transition-colors ${
-                  item.checked ? 'bg-green-50/40' : ''
-                }`}
+                className={`p-4 border-b border-slate-100 flex items-start gap-4 cursor-pointer hover:bg-slate-50 transition-colors ${item.checked ? 'bg-green-50/40' : ''
+                  }`}
               >
                 <div
-                  className={`mt-1 w-5 h-5 rounded-full border flex items-center justify-center transition-all ${
-                    item.checked ? 'bg-green-500 border-green-500' : 'border-slate-300'
-                  }`}
+                  className={`mt-1 w-5 h-5 rounded-full border flex items-center justify-center transition-all ${item.checked ? 'bg-green-500 border-green-500' : 'border-slate-300'
+                    }`}
                 >
                   {item.checked && <CheckCircle className="h-3.5 w-3.5 text-white" />}
                 </div>
@@ -455,12 +448,12 @@ const OpsCenter = ({ onNavigate, user }) => {
       <div className="grid grid-cols-2 gap-4">
         <button
           type="button"
-          onClick={() => onNavigate('sarah')}
+          onClick={() => onNavigate('angela')}
           className="bg-gradient-to-br from-indigo-500 to-blue-600 p-4 rounded-2xl text-white shadow-lg cursor-pointer active:scale-95 transition-transform relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 w-16 h-16 bg-white opacity-10 rounded-full -mr-6 -mt-6 group-hover:scale-110 transition-transform" />
           <MessageCircle className="h-6 w-6 text-white/90 mb-2" />
-          <h3 className="font-bold text-sm">Ask Sarah</h3>
+          <h3 className="font-bold text-sm">Ask Angela</h3>
           <p className="text-[10px] text-blue-100 opacity-80">AI Strategy Review</p>
         </button>
         <button
@@ -494,7 +487,7 @@ const OpsCenter = ({ onNavigate, user }) => {
   );
 };
 
-const SarahAI = ({ user }) => {
+const AngelaAI = ({ user }) => {
   const [locked, setLocked] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -540,7 +533,7 @@ const SarahAI = ({ user }) => {
           </div>
           <div className="p-6">
             <p className="text-slate-600 text-sm font-medium mb-6">
-              Sarah has identified <span className="text-blue-600 font-bold">3 High-Value Claims</span>. Unlock full report.
+              Angela has identified <span className="text-blue-600 font-bold">3 High-Value Claims</span>. Unlock full report.
             </p>
             <div className="space-y-3 mb-6 text-left bg-slate-50 p-4 rounded-xl border border-slate-100">
               <div className="flex gap-3 text-sm items-center">
@@ -565,23 +558,22 @@ const SarahAI = ({ user }) => {
         {messages.map((message) => (
           <div key={message.id} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div
-              className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed shadow-sm ${
-                message.sender === 'user'
-                  ? 'bg-blue-600 text-white rounded-tr-none'
-                  : 'bg-white border border-slate-200 rounded-tl-none text-slate-700'
-              }`}
+              className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed shadow-sm ${message.sender === 'user'
+                ? 'bg-blue-600 text-white rounded-tr-none'
+                : 'bg-white border border-slate-200 rounded-tl-none text-slate-700'
+                }`}
             >
               {message.text}
             </div>
           </div>
         ))}
-        {typing && <div className="text-xs text-slate-400 ml-4 animate-pulse">Sarah is typing...</div>}
+        {typing && <div className="text-xs text-slate-400 ml-4 animate-pulse">Angela is typing...</div>}
       </div>
       <div className="p-4 bg-white border-t border-slate-200 flex gap-2 items-center">
         <input
           value={input}
           onChange={(event) => setInput(event.target.value)}
-          placeholder="Reply to Sarah..."
+          placeholder="Reply to Angela..."
           className="flex-1 bg-slate-100 rounded-full px-5 py-3 outline-none focus:ring-2 focus:ring-blue-500 text-sm"
         />
         <button
@@ -596,7 +588,7 @@ const SarahAI = ({ user }) => {
   );
 };
 
-const LifeHub = ({ user }) => {
+const LifeHub = ({ user, onScanComplete }) => {
   const [tool, setTool] = useState(null);
   const [scanState, setScanState] = useState('camera');
   const [scanImage, setScanImage] = useState(null);
@@ -604,6 +596,25 @@ const LifeHub = ({ user }) => {
   const [filterClearance, setFilterClearance] = useState('All');
   const [filterRank, setFilterRank] = useState('All');
   const [filterBranch, setFilterBranch] = useState('All');
+
+  if (tool === 'calculator') return (
+    <div className="animate-in slide-in-from-right">
+      <button onClick={() => setTool(null)} className="m-4 text-slate-500 flex gap-1 text-sm font-bold items-center bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+        <ChevronLeft className="h-4 w-4" /> Back
+      </button>
+      <VARatingCalculator />
+    </div>
+  );
+
+  if (tool === 'pact') return (
+    <div className="animate-in slide-in-from-right">
+      <button onClick={() => setTool(null)} className="m-4 text-slate-500 flex gap-1 text-sm font-bold items-center bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+        <ChevronLeft className="h-4 w-4" /> Back
+      </button>
+      <PACTExplorer user={user} />
+    </div>
+  );
+
 
   const handleFileChange = (event) => {
     const [file] = event.target.files || [];
@@ -644,12 +655,12 @@ const LifeHub = ({ user }) => {
           </div>
         )}
         {scanState === 'processing' && (
-          <div className="flex-1 flex flex-col items-center justify-center bg-slate-900">
-            {scanImage && <img src={scanImage} alt="Scan" className="w-64 h-80 object-cover border-2 border-green-500 opacity-50 mb-4" />}
+          <div className="flex-1 flex flex-col items-center justify-center bg-slate-900 px-8 text-center">
+            {scanImage && <img src={scanImage} alt="Scan" className="w-64 h-80 object-cover border-2 border-green-500 opacity-50 mb-4 rounded-lg shadow-[0_0_20px_rgba(34,197,94,0.3)]" />}
             <div className="w-64 h-2 bg-slate-800 rounded-full overflow-hidden">
               <div className="h-full bg-green-500 animate-[width_2s_ease-in-out]" />
             </div>
-            <p className="text-green-400 mt-4 font-mono animate-pulse">ENHANCING TEXT...</p>
+            <p className="text-green-400 mt-6 font-mono text-xs tracking-tighter h-4">{ocrText}</p>
           </div>
         )}
         {scanState === 'done' && (
@@ -657,8 +668,21 @@ const LifeHub = ({ user }) => {
             <FileCheck className="h-20 w-20 text-green-400 mb-4" />
             <h2 className="text-2xl font-bold">Secure Upload</h2>
             <p className="text-slate-400 mb-8">Added to Digital Vault.</p>
-            <button type="button" onClick={() => setTool(null)} className="bg-white text-slate-900 px-8 py-3 rounded-xl font-bold">
-              Done
+            <button
+              type="button"
+              onClick={() => {
+                const newDoc = {
+                  id: Date.now(),
+                  name: `Scan_${new Date().toLocaleDateString()}`,
+                  image: scanImage,
+                  date: new Date().toLocaleDateString()
+                };
+                onScanComplete(newDoc);
+                setTool(null);
+              }}
+              className="bg-white text-slate-900 px-8 py-3 rounded-xl font-bold active:scale-95 transition-transform"
+            >
+              Save to Dossier
             </button>
           </div>
         )}
@@ -733,13 +757,12 @@ const LifeHub = ({ user }) => {
                 <div className="flex justify-between items-start mb-1">
                   <h3 className="font-bold text-slate-900">{job.title}</h3>
                   <span
-                    className={`text-[10px] font-bold px-2 py-1 rounded ${
-                      job.badge === 'TS/SCI'
-                        ? 'bg-red-100 text-red-700'
-                        : job.badge === 'Secret'
-                          ? 'bg-blue-100 text-blue-700'
-                          : 'bg-green-100 text-green-700'
-                    }`}
+                    className={`text-[10px] font-bold px-2 py-1 rounded ${job.badge === 'TS/SCI'
+                      ? 'bg-red-100 text-red-700'
+                      : job.badge === 'Secret'
+                        ? 'bg-blue-100 text-blue-700'
+                        : 'bg-green-100 text-green-700'
+                      }`}
                   >
                     {job.badge}
                   </span>
@@ -852,6 +875,280 @@ const LifeHub = ({ user }) => {
           <p className="text-[10px] text-slate-500">Profile Architect</p>
         </button>
       </div>
+
+      <div className="bg-slate-50 rounded-3xl p-4 border border-slate-200">
+        <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 ml-1">Veteran Utilities</h3>
+        <div className="space-y-2">
+          <button
+            onClick={() => setTool('calculator')}
+            className="w-full bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between group active:scale-[0.98] transition-all"
+          >
+            <div className="flex items-center gap-3">
+              <div className="bg-blue-50 p-2 rounded-xl group-hover:bg-blue-100 transition-colors">
+                <Layout className="h-5 w-5 text-blue-600" />
+              </div>
+              <div className="text-left">
+                <h4 className="text-sm font-bold text-slate-900">VA Rating Calculator</h4>
+                <p className="text-[10px] text-slate-500">Calculate "VA Math" combined ratings</p>
+              </div>
+            </div>
+            <ChevronRight className="h-4 w-4 text-slate-300" />
+          </button>
+
+          <button
+            onClick={() => setTool('pact')}
+            className="w-full bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between group active:scale-[0.98] transition-all"
+          >
+            <div className="flex items-center gap-3">
+              <div className="bg-yellow-50 p-2 rounded-xl group-hover:bg-yellow-100 transition-colors">
+                <Shield className="h-5 w-5 text-yellow-600" />
+              </div>
+              <div className="text-left">
+                <h4 className="text-sm font-bold text-slate-900">PACT Act Explorer</h4>
+                <p className="text-[10px] text-slate-500">Check presumptive eligibility</p>
+              </div>
+            </div>
+            <ChevronRight className="h-4 w-4 text-slate-300" />
+          </button>
+
+          <button
+            onClick={() => setTool('nexus')}
+            className="w-full bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between group active:scale-[0.98] transition-all"
+          >
+            <div className="flex items-center gap-3">
+              <div className="bg-indigo-50 p-2 rounded-xl group-hover:bg-indigo-100 transition-colors">
+                <FileText className="h-5 w-5 text-indigo-600" />
+              </div>
+              <div className="text-left">
+                <h4 className="text-sm font-bold text-slate-900">Nexus Template Gen</h4>
+                <p className="text-[10px] text-slate-500">Draft medical evidence links</p>
+              </div>
+            </div>
+            <ChevronRight className="h-4 w-4 text-slate-300" />
+          </button>
+        </div>
+      </div>
+
+    </div>
+  );
+};
+
+const PACT_ACT_DATA = [
+  { era: 'Post-9/11', locations: ['Afghanistan', 'Iraq', 'Syria'], conditions: ['Burn Pit exposure', 'Asthma', 'Rhinitis', 'Sinusitis', 'Various Cancers'] },
+  { era: 'Gulf War', locations: ['Kuwait', 'Saudi Arabia', 'Iraq'], conditions: ['Chronic Fatigue Syndrome', 'Fibromyalgia', 'IBS', 'Respiratory issues'] },
+  { era: 'Vietnam', locations: ['Vietnam', 'Thailand', 'Blue Water'], conditions: ['Agent Orange exposure', 'Type 2 Diabetes', 'Ischemic Heart Disease', 'Parkinson\'s'] }
+];
+
+const NexusTemplateGenerator = ({ user }) => {
+  const [condition, setCondition] = useState('');
+  const [generated, setGenerated] = useState(false);
+
+  const generate = () => setGenerated(true);
+
+  return (
+    <div className="p-4 space-y-6 animate-in slide-in-from-bottom-4">
+      <div className="bg-indigo-900 rounded-3xl p-6 text-white shadow-xl">
+        <h2 className="text-2xl font-black mb-2">Nexus Architect</h2>
+        <p className="text-[10px] font-bold text-indigo-300 uppercase tracking-widest mb-4">Evidence Support Tool</p>
+        {!generated ? (
+          <div className="space-y-4">
+            <p className="text-xs text-indigo-100 leading-relaxed">
+              Enter the condition you are claiming. We'll generate a medical-grade Nexus statement template for your doctor to review.
+            </p>
+            <input
+              value={condition}
+              onChange={(e) => setCondition(e.target.value)}
+              placeholder="e.g. Sleep Apnea"
+              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white outline-none focus:border-indigo-400 text-sm font-medium"
+            />
+            <button
+              onClick={generate}
+              disabled={!condition}
+              className="w-full bg-indigo-500 disabled:bg-slate-700 text-white font-bold py-3 rounded-xl shadow-lg active:scale-95 transition-transform"
+            >
+              Generate Template
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <div className="bg-white/5 border border-indigo-400/30 rounded-2xl p-4 relative">
+              <p className="text-[11px] text-slate-100 leading-relaxed font-serif italic">
+                "It is my professional opinion that it is 'at least as likely as not' (50% probability or greater) that the veteran's diagnosis of {condition} was incurred in or aggravated by their active duty service, specifically relating to {user?.branch || 'military service'} exposure..."
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                setGenerated(false);
+                setCondition('');
+              }}
+              className="w-full bg-white/10 text-white text-xs font-bold py-3 rounded-xl border border-white/20"
+            >
+              Start Over
+            </button>
+          </div>
+        )}
+      </div>
+      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+        <div className="flex gap-3">
+          <AlertCircle className="h-5 w-5 text-indigo-600 mt-0.5" />
+          <p className="text-[10px] text-slate-600 leading-relaxed">
+            <span className="font-bold text-indigo-700">Important:</span> This is a template only. A licensed medical provider must review your history and sign their own version to be valid for VA claims.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PACTExplorer = ({ user }) => {
+  const eraData = PACT_ACT_DATA.find(d => d.era === user?.era) || PACT_ACT_DATA[0];
+
+  return (
+    <div className="p-4 space-y-6 animate-in slide-in-from-bottom-4">
+      <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden underline-offset-4">
+        <div className="absolute top-0 right-0 w-24 h-24 bg-yellow-500 rounded-full blur-[60px] opacity-10 -mr-8 -mt-8" />
+        <h2 className="text-2xl font-black mb-1">PACT Act Explorer</h2>
+        <p className="text-[10px] font-bold text-yellow-500 uppercase tracking-widest mb-4">Presumptive Eligibility Check</p>
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <p className="text-xs text-slate-300 leading-relaxed">
+            Based on your <span className="text-white font-bold">{user?.era || 'Service'}</span> era, the following conditions are presumed service-connected under current law.
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Presumed Conditions</h3>
+        <div className="grid gap-3">
+          {eraData.conditions.map((condition, i) => (
+            <div key={i} className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="bg-green-100 p-2 rounded-lg">
+                  <Shield className="h-4 w-4 text-green-600" />
+                </div>
+                <span className="text-sm font-bold text-slate-900">{condition}</span>
+              </div>
+              <ChevronRight className="h-4 w-4 text-slate-300" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-blue-50 border border-blue-100 rounded-3xl p-6">
+        <h4 className="font-black text-blue-900 mb-2">Did you know?</h4>
+        <p className="text-xs text-blue-700 leading-relaxed mb-4">
+          If you have any of these conditions, you don't need to prove they were caused by service—only that you served in the required locations.
+        </p>
+        <button className="text-sm font-bold text-blue-600 flex items-center gap-2">
+          Read location requirements <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const VARatingCalculator = () => {
+  const [ratings, setRatings] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+
+  const addRating = () => {
+    const val = parseInt(inputValue);
+    if (!isNaN(val) && val >= 0 && val <= 100) {
+      setRatings([...ratings, val].sort((a, b) => b - a));
+      setInputValue('');
+    }
+  };
+
+  const calculateCombined = (currentRatings) => {
+    if (currentRatings.length === 0) return 0;
+
+    let remaining = 100;
+    let combined = 0;
+
+    // VA Math: Sort highest to lowest
+    const sorted = [...currentRatings].sort((a, b) => b - a);
+
+    sorted.forEach(rating => {
+      const effect = (remaining * (rating / 100));
+      combined += effect;
+      remaining -= effect;
+    });
+
+    // Round to nearest 10
+    return Math.round(combined / 10) * 10;
+  };
+
+  const combinedRating = calculateCombined(ratings);
+
+  return (
+    <div className="p-4 space-y-6 animate-in slide-in-from-bottom-4">
+      <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full blur-[80px] opacity-20 -mr-10 -mt-10" />
+        <h2 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-2">Vault Calculator</h2>
+        <div className="flex items-baseline gap-2">
+          <span className="text-6xl font-black tracking-tighter">{combinedRating}%</span>
+          <span className="text-sm font-bold text-slate-400 uppercase">Combined</span>
+        </div>
+        <p className="text-[10px] text-slate-500 mt-4 leading-relaxed font-medium">
+          Note: This is an estimation based on standard VA Combined Rating Tables ("VA Math").
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+        <h3 className="text-sm font-bold text-slate-900 mb-4">Add Individual Ratings</h3>
+        <div className="flex gap-2">
+          <input
+            type="number"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="e.g. 50"
+            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-blue-500 text-sm font-medium"
+          />
+          <button
+            onClick={addRating}
+            className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold active:scale-95 transition-transform"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Current Evaluation</h3>
+        {ratings.length === 0 ? (
+          <div className="text-center py-8 bg-white rounded-2xl border border-dashed border-slate-200">
+            <p className="text-xs text-slate-400 font-medium">No ratings added yet.</p>
+          </div>
+        ) : (
+          <div className="grid gap-2">
+            {ratings.map((r, i) => (
+              <div key={i} className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex justify-between items-center animate-in slide-in-from-left-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-8 bg-blue-500 rounded-full" />
+                  <span className="font-bold text-slate-900">{r}% Evaluation</span>
+                </div>
+                <button
+                  onClick={() => setRatings(ratings.filter((_, index) => index !== i))}
+                  className="text-slate-300 hover:text-red-500 transition-colors"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {combinedRating < 100 && ratings.length > 0 && (
+        <div className="bg-green-50 border border-green-100 rounded-2xl p-4 flex items-start gap-3">
+          <TrendingUp className="h-5 w-5 text-green-600 mt-0.5" />
+          <div>
+            <h4 className="text-sm font-bold text-green-900 text-left">Path to 100%</h4>
+            <p className="text-[11px] text-green-700 leading-relaxed text-left">
+              To reach 100%, you need additional evaluations totaling approximately {100 - combinedRating}% more in "actual" disability weight.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -955,24 +1252,58 @@ const ExamsStore = () => {
   );
 };
 
-const Dossier = ({ user }) => (
+const Dossier = ({ user, docs = [] }) => (
   <div className="p-6 pt-12 text-center animate-in zoom-in-95">
     <div className="w-24 h-24 bg-slate-200 rounded-full mx-auto mb-6 flex items-center justify-center border-4 border-white shadow-lg">
       <User className="h-10 w-10 text-slate-400" />
     </div>
     <h2 className="text-2xl font-black text-slate-900">{user?.name || 'Veteran'}</h2>
     <p className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-8">{user?.branch || 'Branch'} • {user?.era || 'Era'}</p>
+
     <div className="grid grid-cols-2 gap-4 mb-8">
-      <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm transition-all hover:shadow-md">
         <span className="block text-4xl font-black text-blue-600">{user?.rating || '0'}%</span>
         <span className="text-[10px] font-bold text-slate-400 uppercase">Service Connected</span>
       </div>
-      <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm transition-all hover:shadow-md">
         <span className="block text-4xl font-black text-green-600">Active</span>
         <span className="text-[10px] font-bold text-slate-400 uppercase">Account Status</span>
       </div>
     </div>
-    <button type="button" className="text-red-500 text-sm font-bold bg-red-50 px-6 py-3 rounded-xl w-full">
+
+    <div className="text-left mb-8">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider">Digital Vault</h3>
+        <span className="text-[10px] font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded-md">{docs.length} Items</span>
+      </div>
+
+      {docs.length === 0 ? (
+        <div className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center">
+          <ScanLine className="h-8 w-8 text-slate-300 mx-auto mb-2" />
+          <p className="text-xs text-slate-500 font-medium">No documents scanned yet.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          {docs.map((doc) => (
+            <div key={doc.id} className="bg-white p-3 rounded-xl border border-slate-100 shadow-sm animate-in fade-in zoom-in">
+              <div className="aspect-[3/4] bg-slate-100 rounded-lg mb-2 overflow-hidden border border-slate-200">
+                {doc.image ? (
+                  <img src={doc.image} alt={doc.name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <FileText className="h-8 w-8 text-slate-300" />
+                  </div>
+                )}
+              </div>
+              <p className="text-[10px] font-bold text-slate-700 truncate">{doc.name}</p>
+              <p className="text-[8px] text-slate-400 font-medium">{doc.date}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <button type="button" className="text-red-500 text-sm font-bold bg-red-50 px-6 py-3 rounded-xl w-full active:scale-95 transition-transform">
       Sign Out
     </button>
   </div>
@@ -982,6 +1313,7 @@ const DemoApp = () => {
   const [view, setView] = useState('launch');
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('ops');
+  const [scannedDocs, setScannedDocs] = useState([]);
 
   const handleLaunchStart = () => setView('onboarding');
 
@@ -998,10 +1330,10 @@ const DemoApp = () => {
       <Header user={user} />
       <main className="h-full overflow-y-auto custom-scrollbar">
         {activeTab === 'ops' && <OpsCenter onNavigate={setActiveTab} user={user} />}
-        {activeTab === 'sarah' && <SarahAI user={user} />}
-        {activeTab === 'life' && <LifeHub user={user} />}
+        {activeTab === 'angela' && <AngelaAI user={user} />}
+        {activeTab === 'life' && <LifeHub user={user} onScanComplete={(doc) => setScannedDocs([...scannedDocs, doc])} />}
         {activeTab === 'exams' && <ExamsStore />}
-        {activeTab === 'dossier' && <Dossier user={user} />}
+        {activeTab === 'dossier' && <Dossier user={user} docs={scannedDocs} />}
       </main>
       <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
