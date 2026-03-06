@@ -23,8 +23,17 @@ const PACT_SOURCE_URL = "https://www.publichealth.va.gov/exposures/benefits/PACT
 const RADIATION_SOURCE_URL = "https://www.publichealth.va.gov/exposures/radiation/diseases.asp";
 const CAMP_LEJEUNE_SOURCE_URL =
   "https://www.va.gov/disability/eligibility/hazardous-materials-exposure/camp-lejeune-water-contamination";
+const COMBINED_RATINGS_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.25";
+const MENTAL_HEALTH_RATINGS_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.130";
+const NEURO_RATINGS_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.124a";
+const MUSCULOSKELETAL_RATINGS_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.71a";
+const RESPIRATORY_RATINGS_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.97";
+const HEARING_RATINGS_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.85";
+const EAR_RATINGS_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.87";
+const DIGESTIVE_RATINGS_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.114";
+const PYRAMIDING_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.14";
+const RESPIRATORY_SINGLE_RATING_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.96";
 const RATING_OPTIONS = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-const CLAIM_RATING_OPTIONS = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 const SCAN_STAGES = ["Aligning page edges", "Enhancing contrast", "Running OCR simulation", "Saving to Dossier"];
 
 const loadPaymentState = () => {
@@ -882,6 +891,447 @@ const PACT_ERA_CONFIG = {
   }
 };
 
+const ratingLevel = (value, summary) => ({ value, summary });
+
+const CONDITION_RATING_RULES = {
+  PTSD: {
+    mode: "simple",
+    diagnosticCode: "9411",
+    ruleTitle: "General Rating Formula for Mental Disorders",
+    sourceUrl: MENTAL_HEALTH_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.130",
+    exclusivityGroup: "mental_health",
+    exclusivityMessage:
+      "PTSD, depression, and anxiety usually collapse into one VA mental-health evaluation when the symptoms overlap. Do not stack them here.",
+    notes: [
+      "Choose the level that best matches the veteran's overall occupational and social impairment, not a single symptom.",
+      "Anti-pyramiding also applies. See 38 CFR 4.14 for the rule against compensating the same manifestations twice."
+    ],
+    options: [
+      ratingLevel(0, "Diagnosed, but symptoms are not severe enough to interfere with work/social function or require continuous medication."),
+      ratingLevel(10, "Mild or transient symptoms, or symptoms controlled by continuous medication."),
+      ratingLevel(30, "Occasional decrease in work efficiency, but generally functioning satisfactorily."),
+      ratingLevel(50, "Reduced reliability and productivity."),
+      ratingLevel(70, "Deficiencies in most areas such as work, school, family relations, judgment, thinking, or mood."),
+      ratingLevel(100, "Total occupational and social impairment.")
+    ]
+  },
+  "Major Depressive Disorder": {
+    mode: "simple",
+    diagnosticCode: "9434",
+    ruleTitle: "General Rating Formula for Mental Disorders",
+    sourceUrl: MENTAL_HEALTH_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.130",
+    exclusivityGroup: "mental_health",
+    exclusivityMessage:
+      "PTSD, depression, and anxiety usually collapse into one VA mental-health evaluation when the symptoms overlap. Do not stack them here.",
+    notes: [
+      "VA uses the same mental-health schedule as PTSD and anxiety disorders.",
+      "Pick the single evaluation that best fits the overall impairment picture."
+    ],
+    options: [
+      ratingLevel(0, "Diagnosed, but symptoms are not severe enough to interfere with work/social function or require continuous medication."),
+      ratingLevel(10, "Mild or transient symptoms, or symptoms controlled by continuous medication."),
+      ratingLevel(30, "Occasional decrease in work efficiency, but generally functioning satisfactorily."),
+      ratingLevel(50, "Reduced reliability and productivity."),
+      ratingLevel(70, "Deficiencies in most areas such as work, school, family relations, judgment, thinking, or mood."),
+      ratingLevel(100, "Total occupational and social impairment.")
+    ]
+  },
+  "Anxiety Condition": {
+    mode: "simple",
+    diagnosticCode: "9400",
+    ruleTitle: "General Rating Formula for Mental Disorders",
+    sourceUrl: MENTAL_HEALTH_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.130",
+    exclusivityGroup: "mental_health",
+    exclusivityMessage:
+      "PTSD, depression, and anxiety usually collapse into one VA mental-health evaluation when the symptoms overlap. Do not stack them here.",
+    notes: [
+      "VA uses the same mental-health schedule as PTSD and depression.",
+      "Choose one mental-health rating based on the total impairment picture."
+    ],
+    options: [
+      ratingLevel(0, "Diagnosed, but symptoms are not severe enough to interfere with work/social function or require continuous medication."),
+      ratingLevel(10, "Mild or transient symptoms, or symptoms controlled by continuous medication."),
+      ratingLevel(30, "Occasional decrease in work efficiency, but generally functioning satisfactorily."),
+      ratingLevel(50, "Reduced reliability and productivity."),
+      ratingLevel(70, "Deficiencies in most areas such as work, school, family relations, judgment, thinking, or mood."),
+      ratingLevel(100, "Total occupational and social impairment.")
+    ]
+  },
+  Migraines: {
+    mode: "simple",
+    diagnosticCode: "8100",
+    ruleTitle: "Migraine headaches",
+    sourceUrl: NEURO_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.124a",
+    notes: [
+      "VA focuses on characteristic prostrating attacks and how often they happen.",
+      "The 50 percent level is the schedular maximum under DC 8100."
+    ],
+    options: [
+      ratingLevel(0, "Less frequent attacks."),
+      ratingLevel(10, "Characteristic prostrating attacks averaging one in 2 months over the last several months."),
+      ratingLevel(30, "Characteristic prostrating attacks averaging once a month over the last several months."),
+      ratingLevel(50, "Very frequent completely prostrating and prolonged attacks productive of severe economic inadaptability.")
+    ]
+  },
+  "Peripheral Neuropathy": {
+    mode: "profiles",
+    ruleTitle: "Peripheral nerve ratings depend on the affected nerve and severity",
+    sourceUrl: NEURO_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.124a",
+    notes: [
+      "Do not guess this rating. Choose the actual nerve family being evaluated and then the matching severity level.",
+      "Different nerves have different maxima, so the form stays locked until the nerve basis is selected."
+    ],
+    profiles: [
+      {
+        id: "sciatic_8520",
+        label: "Sciatic nerve (DC 8520)",
+        diagnosticCode: "8520",
+        sourceUrl: NEURO_RATINGS_SOURCE_URL,
+        notes: ["Common lower-extremity pathway for neuropathy or radiculopathy affecting the sciatic distribution."],
+        options: [
+          ratingLevel(10, "Mild incomplete paralysis."),
+          ratingLevel(20, "Moderate incomplete paralysis."),
+          ratingLevel(40, "Moderately severe incomplete paralysis."),
+          ratingLevel(60, "Severe incomplete paralysis with marked muscular atrophy."),
+          ratingLevel(80, "Complete paralysis; foot dangles and drops, with no active movement below the knee.")
+        ]
+      },
+      {
+        id: "common_peroneal_8521",
+        label: "Common peroneal nerve (DC 8521)",
+        diagnosticCode: "8521",
+        sourceUrl: NEURO_RATINGS_SOURCE_URL,
+        notes: ["Use when the rating is tied to the external popliteal/common peroneal nerve rather than the sciatic trunk."],
+        options: [
+          ratingLevel(10, "Mild incomplete paralysis."),
+          ratingLevel(20, "Moderate incomplete paralysis."),
+          ratingLevel(30, "Severe incomplete paralysis."),
+          ratingLevel(40, "Complete paralysis with foot drop and characteristic loss of dorsiflexion/eversion.")
+        ]
+      },
+      {
+        id: "femoral_8526",
+        label: "Femoral nerve (DC 8526)",
+        diagnosticCode: "8526",
+        sourceUrl: NEURO_RATINGS_SOURCE_URL,
+        notes: ["Use when the rating is tied to the anterior crural/femoral nerve."],
+        options: [
+          ratingLevel(10, "Mild incomplete paralysis."),
+          ratingLevel(20, "Moderate incomplete paralysis."),
+          ratingLevel(30, "Severe incomplete paralysis."),
+          ratingLevel(40, "Complete paralysis of quadriceps extensor muscles.")
+        ]
+      }
+    ]
+  },
+  "TBI Residuals": {
+    mode: "simple",
+    diagnosticCode: "8045",
+    ruleTitle: "Residuals of traumatic brain injury",
+    sourceUrl: NEURO_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.124a",
+    notes: [
+      "DC 8045 uses a facet table. The final rating follows the highest facet level, unless one facet is total.",
+      "Distinct residuals can sometimes be rated separately, but only if the same symptoms are not counted twice."
+    ],
+    options: [
+      ratingLevel(0, "Highest TBI facet level is 0."),
+      ratingLevel(10, "Highest TBI facet level is 1."),
+      ratingLevel(40, "Highest TBI facet level is 2."),
+      ratingLevel(70, "Highest TBI facet level is 3."),
+      ratingLevel(100, "One or more facets are rated total.")
+    ]
+  },
+  "Lumbosacral (Back) Strain": {
+    mode: "simple",
+    diagnosticCode: "5237",
+    ruleTitle: "Thoracolumbar spine strain",
+    sourceUrl: MUSCULOSKELETAL_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.71a",
+    notes: ["This follows the General Rating Formula for Diseases and Injuries of the Spine for the thoracolumbar segment."],
+    options: [
+      ratingLevel(10, "Forward flexion greater than 60 degrees but not greater than 85, combined thoracolumbar range greater than 120 but not greater than 235, or localized tenderness/spasm not causing abnormal gait or contour."),
+      ratingLevel(20, "Forward flexion greater than 30 degrees but not greater than 60, combined thoracolumbar range not greater than 120, or muscle spasm/guarding causing abnormal gait or contour."),
+      ratingLevel(40, "Forward flexion 30 degrees or less, or favorable ankylosis of the entire thoracolumbar spine."),
+      ratingLevel(50, "Unfavorable ankylosis of the entire thoracolumbar spine."),
+      ratingLevel(100, "Unfavorable ankylosis of the entire spine.")
+    ]
+  },
+  "Cervical (Neck) Strain": {
+    mode: "simple",
+    diagnosticCode: "5237",
+    ruleTitle: "Cervical spine strain",
+    sourceUrl: MUSCULOSKELETAL_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.71a",
+    notes: ["This follows the General Rating Formula for Diseases and Injuries of the Spine for the cervical segment."],
+    options: [
+      ratingLevel(10, "Forward flexion greater than 30 degrees but not greater than 40, combined cervical range greater than 170 but not greater than 335, or localized tenderness/spasm not causing abnormal gait or contour."),
+      ratingLevel(20, "Forward flexion greater than 15 degrees but not greater than 30, combined cervical range not greater than 170, or muscle spasm/guarding causing abnormal gait or contour."),
+      ratingLevel(30, "Forward flexion 15 degrees or less, or favorable ankylosis of the entire cervical spine."),
+      ratingLevel(40, "Unfavorable ankylosis of the entire cervical spine."),
+      ratingLevel(100, "Unfavorable ankylosis of the entire spine.")
+    ]
+  },
+  "Knee Strain/Pain": {
+    mode: "profiles",
+    ruleTitle: "Knee ratings turn on the actual rating basis",
+    sourceUrl: MUSCULOSKELETAL_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.71a",
+    notes: [
+      "Knee ratings can be separate for flexion, extension, and instability when the facts support distinct manifestations.",
+      "Choose the exact basis you are rating instead of guessing from a generic knee label."
+    ],
+    profiles: [
+      {
+        id: "flexion_5260",
+        label: "Limitation of flexion (DC 5260)",
+        diagnosticCode: "5260",
+        sourceUrl: MUSCULOSKELETAL_RATINGS_SOURCE_URL,
+        notes: ["Use when the rating is driven by reduced flexion."],
+        options: [
+          ratingLevel(0, "Flexion limited to 60 degrees."),
+          ratingLevel(10, "Flexion limited to 45 degrees."),
+          ratingLevel(20, "Flexion limited to 30 degrees."),
+          ratingLevel(30, "Flexion limited to 15 degrees.")
+        ]
+      },
+      {
+        id: "extension_5261",
+        label: "Limitation of extension (DC 5261)",
+        diagnosticCode: "5261",
+        sourceUrl: MUSCULOSKELETAL_RATINGS_SOURCE_URL,
+        notes: ["Use when the rating is driven by reduced extension."],
+        options: [
+          ratingLevel(0, "Extension limited to 5 degrees."),
+          ratingLevel(10, "Extension limited to 10 degrees."),
+          ratingLevel(20, "Extension limited to 15 degrees."),
+          ratingLevel(30, "Extension limited to 20 degrees."),
+          ratingLevel(40, "Extension limited to 30 degrees."),
+          ratingLevel(50, "Extension limited to 45 degrees.")
+        ]
+      },
+      {
+        id: "instability_5257",
+        label: "Recurrent subluxation or instability (DC 5257)",
+        diagnosticCode: "5257",
+        sourceUrl: MUSCULOSKELETAL_RATINGS_SOURCE_URL,
+        notes: ["Current DC 5257 looks at the actual instability pattern and prescribed bracing or assistive devices."],
+        options: [
+          ratingLevel(10, "Sprain/incomplete ligament tear or patellar instability meeting the 10 percent criteria."),
+          ratingLevel(20, "Persistent instability or patellar instability meeting the 20 percent criteria."),
+          ratingLevel(30, "Persistent instability or patellar instability meeting the 30 percent criteria.")
+        ]
+      }
+    ]
+  },
+  "Plantar Fasciitis": {
+    mode: "simple",
+    diagnosticCode: "5269",
+    ruleTitle: "Plantar fasciitis",
+    sourceUrl: MUSCULOSKELETAL_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.71a",
+    notes: ["DC 5269 caps at 30 percent unless there is actual loss of use of the foot."],
+    options: [
+      ratingLevel(10, "Otherwise, unilateral or bilateral."),
+      ratingLevel(20, "No relief from both non-surgical and surgical treatment, unilateral."),
+      ratingLevel(30, "No relief from both non-surgical and surgical treatment, bilateral."),
+      ratingLevel(40, "Actual loss of use of the foot.")
+    ]
+  },
+  "Sleep Apnea": {
+    mode: "simple",
+    diagnosticCode: "6847",
+    ruleTitle: "Sleep apnea syndromes",
+    sourceUrl: RESPIRATORY_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.97",
+    exclusivityGroup: "special_respiratory",
+    exclusivityMessage:
+      "Do not stack asthma and sleep apnea in this calculator. 38 CFR 4.96(a) says certain respiratory DCs must be rated as a single predominant respiratory disability.",
+    notes: [
+      "Use the actual treatment/evidence level under DC 6847.",
+      "If asthma is already in the stack, use one predominant respiratory rating instead of two separate ones."
+    ],
+    options: [
+      ratingLevel(0, "Asymptomatic, but with documented sleep disorder breathing."),
+      ratingLevel(30, "Persistent day-time hypersomnolence."),
+      ratingLevel(50, "Requires use of a breathing assistance device such as CPAP."),
+      ratingLevel(100, "Chronic respiratory failure with carbon dioxide retention or cor pulmonale, or requires tracheostomy.")
+    ]
+  },
+  Asthma: {
+    mode: "simple",
+    diagnosticCode: "6602",
+    ruleTitle: "Bronchial asthma",
+    sourceUrl: RESPIRATORY_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.97",
+    exclusivityGroup: "special_respiratory",
+    exclusivityMessage:
+      "Do not stack asthma and sleep apnea in this calculator. 38 CFR 4.96(a) says certain respiratory DCs must be rated as a single predominant respiratory disability.",
+    notes: [
+      "Use the actual PFT or treatment facts from DC 6602.",
+      "If sleep apnea is already in the stack, use one predominant respiratory rating instead of two separate ones."
+    ],
+    options: [
+      ratingLevel(10, "FEV-1 of 71 to 80 percent predicted, FEV-1/FVC of 71 to 80 percent, or intermittent inhalational/oral bronchodilator therapy."),
+      ratingLevel(30, "FEV-1 of 56 to 70 percent predicted, FEV-1/FVC of 56 to 70 percent, or daily inhalational/oral bronchodilator therapy or inhalational anti-inflammatory medication."),
+      ratingLevel(60, "FEV-1 of 40 to 55 percent predicted, FEV-1/FVC of 40 to 55 percent, or at least monthly physician visits for exacerbations, or intermittent systemic corticosteroids at least 3 times per year."),
+      ratingLevel(100, "FEV-1 less than 40 percent predicted, FEV-1/FVC less than 40 percent, more than one attack per week with respiratory failure, or daily high-dose systemic corticosteroids or immuno-suppressive medications.")
+    ]
+  },
+  "Sinusitis/Rhinitis": {
+    mode: "profiles",
+    ruleTitle: "Pick the actual ENT diagnosis being rated",
+    sourceUrl: RESPIRATORY_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.97",
+    notes: [
+      "Sinusitis and rhinitis do not use the same criteria. Choose the actual diagnosis being evaluated.",
+      "The calculator only unlocks ratings after the diagnosis path is selected."
+    ],
+    profiles: [
+      {
+        id: "sinusitis_6514",
+        label: "Chronic sinusitis (General Rating Formula, DC 6510-6514)",
+        diagnosticCode: "6514",
+        sourceUrl: RESPIRATORY_RATINGS_SOURCE_URL,
+        notes: ["Use when the claim is actually sinusitis."],
+        options: [
+          ratingLevel(0, "Detected by X-ray only."),
+          ratingLevel(10, "1 or 2 incapacitating episodes per year requiring prolonged antibiotics, or 3 to 6 non-incapacitating episodes with headaches, pain, and purulent discharge or crusting."),
+          ratingLevel(30, "3 or more incapacitating episodes per year requiring prolonged antibiotics, or more than 6 non-incapacitating episodes with headaches, pain, and purulent discharge or crusting."),
+          ratingLevel(50, "Following radical surgery with chronic osteomyelitis, or near-constant sinusitis after repeated surgeries.")
+        ]
+      },
+      {
+        id: "rhinitis_6522",
+        label: "Allergic or vasomotor rhinitis (DC 6522)",
+        diagnosticCode: "6522",
+        sourceUrl: RESPIRATORY_RATINGS_SOURCE_URL,
+        notes: ["Use when the claim is actually allergic or vasomotor rhinitis."],
+        options: [
+          ratingLevel(0, "Service-connected rhinitis below compensable obstruction/polyps findings."),
+          ratingLevel(10, "Without polyps, but with greater than 50 percent obstruction of nasal passage on both sides or complete obstruction on one side."),
+          ratingLevel(30, "With polyps.")
+        ]
+      }
+    ]
+  },
+  Tinnitus: {
+    mode: "simple",
+    diagnosticCode: "6260",
+    ruleTitle: "Tinnitus",
+    sourceUrl: EAR_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.87",
+    notes: [
+      "The schedular maximum is 10 percent whether tinnitus is perceived in one ear, both ears, or in the head.",
+      "This tool locks tinnitus to the single allowed schedular level."
+    ],
+    options: [ratingLevel(10, "Recurrent tinnitus. This is the schedular maximum under DC 6260.")]
+  },
+  "Hearing Loss": {
+    mode: "measurement_required",
+    diagnosticCode: "6100",
+    ruleTitle: "Hearing loss requires the official audiometric tables",
+    sourceUrl: HEARING_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.85",
+    lockedMessage:
+      "Hearing loss is not a pick-a-percentage condition. It requires Maryland CNC speech discrimination plus puretone threshold averages run through Tables VI, VIa, and VII in 38 CFR 4.85.",
+    notes: [
+      "This calculator will not guess a hearing-loss percentage without the audiogram table result.",
+      "Use the official hearing tables before adding a hearing-loss rating."
+    ]
+  },
+  GERD: {
+    mode: "simple",
+    diagnosticCode: "7206",
+    ruleTitle: "Gastroesophageal reflux disease",
+    sourceUrl: DIGESTIVE_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.114",
+    notes: [
+      "Current VA digestive ratings use DC 7206 for GERD.",
+      "The schedular maximum under DC 7206 is 80 percent."
+    ],
+    options: [
+      ratingLevel(10, "Documented history without daily symptoms or with recurrent symptoms once or twice yearly."),
+      ratingLevel(30, "Recurrent esophageal symptoms at least once weekly but less than daily."),
+      ratingLevel(50, "Recurrent esophageal symptoms occurring daily."),
+      ratingLevel(80, "Documented daily treatment with near-continuous and refractory symptoms plus qualifying severe complications under DC 7206.")
+    ]
+  },
+  IBS: {
+    mode: "simple",
+    diagnosticCode: "7319",
+    ruleTitle: "Irritable bowel syndrome / irritable colon syndrome",
+    sourceUrl: DIGESTIVE_RATINGS_SOURCE_URL,
+    sourceLabel: "38 CFR 4.114",
+    notes: ["Current VA digestive ratings use the revised IBS criteria in DC 7319."],
+    options: [
+      ratingLevel(0, "Diagnosed, but no compensable episodes in the last 12 months."),
+      ratingLevel(10, "Occasional episodes of abdominal distress."),
+      ratingLevel(20, "Frequent abdominal distress."),
+      ratingLevel(30, "Diarrhea, diarrhea alternating with constipation, bloating, and frequent abdominal distress or other severe symptoms.")
+    ]
+  }
+};
+
+const collectRuleRatings = (rule) => {
+  if (!rule) return [];
+  if (rule.mode === "simple") return rule.options.map((option) => option.value);
+  if (rule.mode === "profiles") return rule.profiles.flatMap((profile) => profile.options.map((option) => option.value));
+  return [];
+};
+
+const FACT_BASED_CLAIM_RATING_OPTIONS = [...new Set(Object.values(CONDITION_RATING_RULES).flatMap(collectRuleRatings))]
+  .filter((value) => Number(value) > 0)
+  .sort((a, b) => a - b);
+
+const getConditionRule = (conditionName) => CONDITION_RATING_RULES[conditionName] || null;
+
+const getConditionRatingContext = (conditionName, profileId = "") => {
+  const rule = getConditionRule(conditionName);
+  if (!rule) return null;
+  if (rule.mode === "simple") return rule;
+  if (rule.mode !== "profiles") return null;
+  return rule.profiles.find((profile) => profile.id === profileId) || null;
+};
+
+const getConditionRatingOptions = (conditionName, profileId = "") =>
+  getConditionRatingContext(conditionName, profileId)?.options || [];
+
+const getDefaultConditionRating = (conditionName, profileId = "") => {
+  const options = getConditionRatingOptions(conditionName, profileId);
+  const firstCompensable = options.find((option) => option.value > 0);
+  return firstCompensable?.value ?? options[0]?.value ?? "";
+};
+
+const isClaimRatingSelected = (rating) => Number.isFinite(Number(rating));
+
+const formatClaimRating = (rating) => (isClaimRatingSelected(rating) ? `${Number(rating)}%` : "Facts needed");
+
+const buildSuggestedClaim = (conditionName) => {
+  const conditionData = findConditionData(conditionName);
+  const rule = getConditionRule(conditionName);
+  return {
+    name: conditionName,
+    rating: null,
+    dbq: conditionData?.dbq || "",
+    specialist: conditionData?.specialist || "",
+    type: "new",
+    diagnosticCode: rule?.diagnosticCode || "",
+    ratingRuleTitle: rule?.ruleTitle || "Fact-based rating review",
+    ratingProfileId: "",
+    ratingProfileLabel: rule?.mode === "profiles" ? "Select a rating basis in VA Math" : "",
+    sourceUrl: rule?.sourceUrl || "",
+    sourceLabel: rule?.sourceLabel || "",
+    ratingSummary: rule?.lockedMessage || "Select the actual factual rating basis before using this claim in VA Math.",
+    pendingFacts: true
+  };
+};
+
 const PAY_TABLE_2026 = {
   10: { base: 180.42 },
   20: { base: 356.66 },
@@ -896,6 +1346,43 @@ const PAY_TABLE_2026 = {
 };
 
 const findConditionData = (conditionName) => ALL_CONDITIONS.find((item) => item.name === conditionName);
+
+const getConditionRuleNotes = (conditionName, profileId = "") => {
+  const rule = getConditionRule(conditionName);
+  if (!rule) return [];
+  const profileNotes = rule.mode === "profiles" ? rule.profiles.find((profile) => profile.id === profileId)?.notes || [] : [];
+  return [...new Set([...(rule.notes || []), ...profileNotes])];
+};
+
+const getClaimIdentityKey = (claim) => `${claim.name}::${claim.ratingProfileId || ""}`;
+
+const getClaimConflict = (claims, conditionName, profileId = "") => {
+  const rule = getConditionRule(conditionName);
+  if (!rule) return null;
+
+  const exactDuplicate = claims.find((claim) => getClaimIdentityKey(claim) === `${conditionName}::${profileId}`);
+  if (exactDuplicate && isClaimRatingSelected(exactDuplicate.rating)) {
+    return {
+      type: "duplicate",
+      message: `${conditionName}${exactDuplicate.ratingProfileLabel ? ` (${exactDuplicate.ratingProfileLabel})` : ""} is already in the stack.`
+    };
+  }
+
+  if (rule.exclusivityGroup) {
+    const conflictingClaim = claims.find((claim) => {
+      const claimRule = getConditionRule(claim.name);
+      return claimRule?.exclusivityGroup === rule.exclusivityGroup && claim.name !== conditionName;
+    });
+    if (conflictingClaim) {
+      return {
+        type: "exclusive",
+        message: rule.exclusivityMessage || `${conditionName} conflicts with ${conflictingClaim.name}.`
+      };
+    }
+  }
+
+  return null;
+};
 
 const getDefaultPactTrackForEra = (era) => {
   const config = PACT_ERA_CONFIG[era];
@@ -980,6 +1467,7 @@ const calculateCombinedRating = (currentRating, newDisabilities) =>
 const getPathTo100Guide = (startingRating, newDisabilities) => {
   const detail = calculateCombinedRatingDetailed(startingRating, newDisabilities);
   const currentCombined = detail.finalCombined;
+  const ratingUniverse = FACT_BASED_CLAIM_RATING_OPTIONS;
   if (currentCombined >= 100) {
     return {
       currentCombined,
@@ -991,8 +1479,8 @@ const getPathTo100Guide = (startingRating, newDisabilities) => {
 
   let singleStep = null;
   let doubleStep = null;
-  for (let i = 0; i < CLAIM_RATING_OPTIONS.length; i += 1) {
-    const one = CLAIM_RATING_OPTIONS[i];
+  for (let i = 0; i < ratingUniverse.length; i += 1) {
+    const one = ratingUniverse[i];
     if (calculateCombinedRating(currentCombined, [one]) === 100) {
       singleStep = [one];
       break;
@@ -1021,9 +1509,9 @@ const getPathTo100Guide = (startingRating, newDisabilities) => {
     return bestPair;
   };
 
-  doubleStep = findBestPair(CLAIM_RATING_OPTIONS.filter((rating) => rating < 100));
+  doubleStep = findBestPair(ratingUniverse.filter((rating) => rating < 100));
   if (!doubleStep) {
-    doubleStep = findBestPair(CLAIM_RATING_OPTIONS);
+    doubleStep = findBestPair(ratingUniverse);
   }
 
   return {
@@ -1740,9 +2228,12 @@ function TYFYSPlatform() {
   const [childCount, setChildCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCondition, setSelectedCondition] = useState("");
-  const [newRatingInput, setNewRatingInput] = useState(10);
+  const [selectedRatingProfileId, setSelectedRatingProfileId] = useState("");
+  const [newRatingInput, setNewRatingInput] = useState("");
   const [claimType, setClaimType] = useState("increase");
   const [addedClaims, setAddedClaims] = useState([]);
+  const [editingClaimIndex, setEditingClaimIndex] = useState(null);
+  const [calculatorNotice, setCalculatorNotice] = useState(null);
   const [calculation, setCalculation] = useState({
     beforePay: 0,
     afterPay: 0,
@@ -1805,6 +2296,15 @@ function TYFYSPlatform() {
 
   const [expandCalcHelp, setExpandCalcHelp] = useState(false);
   const hasPaid = paymentState.completed;
+  const selectedConditionRule = getConditionRule(selectedCondition);
+  const selectedRatingContext = getConditionRatingContext(selectedCondition, selectedRatingProfileId);
+  const selectedRatingOptions = getConditionRatingOptions(selectedCondition, selectedRatingProfileId);
+  const selectedConditionNotes = getConditionRuleNotes(selectedCondition, selectedRatingProfileId);
+  const selectedConditionBlockedMessage =
+    selectedConditionRule?.mode === "measurement_required" ? selectedConditionRule.lockedMessage : "";
+  const selectedConditionNeedsProfile = selectedConditionRule?.mode === "profiles" && !selectedRatingProfileId;
+  const hasSelectedRatingOption =
+    newRatingInput !== "" && selectedRatingOptions.some((option) => option.value === Number(newRatingInput));
 
   const startSystem = () => {
     setHasStarted(true);
@@ -1822,6 +2322,40 @@ function TYFYSPlatform() {
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
+  useEffect(() => {
+    const rule = getConditionRule(selectedCondition);
+    if (!rule) {
+      setSelectedRatingProfileId("");
+      setNewRatingInput("");
+      return;
+    }
+    if (rule.mode === "simple") {
+      setSelectedRatingProfileId("");
+      setNewRatingInput((prev) =>
+        prev !== "" && rule.options.some((option) => option.value === Number(prev))
+          ? prev
+          : getDefaultConditionRating(selectedCondition)
+      );
+      return;
+    }
+    if (rule.mode === "measurement_required") {
+      setSelectedRatingProfileId("");
+      setNewRatingInput("");
+      return;
+    }
+    setNewRatingInput("");
+  }, [selectedCondition]);
+  useEffect(() => {
+    if (!selectedConditionRule || selectedConditionRule.mode !== "profiles") return;
+    if (!selectedRatingProfileId) {
+      setNewRatingInput("");
+      return;
+    }
+    const defaultRating = getDefaultConditionRating(selectedCondition, selectedRatingProfileId);
+    setNewRatingInput((prev) =>
+      prev !== "" && selectedRatingOptions.some((option) => option.value === Number(prev)) ? prev : defaultRating
+    );
+  }, [selectedCondition, selectedConditionRule, selectedRatingOptions, selectedRatingProfileId]);
   useEffect(() => {
     savePaymentState(paymentState);
   }, [paymentState]);
@@ -2049,17 +2583,18 @@ function TYFYSPlatform() {
       userProfile.pain_points.forEach((point) => {
         Object.values(DISABILITY_DATA).forEach((catList) => {
           const condition = catList.find((c) => c.name === point);
-          if (condition)
-            newClaims.push({
-              name: condition.name,
-              rating: 30,
-              dbq: condition.dbq,
-              specialist: condition.specialist,
-              type: "new"
-            });
+          if (condition) newClaims.push(buildSuggestedClaim(condition.name));
         });
       });
-      setAddedClaims(newClaims);
+      setAddedClaims((prev) => {
+        const merged = [...prev];
+        newClaims.forEach((claim) => {
+          if (!merged.some((existing) => getClaimIdentityKey(existing) === getClaimIdentityKey(claim))) {
+            merged.push(claim);
+          }
+        });
+        return merged;
+      });
     }
     if (!botMemory.current.hasWelcomed) {
       // Updated welcome message
@@ -2244,23 +2779,84 @@ function TYFYSPlatform() {
 
   const addClaim = () => {
     if (!selectedCategory || !selectedCondition) return;
+    if (selectedConditionRule?.mode === "measurement_required") {
+      setCalculatorNotice({ type: "warning", text: selectedConditionRule.lockedMessage });
+      return;
+    }
+    if (selectedConditionNeedsProfile) {
+      setCalculatorNotice({ type: "warning", text: "Select the exact VA rating basis before adding this condition." });
+      return;
+    }
+    if (!hasSelectedRatingOption) {
+      setCalculatorNotice({ type: "warning", text: "Pick a valid fact-based rating from the official condition schedule first." });
+      return;
+    }
+
+    const selectedRatingValue = Number(newRatingInput);
+    const selectedRatingOption = selectedRatingOptions.find((option) => option.value === selectedRatingValue);
+    if (!selectedRatingContext || !selectedRatingOption) {
+      setCalculatorNotice({ type: "warning", text: "Pick a valid fact-based rating from the official condition schedule first." });
+      return;
+    }
+
+    const claimsForConflict =
+      editingClaimIndex === null ? addedClaims : addedClaims.filter((_, idx) => idx !== editingClaimIndex);
+    const claimConflict = getClaimConflict(claimsForConflict, selectedCondition, selectedRatingProfileId);
+    if (claimConflict) {
+      setCalculatorNotice({ type: "warning", text: claimConflict.message });
+      return;
+    }
+
     const conditionData = DISABILITY_DATA[selectedCategory].find((c) => c.name === selectedCondition);
-    setAddedClaims([
-      ...addedClaims,
-      {
-        name: selectedCondition,
-        rating: parseInt(newRatingInput, 10),
-        dbq: conditionData.dbq,
-        specialist: conditionData.specialist,
-        type: claimType
+    const nextClaim = {
+      name: selectedCondition,
+      rating: selectedRatingValue,
+      dbq: conditionData.dbq,
+      specialist: conditionData.specialist,
+      type: claimType,
+      diagnosticCode: selectedRatingContext.diagnosticCode || selectedConditionRule?.diagnosticCode || "",
+      ratingRuleTitle: selectedConditionRule?.ruleTitle || "",
+      ratingProfileId: selectedConditionRule?.mode === "profiles" ? selectedRatingProfileId : "",
+      ratingProfileLabel: selectedConditionRule?.mode === "profiles" ? selectedRatingContext.label : "",
+      sourceUrl: selectedRatingContext.sourceUrl || selectedConditionRule?.sourceUrl || "",
+      sourceLabel: selectedConditionRule?.sourceLabel || "",
+      ratingSummary: selectedRatingOption.summary,
+      pendingFacts: false
+    };
+
+    setAddedClaims((prevClaims) => {
+      if (editingClaimIndex !== null) {
+        const updated = [...prevClaims];
+        updated[editingClaimIndex] = nextClaim;
+        return updated;
       }
-    ]);
+
+      const pendingIndex = prevClaims.findIndex(
+        (claim) =>
+          getClaimIdentityKey(claim) === getClaimIdentityKey(nextClaim) && !isClaimRatingSelected(claim.rating)
+      );
+
+      if (pendingIndex >= 0) {
+        const updated = [...prevClaims];
+        updated[pendingIndex] = nextClaim;
+        return updated;
+      }
+
+      return [...prevClaims, nextClaim];
+    });
+    setCalculatorNotice({
+      type: "success",
+      text: `${selectedCondition} ${editingClaimIndex !== null ? "updated" : "added"} using ${selectedRatingContext.diagnosticCode ? `DC ${selectedRatingContext.diagnosticCode}` : "the selected VA schedule"}.`
+    });
     setSelectedCondition("");
+    setSelectedRatingProfileId("");
+    setEditingClaimIndex(null);
   };
   const removeClaim = (idx) => {
     const newClaims = [...addedClaims];
     newClaims.splice(idx, 1);
     setAddedClaims(newClaims);
+    setEditingClaimIndex(null);
   };
 
   const handleScannerChange = (field, value) => {
@@ -2934,23 +3530,51 @@ function TYFYSPlatform() {
                               <div>
                                 <p className="font-bold text-slate-800 text-lg">{claim.name}</p>
                                 <p className="text-xs text-slate-500 font-mono mt-0.5">{claim.dbq}</p>
+                                <div className="flex flex-wrap items-center gap-2 mt-2">
+                                  <span
+                                    className={`px-2.5 py-1 text-[11px] font-bold rounded-full border ${
+                                      isClaimRatingSelected(claim.rating)
+                                        ? "bg-slate-50 text-slate-700 border-slate-200"
+                                        : "bg-amber-50 text-amber-700 border-amber-100"
+                                    }`}
+                                  >
+                                    {formatClaimRating(claim.rating)}
+                                  </span>
+                                  {claim.diagnosticCode && (
+                                    <span className="px-2.5 py-1 text-[11px] font-bold rounded-full border bg-white text-slate-600 border-slate-200">
+                                      DC {claim.diagnosticCode}
+                                    </span>
+                                  )}
+                                </div>
                               </div>
                             </div>
                             <div className="flex items-center gap-2 pl-14 sm:pl-0">
-                              <span className="px-3 py-1 bg-orange-50 text-orange-600 text-xs font-bold rounded-full border border-orange-100">
-                                Action Needed
+                              <span
+                                className={`px-3 py-1 text-xs font-bold rounded-full border ${
+                                  isClaimRatingSelected(claim.rating)
+                                    ? "bg-emerald-50 text-emerald-700 border-emerald-100"
+                                    : "bg-orange-50 text-orange-600 border-orange-100"
+                                }`}
+                              >
+                                {isClaimRatingSelected(claim.rating) ? "Fact-based rating set" : "Rating facts needed"}
                               </span>
                               <button
                                 onClick={() => {
-                                  setIsBotOpen(true);
-                                  addMessage(
-                                    "bot",
-                                    "This feature is for Premium members. A specialist would review your specific medical evidence for this claim."
+                                  setActiveView("calculator");
+                                  setEditingClaimIndex(idx);
+                                  setSelectedCategory(
+                                    Object.keys(DISABILITY_DATA).find((category) =>
+                                      DISABILITY_DATA[category].some((condition) => condition.name === claim.name)
+                                    ) || ""
                                   );
+                                  setSelectedCondition(claim.name);
+                                  setSelectedRatingProfileId(claim.ratingProfileId || "");
+                                  setNewRatingInput(isClaimRatingSelected(claim.rating) ? String(claim.rating) : "");
+                                  setCalculatorNotice(null);
                                 }}
                                 className="text-xs bg-slate-100 text-slate-500 px-3 py-2 rounded-lg font-bold hover:bg-slate-200 transition-colors flex items-center gap-1"
                               >
-                                <Icons.Lock className="w-3 h-3" /> Review
+                                <Icons.Edit className="w-3 h-3" /> Edit
                               </button>
                               {/* Quick Edit (Delete) */}
                               <button onClick={() => removeClaim(idx)} className="p-2 text-slate-300 hover:text-red-500 transition-colors">
@@ -3358,7 +3982,7 @@ function TYFYSPlatform() {
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                   <div className="flex flex-col lg:flex-row justify-between gap-6">
                     <div className="max-w-3xl">
-                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-green-600 mb-2">Official-style combined rating logic</p>
+                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-green-600 mb-2">38 CFR-based combined rating logic</p>
                       <h2 className="text-2xl font-black text-slate-900 mb-3">VA Math Calculator</h2>
                       <p className="text-slate-600 leading-relaxed">
                         Each added condition is applied to your remaining healthy efficiency, rounded to the nearest whole
@@ -3376,8 +4000,20 @@ function TYFYSPlatform() {
                           <ul className="list-disc list-inside space-y-1.5">
                             <li>Use <strong>Increase</strong> if a condition is already service connected but got worse.</li>
                             <li>Use <strong>New</strong> if the VA has never rated that condition before.</li>
-                            <li>Claims entered here are educational only and do not replace a combined ratings table review.</li>
+                            <li>Claims entered here use condition-specific rating guardrails so the dropdown only shows percentages supported by the selected VA schedule.</li>
+                            <li>Some conditions are intentionally locked until you pick the exact diagnostic basis or bring the actual test results.</li>
                           </ul>
+                          <div className="mt-3 flex flex-wrap gap-3">
+                            <a href={COMBINED_RATINGS_SOURCE_URL} target="_blank" rel="noreferrer" className="font-bold text-green-800 hover:text-green-900">
+                              Open 38 CFR 4.25
+                            </a>
+                            <a href={PYRAMIDING_SOURCE_URL} target="_blank" rel="noreferrer" className="font-bold text-green-800 hover:text-green-900">
+                              Open 38 CFR 4.14
+                            </a>
+                            <a href={RESPIRATORY_SINGLE_RATING_SOURCE_URL} target="_blank" rel="noreferrer" className="font-bold text-green-800 hover:text-green-900">
+                              Open 38 CFR 4.96(a)
+                            </a>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -3393,6 +4029,14 @@ function TYFYSPlatform() {
                         className="text-sm font-bold text-blue-700 hover:text-blue-800"
                       >
                         Open official VA compensation rates
+                      </a>
+                      <a
+                        href={COMBINED_RATINGS_SOURCE_URL}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block mt-2 text-sm font-bold text-blue-700 hover:text-blue-800"
+                      >
+                        Open official combined ratings rule
                       </a>
                     </div>
                   </div>
@@ -3443,7 +4087,7 @@ function TYFYSPlatform() {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div>
                           <label className="text-xs font-bold text-slate-500 uppercase">Category</label>
                           <select
@@ -3451,6 +4095,9 @@ function TYFYSPlatform() {
                             onChange={(e) => {
                               setSelectedCategory(e.target.value);
                               setSelectedCondition("");
+                              setSelectedRatingProfileId("");
+                              setNewRatingInput("");
+                              setCalculatorNotice(null);
                             }}
                             className="w-full mt-2 p-3 border rounded-xl"
                           >
@@ -3466,7 +4113,11 @@ function TYFYSPlatform() {
                           <label className="text-xs font-bold text-slate-500 uppercase">Condition</label>
                           <select
                             value={selectedCondition}
-                            onChange={(e) => setSelectedCondition(e.target.value)}
+                            onChange={(e) => {
+                              setSelectedCondition(e.target.value);
+                              setSelectedRatingProfileId("");
+                              setCalculatorNotice(null);
+                            }}
                             disabled={!selectedCategory}
                             className="w-full mt-2 p-3 border rounded-xl disabled:bg-slate-100"
                           >
@@ -3483,17 +4134,127 @@ function TYFYSPlatform() {
                           <label className="text-xs font-bold text-slate-500 uppercase">Expected rating</label>
                           <select
                             value={newRatingInput}
-                            onChange={(e) => setNewRatingInput(parseInt(e.target.value, 10))}
-                            className="w-full mt-2 p-3 border rounded-xl"
+                            onChange={(e) => setNewRatingInput(e.target.value)}
+                            disabled={!selectedCondition || selectedConditionNeedsProfile || Boolean(selectedConditionBlockedMessage)}
+                            className="w-full mt-2 p-3 border rounded-xl disabled:bg-slate-100"
                           >
-                            {CLAIM_RATING_OPTIONS.map((rating) => (
-                              <option key={rating} value={rating}>
-                                {rating}%
+                            <option value="">{selectedConditionBlockedMessage ? "Facts required" : "Select..."}</option>
+                            {selectedRatingOptions.map((option) => (
+                              <option key={option.value} value={option.value}>
+                                {option.value}%
                               </option>
                             ))}
                           </select>
                         </div>
                       </div>
+
+                      {selectedConditionRule?.mode === "profiles" && (
+                        <div className="mb-4">
+                          <label className="text-xs font-bold text-slate-500 uppercase">Rating basis</label>
+                          <select
+                            value={selectedRatingProfileId}
+                            onChange={(e) => {
+                              setSelectedRatingProfileId(e.target.value);
+                              setCalculatorNotice(null);
+                            }}
+                            className="w-full mt-2 p-3 border rounded-xl"
+                          >
+                            <option value="">Select the exact VA rating basis...</option>
+                            {selectedConditionRule.profiles.map((profile) => (
+                              <option key={profile.id} value={profile.id}>
+                                {profile.label}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+
+                      {calculatorNotice && (
+                        <div
+                          className={`mb-4 rounded-2xl border p-4 text-sm ${
+                            calculatorNotice.type === "success"
+                              ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+                              : "border-amber-200 bg-amber-50 text-amber-900"
+                          }`}
+                        >
+                          {calculatorNotice.text}
+                        </div>
+                      )}
+
+                      {selectedConditionRule && (
+                        <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+                            <div>
+                              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">Fact-based rating guardrail</p>
+                              <h3 className="text-lg font-bold text-slate-900 mt-2">{selectedCondition}</h3>
+                              <p className="text-sm text-slate-600 mt-1">
+                                {selectedRatingContext?.label || selectedConditionRule.ruleTitle}
+                              </p>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              <span className="px-3 py-1 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-700">
+                                DC {selectedRatingContext?.diagnosticCode || selectedConditionRule.diagnosticCode || "Varies"}
+                              </span>
+                              <a
+                                href={selectedRatingContext?.sourceUrl || selectedConditionRule.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-xs font-bold text-blue-700"
+                              >
+                                {selectedConditionRule.sourceLabel || "Open official source"}
+                              </a>
+                            </div>
+                          </div>
+
+                          {selectedConditionBlockedMessage ? (
+                            <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+                              {selectedConditionBlockedMessage}
+                            </div>
+                          ) : (
+                            <>
+                              <div className="mt-4 flex flex-wrap gap-2">
+                                {selectedRatingOptions.length ? (
+                                  selectedRatingOptions.map((option) => (
+                                    <span
+                                      key={option.value}
+                                      className={`px-3 py-1 rounded-full text-xs font-bold border ${
+                                        newRatingInput !== "" && Number(newRatingInput) === option.value
+                                          ? "bg-slate-900 text-white border-slate-900"
+                                          : "bg-white text-slate-700 border-slate-200"
+                                      }`}
+                                    >
+                                      {option.value}%
+                                    </span>
+                                  ))
+                                ) : (
+                                  <span className="text-sm text-slate-500">Select a rating basis to unlock the valid percentages.</span>
+                                )}
+                              </div>
+                              {selectedRatingOptions.length > 0 && (
+                                <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
+                                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Selected rating facts</p>
+                                  <p className="text-sm text-slate-700">
+                                    {(newRatingInput !== "" &&
+                                      selectedRatingOptions.find((option) => option.value === Number(newRatingInput))?.summary) ||
+                                      "Pick one of the supported rating levels above."}
+                                  </p>
+                                </div>
+                              )}
+                            </>
+                          )}
+
+                          <div className="mt-4 space-y-2">
+                            {selectedConditionNotes.map((note) => (
+                              <p key={note} className="text-sm text-slate-600">
+                                {note}
+                              </p>
+                            ))}
+                            {selectedConditionRule.exclusivityMessage && (
+                              <p className="text-sm font-medium text-amber-800">{selectedConditionRule.exclusivityMessage}</p>
+                            )}
+                          </div>
+                        </div>
+                      )}
 
                       <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-end">
                         <div className="flex-1">
@@ -3513,13 +4274,31 @@ function TYFYSPlatform() {
                             </button>
                           </div>
                         </div>
-                        <button
-                          onClick={addClaim}
-                          disabled={!selectedCondition}
+                        <div className="flex gap-3">
+                          {editingClaimIndex !== null && (
+                            <button
+                              onClick={() => {
+                                setEditingClaimIndex(null);
+                                setCalculatorNotice(null);
+                              }}
+                              className="px-4 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold hover:border-slate-400"
+                            >
+                              Cancel edit
+                            </button>
+                          )}
+                          <button
+                            onClick={addClaim}
+                            disabled={
+                            !selectedCondition ||
+                            selectedConditionNeedsProfile ||
+                            Boolean(selectedConditionBlockedMessage) ||
+                            !hasSelectedRatingOption
+                          }
                           className="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-800 disabled:opacity-50"
                         >
-                          Add condition
-                        </button>
+                            {editingClaimIndex !== null ? "Update condition" : "Add condition"}
+                          </button>
+                        </div>
                       </div>
                     </div>
 
@@ -3548,7 +4327,7 @@ function TYFYSPlatform() {
                       <div className="flex items-center justify-between mb-4">
                         <div>
                           <h3 className="text-xl font-bold text-slate-900">Claims in the stack</h3>
-                          <p className="text-sm text-slate-500">These ratings are applied from highest to lowest inside VA math.</p>
+                          <p className="text-sm text-slate-500">Only claims with a fact-based rating are applied from highest to lowest inside VA math.</p>
                         </div>
                         <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
                           {addedClaims.length} claim{addedClaims.length === 1 ? "" : "s"}
@@ -3565,16 +4344,34 @@ function TYFYSPlatform() {
                           {addedClaims.map((claim, idx) => (
                             <div key={`${claim.name}-${idx}`} className="rounded-2xl border border-slate-200 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                               <div>
-                                <div className="flex items-center gap-2 mb-1">
+                                <div className="flex flex-wrap items-center gap-2 mb-1">
                                   <span className={`text-[11px] font-bold uppercase tracking-wider px-2 py-1 rounded-full ${claim.type === "new" ? "bg-blue-50 text-blue-700" : "bg-green-50 text-green-700"}`}>
                                     {claim.type}
                                   </span>
-                                  <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-slate-100 text-slate-600">
-                                    {claim.rating}%
+                                  <span
+                                    className={`text-[11px] font-bold uppercase tracking-wider px-2 py-1 rounded-full ${
+                                      isClaimRatingSelected(claim.rating)
+                                        ? "bg-slate-100 text-slate-600"
+                                        : "bg-amber-50 text-amber-700 border border-amber-100"
+                                    }`}
+                                  >
+                                    {formatClaimRating(claim.rating)}
                                   </span>
+                                  {claim.diagnosticCode && (
+                                    <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-white border border-slate-200 text-slate-600">
+                                      DC {claim.diagnosticCode}
+                                    </span>
+                                  )}
                                 </div>
                                 <p className="font-bold text-slate-900">{claim.name}</p>
                                 <p className="text-sm text-slate-500">{claim.dbq}</p>
+                                {claim.ratingProfileLabel && <p className="text-sm text-slate-500 mt-1">{claim.ratingProfileLabel}</p>}
+                                {claim.ratingSummary && <p className="text-sm text-slate-600 mt-2">{claim.ratingSummary}</p>}
+                                {claim.sourceUrl && (
+                                  <a href={claim.sourceUrl} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs font-bold text-blue-700 hover:text-blue-800">
+                                    {claim.sourceLabel || "Open official source"}
+                                  </a>
+                                )}
                               </div>
                               <button onClick={() => removeClaim(idx)} className="p-2 text-slate-300 hover:text-red-500 transition-colors">
                                 <Icons.Trash className="w-4 h-4" />
@@ -3607,7 +4404,7 @@ function TYFYSPlatform() {
                         </button>
                       </div>
                       {!vaMathDetail.steps.length ? (
-                        <p className="text-sm text-slate-500">Add at least one claim to see the exact VA math sequence.</p>
+                        <p className="text-sm text-slate-500">Add at least one claim with a fact-based percentage to see the exact VA math sequence.</p>
                       ) : (
                         <div className="space-y-3">
                           {vaMathDetail.steps.map((step, idx) => (
@@ -3634,7 +4431,7 @@ function TYFYSPlatform() {
                       <div className="flex items-center justify-between gap-4 mb-4">
                         <div>
                           <h3 className="text-xl font-bold text-slate-900">Path to 100%</h3>
-                          <p className="text-sm text-slate-500">Guidance is based only on the ratings entered in this tool.</p>
+                          <p className="text-sm text-slate-500">Guidance is limited to the condition-specific rating levels supported in this tool.</p>
                         </div>
                         <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                           Need 95 raw to round to 100
@@ -3654,7 +4451,7 @@ function TYFYSPlatform() {
                           <p className="text-slate-600">
                             {pathTo100Guide.singleStep
                               ? `One additional ${pathTo100Guide.singleStep[0]}% rating would push this scenario to 100%.`
-                              : "No single rating from 10% to 100% reaches 100% from the scenario entered here."}
+                              : "No single supported condition rating in this tool reaches 100% from the scenario entered here."}
                           </p>
                         </div>
                         <div className="rounded-2xl border border-slate-200 p-4">
@@ -3662,7 +4459,7 @@ function TYFYSPlatform() {
                           <p className="text-slate-600">
                             {pathTo100Guide.doubleStep
                               ? `A pair like ${pathTo100Guide.doubleStep[0]}% + ${pathTo100Guide.doubleStep[1]}% would get this scenario to 100%.`
-                              : "No simple two-claim combination was found with the standard 10% increments."}
+                              : "No simple two-claim combination was found from the supported rating levels in this tool."}
                           </p>
                         </div>
                         <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">
@@ -4396,8 +5193,8 @@ function TYFYSPlatform() {
                 <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                   <iframe
                     title="TYFYS Intake Portal"
-                    src="intake-portal.html"
-                    className="w-full h-[76vh] min-h-[640px] border-0"
+                    src="intake-portal.html?embed=1"
+                    className="w-full h-[80vh] min-h-[720px] border-0 bg-slate-50"
                     loading="lazy"
                   />
                 </div>
