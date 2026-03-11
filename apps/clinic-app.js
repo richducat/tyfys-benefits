@@ -1377,25 +1377,40 @@
         className: "w-full min-h-[120px] rounded-[1.75rem] border border-slate-200 px-4 py-4 outline-none focus:border-slate-400"
       }
     ), /* @__PURE__ */ React.createElement("button", { type: "submit", className: "rounded-2xl bg-slate-900 text-white px-5 py-3 font-black hover:bg-slate-800 transition" }, "Add progress note")), /* @__PURE__ */ React.createElement("div", { className: "space-y-4" }, selectedSubject.progressNotes.map((note) => /* @__PURE__ */ React.createElement("div", { key: note.id, className: "rounded-[1.75rem] border border-slate-200 p-5" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between gap-3" }, /* @__PURE__ */ React.createElement("p", { className: "font-black text-slate-900" }, note.author), /* @__PURE__ */ React.createElement("p", { className: "text-xs font-bold uppercase tracking-[0.16em] text-slate-400" }, note.createdAt)), /* @__PURE__ */ React.createElement("p", { className: "text-sm text-slate-600 mt-4 leading-relaxed" }, note.text))))));
-    const renderEDocsTab = () => /* @__PURE__ */ React.createElement(Panel, { title: "eDocs / labs / misc", subtitle: "Certified-copy and signature controls are wired into the clinic packet, not mocked." }, /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-left min-w-[760px]" }, /* @__PURE__ */ React.createElement("thead", { className: "text-[11px] uppercase tracking-[0.18em] text-slate-400" }, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Document"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Category"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Signature"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Expiration"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Uploaded By"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Actions"))), /* @__PURE__ */ React.createElement("tbody", { className: "divide-y divide-slate-100" }, selectedSubject.edocs.map((doc) => /* @__PURE__ */ React.createElement("tr", { key: doc.id, className: "text-sm" }, /* @__PURE__ */ React.createElement("td", { className: "py-4" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-slate-900" }, doc.name), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, doc.status), doc.redactionTerms?.length ? /* @__PURE__ */ React.createElement("p", { className: "text-[11px] font-black uppercase tracking-[0.14em] text-slate-400 mt-1" }, doc.redactionTerms.length, " redaction term(s) saved") : null), /* @__PURE__ */ React.createElement("td", { className: "py-4 text-slate-600" }, doc.category), /* @__PURE__ */ React.createElement("td", { className: "py-4" }, /* @__PURE__ */ React.createElement(StatusPill, { value: doc.signatureStatus })), /* @__PURE__ */ React.createElement("td", { className: "py-4 text-slate-600" }, doc.expirationDate || "None"), /* @__PURE__ */ React.createElement("td", { className: "py-4 text-slate-600" }, doc.uploadedBy), /* @__PURE__ */ React.createElement("td", { className: "py-4" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2" }, /* @__PURE__ */ React.createElement("button", { type: "button", onClick: () => openDocumentPreview(doc.id), className: "rounded-xl bg-white border border-slate-200 text-slate-700 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] hover:border-slate-400 transition" }, "Open"), /* @__PURE__ */ React.createElement(
-      "button",
+    const renderEDocsTab = () => /* @__PURE__ */ React.createElement(
+      Panel,
       {
-        type: "button",
-        onClick: () => certifyDocument(doc.id),
-        disabled: !canCertifyDocument(doc),
-        className: `rounded-xl px-3 py-2 text-xs font-black uppercase tracking-[0.14em] transition ${canCertifyDocument(doc) ? "bg-slate-900 text-white hover:bg-slate-800" : "bg-slate-200 text-slate-500 cursor-not-allowed"}`
+        title: "eDocs / labs / misc",
+        subtitle: "Certified-copy, signature, and redaction controls are wired into the clinic packet. Use Open / Redact to launch the bulk blackout workspace."
       },
-      "Certify"
-    ), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        type: "button",
-        onClick: () => requestSignature(doc.id),
-        disabled: !canRequestSignature(doc),
-        className: `rounded-xl px-3 py-2 text-xs font-black uppercase tracking-[0.14em] transition ${canRequestSignature(doc) ? "bg-white border border-slate-200 text-slate-700 hover:border-slate-400" : "bg-slate-200 text-slate-500 cursor-not-allowed"}`
-      },
-      "Request signature"
-    )))))))));
+      /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-left min-w-[760px]" }, /* @__PURE__ */ React.createElement("thead", { className: "text-[11px] uppercase tracking-[0.18em] text-slate-400" }, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Document"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Category"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Signature"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Expiration"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Uploaded By"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Actions"))), /* @__PURE__ */ React.createElement("tbody", { className: "divide-y divide-slate-100" }, selectedSubject.edocs.map((doc) => /* @__PURE__ */ React.createElement("tr", { key: doc.id, className: "text-sm" }, /* @__PURE__ */ React.createElement("td", { className: "py-4" }, /* @__PURE__ */ React.createElement("p", { className: "font-bold text-slate-900" }, doc.name), /* @__PURE__ */ React.createElement("p", { className: "text-slate-500" }, doc.status), doc.redactionTerms?.length ? /* @__PURE__ */ React.createElement("p", { className: "text-[11px] font-black uppercase tracking-[0.14em] text-slate-400 mt-1" }, doc.redactionTerms.length, " redaction term(s) saved") : null), /* @__PURE__ */ React.createElement("td", { className: "py-4 text-slate-600" }, doc.category), /* @__PURE__ */ React.createElement("td", { className: "py-4" }, /* @__PURE__ */ React.createElement(StatusPill, { value: doc.signatureStatus })), /* @__PURE__ */ React.createElement("td", { className: "py-4 text-slate-600" }, doc.expirationDate || "None"), /* @__PURE__ */ React.createElement("td", { className: "py-4 text-slate-600" }, doc.uploadedBy), /* @__PURE__ */ React.createElement("td", { className: "py-4" }, /* @__PURE__ */ React.createElement("div", { className: "flex flex-wrap gap-2" }, /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          type: "button",
+          onClick: () => openDocumentPreview(doc.id),
+          className: "rounded-xl bg-white border border-slate-200 text-slate-700 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] hover:border-slate-400 transition"
+        },
+        "Open / Redact"
+      ), /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          type: "button",
+          onClick: () => certifyDocument(doc.id),
+          disabled: !canCertifyDocument(doc),
+          className: `rounded-xl px-3 py-2 text-xs font-black uppercase tracking-[0.14em] transition ${canCertifyDocument(doc) ? "bg-slate-900 text-white hover:bg-slate-800" : "bg-slate-200 text-slate-500 cursor-not-allowed"}`
+        },
+        "Certify"
+      ), /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          type: "button",
+          onClick: () => requestSignature(doc.id),
+          disabled: !canRequestSignature(doc),
+          className: `rounded-xl px-3 py-2 text-xs font-black uppercase tracking-[0.14em] transition ${canRequestSignature(doc) ? "bg-white border border-slate-200 text-slate-700 hover:border-slate-400" : "bg-slate-200 text-slate-500 cursor-not-allowed"}`
+        },
+        "Request signature"
+      ))))))))
+    );
     const renderEDocsAuditTab = () => /* @__PURE__ */ React.createElement(Panel, { title: "eDocs audit trail", subtitle: "Subject-scoped document activity for certifications, signature routing, and packet changes." }, /* @__PURE__ */ React.createElement("div", { className: "overflow-x-auto" }, /* @__PURE__ */ React.createElement("table", { className: "w-full text-left min-w-[720px]" }, /* @__PURE__ */ React.createElement("thead", { className: "text-[11px] uppercase tracking-[0.18em] text-slate-400" }, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Time"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Actor"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Action"), /* @__PURE__ */ React.createElement("th", { className: "pb-3" }, "Trace"))), /* @__PURE__ */ React.createElement("tbody", { className: "divide-y divide-slate-100" }, selectedSubjectDocAudit.length ? selectedSubjectDocAudit.map((entry) => /* @__PURE__ */ React.createElement("tr", { key: entry.id, className: "text-sm" }, /* @__PURE__ */ React.createElement("td", { className: "py-4 text-slate-500" }, entry.timestamp), /* @__PURE__ */ React.createElement("td", { className: "py-4 font-bold text-slate-900" }, entry.actor), /* @__PURE__ */ React.createElement("td", { className: "py-4 text-slate-700" }, entry.action), /* @__PURE__ */ React.createElement("td", { className: "py-4 font-mono text-[12px] text-indigo-600" }, entry.trace))) : /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("td", { colSpan: "4", className: "py-8 text-sm text-slate-500" }, "No eDocs audit entries for this subject yet."))))));
     const renderSubjectWorkbench = () => {
       if (!selectedSubject) return null;

@@ -1972,7 +1972,10 @@ function App() {
   );
 
   const renderEDocsTab = () => (
-    <Panel title="eDocs / labs / misc" subtitle="Certified-copy and signature controls are wired into the clinic packet, not mocked.">
+    <Panel
+      title="eDocs / labs / misc"
+      subtitle="Certified-copy, signature, and redaction controls are wired into the clinic packet. Use Open / Redact to launch the bulk blackout workspace."
+    >
       <div className="overflow-x-auto">
         <table className="w-full text-left min-w-[760px]">
           <thead className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
@@ -2003,8 +2006,12 @@ function App() {
                 <td className="py-4 text-slate-600">{doc.uploadedBy}</td>
                 <td className="py-4">
                   <div className="flex flex-wrap gap-2">
-                    <button type="button" onClick={() => openDocumentPreview(doc.id)} className="rounded-xl bg-white border border-slate-200 text-slate-700 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] hover:border-slate-400 transition">
-                      Open
+                    <button
+                      type="button"
+                      onClick={() => openDocumentPreview(doc.id)}
+                      className="rounded-xl bg-white border border-slate-200 text-slate-700 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] hover:border-slate-400 transition"
+                    >
+                      Open / Redact
                     </button>
                     <button
                       type="button"
