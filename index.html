@@ -1363,7 +1363,6 @@
 
        function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswers }) {
            const [errors, setErrors] = useState({});
-           const [botField, setBotField] = useState("");
            const [consentState, setConsentState] = useState({
                privateOrg: false,
                terms: false,
@@ -1410,11 +1409,6 @@
                }
                if (!consentState.terms || !consentState.sms) {
                    alert("Please accept the Terms & SMS Policy to continue.");
-                   return;
-               }
-
-               if (botField !== "") {
-                   console.warn("Spam blocked: Honeypot");
                    return;
                }
 
@@ -1500,10 +1494,6 @@
                    </p>
 
                    <form onSubmit={handleLocalSubmit} className="space-y-4" noValidate>
-                       <div className="opacity-0 absolute -z-10 h-0 w-0 overflow-hidden">
-                           <input type="text" name="website_url" tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} />
-                       </div>
-
                        <div className="grid gap-4" style={responsiveFieldGridStyle}>
                            <div className="relative min-w-0 group">
                                <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">First Name</label>
