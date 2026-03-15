@@ -14,8 +14,8 @@
 
 <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-   <meta name="description" content="Schedule your free discovery call with Thank You For Your Service. We help veterans increase their VA disability rating with private medical evidence.">
-   <title>Contact Us | Schedule Discovery Call | Thank You For Your Service</title>
+   <meta name="description" content="Schedule a discovery call to discuss your claim goals and whether private medical evidence is a fit for your VA disability case.">
+   <title>Book a Discovery Call for VA Disability Claim Support | TYFYS</title>
    <script src="https://cdn.tailwindcss.com"></script>
    <link rel="stylesheet" href="apps/navigation.css">
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
@@ -40,6 +40,37 @@
    <style>
        html { scroll-behavior: smooth; }
    </style>
+
+   <!-- TYFYS Structured Data -->
+   <script type="application/ld+json" data-tyfys-schema="organization">
+   {
+     "@context": "https://schema.org",
+     "@type": "Organization",
+     "name": "Thank You For Your Service (TYFYS)",
+     "url": "https://tyfys.net",
+     "logo": "https://tyfys.net/logo.png",
+     "sameAs": []
+   }
+   </script>
+   <script type="application/ld+json" data-tyfys-schema="localbusiness">
+   {
+     "@context": "https://schema.org",
+     "@type": "LocalBusiness",
+     "name": "TYFYS",
+     "url": "https://tyfys.net",
+     "telephone": "321-248-2805",
+     "address": {
+       "@type": "PostalAddress",
+       "addressCountry": "US"
+     },
+     "areaServed": {
+       "@type": "AdministrativeArea",
+       "name": "United States"
+     },
+     "description": "Neutral coordination of private medical evidence (DBQs and independent medical opinions) to support veterans disability claims."
+   }
+   </script>
+   <!-- /TYFYS Structured Data -->
 </head>
 <body class="font-sans text-slate-700 antialiased bg-slate-50 flex flex-col min-h-screen">
 
@@ -366,10 +397,15 @@
               
                <!-- Contact Info -->
               <div class="max-w-3xl">
-                   <h1 class="font-serif text-4xl font-bold text-slate-900 mb-6">Let's Secure Your Future.</h1>
+                   <h1 class="font-serif text-4xl font-bold text-slate-900 mb-6">Book a Discovery Call for VA Disability Claim Support</h1>
                    <p class="text-lg text-slate-600 mb-10 leading-relaxed">
-                       Schedule a call with our team. We'll review your service history, current ratings, and identify the fastest path to the benefits you've earned.
+                       Schedule a call with our team. We will review your service history and current claim status so you can decide whether private medical evidence support is the right fit.
                    </p>
+                   <div class="mb-10 grid gap-3 sm:grid-cols-3">
+                       <a href="services.html" class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-navy-200 transition">Services Hub</a>
+                       <a href="how-it-works.html" class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-navy-200 transition">How It Works</a>
+                       <a href="faqs.html" class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-navy-200 transition">FAQs Hub</a>
+                   </div>
                   
                    <div class="space-y-8">
                        <div class="flex items-start">
@@ -1171,6 +1207,9 @@
                if (previousAnswers?.goal === 'new') return "Start Your New Claim Right.";
                return data.question;
            };
+           const responsiveFieldGridStyle = { gridTemplateColumns: 'repeat(auto-fit, minmax(15rem, 1fr))' };
+           const hasBestContact = consentState.bestContact.text || consentState.bestContact.email || consentState.bestContact.phone;
+           const canSubmit = hasBestContact && consentState.privateOrg && consentState.terms && consentState.sms && !isSubmitting;
 
 
            const handleConsentChange = (field) => {
@@ -1252,29 +1291,16 @@
                const domainPart = lowerEmail.split('@')[1] || '';
                const userPart = lowerEmail.split('@')[0] || '';
                const baseDomain = domainPart.split('.')[0];
-
-
-               const allowedDomains = [
-                   'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'msn.com',
-                   'aol.com', 'icloud.com', 'live.com', 'me.com', 'ymail.com',
-                   'comcast.net', 'verizon.net', 'att.net', 'sbcglobal.net', 'cox.net',
-                   'bellsouth.net', 'charter.net', 'earthlink.net', 'mac.com', 'rocketmail.com',
-                   'optonline.net', 'roadrunner.com', 'windstream.net', 'juno.com', 'centurylink.net',
-                   'protonmail.com', 'pm.me', 'zoho.com', 'gmx.com', 'mail.com', 'aim.com',
-                   'frontier.com', 'netzero.net', 'twc.com', 'spectrum.net'
-               ];
-
-
-               const isAllowedDomain = allowedDomains.includes(domainPart);
-               const isMilDomain = domainPart.endsWith('.mil');
                const isUserRepeated = /^([a-z0-9])\1+$/.test(userPart);
                const uniqueCharsUser = new Set(userPart.split('')).size;
+               const domainLabels = domainPart.split('.');
+               const hasInvalidDomainLabel = domainLabels.some(label => !label || label.startsWith('-') || label.endsWith('-'));
 
 
                if (lowerEmail.includes('..') || lowerEmail.startsWith('.') || lowerEmail.endsWith('.')) newErrors.email = "Check for typos.";
                else if (!emailRegex.test(values.email)) newErrors.email = "Valid email required.";
                else if (profanityList.some(word => lowerEmail.includes(word))) newErrors.email = "Professional email required.";
-               else if (!isAllowedDomain && !isMilDomain) newErrors.email = "Use a common personal or .mil email.";
+               else if (hasInvalidDomainLabel) newErrors.email = "Valid email required.";
                else if (userPart === baseDomain) newErrors.email = "Valid email required.";
                else if (isUserRepeated) newErrors.email = "Valid email required.";
                else if (userPart.length > 5 && uniqueCharsUser < 3) newErrors.email = "Valid email required.";
@@ -1282,12 +1308,17 @@
 
                if (!values.zipCode || values.zipCode.length < 5) newErrors.zipCode = "Valid Zip Code required.";
 
+               if (!hasBestContact) {
+                   newErrors.bestContact = "Choose at least one contact method.";
+               }
+
 
                if (Object.keys(newErrors).length > 0) {
                    setErrors(newErrors);
                    return;
                }
               
+               setErrors({});
                // Include consents in final payload
                onSubmit({ ...values, consent: consentState });
            };
@@ -1296,7 +1327,7 @@
            return (
                <div>
                    {/* Status Bar */}
-                   <div className="flex items-center justify-between mb-8 bg-blue-50/50 p-3 rounded-lg border border-blue-100">
+                   <div className="mb-8 flex flex-col gap-2 rounded-lg border border-blue-100 bg-blue-50/50 p-3 sm:flex-row sm:items-center sm:justify-between">
                        <div className="flex items-center gap-2 text-blue-800 text-sm font-bold">
                            <div className="relative w-2 h-2">
                                <div className="absolute w-2 h-2 bg-green-500 rounded-full pulse-ring"></div>
@@ -1304,7 +1335,7 @@
                            </div>
                            Online Now
                        </div>
-                       <div className="text-xs text-blue-600 font-semibold tracking-wide uppercase">
+                       <div className="text-[11px] text-blue-600 font-semibold tracking-wide uppercase sm:text-xs">
                            3 Specialists Available
                        </div>
                    </div>
@@ -1326,32 +1357,32 @@
 
 
                        {/* Name Fields */}
-                       <div className="grid md:grid-cols-2 gap-4">
-                           <div className="relative group">
-                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">First Name</label>
-                               <div className="relative">
+                       <div className="grid gap-4" style={responsiveFieldGridStyle}>
+                           <div className="relative min-w-0 group">
+                               <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">First Name</label>
+                               <div className="relative min-w-0">
                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
                                    <input
                                        name="firstName"
                                        required
                                        type="text"
                                        autoComplete="given-name"
-                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.firstName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.firstName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`}
                                        placeholder="John"
                                    />
                                </div>
                                {errors.firstName && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.firstName}</p>}
                            </div>
-                           <div className="relative group">
-                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Last Name</label>
-                               <div className="relative">
+                           <div className="relative min-w-0 group">
+                               <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Last Name</label>
+                               <div className="relative min-w-0">
                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
                                    <input
                                        name="lastName"
                                        required
                                        type="text"
                                        autoComplete="family-name"
-                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.lastName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.lastName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`}
                                        placeholder="Doe"
                                    />
                                </div>
@@ -1361,25 +1392,25 @@
 
 
                        {/* Email & Phone */}
-                       <div className="grid md:grid-cols-2 gap-4">
-                            <div className="relative group">
-                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Email Address</label>
-                               <div className="relative">
+                       <div className="grid gap-4" style={responsiveFieldGridStyle}>
+                            <div className="relative min-w-0 group">
+                               <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Email Address</label>
+                               <div className="relative min-w-0">
                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
                                    <input
                                        name="email"
                                        required
                                        type="email"
                                        autoComplete="email"
-                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.email ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.email ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`}
                                        placeholder="john@example.com"
                                    />
                                </div>
                                {errors.email && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.email}</p>}
                            </div>
-                           <div className="relative group">
-                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Phone Number</label>
-                               <div className="relative">
+                           <div className="relative min-w-0 group">
+                               <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Phone Number</label>
+                               <div className="relative min-w-0">
                                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
                                    <input
                                        name="phone"
@@ -1387,7 +1418,7 @@
                                        type="tel"
                                        autoComplete="tel"
                                        maxLength={14}
-                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.phone ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.phone ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`}
                                        placeholder="(555) 123-4567"
                                        onInput={(e) => {
                                            let v = e.target.value.replace(/\D/g, '');
@@ -1407,10 +1438,10 @@
 
 
                        {/* Zip Code & Time */}
-                       <div className="grid md:grid-cols-2 gap-4">
-                           <div className="relative group">
-                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Zip Code</label>
-                               <div className="relative">
+                       <div className="grid gap-4" style={responsiveFieldGridStyle}>
+                           <div className="relative min-w-0 group">
+                               <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Zip Code</label>
+                               <div className="relative min-w-0">
                                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
                                    <input
                                        name="zipCode"
@@ -1418,17 +1449,17 @@
                                        type="text"
                                        autoComplete="postal-code"
                                        maxLength={5}
-                                       className={`w-full pl-11 pr-4 py-3.5 rounded-xl border-2 ${errors.zipCode ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900`}
+                                       className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.zipCode ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`}
                                        placeholder="12345"
                                    />
                                </div>
                                {errors.zipCode && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.zipCode}</p>}
                            </div>
-                           <div className="relative group">
-                               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Best Time To Contact</label>
-                               <div className="relative">
+                           <div className="relative min-w-0 group">
+                               <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Best Time To Contact</label>
+                               <div className="relative min-w-0">
                                    <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
-                                   <select name="bestTime" className="w-full pl-11 pr-4 py-3.5 rounded-xl border-2 border-slate-200 bg-slate-50 focus:bg-white focus:border-blue-600 outline-none transition-all font-medium text-slate-900 appearance-none">
+                                   <select name="bestTime" className="w-full min-w-0 appearance-none rounded-xl border-2 border-slate-200 bg-slate-50 py-3.5 pl-11 pr-10 font-medium text-slate-900 outline-none transition-all focus:border-blue-600 focus:bg-white">
                                        <option>Morning (9AM - 12PM)</option>
                                        <option>Afternoon (12PM - 4PM)</option>
                                        <option>Evening (4PM - 7PM)</option>
@@ -1441,10 +1472,10 @@
 
                        {/* Best Form of Contact Checkboxes */}
                        <div className="py-2">
-                           <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Best Form Of Contact</label>
-                           <div className="flex gap-4">
+                           <label className="ml-1 mb-2 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Best Form Of Contact</label>
+                           <div className="flex flex-wrap gap-3">
                                {['Text', 'Email', 'Phone'].map(type => (
-                                   <label key={type} className="flex items-center gap-2 cursor-pointer text-slate-700 font-medium text-sm">
+                                   <label key={type} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 cursor-pointer text-slate-700 font-medium text-sm">
                                        <input
                                            type="checkbox"
                                            checked={consentState.bestContact[type.toLowerCase()]}
@@ -1455,6 +1486,7 @@
                                    </label>
                                ))}
                            </div>
+                           {errors.bestContact && <p className="text-red-500 text-xs mt-2 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.bestContact}</p>}
                        </div>
 
 
@@ -1501,12 +1533,12 @@
 
 
                        <div className="pt-4">
-                           {(!consentState.privateOrg || !consentState.terms || !consentState.sms) && (
-                               <p className="mb-3 text-xs text-slate-500">Check all 3 consent boxes to enable Continue.</p>
+                           {(!hasBestContact || !consentState.privateOrg || !consentState.terms || !consentState.sms) && (
+                               <p className="mb-3 text-xs text-slate-500">Choose a contact method and check all 3 consent boxes to enable Continue.</p>
                            )}
                            <button
                                type="submit"
-                               disabled={isSubmitting || !consentState.privateOrg || !consentState.terms || !consentState.sms}
+                               disabled={!canSubmit}
                                className="w-full bg-green-500 hover:bg-green-600 text-white font-bold text-xl py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 group border-b-4 border-green-700 active:border-b-0 active:mt-1"
                            >
                                {isSubmitting ? 'Processing...' : (
@@ -1689,5 +1721,7 @@
        // Initialize Icons
        lucide.createIcons();
    </script>
+
+   <script src="apps/seo-sitewide.js"></script>
 </body>
 </html>
