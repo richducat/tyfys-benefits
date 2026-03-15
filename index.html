@@ -1390,6 +1390,12 @@
                    ...prev,
                    bestContact: { ...prev.bestContact, [method]: !prev.bestContact[method] }
                }));
+               setErrors(prev => {
+                   if (!prev.bestContact) return prev;
+                   const nextErrors = { ...prev };
+                   delete nextErrors.bestContact;
+                   return nextErrors;
+               });
            };
 
            const handleLocalSubmit = (e) => {
@@ -1606,18 +1612,34 @@
 
                        <div className="py-2">
                            <label className="ml-1 mb-2 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Best Form Of Contact</label>
-                           <div className="flex flex-wrap gap-3">
-                               {['Text', 'Email', 'Phone'].map(type => (
-                                   <label key={type} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 cursor-pointer text-slate-700 font-medium text-sm">
-                                       <input
-                                           type="checkbox"
-                                           checked={consentState.bestContact[type.toLowerCase()]}
-                                           onChange={() => handleContactMethodChange(type.toLowerCase())}
-                                           className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                       />
-                                       {type}
-                                   </label>
-                               ))}
+                           <div className="flex flex-wrap gap-3" role="group" aria-label="Best form of contact">
+                               {[
+                                   ['text', 'Text'],
+                                   ['email', 'Email'],
+                                   ['phone', 'Phone']
+                               ].map(([method, label]) => {
+                                   const isSelected = consentState.bestContact[method];
+                                   return (
+                                       <button
+                                           key={method}
+                                           type="button"
+                                           onClick={() => handleContactMethodChange(method)}
+                                           aria-pressed={isSelected}
+                                           className={`flex items-center gap-2 rounded-lg border px-3 py-2 font-medium text-sm transition-colors ${
+                                               isSelected
+                                                   ? 'border-blue-600 bg-blue-50 text-blue-700 shadow-sm'
+                                                   : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                                           }`}
+                                       >
+                                           <span className={`flex h-4 w-4 items-center justify-center rounded border transition-colors ${
+                                               isSelected ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'
+                                           }`}>
+                                               {isSelected && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
+                                           </span>
+                                           {label}
+                                       </button>
+                                   );
+                               })}
                            </div>
                            {errors.bestContact && <p className="text-red-500 text-xs mt-2 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.bestContact}</p>}
                        </div>
