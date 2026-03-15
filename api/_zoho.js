@@ -1,5 +1,9 @@
 const { safeString } = require('./_util');
 
+let cachedAccessToken = '';
+let cachedAccessTokenExpiresAt = 0;
+let pendingAccessTokenPromise = null;
+
 function zohoNoData(code, message) {
   const normalizedCode = safeString(code).toUpperCase();
   const normalizedMessage = safeString(message).toLowerCase();
@@ -16,7 +20,24 @@ async function parseJson(res) {
   }
 }
 
+function cachedTokenStillValid() {
+  return cachedAccessToken && cachedAccessTokenExpiresAt - Date.now() > 60 * 1000;
+}
+
+function readTokenLifetimeSeconds(payload) {
+  const seconds = Number(payload?.expires_in_sec || payload?.expires_in || 0);
+  return Number.isFinite(seconds) && seconds > 0 ? seconds : 3000;
+}
+
 async function zohoGetAccessToken() {
+  if (cachedTokenStillValid()) {
+    return cachedAccessToken;
+  }
+
+  if (pendingAccessTokenPromise) {
+    return pendingAccessTokenPromise;
+  }
+
   const refreshToken = process.env.ZOHO_REFRESH_TOKEN;
   const clientId = process.env.ZOHO_CLIENT_ID;
   const clientSecret = process.env.ZOHO_CLIENT_SECRET;
@@ -34,12 +55,23 @@ async function zohoGetAccessToken() {
     grant_type: 'refresh_token',
   });
 
-  const res = await fetch(`${url}?${params.toString()}`, { method: 'POST' });
-  const j = await parseJson(res);
-  if (!res.ok || !j.access_token) {
-    throw new Error(`Zoho token refresh failed: ${res.status} ${JSON.stringify(j)}`);
+  pendingAccessTokenPromise = (async () => {
+    const res = await fetch(`${url}?${params.toString()}`, { method: 'POST' });
+    const j = await parseJson(res);
+    if (!res.ok || !j.access_token) {
+      throw new Error(`Zoho token refresh failed: ${res.status} ${JSON.stringify(j)}`);
+    }
+
+    cachedAccessToken = j.access_token;
+    cachedAccessTokenExpiresAt = Date.now() + readTokenLifetimeSeconds(j) * 1000;
+    return cachedAccessToken;
+  })();
+
+  try {
+    return await pendingAccessTokenPromise;
+  } finally {
+    pendingAccessTokenPromise = null;
   }
-  return j.access_token;
 }
 
 function zohoApiDomain() {
