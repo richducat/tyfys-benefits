@@ -1192,7 +1192,6 @@
 
        function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswers }) {
            const [errors, setErrors] = useState({});
-           const [botField, setBotField] = useState("");
            const [consentState, setConsentState] = useState({
                privateOrg: false,
                terms: false,
@@ -1247,15 +1246,6 @@
                    alert("Please accept the Terms & SMS Policy to continue.");
                    return;
                }
-
-
-               // Honeypot Check (Must stay)
-               if (botField !== "") {
-                   console.warn("Spam blocked: Honeypot");
-                   return;
-               }
-              
-               // --- REMOVED THE 2 SECOND TIME CHECK HERE TO FIX AUTOFILL SUBMISSION ---
 
 
                const nameRegex = /^[a-zA-Z\s'-]+$/;
@@ -1356,12 +1346,6 @@
 
 
                    <form onSubmit={handleLocalSubmit} className="space-y-4" noValidate>
-                      
-                       <div className="opacity-0 absolute -z-10 h-0 w-0 overflow-hidden">
-                           <input type="text" name="website_url" tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} />
-                       </div>
-
-
                        {/* Name Fields */}
                        <div className="grid gap-4" style={responsiveFieldGridStyle}>
                            <div className="relative min-w-0 group">
