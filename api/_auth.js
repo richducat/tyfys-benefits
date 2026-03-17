@@ -139,6 +139,13 @@ async function readAuthenticatedUser(req, { refresh = false } = {}) {
     return null;
   }
 
+  const sessionCreatedAt = Date.parse(String(session.createdAt || ''));
+  const passwordUpdatedAt = Date.parse(String(user.passwordUpdatedAt || ''));
+  if (Number.isFinite(sessionCreatedAt) && Number.isFinite(passwordUpdatedAt) && sessionCreatedAt < passwordUpdatedAt) {
+    await deleteSession(sessionId);
+    return null;
+  }
+
   const nextSession = refresh ? await refreshSession(sessionId) : session;
   return { session: nextSession, user };
 }
