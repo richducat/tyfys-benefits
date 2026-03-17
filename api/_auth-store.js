@@ -3,6 +3,7 @@ const path = require('path');
 const crypto = require('crypto');
 
 const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+const PASSWORD_RESET_TTL_MS = 30 * 60 * 1000;
 const STORE_PREFIX = 'tyfys:auth';
 const FILE_STORE_PATH =
   process.env.TYFYS_AUTH_STORE_FILE || path.join(__dirname, '.local', 'auth-store.json');
@@ -44,11 +45,20 @@ function createSessionId() {
   return crypto.randomBytes(32).toString('hex');
 }
 
+function createPasswordResetToken() {
+  return crypto.randomBytes(32).toString('hex');
+}
+
+function hashPasswordResetToken(token) {
+  return crypto.createHash('sha256').update(String(token || '')).digest('hex');
+}
+
 function defaultFileStore() {
   return {
     users: {},
     emailToUserId: {},
     sessions: {},
+    passwordResets: {},
   };
 }
 
@@ -59,6 +69,7 @@ function normalizeStoreShape(raw) {
     emailToUserId:
       parsed.emailToUserId && typeof parsed.emailToUserId === 'object' ? parsed.emailToUserId : {},
     sessions: {},
+    passwordResets: {},
   };
 
   if (parsed.sessions && typeof parsed.sessions === 'object') {
@@ -66,6 +77,14 @@ function normalizeStoreShape(raw) {
       if (!session || typeof session !== 'object') continue;
       if (Number(session.expiresAt || 0) <= Date.now()) continue;
       nextStore.sessions[sessionId] = session;
+    }
+  }
+
+  if (parsed.passwordResets && typeof parsed.passwordResets === 'object') {
+    for (const [tokenHash, resetRecord] of Object.entries(parsed.passwordResets)) {
+      if (!resetRecord || typeof resetRecord !== 'object') continue;
+      if (Number(resetRecord.expiresAt || 0) <= Date.now()) continue;
+      nextStore.passwordResets[tokenHash] = resetRecord;
     }
   }
 
@@ -235,6 +254,14 @@ function sessionKey(sessionId) {
   return `${STORE_PREFIX}:session:${sessionId}`;
 }
 
+function passwordResetKey(tokenHash) {
+  return `${STORE_PREFIX}:password-reset:${safeTokenHash(tokenHash)}`;
+}
+
+function safeTokenHash(tokenHash) {
+  return String(tokenHash || '').trim().toLowerCase().slice(0, 128);
+}
+
 async function getUserById(userId) {
   const id = String(userId || '').trim();
   if (!id) return null;
@@ -293,6 +320,9 @@ async function createUser({ email, passwordHash, passwordSalt, displayName, lead
     passwordSalt,
     createdAt: nowIso(),
     updatedAt: nowIso(),
+    passwordUpdatedAt: nowIso(),
+    passwordResetTokenHash: '',
+    passwordResetRequestedAt: '',
     lastLoginAt: '',
     state: state || null,
   };
@@ -505,16 +535,144 @@ async function deleteSession(sessionId) {
   await upstashCommand(['DEL', sessionKey(id)]);
 }
 
+async function getPasswordReset(tokenHash) {
+  const normalizedHash = safeTokenHash(tokenHash);
+  if (!normalizedHash) return null;
+  assertStoreConfigured();
+
+  if (fileStoreEnabled()) {
+    const store = readFileStore();
+    return store.passwordResets[normalizedHash] || null;
+  }
+
+  if (blobStoreEnabled()) {
+    const { store } = await readBlobStore();
+    return store.passwordResets[normalizedHash] || null;
+  }
+
+  const raw = await upstashCommand(['GET', passwordResetKey(normalizedHash)]);
+  return raw ? JSON.parse(raw) : null;
+}
+
+async function deletePasswordReset(tokenHash) {
+  const normalizedHash = safeTokenHash(tokenHash);
+  if (!normalizedHash) return;
+  assertStoreConfigured();
+
+  if (fileStoreEnabled()) {
+    await runFileMutation((store) => {
+      delete store.passwordResets[normalizedHash];
+      return true;
+    });
+    return;
+  }
+
+  if (blobStoreEnabled()) {
+    await runBlobMutation((store) => {
+      delete store.passwordResets[normalizedHash];
+      return true;
+    });
+    return;
+  }
+
+  await upstashCommand(['DEL', passwordResetKey(normalizedHash)]);
+}
+
+async function createPasswordReset({ userId, ttlMs = PASSWORD_RESET_TTL_MS } = {}) {
+  const id = String(userId || '').trim();
+  if (!id) throw new Error('User id is required for password reset');
+  assertStoreConfigured();
+
+  const existingUser = await getUserById(id);
+  if (!existingUser) throw new Error('Account not found');
+
+  const token = createPasswordResetToken();
+  const tokenHash = hashPasswordResetToken(token);
+  const requestedAt = nowIso();
+  const resetRecord = {
+    tokenHash,
+    userId: id,
+    createdAt: requestedAt,
+    expiresAt: Date.now() + Math.max(60 * 1000, Number(ttlMs) || PASSWORD_RESET_TTL_MS),
+  };
+
+  if (fileStoreEnabled()) {
+    await runFileMutation((store) => {
+      const currentUser = store.users[id];
+      if (!currentUser) throw new Error('Account not found');
+      if (currentUser.passwordResetTokenHash) {
+        delete store.passwordResets[currentUser.passwordResetTokenHash];
+      }
+      store.users[id] = {
+        ...currentUser,
+        passwordResetTokenHash: tokenHash,
+        passwordResetRequestedAt: requestedAt,
+        updatedAt: nowIso(),
+      };
+      store.passwordResets[tokenHash] = resetRecord;
+      return true;
+    });
+    return { token, tokenHash, expiresAt: resetRecord.expiresAt, createdAt: requestedAt };
+  }
+
+  if (blobStoreEnabled()) {
+    await runBlobMutation((store) => {
+      const currentUser = store.users[id];
+      if (!currentUser) throw new Error('Account not found');
+      if (currentUser.passwordResetTokenHash) {
+        delete store.passwordResets[currentUser.passwordResetTokenHash];
+      }
+      store.users[id] = {
+        ...currentUser,
+        passwordResetTokenHash: tokenHash,
+        passwordResetRequestedAt: requestedAt,
+        updatedAt: nowIso(),
+      };
+      store.passwordResets[tokenHash] = resetRecord;
+      return true;
+    });
+    return { token, tokenHash, expiresAt: resetRecord.expiresAt, createdAt: requestedAt };
+  }
+
+  if (existingUser.passwordResetTokenHash) {
+    await upstashCommand(['DEL', passwordResetKey(existingUser.passwordResetTokenHash)]);
+  }
+  await upstashCommand([
+    'SET',
+    userKey(id),
+    JSON.stringify({
+      ...existingUser,
+      passwordResetTokenHash: tokenHash,
+      passwordResetRequestedAt: requestedAt,
+      updatedAt: nowIso(),
+    }),
+  ]);
+  await upstashCommand([
+    'SET',
+    passwordResetKey(tokenHash),
+    JSON.stringify(resetRecord),
+    'PX',
+    String(Math.max(60 * 1000, Number(ttlMs) || PASSWORD_RESET_TTL_MS)),
+  ]);
+
+  return { token, tokenHash, expiresAt: resetRecord.expiresAt, createdAt: requestedAt };
+}
+
 module.exports = {
+  PASSWORD_RESET_TTL_MS,
   SESSION_TTL_MS,
   blobStoreEnabled,
+  createPasswordReset,
   createSession,
   createUser,
+  deletePasswordReset,
   deleteSession,
   fileStoreEnabled,
+  getPasswordReset,
   getSession,
   getUserByEmail,
   getUserById,
+  hashPasswordResetToken,
   normalizeEmail,
   refreshSession,
   updateUser,

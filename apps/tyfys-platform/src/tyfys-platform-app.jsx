@@ -41,7 +41,7 @@ const DIGESTIVE_RATINGS_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chap
 const PYRAMIDING_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.14";
 const RESPIRATORY_SINGLE_RATING_SOURCE_URL = "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.96";
 const RATING_OPTIONS = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-const SCAN_STAGES = ["Preparing document", "Extracting text", "Running OCR", "Saving to Dossier"];
+const SCAN_STAGES = ["Preparing document", "Extracting text", "Reading text", "Saving to Records Vault"];
 const OCR_SCRIPT_URL = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
 const PDF_JS_SCRIPT_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
 const PDF_JS_WORKER_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -1145,7 +1145,7 @@ const INTAKE_RECORD_REQUIREMENTS = [
   {
     id: "dd214",
     label: "DD-214 or separation paperwork",
-    helper: "Upload discharge paperwork so intake can verify service dates and character of discharge.",
+    helper: "Upload this first so TYFYS can confirm your service dates and discharge details.",
     defaultTitle: "DD-214 or separation paperwork",
     type: "Service Record",
     source: "Service treatment record",
@@ -1163,7 +1163,7 @@ const INTAKE_RECORD_REQUIREMENTS = [
   {
     id: "personnel",
     label: "Personnel or deployment records",
-    helper: "Orders, deployments, duty assignments, awards, or records that place the veteran where events happened.",
+    helper: "Orders, deployments, duty assignments, awards, or records that show where and when key events happened during your service.",
     defaultTitle: "Personnel or deployment records",
     type: "Service Record",
     source: "Manual note",
@@ -1172,7 +1172,7 @@ const INTAKE_RECORD_REQUIREMENTS = [
   {
     id: "va_records",
     label: "VA records, rating decisions, or C-file pages",
-    helper: "Blue Button exports, prior rating decisions, and any VA-generated claim history.",
+    helper: "Blue Button exports, past rating decisions, and any VA claim documents you already have.",
     defaultTitle: "VA records or C-file pages",
     type: "Other",
     source: "VA Blue Button",
@@ -1181,7 +1181,7 @@ const INTAKE_RECORD_REQUIREMENTS = [
   {
     id: "private_records",
     label: "Private medical records tied to claimed conditions",
-    helper: "Civilian treatment notes, imaging, specialist letters, and other non-VA evidence.",
+    helper: "Civilian treatment notes, imaging, specialist letters, and other non-VA records tied to your claimed conditions.",
     defaultTitle: "Private medical records",
     type: "Private Medical Record",
     source: "Private doctor",
@@ -1191,43 +1191,43 @@ const INTAKE_RECORD_REQUIREMENTS = [
 const DOCTOR_PORTAL_TEAM = [
   {
     id: "team-ops",
-    name: "TYFYS Care Ops",
-    title: "Scheduling and packet coordination",
-    specialty: "Intake routing, evidence handoff, follow-up reminders",
-    focus: ["Calendar routing", "Packet delivery", "Status updates"],
-    bio: "Bridges your TYFYS team and physician partners so records, questionnaires, and visit windows stay aligned.",
+    name: "TYFYS Support Team",
+    title: "Scheduling and records support",
+    specialty: "Appointment help, records review, follow-up reminders",
+    focus: ["Appointments", "Records delivery", "Status updates"],
+    bio: "Keeps your records, questionnaires, and appointments moving so you always know the next step.",
     availability: "Monday to Friday, 9:00 AM to 6:00 PM ET",
     nextVisit: "March 9, 2026 · 2:00 PM ET",
     location: "TYFYS operations desk + remote coordinators",
-    sync: "HubSpot + Calendly routing",
+    sync: "Keeps your appointments, records, and next steps on track",
     threadId: "thread-ops",
     tag: "TYFYS Team"
   },
   {
     id: "hallett",
     name: "Dr. Amanda Miller",
-    title: "Lead physician partner",
+    title: "Review physician",
     specialty: "Family medicine, DBQ prep, records review",
     focus: ["Musculoskeletal", "General medicine", "Readiness review"],
-    bio: "Reviews uploaded evidence, closes packet gaps, and prepares veterans for telehealth or in-person examinations.",
+    bio: "Reviews your uploaded records, spots missing items, and prepares you for telehealth or in-person exams.",
     availability: "Tuesday and Thursday telehealth blocks",
     nextVisit: "March 10, 2026 · 10:30 AM ET",
     location: "Telehealth + Florida partner clinics",
-    sync: "athenahealth + Google Calendar",
+    sync: "Reviews records and helps prepare for exams or DBQs",
     threadId: "thread-hallett",
     tag: "Assigned Doctor"
   },
   {
     id: "warren",
     name: "Dr. Elise Warren",
-    title: "Behavioral health physician partner",
+    title: "Behavioral health physician",
     specialty: "Psychiatry, PTSD, anxiety, sleep disruption",
     focus: ["Mental health DBQs", "PTSD narratives", "Medication review"],
-    bio: "Handles psych-focused consults and makes sure symptom history is documented in plain English before the evaluation.",
+    bio: "Helps organize mental health history in plain language before a behavioral health evaluation.",
     availability: "Monday and Wednesday late-afternoon sessions",
     nextVisit: "March 11, 2026 · 4:15 PM ET",
     location: "50-state telehealth availability",
-    sync: "SimplePractice + TherapyNotes",
+    sync: "Helps organize mental health records and upcoming visits",
     threadId: "thread-behavioral",
     tag: "Assigned Doctor"
   }
@@ -1236,10 +1236,10 @@ const DOCTOR_PORTAL_VISITS = [
   {
     id: "visit-prep",
     time: "March 9, 2026 · 2:00 PM ET",
-    title: "TYFYS packet handoff",
-    owner: "TYFYS Care Ops",
-    mode: "Internal routing",
-    summary: "Your records, questionnaires, and current claim notes are pushed into the physician partner workflow."
+    title: "TYFYS records review",
+    owner: "TYFYS Support Team",
+    mode: "TYFYS team review",
+    summary: "Your uploaded records, questionnaires, and claim notes are reviewed so the right provider gets the right file."
   },
   {
     id: "visit-ortho",
@@ -1247,7 +1247,7 @@ const DOCTOR_PORTAL_VISITS = [
     title: "Telehealth prep visit",
     owner: "Dr. Amanda Miller",
     mode: "Video consult",
-    summary: "Review MRI, medication list, flare-up timeline, and the facts needed before a DBQ or medical opinion."
+    summary: "Review your MRI, medication list, flare-ups, and the facts needed before a DBQ or medical opinion."
   },
   {
     id: "visit-psych",
@@ -1255,100 +1255,100 @@ const DOCTOR_PORTAL_VISITS = [
     title: "Behavioral health consult",
     owner: "Dr. Elise Warren",
     mode: "Video consult",
-    summary: "Finalize PTSD and anxiety symptom summaries before the behavioral health questionnaire is completed."
+    summary: "Finalize PTSD and anxiety symptom history before the behavioral health questionnaire is completed."
   }
 ];
 const DOCTOR_PORTAL_INTEGRATIONS = [
   {
     id: "athena",
     name: "athenahealth",
-    category: "EHR + practice management",
-    audience: "Private physician groups",
-    sync: "Two-way schedule windows",
+    category: "Doctor scheduling and records",
+    audience: "Private clinics",
+    sync: "Share appointments and record requests",
     status: "Ready",
-    description: "Map TYFYS referrals and consult windows directly into physician calendars."
+    description: "Helpful when your civilian doctor already uses athenahealth for appointments and chart notes."
   },
   {
     id: "simplepractice",
     name: "SimplePractice",
-    category: "Behavioral health",
-    audience: "Psychs, therapists, counselors",
-    sync: "Telehealth bookings + intake forms",
+    category: "Counseling and telehealth",
+    audience: "Therapists and psychiatry practices",
+    sync: "Share appointments and forms",
     status: "Ready",
-    description: "Ideal for psych and therapy partners who need secure telehealth plus questionnaire handoff."
+    description: "Useful when your mental health provider uses SimplePractice for visits and questionnaires."
   },
   {
     id: "drchrono",
     name: "DrChrono",
-    category: "Cloud EHR",
+    category: "Doctor records",
     audience: "Independent practices",
-    sync: "Visit slots + chart prep",
+    sync: "Share openings and visit updates",
     status: "Pilot",
-    description: "Push next-available slots and pull appointment confirmations back into TYFYS."
+    description: "Helpful when a private clinic manages appointments and chart notes in DrChrono."
   },
   {
     id: "ecw",
     name: "eClinicalWorks",
-    category: "EHR + PM",
-    audience: "Multi-location clinics",
-    sync: "Calendar export + task routing",
+    category: "Clinic records",
+    audience: "Larger clinics",
+    sync: "Share referrals and follow-up tasks",
     status: "Ready",
-    description: "Support referral queues and follow-up reminders across larger private groups."
+    description: "Good for larger clinics that need TYFYS to coordinate records and follow-up across locations."
   },
   {
     id: "nextgen",
     name: "NextGen Office",
-    category: "Practice management",
-    audience: "Primary care + specialty",
-    sync: "Calendar + patient routing",
+    category: "Primary care and specialty records",
+    audience: "Private doctors",
+    sync: "Share consult openings and follow-up notes",
     status: "Ready",
-    description: "Surface open consult blocks and capture TYFYS handoff milestones."
+    description: "Useful when a private doctor handles consult scheduling and follow-up through NextGen Office."
   },
   {
     id: "therapynotes",
     name: "TherapyNotes",
-    category: "Mental health PM",
+    category: "Mental health records",
     audience: "Psychologists and psychiatrists",
-    sync: "Session schedule + intake packet",
+    sync: "Share visit timing and prep notes",
     status: "Pilot",
-    description: "Sync behavioral health sessions with TYFYS prep notes and reminders."
+    description: "Helpful when your behavioral health provider uses TherapyNotes for appointments and paperwork."
   },
   {
     id: "jane",
     name: "Jane",
-    category: "Scheduling + reminders",
-    audience: "Private wellness and rehab",
-    sync: "Booking feed + follow-up reminders",
+    category: "Scheduling and reminders",
+    audience: "Rehab and wellness clinics",
+    sync: "Share bookings and reminders",
     status: "Pilot",
-    description: "Strong fit for rehab and cash-pay specialty clinics that want clean intake handoff."
+    description: "Helpful if your rehab or specialty clinic schedules through Jane."
   },
   {
     id: "hubspot",
-    name: "HubSpot CRM",
-    category: "CRM routing",
-    audience: "Concierge and referral ops",
-    sync: "Lead-to-appointment routing",
+    name: "HubSpot",
+    category: "Referral intake",
+    audience: "Front-desk and referral teams",
+    sync: "Share referral status and next steps",
     status: "Ready",
-    description: "Useful for physician partners running referral intake through CRM before scheduling."
+    description: "Useful when a clinic handles new-patient intake through a shared referral team."
   }
 ];
 const INITIAL_SECURE_THREADS = [
   {
     id: "thread-ops",
-    title: "TYFYS Care Ops",
-    participants: "Scheduling, records, and intake routing",
+    title: "TYFYS Support Team",
+    participants: "Scheduling, records, and next steps",
     status: "TYFYS team",
     responseTime: "Replies within 1 business hour",
     unread: 2,
     lastTimestamp: "9:42 AM",
-    lastMessage: "We pushed your packet to Dr. Miller and synced the prep visit.",
-    autoReplySender: "TYFYS Care Ops",
+    lastMessage: "We shared your records with Dr. Miller and confirmed the prep visit.",
+    autoReplySender: "TYFYS Support Team",
     messages: [
       {
         id: "thread-ops-1",
-        sender: "TYFYS Care Ops",
+        sender: "TYFYS Support Team",
         time: "8:55 AM",
-        text: "Your uploaded evidence packet is complete enough for scheduling. We are routing it to the physician team now.",
+        text: "Your uploaded records are ready for scheduling. We are sending them to the physician team now.",
         isCurrentUser: false
       },
       {
@@ -1362,7 +1362,7 @@ const INITIAL_SECURE_THREADS = [
         id: "thread-ops-3",
         sender: "TYFYS Care Ops",
         time: "9:42 AM",
-        text: "We pushed your packet to Dr. Miller and synced the prep visit.",
+        text: "We shared your records with Dr. Miller and confirmed the prep visit.",
         isCurrentUser: false
       }
     ]
@@ -1370,8 +1370,8 @@ const INITIAL_SECURE_THREADS = [
   {
     id: "thread-hallett",
     title: "Dr. Amanda Miller",
-    participants: "Assigned physician partner",
-    status: "Doctor direct",
+    participants: "Assigned provider",
+    status: "Provider direct",
     responseTime: "Replies the same business day",
     unread: 0,
     lastTimestamp: "Yesterday",
@@ -1382,14 +1382,14 @@ const INITIAL_SECURE_THREADS = [
         id: "thread-hallett-1",
         sender: "Dr. Amanda Miller",
         time: "Yesterday",
-        text: "I reviewed your claim packet. Please have your MRI report and medication list nearby for our visit.",
+        text: "I reviewed your records. Please have your MRI report and medication list nearby for our visit.",
         isCurrentUser: false
       }
     ]
   },
   {
     id: "thread-behavioral",
-    title: "Dr. Elise Warren + TYFYS",
+    title: "Dr. Elise Warren and TYFYS",
     participants: "Behavioral health shared channel",
     status: "Shared care channel",
     responseTime: "Replies within 4 business hours",
@@ -1400,9 +1400,9 @@ const INITIAL_SECURE_THREADS = [
     messages: [
       {
         id: "thread-behavioral-1",
-        sender: "TYFYS Care Ops",
+        sender: "TYFYS Support Team",
         time: "Yesterday",
-        text: "We opened this shared thread so you can talk to TYFYS and your behavioral health doctor in one place.",
+        text: "We opened this shared thread so you can message TYFYS and your behavioral health doctor in one place.",
         isCurrentUser: false
       },
       {
@@ -1417,7 +1417,7 @@ const INITIAL_SECURE_THREADS = [
 ];
 const SECURE_THREAD_AUTO_REPLIES = {
   "thread-ops":
-    "TYFYS received your note. We will update your doctor-facing packet and confirm once the schedule sync finishes.",
+    "TYFYS received your note. We will update your file and confirm once the appointment details are set.",
   "thread-hallett":
     "Thank you. I added that note to your prep checklist so we can cover it during the consult.",
   "thread-behavioral":
@@ -2091,12 +2091,12 @@ const buildSuggestedClaim = (conditionName) => {
     specialist: conditionData?.specialist || "",
     type: "new",
     diagnosticCode: rule?.diagnosticCode || "",
-    ratingRuleTitle: rule?.ruleTitle || "Fact-based rating review",
+    ratingRuleTitle: rule?.ruleTitle || "VA rating review",
     ratingProfileId: "",
-    ratingProfileLabel: rule?.mode === "profiles" ? "Select a rating basis in VA Math" : "",
+    ratingProfileLabel: rule?.mode === "profiles" ? "Select a rating basis in the VA Rating Calculator" : "",
     sourceUrl: rule?.sourceUrl || "",
     sourceLabel: rule?.sourceLabel || "",
-    ratingSummary: rule?.lockedMessage || "Select the actual factual rating basis before using this claim in VA Math.",
+    ratingSummary: rule?.lockedMessage || "Select the actual rating basis before using this condition in the VA Rating Calculator.",
     pendingFacts: true
   };
 };
@@ -2300,12 +2300,18 @@ const getPathTo100Guide = (startingRating, newDisabilities) => {
 const createDossierEntry = (payload, scanResult) => {
   const storedText = buildStoredOcrText(scanResult?.text);
   const confidence = Math.max(0, Math.min(99, Math.round(scanResult?.confidence || 0)));
+  const scanMethodLabel =
+    scanResult?.method === "Embedded PDF text"
+      ? "Existing text already inside the PDF"
+      : scanResult?.method === "PDF OCR"
+        ? "Text read from the PDF pages"
+        : "Text read from your photo or upload";
   const detailLines = [
-    `Extraction method: ${scanResult?.method || "Browser OCR"}`,
-    `Pages processed: ${scanResult?.pageCount || 1}`
+    `How TYFYS read it: ${scanMethodLabel}`,
+    `Pages reviewed: ${scanResult?.pageCount || 1}`
   ];
   if (payload.notes) {
-    detailLines.push(`Capture notes: ${payload.notes.trim()}`);
+    detailLines.push(`Notes for TYFYS: ${payload.notes.trim()}`);
   }
 
   return {
@@ -2320,7 +2326,7 @@ const createDossierEntry = (payload, scanResult) => {
     confidence,
     ocrText: `${detailLines.join("\n")}\n\n${storedText.preview}`.trim(),
     capturedAt: new Date().toISOString(),
-    status: confidence >= 95 ? "Ready for review" : confidence >= 70 ? "Needs quick human check" : "Review scan quality",
+    status: confidence >= 95 ? "Looks good" : confidence >= 70 ? "Review this scan" : "Check scan quality",
     crmSync: null
   };
 };
@@ -2406,13 +2412,13 @@ const buildNexusDraft = (form, dossierItems) => {
 const ONBOARDING_STEPS = [
   {
     id: "welcome",
-    title: "Welcome Aboard",
+    title: "Before We Begin",
     questions: [
       {
         id: "vso_aware",
-        label: "Are you aware we are NOT the VA or a VSO?",
+        label: "Do you understand TYFYS is a private company and not the VA or a VSO?",
         guideText:
-          "Welcome! I'm here to help you build your claim. Just to be clear, we are a private company of experts, not the government.",
+          "Before we start, please confirm you understand TYFYS is a private Veteran-led company. We help you organize records, evidence, and next steps, but we are not the VA.",
         type: "boolean",
         footerInfo: (
           <div className="flex gap-4 items-center bg-blue-50 p-4 rounded-xl border border-blue-100 mt-6 shadow-sm">
@@ -2429,7 +2435,7 @@ const ONBOARDING_STEPS = [
   },
   {
     id: "qualification",
-    title: "Qualification Check",
+    title: "A Few Quick Eligibility Questions",
     questions: [
       { id: "attorney", label: "Are you currently working with an accredited attorney?", type: "boolean" },
       { id: "appeal", label: "Do you have an active appeal with a BVA Judge?", type: "boolean" },
@@ -2439,11 +2445,11 @@ const ONBOARDING_STEPS = [
         type: "boolean"
       }
     ],
-    guideText: "We need to make sure we're the right fit for your specific legal situation."
+    guideText: "These questions help us make sure TYFYS is the right fit and point you to the safest next step."
   },
   {
     id: "service",
-    title: "Service History",
+    title: "Your Service History",
     questions: [
       {
         id: "branch",
@@ -2453,20 +2459,20 @@ const ONBOARDING_STEPS = [
       },
       { id: "era", label: "Service Era", type: "select", options: ["Post-9/11", "Gulf War", "Peacetime", "Vietnam", "Korea"] }
     ],
-    guideText: "Your branch and era help us identify specific presumptive conditions you might qualify for."
+    guideText: "Your branch and service era help us surface the records, exposures, and presumptive paths most likely to matter."
   },
   {
     id: "status",
-    title: "Current Status",
+    title: "Your Current VA Status",
     questions: [
       { id: "rating", label: "What is your current VA Rating?", type: "slider" },
       { id: "claims_pending", label: "Do you have any claims currently pending?", type: "boolean" }
     ],
-    guideText: "Knowing your starting point helps us calculate your potential backpay. What is your rating today?"
+    guideText: "Your current rating helps us show the right calculator guidance and compensation estimate."
   },
   {
     id: "pain_category",
-    title: "Primary Issues",
+    title: "Conditions To Review",
     questions: [
       {
         id: "pain_categories",
@@ -2475,7 +2481,7 @@ const ONBOARDING_STEPS = [
         options: Object.keys(DISABILITY_DATA)
       }
     ],
-    guideText: "This is the important part. Which of these are bothering you the most? We'll help you prove they are service-connected."
+    guideText: "Choose the body systems you want help organizing so we can build the right evidence checklist."
   },
   {
     id: "pain_specific",
@@ -2487,32 +2493,32 @@ const ONBOARDING_STEPS = [
         type: "dynamic_multi_select"
       }
     ],
-    guideText: "Excellent. Now let's get specific so we can find the exact DBQs you need."
+    guideText: "Now choose the specific conditions you want this account to track."
   },
   // --- CONTACT & PROFILE SECTION ---
   {
     id: "contact_name",
-    title: "Who are we speaking with?",
+    title: "Your Name",
     type: "contact_form_part1",
-    guideText: "Almost there! I just need to know who I'm building this strategy for so we can save your progress."
+    guideText: "Tell us whose account we are setting up so your progress stays attached to the right Veteran."
   },
   {
     id: "contact_info",
-    title: "Contact Information",
+    title: "How To Reach You",
     type: "contact_form_part2",
-    guideText: "We'll send your Strategy Report and access details here."
+    guideText: "We will use this email and phone number for account access, updates, and next-step reminders."
   },
   {
     id: "final_details",
-    title: "Final Details",
+    title: "Finish Setting Up Your Account",
     type: "contact_form_part3",
-    guideText: "Almost there! Just need your location to match you with the right specialists."
+    guideText: "Add your ZIP code and create the password you will use to come back to your TYFYS account."
   },
   {
     id: "analyzing",
     type: "loading",
     duration: 2000,
-    text: "Building your Mission Control..."
+    text: "Preparing your TYFYS account..."
   }
 ];
 
@@ -2527,7 +2533,7 @@ function LoadingStep({ text }) {
         <Icons.Activity className="absolute inset-0 m-auto text-blue-500 w-8 h-8" />
       </div>
       <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-3 animate-pulse">{text}</h2>
-      <p className="text-slate-400 text-base sm:text-lg font-medium">Checking eligibility requirements...</p>
+      <p className="text-slate-400 text-base sm:text-lg font-medium">Saving your information and setting up your next steps...</p>
     </div>
   );
 }
@@ -2603,29 +2609,29 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
     }
 
     if (part === 1) {
-      if (!localData.firstName) newErrors.firstName = "First Name is required";
-      if (!localData.lastName) newErrors.lastName = "Last Name is required";
+      if (!localData.firstName) newErrors.firstName = "Please enter your first name";
+      if (!localData.lastName) newErrors.lastName = "Please enter your last name";
     }
     if (part === 2) {
       // SECURITY: Strict Regex for Email
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-      if (!localData.email || !emailRegex.test(localData.email)) newErrors.email = "Valid Email is required";
-      if (!localData.phone || localData.phone.length < 10) newErrors.phone = "Valid Phone Number is required";
+      if (!localData.email || !emailRegex.test(localData.email)) newErrors.email = "Please enter a valid email";
+      if (!localData.phone || localData.phone.length < 10) newErrors.phone = "Please enter a valid phone number";
     }
     if (part === 3) {
-      if (!localData.zip || localData.zip.length < 5) newErrors.zip = "Valid Zip Code is required";
+      if (!localData.zip || localData.zip.length < 5) newErrors.zip = "Please enter a valid ZIP code";
       if (!localData.appPassword || localData.appPassword.length < 8) {
         newErrors.appPassword = "Create a password with at least 8 characters";
       }
       if (localData.confirmPassword !== localData.appPassword) {
         newErrors.confirmPassword = "Passwords must match";
       }
-      if (!localData.privateOrg) newErrors.privateOrg = "Acknowledgement required";
-      if (!localData.terms) newErrors.terms = "Agreement required";
+      if (!localData.privateOrg) newErrors.privateOrg = "Please confirm TYFYS is a private company";
+      if (!localData.terms) newErrors.terms = "Please accept the Terms & Conditions";
 
       // SECURITY: Math Challenge Verification
       if (parseInt(localData.securityAnswer, 10) !== securityQuestion.ans) {
-        newErrors.securityAnswer = "Incorrect verification answer";
+        newErrors.securityAnswer = "Please answer the security question correctly";
       }
     }
 
@@ -2765,7 +2771,7 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
             <div>
               <p className="text-sm font-bold text-slate-700">Create your TYFYS login</p>
               <p className="text-xs text-slate-500 mt-1">
-                We keep this device signed in for 30 days, and you can log back in later without redoing onboarding.
+                This password lets you come back to your account on this device without starting over.
               </p>
             </div>
             <div>
@@ -2800,7 +2806,7 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
           <div className="bg-slate-100 p-4 rounded-xl border border-slate-200">
             <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
               <Icons.LockSmall className="w-4 h-4 text-blue-600" />
-              Security Check: What is {securityQuestion.n1} + {securityQuestion.n2}?
+              Quick Security Check: What is {securityQuestion.n1} + {securityQuestion.n2}?
             </label>
             <input
               name="securityAnswer"
@@ -2822,7 +2828,7 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
               </div>
               <input type="checkbox" name="privateOrg" className="hidden" checked={localData.privateOrg || false} onChange={handleChange} />
               <span className="text-sm text-slate-600 leading-tight">
-                I understand TYFYS is a <strong>private organization</strong>, not the VA.
+                I understand TYFYS is a <strong>private company</strong>, not the VA or a VSO.
               </span>
             </label>
             {errors.privateOrg && <p className="text-red-500 text-xs pl-9">{errors.privateOrg}</p>}
@@ -2847,13 +2853,13 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
           disabled={Boolean(isSubmitting)}
           className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-slate-900 font-black text-lg sm:text-xl py-4 rounded-xl shadow-lg transition-all hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 border-b-4 border-yellow-600 active:border-b-0 active:mt-1"
         >
-          {isSubmitting ? "Creating Your Profile..." : part === 3 ? "Create My Profile" : "Continue"}{" "}
+          {isSubmitting ? "Creating Your Account..." : part === 3 ? "Create My Account" : "Continue"}{" "}
           {!isSubmitting && <Icons.ChevronRight className="w-6 h-6 stroke-[3px]" />}
         </button>
 
         {submitError && (
           <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            <p className="font-bold text-red-800">We could not create your TYFYS profile.</p>
+            <p className="font-bold text-red-800">We could not finish setting up your TYFYS account.</p>
             <p className="mt-1">{submitError}</p>
             {hasExistingAccountError && (
               <button
@@ -2861,7 +2867,7 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
                 onClick={onReturnToLogin}
                 className="mt-3 inline-flex items-center gap-2 rounded-lg border border-red-300 bg-white px-3 py-2 text-sm font-bold text-red-700 transition-colors hover:bg-red-100"
               >
-                Go To Sign-In <Icons.ChevronRight className="w-4 h-4 stroke-[3px]" />
+                Go to Sign-In <Icons.ChevronRight className="w-4 h-4 stroke-[3px]" />
               </button>
             )}
           </div>
@@ -2887,17 +2893,41 @@ function AccessLanding({
   accountEmail,
   displayName,
   onboardingComplete,
-  statusMessage,
+  loginMessage,
   isSubmitting,
+  resetToken,
+  resetStatus,
+  resetVerification,
+  isResetSubmitting,
   onLogin,
+  onRequestPasswordReset,
+  onVerifyPasswordResetAccount,
+  onCompletePasswordReset,
+  onClearPasswordReset,
   onCreateAccount
 }) {
   const [email, setEmail] = useState(accountEmail || "");
   const [password, setPassword] = useState("");
+  const [mode, setMode] = useState(() => (resetToken ? "complete" : "login"));
+  const [resetEmail, setResetEmail] = useState(accountEmail || "");
+  const [resetZip, setResetZip] = useState("");
+  const [resetLastName, setResetLastName] = useState("");
+  const [resetPhoneLast4, setResetPhoneLast4] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
   useEffect(() => {
     setEmail(accountEmail || "");
+    setResetEmail(accountEmail || "");
   }, [accountEmail]);
+
+  useEffect(() => {
+    if (resetToken) {
+      setMode("complete");
+      return;
+    }
+    setMode((currentMode) => (currentMode === "complete" ? "login" : currentMode));
+  }, [resetToken]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -2905,21 +2935,84 @@ function AccessLanding({
     setPassword("");
   };
 
+  const handleRequestReset = async (event) => {
+    event.preventDefault();
+    await onRequestPasswordReset({ email: resetEmail || email || accountEmail || "" });
+  };
+
+  const handleVerifyResetAccount = async (event) => {
+    event.preventDefault();
+    await onVerifyPasswordResetAccount({
+      email: resetEmail || email || accountEmail || "",
+      zip: resetZip,
+      lastName: resetLastName,
+      phoneLast4: resetPhoneLast4,
+    });
+  };
+
+  const handleCompleteReset = async (event) => {
+    event.preventDefault();
+    if (newPassword !== confirmNewPassword) return;
+    await onCompletePasswordReset({ token: resetToken, password: newPassword });
+    setNewPassword("");
+    setConfirmNewPassword("");
+  };
+
   const heroTitle = hasSavedAccount
     ? onboardingComplete
-      ? "Welcome back to your TYFYS workspace"
-      : "Resume your TYFYS setup"
-    : "Log in first, or start your new TYFYS setup";
+      ? "Welcome back to your TYFYS account"
+      : "Finish setting up your TYFYS account"
+    : "Log in or start your TYFYS account";
   const heroBody = hasSavedAccount
     ? onboardingComplete
-      ? "Sign in on this device to reopen your saved claim plan, uploaded materials, and next steps."
-      : "Your onboarding progress is saved on this device. Sign in to continue from where you left off."
-    : "Use the login portal first if you already have a TYFYS account. If you are new here, the new-account button below will walk you into onboarding and save your progress on this device.";
+      ? "Sign in on this device to reopen your saved profile, uploaded records, and next steps."
+      : "Your setup progress is saved on this device. Sign in to continue where you left off."
+    : "If you already have a TYFYS login, sign in first. If you are new here, use the new-account button below and we will walk you through setup step by step.";
   const savedItems = hasSavedAccount
     ? onboardingComplete
-      ? ["Your saved profile and contact details", "Claim tracker progress and calculator inputs", "Dossier uploads and workspace drafts"]
-      : ["Your saved contact details", "Your onboarding step and answers so far", "The login you will use to come back later"]
-    : ["Your secure TYFYS login for this device", "Your onboarding answers and contact details", "Your claim plan progress when you return"];
+      ? ["Your saved profile and contact details", "Your rating calculator progress and notes", "Your uploaded records and saved drafts"]
+      : ["Your saved contact details", "Your current setup step and answers so far", "The login you will use to come back later"]
+    : ["Your secure TYFYS login for this device", "Your setup answers and contact details", "Your saved progress when you come back"];
+  const panelLabel =
+    mode === "request"
+      ? "Password Help"
+      : mode === "complete"
+        ? "Reset Password"
+        : hasKnownAccount
+          ? "Returning User"
+          : "App Sign-In";
+  const panelTitle =
+    mode === "request"
+      ? "Reset your password"
+      : mode === "complete"
+        ? resetVerification?.checking
+          ? "Checking your reset link"
+          : resetVerification?.valid
+            ? "Choose a new password"
+            : "Request a new reset link"
+        : "Log in to continue";
+  const panelBody =
+    mode === "request"
+      ? "Use the email reset link if you can still reach the inbox on file. If not, verify the ZIP code, last name, and phone ending saved in your TYFYS profile."
+      : mode === "complete"
+        ? resetVerification?.checking
+          ? "We are making sure your secure reset link is still valid."
+          : resetVerification?.valid
+            ? "Choose a new password for your TYFYS account. Once it is saved, we will sign you back in automatically."
+            : resetVerification?.error || "This reset link is no longer valid. Request a fresh reset email below."
+        : hasKnownAccount
+          ? onboardingComplete
+            ? "We found saved TYFYS progress on this device. Sign in to reopen it."
+            : "We found an existing TYFYS account for this email. Sign in first so you do not create a duplicate."
+          : "If you already have a TYFYS login, enter it here first. If you are new here, use the button below.";
+  const resetStatusTone =
+    resetStatus?.type === "error"
+      ? "border-red-200 bg-red-50 text-red-700"
+      : resetStatus?.type === "success"
+        ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+        : "border-slate-200 bg-slate-50 text-slate-600";
+  const resetPasswordsMatch = newPassword === confirmNewPassword;
+  const showNewAccountCard = mode === "login";
 
   return (
     <div className="fixed inset-0 z-[80] overflow-y-auto bg-slate-950 text-white">
@@ -2935,15 +3028,15 @@ function AccessLanding({
                   <Icons.ShieldCheck className="h-8 w-8" />
                 </div>
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.3em] text-slate-300">TYFYS App Access</p>
-                  <p className="text-sm text-slate-400">Private claim-planning workspace</p>
+                  <p className="text-xs font-black uppercase tracking-[0.3em] text-slate-300">TYFYS Veteran Access</p>
+                  <p className="text-sm text-slate-400">Private claim support account</p>
                 </div>
               </div>
 
               <div className="mt-8 max-w-2xl">
                 <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/25 bg-blue-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-blue-100">
                   <Icons.LockSmall className="h-4 w-4" />
-                  Secure login + saved progress
+                  Secure login and saved progress
                 </div>
                 <h1 className="mt-5 text-4xl font-black leading-tight text-white sm:text-5xl">
                   {heroTitle}
@@ -2961,16 +3054,16 @@ function AccessLanding({
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
                   <Icons.FileText className="h-6 w-6 text-blue-300" />
-                  <p className="mt-3 text-sm font-black text-white">Resume your workspace</p>
+                  <p className="mt-3 text-sm font-black text-white">Resume your account</p>
                   <p className="mt-2 text-sm leading-6 text-slate-300">
-                    Return to your tracker, drafts, and evidence plan where you left off.
+                    Return to your records, rating work, and next steps where you left off.
                   </p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
                   <Icons.CheckCircle className="h-6 w-6 text-emerald-300" />
-                  <p className="mt-3 text-sm font-black text-white">Stay ready to continue</p>
+                  <p className="mt-3 text-sm font-black text-white">Come back without starting over</p>
                   <p className="mt-2 text-sm leading-6 text-slate-300">
-                    Use one login on this device to reopen TYFYS and pick back up later.
+                    Use one secure login on this device to reopen TYFYS and pick back up later.
                   </p>
                 </div>
               </div>
@@ -2992,92 +3085,320 @@ function AccessLanding({
 
             <section className="overflow-hidden rounded-[2rem] border border-white/40 bg-white text-slate-900 shadow-2xl">
               <div className="border-b border-slate-200 px-6 py-6 sm:px-8 sm:py-8">
-                <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">
-                  {hasKnownAccount ? "Returning User" : "App Sign-In"}
-                </p>
-                <h2 className="mt-3 text-3xl font-black text-slate-900">Log in to continue</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-600">
-                  {hasKnownAccount
-                    ? onboardingComplete
-                      ? "We found saved TYFYS progress on this device. Sign in to reopen it."
-                      : "We found an existing TYFYS account for this flow. Sign in first so you do not create a duplicate."
-                    : "If you already have a TYFYS login, enter it here first. If you are setting up a new account, use the onboarding button below."}
-                </p>
+                <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">{panelLabel}</p>
+                <h2 className="mt-3 text-3xl font-black text-slate-900">{panelTitle}</h2>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{panelBody}</p>
               </div>
 
               <div className="px-6 py-6 sm:px-8 sm:py-8">
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {(hasSavedAccount || (hasKnownAccount && accountEmail)) && (
-                    <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
-                      <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
-                        {hasSavedAccount ? "Saved account" : "Account email"}
-                      </p>
-                      <p className="mt-2 text-base font-bold text-slate-900">
-                        {displayName || (hasKnownAccount ? "Existing TYFYS account" : "Your TYFYS workspace")}
-                      </p>
-                      <p className="text-sm text-slate-500">{accountEmail || "Email saved on this device"}</p>
-                    </div>
-                  )}
+                {mode === "login" && (
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    {(hasSavedAccount || (hasKnownAccount && accountEmail)) && (
+                      <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+                        <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
+                          {hasSavedAccount ? "Saved account" : "Account email"}
+                        </p>
+                        <p className="mt-2 text-base font-bold text-slate-900">
+                          {displayName || (hasKnownAccount ? "Existing TYFYS account" : "Your TYFYS account")}
+                        </p>
+                        <p className="text-sm text-slate-500">{accountEmail || "Email saved on this device"}</p>
+                      </div>
+                    )}
 
-                  <div>
-                    <label className="mb-1 block text-sm font-bold text-slate-700">Email</label>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(event) => setEmail(event.target.value)}
-                      autoComplete="username"
-                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1 block text-sm font-bold text-slate-700">Password</label>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                      autoComplete="current-password"
-                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
-                      placeholder="Enter your TYFYS password"
-                    />
-                  </div>
-                  {statusMessage && (
-                    <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
-                      {statusMessage}
+                    <div>
+                      <label className="mb-1 block text-sm font-bold text-slate-700">Email</label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        autoComplete="username"
+                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                        placeholder="you@example.com"
+                      />
                     </div>
-                  )}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-base font-black text-white shadow-lg transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-70"
-                  >
-                    {isSubmitting ? "Signing In..." : "Log In and Continue"}
-                    {!isSubmitting && <Icons.ChevronRight className="h-5 w-5" />}
-                  </button>
-                  <p className="text-xs leading-5 text-slate-500">
-                    TYFYS keeps this device signed in for up to 30 days so you can return to your saved workspace faster.
-                  </p>
-                </form>
+                    <div>
+                      <div className="mb-1 flex items-center justify-between gap-4">
+                        <label className="block text-sm font-bold text-slate-700">Password</label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setResetEmail(email || accountEmail || "");
+                            setMode("request");
+                          }}
+                          className="text-sm font-bold text-blue-700 hover:text-blue-800"
+                        >
+                          Forgot password?
+                        </button>
+                      </div>
+                      <input
+                        type="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        autoComplete="current-password"
+                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                        placeholder="Enter your TYFYS password"
+                      />
+                    </div>
+                    {loginMessage && (
+                      <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                        {loginMessage}
+                      </div>
+                    )}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-base font-black text-white shadow-lg transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-70"
+                    >
+                      {isSubmitting ? "Signing In..." : "Log In and Continue"}
+                      {!isSubmitting && <Icons.ChevronRight className="h-5 w-5" />}
+                    </button>
+                    <p className="text-xs leading-5 text-slate-500">
+                      TYFYS keeps this device signed in for up to 30 days so you can return to your saved account faster.
+                    </p>
+                  </form>
+                )}
 
-                <div className="mt-6 border-t border-slate-200 pt-6">
+                {mode === "request" && (
+                  <div className="space-y-6">
+                    <form onSubmit={handleRequestReset} className="space-y-5">
+                      <div className="rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4 text-sm leading-6 text-blue-900">
+                        Use the same email you used to create your TYFYS account. If email delivery is available, we will send a secure reset link there.
+                      </div>
+                      <div>
+                        <label className="mb-1 block text-sm font-bold text-slate-700">Account email</label>
+                        <input
+                          type="email"
+                          value={resetEmail}
+                          onChange={(event) => setResetEmail(event.target.value)}
+                          autoComplete="email"
+                          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                          placeholder="you@example.com"
+                        />
+                      </div>
+                      {resetStatus?.message && (
+                        <div className={`rounded-2xl border px-4 py-3 text-sm ${resetStatusTone}`}>
+                          {resetStatus.message}
+                        </div>
+                      )}
+                      <button
+                        type="submit"
+                        disabled={isResetSubmitting}
+                        className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-base font-black text-white shadow-lg transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-70"
+                      >
+                        {isResetSubmitting ? "Sending Reset Link..." : "Email Me a Reset Link"}
+                        {!isResetSubmitting && <Icons.Mail className="h-5 w-5" />}
+                      </button>
+                    </form>
+
+                    <div className="relative">
+                      <div className="border-t border-slate-200"></div>
+                      <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white px-3 text-xs font-black uppercase tracking-[0.24em] text-slate-400">
+                        Or
+                      </span>
+                    </div>
+
+                    <form onSubmit={handleVerifyResetAccount} className="space-y-5">
+                      <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4 text-sm leading-6 text-amber-900">
+                        Cannot reach your email right now? Verify the details TYFYS already has on file and you can choose a new password immediately.
+                      </div>
+                      <div>
+                        <label className="mb-1 block text-sm font-bold text-slate-700">Account email</label>
+                        <input
+                          type="email"
+                          value={resetEmail}
+                          onChange={(event) => setResetEmail(event.target.value)}
+                          autoComplete="email"
+                          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                          placeholder="you@example.com"
+                        />
+                      </div>
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div>
+                          <label className="mb-1 block text-sm font-bold text-slate-700">ZIP code on file</label>
+                          <input
+                            type="text"
+                            value={resetZip}
+                            onChange={(event) => setResetZip(event.target.value)}
+                            autoComplete="postal-code"
+                            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                            placeholder="12345"
+                          />
+                        </div>
+                        <div>
+                          <label className="mb-1 block text-sm font-bold text-slate-700">Phone ending</label>
+                          <input
+                            type="text"
+                            inputMode="numeric"
+                            value={resetPhoneLast4}
+                            onChange={(event) => setResetPhoneLast4(event.target.value)}
+                            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                            placeholder="Last 4 digits"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="mb-1 block text-sm font-bold text-slate-700">Last name on file</label>
+                        <input
+                          type="text"
+                          value={resetLastName}
+                          onChange={(event) => setResetLastName(event.target.value)}
+                          autoComplete="family-name"
+                          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                          placeholder="Your last name"
+                        />
+                      </div>
+                      {resetStatus?.message && (
+                        <div className={`rounded-2xl border px-4 py-3 text-sm ${resetStatusTone}`}>
+                          {resetStatus.message}
+                        </div>
+                      )}
+                      <button
+                        type="submit"
+                        disabled={isResetSubmitting}
+                        className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-base font-black text-white shadow-lg transition-colors hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
+                      >
+                        {isResetSubmitting ? "Verifying Account..." : "Verify My Account Details"}
+                        {!isResetSubmitting && <Icons.ShieldCheck className="h-5 w-5" />}
+                      </button>
+                    </form>
+
+                    <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs leading-5 text-slate-500">
+                      TYFYS only opens the password screen when the account details match what is already saved for that member.
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onClearPasswordReset();
+                        setMode("login");
+                      }}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-black text-slate-700 transition-colors hover:border-slate-400"
+                    >
+                      <Icons.ChevronLeft className="h-5 w-5" />
+                      Back to Sign-In
+                    </button>
+                  </div>
+                )}
+
+                {mode === "complete" && (
+                  <div className="space-y-5">
+                    {resetVerification?.checking && (
+                      <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-600">
+                        Verifying your secure reset link now.
+                      </div>
+                    )}
+
+                    {!resetVerification?.checking && !resetVerification?.valid && (
+                      <div className="space-y-4">
+                        <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-4 text-sm leading-6 text-red-700">
+                          {resetVerification?.error || "This password reset link is invalid or expired."}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onClearPasswordReset();
+                            setResetEmail(accountEmail || "");
+                            setMode("request");
+                          }}
+                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-base font-black text-white shadow-lg transition-colors hover:bg-blue-500"
+                        >
+                          Request a Fresh Reset Link
+                          <Icons.Mail className="h-5 w-5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onClearPasswordReset();
+                            setMode("login");
+                          }}
+                          className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-black text-slate-700 transition-colors hover:border-slate-400"
+                        >
+                          <Icons.ChevronLeft className="h-5 w-5" />
+                          Back to Sign-In
+                        </button>
+                      </div>
+                    )}
+
+                    {!resetVerification?.checking && resetVerification?.valid && (
+                      <form onSubmit={handleCompleteReset} className="space-y-5">
+                        <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+                          <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">Account email</p>
+                          <p className="mt-2 text-base font-bold text-slate-900">{resetVerification.email || accountEmail || "TYFYS account"}</p>
+                        </div>
+                        <div>
+                          <label className="mb-1 block text-sm font-bold text-slate-700">New password</label>
+                          <input
+                            type="password"
+                            value={newPassword}
+                            onChange={(event) => setNewPassword(event.target.value)}
+                            autoComplete="new-password"
+                            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                            placeholder="Create a new password"
+                          />
+                        </div>
+                        <div>
+                          <label className="mb-1 block text-sm font-bold text-slate-700">Confirm new password</label>
+                          <input
+                            type="password"
+                            value={confirmNewPassword}
+                            onChange={(event) => setConfirmNewPassword(event.target.value)}
+                            autoComplete="new-password"
+                            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                            placeholder="Re-enter your new password"
+                          />
+                        </div>
+                        {newPassword && confirmNewPassword && !resetPasswordsMatch && (
+                          <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                            These passwords do not match yet.
+                          </div>
+                        )}
+                        {resetStatus?.message && (
+                          <div className={`rounded-2xl border px-4 py-3 text-sm ${resetStatusTone}`}>
+                            {resetStatus.message}
+                          </div>
+                        )}
+                        <button
+                          type="submit"
+                          disabled={isResetSubmitting || newPassword.length < 8 || confirmNewPassword.length < 8 || !resetPasswordsMatch}
+                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-base font-black text-white shadow-lg transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-70"
+                        >
+                          {isResetSubmitting ? "Saving New Password..." : "Save New Password and Sign In"}
+                          {!isResetSubmitting && <Icons.ChevronRight className="h-5 w-5" />}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onClearPasswordReset();
+                            setMode("login");
+                          }}
+                          className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-black text-slate-700 transition-colors hover:border-slate-400"
+                        >
+                          <Icons.ChevronLeft className="h-5 w-5" />
+                          Back to Sign-In
+                        </button>
+                      </form>
+                    )}
+                  </div>
+                )}
+
+                <div className={`mt-6 border-t border-slate-200 pt-6 ${showNewAccountCard ? "" : "hidden"}`}>
                   <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                    <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">New To TYFYS?</p>
-                    <p className="mt-2 text-lg font-black text-slate-900">Setting up a new account?</p>
+                    <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">New to TYFYS?</p>
+                    <p className="mt-2 text-lg font-black text-slate-900">Need to create your account?</p>
                     <p className="mt-2 text-sm leading-6 text-slate-600">
-                      Click below to start onboarding, save your contact details, and create the login you will use to come back later.
+                      Start here to save your contact details, create your login, and come back later without redoing setup.
                     </p>
                     <div className="mt-4 space-y-3">
                       <div className="flex items-start gap-3">
                         <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">1</div>
-                        <p className="text-sm leading-6 text-slate-600">Enter your name, email, phone, and zip code.</p>
+                        <p className="text-sm leading-6 text-slate-600">Enter your name, email, phone number, and ZIP code.</p>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">2</div>
-                        <p className="text-sm leading-6 text-slate-600">Create the password that becomes your TYFYS login on this device.</p>
+                        <p className="text-sm leading-6 text-slate-600">Create the password you will use to come back to TYFYS.</p>
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">3</div>
-                        <p className="text-sm leading-6 text-slate-600">Come back later and log in without starting over.</p>
+                        <p className="text-sm leading-6 text-slate-600">Return later and log in without starting over.</p>
                       </div>
                     </div>
 
@@ -3092,7 +3413,7 @@ function AccessLanding({
                   </div>
 
                   <div className="mt-4 rounded-2xl border border-yellow-200 bg-yellow-50 px-4 py-4 text-sm leading-6 text-slate-700">
-                    <span className="font-black text-slate-900">Notice:</span> TYFYS is a private organization and not the VA. Your information is saved locally on this device so you can return and continue your workspace.
+                    <span className="font-black text-slate-900">Notice:</span> TYFYS is a private company and not the VA. Your information is stored on this device so you can return and continue your account.
                   </div>
                 </div>
               </div>
@@ -3116,18 +3437,18 @@ function SpecialistModal({ onClose, discountUnlocked, isMember }) {
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white shadow-lg">
             <Icons.Stethoscope className="w-8 h-8 text-blue-600" />
           </div>
-          <h3 className="text-2xl font-black text-slate-900">Private Specialist Access</h3>
-          <p className="text-slate-500 font-medium">Get the Nexus Letter you need to win your claim.</p>
+          <h3 className="text-2xl font-black text-slate-900">Independent Doctor Support</h3>
+          <p className="text-slate-500 font-medium">Get help lining up the medical opinion or DBQ support your claim may need.</p>
         </div>
 
         <div className="space-y-4">
           {/* A La Carte Option */}
           <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 opacity-60 hover:opacity-100 transition-opacity">
             <div className="flex justify-between items-center mb-1">
-              <span className="font-bold text-slate-600">A La Carte (One-Time)</span>
+              <span className="font-bold text-slate-600">One-Time Review</span>
               <span className="font-black text-xl text-slate-800">$1,800</span>
             </div>
-            <p className="text-xs text-slate-400">Single Nexus Letter only.</p>
+            <p className="text-xs text-slate-400">Single medical opinion only.</p>
           </div>
 
           {/* Premium Member Option */}
@@ -3137,7 +3458,7 @@ function SpecialistModal({ onClose, discountUnlocked, isMember }) {
             </div>
             <div className="flex justify-between items-center mb-1">
               <span className="font-bold text-blue-900 flex items-center gap-2">
-                <Icons.ShieldCheck className="w-4 h-4" /> Premium Member
+                <Icons.ShieldCheck className="w-4 h-4" /> Membership Price
               </span>
               <div className="text-right">
                 <span className="block text-xs text-slate-400 line-through">$1,800</span>
@@ -3147,7 +3468,7 @@ function SpecialistModal({ onClose, discountUnlocked, isMember }) {
             <p className="text-xs text-blue-600 font-bold mb-2">Save $450 instantly (25% OFF)</p>
             {!isMember && (
               <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors">
-                Join Premium & Save
+                Join Membership & Save
               </button>
             )}
           </div>
@@ -3159,17 +3480,17 @@ function SpecialistModal({ onClose, discountUnlocked, isMember }) {
             </div>
             <div className="flex justify-between items-center mb-2">
               <span className="font-bold text-white flex items-center gap-2">
-                <Icons.Star className="w-4 h-4 text-yellow-400" /> Package Deal
+                <Icons.Star className="w-4 h-4 text-yellow-400" /> Full Support Package
               </span>
               <div className="text-right">
                 <span className="font-black text-xl text-yellow-400">INCLUDED</span>
               </div>
             </div>
             <p className="text-xs text-slate-300 leading-tight mb-3">
-              Nexus Letters are <strong>INCLUDED</strong> in our Standard & Multi-Claim packages.
+              Medical opinion letters are <strong>INCLUDED</strong> in our Standard and Multi-Claim packages.
             </p>
             <button className="w-full py-2 bg-yellow-500 hover:bg-yellow-400 text-slate-900 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
-              View Packages <Icons.ArrowRight className="w-3 h-3" />
+              View Support Options <Icons.ArrowRight className="w-3 h-3" />
             </button>
           </div>
         </div>
@@ -3258,6 +3579,14 @@ function TYFYSPlatform() {
   const prefilledContactStep = ONBOARDING_STEPS.findIndex((step) => step.id === "contact_name");
   const prefilledProfile = mapLeadPrefillToProfile(leadPrefill);
   const leadPrefillEmail = normalizeEmail(prefilledProfile.email || leadPrefill?.email || "");
+  const initialResetToken = (() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return String(params.get("resetToken") || "").trim();
+    } catch (error) {
+      return "";
+    }
+  })();
   const storedUserProfile = sanitizeUserProfile(persistedAppState?.userProfile || {});
   const initialOnboardingStep =
     Number.isFinite(persistedAppState?.onboardingStep) && persistedAppState.onboardingStep >= 0 && persistedAppState.onboardingStep < ONBOARDING_STEPS.length
@@ -3333,6 +3662,16 @@ function TYFYSPlatform() {
   const [isAuthBootstrapping, setIsAuthBootstrapping] = useState(true);
   const [authStatusMessage, setAuthStatusMessage] = useState("");
   const [isAuthSubmitting, setIsAuthSubmitting] = useState(false);
+  const [passwordResetToken, setPasswordResetToken] = useState(initialResetToken);
+  const [passwordResetStatus, setPasswordResetStatus] = useState({ type: "", message: "" });
+  const [isPasswordResetSubmitting, setIsPasswordResetSubmitting] = useState(false);
+  const [passwordResetVerification, setPasswordResetVerification] = useState(() => ({
+    checking: Boolean(initialResetToken),
+    valid: false,
+    email: "",
+    error: "",
+    expiresAt: "",
+  }));
   const [hasLeadPrefillAccount, setHasLeadPrefillAccount] = useState(false);
   const [isLeadPrefillAccountLookupPending, setIsLeadPrefillAccountLookupPending] = useState(
     () => Boolean(hasLeadPrefill && leadPrefillEmail && !persistedAuthAccount)
@@ -3341,7 +3680,7 @@ function TYFYSPlatform() {
   const [aiBotMessages, setAiBotMessages] = useState([
     {
       sender: "bot",
-      text: "Hello! I'm Angela. I know this process can be overwhelming, but I'm here to listen and help you every step of the way."
+      text: "Hello, I'm Angela. I can help you figure out where to start, which records to upload, and which TYFYS tool to use next."
     }
   ]);
   const [aiBotInput, setAiBotInput] = useState("");
@@ -3428,7 +3767,7 @@ function TYFYSPlatform() {
     Boolean(authAccount) || onboardingComplete || hasExistingAccountStatus || hasLeadPrefillAccount;
   const isAccessBootstrapping = isAuthBootstrapping || isLeadPrefillAccountLookupPending;
   const showAccessLanding =
-    !isAccessBootstrapping && !isAuthenticated && (!hasStarted || onboardingComplete || hasKnownAccount);
+    Boolean(passwordResetToken) || (!isAccessBootstrapping && !isAuthenticated && (!hasStarted || onboardingComplete || hasKnownAccount));
   const currentOnboardingStep = ONBOARDING_STEPS[onboardingStep];
   const isContactOnboardingStep = currentOnboardingStep?.type?.startsWith("contact_form");
   const isLoadingOnboardingStep = currentOnboardingStep?.type === "loading";
@@ -3623,6 +3962,146 @@ function TYFYSPlatform() {
       updatedAt: new Date().toISOString()
     };
     saveAuthHint(updatedAccount);
+  };
+
+  const clearPasswordResetQuery = () => {
+    setPasswordResetToken("");
+    setPasswordResetStatus({ type: "", message: "" });
+    setPasswordResetVerification({
+      checking: false,
+      valid: false,
+      email: "",
+      error: "",
+      expiresAt: "",
+    });
+
+    try {
+      const nextUrl = new URL(window.location.href);
+      nextUrl.searchParams.delete("resetToken");
+      window.history.replaceState({}, "", nextUrl.toString());
+    } catch (error) {
+      // No-op if the current location cannot be rewritten.
+    }
+  };
+
+  const handlePasswordResetRequest = async ({ email }) => {
+    const normalizedEmail = normalizeEmail(email);
+    if (!normalizedEmail) {
+      setPasswordResetStatus({
+        type: "error",
+        message: "Enter the email tied to your TYFYS account so we can send a reset link."
+      });
+      return;
+    }
+
+    setIsPasswordResetSubmitting(true);
+    setPasswordResetStatus({ type: "", message: "" });
+
+    try {
+      const payload = await requestAppJson("/api/auth-password-reset-request", {
+        method: "POST",
+        body: { email: normalizedEmail }
+      });
+      setPasswordResetStatus({
+        type: "success",
+        message: payload.message || "If that email is in TYFYS, we sent a password reset link."
+      });
+      if (payload?.debugResetUrl) {
+        console.info("Local password reset link:", payload.debugResetUrl);
+      }
+    } catch (error) {
+      setPasswordResetStatus({
+        type: "error",
+        message: String(error?.message || error || "").slice(0, 240)
+      });
+    } finally {
+      setIsPasswordResetSubmitting(false);
+    }
+  };
+
+  const handlePasswordResetAccountVerification = async ({ email, zip, lastName, phoneLast4 }) => {
+    const normalizedEmail = normalizeEmail(email);
+    if (!normalizedEmail) {
+      setPasswordResetStatus({
+        type: "error",
+        message: "Enter the email tied to your TYFYS account first."
+      });
+      return;
+    }
+
+    setIsPasswordResetSubmitting(true);
+    setPasswordResetStatus({ type: "", message: "" });
+
+    try {
+      const payload = await requestAppJson("/api/auth-password-reset-challenge", {
+        method: "POST",
+        body: {
+          email: normalizedEmail,
+          zip,
+          lastName,
+          phoneLast4
+        }
+      });
+      setPasswordResetToken(payload.resetToken || "");
+      setPasswordResetVerification({
+        checking: false,
+        valid: Boolean(payload.resetToken),
+        email: payload.email || normalizedEmail,
+        error: "",
+        expiresAt: payload.expiresAt || ""
+      });
+      setPasswordResetStatus({
+        type: "success",
+        message: payload.message || "Account verified. Choose your new password now."
+      });
+    } catch (error) {
+      setPasswordResetStatus({
+        type: "error",
+        message: String(error?.message || error || "").slice(0, 240)
+      });
+    } finally {
+      setIsPasswordResetSubmitting(false);
+    }
+  };
+
+  const handlePasswordResetComplete = async ({ token, password }) => {
+    if (!token) {
+      setPasswordResetStatus({
+        type: "error",
+        message: "This password reset link is missing or invalid."
+      });
+      return;
+    }
+    if (!password || password.length < 8) {
+      setPasswordResetStatus({
+        type: "error",
+        message: "Create a password with at least 8 characters."
+      });
+      return;
+    }
+
+    setIsPasswordResetSubmitting(true);
+    setPasswordResetStatus({ type: "", message: "" });
+
+    try {
+      const payload = await requestAppJson("/api/auth-password-reset-complete", {
+        method: "POST",
+        body: { token, password }
+      });
+      saveAuthHint(payload.account);
+      saveAppSessionToken(payload.sessionToken || loadAppSessionToken());
+      setIsAuthenticated(true);
+      setAuthStatusMessage("");
+      clearPasswordResetQuery();
+      applyPersistedSnapshot(payload.appState, payload.account);
+    } catch (error) {
+      setPasswordResetStatus({
+        type: "error",
+        message: String(error?.message || error || "").slice(0, 240)
+      });
+    } finally {
+      setIsPasswordResetSubmitting(false);
+    }
   };
 
   const lookupExistingAccount = async (email) => {
@@ -3920,6 +4399,56 @@ function TYFYSPlatform() {
     };
   }, []);
   useEffect(() => {
+    if (!passwordResetToken) {
+      setPasswordResetVerification({
+        checking: false,
+        valid: false,
+        email: "",
+        error: "",
+        expiresAt: "",
+      });
+      return undefined;
+    }
+
+    let canceled = false;
+    setPasswordResetVerification({
+      checking: true,
+      valid: false,
+      email: "",
+      error: "",
+      expiresAt: "",
+    });
+
+    requestAppJson("/api/auth-password-reset-verify", {
+      method: "POST",
+      body: { token: passwordResetToken }
+    })
+      .then((payload) => {
+        if (canceled) return;
+        setPasswordResetVerification({
+          checking: false,
+          valid: true,
+          email: payload.email || "",
+          error: "",
+          expiresAt: payload.expiresAt || "",
+        });
+      })
+      .catch((error) => {
+        if (canceled) return;
+        setPasswordResetVerification({
+          checking: false,
+          valid: false,
+          email: "",
+          error: String(error?.message || error || "").slice(0, 240),
+          expiresAt: "",
+        });
+      });
+
+    return () => {
+      canceled = true;
+    };
+  }, [passwordResetToken]);
+  useEffect(() => {
     if (isAuthBootstrapping) return undefined;
 
     if (!hasLeadPrefill || !leadPrefillEmail || onboardingComplete || isAuthenticated) {
@@ -4197,17 +4726,16 @@ function TYFYSPlatform() {
   const addMessage = (sender, text) => setMessages((prev) => [...prev, { sender, text }]);
 
   // Bot interaction for "Start Guided Tour"
-  // Updated messages to be warmer and use "Angela"
   const startGuidedTour = () => {
     setIsBotOpen(true);
     addMessage(
       "bot",
-      "Hi there! I'm Angela. Let's take a moment to get you comfortable. Could you check your 'Service Profile' on the dashboard? We want to make sure your Branch and Era are just right. You can adjust them with the pencil icon if needed."
+      "Let's start on Claim Home. Use the pencil icon to confirm your branch, service era, and current rating so the rest of the app matches your situation."
     );
     setTimeout(() => {
       addMessage(
         "bot",
-        "Next, take a look at the 'Active Claims Tracker'. If it's looking a bit empty, don't worry—just head over to the Calculator to add the conditions you'd like to discuss."
+        "Next, open the VA Rating Calculator to add the conditions you want to review. After that, go to Records Intake to upload your DD-214, service records, and VA decisions."
       );
     }, 2000);
   };
@@ -4243,7 +4771,7 @@ function TYFYSPlatform() {
       } catch (error) {
         if (/already exists/i.test(String(error?.message || ""))) {
           setAuthStatusMessage(
-            "We found an existing TYFYS login for this email. Sign in to continue instead of creating a duplicate profile."
+            "We found an existing TYFYS login for this email. Sign in to continue instead of creating a duplicate account."
           );
           returnToAccessLanding();
         }
@@ -4287,7 +4815,14 @@ function TYFYSPlatform() {
     }
     if (!botMemory.current.hasWelcomed) {
       // Updated welcome message
-      setTimeout(() => addMessage("bot", `It is wonderful to meet you, ${userProfile.firstName || userProfile.branch || "Veteran"}. Your profile is all set. Welcome to your Mission Control.`), 500);
+      setTimeout(
+        () =>
+          addMessage(
+            "bot",
+            `Your account is ready, ${userProfile.firstName || userProfile.branch || "Veteran"}. Start in Records Intake to upload your key records, then use Claim Home to track the rest of your next steps.`
+          ),
+        500
+      );
       botMemory.current.hasWelcomed = true;
     }
   };
@@ -4301,8 +4836,7 @@ function TYFYSPlatform() {
     void syncZohoSignup(mergedProfile);
     setShowProfileEdit(false);
     setIsBotOpen(true);
-    // Updated profile save message
-    addMessage("bot", "I've carefully updated your profile details. This will help us take better care of your specific needs.");
+    addMessage("bot", "Your profile is updated. If anything changes later, you can edit it again from Claim Home.");
   };
 
   const handlePaymentComplete = ({ planName, unlockPremium = false }) => {
@@ -4319,7 +4853,7 @@ function TYFYSPlatform() {
     setIsBotOpen(true);
     addMessage(
       "bot",
-      `Payment confirmed for ${planName}. I opened your intake workspace so you can keep moving on records collection right away.`
+      `Payment confirmed for ${planName}. I opened Records Intake so you can keep moving on your file right away.`
     );
   };
 
@@ -4329,7 +4863,7 @@ function TYFYSPlatform() {
       setIsBotOpen(true);
       addMessage(
         "bot",
-        `This ${planName} checkout is handled by a specialist. Use "Book Discovery Call" and we will complete enrollment with you directly.`
+        `This ${planName} checkout is handled by a TYFYS specialist. Use "Book Discovery Call" and we will finish enrollment with you directly.`
       );
       return;
     }
@@ -4339,7 +4873,7 @@ function TYFYSPlatform() {
       setIsBotOpen(true);
       addMessage(
         "bot",
-        "Online checkout is not enabled on this site version yet. Use \"Book Discovery Call\" and we will complete enrollment with you directly."
+        "Online checkout is not enabled on this site version yet. Use \"Book Discovery Call\" and we will finish enrollment with you directly."
       );
       return;
     }
@@ -4349,7 +4883,7 @@ function TYFYSPlatform() {
       setIsBotOpen(true);
       addMessage(
         "bot",
-        "Plan activation is handled by TYFYS care team in the mobile app. Use \"Book Discovery Call\" and we will finish enrollment with you directly."
+        "Plan activation is handled by the TYFYS team in the mobile app. Use \"Book Discovery Call\" and we will finish enrollment with you directly."
       );
       return;
     }
@@ -4440,21 +4974,20 @@ function TYFYSPlatform() {
     setIsTyping(true);
     setTimeout(() => {
       const text = input.trim().toLowerCase();
-      // Updated Main Chat logic for empathy
       if (text.includes("nexus"))
         addMessage(
           "bot",
-          "A Nexus Letter is so important—it's like the bridge connecting your condition to your service. While VSOs are great, they usually can't write these medical opinions, but our compassionate private doctors certainly can."
+          "A nexus letter is a medical opinion that explains why a condition is connected to your service. If you already have records in your account, the Medical Opinion Draft tool can help you organize the facts a doctor would need."
         );
       else if (text.includes("cost") || text.includes("price"))
         addMessage(
           "bot",
-          "We want to make sure you have the best support. Our Premium access is $250/mo. For comprehensive support, our Standard package is $3,500, and the Multi-Claim package is $5,500. We can look at payment plans too."
+          "TYFYS membership is $250 per month. Full-service packages start at $3,500 for up to three claims and $5,500 for larger multi-claim support. We can also talk through payment plans."
         );
       else
         addMessage(
           "bot",
-          "I hear you, and I'm here to help. You might find some relief looking at the Doc Finder for free resources, or we can explore our Strategy plans together."
+          "I can help you decide where to go next. Try Records Intake to upload files, VA Rating Calculator to model percentages, or Evidence Checklist to see which documents matter for a condition."
         );
       setIsTyping(false);
     }, 1000);
@@ -4464,13 +4997,12 @@ function TYFYSPlatform() {
     e.preventDefault();
     if (!aiBotInput.trim()) return;
     if (!isMember && dailyQuestionCount >= 3) {
-      // Updated limit message
       setAiBotMessages((prev) => [
         ...prev,
         { sender: "user", text: aiBotInput },
         {
           sender: "bot",
-          text: "I'm so sorry, but it looks like you've reached your daily question limit. I'd love to keep chatting—upgrading to Premium ($250/mo) would let us talk as much as you need."
+          text: "You have used today's free questions. Open Support Options if you want unlimited guided help from Angela."
         }
       ]);
       setAiBotInput("");
@@ -4481,18 +5013,17 @@ function TYFYSPlatform() {
     setAiBotInput("");
     setDailyQuestionCount((prev) => prev + 1);
     setTimeout(() => {
-      // Updated AI Bot responses for empathy
       let response =
-        "As your support specialist, I want to ensure you feel heard. Evidence is the key to getting you the rating you deserve.";
+        "I can help you organize the next step. Good records and clear facts usually make the rest of the claim process easier to follow.";
       if (query.toLowerCase().includes("ptsd"))
         response =
-          "I understand how heavy PTSD can be. To support a claim, the VA looks for three things: a current diagnosis, a specific stressor from your service, and a medical link between them. We're here to help you tell your story.";
+          "For a PTSD claim, VA usually looks for three things: a current diagnosis, a specific in-service stressor, and a medical link between the two. Records Intake, your statement, and the Medical Opinion Draft can help you organize those pieces.";
       else if (query.toLowerCase().includes("back"))
         response =
-          "Back pain can be really difficult. For ratings, the VA mostly looks at your Range of Motion—specifically how far you can bend forward. If it hurts to move, that's important to document too.";
+          "For back claims, VA usually focuses on range of motion, flare-ups, and how the condition affects work and daily life. Upload imaging and treatment notes first, then use the VA Rating Calculator to model the likely range.";
       else if (query.toLowerCase().includes("tinnitus"))
         response =
-          "That ringing in your ears is very real. Tinnitus is usually rated at 10%, but it's also a significant starting point that can be linked to other challenges like migraines or sleep issues.";
+          "Tinnitus is usually capped at 10%, but it can still matter because it may connect to other issues like sleep problems, headaches, or hearing loss. Use Evidence Checklist to see which records usually help.";
       setAiBotMessages((prev) => [...prev, { sender: "bot", text: response }]);
     }, 1000);
   };
@@ -4508,14 +5039,14 @@ function TYFYSPlatform() {
       return;
     }
     if (!hasSelectedRatingOption) {
-      setCalculatorNotice({ type: "warning", text: "Pick a valid fact-based rating from the official condition schedule first." });
+      setCalculatorNotice({ type: "warning", text: "Pick a supported rating from the official VA schedule first." });
       return;
     }
 
     const selectedRatingValue = Number(newRatingInput);
     const selectedRatingOption = selectedRatingOptions.find((option) => option.value === selectedRatingValue);
     if (!selectedRatingContext || !selectedRatingOption) {
-      setCalculatorNotice({ type: "warning", text: "Pick a valid fact-based rating from the official condition schedule first." });
+      setCalculatorNotice({ type: "warning", text: "Pick a supported rating from the official VA schedule first." });
       return;
     }
 
@@ -4594,17 +5125,17 @@ function TYFYSPlatform() {
 
   const syncDossierUploadToZoho = async (item, file) => {
     if (!file) {
-      return { skipped: true, reason: "Attach a document before syncing to Zoho." };
+      return { skipped: true, reason: "Attach a document before sending it to your TYFYS file." };
     }
 
     if (!hasLiveAppApi()) {
-      return { skipped: true, reason: "CRM sync is available on the live TYFYS app." };
+      return { skipped: true, reason: "File delivery is available on the live TYFYS app." };
     }
 
     const lookupEmail = userProfile.email || authAccount?.email || "";
     const lookupPhone = userProfile.phone || "";
     if (!zohoLeadId && !lookupEmail && !lookupPhone) {
-      return { skipped: true, reason: "Save the veteran profile before syncing records to Zoho." };
+      return { skipped: true, reason: "Finish saving the account before sending records to your TYFYS file." };
     }
 
     const formData = new FormData();
@@ -4627,7 +5158,7 @@ function TYFYSPlatform() {
     );
     const payload = await response.json().catch(() => ({}));
     if (!response.ok || !payload?.ok) {
-      throw new Error(payload?.error || "Unable to sync this record to Zoho.");
+      throw new Error(payload?.error || "Unable to send this record to your TYFYS file.");
     }
 
     if (payload?.recordId) {
@@ -4706,7 +5237,7 @@ function TYFYSPlatform() {
       setLastScanResult(savedItem);
 
       try {
-        setScanStageLabel("Syncing to Zoho");
+        setScanStageLabel("Sending to your TYFYS file");
         const syncPayload = await syncDossierUploadToZoho(savedItem, scannerFile);
 
         if (syncPayload?.skipped) {
@@ -4728,9 +5259,9 @@ function TYFYSPlatform() {
           setLastScanResult(syncedItem);
           setRecordSyncNotice({
             type: "success",
-            text: `${syncedItem.title} synced to Zoho ${syncedItem.crmSync.crmModule}.`
+            text: `${syncedItem.title} was added to your TYFYS file.`
           });
-          setScanStageLabel("Scan and CRM sync complete");
+          setScanStageLabel("Upload complete");
         }
       } catch (syncError) {
         const failedItem = {
@@ -4745,9 +5276,9 @@ function TYFYSPlatform() {
         setLastScanResult(failedItem);
         setRecordSyncNotice({
           type: "error",
-          text: failedItem.crmSync.error || "The file was saved locally, but Zoho sync failed."
+          text: failedItem.crmSync.error || "The file was saved on this device, but we could not send it to your TYFYS file yet."
         });
-        setScanStageLabel("Saved locally; Zoho sync failed");
+        setScanStageLabel("Saved on this device");
       }
 
       setScanProgress(1);
@@ -4769,9 +5300,9 @@ function TYFYSPlatform() {
     const exportText = JSON.stringify(dossier, null, 2);
     if (nativeAppRuntime) {
       void shareTextPayload({
-        title: "TYFYS Dossier Export",
+        title: "TYFYS Records Vault Export",
         text: exportText,
-        dialogTitle: "Share Dossier Export"
+        dialogTitle: "Share Records Vault Export"
       }).catch((error) => {
         console.warn("Native dossier share failed:", error);
       });
@@ -4929,64 +5460,64 @@ function TYFYSPlatform() {
   const headerMeta =
     {
       welcome_guide: {
-        eyebrow: "Dashboard",
-        title: "Mission Control",
-        subtitle: "Track claims, care coordination, and next actions from one place."
+        eyebrow: "Start here",
+        title: "Claim Home",
+        subtitle: "Review your profile, records, ratings, and next steps in one place."
       },
       doctor_portal: {
-        eyebrow: "Care Coordination",
-        title: "Doctor Portal",
-        subtitle: "See which TYFYS coordinators and physician partners are attached to your packet."
+        eyebrow: "Care team",
+        title: "Care Team",
+        subtitle: "See your TYFYS contacts, provider appointments, and who owns each next step."
       },
       secure_comms: {
-        eyebrow: "Encrypted Messaging",
-        title: "Secure Comms",
-        subtitle: "Message TYFYS and assigned doctors from one shared inbox."
+        eyebrow: "Messages",
+        title: "Messages",
+        subtitle: "Send questions and updates to TYFYS and your assigned providers in one secure inbox."
       },
       dossier: {
-        eyebrow: "Evidence Tools",
-        title: "Dossier Vault and Scanner",
-        subtitle: "Capture records, extract text, and store claim-ready evidence on this device."
+        eyebrow: "Records",
+        title: "Records Vault",
+        subtitle: "Upload records, read scanned text, and keep your claim evidence organized on this device."
       },
       calculator: {
-        eyebrow: "Benefits Modeling",
-        title: "VA Math Calculator",
+        eyebrow: "VA ratings",
+        title: "VA Rating Calculator",
         subtitle: "Model combined ratings, rounding, and compensation impact."
       },
       pact_explorer: {
-        eyebrow: "Research Tools",
-        title: "PACT Act Explorer",
-        subtitle: "Filter presumptives by era, exposure track, and official VA sources."
+        eyebrow: "PACT Act",
+        title: "PACT Act Guide",
+        subtitle: "Check exposure-based presumptive conditions using official VA sources."
       },
       nexus_generator: {
-        eyebrow: "Drafting Support",
-        title: "Nexus Template Generator",
-        subtitle: "Build clinician-ready opinion drafts from your existing claim facts."
+        eyebrow: "Medical opinion",
+        title: "Medical Opinion Draft",
+        subtitle: "Organize the facts a doctor would need for a nexus or medical opinion letter."
       },
       doc_wizard: {
-        eyebrow: "Document Support",
-        title: "Document Resource Finder",
-        subtitle: "Map conditions to DBQs, records, and specialist requirements."
+        eyebrow: "Evidence checklist",
+        title: "Evidence Checklist",
+        subtitle: "See the forms, records, and supporting documents tied to a condition."
       },
       strategy: {
-        eyebrow: "Membership",
-        title: "Strategic Roadmap",
-        subtitle: "Compare support tiers, pricing, and next best moves."
+        eyebrow: "Support options",
+        title: "Support Options",
+        subtitle: "Compare TYFYS membership and full-service claim support."
       },
       intake_portal: {
-        eyebrow: "Client Intake",
+        eyebrow: "Records intake",
         title: "Military Records Intake",
-        subtitle: "Collect military records, chat through intake, and sync uploads into Zoho."
+        subtitle: "Upload your service and VA records so TYFYS can review the right file first."
       },
       ai_claims: {
-        eyebrow: "Premium Support",
-        title: "TYFYS Claims Assistant",
-        subtitle: "Chat with Angela for guided help on evidence and claim strategy."
+        eyebrow: "Guided support",
+        title: "Claim Guide",
+        subtitle: "Ask Angela where to start, what records matter, and what tool to use next."
       }
     }[activeView] || {
       eyebrow: "TYFYS App",
-      title: "Mission Control",
-      subtitle: "Keep your claim packet and care team aligned."
+      title: "Claim Home",
+      subtitle: "Keep your records, ratings, and support team aligned."
     };
 
   // Auto-advance logic for loading screen
@@ -5034,7 +5565,7 @@ function TYFYSPlatform() {
           <div className="w-14 h-14 rounded-2xl bg-yellow-500 text-slate-950 flex items-center justify-center mx-auto shadow-xl">
             <Icons.ShieldCheck className="w-8 h-8" />
           </div>
-          <h1 className="mt-5 text-2xl font-black">Loading your TYFYS workspace</h1>
+          <h1 className="mt-5 text-2xl font-black">Loading your TYFYS account</h1>
           <p className="mt-3 text-sm text-slate-300">Checking your saved sign-in and restoring your progress.</p>
         </div>
       </div>
@@ -5052,11 +5583,20 @@ function TYFYSPlatform() {
           `${userProfile.firstName || prefilledProfile.firstName || ""} ${userProfile.lastName || prefilledProfile.lastName || ""}`.trim()
         }
         onboardingComplete={onboardingComplete}
-        statusMessage={authStatusMessage}
+        loginMessage={authStatusMessage}
         isSubmitting={isAuthSubmitting}
+        resetToken={passwordResetToken}
+        resetStatus={passwordResetStatus}
+        resetVerification={passwordResetVerification}
+        isResetSubmitting={isPasswordResetSubmitting}
         onLogin={handleClientLogin}
+        onRequestPasswordReset={handlePasswordResetRequest}
+        onVerifyPasswordResetAccount={handlePasswordResetAccountVerification}
+        onCompletePasswordReset={handlePasswordResetComplete}
+        onClearPasswordReset={clearPasswordResetQuery}
         onCreateAccount={() => {
           setAuthStatusMessage("");
+          clearPasswordResetQuery();
           startSystem();
         }}
       />
@@ -5359,7 +5899,7 @@ function TYFYSPlatform() {
             </div>
             <div>
               <h1 className="font-bold text-lg tracking-tight">TYFYS</h1>
-              <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">Veteran OS v2.0</p>
+              <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase">Veteran Claim Workspace</p>
             </div>
           </div>
           <button onClick={() => setIsSidebarOpen(false)} className="md:hidden text-slate-400">
@@ -5372,19 +5912,19 @@ function TYFYSPlatform() {
             onClick={() => setActiveView("welcome_guide")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "welcome_guide" ? "bg-blue-600 text-white shadow-lg shadow-blue-900/50" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.Map className="w-5 h-5" /> Mission Control
+            <Icons.Map className="w-5 h-5" /> Claim Home
           </button>
           <button
             onClick={() => setActiveView("doctor_portal")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "doctor_portal" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.Stethoscope className="w-5 h-5" /> Doctor Portal
+            <Icons.Stethoscope className="w-5 h-5" /> Care Team
           </button>
           <button
             onClick={() => setActiveView("secure_comms")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "secure_comms" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.MessageSquare className="w-5 h-5" /> Secure Comms
+            <Icons.MessageSquare className="w-5 h-5" /> Messages
             {secureUnreadCount > 0 && (
               <span
                 className={`ml-auto min-w-[1.5rem] px-2 py-0.5 rounded-full text-[10px] font-bold text-center ${activeView === "secure_comms" ? "bg-white/20 text-white" : "bg-blue-50 text-blue-700"}`}
@@ -5397,7 +5937,7 @@ function TYFYSPlatform() {
             onClick={() => setActiveView("intake_portal")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "intake_portal" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.FileText className="w-5 h-5" /> Intake Portal
+            <Icons.FileText className="w-5 h-5" /> Records Intake
           </button>
 
           <p className="px-4 py-2 mt-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Tools</p>
@@ -5405,59 +5945,59 @@ function TYFYSPlatform() {
             onClick={() => setActiveView("dossier")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "dossier" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.Database className="w-5 h-5" /> Dossier Scanner
+            <Icons.Database className="w-5 h-5" /> Records Vault
           </button>
           <button
             onClick={() => setActiveView("calculator")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "calculator" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.Calculator className="w-5 h-5" /> VA Math
+            <Icons.Calculator className="w-5 h-5" /> VA Rating Calculator
           </button>
           <button
             onClick={() => setActiveView("pact_explorer")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "pact_explorer" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.Zap className="w-5 h-5" /> PACT Act Explorer
+            <Icons.Zap className="w-5 h-5" /> PACT Act Guide
           </button>
           <button
             onClick={() => setActiveView("nexus_generator")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "nexus_generator" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.Quote className="w-5 h-5" /> Nexus Generator
+            <Icons.Quote className="w-5 h-5" /> Medical Opinion Draft
           </button>
           <button
             onClick={() => setActiveView("doc_wizard")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "doc_wizard" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.FileUp className="w-5 h-5" /> Evidence Finder
+            <Icons.FileUp className="w-5 h-5" /> Evidence Checklist
           </button>
           <button
             onClick={() => setActiveView("strategy")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "strategy" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.TrendingUp className="w-5 h-5" /> Plans & Pricing
+            <Icons.TrendingUp className="w-5 h-5" /> Support Options
           </button>
 
-          <p className="px-4 py-2 mt-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Premium</p>
+          <p className="px-4 py-2 mt-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Guided Support</p>
           <button
             onClick={() => setActiveView("ai_claims")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "ai_claims" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.Bot className="w-5 h-5" /> TYFYS Claims Bot {isMember ? "" : <Icons.Lock className="w-3 h-3 ml-auto opacity-50" />}
+            <Icons.Bot className="w-5 h-5" /> Claim Guide {isMember ? "" : <Icons.Lock className="w-3 h-3 ml-auto opacity-50" />}
           </button>
           <button className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all cursor-not-allowed opacity-60">
-            <Icons.User className="w-5 h-5" /> Private Specialist <Icons.Lock className="w-3 h-3 ml-auto" />
+            <Icons.User className="w-5 h-5" /> Independent Doctor Support <Icons.Lock className="w-3 h-3 ml-auto" />
           </button>
         </nav>
         <div className="p-4 bg-slate-800 m-4 rounded-xl border border-slate-700">
           <div className="flex items-center gap-3 mb-2">
             <div className={`w-2 h-2 rounded-full ${isMember ? "bg-blue-400" : "bg-green-400 animate-pulse"}`}></div>
-            <span className="text-xs font-bold text-white uppercase">{isMember ? "Premium" : "Sales Ready"}</span>
+            <span className="text-xs font-bold text-white uppercase">{isMember ? "Guided" : "Self-Guided"}</span>
           </div>
           <p className="text-xs text-slate-400 mb-3">ID: {userProfile.branch?.substring(0, 3).toUpperCase() || "VET"}-8821</p>
           {!isMember && (
             <button onClick={() => setActiveView("strategy")} className="w-full py-2 bg-yellow-500 hover:bg-yellow-400 text-slate-900 text-xs font-bold rounded-lg transition-colors">
-              Upgrade Now
+              Explore Support Options
             </button>
           )}
         </div>
@@ -5484,7 +6024,7 @@ function TYFYSPlatform() {
                   onClick={() => setActiveView("doctor_portal")}
                   className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-bold hover:border-blue-400 hover:text-blue-700 transition-colors"
                 >
-                  <Icons.Stethoscope className="w-4 h-4" /> Doctor Portal
+                  <Icons.Stethoscope className="w-4 h-4" /> Care Team
                 </button>
               )}
               {activeView !== "secure_comms" && (
@@ -5492,7 +6032,7 @@ function TYFYSPlatform() {
                   onClick={() => setActiveView("secure_comms")}
                   className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-bold hover:border-blue-400 hover:text-blue-700 transition-colors"
                 >
-                  <Icons.MessageSquare className="w-4 h-4" /> Secure Comms
+                  <Icons.MessageSquare className="w-4 h-4" /> Messages
                   {secureUnreadCount > 0 && (
                     <span className="min-w-[1.35rem] px-1.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold text-center">
                       {secureUnreadCount}
@@ -5583,7 +6123,7 @@ function TYFYSPlatform() {
                   onClick={startGuidedTour}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 mb-6"
                 >
-                  <Icons.MessageSquare className="w-6 h-6" /> Start Guided Tour with Angela
+                  <Icons.MessageSquare className="w-6 h-6" /> Show Me Where To Start
                 </button>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -5599,8 +6139,8 @@ function TYFYSPlatform() {
                         {dossierCounts.total} saved
                       </span>
                     </div>
-                    <p className="font-bold text-slate-900">Dossier Vault</p>
-                    <p className="text-sm text-slate-500 mt-1">Scan, extract text, and store evidence packets on this device.</p>
+                    <p className="font-bold text-slate-900">Records Vault</p>
+                    <p className="text-sm text-slate-500 mt-1">Upload records, read scanned text, and keep your evidence organized on this device.</p>
                   </button>
                   <button
                     onClick={() => setActiveView("calculator")}
@@ -5614,7 +6154,7 @@ function TYFYSPlatform() {
                         {calculation.afterRating || currentRating}%
                       </span>
                     </div>
-                    <p className="font-bold text-slate-900">VA Math</p>
+                    <p className="font-bold text-slate-900">VA Rating Calculator</p>
                     <p className="text-sm text-slate-500 mt-1">See combined-rating steps, exact rounding, and a path to 100%.</p>
                   </button>
                   <button
@@ -5629,8 +6169,8 @@ function TYFYSPlatform() {
                         {pactEra}
                       </span>
                     </div>
-                    <p className="font-bold text-slate-900">PACT Act Explorer</p>
-                    <p className="text-sm text-slate-500 mt-1">Filter presumptives by era and exposure track with VA source links.</p>
+                    <p className="font-bold text-slate-900">PACT Act Guide</p>
+                    <p className="text-sm text-slate-500 mt-1">Check presumptive conditions by era and exposure track with official VA sources.</p>
                   </button>
                   <button
                     onClick={() => setActiveView("nexus_generator")}
@@ -5641,11 +6181,11 @@ function TYFYSPlatform() {
                         <Icons.Quote className="w-5 h-5" />
                       </div>
                       <span className="text-xs font-bold text-violet-700 bg-violet-50 px-2 py-1 rounded-full">
-                        {matchingNexusDocs.length} docs
+                        {matchingNexusDocs.length} records
                       </span>
                     </div>
-                    <p className="font-bold text-slate-900">Nexus Generator</p>
-                    <p className="text-sm text-slate-500 mt-1">Draft clinician-ready medical opinion language from your claim facts.</p>
+                    <p className="font-bold text-slate-900">Medical Opinion Draft</p>
+                    <p className="text-sm text-slate-500 mt-1">Organize the facts a doctor would need to write a medical opinion that connects your condition to service.</p>
                   </button>
                 </div>
 
@@ -5656,10 +6196,10 @@ function TYFYSPlatform() {
                   >
                     <div className="flex items-start justify-between gap-4 mb-5">
                       <div>
-                        <p className="text-xs font-bold uppercase tracking-[0.25em] text-blue-600 mb-2">Care coordination</p>
-                        <h3 className="text-2xl font-black text-slate-900">Doctor Portal</h3>
+                        <p className="text-xs font-bold uppercase tracking-[0.25em] text-blue-600 mb-2">Care team</p>
+                        <h3 className="text-2xl font-black text-slate-900">Care Team</h3>
                         <p className="text-sm text-slate-500 mt-2 max-w-2xl">
-                          View the delegation-style directory for TYFYS care ops and assigned doctors, with visit context and system handoff status.
+                          See your TYFYS contacts, provider appointments, and who is handling each part of your file.
                         </p>
                       </div>
                       <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
@@ -5668,15 +6208,15 @@ function TYFYSPlatform() {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Assigned doctors</p>
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">TYFYS contacts</p>
                         <p className="text-3xl font-black text-slate-900 mt-2">{assignedDoctorCount}</p>
                       </div>
                       <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Next visit</p>
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Next appointment</p>
                         <p className="text-sm font-bold text-slate-900 mt-2">{nextDoctorVisit ? nextDoctorVisit.time : "Not scheduled"}</p>
                       </div>
                       <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Sync requests</p>
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Pending follow-ups</p>
                         <p className="text-3xl font-black text-slate-900 mt-2">{requestedIntegrationCount}</p>
                       </div>
                     </div>
@@ -5689,9 +6229,9 @@ function TYFYSPlatform() {
                     <div className="flex items-start justify-between gap-4 mb-5">
                       <div>
                         <p className="text-xs font-bold uppercase tracking-[0.25em] text-blue-600 mb-2">Shared inbox</p>
-                        <h3 className="text-2xl font-black text-slate-900">Secure Comms</h3>
+                        <h3 className="text-2xl font-black text-slate-900">Messages</h3>
                         <p className="text-sm text-slate-500 mt-2 max-w-2xl">
-                          Keep TYFYS and your assigned doctors in one encrypted messaging workspace, with thread-level visit prep and response expectations.
+                          Keep TYFYS and your assigned providers in one secure inbox with clear next steps and reply windows.
                         </p>
                       </div>
                       <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
@@ -5720,26 +6260,26 @@ function TYFYSPlatform() {
                   <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                     <div className="flex justify-between items-center mb-6">
                       <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
-                        <Icons.FileText className="w-5 h-5 text-orange-500" /> Active Claims Tracker
+                        <Icons.FileText className="w-5 h-5 text-orange-500" /> Tracked Conditions
                       </h3>
                       <button
                         onClick={() => setActiveView("calculator")}
                         className="text-sm text-blue-600 font-bold hover:bg-blue-50 px-3 py-1 rounded-lg transition-colors"
                       >
-                        + Add New
+                        Add condition
                       </button>
                     </div>
 
                     {addedClaims.length === 0 ? (
                       <div className="text-center py-12 border-2 border-dashed border-slate-100 rounded-xl bg-slate-50/50">
                         <Icons.FileUp className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                        <p className="text-slate-500 font-medium">No claims being tracked.</p>
-                        <p className="text-sm text-slate-400 mb-4">Add conditions to see required evidence.</p>
+                        <p className="text-slate-500 font-medium">No conditions added yet.</p>
+                        <p className="text-sm text-slate-400 mb-4">Add conditions to see rating guidance and supporting records.</p>
                         <button
                           onClick={() => setActiveView("calculator")}
                           className="bg-white border border-slate-300 text-slate-700 font-bold px-4 py-2 rounded-lg hover:border-blue-500 hover:text-blue-600 transition-colors"
                         >
-                          Start Tracking
+                          Start here
                         </button>
                       </div>
                     ) : (
@@ -5784,7 +6324,7 @@ function TYFYSPlatform() {
                                     : "bg-orange-50 text-orange-600 border-orange-100"
                                 }`}
                               >
-                                {isClaimRatingSelected(claim.rating) ? "Fact-based rating set" : "Rating facts needed"}
+                                {isClaimRatingSelected(claim.rating) ? "Rating selected" : "Rating details needed"}
                               </span>
                               <button
                                 onClick={() => {
@@ -5824,26 +6364,26 @@ function TYFYSPlatform() {
                       <div className="relative z-10">
                         <div className="flex justify-between items-start mb-4">
                           <h3 className="font-bold flex items-center gap-2">
-                            <Icons.ShieldCheck className={`w-5 h-5 ${isMember ? "text-green-400" : "text-slate-400"}`} /> Access
+                            <Icons.ShieldCheck className={`w-5 h-5 ${isMember ? "text-green-400" : "text-slate-400"}`} /> Support
                             Level
                           </h3>
                           <span
                             className={`text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider ${isMember ? "bg-green-500/20 text-green-400" : "bg-slate-100 text-slate-500"}`}
                           >
-                            {isMember ? "Premium" : "Standard"}
+                            {isMember ? "Guided" : "Self-Guided"}
                           </span>
                         </div>
                         <p className={`text-sm mb-6 ${isMember ? "text-slate-400" : "text-slate-500"}`}>
                           {isMember
-                            ? "You have full access to AI Claims Assistant, Consults, and Discounts."
-                            : "Upgrade to unlock TYFYS Claims Assistant, 25% Service Discounts, and Monthly Consults."}
+                            ? "You have guided access to Angela, monthly consult support, and service discounts."
+                            : "Upgrade for guided Angela access, monthly consult support, and service discounts."}
                         </p>
                         {!isMember && (
                           <button
                             onClick={() => setActiveView("strategy")}
                             className="w-full py-3 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-colors text-sm"
                           >
-                            Unlock Premium ($250/mo)
+                            Explore Guided Support ($250/mo)
                           </button>
                         )}
                       </div>
@@ -5862,7 +6402,7 @@ function TYFYSPlatform() {
                               <Icons.FileText className="w-4 h-4" />
                             </div>
                             <span className="text-sm font-bold text-emerald-700">
-                              {dossier.length ? "Continue Intake Workspace" : "Start Intake Workspace"}
+                              {dossier.length ? "Continue Records Intake" : "Start Records Intake"}
                             </span>
                           </div>
                           <Icons.ChevronRight className="w-4 h-4 text-emerald-400" />
@@ -5875,7 +6415,7 @@ function TYFYSPlatform() {
                             <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
                               <Icons.Database className="w-4 h-4" />
                             </div>
-                            <span className="text-sm font-bold text-slate-700 group-hover:text-blue-700">Scan Into Dossier</span>
+                            <span className="text-sm font-bold text-slate-700 group-hover:text-blue-700">Open Records Vault</span>
                           </div>
                           <Icons.ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-blue-400" />
                         </button>
@@ -5942,7 +6482,7 @@ function TYFYSPlatform() {
                         </div>
                         <div>
                           <p className="text-sm font-bold text-slate-800">The TYFYS Method</p>
-                          <p className="text-xs text-slate-600">Private Medical Evidence & Nexus Letters. Often bypasses the C&P exam entirely.</p>
+                          <p className="text-xs text-slate-600">Private medical records and doctor opinion letters. This can strengthen the file before a C&P exam is even scheduled.</p>
                         </div>
                       </div>
                     </div>
@@ -5956,23 +6496,23 @@ function TYFYSPlatform() {
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                   <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-5">
                     <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-blue-600 mb-2">Delegation-style directory</p>
-                      <h2 className="text-2xl font-black text-slate-900 mb-2">Doctor Portal</h2>
+                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-blue-600 mb-2">Care team overview</p>
+                      <h2 className="text-2xl font-black text-slate-900 mb-2">Care Team</h2>
                       <p className="text-slate-600 max-w-4xl">
-                        See exactly who is attached to your packet, what part of the workflow they own, when your next visit or handoff is scheduled, and which practice systems TYFYS can route through without extra back-and-forth.
+                        See who is helping with your file, when your next appointment is scheduled, and what the next step is.
                       </p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 min-w-[18rem]">
                       <div className="rounded-2xl bg-blue-50 border border-blue-100 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-blue-700">Assigned doctors</p>
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-blue-700">TYFYS contacts</p>
                         <p className="text-3xl font-black text-blue-900 mt-2">{assignedDoctorCount}</p>
                       </div>
                       <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Next visit</p>
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Next appointment</p>
                         <p className="text-sm font-bold text-emerald-900 mt-2">{nextDoctorVisit ? nextDoctorVisit.time : "Not scheduled"}</p>
                       </div>
                       <div className="rounded-2xl bg-violet-50 border border-violet-100 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-violet-700">Sync requests</p>
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-violet-700">Pending follow-ups</p>
                         <p className="text-3xl font-black text-violet-900 mt-2">{requestedIntegrationCount}</p>
                       </div>
                     </div>
@@ -5983,14 +6523,14 @@ function TYFYSPlatform() {
                   <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                     <div className="bg-slate-900 px-6 py-5 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
                       <div>
-                        <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-2">Authorized support roster</p>
-                        <h3 className="text-2xl font-black">Your care team directory</h3>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-2">Your contacts</p>
+                        <h3 className="text-2xl font-black">Your TYFYS and provider contacts</h3>
                       </div>
                       <button
                         onClick={() => setActiveView("secure_comms")}
                         className="self-start md:self-auto px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-sm font-bold hover:bg-white/20 transition-colors"
                       >
-                        Open shared inbox
+                        Open messages
                       </button>
                     </div>
                     <div className="divide-y divide-slate-100">
@@ -6031,14 +6571,14 @@ function TYFYSPlatform() {
                                 <div className="flex items-start gap-3">
                                   <Icons.Calendar className="w-4 h-4 text-slate-400 mt-0.5" />
                                   <div>
-                                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Next visit</p>
+                                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Next appointment</p>
                                     <p className="font-bold text-slate-900">{member.nextVisit}</p>
                                   </div>
                                 </div>
                                 <div className="flex items-start gap-3">
                                   <Icons.Database className="w-4 h-4 text-slate-400 mt-0.5" />
                                   <div>
-                                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">System sync</p>
+                                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">How they help</p>
                                     <p className="font-bold text-slate-900">{member.sync}</p>
                                   </div>
                                 </div>
@@ -6047,7 +6587,7 @@ function TYFYSPlatform() {
                                 onClick={() => openSecureThread(member.threadId)}
                                 className="w-full mt-4 px-4 py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors"
                               >
-                                Message {member.tag === "Assigned Doctor" ? "this doctor" : "care ops"}
+                                Message {member.tag === "Assigned Doctor" ? "this provider" : "TYFYS"}
                               </button>
                             </div>
                           </div>
@@ -6059,8 +6599,8 @@ function TYFYSPlatform() {
                   <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
                     <div className="flex items-center justify-between gap-4 mb-6">
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900">Upcoming visit context</h3>
-                        <p className="text-sm text-slate-500">Keep your packet handoff, prep visits, and follow-up consults aligned.</p>
+                        <h3 className="text-xl font-bold text-slate-900">Upcoming appointments</h3>
+                        <p className="text-sm text-slate-500">Review what is coming up and what each appointment is for.</p>
                       </div>
                       <button
                         onClick={() => setActiveView("secure_comms")}
@@ -6091,7 +6631,7 @@ function TYFYSPlatform() {
                               }}
                               className="text-sm font-bold text-blue-700 hover:text-blue-800"
                             >
-                              Open thread
+                              Open conversation
                             </button>
                           </div>
                         </div>
@@ -6103,13 +6643,13 @@ function TYFYSPlatform() {
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
                     <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-violet-600 mb-2">Practice system coverage</p>
-                      <h3 className="text-2xl font-black text-slate-900">CRM and calendar integration cards</h3>
+                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-violet-600 mb-2">Provider coordination</p>
+                      <h3 className="text-2xl font-black text-slate-900">If your doctor already has a patient system</h3>
                       <p className="text-slate-500 mt-2 max-w-3xl">
-                        If your physician partner uses one of these systems, TYFYS can route referral context, schedule windows, and intake packet handoff with less manual chasing.
+                        If your doctor uses one of these systems, TYFYS can usually coordinate appointments and record requests with less back-and-forth. If you are not sure, pick the closest match and we can confirm it for you.
                       </p>
                     </div>
-                    <span className="text-sm font-bold text-slate-500">{requestedIntegrationCount} intro request{requestedIntegrationCount === 1 ? "" : "s"} queued</span>
+                    <span className="text-sm font-bold text-slate-500">{requestedIntegrationCount} follow-up request{requestedIntegrationCount === 1 ? "" : "s"} sent</span>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
                     {doctorPortalIntegrations.map((integration) => (
@@ -6136,7 +6676,7 @@ function TYFYSPlatform() {
                             <span className="font-bold text-slate-800 text-right">{integration.audience}</span>
                           </div>
                           <div className="flex items-center justify-between gap-3">
-                            <span className="text-slate-400">Sync mode</span>
+                            <span className="text-slate-400">What TYFYS can help with</span>
                             <span className="font-bold text-slate-800 text-right">{integration.sync}</span>
                           </div>
                         </div>
@@ -6148,7 +6688,7 @@ function TYFYSPlatform() {
                               : "border border-slate-300 text-slate-700 hover:border-blue-400 hover:text-blue-700"
                           }`}
                         >
-                          {integration.requestedAt ? "Intro requested" : "Request intro"}
+                          {integration.requestedAt ? "TYFYS follow-up requested" : "Ask TYFYS to coordinate"}
                         </button>
                         {integration.requestedAt && (
                           <p className="text-xs text-slate-500 mt-2">Requested {formatDateTime(integration.requestedAt)}</p>
@@ -6165,10 +6705,10 @@ function TYFYSPlatform() {
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                   <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-5">
                     <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-blue-600 mb-2">One inbox, shared care</p>
-                      <h2 className="text-2xl font-black text-slate-900 mb-2">Secure Comms</h2>
+                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-blue-600 mb-2">One inbox for TYFYS and providers</p>
+                      <h2 className="text-2xl font-black text-slate-900 mb-2">Messages</h2>
                       <p className="text-slate-600 max-w-4xl">
-                        Message TYFYS care ops and your assigned doctors from one shared inbox. Each thread carries visit context, response expectations, and a clean running history of packet updates.
+                        Message TYFYS and your assigned providers from one secure inbox. Each conversation keeps the history, next steps, and reply window in one place.
                       </p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 min-w-[18rem]">
@@ -6181,7 +6721,7 @@ function TYFYSPlatform() {
                         <p className="text-3xl font-black text-amber-900 mt-2">{secureUnreadCount}</p>
                       </div>
                       <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Selected SLA</p>
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Typical response</p>
                         <p className="text-sm font-bold text-emerald-900 mt-2">{selectedSecureThread?.responseTime || "Same day"}</p>
                       </div>
                     </div>
@@ -6191,8 +6731,8 @@ function TYFYSPlatform() {
                 <div className="flex flex-col xl:flex-row bg-white rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden min-h-[42rem]">
                   <aside className="xl:w-[22rem] border-b xl:border-b-0 xl:border-r border-slate-200 bg-slate-50/80">
                     <div className="px-5 py-5 border-b border-slate-200">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-2">Shared inbox</p>
-                      <h3 className="text-xl font-bold text-slate-900">Care channels</h3>
+                      <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-2">Messages</p>
+                      <h3 className="text-xl font-bold text-slate-900">Care conversations</h3>
                     </div>
                     <div className="p-3 space-y-2">
                       {secureThreads.map((thread) => (
@@ -6247,7 +6787,7 @@ function TYFYSPlatform() {
                             onClick={() => setActiveView("doctor_portal")}
                             className="self-start md:self-auto px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-sm font-bold hover:bg-white/20 transition-colors"
                           >
-                            Open Doctor Portal
+                            Open Care Team
                           </button>
                         </div>
 
@@ -6294,7 +6834,7 @@ function TYFYSPlatform() {
                       <div className="flex-1 flex items-center justify-center p-10">
                         <div className="text-center">
                           <Icons.MessageSquare className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-                          <p className="font-bold text-slate-700">No secure thread selected.</p>
+                          <p className="font-bold text-slate-700">Choose a conversation to read your messages.</p>
                         </div>
                       </div>
                     )}
@@ -6309,23 +6849,21 @@ function TYFYSPlatform() {
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
                     <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-blue-600 mb-2">Persistent on-device vault</p>
-                      <h2 className="text-2xl font-black text-slate-900 mb-2">Document Vault and Interactive Scanner</h2>
+                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-blue-600 mb-2">Saved on this device</p>
+                      <h2 className="text-2xl font-black text-slate-900 mb-2">Records Vault</h2>
                       <p className="text-slate-600 max-w-3xl">
-                        Capture evidence, run browser-local OCR or PDF text extraction, and keep a clean Dossier of the
-                        records your claim packet depends on. Files stay browser-local in this prototype, while the vault
-                        keeps persistent metadata, notes, and extracted text previews.
+                        Upload records, scan readable text from PDFs or images, and keep the documents your claim depends on in one place. Files stay saved on this device, while the vault keeps notes and text previews attached to each record.
                       </p>
                     </div>
                     <div className="grid grid-cols-2 gap-3 min-w-[16rem]">
                       <div className="rounded-2xl bg-blue-50 border border-blue-100 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-blue-600">Docs saved</p>
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-blue-600">Files saved</p>
                         <p className="text-3xl font-black text-blue-900">{dossierCounts.total}</p>
                       </div>
                       <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-4">
                         <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-600">Last scan</p>
                         <p className="text-sm font-bold text-emerald-900">
-                          {lastScanResult ? `${lastScanResult.confidence}% confidence` : "Ready"}
+                          {lastScanResult ? `${lastScanResult.confidence}% text confidence` : "Ready"}
                         </p>
                       </div>
                     </div>
@@ -6336,11 +6874,11 @@ function TYFYSPlatform() {
                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900">Interactive scanner</h3>
-                        <p className="text-sm text-slate-500">Capture a document, extract real text, and save it into your Dossier.</p>
+                        <h3 className="text-xl font-bold text-slate-900">Scan a record</h3>
+                        <p className="text-sm text-slate-500">Upload a document, read the text TYFYS finds, and save it to your Records Vault.</p>
                       </div>
                       <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
-                        {isScanning ? activeScanStage : "Idle"}
+                        {isScanning ? activeScanStage : "Ready"}
                       </span>
                     </div>
 
@@ -6353,12 +6891,12 @@ function TYFYSPlatform() {
                             <Icons.FileUp className="w-7 h-7" />
                           </div>
                           <p className="text-white font-bold text-lg">
-                            {isScanning ? `Scanning ${scanPayloadRef.current?.title || "document"}...` : "Drop into scanner lane"}
+                            {isScanning ? `Scanning ${scanPayloadRef.current?.title || "document"}...` : "Drop a file to scan"}
                           </p>
                           <p className="text-sm text-slate-400 mt-2">
                             {isScanning
-                              ? "Real OCR is reading the selected file and saving the extracted text into your Dossier."
-                              : "Attach a PDF or image, choose the condition, then run the scan."}
+                              ? "TYFYS is reading the selected file and saving the extracted text to your Records Vault."
+                              : "Attach a PDF or photo, choose the condition, then save the record."}
                           </p>
                         </div>
                       </div>
@@ -6368,7 +6906,7 @@ function TYFYSPlatform() {
                       ></div>
                       <div className="absolute left-8 right-8 bottom-5 flex items-center justify-between text-xs font-mono text-slate-300">
                         <span>{activeScanStage}</span>
-                        <span>{isScanning ? "Live scan" : "Ready"}</span>
+                        <span>{isScanning ? "Scanning now" : "Ready"}</span>
                       </div>
                     </div>
 
@@ -6389,7 +6927,7 @@ function TYFYSPlatform() {
                           onChange={(e) => handleScannerChange("condition", e.target.value)}
                           className="mt-2 w-full p-3 border rounded-xl bg-slate-50"
                         >
-                          <option value="">General evidence</option>
+                          <option value="">General claim record</option>
                           {CONDITION_OPTIONS.map((condition) => (
                             <option key={condition} value={condition}>
                               {condition}
@@ -6439,17 +6977,17 @@ function TYFYSPlatform() {
                       <p className="text-xs text-slate-400 mt-2">
                         {scannerForm.fileName
                           ? `${scannerForm.fileName} · ${formatFileSize(scannerForm.fileSize)}`
-                          : "Use your camera or upload a PDF/image. Notes are saved alongside the scanned text."}
+                          : "Use your camera or upload a PDF or photo. TYFYS saves the text it finds so you can review it later."}
                       </p>
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Capture notes</label>
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Notes for TYFYS</label>
                       <textarea
                         value={scannerForm.notes}
                         onChange={(e) => handleScannerChange("notes", e.target.value)}
                         rows="4"
-                        placeholder="Example: mentions flare-ups, reduced range of motion, and missed work shifts."
+                        placeholder="Example: mentions flare-ups, limited movement, and missed work shifts."
                         className="mt-2 w-full p-3 border rounded-xl bg-slate-50"
                       />
                     </div>
@@ -6460,14 +6998,14 @@ function TYFYSPlatform() {
                         disabled={isScanning || !scannerFile}
                         className="px-5 py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 disabled:opacity-60"
                       >
-                        {isScanning ? "Scanning..." : "Run interactive scan"}
+                        {isScanning ? "Saving..." : "Save to Records Vault"}
                       </button>
                       <button
                         onClick={exportDossier}
                         disabled={!dossier.length}
                         className="px-5 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold hover:border-slate-400 disabled:opacity-60"
                       >
-                        Export Dossier JSON
+                        Export Records Vault
                       </button>
                     </div>
 
@@ -6477,11 +7015,11 @@ function TYFYSPlatform() {
                       <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-5">
                         <div className="flex items-center justify-between gap-4 mb-3">
                           <div>
-                            <p className="text-xs font-bold uppercase tracking-wider text-cyan-700">Latest scan result</p>
+                            <p className="text-xs font-bold uppercase tracking-wider text-cyan-700">Latest saved record</p>
                             <p className="font-bold text-slate-900">{lastScanResult.title}</p>
                           </div>
                           <span className="text-xs font-bold px-3 py-1 rounded-full bg-white text-cyan-700 border border-cyan-200">
-                            {lastScanResult.confidence}% confidence
+                            {lastScanResult.confidence}% text confidence
                           </span>
                         </div>
                         <div className="text-sm text-slate-700 whitespace-pre-line leading-relaxed bg-white border border-cyan-100 rounded-xl p-4">
@@ -6494,8 +7032,8 @@ function TYFYSPlatform() {
                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <div className="flex items-center justify-between gap-4 mb-6">
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900">Dossier vault</h3>
-                        <p className="text-sm text-slate-500">Persistent document cards saved from this browser session onward.</p>
+                        <h3 className="text-xl font-bold text-slate-900">Saved records</h3>
+                        <p className="text-sm text-slate-500">Records saved from this browser session onward.</p>
                       </div>
                       <div className="text-right">
                         <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Types tracked</p>
@@ -6506,8 +7044,8 @@ function TYFYSPlatform() {
                     {!dossier.length ? (
                       <div className="h-full border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/70 p-10 text-center">
                         <Icons.Database className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-                        <p className="font-bold text-slate-700">Your Dossier is empty.</p>
-                        <p className="text-sm text-slate-500 mt-2">Run your first scan to start building a persistent evidence stack.</p>
+                        <p className="font-bold text-slate-700">Your Records Vault is empty.</p>
+                        <p className="text-sm text-slate-500 mt-2">Start your first scan to save a record here.</p>
                       </div>
                     ) : (
                       <div className="space-y-4 max-h-[60rem] overflow-y-auto pr-1">
@@ -6524,18 +7062,18 @@ function TYFYSPlatform() {
                                   </span>
                                   {item.crmSync?.status === "synced" && (
                                     <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">
-                                      Zoho synced
+                                      Sent to TYFYS file
                                     </span>
                                   )}
                                   {item.crmSync?.status === "failed" && (
                                     <span className="text-[11px] font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2 py-1 rounded-full">
-                                      Zoho sync failed
+                                      TYFYS file pending
                                     </span>
                                   )}
                                 </div>
                                 <p className="font-bold text-slate-900 text-lg">{item.title}</p>
                                 <p className="text-sm text-slate-500">
-                                  {item.condition || "General evidence"} · {item.source} · {formatDateTime(item.capturedAt)}
+                                  {item.condition || "General claim record"} · {item.source} · {formatDateTime(item.capturedAt)}
                                 </p>
                               </div>
                               <button
@@ -6549,21 +7087,21 @@ function TYFYSPlatform() {
                               <div className="rounded-xl bg-slate-50 border border-slate-200 p-3">
                                 <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">File</p>
                                 <p className="font-medium text-slate-700 mt-1">
-                                  {item.fileName ? `${item.fileName} · ${formatFileSize(item.fileSize)}` : "Scanner note only"}
+                                  {item.fileName ? `${item.fileName} · ${formatFileSize(item.fileSize)}` : "Notes only"}
                                 </p>
                               </div>
                               <div className="rounded-xl bg-slate-50 border border-slate-200 p-3">
-                                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Scan confidence</p>
+                                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Text confidence</p>
                                 <p className="font-medium text-slate-700 mt-1">{item.confidence}%</p>
                               </div>
                             </div>
                             {item.crmSync && (
                               <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm">
-                                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">CRM sync</p>
+                                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">TYFYS file status</p>
                                 <p className="mt-1 font-medium text-slate-700">
                                   {item.crmSync.status === "synced"
-                                    ? `Attached to ${item.crmSync.crmModule || "Zoho"} ${item.crmSync.recordId || ""}`.trim()
-                                    : item.crmSync.error || "Saved locally only"}
+                                    ? "Added to your TYFYS file."
+                                    : "Saved on this device. TYFYS still needs to add it to your file."}
                                 </p>
                               </div>
                             )}
@@ -6584,8 +7122,8 @@ function TYFYSPlatform() {
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                   <div className="flex flex-col lg:flex-row justify-between gap-6">
                     <div className="max-w-3xl">
-                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-green-600 mb-2">38 CFR-based combined rating logic</p>
-                      <h2 className="text-2xl font-black text-slate-900 mb-3">VA Math Calculator</h2>
+                      <p className="text-xs font-bold uppercase tracking-[0.3em] text-green-600 mb-2">Official VA combined-rating rules</p>
+                      <h2 className="text-2xl font-black text-slate-900 mb-3">VA Rating Calculator</h2>
                       <p className="text-slate-600 leading-relaxed">
                         Each added condition is applied to your remaining healthy efficiency, rounded to the nearest whole
                         number after every step, then rounded to the nearest 10% at the end. This remains an estimate
@@ -6602,8 +7140,8 @@ function TYFYSPlatform() {
                           <ul className="list-disc list-inside space-y-1.5">
                             <li>Use <strong>Increase</strong> if a condition is already service connected but got worse.</li>
                             <li>Use <strong>New</strong> if the VA has never rated that condition before.</li>
-                            <li>Claims entered here use condition-specific rating guardrails so the dropdown only shows percentages supported by the selected VA schedule.</li>
-                            <li>Some conditions are intentionally locked until you pick the exact diagnostic basis or bring the actual test results.</li>
+                            <li>Claims entered here use condition-specific rating rules so the dropdown only shows percentages supported by the selected VA schedule.</li>
+                            <li>Some conditions stay locked until you choose the exact diagnosis or add the test result the VA uses for that rating.</li>
                           </ul>
                           <div className="mt-3 flex flex-wrap gap-3">
                             <a href={COMBINED_RATINGS_SOURCE_URL} target="_blank" rel="noreferrer" className="font-bold text-green-800 hover:text-green-900">
@@ -6733,7 +7271,7 @@ function TYFYSPlatform() {
                           </select>
                         </div>
                         <div>
-                          <label className="text-xs font-bold text-slate-500 uppercase">Expected rating</label>
+                          <label className="text-xs font-bold text-slate-500 uppercase">Rating to model</label>
                           <select
                             value={newRatingInput}
                             onChange={(e) => setNewRatingInput(e.target.value)}
@@ -6787,7 +7325,7 @@ function TYFYSPlatform() {
                         <div className="mb-6 rounded-2xl border border-slate-200 bg-slate-50 p-5">
                           <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                             <div>
-                              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">Fact-based rating guardrail</p>
+                              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500">Allowed ratings for this condition</p>
                               <h3 className="text-lg font-bold text-slate-900 mt-2">{selectedCondition}</h3>
                               <p className="text-sm text-slate-600 mt-1">
                                 {selectedRatingContext?.label || selectedConditionRule.ruleTitle}
@@ -6834,7 +7372,7 @@ function TYFYSPlatform() {
                               </div>
                               {selectedRatingOptions.length > 0 && (
                                 <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
-                                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Selected rating facts</p>
+                                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">What this rating means</p>
                                   <p className="text-sm text-slate-700">
                                     {(newRatingInput !== "" &&
                                       selectedRatingOptions.find((option) => option.value === Number(newRatingInput))?.summary) ||
@@ -6860,7 +7398,7 @@ function TYFYSPlatform() {
 
                       <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-end">
                         <div className="flex-1">
-                          <label className="text-xs font-bold text-slate-500 uppercase">Claim type</label>
+                          <label className="text-xs font-bold text-slate-500 uppercase">Claim status</label>
                           <div className="mt-2 flex rounded-xl border overflow-hidden">
                             <button
                               onClick={() => setClaimType("increase")}
@@ -6928,18 +7466,18 @@ function TYFYSPlatform() {
                     <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                       <div className="flex items-center justify-between mb-4">
                         <div>
-                          <h3 className="text-xl font-bold text-slate-900">Claims in the stack</h3>
-                          <p className="text-sm text-slate-500">Only claims with a fact-based rating are applied from highest to lowest inside VA math.</p>
+                          <h3 className="text-xl font-bold text-slate-900">Conditions in your calculator</h3>
+                          <p className="text-sm text-slate-500">Only conditions with a supported rating are applied from highest to lowest in the calculator.</p>
                         </div>
                         <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
-                          {addedClaims.length} claim{addedClaims.length === 1 ? "" : "s"}
+                          {addedClaims.length} condition{addedClaims.length === 1 ? "" : "s"}
                         </span>
                       </div>
                       {!addedClaims.length ? (
                         <div className="rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/70 p-10 text-center">
                           <Icons.Calculator className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                          <p className="font-bold text-slate-700">No claims added yet.</p>
-                          <p className="text-sm text-slate-500 mt-2">Start with the condition inputs above to see exact rating math.</p>
+                          <p className="font-bold text-slate-700">No conditions added yet.</p>
+                          <p className="text-sm text-slate-500 mt-2">Start with the condition fields above to see how the combined rating changes.</p>
                         </div>
                       ) : (
                         <div className="space-y-3">
@@ -6989,8 +7527,8 @@ function TYFYSPlatform() {
                     <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                       <div className="flex items-start justify-between gap-4 mb-4">
                         <div>
-                          <h3 className="text-xl font-bold text-slate-900">Step-by-step breakdown</h3>
-                          <p className="text-sm text-slate-500">Every claim reduces the remaining healthy efficiency, not the original 100%.</p>
+                          <h3 className="text-xl font-bold text-slate-900">How the calculator works</h3>
+                          <p className="text-sm text-slate-500">Every added condition reduces the remaining healthy efficiency, not the original 100%.</p>
                         </div>
                         <button
                           onClick={() => {
@@ -7006,7 +7544,7 @@ function TYFYSPlatform() {
                         </button>
                       </div>
                       {!vaMathDetail.steps.length ? (
-                        <p className="text-sm text-slate-500">Add at least one claim with a fact-based percentage to see the exact VA math sequence.</p>
+                        <p className="text-sm text-slate-500">Add at least one condition with a supported percentage to see the exact rating sequence.</p>
                       ) : (
                         <div className="space-y-3">
                           {vaMathDetail.steps.map((step, idx) => (
@@ -7096,7 +7634,7 @@ function TYFYSPlatform() {
               <div className="space-y-6 animate-fadeIn">
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                   <p className="text-xs font-bold uppercase tracking-[0.3em] text-orange-600 mb-2">Official VA exposure guidance</p>
-                  <h2 className="text-2xl font-black text-slate-900 mb-2">PACT Act Explorer</h2>
+                  <h2 className="text-2xl font-black text-slate-900 mb-2">PACT Act Guide</h2>
                   <p className="text-slate-600 max-w-4xl">{pactConfig.intro}</p>
                   <div className="flex flex-wrap gap-2 mt-5">
                     {Object.keys(PACT_ERA_CONFIG).map((era) => (
@@ -7113,7 +7651,7 @@ function TYFYSPlatform() {
 
                 <div className="grid grid-cols-1 xl:grid-cols-[18rem,1fr] gap-6">
                   <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <h3 className="text-lg font-bold text-slate-900 mb-4">Recommended tracks</h3>
+                    <h3 className="text-lg font-bold text-slate-900 mb-4">Recommended starting points</h3>
                     <div className="space-y-3">
                       {pactTrackIds.map((trackId) => {
                         const track = PACT_TRACKS[trackId];
@@ -7230,17 +7768,16 @@ function TYFYSPlatform() {
                   <div className="flex flex-col lg:flex-row justify-between gap-5">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.3em] text-violet-600 mb-2">Drafting support only</p>
-                      <h2 className="text-2xl font-black text-slate-900 mb-2">Nexus Template Generator</h2>
+                      <h2 className="text-2xl font-black text-slate-900 mb-2">Medical Opinion Draft</h2>
                       <p className="text-slate-600 max-w-4xl">
-                        Build a clinician-ready draft that connects service facts, symptom history, and the records already in your
-                        Dossier. A licensed medical professional still has to independently review, edit, and sign the final opinion.
+                        Use this to organize the facts a doctor would need for a nexus or medical opinion letter. A licensed medical professional still has to independently review, edit, and sign the final opinion.
                       </p>
                     </div>
                     <button
                       onClick={() => setActiveView("dossier")}
                       className="self-start px-4 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold hover:border-slate-400"
                     >
-                      Open Dossier
+                      Open Records Vault
                     </button>
                   </div>
                 </div>
@@ -7392,7 +7929,7 @@ function TYFYSPlatform() {
                     </div>
 
                     <div className="rounded-2xl border border-violet-100 bg-violet-50 p-4">
-                      <p className="text-xs font-bold uppercase tracking-wider text-violet-700 mb-2">Matching dossier support</p>
+                      <p className="text-xs font-bold uppercase tracking-wider text-violet-700 mb-2">Matching records from your vault</p>
                       {matchingNexusDocs.length ? (
                         <div className="flex flex-wrap gap-2">
                           {matchingNexusDocs.slice(0, 6).map((item) => (
@@ -7402,7 +7939,7 @@ function TYFYSPlatform() {
                           ))}
                         </div>
                       ) : (
-                        <p className="text-sm text-violet-900">No matching Dossier items yet. Add service records, lay statements, or private medical evidence to strengthen the draft.</p>
+                        <p className="text-sm text-violet-900">No matching records yet. Add service records, lay statements, or private medical evidence to strengthen the draft.</p>
                       )}
                     </div>
 
@@ -7410,7 +7947,7 @@ function TYFYSPlatform() {
                       onClick={generateNexusTemplate}
                       className="w-full py-3 rounded-xl bg-violet-600 text-white font-bold hover:bg-violet-700"
                     >
-                      Generate nexus draft
+                      Create medical opinion draft
                     </button>
                   </div>
 
@@ -7431,8 +7968,8 @@ function TYFYSPlatform() {
                     {!nexusDraft ? (
                       <div className="flex-1 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/70 p-10 text-center">
                         <Icons.Quote className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-                        <p className="font-bold text-slate-700">No draft generated yet.</p>
-                        <p className="text-sm text-slate-500 mt-2">Complete the fields on the left and generate a nexus template.</p>
+                        <p className="font-bold text-slate-700">No draft created yet.</p>
+                        <p className="text-sm text-slate-500 mt-2">Complete the fields on the left and create a medical opinion draft.</p>
                       </div>
                     ) : (
                       <pre className="flex-1 whitespace-pre-wrap text-sm leading-relaxed text-slate-700 bg-slate-50 border border-slate-200 rounded-2xl p-5 overflow-y-auto">
@@ -7448,36 +7985,36 @@ function TYFYSPlatform() {
               <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 h-full flex flex-col">
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold text-slate-900">Free Document Finder</h2>
-                    <p className="text-slate-500">Select a condition to see the EXACT documents required by the VA.</p>
+                    <h2 className="text-2xl font-bold text-slate-900">Evidence Checklist</h2>
+                    <p className="text-slate-500">Choose a condition to see the main VA form and supporting records that usually matter.</p>
                   </div>
-                  <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide">Always Free</div>
+                  <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide">Free Tool</div>
                 </div>
 
                 {/* INSTRUCTIONAL GRAPHIC */}
                 <div className="grid grid-cols-3 gap-4 mb-8">
                   <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center relative">
                     <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">1</div>
-                    <p className="text-xs font-bold text-slate-700 uppercase">Select Condition</p>
+                    <p className="text-xs font-bold text-slate-700 uppercase">Choose condition</p>
                     <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-slate-300">
                       <Icons.ChevronRight className="w-6 h-6" />
                     </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center relative">
                     <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">2</div>
-                    <p className="text-xs font-bold text-slate-700 uppercase">Get Checklist</p>
+                    <p className="text-xs font-bold text-slate-700 uppercase">Review checklist</p>
                     <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-slate-300">
                       <Icons.ChevronRight className="w-6 h-6" />
                     </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center">
                     <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">3</div>
-                    <p className="text-xs font-bold text-slate-700 uppercase">Build Claim</p>
+                    <p className="text-xs font-bold text-slate-700 uppercase">Gather records</p>
                   </div>
                 </div>
 
                 <div className="mb-8">
-                  <label className="block text-sm font-bold text-slate-500 uppercase mb-2">I want to claim:</label>
+                  <label className="block text-sm font-bold text-slate-500 uppercase mb-2">I want help with:</label>
                   <select
                     value={docWizardCondition}
                     onChange={(e) => setDocWizardCondition(e.target.value)}
@@ -7494,10 +8031,10 @@ function TYFYSPlatform() {
                   </select>
                 </div>
                 {docWizardCondition && (
-                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-8 animate-fadeIn flex-1">
-                    <h3 className="text-xl font-bold text-blue-900 mb-6 flex items-center gap-2">
-                      <Icons.FileText className="w-6 h-6" /> Required Evidence Checklist
-                    </h3>
+                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-8 animate-fadeIn flex-1">
+                      <h3 className="text-xl font-bold text-blue-900 mb-6 flex items-center gap-2">
+                      <Icons.FileText className="w-6 h-6" /> What to gather
+                      </h3>
                     {(() => {
                       const flatData = Object.values(DISABILITY_DATA).flat();
                       const item = flatData.find((i) => i.name === docWizardCondition);
@@ -7520,24 +8057,24 @@ function TYFYSPlatform() {
                                 setIsBotOpen(true);
                                 addMessage(
                                   "bot",
-                                  "Our specialists can complete this DBQ for you based on medical evidence. Check the Strategy tab."
+                                  "If you want help gathering or reviewing this DBQ, open Support Options and we can walk you through the next step."
                                 );
                               }}
                               className="text-xs bg-slate-50 text-blue-600 font-bold px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-blue-50 transition-colors whitespace-nowrap self-center"
                             >
-                              Help Me With This
+                              Ask TYFYS About This
                             </button>
                           </li>
                           {item.docs &&
                             item.docs.map((doc) => (
                               <li key={doc} className="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-200 shadow-sm relative group">
-                                <div className="bg-purple-100 p-2 rounded-lg text-purple-600 font-bold text-sm">DOC</div>
+                                <div className="bg-purple-100 p-2 rounded-lg text-purple-600 font-bold text-sm">RECORD</div>
                                 <div className="flex-1">
                                   <div className="flex items-center gap-2">
                                     <span className="font-bold text-slate-800 block text-lg">{doc}</span>
                                     <HelpTooltip
-                                      title="Supporting Documentation"
-                                      content="Evidence like personal statements or medical logs helps prove the severity and frequency of your condition."
+                                      title="Supporting Records"
+                                      content="Evidence like personal statements, logs, and treatment records helps show how often symptoms happen and how severe they are."
                                     />
                                   </div>
                                   <span className="text-slate-500 text-sm">Supporting evidence.</span>
@@ -7550,17 +8087,17 @@ function TYFYSPlatform() {
                               <div className="flex items-center gap-2">
                                 <span className="font-bold text-slate-800 block text-lg">Medical Opinion</span>
                                 <HelpTooltip
-                                  title="The Nexus Letter"
-                                  content="This is the most critical document. It is a letter from a doctor stating your condition is 'more likely than not' caused by your service. Without it, claims often fail."
+                                  title="Medical Opinion Letter"
+                                  content="This is a letter from a doctor explaining that your condition is more likely than not connected to your service."
                                 />
                               </div>
-                              <span className="text-slate-500 text-sm">Crucial link.</span>
+                              <span className="text-slate-500 text-sm">Often important.</span>
                             </div>
                             <button
                               onClick={() => setShowSpecialistModal(true)}
                               className="text-xs bg-orange-600 text-white font-bold px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors whitespace-nowrap self-center shadow-md"
                             >
-                              Get a Private Doctor
+                              Find an Independent Doctor
                             </button>
                           </li>
                         </ul>
@@ -7576,8 +8113,8 @@ function TYFYSPlatform() {
                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
                   <div className="flex flex-col md:flex-row justify-between items-center mb-8">
                     <div>
-                      <h2 className="text-2xl font-bold text-slate-900">Choose Your Path</h2>
-                      <p className="text-slate-500 text-lg">Select the level of support you need.</p>
+                      <h2 className="text-2xl font-bold text-slate-900">Choose Your Level of Support</h2>
+                      <p className="text-slate-500 text-lg">Select how much help you want from TYFYS.</p>
                     </div>
                     {!discountUnlocked && !isMember && (
                       <button
@@ -7592,7 +8129,7 @@ function TYFYSPlatform() {
                   {/* TIMELINE COMPARISON */}
                   <div className="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-200">
                     <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-                      <Icons.Clock className="w-5 h-5 text-blue-600" /> Average Timeline to Completion
+                        <Icons.Clock className="w-5 h-5 text-blue-600" /> Average Time to Completion
                     </h3>
                     <div className="space-y-4">
                       <div>
@@ -7623,13 +8160,13 @@ function TYFYSPlatform() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
                       <div>
                         <h3 className="text-3xl font-bold mb-4">Premium Membership</h3>
-                        <p className="text-blue-200 mb-6 text-lg">The ultimate toolkit for veterans.</p>
+                        <p className="text-blue-200 mb-6 text-lg">Hands-on support, faster navigation, and ongoing guidance.</p>
                         <ul className="space-y-3 text-blue-50 font-medium">
                           <li className="flex items-center gap-3">
                             <Icons.Clock className="w-5 h-5 text-green-400" /> Save 7-10 months of waiting (Avg)
                           </li>
                           <li className="flex items-center gap-3">
-                            <Icons.CheckCircle className="w-5 h-5 text-green-400" /> <strong>Unlimited</strong> TYFYS Claims Assistant
+                            <Icons.CheckCircle className="w-5 h-5 text-green-400" /> <strong>Unlimited</strong> Claim Guide access
                           </li>
                           <li className="flex items-center gap-3">
                             <Icons.CheckCircle className="w-5 h-5 text-green-400" /> <strong>1 Free 30-min Consult</strong> / Month
@@ -7657,12 +8194,12 @@ function TYFYSPlatform() {
                           {isCheckoutLoading
                             ? "Redirecting..."
                             : nativeAppRuntime
-                              ? "Talk to TYFYS About Premium"
+                              ? "Talk to TYFYS About Membership"
                               : "Join Premium"}
                         </button>
                         {nativeAppRuntime && (
                           <p className="mt-3 text-xs text-blue-100 max-w-xs ml-auto">
-                            Membership activation is handled by TYFYS care ops in the mobile app so your account can stay in sync across web and mobile.
+                            TYFYS activates memberships in the mobile app so your support plan stays active in both the mobile app and website.
                           </p>
                         )}
                       </div>
@@ -7780,14 +8317,13 @@ function TYFYSPlatform() {
                   <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2">
-                        First Activity After Signup
+                        Start here after signup
                       </p>
                       <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-3">
-                        Run Intake Before They Explore the Rest of the App
+                        Finish records intake first
                       </h2>
                       <p className="text-slate-600 max-w-3xl">
-                        Use the embedded intake assistant to collect missing military records, then upload everything here so the
-                        source files are attached to the veteran's Zoho record immediately.
+                        Use this area to gather your DD-214, service treatment records, VA decisions, and private records first. Once those are uploaded, the rest of the app will be much easier to use.
                       </p>
                     </div>
                     <div className="grid grid-cols-2 gap-3 min-w-[16rem]">
@@ -7798,7 +8334,7 @@ function TYFYSPlatform() {
                         </p>
                       </div>
                       <div className="rounded-2xl bg-blue-50 border border-blue-100 p-4">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-blue-600">Zoho synced</p>
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-blue-600">Sent to TYFYS file</p>
                         <p className="text-3xl font-black text-blue-900">{syncedDossierCount}</p>
                       </div>
                     </div>
@@ -7810,17 +8346,16 @@ function TYFYSPlatform() {
                     <div className="border-b border-slate-200 p-6">
                       <div className="flex items-center justify-between gap-4">
                         <div>
-                          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">Embedded Assistant</p>
-                          <h3 className="mt-2 text-2xl font-black text-slate-900">Intake chatbot</h3>
+                          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">Guided intake</p>
+                          <h3 className="mt-2 text-2xl font-black text-slate-900">Records intake assistant</h3>
                           <p className="mt-2 text-sm leading-6 text-slate-500">
-                            This stays scoped to intake so the veteran can hand over military records before moving into the rest of
-                            TYFYS.
+                            Stay here first so you can hand over the key records before moving into calculators and drafting tools.
                           </p>
                         </div>
                         <div className="rounded-2xl bg-slate-900 px-4 py-3 text-white">
-                          <p className="text-[11px] font-bold uppercase tracking-wider text-slate-300">Zoho target</p>
+                          <p className="text-[11px] font-bold uppercase tracking-wider text-slate-300">TYFYS file</p>
                           <p className="mt-1 text-sm font-bold">
-                            {zohoCrmModule || "CRM record pending"}
+                            {zohoCrmModule || "File not created yet"}
                             {zohoLeadId ? ` · ${zohoLeadId}` : ""}
                           </p>
                         </div>
@@ -7832,9 +8367,9 @@ function TYFYSPlatform() {
                         <div className="flex min-h-[44rem] items-center justify-center rounded-[1.75rem] border border-white/10 bg-slate-900 text-center text-slate-300">
                           <div>
                             <Icons.Bot className="mx-auto h-10 w-10 text-emerald-300" />
-                            <p className="mt-4 text-lg font-bold text-white">Loading intake assistant...</p>
+                            <p className="mt-4 text-lg font-bold text-white">Loading intake guide...</p>
                             <p className="mt-2 max-w-md text-sm leading-6 text-slate-400">
-                              The Zapier intake chatbot is loading directly inside the app.
+                              Your intake guide is opening directly inside the app.
                             </p>
                           </div>
                         </div>
@@ -7844,7 +8379,7 @@ function TYFYSPlatform() {
                         <div className="flex min-h-[44rem] items-center justify-center rounded-[1.75rem] border border-amber-500/30 bg-amber-500/10 px-6 text-center">
                           <div>
                             <Icons.AlertTriangle className="mx-auto h-10 w-10 text-amber-300" />
-                            <p className="mt-4 text-lg font-bold text-white">Chatbot embed failed to load</p>
+                            <p className="mt-4 text-lg font-bold text-white">Intake guide could not load</p>
                             <p className="mt-2 max-w-md text-sm leading-6 text-slate-300">{zapierEmbedError}</p>
                           </div>
                         </div>
@@ -7875,7 +8410,7 @@ function TYFYSPlatform() {
                           onClick={() => setActiveView("welcome_guide")}
                           className="px-4 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-lg font-bold hover:border-slate-400 transition-colors"
                         >
-                          Return to Dashboard
+                          Return to Claim Home
                         </button>
                       </div>
 
@@ -7936,14 +8471,14 @@ function TYFYSPlatform() {
                     <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                       <div className="flex items-center justify-between gap-4 mb-5">
                         <div>
-                          <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Upload and sync</p>
+                          <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Upload records</p>
                           <h3 className="text-xl font-black text-slate-900 mt-2">Record uploader</h3>
                         </div>
                         <button
                           onClick={() => setActiveView("dossier")}
                           className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-colors"
                         >
-                          Open Full Dossier <Icons.ArrowRight className="w-4 h-4" />
+                          Open Records Vault <Icons.ArrowRight className="w-4 h-4" />
                         </button>
                       </div>
 
@@ -7995,7 +8530,7 @@ function TYFYSPlatform() {
                             onChange={(e) => handleScannerChange("condition", e.target.value)}
                             className="mt-2 w-full p-3 border rounded-xl bg-slate-50"
                           >
-                            <option value="">General evidence</option>
+                            <option value="">General claim record</option>
                             {CONDITION_OPTIONS.map((condition) => (
                               <option key={condition} value={condition}>
                                 {condition}
@@ -8018,17 +8553,17 @@ function TYFYSPlatform() {
                         <p className="text-xs text-slate-400 mt-2">
                           {scannerForm.fileName
                             ? `${scannerForm.fileName} · ${formatFileSize(scannerForm.fileSize)}`
-                            : "Choose a PDF or image. TYFYS will OCR it, save it in the Dossier, and attach the source file to Zoho."}
+                            : "Choose a PDF or photo. TYFYS will save the text it finds to your Records Vault and add it to your TYFYS file when available."}
                         </p>
                       </div>
 
                       <div className="mt-4">
-                        <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Capture notes</label>
+                        <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Notes for TYFYS</label>
                         <textarea
                           value={scannerForm.notes}
                           onChange={(e) => handleScannerChange("notes", e.target.value)}
                           rows="4"
-                          placeholder="Anything the intake team should know about this file."
+                          placeholder="Anything TYFYS should know about this record."
                           className="mt-2 w-full p-3 border rounded-xl bg-slate-50"
                         />
                       </div>
@@ -8039,13 +8574,13 @@ function TYFYSPlatform() {
                           disabled={isScanning || !scannerFile}
                           className="px-5 py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 disabled:opacity-60"
                         >
-                          {isScanning ? "Uploading..." : "Upload, scan, and sync"}
+                          {isScanning ? "Saving..." : "Upload this record"}
                         </button>
                         <button
                           onClick={() => setActiveView("dossier")}
                           className="px-5 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold hover:border-slate-400"
                         >
-                          Review All Uploaded Records
+                          Open Records Vault
                         </button>
                       </div>
 
@@ -8073,7 +8608,7 @@ function TYFYSPlatform() {
                               <p className="font-bold text-slate-900">{lastScanResult.title}</p>
                             </div>
                             <span className="text-xs font-bold px-3 py-1 rounded-full bg-white text-cyan-700 border border-cyan-200">
-                              {lastScanResult.confidence}% confidence
+                              {lastScanResult.confidence}% text confidence
                             </span>
                           </div>
                           <div className="text-sm text-slate-700 whitespace-pre-line leading-relaxed bg-white border border-cyan-100 rounded-xl p-4">
@@ -8081,12 +8616,12 @@ function TYFYSPlatform() {
                           </div>
                           {lastScanResult.crmSync?.status === "synced" && (
                             <p className="mt-3 text-xs font-bold uppercase tracking-wider text-emerald-700">
-                              Synced to Zoho {lastScanResult.crmSync.crmModule}
+                              Sent to your TYFYS file
                             </p>
                           )}
                           {lastScanResult.crmSync?.status === "failed" && (
                             <p className="mt-3 text-xs font-bold uppercase tracking-wider text-red-700">
-                              Saved locally. Zoho sync failed.
+                              Saved on this device. TYFYS file update pending.
                             </p>
                           )}
                         </div>
@@ -8103,10 +8638,10 @@ function TYFYSPlatform() {
                 <div className="bg-slate-900 text-white p-4 flex justify-between items-center">
                   <div className="flex items-center gap-2">
                     <Icons.Bot className="w-5 h-5 text-green-400" />
-                    <h3 className="font-bold">TYFYS Claims Bot</h3>
+                    <h3 className="font-bold">Claim Guide</h3>
                   </div>
                   <div className="text-xs bg-white/10 px-2 py-1 rounded">
-                    {isMember ? "Unlimited Access" : `${3 - dailyQuestionCount} Free Questions Left`}
+                    {isMember ? "Unlimited guidance" : `${3 - dailyQuestionCount} guided questions left`}
                   </div>
                 </div>
                 <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
@@ -8127,7 +8662,7 @@ function TYFYSPlatform() {
                         <Icons.Lock className="w-6 h-6 text-slate-400 mb-2" />
                         <p className="text-sm font-bold text-slate-800 mb-1">Daily Limit Reached</p>
                         <button onClick={() => setActiveView("strategy")} className="text-xs text-blue-600 underline">
-                          Upgrade to Premium for Unlimited
+                          See support options for unlimited guidance
                         </button>
                       </div>
                     )}
@@ -8136,7 +8671,7 @@ function TYFYSPlatform() {
                       type="text"
                       value={aiBotInput}
                       onChange={(e) => setAiBotInput(e.target.value)}
-                      placeholder="Ask Angela anything..."
+                      placeholder="Ask Angela about your claim..."
                       className="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
                     />
                     <button
@@ -8167,8 +8702,8 @@ function TYFYSPlatform() {
               <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-blue-900 rounded-full"></span>
             </div>
             <div>
-              <p className="font-bold text-sm">Angela - Guide</p>
-              <p className="text-xs text-blue-200">Online | Here for You</p>
+              <p className="font-bold text-sm">Angela - TYFYS Guide</p>
+              <p className="text-xs text-blue-200">Online | Ready to help</p>
             </div>
           </div>
           <button onClick={() => setIsBotOpen(false)} className="text-blue-200 hover:text-white transition-colors">
@@ -8204,7 +8739,7 @@ function TYFYSPlatform() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Angela anything..."
+              placeholder="Ask Angela about your claim..."
               className="w-full pl-4 pr-12 py-3 bg-slate-50 border border-slate-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
             />
             <button
