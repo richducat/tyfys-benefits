@@ -45,6 +45,7 @@ const SCAN_STAGES = ["Preparing document", "Extracting text", "Reading text", "S
 const OCR_SCRIPT_URL = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
 const PDF_JS_SCRIPT_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
 const PDF_JS_WORKER_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+const GOOGLE_IDENTITY_SCRIPT_URL = "https://accounts.google.com/gsi/client";
 const ZAPIER_CHATBOT_SCRIPT_URL =
   "https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js";
 const ZAPIER_CHATBOT_ELEMENT_TAG = "zapier-interfaces-chatbot-embed";
@@ -2899,7 +2900,9 @@ function AccessLanding({
   resetStatus,
   resetVerification,
   isResetSubmitting,
+  googleAuth,
   onLogin,
+  onGoogleLogin,
   onRequestPasswordReset,
   onVerifyPasswordResetAccount,
   onCompletePasswordReset,
@@ -2915,11 +2918,18 @@ function AccessLanding({
   const [resetPhoneLast4, setResetPhoneLast4] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [googleRenderError, setGoogleRenderError] = useState("");
+  const googleButtonRef = useRef(null);
+  const googleLoginRef = useRef(onGoogleLogin);
 
   useEffect(() => {
     setEmail(accountEmail || "");
     setResetEmail(accountEmail || "");
   }, [accountEmail]);
+
+  useEffect(() => {
+    googleLoginRef.current = onGoogleLogin;
+  }, [onGoogleLogin]);
 
   useEffect(() => {
     if (resetToken) {
@@ -3013,6 +3023,56 @@ function AccessLanding({
         : "border-slate-200 bg-slate-50 text-slate-600";
   const resetPasswordsMatch = newPassword === confirmNewPassword;
   const showNewAccountCard = mode === "login";
+  const googleEnabled = Boolean(googleAuth?.enabled && googleAuth?.clientId);
+
+  useEffect(() => {
+    if (mode !== "login" || !googleEnabled || !googleButtonRef.current) {
+      setGoogleRenderError("");
+      return undefined;
+    }
+
+    let canceled = false;
+    const buttonContainer = googleButtonRef.current;
+
+    loadExternalScript(GOOGLE_IDENTITY_SCRIPT_URL, "google")
+      .then((google) => {
+        if (canceled || !buttonContainer || !google?.accounts?.id?.initialize) return;
+
+        google.accounts.id.initialize({
+          client_id: googleAuth.clientId,
+          ux_mode: "popup",
+          context: hasKnownAccount ? "signin" : "signup",
+          callback: (response) => {
+            const credential = String(response?.credential || "").trim();
+            if (!credential) {
+              setGoogleRenderError("Google did not finish sign-in. Please try again.");
+              return;
+            }
+            setGoogleRenderError("");
+            googleLoginRef.current?.({ credential });
+          }
+        });
+
+        buttonContainer.innerHTML = "";
+        google.accounts.id.renderButton(buttonContainer, {
+          type: "standard",
+          theme: "outline",
+          size: "large",
+          text: hasKnownAccount ? "signin_with" : "continue_with",
+          shape: "pill",
+          logo_alignment: "left",
+          width: Math.max(240, Math.min(360, Math.floor(buttonContainer.offsetWidth || 320)))
+        });
+      })
+      .catch((error) => {
+        if (canceled) return;
+        setGoogleRenderError(String(error?.message || error || "").slice(0, 180));
+      });
+
+    return () => {
+      canceled = true;
+    };
+  }, [googleAuth?.clientId, googleEnabled, hasKnownAccount, mode]);
 
   return (
     <div className="fixed inset-0 z-[80] overflow-y-auto bg-slate-950 text-white">
@@ -3093,6 +3153,31 @@ function AccessLanding({
               <div className="px-6 py-6 sm:px-8 sm:py-8">
                 {mode === "login" && (
                   <form onSubmit={handleSubmit} className="space-y-5">
+                    {googleEnabled && (
+                      <div className="space-y-3">
+                        <div className="rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-4 text-sm leading-6 text-emerald-900">
+                          Use Google to sign in faster. If this email already has a TYFYS account, we will reopen it instead of creating a duplicate.
+                        </div>
+                        <div className={isSubmitting ? "pointer-events-none opacity-60" : ""}>
+                          <div
+                            ref={googleButtonRef}
+                            className="flex min-h-[44px] items-center justify-center rounded-xl border border-slate-200 bg-white px-2 py-2"
+                          ></div>
+                        </div>
+                        {googleRenderError && (
+                          <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                            {googleRenderError}
+                          </div>
+                        )}
+                        <div className="relative">
+                          <div className="border-t border-slate-200"></div>
+                          <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white px-3 text-xs font-black uppercase tracking-[0.24em] text-slate-400">
+                            Or use your TYFYS email
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
                     {(hasSavedAccount || (hasKnownAccount && accountEmail)) && (
                       <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
                         <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
@@ -3587,6 +3672,15 @@ function TYFYSPlatform() {
       return "";
     }
   })();
+  const initialAutostart = (() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const value = String(params.get("autostart") || "").trim().toLowerCase();
+      return value === "1" || value === "true" || value === "yes";
+    } catch (error) {
+      return false;
+    }
+  })();
   const storedUserProfile = sanitizeUserProfile(persistedAppState?.userProfile || {});
   const initialOnboardingStep =
     Number.isFinite(persistedAppState?.onboardingStep) && persistedAppState.onboardingStep >= 0 && persistedAppState.onboardingStep < ONBOARDING_STEPS.length
@@ -3601,7 +3695,9 @@ function TYFYSPlatform() {
   const initialUserProfile = createBaseUserProfile(prefilledProfile, storedUserProfile);
 
   // STATE
-  const [hasStarted, setHasStarted] = useState(() => Boolean(persistedAppState?.hasStarted || loadHasStarted()));
+  const [hasStarted, setHasStarted] = useState(() =>
+    Boolean(initialAutostart || persistedAppState?.hasStarted || loadHasStarted())
+  );
   const [onboardingComplete, setOnboardingComplete] = useState(() => Boolean(persistedAppState?.onboardingComplete));
   const [onboardingStep, setOnboardingStep] = useState(initialOnboardingStep);
   const [intakeStarted, setIntakeStarted] = useState(() => Boolean(persistedAppState?.intakeStarted));
@@ -3662,6 +3758,12 @@ function TYFYSPlatform() {
   const [isAuthBootstrapping, setIsAuthBootstrapping] = useState(true);
   const [authStatusMessage, setAuthStatusMessage] = useState("");
   const [isAuthSubmitting, setIsAuthSubmitting] = useState(false);
+  const [googleAuthConfig, setGoogleAuthConfig] = useState({
+    loading: true,
+    enabled: false,
+    clientId: "",
+    error: ""
+  });
   const [passwordResetToken, setPasswordResetToken] = useState(initialResetToken);
   const [passwordResetStatus, setPasswordResetStatus] = useState({ type: "", message: "" });
   const [isPasswordResetSubmitting, setIsPasswordResetSubmitting] = useState(false);
@@ -4170,6 +4272,49 @@ function TYFYSPlatform() {
     }
   };
 
+  const handleGoogleLogin = async ({ credential }) => {
+    const googleCredential = String(credential || "").trim();
+    if (!googleCredential) {
+      setAuthStatusMessage("Google sign-in did not return a valid login token. Please try again.");
+      return;
+    }
+
+    setIsAuthSubmitting(true);
+    setAuthStatusMessage("");
+
+    try {
+      const snapshot = createPersistedSnapshot({
+        hasStarted: true,
+        userProfile: sanitizeUserProfile({
+          ...userProfile,
+          email: userProfile.email || authAccount?.email || leadPrefillEmail || ""
+        })
+      });
+      const payload = await requestAppJson("/api/auth-google", {
+        method: "POST",
+        body: {
+          credential: googleCredential,
+          leadId: zohoLeadId,
+          displayName: `${userProfile.firstName || ""} ${userProfile.lastName || ""}`.trim(),
+          userProfile: snapshot.userProfile,
+          appState: snapshot
+        }
+      });
+      saveAuthHint(payload.account);
+      saveAppSessionToken(payload.sessionToken || loadAppSessionToken());
+      setIsAuthenticated(true);
+      setHasStarted(true);
+      saveHasStarted();
+      setAuthStatusMessage("");
+      clearPasswordResetQuery();
+      applyPersistedSnapshot(payload.appState, payload.account);
+    } catch (error) {
+      setAuthStatusMessage(String(error?.message || error || "").slice(0, 240));
+    } finally {
+      setIsAuthSubmitting(false);
+    }
+  };
+
   const handleClientLogout = async () => {
     try {
       await requestAppJson("/api/auth-logout", { method: "POST" });
@@ -4181,6 +4326,39 @@ function TYFYSPlatform() {
     setIsSidebarOpen(false);
     setAuthStatusMessage("You signed out. Log back in on this device to continue where you left off.");
   };
+
+  useEffect(() => {
+    let canceled = false;
+
+    requestAppJson("/api/auth-google-config")
+      .then((payload) => {
+        if (canceled) return;
+        setGoogleAuthConfig({
+          loading: false,
+          enabled: Boolean(payload?.enabled && payload?.clientId),
+          clientId: payload?.clientId || "",
+          error: ""
+        });
+      })
+      .catch((error) => {
+        if (canceled) return;
+        setGoogleAuthConfig({
+          loading: false,
+          enabled: false,
+          clientId: "",
+          error: String(error?.message || error || "").slice(0, 240)
+        });
+      });
+
+    return () => {
+      canceled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!initialAutostart || hasStarted) return;
+    saveHasStarted();
+  }, [hasStarted, initialAutostart]);
 
   useEffect(() => {
     if (!nativeAppRuntime) return undefined;
@@ -5589,7 +5767,9 @@ function TYFYSPlatform() {
         resetStatus={passwordResetStatus}
         resetVerification={passwordResetVerification}
         isResetSubmitting={isPasswordResetSubmitting}
+        googleAuth={googleAuthConfig}
         onLogin={handleClientLogin}
+        onGoogleLogin={handleGoogleLogin}
         onRequestPasswordReset={handlePasswordResetRequest}
         onVerifyPasswordResetAccount={handlePasswordResetAccountVerification}
         onCompletePasswordReset={handlePasswordResetComplete}
