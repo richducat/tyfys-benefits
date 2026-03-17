@@ -41,13 +41,14 @@ module.exports = async (req, res) => {
       state: appState,
     });
 
-    await createAuthenticatedSession(res, req, account.userId);
+    const session = await createAuthenticatedSession(res, req, account.userId);
 
     return json(res, 200, {
       ok: true,
       authenticated: true,
       account: publicAccount(account),
       appState: account.state || null,
+      sessionToken: session.sessionId,
     });
   } catch (error) {
     const message = safeString(error?.message || error, 2000);

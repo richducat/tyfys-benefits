@@ -26,13 +26,14 @@ module.exports = async (req, res) => {
     }
 
     const nextAccount = await updateUser(account.userId, { lastLoginAt: new Date().toISOString() });
-    await createAuthenticatedSession(res, req, nextAccount.userId);
+    const session = await createAuthenticatedSession(res, req, nextAccount.userId);
 
     return json(res, 200, {
       ok: true,
       authenticated: true,
       account: publicAccount(nextAccount),
       appState: nextAccount.state || null,
+      sessionToken: session.sessionId,
     });
   } catch (error) {
     return json(res, 500, { ok: false, error: safeString(error?.message || error, 2000) });
