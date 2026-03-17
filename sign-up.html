@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script>
+      (function () {
+        const hostname = String(window.location.hostname || "").toLowerCase();
+        const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
+        window.__TYFYS_APP_CONFIG__ = {
+          apiBase: isLocalRuntime ? "" : "https://app.tyfys.net",
+          runtime: "web"
+        };
+      })();
+    </script>
     <title>TYFYS - Sign Up</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            safelist: [
-                'border-blue-600',
-                'bg-blue-50',
-                'text-blue-900',
-                'shadow-sm',
-                'hover:border-blue-400'
-            ]
-        }
-    </script>
+    <link rel="stylesheet" href="tyfys-platform/app-tailwind.css">
 
     <!-- React & ReactDOM -->
     <script defer src="tyfys-platform/vendor/react.production.min.js"></script>
@@ -27,7 +25,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        html, body {
+            min-height: 100%;
+            overflow-x: hidden;
+        }
         body { font-family: 'Inter', sans-serif; }
+        #root {
+            min-height: 100dvh;
+        }
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
@@ -92,7 +97,7 @@
    </script>
    <!-- /TYFYS Structured Data -->
 </head>
-<body class="bg-slate-50 text-slate-900 overflow-hidden" data-page="sign-up">
+<body class="bg-slate-50 text-slate-900 min-h-screen overflow-x-hidden" data-page="sign-up">
     <div id="root"></div>
 
     <script src="tyfys-platform/tyfys-platform-app.js" defer></script>

@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script>
+      (function () {
+        const hostname = String(window.location.hostname || "").toLowerCase();
+        const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
+        window.__TYFYS_APP_CONFIG__ = {
+          apiBase: isLocalRuntime ? "" : "https://app.tyfys.net",
+          runtime: "web"
+        };
+      })();
+    </script>
     <title>TYFYS - Veteran Operating System</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            safelist: [
-                'border-blue-600',
-                'bg-blue-50',
-                'text-blue-900',
-                'shadow-sm',
-                'hover:border-blue-400'
-            ]
-        }
-    </script>
+    <link rel="stylesheet" href="tyfys-platform/app-tailwind.css">
 
     <!-- React & ReactDOM -->
     <script defer src="tyfys-platform/vendor/react.production.min.js"></script>
