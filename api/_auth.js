@@ -26,6 +26,19 @@ function parseCookies(req) {
   return cookies;
 }
 
+function readSessionToken(req) {
+  const authorization = String(req?.headers?.authorization || '').trim();
+  if (/^bearer\s+/i.test(authorization)) {
+    return authorization.replace(/^bearer\s+/i, '').trim();
+  }
+
+  const headerToken = String(req?.headers?.['x-tyfys-session'] || '').trim();
+  if (headerToken) return headerToken;
+
+  const cookies = parseCookies(req);
+  return String(cookies[SESSION_COOKIE] || '').trim();
+}
+
 function shouldUseSecureCookies(req) {
   const forwardedProto = String(req?.headers?.['x-forwarded-proto'] || '')
     .split(',')[0]
@@ -111,8 +124,7 @@ function publicAccount(account) {
 }
 
 async function readAuthenticatedUser(req, { refresh = false } = {}) {
-  const cookies = parseCookies(req);
-  const sessionId = cookies[SESSION_COOKIE];
+  const sessionId = readSessionToken(req);
   if (!sessionId) return null;
 
   const session = await getSession(sessionId);
@@ -146,6 +158,7 @@ module.exports = {
   parseCookies,
   publicAccount,
   readAuthenticatedUser,
+  readSessionToken,
   sanitizePersistedState,
   setSessionCookie,
   verifyPassword,
