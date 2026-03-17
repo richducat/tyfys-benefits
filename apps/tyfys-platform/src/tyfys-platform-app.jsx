@@ -10,7 +10,11 @@ const ZOHO_LEAD_ID_KEY = "tyfys.zohoLeadId";
 const DOSSIER_STORAGE_KEY = "tyfys.dossier";
 const APP_STATE_STORAGE_KEY = "tyfys.appState.v1";
 const APP_AUTH_STORAGE_KEY = "tyfys.appAuth.v1";
+const APP_SESSION_TOKEN_KEY = "tyfys.appSessionToken.v1";
 const APP_STATE_VERSION = 1;
+const MOBILE_APP_API_BASE = "https://app.tyfys.net";
+const STATIC_APP_HOSTS = new Set(["tyfys.net", "www.tyfys.net"]);
+const LIVE_APP_API_HOSTS = new Set(["app.tyfys.net", "www.app.tyfys.net"]);
 const DEFAULT_PAYMENT_STATE = {
   completed: false,
   planName: "",
@@ -47,8 +51,6 @@ const ZAPIER_CHATBOT_ELEMENT_TAG = "zapier-interfaces-chatbot-embed";
 const ZAPIER_INTAKE_CHATBOT_ID = "cm5qukhqm000dd1ruzsy2m3id";
 const MAX_STORED_OCR_CHARS = 12000;
 const MAX_PDF_OCR_PAGES = 5;
-const APP_API_BASE_STORAGE_KEY = "tyfys.appApiBase";
-const DEFAULT_REMOTE_APP_API_BASE = "https://app.tyfys.net";
 const externalScriptPromises = {};
 
 const loadPaymentState = () => {
@@ -113,6 +115,14 @@ const loadHasStarted = () => {
 const saveHasStarted = () => {
   try {
     window.sessionStorage.setItem(HAS_STARTED_KEY, "1");
+  } catch (error) {
+    // No-op when storage is unavailable.
+  }
+};
+
+const clearHasStarted = () => {
+  try {
+    window.sessionStorage.removeItem(HAS_STARTED_KEY);
   } catch (error) {
     // No-op when storage is unavailable.
   }
@@ -223,6 +233,7 @@ const mapLeadPrefillToProfile = (leadPrefill) => {
     email: leadPrefill.email || "",
     phone: leadPrefill.phone || "",
     zip: leadPrefill.zip || "",
+    branch: leadPrefill.branch || "",
     rating: Number(leadPrefill.rating || 0),
     pain_categories: mapLeadCategories(leadPrefill.conditions),
     privateOrg: Boolean(leadPrefill.privateOrg),
@@ -319,6 +330,118 @@ const loadAuthAccount = () => loadStoredJson(APP_AUTH_STORAGE_KEY, null);
 
 const saveAuthAccount = (account) => {
   saveStoredJson(APP_AUTH_STORAGE_KEY, account);
+};
+
+const loadAppSessionToken = () => {
+  try {
+    return window.localStorage.getItem(APP_SESSION_TOKEN_KEY) || "";
+  } catch (error) {
+    return "";
+  }
+};
+
+const saveAppSessionToken = (token) => {
+  try {
+    const normalized = String(token || "").trim();
+    if (normalized) window.localStorage.setItem(APP_SESSION_TOKEN_KEY, normalized);
+    else window.localStorage.removeItem(APP_SESSION_TOKEN_KEY);
+  } catch (error) {
+    // No-op when storage is unavailable.
+  }
+};
+
+const getRuntimeConfig = () => {
+  const config = window.__TYFYS_APP_CONFIG__;
+  return config && typeof config === "object" ? config : {};
+};
+
+const getCapacitorBridge = () => {
+  const bridge = window.Capacitor;
+  return bridge && typeof bridge === "object" ? bridge : null;
+};
+
+const getCapacitorPlugin = (pluginName) => {
+  const plugins = getCapacitorBridge()?.Plugins;
+  return pluginName && plugins && typeof plugins === "object" ? plugins[pluginName] || null : null;
+};
+
+const isNativeAppRuntime = () => {
+  const bridge = getCapacitorBridge();
+  if (!bridge) return false;
+  if (typeof bridge.isNativePlatform === "function") return Boolean(bridge.isNativePlatform());
+  const platform = typeof bridge.getPlatform === "function" ? bridge.getPlatform() : "";
+  return platform === "ios" || platform === "android";
+};
+
+const normalizeApiBase = (value) => String(value || "").trim().replace(/\/+$/, "");
+
+const hostHasSameOriginApi = () => {
+  const hostname = String(window.location.hostname || "").toLowerCase();
+  if (!hostname) return false;
+  if (LIVE_APP_API_HOSTS.has(hostname)) return true;
+  if (hostname.endsWith(".vercel.app") || hostname.endsWith(".vercel-dns.com")) return true;
+  return false;
+};
+
+const resolveApiBase = () => {
+  const explicitBase = normalizeApiBase(getRuntimeConfig().apiBase);
+  if (explicitBase) return explicitBase;
+  if (hostHasSameOriginApi()) return "";
+
+  const hostname = String(window.location.hostname || "").toLowerCase();
+  if (isNativeAppRuntime()) return MOBILE_APP_API_BASE;
+  if (STATIC_APP_HOSTS.has(hostname) || hostname.endsWith(".github.io")) return MOBILE_APP_API_BASE;
+  return "";
+};
+
+const resolveApiUrl = (path) => {
+  const normalizedPath = String(path || "").startsWith("/") ? String(path || "") : `/${String(path || "")}`;
+  const apiBase = resolveApiBase();
+  return apiBase ? `${apiBase}${normalizedPath}` : normalizedPath;
+};
+
+const createApiRequestInit = ({ method = "GET", body, headers = {}, credentials } = {}) => {
+  const nextHeaders = { ...headers };
+  const sessionToken = loadAppSessionToken();
+  if (sessionToken && !nextHeaders.Authorization && !nextHeaders.authorization) {
+    nextHeaders.Authorization = `Bearer ${sessionToken}`;
+  }
+
+  return {
+    method,
+    body,
+    credentials: credentials ?? (resolveApiBase() ? "omit" : "include"),
+    headers: Object.keys(nextHeaders).length ? nextHeaders : undefined
+  };
+};
+
+const openExternalUrl = async (url) => {
+  const href = String(url || "").trim();
+  if (!href) return false;
+
+  const browser = getCapacitorPlugin("Browser");
+  if (browser?.open) {
+    await browser.open({ url: href, presentationStyle: "fullscreen" });
+    return true;
+  }
+
+  window.open(href, "_blank", "noopener,noreferrer");
+  return false;
+};
+
+const shareTextPayload = async ({ title, text, dialogTitle }) => {
+  const sharePlugin = getCapacitorPlugin("Share");
+  if (sharePlugin?.share) {
+    await sharePlugin.share({ title, text, dialogTitle });
+    return true;
+  }
+
+  if (navigator.share) {
+    await navigator.share({ title, text });
+    return true;
+  }
+
+  return false;
 };
 
 const createLocalId = (prefix) => `${prefix}-${Date.now()}-${Math.floor(Math.random() * 100000)}`;
@@ -563,57 +686,7 @@ const scanDocumentFile = async (file, onStage, onProgress) => {
   throw new Error("Upload a PDF or image file to run a scan.");
 };
 
-const normalizeAppApiBase = (value) => {
-  const raw = String(value || "").trim();
-  if (!raw || raw.toLowerCase() === "self") return "";
-
-  try {
-    const parsed =
-      raw.startsWith("http://") || raw.startsWith("https://") ? new URL(raw) : new URL(raw, window.location.origin);
-    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return "";
-    return parsed.origin === window.location.origin ? "" : parsed.origin;
-  } catch (error) {
-    return "";
-  }
-};
-
-const getConfiguredAppApiBase = () => {
-  const params = new URLSearchParams(window.location.search);
-  const queryValue = params.get("apiBase");
-  if (String(queryValue || "").trim().toLowerCase() === "self") return "";
-
-  const queryBase = normalizeAppApiBase(queryValue);
-  if (queryBase) return queryBase;
-
-  try {
-    const localBase = normalizeAppApiBase(window.localStorage.getItem(APP_API_BASE_STORAGE_KEY));
-    if (localBase) return localBase;
-  } catch (error) {
-    // No-op when storage is unavailable.
-  }
-
-  const globalBase = normalizeAppApiBase(window.TYFYS_APP_API_BASE || window.__TYFYS_APP_API_BASE__);
-  if (globalBase) return globalBase;
-
-  const hostname = String(window.location.hostname || "").toLowerCase();
-  if (hostname === "tyfys.net" || hostname === "www.tyfys.net" || hostname.endsWith(".github.io")) {
-    return DEFAULT_REMOTE_APP_API_BASE;
-  }
-
-  return "";
-};
-
-const resolveAppApiUrl = (path) => {
-  const rawPath = String(path || "").trim();
-  if (!rawPath) return rawPath;
-  if (/^https?:\/\//i.test(rawPath)) return rawPath;
-  const normalizedPath = rawPath.startsWith("/") ? rawPath : `/${rawPath}`;
-  const apiBase = getConfiguredAppApiBase();
-  return apiBase ? `${apiBase}${normalizedPath}` : normalizedPath;
-};
-
 const hasLiveAppApi = () => {
-  const hostname = String(window.location.hostname || "").toLowerCase();
   const params = new URLSearchParams(window.location.search);
   if (params.get("api") === "live") return true;
   if (params.get("api") === "off") return false;
@@ -624,12 +697,12 @@ const hasLiveAppApi = () => {
   } catch (error) {
     // No-op when storage is unavailable.
   }
-  if (getConfiguredAppApiBase()) return true;
+  if (resolveApiBase()) return true;
+
+  const hostname = String(window.location.hostname || "").toLowerCase();
   if (!hostname) return false;
-  if (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]") return false;
-  if (hostname.endsWith(".vercel.app") || hostname.endsWith(".vercel-dns.com")) return true;
-  if (hostname === "tyfys.net" || hostname === "www.tyfys.net" || hostname.endsWith(".github.io")) return false;
-  return true;
+  if (hostname === "localhost" || hostname === "127.0.0.1") return isNativeAppRuntime();
+  return hostHasSameOriginApi();
 };
 
 // --- ICONS ---
@@ -2477,7 +2550,7 @@ function HelpTooltip({ title, content }) {
   );
 }
 
-function ContactStep({ onNext, initialData, part }) {
+function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onClearSubmitError, onReturnToLogin }) {
   const [localData, setLocalData] = useState(initialData);
   const [errors, setErrors] = useState({});
 
@@ -2493,6 +2566,9 @@ function ContactStep({ onNext, initialData, part }) {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setLocalData((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+    if (submitError && typeof onClearSubmitError === "function") {
+      onClearSubmitError();
+    }
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: null }));
   };
 
@@ -2558,10 +2634,15 @@ function ContactStep({ onNext, initialData, part }) {
   };
 
   const handleSubmit = () => {
+    if (submitError && typeof onClearSubmitError === "function") {
+      onClearSubmitError();
+    }
     if (validate()) {
       onNext(localData);
     }
   };
+
+  const hasExistingAccountError = /already exists/i.test(String(submitError || ""));
 
   return (
     <div className="animate-fadeIn w-full space-y-5 sm:space-y-6">
@@ -2763,10 +2844,28 @@ function ContactStep({ onNext, initialData, part }) {
       <div className="flex flex-col gap-3">
         <button
           onClick={handleSubmit}
+          disabled={Boolean(isSubmitting)}
           className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-slate-900 font-black text-lg sm:text-xl py-4 rounded-xl shadow-lg transition-all hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 border-b-4 border-yellow-600 active:border-b-0 active:mt-1"
         >
-          {part === 3 ? "Create My Profile" : "Continue"} <Icons.ChevronRight className="w-6 h-6 stroke-[3px]" />
+          {isSubmitting ? "Creating Your Profile..." : part === 3 ? "Create My Profile" : "Continue"}{" "}
+          {!isSubmitting && <Icons.ChevronRight className="w-6 h-6 stroke-[3px]" />}
         </button>
+
+        {submitError && (
+          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            <p className="font-bold text-red-800">We could not create your TYFYS profile.</p>
+            <p className="mt-1">{submitError}</p>
+            {hasExistingAccountError && (
+              <button
+                type="button"
+                onClick={onReturnToLogin}
+                className="mt-3 inline-flex items-center gap-2 rounded-lg border border-red-300 bg-white px-3 py-2 text-sm font-bold text-red-700 transition-colors hover:bg-red-100"
+              >
+                Go To Sign-In <Icons.ChevronRight className="w-4 h-4 stroke-[3px]" />
+              </button>
+            )}
+          </div>
+        )}
 
         {/* SECURITY: Badges */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 text-[10px] text-slate-400 font-medium uppercase tracking-wider">
@@ -2784,6 +2883,7 @@ function ContactStep({ onNext, initialData, part }) {
 
 function AccessLanding({
   hasSavedAccount,
+  hasKnownAccount,
   accountEmail,
   displayName,
   onboardingComplete,
@@ -2809,12 +2909,12 @@ function AccessLanding({
     ? onboardingComplete
       ? "Welcome back to your TYFYS workspace"
       : "Resume your TYFYS setup"
-    : "Create your TYFYS login and save your progress";
+    : "Log in first, or start your new TYFYS setup";
   const heroBody = hasSavedAccount
     ? onboardingComplete
       ? "Sign in on this device to reopen your saved claim plan, uploaded materials, and next steps."
       : "Your onboarding progress is saved on this device. Sign in to continue from where you left off."
-    : "Create a login once, save your details on this device, and come back to your claim plan without starting over.";
+    : "Use the login portal first if you already have a TYFYS account. If you are new here, the new-account button below will walk you into onboarding and save your progress on this device.";
   const savedItems = hasSavedAccount
     ? onboardingComplete
       ? ["Your saved profile and contact details", "Claim tracker progress and calculator inputs", "Dossier uploads and workspace drafts"]
@@ -2893,102 +2993,108 @@ function AccessLanding({
             <section className="overflow-hidden rounded-[2rem] border border-white/40 bg-white text-slate-900 shadow-2xl">
               <div className="border-b border-slate-200 px-6 py-6 sm:px-8 sm:py-8">
                 <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">
-                  {hasSavedAccount ? "Returning User" : "New User"}
+                  {hasKnownAccount ? "Returning User" : "App Sign-In"}
                 </p>
-                <h2 className="mt-3 text-3xl font-black text-slate-900">
-                  {hasSavedAccount ? "Log in to continue" : "Start with your secure login"}
-                </h2>
+                <h2 className="mt-3 text-3xl font-black text-slate-900">Log in to continue</h2>
                 <p className="mt-3 text-sm leading-6 text-slate-600">
-                  {hasSavedAccount
+                  {hasKnownAccount
                     ? onboardingComplete
                       ? "We found saved TYFYS progress on this device. Sign in to reopen it."
-                      : "Your setup is already saved on this device. Sign in to finish onboarding."
-                    : "You will create your password during onboarding, and TYFYS will keep this device signed in for up to 30 days."}
+                      : "We found an existing TYFYS account for this flow. Sign in first so you do not create a duplicate."
+                    : "If you already have a TYFYS login, enter it here first. If you are setting up a new account, use the onboarding button below."}
                 </p>
               </div>
 
               <div className="px-6 py-6 sm:px-8 sm:py-8">
-                {hasSavedAccount ? (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {(hasSavedAccount || (hasKnownAccount && accountEmail)) && (
                     <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
-                      <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">Saved account</p>
-                      <p className="mt-2 text-base font-bold text-slate-900">{displayName || "Your TYFYS workspace"}</p>
+                      <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500">
+                        {hasSavedAccount ? "Saved account" : "Account email"}
+                      </p>
+                      <p className="mt-2 text-base font-bold text-slate-900">
+                        {displayName || (hasKnownAccount ? "Existing TYFYS account" : "Your TYFYS workspace")}
+                      </p>
                       <p className="text-sm text-slate-500">{accountEmail || "Email saved on this device"}</p>
                     </div>
+                  )}
 
-                    <div>
-                      <label className="mb-1 block text-sm font-bold text-slate-700">Email</label>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        autoComplete="username"
-                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
-                        placeholder="you@example.com"
-                      />
+                  <div>
+                    <label className="mb-1 block text-sm font-bold text-slate-700">Email</label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      autoComplete="username"
+                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                      placeholder="you@example.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-sm font-bold text-slate-700">Password</label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      autoComplete="current-password"
+                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
+                      placeholder="Enter your TYFYS password"
+                    />
+                  </div>
+                  {statusMessage && (
+                    <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                      {statusMessage}
                     </div>
-                    <div>
-                      <label className="mb-1 block text-sm font-bold text-slate-700">Password</label>
-                      <input
-                        type="password"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        autoComplete="current-password"
-                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition-colors focus:border-blue-500"
-                        placeholder="Enter your TYFYS password"
-                      />
-                    </div>
-                    {statusMessage && (
-                      <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
-                        {statusMessage}
-                      </div>
-                    )}
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-base font-black text-white shadow-lg transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-70"
-                    >
-                      {isSubmitting ? "Signing In..." : "Log In and Resume"}
-                      {!isSubmitting && <Icons.ChevronRight className="h-5 w-5" />}
-                    </button>
-                    <p className="text-xs leading-5 text-slate-500">
-                      Your saved TYFYS session lasts 30 days on this device. Signing in restores your saved progress.
+                  )}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-base font-black text-white shadow-lg transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {isSubmitting ? "Signing In..." : "Log In and Continue"}
+                    {!isSubmitting && <Icons.ChevronRight className="h-5 w-5" />}
+                  </button>
+                  <p className="text-xs leading-5 text-slate-500">
+                    TYFYS keeps this device signed in for up to 30 days so you can return to your saved workspace faster.
+                  </p>
+                </form>
+
+                <div className="mt-6 border-t border-slate-200 pt-6">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                    <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">New To TYFYS?</p>
+                    <p className="mt-2 text-lg font-black text-slate-900">Setting up a new account?</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                      Click below to start onboarding, save your contact details, and create the login you will use to come back later.
                     </p>
-                  </form>
-                ) : (
-                  <div className="space-y-6">
-                    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                      <p className="text-sm font-black text-slate-900">What happens next</p>
-                      <div className="mt-4 space-y-3">
-                        <div className="flex items-start gap-3">
-                          <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">1</div>
-                          <p className="text-sm leading-6 text-slate-600">Enter your name, email, phone, and zip code.</p>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">2</div>
-                          <p className="text-sm leading-6 text-slate-600">Create a password that becomes your TYFYS login on this device.</p>
-                        </div>
-                        <div className="flex items-start gap-3">
-                          <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">3</div>
-                          <p className="text-sm leading-6 text-slate-600">Come back later and log in to continue without starting over.</p>
-                        </div>
+                    <div className="mt-4 space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">1</div>
+                        <p className="text-sm leading-6 text-slate-600">Enter your name, email, phone, and zip code.</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">2</div>
+                        <p className="text-sm leading-6 text-slate-600">Create the password that becomes your TYFYS login on this device.</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">3</div>
+                        <p className="text-sm leading-6 text-slate-600">Come back later and log in without starting over.</p>
                       </div>
                     </div>
 
                     <button
                       type="button"
                       onClick={onCreateAccount}
-                      className="flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 px-5 py-4 text-lg font-black text-white shadow-xl transition-transform hover:-translate-y-0.5"
+                      className="mt-5 flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 px-5 py-4 text-lg font-black text-white shadow-xl transition-transform hover:-translate-y-0.5"
                     >
-                      Create Login and Continue
+                      Click here if you're setting up a new account
                       <Icons.ChevronRight className="h-6 w-6" />
                     </button>
-
-                    <div className="rounded-2xl border border-yellow-200 bg-yellow-50 px-4 py-4 text-sm leading-6 text-slate-700">
-                      <span className="font-black text-slate-900">Notice:</span> TYFYS is a private organization and not the VA. Your information is saved locally on this device so you can return and continue your workspace.
-                    </div>
                   </div>
-                )}
+
+                  <div className="mt-4 rounded-2xl border border-yellow-200 bg-yellow-50 px-4 py-4 text-sm leading-6 text-slate-700">
+                    <span className="font-black text-slate-900">Notice:</span> TYFYS is a private organization and not the VA. Your information is saved locally on this device so you can return and continue your workspace.
+                  </div>
+                </div>
               </div>
             </section>
           </div>
@@ -3143,6 +3249,7 @@ function TYFYSPlatform() {
   const leadPrefill = loadLeadPrefill();
   const persistedAppStateRef = useRef(loadPersistedAppState());
   const persistedAuthAccountRef = useRef(loadAuthAccount());
+  const nativeAppRuntime = isNativeAppRuntime();
   const persistedAppState = persistedAppStateRef.current;
   const persistedAuthAccount = persistedAuthAccountRef.current;
   const hasLeadPrefill = Boolean(
@@ -3150,6 +3257,7 @@ function TYFYSPlatform() {
   );
   const prefilledContactStep = ONBOARDING_STEPS.findIndex((step) => step.id === "contact_name");
   const prefilledProfile = mapLeadPrefillToProfile(leadPrefill);
+  const leadPrefillEmail = normalizeEmail(prefilledProfile.email || leadPrefill?.email || "");
   const storedUserProfile = sanitizeUserProfile(persistedAppState?.userProfile || {});
   const initialOnboardingStep =
     Number.isFinite(persistedAppState?.onboardingStep) && persistedAppState.onboardingStep >= 0 && persistedAppState.onboardingStep < ONBOARDING_STEPS.length
@@ -3225,6 +3333,10 @@ function TYFYSPlatform() {
   const [isAuthBootstrapping, setIsAuthBootstrapping] = useState(true);
   const [authStatusMessage, setAuthStatusMessage] = useState("");
   const [isAuthSubmitting, setIsAuthSubmitting] = useState(false);
+  const [hasLeadPrefillAccount, setHasLeadPrefillAccount] = useState(false);
+  const [isLeadPrefillAccountLookupPending, setIsLeadPrefillAccountLookupPending] = useState(
+    () => Boolean(hasLeadPrefill && leadPrefillEmail && !persistedAuthAccount)
+  );
   // Updated Bot Intro
   const [aiBotMessages, setAiBotMessages] = useState([
     {
@@ -3298,6 +3410,10 @@ function TYFYSPlatform() {
     setHasStarted(true);
     saveHasStarted();
   };
+  const returnToAccessLanding = () => {
+    setHasStarted(false);
+    clearHasStarted();
+  };
   const checkoutLeadId = zohoLeadId || "";
 
   const chatEndRef = useRef(null);
@@ -3307,8 +3423,12 @@ function TYFYSPlatform() {
   const scannerFileInputRef = useRef(null);
   const onboardingScrollRef = useRef(null);
   const isApplyingRemoteStateRef = useRef(false);
+  const hasExistingAccountStatus = /already exists/i.test(String(authStatusMessage || ""));
+  const hasKnownAccount =
+    Boolean(authAccount) || onboardingComplete || hasExistingAccountStatus || hasLeadPrefillAccount;
+  const isAccessBootstrapping = isAuthBootstrapping || isLeadPrefillAccountLookupPending;
   const showAccessLanding =
-    !isAuthBootstrapping && !isAuthenticated && (!hasStarted || onboardingComplete || Boolean(authAccount));
+    !isAccessBootstrapping && !isAuthenticated && (!hasStarted || onboardingComplete || hasKnownAccount);
   const currentOnboardingStep = ONBOARDING_STEPS[onboardingStep];
   const isContactOnboardingStep = currentOnboardingStep?.type?.startsWith("contact_form");
   const isLoadingOnboardingStep = currentOnboardingStep?.type === "loading";
@@ -3419,13 +3539,20 @@ function TYFYSPlatform() {
   };
 
   const requestAppJson = async (url, { method = "GET", body } = {}) => {
-    const response = await fetch(resolveAppApiUrl(url), {
-      method,
-      credentials: "include",
-      headers: body ? { "Content-Type": "application/json" } : undefined,
-      body: body ? JSON.stringify(body) : undefined
-    });
+    const response = await fetch(
+      resolveApiUrl(url),
+      createApiRequestInit({
+        method,
+        headers: body ? { "Content-Type": "application/json" } : undefined,
+        body: body ? JSON.stringify(body) : undefined
+      })
+    );
     const payload = await response.json().catch(() => ({}));
+    if (payload?.sessionToken) {
+      saveAppSessionToken(payload.sessionToken);
+    } else if (payload?.authenticated === false || String(url || "").includes("/api/auth-logout")) {
+      saveAppSessionToken("");
+    }
     if (!response.ok || payload?.ok === false) {
       throw new Error(payload?.error || `Request failed (${response.status})`);
     }
@@ -3498,6 +3625,16 @@ function TYFYSPlatform() {
     saveAuthHint(updatedAccount);
   };
 
+  const lookupExistingAccount = async (email) => {
+    const normalizedEmail = normalizeEmail(email);
+    if (!normalizedEmail) return { exists: false };
+
+    return requestAppJson("/api/auth-lookup", {
+      method: "POST",
+      body: { email: normalizedEmail }
+    });
+  };
+
   const createClientLogin = async ({ email, password, userProfile: nextUserProfile, appState }) => {
     const normalizedEmail = normalizeEmail(email);
     if (!normalizedEmail || !password) return;
@@ -3516,6 +3653,7 @@ function TYFYSPlatform() {
         }
       });
       saveAuthHint(payload.account);
+      saveAppSessionToken(payload.sessionToken || loadAppSessionToken());
       setIsAuthenticated(true);
       setAuthStatusMessage("");
       applyPersistedSnapshot(payload.appState, payload.account);
@@ -3542,6 +3680,7 @@ function TYFYSPlatform() {
         body: { email: normalizedEmail, password }
       });
       saveAuthHint(payload.account);
+      saveAppSessionToken(payload.sessionToken || loadAppSessionToken());
       setIsAuthenticated(true);
       setAuthStatusMessage("");
       applyPersistedSnapshot(payload.appState, payload.account);
@@ -3558,10 +3697,87 @@ function TYFYSPlatform() {
     } catch (error) {
       console.warn("Logout request failed:", error);
     }
+    saveAppSessionToken("");
     setIsAuthenticated(false);
     setIsSidebarOpen(false);
     setAuthStatusMessage("You signed out. Log back in on this device to continue where you left off.");
   };
+
+  useEffect(() => {
+    if (!nativeAppRuntime) return undefined;
+
+    const statusBar = getCapacitorPlugin("StatusBar");
+    const keyboard = getCapacitorPlugin("Keyboard");
+
+    Promise.resolve().then(async () => {
+      try {
+        await statusBar?.setStyle?.({ style: "DARK" });
+      } catch (error) {
+        // No-op when the native bridge does not expose this method.
+      }
+      try {
+        await statusBar?.setBackgroundColor?.({ color: "#f8fafc" });
+      } catch (error) {
+        // No-op when unsupported on the platform.
+      }
+      try {
+        await statusBar?.show?.();
+      } catch (error) {
+        // No-op when unsupported on the platform.
+      }
+      try {
+        await keyboard?.setResizeMode?.({ mode: "body" });
+      } catch (error) {
+        // No-op when unsupported on the platform.
+      }
+    });
+
+    return undefined;
+  }, [nativeAppRuntime]);
+
+  useEffect(() => {
+    if (!nativeAppRuntime) return undefined;
+    const appPlugin = getCapacitorPlugin("App");
+    if (!appPlugin?.addListener) return undefined;
+
+    let listenerHandle = null;
+    let disposed = false;
+
+    Promise.resolve(appPlugin.addListener("backButton", () => {
+      if (showProfileEdit) {
+        setShowProfileEdit(false);
+        return;
+      }
+      if (showSpecialistModal) {
+        setShowSpecialistModal(false);
+        return;
+      }
+      if (isBotOpen) {
+        setIsBotOpen(false);
+        return;
+      }
+      if (isSidebarOpen) {
+        setIsSidebarOpen(false);
+        return;
+      }
+      if (activeView !== "welcome_guide") {
+        setActiveView("welcome_guide");
+        return;
+      }
+      appPlugin.minimizeApp?.();
+    })).then((handle) => {
+      if (disposed) {
+        handle?.remove?.();
+        return;
+      }
+      listenerHandle = handle;
+    });
+
+    return () => {
+      disposed = true;
+      listenerHandle?.remove?.();
+    };
+  }, [activeView, isBotOpen, isSidebarOpen, nativeAppRuntime, showProfileEdit, showSpecialistModal]);
 
   useEffect(() => {
     if (window.innerWidth < 768) setIsSidebarOpen(false);
@@ -3704,6 +3920,73 @@ function TYFYSPlatform() {
     };
   }, []);
   useEffect(() => {
+    if (isAuthBootstrapping) return undefined;
+
+    if (!hasLeadPrefill || !leadPrefillEmail || onboardingComplete || isAuthenticated) {
+      setHasLeadPrefillAccount(false);
+      setIsLeadPrefillAccountLookupPending(false);
+      return undefined;
+    }
+
+    if (authAccount?.email && normalizeEmail(authAccount.email) === leadPrefillEmail) {
+      setHasLeadPrefillAccount(true);
+      setIsLeadPrefillAccountLookupPending(false);
+      setHasStarted(false);
+      clearHasStarted();
+      return undefined;
+    }
+
+    let canceled = false;
+    setIsLeadPrefillAccountLookupPending(true);
+
+    lookupExistingAccount(leadPrefillEmail)
+      .then((payload) => {
+        if (canceled) return;
+        const exists = Boolean(payload?.exists);
+        setHasLeadPrefillAccount(exists);
+
+        if (exists) {
+          setAuthStatusMessage(
+            "We found an existing TYFYS login for this email. Sign in to continue instead of creating a duplicate profile."
+          );
+          setHasStarted(false);
+          clearHasStarted();
+          return;
+        }
+
+        if (!hasStarted) {
+          setHasStarted(true);
+          saveHasStarted();
+        }
+      })
+      .catch((error) => {
+        if (canceled) return;
+        console.warn("Lead account lookup skipped:", error);
+        setHasLeadPrefillAccount(false);
+        if (!hasStarted) {
+          setHasStarted(true);
+          saveHasStarted();
+        }
+      })
+      .finally(() => {
+        if (!canceled) {
+          setIsLeadPrefillAccountLookupPending(false);
+        }
+      });
+
+    return () => {
+      canceled = true;
+    };
+  }, [
+    authAccount?.email,
+    hasLeadPrefill,
+    hasStarted,
+    isAuthenticated,
+    isAuthBootstrapping,
+    leadPrefillEmail,
+    onboardingComplete
+  ]);
+  useEffect(() => {
     if (!isAuthenticated || isAuthBootstrapping || isApplyingRemoteStateRef.current) return;
 
     const timeoutId = window.setTimeout(async () => {
@@ -3833,15 +4116,18 @@ function TYFYSPlatform() {
     if (!hasLiveAppApi()) return null;
 
     try {
-      const response = await fetch(resolveAppApiUrl("/api/zoho-signup"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadId: zohoLeadId || undefined,
-          leadSource: "TYFYS App",
-          profile
+      const response = await fetch(
+        resolveApiUrl("/api/zoho-signup"),
+        createApiRequestInit({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            leadId: zohoLeadId || undefined,
+            leadSource: nativeAppRuntime ? "TYFYS Mobile App" : "TYFYS App",
+            profile
+          })
         })
-      });
+      );
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || !payload?.ok) {
         throw new Error(payload?.error || "Zoho signup sync failed");
@@ -3872,7 +4158,10 @@ function TYFYSPlatform() {
       if (leadId) query.set("leadId", leadId);
       if (email) query.set("email", email);
       if (phone) query.set("phone", phone);
-      const response = await fetch(`${resolveAppApiUrl("/api/zoho-profile")}?${query.toString()}`);
+      const response = await fetch(
+        resolveApiUrl(`/api/zoho-profile?${query.toString()}`),
+        createApiRequestInit()
+      );
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || !payload?.ok || !payload?.found || !payload?.profile) return null;
 
@@ -3952,6 +4241,12 @@ function TYFYSPlatform() {
           appState: createPersistedSnapshot({ userProfile: mergedProfile })
         });
       } catch (error) {
+        if (/already exists/i.test(String(error?.message || ""))) {
+          setAuthStatusMessage(
+            "We found an existing TYFYS login for this email. Sign in to continue instead of creating a duplicate profile."
+          );
+          returnToAccessLanding();
+        }
         return;
       }
     }
@@ -4049,6 +4344,16 @@ function TYFYSPlatform() {
       return;
     }
 
+    if (nativeAppRuntime) {
+      setShowSpecialistModal(true);
+      setIsBotOpen(true);
+      addMessage(
+        "bot",
+        "Plan activation is handled by TYFYS care team in the mobile app. Use \"Book Discovery Call\" and we will finish enrollment with you directly."
+      );
+      return;
+    }
+
     setIsCheckoutLoading(true);
     saveCheckoutPending({
       planName,
@@ -4059,17 +4364,20 @@ function TYFYSPlatform() {
     });
 
     try {
-      const response = await fetch(resolveAppApiUrl("/api/checkout"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          leadId: checkoutLeadId,
-          plan: planCode,
-          profile: userProfile,
-          displayName: `${userProfile.firstName || ""} ${userProfile.lastName || ""}`.trim(),
-          email: authAccount?.email || userProfile.email || ""
+      const response = await fetch(
+        resolveApiUrl("/api/checkout"),
+        createApiRequestInit({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            leadId: checkoutLeadId,
+            plan: planCode,
+            profile: userProfile,
+            displayName: `${userProfile.firstName || ""} ${userProfile.lastName || ""}`.trim(),
+            email: authAccount?.email || userProfile.email || ""
+          })
         })
-      });
+      );
 
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || !payload?.url) {
@@ -4310,10 +4618,13 @@ function TYFYSPlatform() {
     formData.set("condition", item.condition || "");
     formData.set("notes", item.notes || "");
 
-    const response = await fetch(resolveAppApiUrl("/api/zoho-upload-record"), {
-      method: "POST",
-      body: formData
-    });
+    const response = await fetch(
+      resolveApiUrl("/api/zoho-upload-record"),
+      createApiRequestInit({
+        method: "POST",
+        body: formData
+      })
+    );
     const payload = await response.json().catch(() => ({}));
     if (!response.ok || !payload?.ok) {
       throw new Error(payload?.error || "Unable to sync this record to Zoho.");
@@ -4455,7 +4766,19 @@ function TYFYSPlatform() {
   };
 
   const exportDossier = () => {
-    const blob = new Blob([JSON.stringify(dossier, null, 2)], { type: "application/json" });
+    const exportText = JSON.stringify(dossier, null, 2);
+    if (nativeAppRuntime) {
+      void shareTextPayload({
+        title: "TYFYS Dossier Export",
+        text: exportText,
+        dialogTitle: "Share Dossier Export"
+      }).catch((error) => {
+        console.warn("Native dossier share failed:", error);
+      });
+      return;
+    }
+
+    const blob = new Blob([exportText], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
@@ -4704,7 +5027,7 @@ function TYFYSPlatform() {
   }, [selectedSecureThreadId]);
 
   // --- RENDERING ---
-  if (isAuthBootstrapping) {
+  if (isAccessBootstrapping) {
     return (
       <div className="fixed inset-0 z-[90] bg-slate-950 text-white flex items-center justify-center p-6">
         <div className="text-center">
@@ -4722,13 +5045,20 @@ function TYFYSPlatform() {
     return (
       <AccessLanding
         hasSavedAccount={Boolean(authAccount) || onboardingComplete}
-        accountEmail={authAccount?.email || userProfile.email || ""}
-        displayName={authAccount?.displayName || `${userProfile.firstName || ""} ${userProfile.lastName || ""}`.trim()}
+        hasKnownAccount={hasKnownAccount}
+        accountEmail={authAccount?.email || userProfile.email || leadPrefillEmail || ""}
+        displayName={
+          authAccount?.displayName ||
+          `${userProfile.firstName || prefilledProfile.firstName || ""} ${userProfile.lastName || prefilledProfile.lastName || ""}`.trim()
+        }
         onboardingComplete={onboardingComplete}
         statusMessage={authStatusMessage}
         isSubmitting={isAuthSubmitting}
         onLogin={handleClientLogin}
-        onCreateAccount={startSystem}
+        onCreateAccount={() => {
+          setAuthStatusMessage("");
+          startSystem();
+        }}
       />
     );
   }
@@ -4799,6 +5129,10 @@ function TYFYSPlatform() {
                   onNext={handleContactSubmit}
                   initialData={userProfile}
                   part={parseInt(currentOnboardingStep.type.split("part")[1], 10)}
+                  submitError={authStatusMessage}
+                  isSubmitting={isAuthSubmitting}
+                  onClearSubmitError={() => setAuthStatusMessage("")}
+                  onReturnToLogin={returnToAccessLanding}
                 />
               ) : (
                 <div className="animate-fadeIn w-full">
@@ -7320,8 +7654,17 @@ function TYFYSPlatform() {
                           disabled={isCheckoutLoading}
                           className="w-full bg-white text-blue-900 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
                         >
-                          {isCheckoutLoading ? "Redirecting..." : "Join Premium"}
+                          {isCheckoutLoading
+                            ? "Redirecting..."
+                            : nativeAppRuntime
+                              ? "Talk to TYFYS About Premium"
+                              : "Join Premium"}
                         </button>
+                        {nativeAppRuntime && (
+                          <p className="mt-3 text-xs text-blue-100 max-w-xs ml-auto">
+                            Membership activation is handled by TYFYS care ops in the mobile app so your account can stay in sync across web and mobile.
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
