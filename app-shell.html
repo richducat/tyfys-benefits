@@ -5,6 +5,19 @@
     (function () {
       const hostname = String(window.location.hostname || "").toLowerCase();
       const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
+      const isStandaloneAppHost = hostname === "app.tyfys.net" || hostname === "www.app.tyfys.net";
+      if (!isLocalRuntime && isStandaloneAppHost && window.location.pathname === "/app-shell.html") {
+        const cleanUrl = new URL("/", window.location.origin);
+        cleanUrl.search = window.location.search;
+        cleanUrl.hash = window.location.hash;
+        window.history.replaceState(null, "", cleanUrl.toString());
+      }
+    })();
+  </script>
+  <script>
+    (function () {
+      const hostname = String(window.location.hostname || "").toLowerCase();
+      const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
       if (isLocalRuntime) return;
 
       window.dataLayer = window.dataLayer || [];
