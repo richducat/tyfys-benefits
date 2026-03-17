@@ -1,8 +1,38 @@
 {
   "version": 2,
   "functions": {
+    "api/intake-portal-gate.js": {
+      "maxDuration": 10,
+      "includeFiles": "intake-portal-content.html"
+    },
     "api/*.js": {
       "maxDuration": 30
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/lupusstudy",
+      "destination": "/lupusstudy.html"
+    },
+    {
+      "source": "/clinic",
+      "destination": "/clinic.html"
+    },
+    {
+      "source": "/intake-portal",
+      "destination": "/api/intake-portal-gate"
+    },
+    {
+      "source": "/intake-portal.html",
+      "destination": "/api/intake-portal-gate"
+    },
+    {
+      "source": "/oauth/callback",
+      "destination": "/api/zoho-oauth-callback"
+    },
+    {
+      "source": "/zoho/callback",
+      "destination": "/api/zoho-oauth-callback"
+    }
+  ]
 }
