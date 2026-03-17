@@ -11,6 +11,26 @@
   },
   "rewrites": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "app.tyfys.net"
+        }
+      ],
+      "destination": "/app-shell.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.app.tyfys.net"
+        }
+      ],
+      "destination": "/app-shell.html"
+    },
+    {
       "source": "/lupusstudy",
       "destination": "/lupusstudy.html"
     },
