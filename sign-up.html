@@ -2,101 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TYFYS - Sign Up</title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>TYFYS Sign-Up Redirect</title>
     <script>
-        tailwind.config = {
-            safelist: [
-                'border-blue-600',
-                'bg-blue-50',
-                'text-blue-900',
-                'shadow-sm',
-                'hover:border-blue-400'
-            ]
-        }
+      (function () {
+        const hostname = String(window.location.hostname || "").toLowerCase();
+        const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
+        const target = new URL(isLocalRuntime ? "/app-shell.html" : "https://app.tyfys.net/", window.location.href);
+        const current = new URL(window.location.href);
+        current.searchParams.forEach((value, key) => target.searchParams.set(key, value));
+        if (!target.searchParams.has("autostart")) target.searchParams.set("autostart", "1");
+        if (!target.searchParams.has("source")) target.searchParams.set("source", "sign-up-page");
+        window.location.replace(target.toString());
+      })();
     </script>
-
-    <!-- React & ReactDOM -->
-    <script defer src="tyfys-platform/vendor/react.production.min.js"></script>
-    <script defer src="tyfys-platform/vendor/react-dom.production.min.js"></script>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        background: #0f172a;
+        color: #f8fafc;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
 
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+      body {
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        text-align: center;
+      }
 
-        /* Animations */
-        .animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .animate-slideInRight { animation: slideInRight 0.3s ease-out forwards; }
-        @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
-
-        .animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Utilities */
-        .chat-bubble { position: relative; }
-        .chat-bubble::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -8px;
-            width: 0;
-            height: 0;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-right: 10px solid white;
-        }
+      a {
+        color: #93c5fd;
+      }
     </style>
-
-   <!-- TYFYS Structured Data -->
-   <script type="application/ld+json" data-tyfys-schema="organization">
-   {
-     "@context": "https://schema.org",
-     "@type": "Organization",
-     "name": "Thank You For Your Service (TYFYS)",
-     "url": "https://tyfys.net",
-     "logo": "https://tyfys.net/logo.png",
-     "sameAs": []
-   }
-   </script>
-   <script type="application/ld+json" data-tyfys-schema="localbusiness">
-   {
-     "@context": "https://schema.org",
-     "@type": "LocalBusiness",
-     "name": "TYFYS",
-     "url": "https://tyfys.net",
-     "telephone": "321-248-2805",
-     "address": {
-       "@type": "PostalAddress",
-       "addressCountry": "US"
-     },
-     "areaServed": {
-       "@type": "AdministrativeArea",
-       "name": "United States"
-     },
-     "description": "Neutral coordination of private medical evidence (DBQs and independent medical opinions) to support veterans disability claims."
-   }
-   </script>
-   <!-- /TYFYS Structured Data -->
 </head>
-<body class="bg-slate-50 text-slate-900 overflow-hidden" data-page="sign-up">
-    <div id="root"></div>
-
-    <script src="tyfys-platform/tyfys-platform-app.js" defer></script>
-
-   <script src="apps/seo-sitewide.js"></script>
+<body>
+    <main>
+        <h1>Opening TYFYS Sign-Up</h1>
+        <p>You are being redirected to the standalone TYFYS app.</p>
+        <p>If nothing happens, <a href="https://app.tyfys.net/?autostart=1">continue to app.tyfys.net</a>.</p>
+    </main>
 </body>
 </html>

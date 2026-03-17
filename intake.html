@@ -2,16 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0;url=sign-up.html">
-    <title>TYFYS - Veteran Intake</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>TYFYS Intake Redirect</title>
     <script>
-        // Redirect to the veteran sign-up portal
-        window.location.href = 'sign-up.html';
+      (function () {
+        const hostname = String(window.location.hostname || "").toLowerCase();
+        const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
+        const target = new URL(isLocalRuntime ? "/app-shell.html" : "https://app.tyfys.net/", window.location.href);
+        const current = new URL(window.location.href);
+        current.searchParams.forEach((value, key) => target.searchParams.set(key, value));
+        if (!target.searchParams.has("autostart")) target.searchParams.set("autostart", "1");
+        if (!target.searchParams.has("source")) target.searchParams.set("source", "intake-page");
+        window.location.replace(target.toString());
+      })();
     </script>
+    <style>
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        background: #0f172a;
+        color: #f8fafc;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        text-align: center;
+      }
+
+      a {
+        color: #93c5fd;
+      }
+    </style>
 </head>
 <body>
-    <p>Redirecting to veteran intake portal...</p>
-    <p>If you're not redirected, <a href="sign-up.html">click here</a>.</p>
+    <main>
+        <h1>Opening TYFYS Intake</h1>
+        <p>You are being redirected to the standalone TYFYS app.</p>
+        <p>If nothing happens, <a href="https://app.tyfys.net/?autostart=1">continue to app.tyfys.net</a>.</p>
+    </main>
 </body>
 </html>
