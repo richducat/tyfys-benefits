@@ -29,6 +29,7 @@ module.exports = async (req, res) => {
         authenticated: true,
         account: publicAccount(auth.user),
         appState: auth.user.state || null,
+        sessionToken: auth.session.sessionId,
       });
     }
 
@@ -77,6 +78,7 @@ module.exports = async (req, res) => {
       account: publicAccount(nextUser),
       appState: nextUser.state || null,
       savedAt: nextUser.updatedAt,
+      sessionToken: auth.session.sessionId,
     });
   } catch (error) {
     return json(res, 500, { ok: false, error: safeString(error?.message || error, 2000) });

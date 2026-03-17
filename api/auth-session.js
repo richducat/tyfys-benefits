@@ -18,6 +18,7 @@ module.exports = async (req, res) => {
       authenticated: true,
       account: publicAccount(auth.user),
       appState: auth.user.state || null,
+      sessionToken: auth.session.sessionId,
     });
   } catch (error) {
     clearSessionCookie(res, req);
