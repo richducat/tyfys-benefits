@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script>
+     (function () {
+       const hostname = String(window.location.hostname || "").toLowerCase();
+       const isStandaloneAppHost = hostname === "app.tyfys.net" || hostname === "www.app.tyfys.net";
+       if (!isStandaloneAppHost) return;
+
+       const current = new URL(window.location.href);
+       const target = new URL("/app-shell.html", current.origin);
+       target.search = current.search;
+       target.hash = current.hash;
+       window.location.replace(target.toString());
+     })();
+   </script>
    <!-- Google tag (gtag.js) -->
    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1PEBFCV9Q"></script>
    <script>
