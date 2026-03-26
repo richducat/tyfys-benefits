@@ -1,8 +1,10 @@
 import React from 'react';
 
-const Icon = ({ children, className }) => (
+const Icon = ({ children, className, size = 24 }) => (
   <svg
     className={className}
+    width={size}
+    height={size}
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
