@@ -12,7 +12,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        demo: resolve(__dirname, 'demo-app.html')
+        'lead-wizard': resolve(__dirname, 'src/lead-wizard-main.jsx')
       },
       output: {
         entryFileNames: 'assets/[name].js',
