@@ -3967,6 +3967,7 @@ function TYFYSPlatform() {
   const returnToAccessLanding = () => {
     setHasStarted(false);
     clearHasStarted();
+    window.location.reload();
   };
   const checkoutLeadId = zohoLeadId || "";
 
