@@ -4353,7 +4353,24 @@ function TYFYSPlatform() {
       applyPersistedSnapshot(payload.appState, payload.account);
       return payload;
     } catch (error) {
-      setAuthStatusMessage(String(error?.message || error || "").slice(0, 240));
+      const errorMessage = String(error?.message || error || "");
+      if (/already exists|existing tyfys login/i.test(errorMessage)) {
+        try {
+          const loginPayload = await requestAppJson("/api/auth-login", {
+            method: "POST",
+            body: { email: normalizedEmail, password }
+          });
+          saveAuthHint(loginPayload.account);
+          saveAppSessionToken(loginPayload.sessionToken || loadAppSessionToken());
+          setIsAuthenticated(true);
+          setAuthStatusMessage("");
+          applyPersistedSnapshot(loginPayload.appState, loginPayload.account);
+          return loginPayload;
+        } catch (loginError) {
+          // If login fails (wrong password), default back to the account exists message
+        }
+      }
+      setAuthStatusMessage(errorMessage.slice(0, 240));
       throw error;
     } finally {
       setIsAuthSubmitting(false);
