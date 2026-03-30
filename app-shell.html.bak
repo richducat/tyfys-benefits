@@ -160,19 +160,6 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen overflow-x-hidden" data-page="app-shell" data-app-host="standalone">
   <div id="root"></div>
-  <script>
-    if (window.React) {
-      const originalCreateElement = window.React.createElement;
-      window.React.createElement = function(type, props, ...children) {
-        if (type === undefined) {
-          console.error("UNDEFINED REACT COMPONENT DETECTED!", new Error().stack);
-          console.log("Props passed to undefined component:", props);
-          if (props && props.className) console.log("ClassName:", props.className);
-        }
-        return originalCreateElement.apply(window.React, arguments);
-      };
-    }
-  </script>
-  <script src="/tyfys-platform/tyfys-platform-app.js" defer></script>
+  <script src="/tyfys-platform/tyfys-platform-app.js?v=7" defer></script>
 </body>
 </html>
