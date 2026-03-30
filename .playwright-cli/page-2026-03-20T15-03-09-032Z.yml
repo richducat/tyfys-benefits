@@ -1,0 +1,20 @@
+- main [ref=e8]:
+  - generic [ref=e9]:
+    - paragraph [ref=e10]: TYFYS Internal CRM
+    - heading "Sign in to access the private CRM." [level=1] [ref=e11]
+    - paragraph [ref=e12]: Use the same TYFYS account credentials you use for the member app. CRM access is still restricted server-side after sign-in.
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: Email
+        - textbox "Email" [ref=e16]:
+          - /placeholder: team@tyfys.net
+          - text: Password123!ops@tyfys.net
+      - generic [ref=e17]:
+        - generic [ref=e18]: Password
+        - textbox "Password" [ref=e19]:
+          - /placeholder: Your TYFYS account password
+    - generic [ref=e23]: Email and password are required.
+    - generic [ref=e20]:
+      - button "Sign in" [ref=e21] [cursor=pointer]
+      - link "Open the member app" [ref=e22] [cursor=pointer]:
+        - /url: /

@@ -1,0 +1,173 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - complementary [ref=e31]:
+      - img [ref=e34]
+      - navigation [ref=e36]:
+        - button "Dashboard" [ref=e37] [cursor=pointer]:
+          - img [ref=e38]
+          - generic [ref=e40]: Dashboard
+        - button "Subjects" [ref=e41] [cursor=pointer]:
+          - img [ref=e42]
+          - generic [ref=e47]: Subjects
+        - button "Messages" [ref=e48] [cursor=pointer]:
+          - img [ref=e49]
+          - generic [ref=e51]: Messages
+        - button "Protocol AI" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+          - generic [ref=e56]: Protocol AI
+        - button "Audit" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+          - generic [ref=e62]: Audit
+    - complementary [ref=e63]:
+      - generic [ref=e64]:
+        - paragraph [ref=e65]: Subject navigator
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - textbox "Search subject, arm, or status" [ref=e70]
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - button "1074-A3A-201A Elizabeth Merrill Randomized" [ref=e73] [cursor=pointer]:
+            - generic [ref=e74]:
+              - generic [ref=e75]:
+                - paragraph [ref=e76]: 1074-A3A-201A
+                - paragraph [ref=e77]: Elizabeth Merrill
+              - generic [ref=e626]: Randomized
+          - button "1088-B1C-204F Marcus Thomas Screening" [active] [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]:
+              - generic [ref=e82]:
+                - paragraph [ref=e83]: 1088-B1C-204F
+                - paragraph [ref=e84]: Marcus Thomas
+              - generic [ref=e628]: Screening
+        - generic [ref=e87]:
+          - paragraph [ref=e88]: Subject modules
+          - generic [ref=e89]:
+            - button "General" [ref=e90] [cursor=pointer]:
+              - generic [ref=e91]: General
+              - img [ref=e92]
+            - button "Visits" [ref=e94] [cursor=pointer]:
+              - generic [ref=e95]: Visits
+              - img [ref=e96]
+            - button "Study Logs" [ref=e98] [cursor=pointer]:
+              - generic [ref=e99]: Study Logs
+              - img [ref=e100]
+            - button "Medical Conditions" [ref=e102] [cursor=pointer]:
+              - generic [ref=e103]: Medical Conditions
+              - img [ref=e104]
+            - button "Concomitant Medications" [ref=e106] [cursor=pointer]:
+              - generic [ref=e107]: Concomitant Medications
+              - img [ref=e108]
+            - button "Protocol Deviations" [ref=e110] [cursor=pointer]:
+              - generic [ref=e111]: Protocol Deviations
+              - img [ref=e112]
+            - button "Allergies" [ref=e114] [cursor=pointer]:
+              - generic [ref=e115]: Allergies
+              - img [ref=e116]
+            - button "Emergency Contacts" [ref=e118] [cursor=pointer]:
+              - generic [ref=e119]: Emergency Contacts
+              - img [ref=e120]
+            - button "Progress Notes" [ref=e122] [cursor=pointer]:
+              - generic [ref=e123]: Progress Notes
+              - img [ref=e124]
+            - button "eDocs / Labs / Misc" [ref=e126] [cursor=pointer]:
+              - generic [ref=e127]: eDocs / Labs / Misc
+              - img [ref=e128]
+    - main [ref=e130]:
+      - generic [ref=e131]:
+        - generic [ref=e132]:
+          - generic [ref=e133]:
+            - paragraph [ref=e134]: 230LE301
+            - paragraph [ref=e136]: V4.0 / eSource 27 Oct 2025
+          - heading "Marcus J Thomas" [level=2] [ref=e630]
+          - paragraph [ref=e138]: "Study arm: Part A (Screening) · Site: OpenDoor Clinical Research LLC"
+        - generic [ref=e139]:
+          - button "Monitor mode off" [ref=e140] [cursor=pointer]:
+            - generic [ref=e141]:
+              - img [ref=e142]
+              - text: Monitor mode off
+          - generic [ref=e145]:
+            - paragraph [ref=e146]: Connected account
+            - paragraph [ref=e147]: Richard Ducat
+          - button "Log out" [ref=e148] [cursor=pointer]:
+            - img [ref=e149]
+      - generic [ref=e631]:
+        - generic [ref=e633]:
+          - heading "eDocs / labs / misc" [level=3] [ref=e634]
+          - paragraph [ref=e635]: Certified-copy and signature controls are wired into the clinic packet, not mocked.
+        - table [ref=e638]:
+          - rowgroup [ref=e639]:
+            - row "Document Category Signature Expiration Uploaded By Actions" [ref=e640]:
+              - columnheader "Document" [ref=e641]
+              - columnheader "Category" [ref=e642]
+              - columnheader "Signature" [ref=e643]
+              - columnheader "Expiration" [ref=e644]
+              - columnheader "Uploaded By" [ref=e645]
+              - columnheader "Actions" [ref=e646]
+          - rowgroup [ref=e647]:
+            - row "Photo ID Uploaded Identity Not Required None Site Front Desk Certify Request signature" [ref=e648]:
+              - cell "Photo ID Uploaded" [ref=e649]:
+                - paragraph [ref=e650]: Photo ID
+                - paragraph [ref=e651]: Uploaded
+              - cell "Identity" [ref=e652]
+              - cell "Not Required" [ref=e653]:
+                - generic [ref=e654]: Not Required
+              - cell "None" [ref=e656]
+              - cell "Site Front Desk" [ref=e657]
+              - cell "Certify Request signature" [ref=e658]:
+                - generic [ref=e659]:
+                  - button "Certify" [ref=e660] [cursor=pointer]
+                  - button "Request signature" [ref=e661] [cursor=pointer]
+    - complementary [ref=e265]:
+      - generic [ref=e662]:
+        - generic [ref=e664]:
+          - heading "Subject snapshot" [level=3] [ref=e665]
+          - paragraph [ref=e666]: Live summary tied to the selected workbench subject.
+        - generic [ref=e668]:
+          - generic [ref=e669]:
+            - paragraph [ref=e670]: Current subject
+            - paragraph [ref=e671]: 1088-B1C-204F
+            - paragraph [ref=e672]: Marcus Thomas
+          - generic [ref=e673]:
+            - generic [ref=e674]:
+              - paragraph [ref=e675]: Status
+              - paragraph [ref=e676]: Screening
+            - generic [ref=e677]:
+              - paragraph [ref=e678]: Next visit
+              - paragraph [ref=e679]: 2026-02-18
+            - generic [ref=e680]:
+              - paragraph [ref=e681]: Released
+              - paragraph [ref=e682]: $0
+            - generic [ref=e683]:
+              - paragraph [ref=e684]: Pending payouts
+              - paragraph [ref=e685]: "1"
+      - generic [ref=e686]:
+        - generic [ref=e688]:
+          - heading "Action queue" [level=3] [ref=e689]
+          - paragraph [ref=e690]: Fast-glance blockers for the selected subject.
+        - generic [ref=e692]:
+          - generic [ref=e693]:
+            - img [ref=e694]
+            - generic [ref=e699]:
+              - paragraph [ref=e700]: Visit readiness
+              - paragraph [ref=e701]: Eligibility review is next in line.
+          - generic [ref=e702]:
+            - img [ref=e703]
+            - generic [ref=e707]:
+              - paragraph [ref=e708]: Signature queue
+              - paragraph [ref=e709]: 0 pending document(s).
+          - generic [ref=e710]:
+            - img [ref=e711]
+            - generic [ref=e714]:
+              - paragraph [ref=e715]: Payouts
+              - paragraph [ref=e716]: 0 stipend(s) ready to release.
+  - region "Service disclaimer" [ref=e23]:
+    - generic [ref=e24]:
+      - paragraph [ref=e25]:
+        - strong [ref=e26]: "What we do:"
+        - text: We coordinate private medical evidence (DBQs and independent medical opinions) to support veterans' disability claims. We do not provide legal advice, representation, or submit VA claims.
+      - generic [ref=e27]:
+        - link "Services" [ref=e28] [cursor=pointer]:
+          - /url: services.html
+        - link "FAQs" [ref=e29] [cursor=pointer]:
+          - /url: faqs.html
+        - link "How It Works" [ref=e30] [cursor=pointer]:
+          - /url: how-it-works.html

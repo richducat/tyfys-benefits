@@ -1,0 +1,29 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img [ref=e8]
+        - generic [ref=e11]:
+          - paragraph [ref=e12]: TYFYS Clinic
+          - heading "Subject operations console" [level=1] [ref=e13]
+      - paragraph [ref=e14]: This route now mirrors the CTMS-style workflow from the second half of your recording.
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]: Username
+        - textbox [ref=e18]
+      - generic [ref=e19]:
+        - generic [ref=e20]: Password
+        - textbox [ref=e21]
+      - button "Unlock clinic app" [ref=e22] [cursor=pointer]
+  - region "Service disclaimer" [ref=e23]:
+    - generic [ref=e24]:
+      - paragraph [ref=e25]:
+        - strong [ref=e26]: "What we do:"
+        - text: We coordinate private medical evidence (DBQs and independent medical opinions) to support veterans' disability claims. We do not provide legal advice, representation, or submit VA claims.
+      - generic [ref=e27]:
+        - link "Services" [ref=e28] [cursor=pointer]:
+          - /url: services.html
+        - link "FAQs" [ref=e29] [cursor=pointer]:
+          - /url: faqs.html
+        - link "How It Works" [ref=e30] [cursor=pointer]:
+          - /url: how-it-works.html

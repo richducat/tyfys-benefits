@@ -1,0 +1,19 @@
+- main [ref=e2]:
+  - generic [ref=e570]:
+    - generic [ref=e571]:
+      - generic [ref=e572]:
+        - img [ref=e574]
+        - generic [ref=e577]:
+          - paragraph [ref=e578]: Saved Client Access
+          - heading "Sign back in" [level=1] [ref=e579]
+      - paragraph [ref=e580]: Welcome back, Richard. Your saved TYFYS progress is ready on this device.
+      - paragraph [ref=e581]: Sessions stay active for 30 days. Logging back in restores your saved progress.
+    - generic [ref=e582]:
+      - generic [ref=e583]:
+        - generic [ref=e584]: Email
+        - textbox "you@example.com" [ref=e585]: richard@example.com
+      - generic [ref=e586]:
+        - generic [ref=e587]: Password
+        - textbox "Enter your TYFYS password" [ref=e588]
+      - generic [ref=e589]: You signed out. Log back in on this device to continue where you left off.
+      - button "Log In" [ref=e590] [cursor=pointer]

@@ -1,0 +1,205 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - img [ref=e8]
+      - generic [ref=e11]:
+        - heading "TYFYS" [level=1] [ref=e12]
+        - paragraph [ref=e13]: Veteran Claim Workspace
+    - navigation [ref=e14]:
+      - paragraph [ref=e15]: Main
+      - button "Claim Home" [ref=e16] [cursor=pointer]:
+        - img [ref=e17]
+        - text: Claim Home
+      - button "Care Team" [ref=e19] [cursor=pointer]:
+        - img [ref=e20]
+        - text: Care Team
+        - img [ref=e24]
+      - button "Messages 3" [ref=e27] [cursor=pointer]:
+        - img [ref=e28]
+        - text: Messages
+        - generic [ref=e30]: "3"
+      - button "Records Intake" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - text: Records Intake
+        - img [ref=e35]
+      - paragraph [ref=e38]: Tools
+      - button "Records Vault" [ref=e39] [cursor=pointer]:
+        - img [ref=e40]
+        - text: Records Vault
+      - button "VA Rating Calculator" [ref=e44] [cursor=pointer]:
+        - img [ref=e45]
+        - text: VA Rating Calculator
+      - button "PACT Act Guide" [ref=e47] [cursor=pointer]:
+        - img [ref=e48]
+        - text: PACT Act Guide
+      - button "Medical Opinion Draft" [ref=e50] [cursor=pointer]:
+        - img [ref=e51]
+        - text: Medical Opinion Draft
+        - img [ref=e54]
+      - button "Evidence Checklist" [ref=e57] [cursor=pointer]:
+        - img [ref=e58]
+        - text: Evidence Checklist
+      - button "Support Options" [ref=e62] [cursor=pointer]:
+        - img [ref=e63]
+        - text: Support Options
+      - paragraph [ref=e66]: Guided Support
+      - button "Claim Guide" [ref=e67] [cursor=pointer]:
+        - img [ref=e68]
+        - text: Claim Guide
+      - button "Independent Doctor Support" [ref=e71]:
+        - img [ref=e72]
+        - text: Independent Doctor Support
+        - img [ref=e75]
+    - generic [ref=e78]:
+      - generic [ref=e81]: Guided
+      - paragraph [ref=e82]: "ID: VET-8821"
+  - generic [ref=e83]:
+    - banner [ref=e84]:
+      - generic [ref=e86]:
+        - paragraph [ref=e87]: Records
+        - heading "Records Vault" [level=2] [ref=e88]
+        - paragraph [ref=e89]: Upload records, read scanned text, and keep your claim evidence organized on this device.
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - button "Care Team" [ref=e92] [cursor=pointer]:
+            - img [ref=e93]
+            - text: Care Team
+          - button "Messages 3" [ref=e97] [cursor=pointer]:
+            - img [ref=e98]
+            - text: Messages
+            - generic [ref=e100]: "3"
+        - button "Log Out" [ref=e101] [cursor=pointer]:
+          - img [ref=e102]
+          - generic [ref=e105]: Log Out
+        - button "Ask Angela" [ref=e106] [cursor=pointer]:
+          - img [ref=e107]
+          - text: Ask Angela
+    - main [ref=e109]:
+      - generic [ref=e111]:
+        - generic [ref=e113]:
+          - generic [ref=e114]:
+            - paragraph [ref=e115]: Saved on this device
+            - heading "Records Vault" [level=2] [ref=e116]
+            - paragraph [ref=e117]: Upload records, scan readable text from PDFs or images, and keep the documents your claim depends on in one place. Files stay saved on this device, while the vault keeps notes and text previews attached to each record.
+          - generic [ref=e118]:
+            - generic [ref=e119]:
+              - paragraph [ref=e120]: Files saved
+              - paragraph [ref=e121]: "1"
+            - generic [ref=e122]:
+              - paragraph [ref=e123]: Last scan
+              - paragraph [ref=e124]: Ready
+        - generic [ref=e125]:
+          - generic [ref=e126]:
+            - generic [ref=e127]:
+              - generic [ref=e128]:
+                - heading "Scan a record" [level=3] [ref=e129]
+                - paragraph [ref=e130]: Upload a document, read the text TYFYS finds, and save it to your Records Vault.
+              - generic [ref=e131]: Ready
+            - generic [ref=e132]:
+              - generic [ref=e136]:
+                - img [ref=e138]
+                - paragraph [ref=e142]: Drop a file to scan
+                - paragraph [ref=e143]: Attach a PDF or photo, choose the condition, then save the record.
+              - generic [ref=e145]:
+                - generic [ref=e146]: Idle
+                - generic [ref=e147]: Ready
+            - generic [ref=e148]:
+              - generic [ref=e149]:
+                - text: Document title
+                - textbox "Lumbar MRI - Jan 2026" [ref=e150]: blank-upload-valid
+              - generic [ref=e151]:
+                - text: Condition
+                - combobox [ref=e152]:
+                  - option "General claim record" [selected]
+                  - option "PTSD"
+                  - option "Major Depressive Disorder"
+                  - option "Anxiety Condition"
+                  - option "Migraines"
+                  - option "Peripheral Neuropathy"
+                  - option "TBI Residuals"
+                  - option "Lumbosacral (Back) Strain"
+                  - option "Cervical (Neck) Strain"
+                  - option "Knee Strain/Pain"
+                  - option "Plantar Fasciitis"
+                  - option "Sleep Apnea"
+                  - option "Asthma"
+                  - option "Sinusitis/Rhinitis"
+                  - option "Tinnitus"
+                  - option "Hearing Loss"
+                  - option "GERD"
+                  - option "IBS"
+              - generic [ref=e153]:
+                - text: Document type
+                - combobox [ref=e154]:
+                  - option "DBQ"
+                  - option "Nexus Letter"
+                  - option "Private Medical Record" [selected]
+                  - option "Imaging"
+                  - option "Service Record"
+                  - option "Lay Statement"
+                  - option "Toxic Exposure Evidence"
+                  - option "Other"
+              - generic [ref=e155]:
+                - text: Source
+                - combobox [ref=e156]:
+                  - option "Phone capture" [selected]
+                  - option "VA Blue Button"
+                  - option "Private doctor"
+                  - option "Specialist office"
+                  - option "Service treatment record"
+                  - option "Buddy or spouse statement"
+                  - option "Manual note"
+            - generic [ref=e157]:
+              - text: Attach document
+              - button "Choose File" [active] [ref=e158]
+              - paragraph [ref=e159]: blank-upload-valid.png · 1 KB
+            - generic [ref=e160]:
+              - text: Notes for TYFYS
+              - 'textbox "Example: mentions flare-ups, limited movement, and missed work shifts." [ref=e161]'
+            - generic [ref=e162]:
+              - button "Save to Records Vault" [ref=e163] [cursor=pointer]
+              - button "Export Records Vault" [ref=e164] [cursor=pointer]
+          - generic [ref=e165]:
+            - generic [ref=e166]:
+              - generic [ref=e167]:
+                - heading "Saved records" [level=3] [ref=e168]
+                - paragraph [ref=e169]: Records saved from this browser session onward.
+              - generic [ref=e170]:
+                - paragraph [ref=e171]: Types tracked
+                - paragraph [ref=e172]: "1"
+            - generic [ref=e174]:
+              - generic [ref=e175]:
+                - generic [ref=e176]:
+                  - generic [ref=e177]:
+                    - generic [ref=e178]: Service Record
+                    - generic [ref=e179]: Check scan quality
+                  - paragraph [ref=e180]: Service treatment records
+                  - paragraph [ref=e181]: Back pain · Service treatment record · Mar 18, 2026, 3:55 PM
+                - button [ref=e182] [cursor=pointer]:
+                  - img [ref=e183]
+              - generic [ref=e185]:
+                - generic [ref=e186]:
+                  - paragraph [ref=e187]: File
+                  - paragraph [ref=e188]: image.jpg · 200 KB
+                - generic [ref=e189]:
+                  - paragraph [ref=e190]: Text confidence
+                  - paragraph [ref=e191]: 25%
+              - generic [ref=e192]:
+                - paragraph [ref=e193]: Saved file
+                - paragraph [ref=e194]: image.jpg
+              - generic [ref=e195]:
+                - paragraph [ref=e196]: Your notes
+                - paragraph [ref=e197]: Uploaded from the phone camera.
+  - generic [ref=e198]:
+    - generic [ref=e199]:
+      - generic [ref=e200]:
+        - img [ref=e203]
+        - generic [ref=e207]:
+          - paragraph [ref=e208]: Angela - TYFYS Guide
+          - paragraph [ref=e209]: Online | Ready to help
+      - button [ref=e210] [cursor=pointer]:
+        - img [ref=e211]
+    - generic [ref=e216]:
+      - textbox "Ask Angela about your claim..." [ref=e217]
+      - button [disabled] [ref=e218]:
+        - img [ref=e219]

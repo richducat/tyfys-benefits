@@ -1,0 +1,95 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e6] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e8]
+        - generic [ref=e11]:
+          - generic [ref=e12]: Thank You For Your Service
+          - generic [ref=e13]: Veteran Owned & Operated
+      - generic [ref=e14]:
+        - link "Home" [ref=e15] [cursor=pointer]:
+          - /url: index.html
+        - link "About Us" [ref=e16] [cursor=pointer]:
+          - /url: about_us.html
+        - link "Our Team" [ref=e17] [cursor=pointer]:
+          - /url: mission_team.html
+        - link "Our Process" [ref=e18] [cursor=pointer]:
+          - /url: process.html
+        - button "VA Claims" [ref=e20] [cursor=pointer]:
+          - text: VA Claims
+          - img [ref=e21]
+        - button "Resources" [ref=e24] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e25]
+        - button "Cmd/Ctrl + K" [ref=e27] [cursor=pointer]:
+          - img [ref=e28]
+          - generic [ref=e31]: Cmd/Ctrl + K
+        - button "Accessibility" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+          - generic [ref=e40]: Accessibility
+        - link "Book Discovery Call" [ref=e41] [cursor=pointer]:
+          - /url: contact.html
+          - text: Book Discovery Call
+          - img [ref=e42]
+  - main [ref=e44]:
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - img [ref=e55]
+          - generic [ref=e58]:
+            - paragraph [ref=e59]: TYFYS App Access
+            - paragraph [ref=e60]: Private claim-planning workspace
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - img [ref=e63]
+            - text: Secure login + saved progress
+          - heading "Create your TYFYS login and save your progress" [level=1] [ref=e66]
+          - paragraph [ref=e67]: Create a login once, save your details on this device, and come back to your claim plan without starting over.
+        - generic [ref=e68]:
+          - generic [ref=e69]:
+            - img [ref=e70]
+            - paragraph [ref=e73]: Save your profile
+            - paragraph [ref=e74]: Keep your contact info and claim details on this device so you do not have to re-enter them.
+          - generic [ref=e75]:
+            - img [ref=e76]
+            - paragraph [ref=e79]: Resume your workspace
+            - paragraph [ref=e80]: Return to your tracker, drafts, and evidence plan where you left off.
+          - generic [ref=e81]:
+            - img [ref=e82]
+            - paragraph [ref=e85]: Stay ready to continue
+            - paragraph [ref=e86]: Use one login on this device to reopen TYFYS and pick back up later.
+        - generic [ref=e87]:
+          - paragraph [ref=e88]: Saved on this device
+          - generic [ref=e89]:
+            - generic [ref=e90]:
+              - img [ref=e92]
+              - paragraph [ref=e95]: Your secure TYFYS login for this device
+            - generic [ref=e96]:
+              - img [ref=e98]
+              - paragraph [ref=e101]: Your onboarding answers and contact details
+            - generic [ref=e102]:
+              - img [ref=e104]
+              - paragraph [ref=e107]: Your claim plan progress when you return
+      - generic [ref=e108]:
+        - generic [ref=e109]:
+          - paragraph [ref=e110]: New User
+          - heading "Start with your secure login" [level=2] [ref=e111]
+          - paragraph [ref=e112]: You will create your password during onboarding, and TYFYS will keep this device signed in for up to 30 days.
+        - generic [ref=e114]:
+          - generic [ref=e115]:
+            - paragraph [ref=e116]: What happens next
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - generic [ref=e119]: "1"
+                - paragraph [ref=e120]: Enter your name, email, phone, and zip code.
+              - generic [ref=e121]:
+                - generic [ref=e122]: "2"
+                - paragraph [ref=e123]: Create a password that becomes your TYFYS login on this device.
+              - generic [ref=e124]:
+                - generic [ref=e125]: "3"
+                - paragraph [ref=e126]: Come back later and log in to continue without starting over.
+          - button "Create Login and Continue" [ref=e127] [cursor=pointer]:
+            - text: Create Login and Continue
+            - img [ref=e128]
+          - generic [ref=e130]: "Notice: TYFYS is a private organization and not the VA. Your information is saved locally on this device so you can return and continue your workspace."

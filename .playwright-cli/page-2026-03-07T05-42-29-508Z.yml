@@ -1,0 +1,409 @@
+- generic [ref=e1]:
+  - navigation [ref=e424]:
+    - generic [ref=e426]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e428] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e430]
+        - generic [ref=e433]:
+          - generic [ref=e434]: Thank You For Your Service
+          - generic [ref=e435]: Veteran Owned & Operated
+      - generic [ref=e436]:
+        - link "Home" [ref=e437] [cursor=pointer]:
+          - /url: index.html
+        - link "About Us" [ref=e438] [cursor=pointer]:
+          - /url: about_us.html
+        - link "Our Team" [ref=e439] [cursor=pointer]:
+          - /url: mission_team.html
+        - link "Our Process" [ref=e440] [cursor=pointer]:
+          - /url: process.html
+        - button "VA Claims" [ref=e442] [cursor=pointer]:
+          - text: VA Claims
+          - img [ref=e443]
+        - button "Resources" [ref=e446] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e447]
+        - button "Cmd/Ctrl + K" [ref=e449] [cursor=pointer]:
+          - img [ref=e450]
+          - generic [ref=e453]: Cmd/Ctrl + K
+        - button "Accessibility" [ref=e455] [cursor=pointer]:
+          - img [ref=e456]
+          - generic [ref=e462]: Accessibility
+        - link "Book Discovery Call" [ref=e463] [cursor=pointer]:
+          - /url: contact.html
+          - text: Book Discovery Call
+          - img [ref=e464]
+  - main [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e46]:
+        - generic [ref=e48]:
+          - img [ref=e50]
+          - generic [ref=e53]:
+            - heading "TYFYS" [level=1] [ref=e54]
+            - paragraph [ref=e55]: Veteran OS v2.0
+        - navigation [ref=e56]:
+          - paragraph [ref=e57]: Main
+          - button "Mission Control" [ref=e58] [cursor=pointer]:
+            - img [ref=e59]
+            - text: Mission Control
+          - button "Doctor Portal" [ref=e61] [cursor=pointer]:
+            - img [ref=e62]
+            - text: Doctor Portal
+          - button "Secure Comms 1" [ref=e66] [cursor=pointer]:
+            - img [ref=e67]
+            - text: Secure Comms
+            - generic [ref=e69]: "1"
+          - button "Intake Portal" [disabled] [ref=e70]:
+            - img [ref=e71]
+            - text: Intake Portal
+            - img [ref=e74]
+          - paragraph [ref=e77]: Tools
+          - button "Dossier Scanner" [ref=e78] [cursor=pointer]:
+            - img [ref=e79]
+            - text: Dossier Scanner
+          - button "VA Math" [ref=e83] [cursor=pointer]:
+            - img [ref=e84]
+            - text: VA Math
+          - button "PACT Act Explorer" [ref=e86] [cursor=pointer]:
+            - img [ref=e87]
+            - text: PACT Act Explorer
+          - button "Nexus Generator" [ref=e89] [cursor=pointer]:
+            - img [ref=e90]
+            - text: Nexus Generator
+          - button "Evidence Finder" [ref=e93] [cursor=pointer]:
+            - img [ref=e94]
+            - text: Evidence Finder
+          - button "Plans & Pricing" [ref=e98] [cursor=pointer]:
+            - img [ref=e99]
+            - text: Plans & Pricing
+          - paragraph [ref=e102]: Premium
+          - button "TYFYS Claims Bot" [ref=e103] [cursor=pointer]:
+            - img [ref=e104]
+            - text: TYFYS Claims Bot
+            - img [ref=e107]
+          - button "Private Specialist" [ref=e110]:
+            - img [ref=e111]
+            - text: Private Specialist
+            - img [ref=e114]
+        - generic [ref=e117]:
+          - generic [ref=e120]: Sales Ready
+          - paragraph [ref=e121]: "ID: VET-8821"
+          - button "Upgrade Now" [ref=e122] [cursor=pointer]
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - generic [ref=e126]:
+            - paragraph [ref=e127]: Care Coordination
+            - heading "Doctor Portal" [level=2] [ref=e466]
+            - paragraph [ref=e129]: See which TYFYS coordinators and physician partners are attached to your packet.
+          - generic [ref=e130]:
+            - button "Secure Comms 1" [ref=e137] [cursor=pointer]:
+              - img [ref=e138]
+              - text: Secure Comms
+              - generic [ref=e140]: "1"
+            - button "Ask Angela" [ref=e141] [cursor=pointer]:
+              - img [ref=e142]
+              - text: Ask Angela
+        - main [ref=e144]:
+          - generic [ref=e467]:
+            - generic [ref=e469]:
+              - generic [ref=e470]:
+                - paragraph [ref=e471]: Delegation-style directory
+                - heading "Doctor Portal" [level=2] [ref=e472]
+                - paragraph [ref=e473]: See exactly who is attached to your packet, what part of the workflow they own, when your next visit or handoff is scheduled, and which practice systems TYFYS can route through without extra back-and-forth.
+              - generic [ref=e474]:
+                - generic [ref=e475]:
+                  - paragraph [ref=e476]: Assigned doctors
+                  - paragraph [ref=e477]: "2"
+                - generic [ref=e478]:
+                  - paragraph [ref=e479]: Next visit
+                  - paragraph [ref=e480]: March 9, 2026 · 2:00 PM ET
+                - generic [ref=e481]:
+                  - paragraph [ref=e482]: Sync requests
+                  - paragraph [ref=e483]: "1"
+            - generic [ref=e484]:
+              - generic [ref=e485]:
+                - generic [ref=e486]:
+                  - generic [ref=e487]:
+                    - paragraph [ref=e488]: Authorized support roster
+                    - heading "Your care team directory" [level=3] [ref=e489]
+                  - button "Open shared inbox" [ref=e490] [cursor=pointer]
+                - generic [ref=e491]:
+                  - generic [ref=e493]:
+                    - generic [ref=e494]:
+                      - generic [ref=e495]:
+                        - generic [ref=e496]: TYFYS Team
+                        - generic [ref=e497]: Scheduling and packet coordination
+                      - heading "TYFYS Care Ops" [level=4] [ref=e498]
+                      - paragraph [ref=e499]: Intake routing, evidence handoff, follow-up reminders
+                      - paragraph [ref=e500]: Bridges your TYFYS team and physician partners so records, questionnaires, and visit windows stay aligned.
+                      - generic [ref=e501]:
+                        - generic [ref=e502]: Calendar routing
+                        - generic [ref=e503]: Packet delivery
+                        - generic [ref=e504]: Status updates
+                    - generic [ref=e505]:
+                      - generic [ref=e506]:
+                        - generic [ref=e507]:
+                          - img [ref=e508]
+                          - generic [ref=e511]:
+                            - paragraph [ref=e512]: Availability
+                            - paragraph [ref=e513]: Monday to Friday, 9:00 AM to 6:00 PM ET
+                        - generic [ref=e514]:
+                          - img [ref=e515]
+                          - generic [ref=e517]:
+                            - paragraph [ref=e518]: Next visit
+                            - paragraph [ref=e519]: March 9, 2026 · 2:00 PM ET
+                        - generic [ref=e520]:
+                          - img [ref=e521]
+                          - generic [ref=e525]:
+                            - paragraph [ref=e526]: System sync
+                            - paragraph [ref=e527]: HubSpot + Calendly routing
+                      - button "Message care ops" [ref=e528] [cursor=pointer]
+                  - generic [ref=e530]:
+                    - generic [ref=e531]:
+                      - generic [ref=e532]:
+                        - generic [ref=e533]: Assigned Doctor
+                        - generic [ref=e534]: Lead physician partner
+                      - heading "Dr. Amanda Miller" [level=4] [ref=e535]
+                      - paragraph [ref=e536]: Family medicine, DBQ prep, records review
+                      - paragraph [ref=e537]: Reviews uploaded evidence, closes packet gaps, and prepares veterans for telehealth or in-person examinations.
+                      - generic [ref=e538]:
+                        - generic [ref=e539]: Musculoskeletal
+                        - generic [ref=e540]: General medicine
+                        - generic [ref=e541]: Readiness review
+                    - generic [ref=e542]:
+                      - generic [ref=e543]:
+                        - generic [ref=e544]:
+                          - img [ref=e545]
+                          - generic [ref=e548]:
+                            - paragraph [ref=e549]: Availability
+                            - paragraph [ref=e550]: Tuesday and Thursday telehealth blocks
+                        - generic [ref=e551]:
+                          - img [ref=e552]
+                          - generic [ref=e554]:
+                            - paragraph [ref=e555]: Next visit
+                            - paragraph [ref=e556]: March 10, 2026 · 10:30 AM ET
+                        - generic [ref=e557]:
+                          - img [ref=e558]
+                          - generic [ref=e562]:
+                            - paragraph [ref=e563]: System sync
+                            - paragraph [ref=e564]: athenahealth + Google Calendar
+                      - button "Message this doctor" [ref=e565] [cursor=pointer]
+                  - generic [ref=e567]:
+                    - generic [ref=e568]:
+                      - generic [ref=e569]:
+                        - generic [ref=e570]: Assigned Doctor
+                        - generic [ref=e571]: Behavioral health physician partner
+                      - heading "Dr. Elise Warren" [level=4] [ref=e572]
+                      - paragraph [ref=e573]: Psychiatry, PTSD, anxiety, sleep disruption
+                      - paragraph [ref=e574]: Handles psych-focused consults and makes sure symptom history is documented in plain English before the evaluation.
+                      - generic [ref=e575]:
+                        - generic [ref=e576]: Mental health DBQs
+                        - generic [ref=e577]: PTSD narratives
+                        - generic [ref=e578]: Medication review
+                    - generic [ref=e579]:
+                      - generic [ref=e580]:
+                        - generic [ref=e581]:
+                          - img [ref=e582]
+                          - generic [ref=e585]:
+                            - paragraph [ref=e586]: Availability
+                            - paragraph [ref=e587]: Monday and Wednesday late-afternoon sessions
+                        - generic [ref=e588]:
+                          - img [ref=e589]
+                          - generic [ref=e591]:
+                            - paragraph [ref=e592]: Next visit
+                            - paragraph [ref=e593]: March 11, 2026 · 4:15 PM ET
+                        - generic [ref=e594]:
+                          - img [ref=e595]
+                          - generic [ref=e599]:
+                            - paragraph [ref=e600]: System sync
+                            - paragraph [ref=e601]: SimplePractice + TherapyNotes
+                      - button "Message this doctor" [ref=e602] [cursor=pointer]
+              - generic [ref=e603]:
+                - generic [ref=e604]:
+                  - generic [ref=e605]:
+                    - heading "Upcoming visit context" [level=3] [ref=e606]
+                    - paragraph [ref=e607]: Keep your packet handoff, prep visits, and follow-up consults aligned.
+                  - button "Message care team" [ref=e608] [cursor=pointer]
+                - generic [ref=e609]:
+                  - generic [ref=e610]:
+                    - generic [ref=e611]:
+                      - generic [ref=e612]:
+                        - paragraph [ref=e613]: Internal routing
+                        - paragraph [ref=e614]: TYFYS packet handoff
+                      - generic [ref=e615]: March 9, 2026 · 2:00 PM ET
+                    - paragraph [ref=e616]: Your records, questionnaires, and current claim notes are pushed into the physician partner workflow.
+                    - generic [ref=e617]:
+                      - generic [ref=e618]: TYFYS Care Ops
+                      - button "Open thread" [ref=e619] [cursor=pointer]
+                  - generic [ref=e620]:
+                    - generic [ref=e621]:
+                      - generic [ref=e622]:
+                        - paragraph [ref=e623]: Video consult
+                        - paragraph [ref=e624]: Telehealth prep visit
+                      - generic [ref=e625]: March 10, 2026 · 10:30 AM ET
+                    - paragraph [ref=e626]: Review MRI, medication list, flare-up timeline, and the facts needed before a DBQ or medical opinion.
+                    - generic [ref=e627]:
+                      - generic [ref=e628]: Dr. Amanda Miller
+                      - button "Open thread" [ref=e629] [cursor=pointer]
+                  - generic [ref=e630]:
+                    - generic [ref=e631]:
+                      - generic [ref=e632]:
+                        - paragraph [ref=e633]: Video consult
+                        - paragraph [ref=e634]: Behavioral health consult
+                      - generic [ref=e635]: March 11, 2026 · 4:15 PM ET
+                    - paragraph [ref=e636]: Finalize PTSD and anxiety symptom summaries before the behavioral health questionnaire is completed.
+                    - generic [ref=e637]:
+                      - generic [ref=e638]: Dr. Elise Warren
+                      - button "Open thread" [ref=e639] [cursor=pointer]
+            - generic [ref=e640]:
+              - generic [ref=e641]:
+                - generic [ref=e642]:
+                  - paragraph [ref=e643]: Practice system coverage
+                  - heading "CRM and calendar integration cards" [level=3] [ref=e644]
+                  - paragraph [ref=e645]: If your physician partner uses one of these systems, TYFYS can route referral context, schedule windows, and intake packet handoff with less manual chasing.
+                - generic [ref=e646]: 1 intro request queued
+              - generic [ref=e647]:
+                - generic [ref=e648]:
+                  - generic [ref=e649]:
+                    - generic [ref=e650]:
+                      - paragraph [ref=e651]: athenahealth
+                      - paragraph [ref=e652]: EHR + practice management
+                    - generic [ref=e653]: Ready
+                  - paragraph [ref=e654]: Map TYFYS referrals and consult windows directly into physician calendars.
+                  - generic [ref=e655]:
+                    - generic [ref=e656]:
+                      - generic [ref=e657]: Best for
+                      - generic [ref=e658]: Private physician groups
+                    - generic [ref=e659]:
+                      - generic [ref=e660]: Sync mode
+                      - generic [ref=e661]: Two-way schedule windows
+                  - button "Intro requested" [active] [ref=e777] [cursor=pointer]
+                  - paragraph [ref=e778]: Requested Mar 7, 2026, 12:42 AM
+                - generic [ref=e663]:
+                  - generic [ref=e664]:
+                    - generic [ref=e665]:
+                      - paragraph [ref=e666]: SimplePractice
+                      - paragraph [ref=e667]: Behavioral health
+                    - generic [ref=e668]: Ready
+                  - paragraph [ref=e669]: Ideal for psych and therapy partners who need secure telehealth plus questionnaire handoff.
+                  - generic [ref=e670]:
+                    - generic [ref=e671]:
+                      - generic [ref=e672]: Best for
+                      - generic [ref=e673]: Psychs, therapists, counselors
+                    - generic [ref=e674]:
+                      - generic [ref=e675]: Sync mode
+                      - generic [ref=e676]: Telehealth bookings + intake forms
+                  - button "Request intro" [ref=e677] [cursor=pointer]
+                - generic [ref=e678]:
+                  - generic [ref=e679]:
+                    - generic [ref=e680]:
+                      - paragraph [ref=e681]: DrChrono
+                      - paragraph [ref=e682]: Cloud EHR
+                    - generic [ref=e683]: Pilot
+                  - paragraph [ref=e684]: Push next-available slots and pull appointment confirmations back into TYFYS.
+                  - generic [ref=e685]:
+                    - generic [ref=e686]:
+                      - generic [ref=e687]: Best for
+                      - generic [ref=e688]: Independent practices
+                    - generic [ref=e689]:
+                      - generic [ref=e690]: Sync mode
+                      - generic [ref=e691]: Visit slots + chart prep
+                  - button "Request intro" [ref=e692] [cursor=pointer]
+                - generic [ref=e693]:
+                  - generic [ref=e694]:
+                    - generic [ref=e695]:
+                      - paragraph [ref=e696]: eClinicalWorks
+                      - paragraph [ref=e697]: EHR + PM
+                    - generic [ref=e698]: Ready
+                  - paragraph [ref=e699]: Support referral queues and follow-up reminders across larger private groups.
+                  - generic [ref=e700]:
+                    - generic [ref=e701]:
+                      - generic [ref=e702]: Best for
+                      - generic [ref=e703]: Multi-location clinics
+                    - generic [ref=e704]:
+                      - generic [ref=e705]: Sync mode
+                      - generic [ref=e706]: Calendar export + task routing
+                  - button "Request intro" [ref=e707] [cursor=pointer]
+                - generic [ref=e708]:
+                  - generic [ref=e709]:
+                    - generic [ref=e710]:
+                      - paragraph [ref=e711]: NextGen Office
+                      - paragraph [ref=e712]: Practice management
+                    - generic [ref=e713]: Ready
+                  - paragraph [ref=e714]: Surface open consult blocks and capture TYFYS handoff milestones.
+                  - generic [ref=e715]:
+                    - generic [ref=e716]:
+                      - generic [ref=e717]: Best for
+                      - generic [ref=e718]: Primary care + specialty
+                    - generic [ref=e719]:
+                      - generic [ref=e720]: Sync mode
+                      - generic [ref=e721]: Calendar + patient routing
+                  - button "Request intro" [ref=e722] [cursor=pointer]
+                - generic [ref=e723]:
+                  - generic [ref=e724]:
+                    - generic [ref=e725]:
+                      - paragraph [ref=e726]: TherapyNotes
+                      - paragraph [ref=e727]: Mental health PM
+                    - generic [ref=e728]: Pilot
+                  - paragraph [ref=e729]: Sync behavioral health sessions with TYFYS prep notes and reminders.
+                  - generic [ref=e730]:
+                    - generic [ref=e731]:
+                      - generic [ref=e732]: Best for
+                      - generic [ref=e733]: Psychologists and psychiatrists
+                    - generic [ref=e734]:
+                      - generic [ref=e735]: Sync mode
+                      - generic [ref=e736]: Session schedule + intake packet
+                  - button "Request intro" [ref=e737] [cursor=pointer]
+                - generic [ref=e738]:
+                  - generic [ref=e739]:
+                    - generic [ref=e740]:
+                      - paragraph [ref=e741]: Jane
+                      - paragraph [ref=e742]: Scheduling + reminders
+                    - generic [ref=e743]: Pilot
+                  - paragraph [ref=e744]: Strong fit for rehab and cash-pay specialty clinics that want clean intake handoff.
+                  - generic [ref=e745]:
+                    - generic [ref=e746]:
+                      - generic [ref=e747]: Best for
+                      - generic [ref=e748]: Private wellness and rehab
+                    - generic [ref=e749]:
+                      - generic [ref=e750]: Sync mode
+                      - generic [ref=e751]: Booking feed + follow-up reminders
+                  - button "Request intro" [ref=e752] [cursor=pointer]
+                - generic [ref=e753]:
+                  - generic [ref=e754]:
+                    - generic [ref=e755]:
+                      - paragraph [ref=e756]: HubSpot CRM
+                      - paragraph [ref=e757]: CRM routing
+                    - generic [ref=e758]: Ready
+                  - paragraph [ref=e759]: Useful for physician partners running referral intake through CRM before scheduling.
+                  - generic [ref=e760]:
+                    - generic [ref=e761]:
+                      - generic [ref=e762]: Best for
+                      - generic [ref=e763]: Concierge and referral ops
+                    - generic [ref=e764]:
+                      - generic [ref=e765]: Sync mode
+                      - generic [ref=e766]: Lead-to-appointment routing
+                  - button "Request intro" [ref=e767] [cursor=pointer]
+      - generic [ref=e359]:
+        - generic [ref=e360]:
+          - generic [ref=e361]:
+            - img [ref=e364]
+            - generic [ref=e368]:
+              - paragraph [ref=e369]: Angela - Guide
+              - paragraph [ref=e370]: Online | Here for You
+          - button [ref=e371] [cursor=pointer]:
+            - img [ref=e372]
+        - generic [ref=e769]: It is wonderful to meet you, Richard. Your profile is all set. Welcome to your Mission Control.
+        - generic [ref=e377]:
+          - textbox "Ask Angela anything..." [ref=e378]
+          - button [disabled] [ref=e379]:
+            - img [ref=e380]
+  - generic [ref=e772] [cursor=pointer]:
+    - emphasis [ref=e773]: 
+    - generic [ref=e774]:
+      - generic "We're offline" [ref=e775]
+      - paragraph [ref=e776]: Leave a message
+      - text: 
+    - text: 
+  - generic:
+    - generic:
+      - iframe

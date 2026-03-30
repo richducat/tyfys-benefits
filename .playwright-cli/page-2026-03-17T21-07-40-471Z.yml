@@ -1,0 +1,77 @@
+- main [ref=e2]:
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - img [ref=e21]
+        - generic [ref=e24]:
+          - paragraph [ref=e25]: TYFYS Veteran Access
+          - paragraph [ref=e26]: Private claim support account
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - img [ref=e29]
+          - text: Secure login and saved progress
+        - heading "Log in or start your TYFYS account" [level=1] [ref=e32]
+        - paragraph [ref=e33]: If you already have a TYFYS login, sign in first. If you are new here, use the new-account button below and we will walk you through setup step by step.
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - img [ref=e36]
+          - paragraph [ref=e39]: Save your profile
+          - paragraph [ref=e40]: Keep your contact info and claim details on this device so you do not have to re-enter them.
+        - generic [ref=e41]:
+          - img [ref=e42]
+          - paragraph [ref=e45]: Resume your account
+          - paragraph [ref=e46]: Return to your records, rating work, and next steps where you left off.
+        - generic [ref=e47]:
+          - img [ref=e48]
+          - paragraph [ref=e51]: Come back without starting over
+          - paragraph [ref=e52]: Use one secure login on this device to reopen TYFYS and pick back up later.
+      - generic [ref=e53]:
+        - paragraph [ref=e54]: Saved on this device
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - img [ref=e58]
+            - paragraph [ref=e61]: Your secure TYFYS login for this device
+          - generic [ref=e62]:
+            - img [ref=e64]
+            - paragraph [ref=e67]: Your setup answers and contact details
+          - generic [ref=e68]:
+            - img [ref=e70]
+            - paragraph [ref=e73]: Your saved progress when you come back
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - paragraph [ref=e76]: App Sign-In
+        - heading "Log in to continue" [level=2] [ref=e77]
+        - paragraph [ref=e78]: If you already have a TYFYS login, enter it here first. If you are new here, use the button below.
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - generic [ref=e82]: Email
+            - textbox "you@example.com" [ref=e83]
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - generic [ref=e86]: Password
+              - button "Forgot password?" [ref=e87] [cursor=pointer]
+            - textbox "Enter your TYFYS password" [ref=e88]
+          - button "Log In and Continue" [ref=e89] [cursor=pointer]:
+            - text: Log In and Continue
+            - img [ref=e90]
+          - paragraph [ref=e92]: TYFYS keeps this device signed in for up to 30 days so you can return to your saved account faster.
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - paragraph [ref=e95]: New to TYFYS?
+            - paragraph [ref=e96]: Need to create your account?
+            - paragraph [ref=e97]: Start here to save your contact details, create your login, and come back later without redoing setup.
+            - generic [ref=e98]:
+              - generic [ref=e99]:
+                - generic [ref=e100]: "1"
+                - paragraph [ref=e101]: Enter your name, email, phone number, and ZIP code.
+              - generic [ref=e102]:
+                - generic [ref=e103]: "2"
+                - paragraph [ref=e104]: Create the password you will use to come back to TYFYS.
+              - generic [ref=e105]:
+                - generic [ref=e106]: "3"
+                - paragraph [ref=e107]: Return later and log in without starting over.
+            - button "Click here if you're setting up a new account" [ref=e108] [cursor=pointer]:
+              - text: Click here if you're setting up a new account
+              - img [ref=e109]
+          - generic [ref=e111]: "Notice: TYFYS is a private company and not the VA. Your information is stored on this device so you can return and continue your account."

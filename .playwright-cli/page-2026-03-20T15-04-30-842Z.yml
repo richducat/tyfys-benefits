@@ -1,0 +1,2087 @@
+- main [ref=e8]:
+  - generic [ref=e9]:
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - paragraph [ref=e12]: Private Operations Workspace
+        - heading "TYFYS CRM and SOP command center." [level=1] [ref=e13]
+        - paragraph [ref=e14]: Manage customers, follow every case across the pipeline, and keep the entire TYFYS SOP visible from first touch through ready-to-submit delivery.
+        - generic [ref=e15]:
+          - article [ref=e16]:
+            - text: TotalCustomers
+            - strong [ref=e17]: "137"
+            - paragraph [ref=e18]: customer records in the private pipeline
+          - article [ref=e19]:
+            - text: ActiveCustomers
+            - strong [ref=e20]: "137"
+            - paragraph [ref=e21]: cases currently moving
+          - article [ref=e22]:
+            - text: PaidCustomers
+            - strong [ref=e23]: "105"
+            - paragraph [ref=e24]: accounts with paid app access
+          - article [ref=e25]:
+            - text: RecordsInFlight
+            - strong [ref=e26]: "77"
+            - paragraph [ref=e27]: customers with records already uploaded
+          - article [ref=e28]:
+            - text: ReadyToSubmit
+            - strong [ref=e29]: "0"
+            - paragraph [ref=e30]: files at final handoff stage
+          - article [ref=e31]:
+            - text: Urgent
+            - strong [ref=e32]: "0"
+            - paragraph [ref=e33]: cases marked urgent
+      - complementary [ref=e34]:
+        - generic [ref=e35]:
+          - paragraph [ref=e36]: Session
+          - heading "Ops Lead" [level=2] [ref=e37]
+          - paragraph [ref=e38]: Signed in as ops@tyfys.net. This workspace is isolated behind CRM-only access rules.
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: Internal only
+            - generic [ref=e42]: App data + SOP
+            - generic [ref=e43]: Live on app.tyfys.net/crm
+          - generic [ref=e44]:
+            - generic [ref=e45]: "Customers: 137"
+            - generic [ref=e46]: Updated in real time from auth store
+    - generic [ref=e47]:
+      - generic [ref=e48]:
+        - generic [ref=e49]: Search
+        - searchbox "Search" [ref=e50]
+      - generic [ref=e51]:
+        - generic [ref=e52]: Stage
+        - combobox "Stage" [ref=e53]:
+          - option "All stages" [selected]
+          - option "Urgent only"
+          - option "Ready to Submit"
+          - option "Records"
+          - option "Provider"
+          - option "Welcome"
+          - option "Offer"
+          - option "Contract Signed"
+          - option "DD214 / ITF"
+          - option "Records"
+          - option "Intake"
+          - option "MDBQs"
+          - option "Provider"
+          - option "Evidence Packet"
+          - option "Ready to Submit"
+      - generic [ref=e54]:
+        - generic [ref=e55]: Owner
+        - combobox "Owner" [ref=e56]:
+          - option "All owners" [selected]
+      - generic [ref=e57]:
+        - generic [ref=e58]: Status
+        - combobox "Status" [ref=e59]:
+          - option "All statuses" [selected]
+          - option "Active"
+          - option "Paused"
+          - option "Closed"
+    - generic [ref=e60]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - paragraph [ref=e65]: Pipeline
+            - heading "Welcome" [level=2] [ref=e66]
+            - paragraph [ref=e67]: New customer or account that still needs a first-touch review.
+            - generic [ref=e68]: 3 customers
+          - button "Codex Preview codex-preview-reset-1773780997@example.com Normal No next step captured yet. SOP 0/11 No due date" [ref=e69] [cursor=pointer]:
+            - generic [ref=e70]:
+              - generic [ref=e71]:
+                - heading "Codex Preview" [level=3] [ref=e72]
+                - generic [ref=e73]: codex-preview-reset-1773780997@example.com
+              - generic [ref=e74]: Normal
+            - paragraph [ref=e75]: No next step captured yet.
+            - generic [ref=e76]:
+              - generic [ref=e77]: SOP 0/11
+              - generic [ref=e78]: No due date
+          - button "Codex Test codex-test@example.com Normal No next step captured yet. SOP 0/11 No due date" [ref=e79] [cursor=pointer]:
+            - generic [ref=e80]:
+              - generic [ref=e81]:
+                - heading "Codex Test" [level=3] [ref=e82]
+                - generic [ref=e83]: codex-test@example.com
+              - generic [ref=e84]: Normal
+            - paragraph [ref=e85]: No next step captured yet.
+            - generic [ref=e86]:
+              - generic [ref=e87]: SOP 0/11
+              - generic [ref=e88]: No due date
+          - button "Redis Direct redis-direct-1773092954255@example.com Normal No next step captured yet. SOP 0/11 No due date" [ref=e89] [cursor=pointer]:
+            - generic [ref=e90]:
+              - generic [ref=e91]:
+                - heading "Redis Direct" [level=3] [ref=e92]
+                - generic [ref=e93]: redis-direct-1773092954255@example.com
+              - generic [ref=e94]: Normal
+            - paragraph [ref=e95]: No next step captured yet.
+            - generic [ref=e96]:
+              - generic [ref=e97]: SOP 0/11
+              - generic [ref=e98]: No due date
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - paragraph [ref=e101]: Pipeline
+            - heading "Offer" [level=2] [ref=e102]
+            - paragraph [ref=e103]: Qualified lead reviewing pricing, fit, or account setup details.
+            - generic [ref=e104]: 29 customers
+          - button "Richard Ducat test@eb28.co Normal No next step captured yet. 1 records 20% rating SOP 0/11 No due date" [ref=e105] [cursor=pointer]:
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - heading "Richard Ducat" [level=3] [ref=e108]
+                - generic [ref=e109]: test@eb28.co
+              - generic [ref=e110]: Normal
+            - paragraph [ref=e111]: No next step captured yet.
+            - generic [ref=e112]:
+              - generic [ref=e113]: 1 records
+              - generic [ref=e114]: 20% rating
+            - generic [ref=e115]:
+              - generic [ref=e116]: SOP 0/11
+              - generic [ref=e117]: No due date
+          - button "Checkout Check checkout-check-1773890778511@example.com Normal No next step captured yet. 70% rating SOP 0/11 No due date" [ref=e118] [cursor=pointer]:
+            - generic [ref=e119]:
+              - generic [ref=e120]:
+                - heading "Checkout Check" [level=3] [ref=e121]
+                - generic [ref=e122]: checkout-check-1773890778511@example.com
+              - generic [ref=e123]: Normal
+            - paragraph [ref=e124]: No next step captured yet.
+            - generic [ref=e126]: 70% rating
+            - generic [ref=e127]:
+              - generic [ref=e128]: SOP 0/11
+              - generic [ref=e129]: No due date
+          - button "Contract Tester contract-1773890712534@example.com Normal No next step captured yet. SOP 0/11 No due date" [ref=e130] [cursor=pointer]:
+            - generic [ref=e131]:
+              - generic [ref=e132]:
+                - heading "Contract Tester" [level=3] [ref=e133]
+                - generic [ref=e134]: contract-1773890712534@example.com
+              - generic [ref=e135]: Normal
+            - paragraph [ref=e136]: No next step captured yet.
+            - generic [ref=e137]:
+              - generic [ref=e138]: SOP 0/11
+              - generic [ref=e139]: No due date
+          - button "Free Veteran audit-free-1773890117402@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e140] [cursor=pointer]:
+            - generic [ref=e141]:
+              - generic [ref=e142]:
+                - heading "Free Veteran" [level=3] [ref=e143]
+                - generic [ref=e144]: audit-free-1773890117402@example.com
+              - generic [ref=e145]: Normal
+            - paragraph [ref=e146]: No next step captured yet.
+            - generic [ref=e148]: 60% rating
+            - generic [ref=e149]:
+              - generic [ref=e150]: SOP 0/11
+              - generic [ref=e151]: No due date
+          - button "codex-audit@example.com codex-audit@example.com Normal No next step captured yet. SOP 0/11 No due date" [ref=e152] [cursor=pointer]:
+            - generic [ref=e153]:
+              - generic [ref=e154]:
+                - heading "codex-audit@example.com" [level=3] [ref=e155]
+                - generic [ref=e156]: codex-audit@example.com
+              - generic [ref=e157]: Normal
+            - paragraph [ref=e158]: No next step captured yet.
+            - generic [ref=e159]:
+              - generic [ref=e160]: SOP 0/11
+              - generic [ref=e161]: No due date
+          - button "Casey Veteran support-check-1773864175093@example.com Normal No next step captured yet. 70% rating SOP 0/11 No due date" [ref=e162] [cursor=pointer]:
+            - generic [ref=e163]:
+              - generic [ref=e164]:
+                - heading "Casey Veteran" [level=3] [ref=e165]
+                - generic [ref=e166]: support-check-1773864175093@example.com
+              - generic [ref=e167]: Normal
+            - paragraph [ref=e168]: No next step captured yet.
+            - generic [ref=e170]: 70% rating
+            - generic [ref=e171]:
+              - generic [ref=e172]: SOP 0/11
+              - generic [ref=e173]: No due date
+          - button "Free Veteran audit-free-1773863257757@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e174] [cursor=pointer]:
+            - generic [ref=e175]:
+              - generic [ref=e176]:
+                - heading "Free Veteran" [level=3] [ref=e177]
+                - generic [ref=e178]: audit-free-1773863257757@example.com
+              - generic [ref=e179]: Normal
+            - paragraph [ref=e180]: No next step captured yet.
+            - generic [ref=e182]: 60% rating
+            - generic [ref=e183]:
+              - generic [ref=e184]: SOP 0/11
+              - generic [ref=e185]: No due date
+          - button "Free Veteran audit-free-1773863141875@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e186] [cursor=pointer]:
+            - generic [ref=e187]:
+              - generic [ref=e188]:
+                - heading "Free Veteran" [level=3] [ref=e189]
+                - generic [ref=e190]: audit-free-1773863141875@example.com
+              - generic [ref=e191]: Normal
+            - paragraph [ref=e192]: No next step captured yet.
+            - generic [ref=e194]: 60% rating
+            - generic [ref=e195]:
+              - generic [ref=e196]: SOP 0/11
+              - generic [ref=e197]: No due date
+          - button "Free Veteran audit-free-1773863081842@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e198] [cursor=pointer]:
+            - generic [ref=e199]:
+              - generic [ref=e200]:
+                - heading "Free Veteran" [level=3] [ref=e201]
+                - generic [ref=e202]: audit-free-1773863081842@example.com
+              - generic [ref=e203]: Normal
+            - paragraph [ref=e204]: No next step captured yet.
+            - generic [ref=e206]: 60% rating
+            - generic [ref=e207]:
+              - generic [ref=e208]: SOP 0/11
+              - generic [ref=e209]: No due date
+          - button "Free Veteran audit-free-1773863062419@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e210] [cursor=pointer]:
+            - generic [ref=e211]:
+              - generic [ref=e212]:
+                - heading "Free Veteran" [level=3] [ref=e213]
+                - generic [ref=e214]: audit-free-1773863062419@example.com
+              - generic [ref=e215]: Normal
+            - paragraph [ref=e216]: No next step captured yet.
+            - generic [ref=e218]: 60% rating
+            - generic [ref=e219]:
+              - generic [ref=e220]: SOP 0/11
+              - generic [ref=e221]: No due date
+          - button "Free Veteran audit-free-1773863012504@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e222] [cursor=pointer]:
+            - generic [ref=e223]:
+              - generic [ref=e224]:
+                - heading "Free Veteran" [level=3] [ref=e225]
+                - generic [ref=e226]: audit-free-1773863012504@example.com
+              - generic [ref=e227]: Normal
+            - paragraph [ref=e228]: No next step captured yet.
+            - generic [ref=e230]: 60% rating
+            - generic [ref=e231]:
+              - generic [ref=e232]: SOP 0/11
+              - generic [ref=e233]: No due date
+          - button "Free Veteran audit-free-1773862868739@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e234] [cursor=pointer]:
+            - generic [ref=e235]:
+              - generic [ref=e236]:
+                - heading "Free Veteran" [level=3] [ref=e237]
+                - generic [ref=e238]: audit-free-1773862868739@example.com
+              - generic [ref=e239]: Normal
+            - paragraph [ref=e240]: No next step captured yet.
+            - generic [ref=e242]: 60% rating
+            - generic [ref=e243]:
+              - generic [ref=e244]: SOP 0/11
+              - generic [ref=e245]: No due date
+          - button "Free Veteran audit-free-1773862691907@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e246] [cursor=pointer]:
+            - generic [ref=e247]:
+              - generic [ref=e248]:
+                - heading "Free Veteran" [level=3] [ref=e249]
+                - generic [ref=e250]: audit-free-1773862691907@example.com
+              - generic [ref=e251]: Normal
+            - paragraph [ref=e252]: No next step captured yet.
+            - generic [ref=e254]: 60% rating
+            - generic [ref=e255]:
+              - generic [ref=e256]: SOP 0/11
+              - generic [ref=e257]: No due date
+          - button "Free Veteran audit-free-1773862626222@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e258] [cursor=pointer]:
+            - generic [ref=e259]:
+              - generic [ref=e260]:
+                - heading "Free Veteran" [level=3] [ref=e261]
+                - generic [ref=e262]: audit-free-1773862626222@example.com
+              - generic [ref=e263]: Normal
+            - paragraph [ref=e264]: No next step captured yet.
+            - generic [ref=e266]: 60% rating
+            - generic [ref=e267]:
+              - generic [ref=e268]: SOP 0/11
+              - generic [ref=e269]: No due date
+          - button "Free Veteran codex-free-1773856310730@example.com Normal No next step captured yet. 60% rating SOP 0/11 No due date" [ref=e270] [cursor=pointer]:
+            - generic [ref=e271]:
+              - generic [ref=e272]:
+                - heading "Free Veteran" [level=3] [ref=e273]
+                - generic [ref=e274]: codex-free-1773856310730@example.com
+              - generic [ref=e275]: Normal
+            - paragraph [ref=e276]: No next step captured yet.
+            - generic [ref=e278]: 60% rating
+            - generic [ref=e279]:
+              - generic [ref=e280]: SOP 0/11
+              - generic [ref=e281]: No due date
+          - button "Richard Ducat richardducat@me.com Normal No next step captured yet. 40% rating SOP 0/11 No due date" [ref=e282] [cursor=pointer]:
+            - generic [ref=e283]:
+              - generic [ref=e284]:
+                - heading "Richard Ducat" [level=3] [ref=e285]
+                - generic [ref=e286]: richardducat@me.com
+              - generic [ref=e287]: Normal
+            - paragraph [ref=e288]: No next step captured yet.
+            - generic [ref=e290]: 40% rating
+            - generic [ref=e291]:
+              - generic [ref=e292]: SOP 0/11
+              - generic [ref=e293]: No due date
+          - button "Taylor Veteran codex-prod-challenge-1773782053@example.com Normal No next step captured yet. 0% rating SOP 0/11 No due date" [ref=e294] [cursor=pointer]:
+            - generic [ref=e295]:
+              - generic [ref=e296]:
+                - heading "Taylor Veteran" [level=3] [ref=e297]
+                - generic [ref=e298]: codex-prod-challenge-1773782053@example.com
+              - generic [ref=e299]: Normal
+            - paragraph [ref=e300]: No next step captured yet.
+            - generic [ref=e302]: 0% rating
+            - generic [ref=e303]:
+              - generic [ref=e304]: SOP 0/11
+              - generic [ref=e305]: No due date
+          - button "Morgan Veteran codex-preview-challenge-1773781972@example.com Normal No next step captured yet. SOP 0/11 No due date" [ref=e306] [cursor=pointer]:
+            - generic [ref=e307]:
+              - generic [ref=e308]:
+                - heading "Morgan Veteran" [level=3] [ref=e309]
+                - generic [ref=e310]: codex-preview-challenge-1773781972@example.com
+              - generic [ref=e311]: Normal
+            - paragraph [ref=e312]: No next step captured yet.
+            - generic [ref=e313]:
+              - generic [ref=e314]: SOP 0/11
+              - generic [ref=e315]: No due date
+          - button "Jordan Veteran codex-challenge-reset-1773781619@example.com Normal No next step captured yet. SOP 0/11 No due date" [ref=e316] [cursor=pointer]:
+            - generic [ref=e317]:
+              - generic [ref=e318]:
+                - heading "Jordan Veteran" [level=3] [ref=e319]
+                - generic [ref=e320]: codex-challenge-reset-1773781619@example.com
+              - generic [ref=e321]: Normal
+            - paragraph [ref=e322]: No next step captured yet.
+            - generic [ref=e323]:
+              - generic [ref=e324]: SOP 0/11
+              - generic [ref=e325]: No due date
+          - button "Reset Test codex-reset-1773780425@example.com Normal No next step captured yet. SOP 0/11 No due date" [ref=e326] [cursor=pointer]:
+            - generic [ref=e327]:
+              - generic [ref=e328]:
+                - heading "Reset Test" [level=3] [ref=e329]
+                - generic [ref=e330]: codex-reset-1773780425@example.com
+              - generic [ref=e331]: Normal
+            - paragraph [ref=e332]: No next step captured yet.
+            - generic [ref=e333]:
+              - generic [ref=e334]: SOP 0/11
+              - generic [ref=e335]: No due date
+          - button "Codex Final codex-live3-1773773751@example.com Normal No next step captured yet. 70% rating SOP 0/11 No due date" [ref=e336] [cursor=pointer]:
+            - generic [ref=e337]:
+              - generic [ref=e338]:
+                - heading "Codex Final" [level=3] [ref=e339]
+                - generic [ref=e340]: codex-live3-1773773751@example.com
+              - generic [ref=e341]: Normal
+            - paragraph [ref=e342]: No next step captured yet.
+            - generic [ref=e344]: 70% rating
+            - generic [ref=e345]:
+              - generic [ref=e346]: SOP 0/11
+              - generic [ref=e347]: No due date
+          - button "Richard Ducat richducati@gmail.com Normal No next step captured yet. 40% rating SOP 0/11 No due date" [ref=e348] [cursor=pointer]:
+            - generic [ref=e349]:
+              - generic [ref=e350]:
+                - heading "Richard Ducat" [level=3] [ref=e351]
+                - generic [ref=e352]: richducati@gmail.com
+              - generic [ref=e353]: Normal
+            - paragraph [ref=e354]: No next step captured yet.
+            - generic [ref=e356]: 40% rating
+            - generic [ref=e357]:
+              - generic [ref=e358]: SOP 0/11
+              - generic [ref=e359]: No due date
+          - button "Codex API codex-api-1773773700@example.com Normal No next step captured yet. SOP 0/11 No due date" [ref=e360] [cursor=pointer]:
+            - generic [ref=e361]:
+              - generic [ref=e362]:
+                - heading "Codex API" [level=3] [ref=e363]
+                - generic [ref=e364]: codex-api-1773773700@example.com
+              - generic [ref=e365]: Normal
+            - paragraph [ref=e366]: No next step captured yet.
+            - generic [ref=e367]:
+              - generic [ref=e368]: SOP 0/11
+              - generic [ref=e369]: No due date
+          - button "Codex Verify codex-live2-1773772844@example.com Normal No next step captured yet. 70% rating SOP 0/11 No due date" [ref=e370] [cursor=pointer]:
+            - generic [ref=e371]:
+              - generic [ref=e372]:
+                - heading "Codex Verify" [level=3] [ref=e373]
+                - generic [ref=e374]: codex-live2-1773772844@example.com
+              - generic [ref=e375]: Normal
+            - paragraph [ref=e376]: No next step captured yet.
+            - generic [ref=e378]: 70% rating
+            - generic [ref=e379]:
+              - generic [ref=e380]: SOP 0/11
+              - generic [ref=e381]: No due date
+          - button "Codex Live codex-live-1773772636@example.com Normal No next step captured yet. 70% rating SOP 0/11 No due date" [ref=e382] [cursor=pointer]:
+            - generic [ref=e383]:
+              - generic [ref=e384]:
+                - heading "Codex Live" [level=3] [ref=e385]
+                - generic [ref=e386]: codex-live-1773772636@example.com
+              - generic [ref=e387]: Normal
+            - paragraph [ref=e388]: No next step captured yet.
+            - generic [ref=e390]: 70% rating
+            - generic [ref=e391]:
+              - generic [ref=e392]: SOP 0/11
+              - generic [ref=e393]: No due date
+          - button "Codex Smoke codex-clean-1773772196@example.com Normal No next step captured yet. 70% rating SOP 0/11 No due date" [ref=e394] [cursor=pointer]:
+            - generic [ref=e395]:
+              - generic [ref=e396]:
+                - heading "Codex Smoke" [level=3] [ref=e397]
+                - generic [ref=e398]: codex-clean-1773772196@example.com
+              - generic [ref=e399]: Normal
+            - paragraph [ref=e400]: No next step captured yet.
+            - generic [ref=e402]: 70% rating
+            - generic [ref=e403]:
+              - generic [ref=e404]: SOP 0/11
+              - generic [ref=e405]: No due date
+          - button "Codex Tester codex-onboarding-1773768599@example.com Normal No next step captured yet. 0% rating SOP 0/11 No due date" [ref=e406] [cursor=pointer]:
+            - generic [ref=e407]:
+              - generic [ref=e408]:
+                - heading "Codex Tester" [level=3] [ref=e409]
+                - generic [ref=e410]: codex-onboarding-1773768599@example.com
+              - generic [ref=e411]: Normal
+            - paragraph [ref=e412]: No next step captured yet.
+            - generic [ref=e414]: 0% rating
+            - generic [ref=e415]:
+              - generic [ref=e416]: SOP 0/11
+              - generic [ref=e417]: No due date
+          - button "Codex Verify codex-verify-1773765279@example.com Normal No next step captured yet. 70% rating SOP 0/11 No due date" [ref=e418] [cursor=pointer]:
+            - generic [ref=e419]:
+              - generic [ref=e420]:
+                - heading "Codex Verify" [level=3] [ref=e421]
+                - generic [ref=e422]: codex-verify-1773765279@example.com
+              - generic [ref=e423]: Normal
+            - paragraph [ref=e424]: No next step captured yet.
+            - generic [ref=e426]: 70% rating
+            - generic [ref=e427]:
+              - generic [ref=e428]: SOP 0/11
+              - generic [ref=e429]: No due date
+          - button "Codex Browser codex-browser-smoke-20260315-2323@example.com Normal No next step captured yet. 0% rating SOP 0/11 No due date" [ref=e430] [cursor=pointer]:
+            - generic [ref=e431]:
+              - generic [ref=e432]:
+                - heading "Codex Browser" [level=3] [ref=e433]
+                - generic [ref=e434]: codex-browser-smoke-20260315-2323@example.com
+              - generic [ref=e435]: Normal
+            - paragraph [ref=e436]: No next step captured yet.
+            - generic [ref=e438]: 0% rating
+            - generic [ref=e439]:
+              - generic [ref=e440]: SOP 0/11
+              - generic [ref=e441]: No due date
+        - generic [ref=e442]:
+          - generic [ref=e443]:
+            - paragraph [ref=e444]: Pipeline
+            - heading "Contract Signed" [level=2] [ref=e445]
+            - paragraph [ref=e446]: Paid customer with app access or service agreement already in place.
+            - generic [ref=e447]: 29 customers
+          - button "Checkout View checkout-view-1773890960975@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e448] [cursor=pointer]:
+            - generic [ref=e449]:
+              - generic [ref=e450]:
+                - heading "Checkout View" [level=3] [ref=e451]
+                - generic [ref=e452]: checkout-view-1773890960975@example.com
+              - generic [ref=e453]: Normal
+            - paragraph [ref=e454]: No next step captured yet.
+            - generic [ref=e455]:
+              - generic [ref=e456]: Paid app access
+              - generic [ref=e457]: 70% rating
+            - generic [ref=e458]:
+              - generic [ref=e459]: SOP 0/11
+              - generic [ref=e460]: No due date
+          - button "Checkout View checkout-view-1773890876236@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e461] [cursor=pointer]:
+            - generic [ref=e462]:
+              - generic [ref=e463]:
+                - heading "Checkout View" [level=3] [ref=e464]
+                - generic [ref=e465]: checkout-view-1773890876236@example.com
+              - generic [ref=e466]: Normal
+            - paragraph [ref=e467]: No next step captured yet.
+            - generic [ref=e468]:
+              - generic [ref=e469]: Paid app access
+              - generic [ref=e470]: 70% rating
+            - generic [ref=e471]:
+              - generic [ref=e472]: SOP 0/11
+              - generic [ref=e473]: No due date
+          - button "Checkout Check checkout-check-1773890839348@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e474] [cursor=pointer]:
+            - generic [ref=e475]:
+              - generic [ref=e476]:
+                - heading "Checkout Check" [level=3] [ref=e477]
+                - generic [ref=e478]: checkout-check-1773890839348@example.com
+              - generic [ref=e479]: Normal
+            - paragraph [ref=e480]: No next step captured yet.
+            - generic [ref=e481]:
+              - generic [ref=e482]: Paid app access
+              - generic [ref=e483]: 70% rating
+            - generic [ref=e484]:
+              - generic [ref=e485]: SOP 0/11
+              - generic [ref=e486]: No due date
+          - button "Intake Check intake-check-1773890738710@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e487] [cursor=pointer]:
+            - generic [ref=e488]:
+              - generic [ref=e489]:
+                - heading "Intake Check" [level=3] [ref=e490]
+                - generic [ref=e491]: intake-check-1773890738710@example.com
+              - generic [ref=e492]: Normal
+            - paragraph [ref=e493]: No next step captured yet.
+            - generic [ref=e494]:
+              - generic [ref=e495]: Paid app access
+              - generic [ref=e496]: 70% rating
+            - generic [ref=e497]:
+              - generic [ref=e498]: SOP 0/11
+              - generic [ref=e499]: No due date
+          - button "Debug User debug-1773890583936@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e500] [cursor=pointer]:
+            - generic [ref=e501]:
+              - generic [ref=e502]:
+                - heading "Debug User" [level=3] [ref=e503]
+                - generic [ref=e504]: debug-1773890583936@example.com
+              - generic [ref=e505]: Normal
+            - paragraph [ref=e506]: No next step captured yet.
+            - generic [ref=e507]:
+              - generic [ref=e508]: Paid app access
+              - generic [ref=e509]: 70% rating
+            - generic [ref=e510]:
+              - generic [ref=e511]: SOP 0/11
+              - generic [ref=e512]: No due date
+          - button "Probe User probe-1773890373774@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e513] [cursor=pointer]:
+            - generic [ref=e514]:
+              - generic [ref=e515]:
+                - heading "Probe User" [level=3] [ref=e516]
+                - generic [ref=e517]: probe-1773890373774@example.com
+              - generic [ref=e518]: Normal
+            - paragraph [ref=e519]: No next step captured yet.
+            - generic [ref=e520]:
+              - generic [ref=e521]: Paid app access
+              - generic [ref=e522]: 70% rating
+            - generic [ref=e523]:
+              - generic [ref=e524]: SOP 0/11
+              - generic [ref=e525]: No due date
+          - button "Records Veteran audit-stage2_records-1773890117402@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e526] [cursor=pointer]:
+            - generic [ref=e527]:
+              - generic [ref=e528]:
+                - heading "Records Veteran" [level=3] [ref=e529]
+                - generic [ref=e530]: audit-stage2_records-1773890117402@example.com
+              - generic [ref=e531]: Normal
+            - paragraph [ref=e532]: No next step captured yet.
+            - generic [ref=e533]:
+              - generic [ref=e534]: Paid app access
+              - generic [ref=e535]: 70% rating
+            - generic [ref=e536]:
+              - generic [ref=e537]: SOP 0/11
+              - generic [ref=e538]: No due date
+          - button "Setup Veteran audit-stage1_setup-1773890117402@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e539] [cursor=pointer]:
+            - generic [ref=e540]:
+              - generic [ref=e541]:
+                - heading "Setup Veteran" [level=3] [ref=e542]
+                - generic [ref=e543]: audit-stage1_setup-1773890117402@example.com
+              - generic [ref=e544]: Normal
+            - paragraph [ref=e545]: No next step captured yet.
+            - generic [ref=e546]:
+              - generic [ref=e547]: Paid app access
+              - generic [ref=e548]: 70% rating
+            - generic [ref=e549]:
+              - generic [ref=e550]: SOP 0/11
+              - generic [ref=e551]: No due date
+          - button "Alex Veteran agreement-check-1773864360699@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e552] [cursor=pointer]:
+            - generic [ref=e553]:
+              - generic [ref=e554]:
+                - heading "Alex Veteran" [level=3] [ref=e555]
+                - generic [ref=e556]: agreement-check-1773864360699@example.com
+              - generic [ref=e557]: Normal
+            - paragraph [ref=e558]: No next step captured yet.
+            - generic [ref=e559]:
+              - generic [ref=e560]: Paid app access
+              - generic [ref=e561]: 70% rating
+            - generic [ref=e562]:
+              - generic [ref=e563]: SOP 0/11
+              - generic [ref=e564]: No due date
+          - button "Alex Veteran agreement-debug-1773864243475@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e565] [cursor=pointer]:
+            - generic [ref=e566]:
+              - generic [ref=e567]:
+                - heading "Alex Veteran" [level=3] [ref=e568]
+                - generic [ref=e569]: agreement-debug-1773864243475@example.com
+              - generic [ref=e570]: Normal
+            - paragraph [ref=e571]: No next step captured yet.
+            - generic [ref=e572]:
+              - generic [ref=e573]: Paid app access
+              - generic [ref=e574]: 70% rating
+            - generic [ref=e575]:
+              - generic [ref=e576]: SOP 0/11
+              - generic [ref=e577]: No due date
+          - button "Alex Veteran agreement-check-1773864217252@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e578] [cursor=pointer]:
+            - generic [ref=e579]:
+              - generic [ref=e580]:
+                - heading "Alex Veteran" [level=3] [ref=e581]
+                - generic [ref=e582]: agreement-check-1773864217252@example.com
+              - generic [ref=e583]: Normal
+            - paragraph [ref=e584]: No next step captured yet.
+            - generic [ref=e585]:
+              - generic [ref=e586]: Paid app access
+              - generic [ref=e587]: 70% rating
+            - generic [ref=e588]:
+              - generic [ref=e589]: SOP 0/11
+              - generic [ref=e590]: No due date
+          - button "Alex Veteran agreement-check-1773864176533@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e591] [cursor=pointer]:
+            - generic [ref=e592]:
+              - generic [ref=e593]:
+                - heading "Alex Veteran" [level=3] [ref=e594]
+                - generic [ref=e595]: agreement-check-1773864176533@example.com
+              - generic [ref=e596]: Normal
+            - paragraph [ref=e597]: No next step captured yet.
+            - generic [ref=e598]:
+              - generic [ref=e599]: Paid app access
+              - generic [ref=e600]: 70% rating
+            - generic [ref=e601]:
+              - generic [ref=e602]: SOP 0/11
+              - generic [ref=e603]: No due date
+          - button "Alex Veteran agreement-test-1773864050951@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e604] [cursor=pointer]:
+            - generic [ref=e605]:
+              - generic [ref=e606]:
+                - heading "Alex Veteran" [level=3] [ref=e607]
+                - generic [ref=e608]: agreement-test-1773864050951@example.com
+              - generic [ref=e609]: Normal
+            - paragraph [ref=e610]: No next step captured yet.
+            - generic [ref=e611]:
+              - generic [ref=e612]: Paid app access
+              - generic [ref=e613]: 70% rating
+            - generic [ref=e614]:
+              - generic [ref=e615]: SOP 0/11
+              - generic [ref=e616]: No due date
+          - button "Records Veteran audit-stage2_records-1773863257757@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e617] [cursor=pointer]:
+            - generic [ref=e618]:
+              - generic [ref=e619]:
+                - heading "Records Veteran" [level=3] [ref=e620]
+                - generic [ref=e621]: audit-stage2_records-1773863257757@example.com
+              - generic [ref=e622]: Normal
+            - paragraph [ref=e623]: No next step captured yet.
+            - generic [ref=e624]:
+              - generic [ref=e625]: Paid app access
+              - generic [ref=e626]: 70% rating
+            - generic [ref=e627]:
+              - generic [ref=e628]: SOP 0/11
+              - generic [ref=e629]: No due date
+          - button "Setup Veteran audit-stage1_setup-1773863257757@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e630] [cursor=pointer]:
+            - generic [ref=e631]:
+              - generic [ref=e632]:
+                - heading "Setup Veteran" [level=3] [ref=e633]
+                - generic [ref=e634]: audit-stage1_setup-1773863257757@example.com
+              - generic [ref=e635]: Normal
+            - paragraph [ref=e636]: No next step captured yet.
+            - generic [ref=e637]:
+              - generic [ref=e638]: Paid app access
+              - generic [ref=e639]: 70% rating
+            - generic [ref=e640]:
+              - generic [ref=e641]: SOP 0/11
+              - generic [ref=e642]: No due date
+          - button "Records Veteran audit-stage2_records-1773863141875@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e643] [cursor=pointer]:
+            - generic [ref=e644]:
+              - generic [ref=e645]:
+                - heading "Records Veteran" [level=3] [ref=e646]
+                - generic [ref=e647]: audit-stage2_records-1773863141875@example.com
+              - generic [ref=e648]: Normal
+            - paragraph [ref=e649]: No next step captured yet.
+            - generic [ref=e650]:
+              - generic [ref=e651]: Paid app access
+              - generic [ref=e652]: 70% rating
+            - generic [ref=e653]:
+              - generic [ref=e654]: SOP 0/11
+              - generic [ref=e655]: No due date
+          - button "Setup Veteran audit-stage1_setup-1773863141875@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e656] [cursor=pointer]:
+            - generic [ref=e657]:
+              - generic [ref=e658]:
+                - heading "Setup Veteran" [level=3] [ref=e659]
+                - generic [ref=e660]: audit-stage1_setup-1773863141875@example.com
+              - generic [ref=e661]: Normal
+            - paragraph [ref=e662]: No next step captured yet.
+            - generic [ref=e663]:
+              - generic [ref=e664]: Paid app access
+              - generic [ref=e665]: 70% rating
+            - generic [ref=e666]:
+              - generic [ref=e667]: SOP 0/11
+              - generic [ref=e668]: No due date
+          - button "Records Veteran audit-stage2_records-1773863081842@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e669] [cursor=pointer]:
+            - generic [ref=e670]:
+              - generic [ref=e671]:
+                - heading "Records Veteran" [level=3] [ref=e672]
+                - generic [ref=e673]: audit-stage2_records-1773863081842@example.com
+              - generic [ref=e674]: Normal
+            - paragraph [ref=e675]: No next step captured yet.
+            - generic [ref=e676]:
+              - generic [ref=e677]: Paid app access
+              - generic [ref=e678]: 70% rating
+            - generic [ref=e679]:
+              - generic [ref=e680]: SOP 0/11
+              - generic [ref=e681]: No due date
+          - button "Setup Veteran audit-stage1_setup-1773863081842@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e682] [cursor=pointer]:
+            - generic [ref=e683]:
+              - generic [ref=e684]:
+                - heading "Setup Veteran" [level=3] [ref=e685]
+                - generic [ref=e686]: audit-stage1_setup-1773863081842@example.com
+              - generic [ref=e687]: Normal
+            - paragraph [ref=e688]: No next step captured yet.
+            - generic [ref=e689]:
+              - generic [ref=e690]: Paid app access
+              - generic [ref=e691]: 70% rating
+            - generic [ref=e692]:
+              - generic [ref=e693]: SOP 0/11
+              - generic [ref=e694]: No due date
+          - button "Records Veteran audit-stage2_records-1773863062419@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e695] [cursor=pointer]:
+            - generic [ref=e696]:
+              - generic [ref=e697]:
+                - heading "Records Veteran" [level=3] [ref=e698]
+                - generic [ref=e699]: audit-stage2_records-1773863062419@example.com
+              - generic [ref=e700]: Normal
+            - paragraph [ref=e701]: No next step captured yet.
+            - generic [ref=e702]:
+              - generic [ref=e703]: Paid app access
+              - generic [ref=e704]: 70% rating
+            - generic [ref=e705]:
+              - generic [ref=e706]: SOP 0/11
+              - generic [ref=e707]: No due date
+          - button "Setup Veteran audit-stage1_setup-1773863062419@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e708] [cursor=pointer]:
+            - generic [ref=e709]:
+              - generic [ref=e710]:
+                - heading "Setup Veteran" [level=3] [ref=e711]
+                - generic [ref=e712]: audit-stage1_setup-1773863062419@example.com
+              - generic [ref=e713]: Normal
+            - paragraph [ref=e714]: No next step captured yet.
+            - generic [ref=e715]:
+              - generic [ref=e716]: Paid app access
+              - generic [ref=e717]: 70% rating
+            - generic [ref=e718]:
+              - generic [ref=e719]: SOP 0/11
+              - generic [ref=e720]: No due date
+          - button "Records Veteran audit-stage2_records-1773863012504@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e721] [cursor=pointer]:
+            - generic [ref=e722]:
+              - generic [ref=e723]:
+                - heading "Records Veteran" [level=3] [ref=e724]
+                - generic [ref=e725]: audit-stage2_records-1773863012504@example.com
+              - generic [ref=e726]: Normal
+            - paragraph [ref=e727]: No next step captured yet.
+            - generic [ref=e728]:
+              - generic [ref=e729]: Paid app access
+              - generic [ref=e730]: 70% rating
+            - generic [ref=e731]:
+              - generic [ref=e732]: SOP 0/11
+              - generic [ref=e733]: No due date
+          - button "Setup Veteran audit-stage1_setup-1773863012504@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e734] [cursor=pointer]:
+            - generic [ref=e735]:
+              - generic [ref=e736]:
+                - heading "Setup Veteran" [level=3] [ref=e737]
+                - generic [ref=e738]: audit-stage1_setup-1773863012504@example.com
+              - generic [ref=e739]: Normal
+            - paragraph [ref=e740]: No next step captured yet.
+            - generic [ref=e741]:
+              - generic [ref=e742]: Paid app access
+              - generic [ref=e743]: 70% rating
+            - generic [ref=e744]:
+              - generic [ref=e745]: SOP 0/11
+              - generic [ref=e746]: No due date
+          - button "Records Veteran audit-stage2_records-1773862868739@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e747] [cursor=pointer]:
+            - generic [ref=e748]:
+              - generic [ref=e749]:
+                - heading "Records Veteran" [level=3] [ref=e750]
+                - generic [ref=e751]: audit-stage2_records-1773862868739@example.com
+              - generic [ref=e752]: Normal
+            - paragraph [ref=e753]: No next step captured yet.
+            - generic [ref=e754]:
+              - generic [ref=e755]: Paid app access
+              - generic [ref=e756]: 70% rating
+            - generic [ref=e757]:
+              - generic [ref=e758]: SOP 0/11
+              - generic [ref=e759]: No due date
+          - button "Setup Veteran audit-stage1_setup-1773862868739@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e760] [cursor=pointer]:
+            - generic [ref=e761]:
+              - generic [ref=e762]:
+                - heading "Setup Veteran" [level=3] [ref=e763]
+                - generic [ref=e764]: audit-stage1_setup-1773862868739@example.com
+              - generic [ref=e765]: Normal
+            - paragraph [ref=e766]: No next step captured yet.
+            - generic [ref=e767]:
+              - generic [ref=e768]: Paid app access
+              - generic [ref=e769]: 70% rating
+            - generic [ref=e770]:
+              - generic [ref=e771]: SOP 0/11
+              - generic [ref=e772]: No due date
+          - button "Records Veteran audit-stage2_records-1773862691907@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e773] [cursor=pointer]:
+            - generic [ref=e774]:
+              - generic [ref=e775]:
+                - heading "Records Veteran" [level=3] [ref=e776]
+                - generic [ref=e777]: audit-stage2_records-1773862691907@example.com
+              - generic [ref=e778]: Normal
+            - paragraph [ref=e779]: No next step captured yet.
+            - generic [ref=e780]:
+              - generic [ref=e781]: Paid app access
+              - generic [ref=e782]: 70% rating
+            - generic [ref=e783]:
+              - generic [ref=e784]: SOP 0/11
+              - generic [ref=e785]: No due date
+          - button "Setup Veteran audit-stage1_setup-1773862691907@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e786] [cursor=pointer]:
+            - generic [ref=e787]:
+              - generic [ref=e788]:
+                - heading "Setup Veteran" [level=3] [ref=e789]
+                - generic [ref=e790]: audit-stage1_setup-1773862691907@example.com
+              - generic [ref=e791]: Normal
+            - paragraph [ref=e792]: No next step captured yet.
+            - generic [ref=e793]:
+              - generic [ref=e794]: Paid app access
+              - generic [ref=e795]: 70% rating
+            - generic [ref=e796]:
+              - generic [ref=e797]: SOP 0/11
+              - generic [ref=e798]: No due date
+          - button "Records Veteran audit-stage2_records-1773862626222@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e799] [cursor=pointer]:
+            - generic [ref=e800]:
+              - generic [ref=e801]:
+                - heading "Records Veteran" [level=3] [ref=e802]
+                - generic [ref=e803]: audit-stage2_records-1773862626222@example.com
+              - generic [ref=e804]: Normal
+            - paragraph [ref=e805]: No next step captured yet.
+            - generic [ref=e806]:
+              - generic [ref=e807]: Paid app access
+              - generic [ref=e808]: 70% rating
+            - generic [ref=e809]:
+              - generic [ref=e810]: SOP 0/11
+              - generic [ref=e811]: No due date
+          - button "Setup Veteran audit-stage1_setup-1773862626222@example.com Normal No next step captured yet. Paid app access 70% rating SOP 0/11 No due date" [ref=e812] [cursor=pointer]:
+            - generic [ref=e813]:
+              - generic [ref=e814]:
+                - heading "Setup Veteran" [level=3] [ref=e815]
+                - generic [ref=e816]: audit-stage1_setup-1773862626222@example.com
+              - generic [ref=e817]: Normal
+            - paragraph [ref=e818]: No next step captured yet.
+            - generic [ref=e819]:
+              - generic [ref=e820]: Paid app access
+              - generic [ref=e821]: 70% rating
+            - generic [ref=e822]:
+              - generic [ref=e823]: SOP 0/11
+              - generic [ref=e824]: No due date
+        - generic [ref=e825]:
+          - generic [ref=e826]:
+            - paragraph [ref=e827]: Pipeline
+            - heading "DD214 / ITF" [level=2] [ref=e828]
+            - paragraph [ref=e829]: Working on service records, intent to file, or claim kickoff prerequisites.
+            - generic [ref=e830]: 0 customers
+          - paragraph [ref=e832]: No customers in this stage right now.
+        - generic [ref=e833]:
+          - generic [ref=e834]:
+            - paragraph [ref=e835]: Pipeline
+            - heading "Records" [level=2] [ref=e836]
+            - paragraph [ref=e837]: Collecting, syncing, or organizing medical and military records.
+            - generic [ref=e838]: 76 customers
+          - button "Chris Veteran customer@example.com Normal No next step captured yet. Paid app access 2 records 70% rating SOP 0/11 No due date" [ref=e839] [cursor=pointer]:
+            - generic [ref=e840]:
+              - generic [ref=e841]:
+                - heading "Chris Veteran" [level=3] [ref=e842]
+                - generic [ref=e843]: customer@example.com
+              - generic [ref=e844]: Normal
+            - paragraph [ref=e845]: No next step captured yet.
+            - generic [ref=e846]:
+              - generic [ref=e847]: Paid app access
+              - generic [ref=e848]: 2 records
+              - generic [ref=e849]: 70% rating
+            - generic [ref=e850]:
+              - generic [ref=e851]: SOP 0/11
+              - generic [ref=e852]: No due date
+          - button "Richard Ducat richducat@gmail.com Normal No next step captured yet. Paid app access 1 records 60% rating SOP 0/11 No due date" [ref=e853] [cursor=pointer]:
+            - generic [ref=e854]:
+              - generic [ref=e855]:
+                - heading "Richard Ducat" [level=3] [ref=e856]
+                - generic [ref=e857]: richducat@gmail.com
+              - generic [ref=e858]: Normal
+            - paragraph [ref=e859]: No next step captured yet.
+            - generic [ref=e860]:
+              - generic [ref=e861]: Paid app access
+              - generic [ref=e862]: 1 records
+              - generic [ref=e863]: 60% rating
+            - generic [ref=e864]:
+              - generic [ref=e865]: SOP 0/11
+              - generic [ref=e866]: No due date
+          - button "Codex Tester codex-flow-1773890657469@example.com Normal No next step captured yet. Paid app access 2 records 70% rating SOP 0/11 No due date" [ref=e867] [cursor=pointer]:
+            - generic [ref=e868]:
+              - generic [ref=e869]:
+                - heading "Codex Tester" [level=3] [ref=e870]
+                - generic [ref=e871]: codex-flow-1773890657469@example.com
+              - generic [ref=e872]: Normal
+            - paragraph [ref=e873]: No next step captured yet.
+            - generic [ref=e874]:
+              - generic [ref=e875]: Paid app access
+              - generic [ref=e876]: 2 records
+              - generic [ref=e877]: 70% rating
+            - generic [ref=e878]:
+              - generic [ref=e879]: SOP 0/11
+              - generic [ref=e880]: No due date
+          - button "Codex Tester codex-flow-1773890541177@example.com Normal No next step captured yet. Paid app access 2 records 70% rating SOP 0/11 No due date" [ref=e881] [cursor=pointer]:
+            - generic [ref=e882]:
+              - generic [ref=e883]:
+                - heading "Codex Tester" [level=3] [ref=e884]
+                - generic [ref=e885]: codex-flow-1773890541177@example.com
+              - generic [ref=e886]: Normal
+            - paragraph [ref=e887]: No next step captured yet.
+            - generic [ref=e888]:
+              - generic [ref=e889]: Paid app access
+              - generic [ref=e890]: 2 records
+              - generic [ref=e891]: 70% rating
+            - generic [ref=e892]:
+              - generic [ref=e893]: SOP 0/11
+              - generic [ref=e894]: No due date
+          - button "Codex Tester codex-flow-1773890465059@example.com Normal No next step captured yet. Paid app access 2 records 70% rating SOP 0/11 No due date" [ref=e895] [cursor=pointer]:
+            - generic [ref=e896]:
+              - generic [ref=e897]:
+                - heading "Codex Tester" [level=3] [ref=e898]
+                - generic [ref=e899]: codex-flow-1773890465059@example.com
+              - generic [ref=e900]: Normal
+            - paragraph [ref=e901]: No next step captured yet.
+            - generic [ref=e902]:
+              - generic [ref=e903]: Paid app access
+              - generic [ref=e904]: 2 records
+              - generic [ref=e905]: 70% rating
+            - generic [ref=e906]:
+              - generic [ref=e907]: SOP 0/11
+              - generic [ref=e908]: No due date
+          - button "Codex Tester codex-flow-1773890328705@example.com Normal No next step captured yet. Paid app access 2 records 70% rating SOP 0/11 No due date" [ref=e909] [cursor=pointer]:
+            - generic [ref=e910]:
+              - generic [ref=e911]:
+                - heading "Codex Tester" [level=3] [ref=e912]
+                - generic [ref=e913]: codex-flow-1773890328705@example.com
+              - generic [ref=e914]: Normal
+            - paragraph [ref=e915]: No next step captured yet.
+            - generic [ref=e916]:
+              - generic [ref=e917]: Paid app access
+              - generic [ref=e918]: 2 records
+              - generic [ref=e919]: 70% rating
+            - generic [ref=e920]:
+              - generic [ref=e921]: SOP 0/11
+              - generic [ref=e922]: No due date
+          - button "Codex Tester codex-flow-1773890258196@example.com Normal No next step captured yet. Paid app access 2 records 70% rating SOP 0/11 No due date" [ref=e923] [cursor=pointer]:
+            - generic [ref=e924]:
+              - generic [ref=e925]:
+                - heading "Codex Tester" [level=3] [ref=e926]
+                - generic [ref=e927]: codex-flow-1773890258196@example.com
+              - generic [ref=e928]: Normal
+            - paragraph [ref=e929]: No next step captured yet.
+            - generic [ref=e930]:
+              - generic [ref=e931]: Paid app access
+              - generic [ref=e932]: 2 records
+              - generic [ref=e933]: 70% rating
+            - generic [ref=e934]:
+              - generic [ref=e935]: SOP 0/11
+              - generic [ref=e936]: No due date
+          - button "Hold Veteran audit-hold-1773890117402@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e937] [cursor=pointer]:
+            - generic [ref=e938]:
+              - generic [ref=e939]:
+                - heading "Hold Veteran" [level=3] [ref=e940]
+                - generic [ref=e941]: audit-hold-1773890117402@example.com
+              - generic [ref=e942]: Normal
+            - paragraph [ref=e943]: No next step captured yet.
+            - generic [ref=e944]:
+              - generic [ref=e945]: Paid app access
+              - generic [ref=e946]: 4 records
+              - generic [ref=e947]: 70% rating
+            - generic [ref=e948]:
+              - generic [ref=e949]: SOP 0/11
+              - generic [ref=e950]: No due date
+          - button "Decision Veteran audit-stage8_decision-1773890117402@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e951] [cursor=pointer]:
+            - generic [ref=e952]:
+              - generic [ref=e953]:
+                - heading "Decision Veteran" [level=3] [ref=e954]
+                - generic [ref=e955]: audit-stage8_decision-1773890117402@example.com
+              - generic [ref=e956]: Normal
+            - paragraph [ref=e957]: No next step captured yet.
+            - generic [ref=e958]:
+              - generic [ref=e959]: Paid app access
+              - generic [ref=e960]: 4 records
+              - generic [ref=e961]: 70% rating
+            - generic [ref=e962]:
+              - generic [ref=e963]: SOP 0/11
+              - generic [ref=e964]: No due date
+          - button "Final Veteran audit-stage7_final-1773890117402@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e965] [cursor=pointer]:
+            - generic [ref=e966]:
+              - generic [ref=e967]:
+                - heading "Final Veteran" [level=3] [ref=e968]
+                - generic [ref=e969]: audit-stage7_final-1773890117402@example.com
+              - generic [ref=e970]: Normal
+            - paragraph [ref=e971]: No next step captured yet.
+            - generic [ref=e972]:
+              - generic [ref=e973]: Paid app access
+              - generic [ref=e974]: 4 records
+              - generic [ref=e975]: 70% rating
+            - generic [ref=e976]:
+              - generic [ref=e977]: SOP 0/11
+              - generic [ref=e978]: No due date
+          - button "Provider Veteran audit-stage6_provider-1773890117402@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e979] [cursor=pointer]:
+            - generic [ref=e980]:
+              - generic [ref=e981]:
+                - heading "Provider Veteran" [level=3] [ref=e982]
+                - generic [ref=e983]: audit-stage6_provider-1773890117402@example.com
+              - generic [ref=e984]: Normal
+            - paragraph [ref=e985]: No next step captured yet.
+            - generic [ref=e986]:
+              - generic [ref=e987]: Paid app access
+              - generic [ref=e988]: 4 records
+              - generic [ref=e989]: 70% rating
+            - generic [ref=e990]:
+              - generic [ref=e991]: SOP 0/11
+              - generic [ref=e992]: No due date
+          - button "Medical Veteran audit-stage5_medical-1773890117402@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e993] [cursor=pointer]:
+            - generic [ref=e994]:
+              - generic [ref=e995]:
+                - heading "Medical Veteran" [level=3] [ref=e996]
+                - generic [ref=e997]: audit-stage5_medical-1773890117402@example.com
+              - generic [ref=e998]: Normal
+            - paragraph [ref=e999]: No next step captured yet.
+            - generic [ref=e1000]:
+              - generic [ref=e1001]: Paid app access
+              - generic [ref=e1002]: 4 records
+              - generic [ref=e1003]: 70% rating
+            - generic [ref=e1004]:
+              - generic [ref=e1005]: SOP 0/11
+              - generic [ref=e1006]: No due date
+          - button "Review Veteran audit-stage4_review-1773890117402@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1007] [cursor=pointer]:
+            - generic [ref=e1008]:
+              - generic [ref=e1009]:
+                - heading "Review Veteran" [level=3] [ref=e1010]
+                - generic [ref=e1011]: audit-stage4_review-1773890117402@example.com
+              - generic [ref=e1012]: Normal
+            - paragraph [ref=e1013]: No next step captured yet.
+            - generic [ref=e1014]:
+              - generic [ref=e1015]: Paid app access
+              - generic [ref=e1016]: 4 records
+              - generic [ref=e1017]: 70% rating
+            - generic [ref=e1018]:
+              - generic [ref=e1019]: SOP 0/11
+              - generic [ref=e1020]: No due date
+          - button "Ready Veteran audit-stage3_ready-1773890117402@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1021] [cursor=pointer]:
+            - generic [ref=e1022]:
+              - generic [ref=e1023]:
+                - heading "Ready Veteran" [level=3] [ref=e1024]
+                - generic [ref=e1025]: audit-stage3_ready-1773890117402@example.com
+              - generic [ref=e1026]: Normal
+            - paragraph [ref=e1027]: No next step captured yet.
+            - generic [ref=e1028]:
+              - generic [ref=e1029]: Paid app access
+              - generic [ref=e1030]: 4 records
+              - generic [ref=e1031]: 70% rating
+            - generic [ref=e1032]:
+              - generic [ref=e1033]: SOP 0/11
+              - generic [ref=e1034]: No due date
+          - button "Codex Intake codex-intake-1773886454728@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1035] [cursor=pointer]:
+            - generic [ref=e1036]:
+              - generic [ref=e1037]:
+                - heading "Codex Intake" [level=3] [ref=e1038]
+                - generic [ref=e1039]: codex-intake-1773886454728@example.com
+              - generic [ref=e1040]: Normal
+            - paragraph [ref=e1041]: No next step captured yet.
+            - generic [ref=e1042]:
+              - generic [ref=e1043]: Paid app access
+              - generic [ref=e1044]: 4 records
+              - generic [ref=e1045]: 70% rating
+            - generic [ref=e1046]:
+              - generic [ref=e1047]: SOP 0/11
+              - generic [ref=e1048]: No due date
+          - button "Hold Veteran audit-hold-1773863257757@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1049] [cursor=pointer]:
+            - generic [ref=e1050]:
+              - generic [ref=e1051]:
+                - heading "Hold Veteran" [level=3] [ref=e1052]
+                - generic [ref=e1053]: audit-hold-1773863257757@example.com
+              - generic [ref=e1054]: Normal
+            - paragraph [ref=e1055]: No next step captured yet.
+            - generic [ref=e1056]:
+              - generic [ref=e1057]: Paid app access
+              - generic [ref=e1058]: 4 records
+              - generic [ref=e1059]: 70% rating
+            - generic [ref=e1060]:
+              - generic [ref=e1061]: SOP 0/11
+              - generic [ref=e1062]: No due date
+          - button "Decision Veteran audit-stage8_decision-1773863257757@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1063] [cursor=pointer]:
+            - generic [ref=e1064]:
+              - generic [ref=e1065]:
+                - heading "Decision Veteran" [level=3] [ref=e1066]
+                - generic [ref=e1067]: audit-stage8_decision-1773863257757@example.com
+              - generic [ref=e1068]: Normal
+            - paragraph [ref=e1069]: No next step captured yet.
+            - generic [ref=e1070]:
+              - generic [ref=e1071]: Paid app access
+              - generic [ref=e1072]: 4 records
+              - generic [ref=e1073]: 70% rating
+            - generic [ref=e1074]:
+              - generic [ref=e1075]: SOP 0/11
+              - generic [ref=e1076]: No due date
+          - button "Final Veteran audit-stage7_final-1773863257757@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1077] [cursor=pointer]:
+            - generic [ref=e1078]:
+              - generic [ref=e1079]:
+                - heading "Final Veteran" [level=3] [ref=e1080]
+                - generic [ref=e1081]: audit-stage7_final-1773863257757@example.com
+              - generic [ref=e1082]: Normal
+            - paragraph [ref=e1083]: No next step captured yet.
+            - generic [ref=e1084]:
+              - generic [ref=e1085]: Paid app access
+              - generic [ref=e1086]: 4 records
+              - generic [ref=e1087]: 70% rating
+            - generic [ref=e1088]:
+              - generic [ref=e1089]: SOP 0/11
+              - generic [ref=e1090]: No due date
+          - button "Provider Veteran audit-stage6_provider-1773863257757@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1091] [cursor=pointer]:
+            - generic [ref=e1092]:
+              - generic [ref=e1093]:
+                - heading "Provider Veteran" [level=3] [ref=e1094]
+                - generic [ref=e1095]: audit-stage6_provider-1773863257757@example.com
+              - generic [ref=e1096]: Normal
+            - paragraph [ref=e1097]: No next step captured yet.
+            - generic [ref=e1098]:
+              - generic [ref=e1099]: Paid app access
+              - generic [ref=e1100]: 4 records
+              - generic [ref=e1101]: 70% rating
+            - generic [ref=e1102]:
+              - generic [ref=e1103]: SOP 0/11
+              - generic [ref=e1104]: No due date
+          - button "Medical Veteran audit-stage5_medical-1773863257757@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1105] [cursor=pointer]:
+            - generic [ref=e1106]:
+              - generic [ref=e1107]:
+                - heading "Medical Veteran" [level=3] [ref=e1108]
+                - generic [ref=e1109]: audit-stage5_medical-1773863257757@example.com
+              - generic [ref=e1110]: Normal
+            - paragraph [ref=e1111]: No next step captured yet.
+            - generic [ref=e1112]:
+              - generic [ref=e1113]: Paid app access
+              - generic [ref=e1114]: 4 records
+              - generic [ref=e1115]: 70% rating
+            - generic [ref=e1116]:
+              - generic [ref=e1117]: SOP 0/11
+              - generic [ref=e1118]: No due date
+          - button "Review Veteran audit-stage4_review-1773863257757@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1119] [cursor=pointer]:
+            - generic [ref=e1120]:
+              - generic [ref=e1121]:
+                - heading "Review Veteran" [level=3] [ref=e1122]
+                - generic [ref=e1123]: audit-stage4_review-1773863257757@example.com
+              - generic [ref=e1124]: Normal
+            - paragraph [ref=e1125]: No next step captured yet.
+            - generic [ref=e1126]:
+              - generic [ref=e1127]: Paid app access
+              - generic [ref=e1128]: 4 records
+              - generic [ref=e1129]: 70% rating
+            - generic [ref=e1130]:
+              - generic [ref=e1131]: SOP 0/11
+              - generic [ref=e1132]: No due date
+          - button "Ready Veteran audit-stage3_ready-1773863257757@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1133] [cursor=pointer]:
+            - generic [ref=e1134]:
+              - generic [ref=e1135]:
+                - heading "Ready Veteran" [level=3] [ref=e1136]
+                - generic [ref=e1137]: audit-stage3_ready-1773863257757@example.com
+              - generic [ref=e1138]: Normal
+            - paragraph [ref=e1139]: No next step captured yet.
+            - generic [ref=e1140]:
+              - generic [ref=e1141]: Paid app access
+              - generic [ref=e1142]: 4 records
+              - generic [ref=e1143]: 70% rating
+            - generic [ref=e1144]:
+              - generic [ref=e1145]: SOP 0/11
+              - generic [ref=e1146]: No due date
+          - button "Hold Veteran debug-hold-1773863227467@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1147] [cursor=pointer]:
+            - generic [ref=e1148]:
+              - generic [ref=e1149]:
+                - heading "Hold Veteran" [level=3] [ref=e1150]
+                - generic [ref=e1151]: debug-hold-1773863227467@example.com
+              - generic [ref=e1152]: Normal
+            - paragraph [ref=e1153]: No next step captured yet.
+            - generic [ref=e1154]:
+              - generic [ref=e1155]: Paid app access
+              - generic [ref=e1156]: 4 records
+              - generic [ref=e1157]: 70% rating
+            - generic [ref=e1158]:
+              - generic [ref=e1159]: SOP 0/11
+              - generic [ref=e1160]: No due date
+          - button "Final Veteran audit-stage7_final-1773863141875@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1161] [cursor=pointer]:
+            - generic [ref=e1162]:
+              - generic [ref=e1163]:
+                - heading "Final Veteran" [level=3] [ref=e1164]
+                - generic [ref=e1165]: audit-stage7_final-1773863141875@example.com
+              - generic [ref=e1166]: Normal
+            - paragraph [ref=e1167]: No next step captured yet.
+            - generic [ref=e1168]:
+              - generic [ref=e1169]: Paid app access
+              - generic [ref=e1170]: 4 records
+              - generic [ref=e1171]: 70% rating
+            - generic [ref=e1172]:
+              - generic [ref=e1173]: SOP 0/11
+              - generic [ref=e1174]: No due date
+          - button "Hold Veteran audit-hold-1773863141875@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1175] [cursor=pointer]:
+            - generic [ref=e1176]:
+              - generic [ref=e1177]:
+                - heading "Hold Veteran" [level=3] [ref=e1178]
+                - generic [ref=e1179]: audit-hold-1773863141875@example.com
+              - generic [ref=e1180]: Normal
+            - paragraph [ref=e1181]: No next step captured yet.
+            - generic [ref=e1182]:
+              - generic [ref=e1183]: Paid app access
+              - generic [ref=e1184]: 4 records
+              - generic [ref=e1185]: 70% rating
+            - generic [ref=e1186]:
+              - generic [ref=e1187]: SOP 0/11
+              - generic [ref=e1188]: No due date
+          - button "Decision Veteran audit-stage8_decision-1773863141875@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1189] [cursor=pointer]:
+            - generic [ref=e1190]:
+              - generic [ref=e1191]:
+                - heading "Decision Veteran" [level=3] [ref=e1192]
+                - generic [ref=e1193]: audit-stage8_decision-1773863141875@example.com
+              - generic [ref=e1194]: Normal
+            - paragraph [ref=e1195]: No next step captured yet.
+            - generic [ref=e1196]:
+              - generic [ref=e1197]: Paid app access
+              - generic [ref=e1198]: 4 records
+              - generic [ref=e1199]: 70% rating
+            - generic [ref=e1200]:
+              - generic [ref=e1201]: SOP 0/11
+              - generic [ref=e1202]: No due date
+          - button "Provider Veteran audit-stage6_provider-1773863141875@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1203] [cursor=pointer]:
+            - generic [ref=e1204]:
+              - generic [ref=e1205]:
+                - heading "Provider Veteran" [level=3] [ref=e1206]
+                - generic [ref=e1207]: audit-stage6_provider-1773863141875@example.com
+              - generic [ref=e1208]: Normal
+            - paragraph [ref=e1209]: No next step captured yet.
+            - generic [ref=e1210]:
+              - generic [ref=e1211]: Paid app access
+              - generic [ref=e1212]: 4 records
+              - generic [ref=e1213]: 70% rating
+            - generic [ref=e1214]:
+              - generic [ref=e1215]: SOP 0/11
+              - generic [ref=e1216]: No due date
+          - button "Medical Veteran audit-stage5_medical-1773863141875@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1217] [cursor=pointer]:
+            - generic [ref=e1218]:
+              - generic [ref=e1219]:
+                - heading "Medical Veteran" [level=3] [ref=e1220]
+                - generic [ref=e1221]: audit-stage5_medical-1773863141875@example.com
+              - generic [ref=e1222]: Normal
+            - paragraph [ref=e1223]: No next step captured yet.
+            - generic [ref=e1224]:
+              - generic [ref=e1225]: Paid app access
+              - generic [ref=e1226]: 4 records
+              - generic [ref=e1227]: 70% rating
+            - generic [ref=e1228]:
+              - generic [ref=e1229]: SOP 0/11
+              - generic [ref=e1230]: No due date
+          - button "Review Veteran audit-stage4_review-1773863141875@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1231] [cursor=pointer]:
+            - generic [ref=e1232]:
+              - generic [ref=e1233]:
+                - heading "Review Veteran" [level=3] [ref=e1234]
+                - generic [ref=e1235]: audit-stage4_review-1773863141875@example.com
+              - generic [ref=e1236]: Normal
+            - paragraph [ref=e1237]: No next step captured yet.
+            - generic [ref=e1238]:
+              - generic [ref=e1239]: Paid app access
+              - generic [ref=e1240]: 4 records
+              - generic [ref=e1241]: 70% rating
+            - generic [ref=e1242]:
+              - generic [ref=e1243]: SOP 0/11
+              - generic [ref=e1244]: No due date
+          - button "Ready Veteran audit-stage3_ready-1773863141875@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1245] [cursor=pointer]:
+            - generic [ref=e1246]:
+              - generic [ref=e1247]:
+                - heading "Ready Veteran" [level=3] [ref=e1248]
+                - generic [ref=e1249]: audit-stage3_ready-1773863141875@example.com
+              - generic [ref=e1250]: Normal
+            - paragraph [ref=e1251]: No next step captured yet.
+            - generic [ref=e1252]:
+              - generic [ref=e1253]: Paid app access
+              - generic [ref=e1254]: 4 records
+              - generic [ref=e1255]: 70% rating
+            - generic [ref=e1256]:
+              - generic [ref=e1257]: SOP 0/11
+              - generic [ref=e1258]: No due date
+          - button "Hold Veteran audit-hold-1773863081842@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1259] [cursor=pointer]:
+            - generic [ref=e1260]:
+              - generic [ref=e1261]:
+                - heading "Hold Veteran" [level=3] [ref=e1262]
+                - generic [ref=e1263]: audit-hold-1773863081842@example.com
+              - generic [ref=e1264]: Normal
+            - paragraph [ref=e1265]: No next step captured yet.
+            - generic [ref=e1266]:
+              - generic [ref=e1267]: Paid app access
+              - generic [ref=e1268]: 4 records
+              - generic [ref=e1269]: 70% rating
+            - generic [ref=e1270]:
+              - generic [ref=e1271]: SOP 0/11
+              - generic [ref=e1272]: No due date
+          - button "Decision Veteran audit-stage8_decision-1773863081842@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1273] [cursor=pointer]:
+            - generic [ref=e1274]:
+              - generic [ref=e1275]:
+                - heading "Decision Veteran" [level=3] [ref=e1276]
+                - generic [ref=e1277]: audit-stage8_decision-1773863081842@example.com
+              - generic [ref=e1278]: Normal
+            - paragraph [ref=e1279]: No next step captured yet.
+            - generic [ref=e1280]:
+              - generic [ref=e1281]: Paid app access
+              - generic [ref=e1282]: 4 records
+              - generic [ref=e1283]: 70% rating
+            - generic [ref=e1284]:
+              - generic [ref=e1285]: SOP 0/11
+              - generic [ref=e1286]: No due date
+          - button "Final Veteran audit-stage7_final-1773863081842@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1287] [cursor=pointer]:
+            - generic [ref=e1288]:
+              - generic [ref=e1289]:
+                - heading "Final Veteran" [level=3] [ref=e1290]
+                - generic [ref=e1291]: audit-stage7_final-1773863081842@example.com
+              - generic [ref=e1292]: Normal
+            - paragraph [ref=e1293]: No next step captured yet.
+            - generic [ref=e1294]:
+              - generic [ref=e1295]: Paid app access
+              - generic [ref=e1296]: 4 records
+              - generic [ref=e1297]: 70% rating
+            - generic [ref=e1298]:
+              - generic [ref=e1299]: SOP 0/11
+              - generic [ref=e1300]: No due date
+          - button "Provider Veteran audit-stage6_provider-1773863081842@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1301] [cursor=pointer]:
+            - generic [ref=e1302]:
+              - generic [ref=e1303]:
+                - heading "Provider Veteran" [level=3] [ref=e1304]
+                - generic [ref=e1305]: audit-stage6_provider-1773863081842@example.com
+              - generic [ref=e1306]: Normal
+            - paragraph [ref=e1307]: No next step captured yet.
+            - generic [ref=e1308]:
+              - generic [ref=e1309]: Paid app access
+              - generic [ref=e1310]: 4 records
+              - generic [ref=e1311]: 70% rating
+            - generic [ref=e1312]:
+              - generic [ref=e1313]: SOP 0/11
+              - generic [ref=e1314]: No due date
+          - button "Medical Veteran audit-stage5_medical-1773863081842@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1315] [cursor=pointer]:
+            - generic [ref=e1316]:
+              - generic [ref=e1317]:
+                - heading "Medical Veteran" [level=3] [ref=e1318]
+                - generic [ref=e1319]: audit-stage5_medical-1773863081842@example.com
+              - generic [ref=e1320]: Normal
+            - paragraph [ref=e1321]: No next step captured yet.
+            - generic [ref=e1322]:
+              - generic [ref=e1323]: Paid app access
+              - generic [ref=e1324]: 4 records
+              - generic [ref=e1325]: 70% rating
+            - generic [ref=e1326]:
+              - generic [ref=e1327]: SOP 0/11
+              - generic [ref=e1328]: No due date
+          - button "Review Veteran audit-stage4_review-1773863081842@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1329] [cursor=pointer]:
+            - generic [ref=e1330]:
+              - generic [ref=e1331]:
+                - heading "Review Veteran" [level=3] [ref=e1332]
+                - generic [ref=e1333]: audit-stage4_review-1773863081842@example.com
+              - generic [ref=e1334]: Normal
+            - paragraph [ref=e1335]: No next step captured yet.
+            - generic [ref=e1336]:
+              - generic [ref=e1337]: Paid app access
+              - generic [ref=e1338]: 4 records
+              - generic [ref=e1339]: 70% rating
+            - generic [ref=e1340]:
+              - generic [ref=e1341]: SOP 0/11
+              - generic [ref=e1342]: No due date
+          - button "Ready Veteran audit-stage3_ready-1773863081842@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1343] [cursor=pointer]:
+            - generic [ref=e1344]:
+              - generic [ref=e1345]:
+                - heading "Ready Veteran" [level=3] [ref=e1346]
+                - generic [ref=e1347]: audit-stage3_ready-1773863081842@example.com
+              - generic [ref=e1348]: Normal
+            - paragraph [ref=e1349]: No next step captured yet.
+            - generic [ref=e1350]:
+              - generic [ref=e1351]: Paid app access
+              - generic [ref=e1352]: 4 records
+              - generic [ref=e1353]: 70% rating
+            - generic [ref=e1354]:
+              - generic [ref=e1355]: SOP 0/11
+              - generic [ref=e1356]: No due date
+          - button "Hold Veteran audit-hold-1773863062419@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1357] [cursor=pointer]:
+            - generic [ref=e1358]:
+              - generic [ref=e1359]:
+                - heading "Hold Veteran" [level=3] [ref=e1360]
+                - generic [ref=e1361]: audit-hold-1773863062419@example.com
+              - generic [ref=e1362]: Normal
+            - paragraph [ref=e1363]: No next step captured yet.
+            - generic [ref=e1364]:
+              - generic [ref=e1365]: Paid app access
+              - generic [ref=e1366]: 4 records
+              - generic [ref=e1367]: 70% rating
+            - generic [ref=e1368]:
+              - generic [ref=e1369]: SOP 0/11
+              - generic [ref=e1370]: No due date
+          - button "Decision Veteran audit-stage8_decision-1773863062419@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1371] [cursor=pointer]:
+            - generic [ref=e1372]:
+              - generic [ref=e1373]:
+                - heading "Decision Veteran" [level=3] [ref=e1374]
+                - generic [ref=e1375]: audit-stage8_decision-1773863062419@example.com
+              - generic [ref=e1376]: Normal
+            - paragraph [ref=e1377]: No next step captured yet.
+            - generic [ref=e1378]:
+              - generic [ref=e1379]: Paid app access
+              - generic [ref=e1380]: 4 records
+              - generic [ref=e1381]: 70% rating
+            - generic [ref=e1382]:
+              - generic [ref=e1383]: SOP 0/11
+              - generic [ref=e1384]: No due date
+          - button "Final Veteran audit-stage7_final-1773863062419@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1385] [cursor=pointer]:
+            - generic [ref=e1386]:
+              - generic [ref=e1387]:
+                - heading "Final Veteran" [level=3] [ref=e1388]
+                - generic [ref=e1389]: audit-stage7_final-1773863062419@example.com
+              - generic [ref=e1390]: Normal
+            - paragraph [ref=e1391]: No next step captured yet.
+            - generic [ref=e1392]:
+              - generic [ref=e1393]: Paid app access
+              - generic [ref=e1394]: 4 records
+              - generic [ref=e1395]: 70% rating
+            - generic [ref=e1396]:
+              - generic [ref=e1397]: SOP 0/11
+              - generic [ref=e1398]: No due date
+          - button "Provider Veteran audit-stage6_provider-1773863062419@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1399] [cursor=pointer]:
+            - generic [ref=e1400]:
+              - generic [ref=e1401]:
+                - heading "Provider Veteran" [level=3] [ref=e1402]
+                - generic [ref=e1403]: audit-stage6_provider-1773863062419@example.com
+              - generic [ref=e1404]: Normal
+            - paragraph [ref=e1405]: No next step captured yet.
+            - generic [ref=e1406]:
+              - generic [ref=e1407]: Paid app access
+              - generic [ref=e1408]: 4 records
+              - generic [ref=e1409]: 70% rating
+            - generic [ref=e1410]:
+              - generic [ref=e1411]: SOP 0/11
+              - generic [ref=e1412]: No due date
+          - button "Medical Veteran audit-stage5_medical-1773863062419@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1413] [cursor=pointer]:
+            - generic [ref=e1414]:
+              - generic [ref=e1415]:
+                - heading "Medical Veteran" [level=3] [ref=e1416]
+                - generic [ref=e1417]: audit-stage5_medical-1773863062419@example.com
+              - generic [ref=e1418]: Normal
+            - paragraph [ref=e1419]: No next step captured yet.
+            - generic [ref=e1420]:
+              - generic [ref=e1421]: Paid app access
+              - generic [ref=e1422]: 4 records
+              - generic [ref=e1423]: 70% rating
+            - generic [ref=e1424]:
+              - generic [ref=e1425]: SOP 0/11
+              - generic [ref=e1426]: No due date
+          - button "Review Veteran audit-stage4_review-1773863062419@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1427] [cursor=pointer]:
+            - generic [ref=e1428]:
+              - generic [ref=e1429]:
+                - heading "Review Veteran" [level=3] [ref=e1430]
+                - generic [ref=e1431]: audit-stage4_review-1773863062419@example.com
+              - generic [ref=e1432]: Normal
+            - paragraph [ref=e1433]: No next step captured yet.
+            - generic [ref=e1434]:
+              - generic [ref=e1435]: Paid app access
+              - generic [ref=e1436]: 4 records
+              - generic [ref=e1437]: 70% rating
+            - generic [ref=e1438]:
+              - generic [ref=e1439]: SOP 0/11
+              - generic [ref=e1440]: No due date
+          - button "Ready Veteran audit-stage3_ready-1773863062419@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1441] [cursor=pointer]:
+            - generic [ref=e1442]:
+              - generic [ref=e1443]:
+                - heading "Ready Veteran" [level=3] [ref=e1444]
+                - generic [ref=e1445]: audit-stage3_ready-1773863062419@example.com
+              - generic [ref=e1446]: Normal
+            - paragraph [ref=e1447]: No next step captured yet.
+            - generic [ref=e1448]:
+              - generic [ref=e1449]: Paid app access
+              - generic [ref=e1450]: 4 records
+              - generic [ref=e1451]: 70% rating
+            - generic [ref=e1452]:
+              - generic [ref=e1453]: SOP 0/11
+              - generic [ref=e1454]: No due date
+          - button "Hold Veteran audit-hold-1773863012504@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1455] [cursor=pointer]:
+            - generic [ref=e1456]:
+              - generic [ref=e1457]:
+                - heading "Hold Veteran" [level=3] [ref=e1458]
+                - generic [ref=e1459]: audit-hold-1773863012504@example.com
+              - generic [ref=e1460]: Normal
+            - paragraph [ref=e1461]: No next step captured yet.
+            - generic [ref=e1462]:
+              - generic [ref=e1463]: Paid app access
+              - generic [ref=e1464]: 4 records
+              - generic [ref=e1465]: 70% rating
+            - generic [ref=e1466]:
+              - generic [ref=e1467]: SOP 0/11
+              - generic [ref=e1468]: No due date
+          - button "Decision Veteran audit-stage8_decision-1773863012504@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1469] [cursor=pointer]:
+            - generic [ref=e1470]:
+              - generic [ref=e1471]:
+                - heading "Decision Veteran" [level=3] [ref=e1472]
+                - generic [ref=e1473]: audit-stage8_decision-1773863012504@example.com
+              - generic [ref=e1474]: Normal
+            - paragraph [ref=e1475]: No next step captured yet.
+            - generic [ref=e1476]:
+              - generic [ref=e1477]: Paid app access
+              - generic [ref=e1478]: 4 records
+              - generic [ref=e1479]: 70% rating
+            - generic [ref=e1480]:
+              - generic [ref=e1481]: SOP 0/11
+              - generic [ref=e1482]: No due date
+          - button "Final Veteran audit-stage7_final-1773863012504@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1483] [cursor=pointer]:
+            - generic [ref=e1484]:
+              - generic [ref=e1485]:
+                - heading "Final Veteran" [level=3] [ref=e1486]
+                - generic [ref=e1487]: audit-stage7_final-1773863012504@example.com
+              - generic [ref=e1488]: Normal
+            - paragraph [ref=e1489]: No next step captured yet.
+            - generic [ref=e1490]:
+              - generic [ref=e1491]: Paid app access
+              - generic [ref=e1492]: 4 records
+              - generic [ref=e1493]: 70% rating
+            - generic [ref=e1494]:
+              - generic [ref=e1495]: SOP 0/11
+              - generic [ref=e1496]: No due date
+          - button "Provider Veteran audit-stage6_provider-1773863012504@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1497] [cursor=pointer]:
+            - generic [ref=e1498]:
+              - generic [ref=e1499]:
+                - heading "Provider Veteran" [level=3] [ref=e1500]
+                - generic [ref=e1501]: audit-stage6_provider-1773863012504@example.com
+              - generic [ref=e1502]: Normal
+            - paragraph [ref=e1503]: No next step captured yet.
+            - generic [ref=e1504]:
+              - generic [ref=e1505]: Paid app access
+              - generic [ref=e1506]: 4 records
+              - generic [ref=e1507]: 70% rating
+            - generic [ref=e1508]:
+              - generic [ref=e1509]: SOP 0/11
+              - generic [ref=e1510]: No due date
+          - button "Medical Veteran audit-stage5_medical-1773863012504@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1511] [cursor=pointer]:
+            - generic [ref=e1512]:
+              - generic [ref=e1513]:
+                - heading "Medical Veteran" [level=3] [ref=e1514]
+                - generic [ref=e1515]: audit-stage5_medical-1773863012504@example.com
+              - generic [ref=e1516]: Normal
+            - paragraph [ref=e1517]: No next step captured yet.
+            - generic [ref=e1518]:
+              - generic [ref=e1519]: Paid app access
+              - generic [ref=e1520]: 4 records
+              - generic [ref=e1521]: 70% rating
+            - generic [ref=e1522]:
+              - generic [ref=e1523]: SOP 0/11
+              - generic [ref=e1524]: No due date
+          - button "Review Veteran audit-stage4_review-1773863012504@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1525] [cursor=pointer]:
+            - generic [ref=e1526]:
+              - generic [ref=e1527]:
+                - heading "Review Veteran" [level=3] [ref=e1528]
+                - generic [ref=e1529]: audit-stage4_review-1773863012504@example.com
+              - generic [ref=e1530]: Normal
+            - paragraph [ref=e1531]: No next step captured yet.
+            - generic [ref=e1532]:
+              - generic [ref=e1533]: Paid app access
+              - generic [ref=e1534]: 4 records
+              - generic [ref=e1535]: 70% rating
+            - generic [ref=e1536]:
+              - generic [ref=e1537]: SOP 0/11
+              - generic [ref=e1538]: No due date
+          - button "Ready Veteran audit-stage3_ready-1773863012504@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1539] [cursor=pointer]:
+            - generic [ref=e1540]:
+              - generic [ref=e1541]:
+                - heading "Ready Veteran" [level=3] [ref=e1542]
+                - generic [ref=e1543]: audit-stage3_ready-1773863012504@example.com
+              - generic [ref=e1544]: Normal
+            - paragraph [ref=e1545]: No next step captured yet.
+            - generic [ref=e1546]:
+              - generic [ref=e1547]: Paid app access
+              - generic [ref=e1548]: 4 records
+              - generic [ref=e1549]: 70% rating
+            - generic [ref=e1550]:
+              - generic [ref=e1551]: SOP 0/11
+              - generic [ref=e1552]: No due date
+          - button "Ready Veteran debug-stage3proper-1773862982782@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1553] [cursor=pointer]:
+            - generic [ref=e1554]:
+              - generic [ref=e1555]:
+                - heading "Ready Veteran" [level=3] [ref=e1556]
+                - generic [ref=e1557]: debug-stage3proper-1773862982782@example.com
+              - generic [ref=e1558]: Normal
+            - paragraph [ref=e1559]: No next step captured yet.
+            - generic [ref=e1560]:
+              - generic [ref=e1561]: Paid app access
+              - generic [ref=e1562]: 4 records
+              - generic [ref=e1563]: 70% rating
+            - generic [ref=e1564]:
+              - generic [ref=e1565]: SOP 0/11
+              - generic [ref=e1566]: No due date
+          - button "Ready Veteran debug-stage3-1773862948963@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1567] [cursor=pointer]:
+            - generic [ref=e1568]:
+              - generic [ref=e1569]:
+                - heading "Ready Veteran" [level=3] [ref=e1570]
+                - generic [ref=e1571]: debug-stage3-1773862948963@example.com
+              - generic [ref=e1572]: Normal
+            - paragraph [ref=e1573]: No next step captured yet.
+            - generic [ref=e1574]:
+              - generic [ref=e1575]: Paid app access
+              - generic [ref=e1576]: 4 records
+              - generic [ref=e1577]: 70% rating
+            - generic [ref=e1578]:
+              - generic [ref=e1579]: SOP 0/11
+              - generic [ref=e1580]: No due date
+          - button "Ready Veteran audit-stage3_ready-1773862868739@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1581] [cursor=pointer]:
+            - generic [ref=e1582]:
+              - generic [ref=e1583]:
+                - heading "Ready Veteran" [level=3] [ref=e1584]
+                - generic [ref=e1585]: audit-stage3_ready-1773862868739@example.com
+              - generic [ref=e1586]: Normal
+            - paragraph [ref=e1587]: No next step captured yet.
+            - generic [ref=e1588]:
+              - generic [ref=e1589]: Paid app access
+              - generic [ref=e1590]: 4 records
+              - generic [ref=e1591]: 70% rating
+            - generic [ref=e1592]:
+              - generic [ref=e1593]: SOP 0/11
+              - generic [ref=e1594]: No due date
+          - button "Hold Veteran audit-hold-1773862868739@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1595] [cursor=pointer]:
+            - generic [ref=e1596]:
+              - generic [ref=e1597]:
+                - heading "Hold Veteran" [level=3] [ref=e1598]
+                - generic [ref=e1599]: audit-hold-1773862868739@example.com
+              - generic [ref=e1600]: Normal
+            - paragraph [ref=e1601]: No next step captured yet.
+            - generic [ref=e1602]:
+              - generic [ref=e1603]: Paid app access
+              - generic [ref=e1604]: 4 records
+              - generic [ref=e1605]: 70% rating
+            - generic [ref=e1606]:
+              - generic [ref=e1607]: SOP 0/11
+              - generic [ref=e1608]: No due date
+          - button "Decision Veteran audit-stage8_decision-1773862868739@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1609] [cursor=pointer]:
+            - generic [ref=e1610]:
+              - generic [ref=e1611]:
+                - heading "Decision Veteran" [level=3] [ref=e1612]
+                - generic [ref=e1613]: audit-stage8_decision-1773862868739@example.com
+              - generic [ref=e1614]: Normal
+            - paragraph [ref=e1615]: No next step captured yet.
+            - generic [ref=e1616]:
+              - generic [ref=e1617]: Paid app access
+              - generic [ref=e1618]: 4 records
+              - generic [ref=e1619]: 70% rating
+            - generic [ref=e1620]:
+              - generic [ref=e1621]: SOP 0/11
+              - generic [ref=e1622]: No due date
+          - button "Final Veteran audit-stage7_final-1773862868739@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1623] [cursor=pointer]:
+            - generic [ref=e1624]:
+              - generic [ref=e1625]:
+                - heading "Final Veteran" [level=3] [ref=e1626]
+                - generic [ref=e1627]: audit-stage7_final-1773862868739@example.com
+              - generic [ref=e1628]: Normal
+            - paragraph [ref=e1629]: No next step captured yet.
+            - generic [ref=e1630]:
+              - generic [ref=e1631]: Paid app access
+              - generic [ref=e1632]: 4 records
+              - generic [ref=e1633]: 70% rating
+            - generic [ref=e1634]:
+              - generic [ref=e1635]: SOP 0/11
+              - generic [ref=e1636]: No due date
+          - button "Provider Veteran audit-stage6_provider-1773862868739@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1637] [cursor=pointer]:
+            - generic [ref=e1638]:
+              - generic [ref=e1639]:
+                - heading "Provider Veteran" [level=3] [ref=e1640]
+                - generic [ref=e1641]: audit-stage6_provider-1773862868739@example.com
+              - generic [ref=e1642]: Normal
+            - paragraph [ref=e1643]: No next step captured yet.
+            - generic [ref=e1644]:
+              - generic [ref=e1645]: Paid app access
+              - generic [ref=e1646]: 4 records
+              - generic [ref=e1647]: 70% rating
+            - generic [ref=e1648]:
+              - generic [ref=e1649]: SOP 0/11
+              - generic [ref=e1650]: No due date
+          - button "Medical Veteran audit-stage5_medical-1773862868739@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1651] [cursor=pointer]:
+            - generic [ref=e1652]:
+              - generic [ref=e1653]:
+                - heading "Medical Veteran" [level=3] [ref=e1654]
+                - generic [ref=e1655]: audit-stage5_medical-1773862868739@example.com
+              - generic [ref=e1656]: Normal
+            - paragraph [ref=e1657]: No next step captured yet.
+            - generic [ref=e1658]:
+              - generic [ref=e1659]: Paid app access
+              - generic [ref=e1660]: 4 records
+              - generic [ref=e1661]: 70% rating
+            - generic [ref=e1662]:
+              - generic [ref=e1663]: SOP 0/11
+              - generic [ref=e1664]: No due date
+          - button "Review Veteran audit-stage4_review-1773862868739@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1665] [cursor=pointer]:
+            - generic [ref=e1666]:
+              - generic [ref=e1667]:
+                - heading "Review Veteran" [level=3] [ref=e1668]
+                - generic [ref=e1669]: audit-stage4_review-1773862868739@example.com
+              - generic [ref=e1670]: Normal
+            - paragraph [ref=e1671]: No next step captured yet.
+            - generic [ref=e1672]:
+              - generic [ref=e1673]: Paid app access
+              - generic [ref=e1674]: 4 records
+              - generic [ref=e1675]: 70% rating
+            - generic [ref=e1676]:
+              - generic [ref=e1677]: SOP 0/11
+              - generic [ref=e1678]: No due date
+          - button "Hold Veteran audit-hold-1773862691907@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1679] [cursor=pointer]:
+            - generic [ref=e1680]:
+              - generic [ref=e1681]:
+                - heading "Hold Veteran" [level=3] [ref=e1682]
+                - generic [ref=e1683]: audit-hold-1773862691907@example.com
+              - generic [ref=e1684]: Normal
+            - paragraph [ref=e1685]: No next step captured yet.
+            - generic [ref=e1686]:
+              - generic [ref=e1687]: Paid app access
+              - generic [ref=e1688]: 4 records
+              - generic [ref=e1689]: 70% rating
+            - generic [ref=e1690]:
+              - generic [ref=e1691]: SOP 0/11
+              - generic [ref=e1692]: No due date
+          - button "Decision Veteran audit-stage8_decision-1773862691907@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1693] [cursor=pointer]:
+            - generic [ref=e1694]:
+              - generic [ref=e1695]:
+                - heading "Decision Veteran" [level=3] [ref=e1696]
+                - generic [ref=e1697]: audit-stage8_decision-1773862691907@example.com
+              - generic [ref=e1698]: Normal
+            - paragraph [ref=e1699]: No next step captured yet.
+            - generic [ref=e1700]:
+              - generic [ref=e1701]: Paid app access
+              - generic [ref=e1702]: 4 records
+              - generic [ref=e1703]: 70% rating
+            - generic [ref=e1704]:
+              - generic [ref=e1705]: SOP 0/11
+              - generic [ref=e1706]: No due date
+          - button "Final Veteran audit-stage7_final-1773862691907@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1707] [cursor=pointer]:
+            - generic [ref=e1708]:
+              - generic [ref=e1709]:
+                - heading "Final Veteran" [level=3] [ref=e1710]
+                - generic [ref=e1711]: audit-stage7_final-1773862691907@example.com
+              - generic [ref=e1712]: Normal
+            - paragraph [ref=e1713]: No next step captured yet.
+            - generic [ref=e1714]:
+              - generic [ref=e1715]: Paid app access
+              - generic [ref=e1716]: 4 records
+              - generic [ref=e1717]: 70% rating
+            - generic [ref=e1718]:
+              - generic [ref=e1719]: SOP 0/11
+              - generic [ref=e1720]: No due date
+          - button "Provider Veteran audit-stage6_provider-1773862691907@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1721] [cursor=pointer]:
+            - generic [ref=e1722]:
+              - generic [ref=e1723]:
+                - heading "Provider Veteran" [level=3] [ref=e1724]
+                - generic [ref=e1725]: audit-stage6_provider-1773862691907@example.com
+              - generic [ref=e1726]: Normal
+            - paragraph [ref=e1727]: No next step captured yet.
+            - generic [ref=e1728]:
+              - generic [ref=e1729]: Paid app access
+              - generic [ref=e1730]: 4 records
+              - generic [ref=e1731]: 70% rating
+            - generic [ref=e1732]:
+              - generic [ref=e1733]: SOP 0/11
+              - generic [ref=e1734]: No due date
+          - button "Medical Veteran audit-stage5_medical-1773862691907@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1735] [cursor=pointer]:
+            - generic [ref=e1736]:
+              - generic [ref=e1737]:
+                - heading "Medical Veteran" [level=3] [ref=e1738]
+                - generic [ref=e1739]: audit-stage5_medical-1773862691907@example.com
+              - generic [ref=e1740]: Normal
+            - paragraph [ref=e1741]: No next step captured yet.
+            - generic [ref=e1742]:
+              - generic [ref=e1743]: Paid app access
+              - generic [ref=e1744]: 4 records
+              - generic [ref=e1745]: 70% rating
+            - generic [ref=e1746]:
+              - generic [ref=e1747]: SOP 0/11
+              - generic [ref=e1748]: No due date
+          - button "Review Veteran audit-stage4_review-1773862691907@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1749] [cursor=pointer]:
+            - generic [ref=e1750]:
+              - generic [ref=e1751]:
+                - heading "Review Veteran" [level=3] [ref=e1752]
+                - generic [ref=e1753]: audit-stage4_review-1773862691907@example.com
+              - generic [ref=e1754]: Normal
+            - paragraph [ref=e1755]: No next step captured yet.
+            - generic [ref=e1756]:
+              - generic [ref=e1757]: Paid app access
+              - generic [ref=e1758]: 4 records
+              - generic [ref=e1759]: 70% rating
+            - generic [ref=e1760]:
+              - generic [ref=e1761]: SOP 0/11
+              - generic [ref=e1762]: No due date
+          - button "Ready Veteran audit-stage3_ready-1773862691907@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1763] [cursor=pointer]:
+            - generic [ref=e1764]:
+              - generic [ref=e1765]:
+                - heading "Ready Veteran" [level=3] [ref=e1766]
+                - generic [ref=e1767]: audit-stage3_ready-1773862691907@example.com
+              - generic [ref=e1768]: Normal
+            - paragraph [ref=e1769]: No next step captured yet.
+            - generic [ref=e1770]:
+              - generic [ref=e1771]: Paid app access
+              - generic [ref=e1772]: 4 records
+              - generic [ref=e1773]: 70% rating
+            - generic [ref=e1774]:
+              - generic [ref=e1775]: SOP 0/11
+              - generic [ref=e1776]: No due date
+          - button "Hold Veteran audit-hold-1773862626222@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1777] [cursor=pointer]:
+            - generic [ref=e1778]:
+              - generic [ref=e1779]:
+                - heading "Hold Veteran" [level=3] [ref=e1780]
+                - generic [ref=e1781]: audit-hold-1773862626222@example.com
+              - generic [ref=e1782]: Normal
+            - paragraph [ref=e1783]: No next step captured yet.
+            - generic [ref=e1784]:
+              - generic [ref=e1785]: Paid app access
+              - generic [ref=e1786]: 4 records
+              - generic [ref=e1787]: 70% rating
+            - generic [ref=e1788]:
+              - generic [ref=e1789]: SOP 0/11
+              - generic [ref=e1790]: No due date
+          - button "Decision Veteran audit-stage8_decision-1773862626222@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1791] [cursor=pointer]:
+            - generic [ref=e1792]:
+              - generic [ref=e1793]:
+                - heading "Decision Veteran" [level=3] [ref=e1794]
+                - generic [ref=e1795]: audit-stage8_decision-1773862626222@example.com
+              - generic [ref=e1796]: Normal
+            - paragraph [ref=e1797]: No next step captured yet.
+            - generic [ref=e1798]:
+              - generic [ref=e1799]: Paid app access
+              - generic [ref=e1800]: 4 records
+              - generic [ref=e1801]: 70% rating
+            - generic [ref=e1802]:
+              - generic [ref=e1803]: SOP 0/11
+              - generic [ref=e1804]: No due date
+          - button "Final Veteran audit-stage7_final-1773862626222@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1805] [cursor=pointer]:
+            - generic [ref=e1806]:
+              - generic [ref=e1807]:
+                - heading "Final Veteran" [level=3] [ref=e1808]
+                - generic [ref=e1809]: audit-stage7_final-1773862626222@example.com
+              - generic [ref=e1810]: Normal
+            - paragraph [ref=e1811]: No next step captured yet.
+            - generic [ref=e1812]:
+              - generic [ref=e1813]: Paid app access
+              - generic [ref=e1814]: 4 records
+              - generic [ref=e1815]: 70% rating
+            - generic [ref=e1816]:
+              - generic [ref=e1817]: SOP 0/11
+              - generic [ref=e1818]: No due date
+          - button "Provider Veteran audit-stage6_provider-1773862626222@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1819] [cursor=pointer]:
+            - generic [ref=e1820]:
+              - generic [ref=e1821]:
+                - heading "Provider Veteran" [level=3] [ref=e1822]
+                - generic [ref=e1823]: audit-stage6_provider-1773862626222@example.com
+              - generic [ref=e1824]: Normal
+            - paragraph [ref=e1825]: No next step captured yet.
+            - generic [ref=e1826]:
+              - generic [ref=e1827]: Paid app access
+              - generic [ref=e1828]: 4 records
+              - generic [ref=e1829]: 70% rating
+            - generic [ref=e1830]:
+              - generic [ref=e1831]: SOP 0/11
+              - generic [ref=e1832]: No due date
+          - button "Medical Veteran audit-stage5_medical-1773862626222@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1833] [cursor=pointer]:
+            - generic [ref=e1834]:
+              - generic [ref=e1835]:
+                - heading "Medical Veteran" [level=3] [ref=e1836]
+                - generic [ref=e1837]: audit-stage5_medical-1773862626222@example.com
+              - generic [ref=e1838]: Normal
+            - paragraph [ref=e1839]: No next step captured yet.
+            - generic [ref=e1840]:
+              - generic [ref=e1841]: Paid app access
+              - generic [ref=e1842]: 4 records
+              - generic [ref=e1843]: 70% rating
+            - generic [ref=e1844]:
+              - generic [ref=e1845]: SOP 0/11
+              - generic [ref=e1846]: No due date
+          - button "Review Veteran audit-stage4_review-1773862626222@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1847] [cursor=pointer]:
+            - generic [ref=e1848]:
+              - generic [ref=e1849]:
+                - heading "Review Veteran" [level=3] [ref=e1850]
+                - generic [ref=e1851]: audit-stage4_review-1773862626222@example.com
+              - generic [ref=e1852]: Normal
+            - paragraph [ref=e1853]: No next step captured yet.
+            - generic [ref=e1854]:
+              - generic [ref=e1855]: Paid app access
+              - generic [ref=e1856]: 4 records
+              - generic [ref=e1857]: 70% rating
+            - generic [ref=e1858]:
+              - generic [ref=e1859]: SOP 0/11
+              - generic [ref=e1860]: No due date
+          - button "Ready Veteran audit-stage3_ready-1773862626222@example.com Normal No next step captured yet. Paid app access 4 records 70% rating SOP 0/11 No due date" [ref=e1861] [cursor=pointer]:
+            - generic [ref=e1862]:
+              - generic [ref=e1863]:
+                - heading "Ready Veteran" [level=3] [ref=e1864]
+                - generic [ref=e1865]: audit-stage3_ready-1773862626222@example.com
+              - generic [ref=e1866]: Normal
+            - paragraph [ref=e1867]: No next step captured yet.
+            - generic [ref=e1868]:
+              - generic [ref=e1869]: Paid app access
+              - generic [ref=e1870]: 4 records
+              - generic [ref=e1871]: 70% rating
+            - generic [ref=e1872]:
+              - generic [ref=e1873]: SOP 0/11
+              - generic [ref=e1874]: No due date
+          - button "Paid Veteran codex-paid-1773856310730@example.com Normal No next step captured yet. Paid app access 4 records 80% rating SOP 0/11 No due date" [ref=e1875] [cursor=pointer]:
+            - generic [ref=e1876]:
+              - generic [ref=e1877]:
+                - heading "Paid Veteran" [level=3] [ref=e1878]
+                - generic [ref=e1879]: codex-paid-1773856310730@example.com
+              - generic [ref=e1880]: Normal
+            - paragraph [ref=e1881]: No next step captured yet.
+            - generic [ref=e1882]:
+              - generic [ref=e1883]: Paid app access
+              - generic [ref=e1884]: 4 records
+              - generic [ref=e1885]: 80% rating
+            - generic [ref=e1886]:
+              - generic [ref=e1887]: SOP 0/11
+              - generic [ref=e1888]: No due date
+          - button "API Tester Updated api-1773092993@example.com Normal No next step captured yet. Paid app access 1 records 80% rating SOP 0/11 No due date" [ref=e1889] [cursor=pointer]:
+            - generic [ref=e1890]:
+              - generic [ref=e1891]:
+                - heading "API Tester Updated" [level=3] [ref=e1892]
+                - generic [ref=e1893]: api-1773092993@example.com
+              - generic [ref=e1894]: Normal
+            - paragraph [ref=e1895]: No next step captured yet.
+            - generic [ref=e1896]:
+              - generic [ref=e1897]: Paid app access
+              - generic [ref=e1898]: 1 records
+              - generic [ref=e1899]: 80% rating
+            - generic [ref=e1900]:
+              - generic [ref=e1901]: SOP 0/11
+              - generic [ref=e1902]: No due date
+        - generic [ref=e1903]:
+          - generic [ref=e1904]:
+            - paragraph [ref=e1905]: Pipeline
+            - heading "Intake" [level=2] [ref=e1906]
+            - paragraph [ref=e1907]: Questionnaires, intake cleanup, and case prep are underway.
+            - generic [ref=e1908]: 0 customers
+          - paragraph [ref=e1910]: No customers in this stage right now.
+        - generic [ref=e1911]:
+          - generic [ref=e1912]:
+            - paragraph [ref=e1913]: Pipeline
+            - heading "MDBQs" [level=2] [ref=e1914]
+            - paragraph [ref=e1915]: Mini-DBQs and condition-specific evidence prompts are being completed.
+            - generic [ref=e1916]: 0 customers
+          - paragraph [ref=e1918]: No customers in this stage right now.
+        - generic [ref=e1919]:
+          - generic [ref=e1920]:
+            - paragraph [ref=e1921]: Pipeline
+            - heading "Provider" [level=2] [ref=e1922]
+            - paragraph [ref=e1923]: Provider scheduling, evaluations, or follow-up medical documentation.
+            - generic [ref=e1924]: 0 customers
+          - paragraph [ref=e1926]: No customers in this stage right now.
+        - generic [ref=e1927]:
+          - generic [ref=e1928]:
+            - paragraph [ref=e1929]: Pipeline
+            - heading "Evidence Packet" [level=2] [ref=e1930]
+            - paragraph [ref=e1931]: Assembling final packet, reports, and supporting materials.
+            - generic [ref=e1932]: 0 customers
+          - paragraph [ref=e1934]: No customers in this stage right now.
+        - generic [ref=e1935]:
+          - generic [ref=e1936]:
+            - paragraph [ref=e1937]: Pipeline
+            - heading "Ready to Submit" [level=2] [ref=e1938]
+            - paragraph [ref=e1939]: Customer has what they need to submit through the VA or an accredited rep.
+            - generic [ref=e1940]: 0 customers
+          - paragraph [ref=e1942]: No customers in this stage right now.
+      - complementary [ref=e1943]:
+        - generic [ref=e1944]:
+          - generic [ref=e1945]:
+            - generic [ref=e1946]:
+              - paragraph [ref=e1947]: Customer detail
+              - heading "Chris Veteran" [level=2] [ref=e1948]
+              - paragraph [ref=e1949]: customer@example.com
+            - generic [ref=e1950]:
+              - generic [ref=e1951]: Records
+              - generic [ref=e1952]: Normal
+          - generic [ref=e1953]:
+            - generic [ref=e1954]:
+              - text: Lead ID
+              - strong [ref=e1955]: lead_demo_001
+              - paragraph [ref=e1956]: Created Mar 20, 2026
+            - generic [ref=e1957]:
+              - text: Records
+              - strong [ref=e1958]: 2/2
+              - paragraph [ref=e1959]: synced to TYFYS file
+          - generic [ref=e1960]:
+            - generic [ref=e1961]: 555-123-4567
+            - generic [ref=e1962]: Paid access
+            - generic [ref=e1963]: 70% current rating
+            - generic [ref=e1964]: Increase
+        - generic [ref=e1965]:
+          - heading "Pipeline controls" [level=3] [ref=e1966]
+          - generic [ref=e1967]:
+            - generic [ref=e1968]:
+              - generic [ref=e1969]: Stage
+              - combobox "Stage" [ref=e1970]:
+                - option "Welcome"
+                - option "Offer"
+                - option "Contract Signed"
+                - option "DD214 / ITF"
+                - option "Records" [selected]
+                - option "Intake"
+                - option "MDBQs"
+                - option "Provider"
+                - option "Evidence Packet"
+                - option "Ready to Submit"
+            - generic [ref=e1971]:
+              - generic [ref=e1972]: Owner
+              - textbox "Owner" [ref=e1973]:
+                - /placeholder: Assign a team owner
+            - generic [ref=e1974]:
+              - generic [ref=e1975]: Priority
+              - combobox "Priority" [ref=e1976]:
+                - option "Low"
+                - option "Normal" [selected]
+                - option "High"
+                - option "Urgent"
+            - generic [ref=e1977]:
+              - generic [ref=e1978]: Status
+              - combobox "Status" [ref=e1979]:
+                - option "Active" [selected]
+                - option "Paused"
+                - option "Closed"
+            - generic [ref=e1980]:
+              - generic [ref=e1981]: Due date
+              - textbox "Due date" [ref=e1982]
+            - generic [ref=e1983]:
+              - generic [ref=e1984]: Last contact
+              - textbox "Last contact" [ref=e1985]
+          - generic [ref=e1986]:
+            - generic [ref=e1987]: Next step
+            - textbox "Next step" [ref=e1988]:
+              - /placeholder: Capture the next concrete step for this customer.
+          - generic [ref=e1989]:
+            - generic [ref=e1990]:
+              - generic [ref=e1991]: Tags
+              - textbox "Tags" [ref=e1992]:
+                - /placeholder: records, priority, consult
+            - generic [ref=e1993]:
+              - generic [ref=e1994]: Blockers
+              - textbox "Blockers" [ref=e1995]:
+                - /placeholder: One blocker per line
+        - generic [ref=e1996]:
+          - heading "SOP checklist" [level=3] [ref=e1997]
+          - generic [ref=e1998]:
+            - generic [ref=e1999]:
+              - checkbox "Confirm fit and claim goals Offer Open" [ref=e2000]
+              - generic [ref=e2001]:
+                - paragraph [ref=e2002]: Confirm fit and claim goals
+                - paragraph [ref=e2003]: Offer
+              - generic [ref=e2004]: Open
+            - generic [ref=e2005]:
+              - checkbox "Service agreement and deposit confirmed Contract Signed Open" [ref=e2006]
+              - generic [ref=e2007]:
+                - paragraph [ref=e2008]: Service agreement and deposit confirmed
+                - paragraph [ref=e2009]: Contract Signed
+              - generic [ref=e2010]: Open
+            - generic [ref=e2011]:
+              - checkbox "DD-214 verified Dd214 Itf Open" [ref=e2012]
+              - generic [ref=e2013]:
+                - paragraph [ref=e2014]: DD-214 verified
+                - paragraph [ref=e2015]: Dd214 Itf
+              - generic [ref=e2016]: Open
+            - generic [ref=e2017]:
+              - checkbox "Intent to File confirmed Dd214 Itf Open" [ref=e2018]
+              - generic [ref=e2019]:
+                - paragraph [ref=e2020]: Intent to File confirmed
+                - paragraph [ref=e2021]: Dd214 Itf
+              - generic [ref=e2022]: Open
+            - generic [ref=e2023]:
+              - checkbox "Core military and civilian records collected Records Open" [ref=e2024]
+              - generic [ref=e2025]:
+                - paragraph [ref=e2026]: Core military and civilian records collected
+                - paragraph [ref=e2027]: Records
+              - generic [ref=e2028]: Open
+            - generic [ref=e2029]:
+              - checkbox "Intake and questionnaires complete Intake Open" [ref=e2030]
+              - generic [ref=e2031]:
+                - paragraph [ref=e2032]: Intake and questionnaires complete
+                - paragraph [ref=e2033]: Intake
+              - generic [ref=e2034]: Open
+            - generic [ref=e2035]:
+              - checkbox "Mini-DBQs reviewed for all target conditions Mdbqs Open" [ref=e2036]
+              - generic [ref=e2037]:
+                - paragraph [ref=e2038]: Mini-DBQs reviewed for all target conditions
+                - paragraph [ref=e2039]: Mdbqs
+              - generic [ref=e2040]: Open
+            - generic [ref=e2041]:
+              - checkbox "Provider appointment booked Provider Open" [ref=e2042]
+              - generic [ref=e2043]:
+                - paragraph [ref=e2044]: Provider appointment booked
+                - paragraph [ref=e2045]: Provider
+              - generic [ref=e2046]: Open
+            - generic [ref=e2047]:
+              - checkbox "Provider reports or DBQs received Provider Open" [ref=e2048]
+              - generic [ref=e2049]:
+                - paragraph [ref=e2050]: Provider reports or DBQs received
+                - paragraph [ref=e2051]: Provider
+              - generic [ref=e2052]: Open
+            - generic [ref=e2053]:
+              - checkbox "Evidence packet assembled Evidence Packet Open" [ref=e2054]
+              - generic [ref=e2055]:
+                - paragraph [ref=e2056]: Evidence packet assembled
+                - paragraph [ref=e2057]: Evidence Packet
+              - generic [ref=e2058]: Open
+            - generic [ref=e2059]:
+              - checkbox "Customer is ready to submit Ready To Submit Open" [ref=e2060]
+              - generic [ref=e2061]:
+                - paragraph [ref=e2062]: Customer is ready to submit
+                - paragraph [ref=e2063]: Ready To Submit
+              - generic [ref=e2064]: Open
+        - generic [ref=e2065]:
+          - generic [ref=e2066]:
+            - heading "Internal notes" [level=3] [ref=e2067]
+            - generic [ref=e2068]: Updated this hour · Last login No recent activity
+          - generic [ref=e2069]:
+            - generic [ref=e2070]: Add note
+            - textbox "Add note" [ref=e2071]:
+              - /placeholder: Capture the latest call, blocker, decision, or handoff note.
+          - paragraph [ref=e2074]: No private notes yet for this customer.
+        - button "Save CRM changes" [ref=e2076] [cursor=pointer]

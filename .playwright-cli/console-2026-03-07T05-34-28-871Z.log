@@ -1,0 +1,16 @@
+[     830ms] [WARNING] cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation @ https://cdn.tailwindcss.com/:63
+[    7164ms] [WARNING] cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation @ https://cdn.tailwindcss.com/:63
+[    7285ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8788/api/zoho-profile?email=richard%40example.com&phone=5555551212:0
+[   18903ms] [ERROR] Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST')) @ http://127.0.0.1:8788/api/zoho-signup:0
+[   18903ms] [WARNING] Zoho signup sync skipped: Error: Zoho signup sync failed
+    at syncZohoSignup (http://127.0.0.1:8788/tyfys-platform/tyfys-platform-app.js:2249:17) @ http://127.0.0.1:8788/tyfys-platform/tyfys-platform-app.js:2259
+[   31035ms] [ERROR] Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST')) @ http://127.0.0.1:8788/api/zoho-signup:0
+[   31035ms] [WARNING] Zoho signup sync skipped: Error: Zoho signup sync failed
+    at syncZohoSignup (http://127.0.0.1:8788/tyfys-platform/tyfys-platform-app.js:2249:17) @ http://127.0.0.1:8788/tyfys-platform/tyfys-platform-app.js:2259
+[   45112ms] [ERROR] Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST')) @ http://127.0.0.1:8788/api/zoho-signup:0
+[   45112ms] [WARNING] Zoho signup sync skipped: Error: Zoho signup sync failed
+    at syncZohoSignup (http://127.0.0.1:8788/tyfys-platform/tyfys-platform-app.js:2249:17) @ http://127.0.0.1:8788/tyfys-platform/tyfys-platform-app.js:2259
+[   47106ms] [ERROR] Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST')) @ http://127.0.0.1:8788/api/zoho-signup:0
+[   47110ms] [WARNING] Zoho signup sync skipped: Error: Zoho signup sync failed
+    at syncZohoSignup (http://127.0.0.1:8788/tyfys-platform/tyfys-platform-app.js:2249:17) @ http://127.0.0.1:8788/tyfys-platform/tyfys-platform-app.js:2259
+[   87706ms] [ERROR] Attestation check for Attribution Reporting on https://www.google-analytics.com failed. @ http://127.0.0.1:8788/app.html:0

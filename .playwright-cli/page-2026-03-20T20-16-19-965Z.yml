@@ -1,0 +1,2690 @@
+- main [ref=e28]:
+  - generic [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: TYFYS CRM
+          - heading "One work queue for customers, SOP steps, and next actions." [level=1] [ref=e34]
+          - paragraph [ref=e35]: The CRM now centers on who needs attention, what the next step is, and which SOP task is blocking the case from moving forward.
+        - complementary [ref=e36]:
+          - generic [ref=e37]:
+            - paragraph [ref=e38]: Signed in
+            - heading "Richard" [level=2] [ref=e39]
+            - paragraph [ref=e40]: richard@thankyouforyourservice.co can manage live CRM data.
+          - generic [ref=e41]:
+            - generic [ref=e42]: Private workspace
+            - generic [ref=e43]: SOP tracking
+            - generic [ref=e44]: Live app data
+      - generic [ref=e45]:
+        - article [ref=e46]:
+          - generic [ref=e47]: Total customers
+          - strong [ref=e48]: "137"
+          - paragraph [ref=e49]: live customer records in the private queue
+        - article [ref=e50]:
+          - generic [ref=e51]: Needs attention
+          - strong [ref=e52]: "1"
+          - paragraph [ref=e53]: urgent, blocked, or overdue cases
+        - article [ref=e54]:
+          - generic [ref=e55]: Due this week
+          - strong [ref=e56]: "0"
+          - paragraph [ref=e57]: cases with upcoming deadlines
+        - article [ref=e58]:
+          - generic [ref=e59]: Records in flight
+          - strong [ref=e60]: "77"
+          - paragraph [ref=e61]: customers already collecting records
+        - article [ref=e62]:
+          - generic [ref=e63]: Ready to submit
+          - strong [ref=e64]: "0"
+          - paragraph [ref=e65]: files ready for the final handoff
+    - generic [ref=e67]:
+      - button "All visible 137 every result in the current queue" [ref=e68] [cursor=pointer]:
+        - generic [ref=e69]: All visible
+        - strong [ref=e70]: "137"
+        - paragraph [ref=e71]: every result in the current queue
+      - button "Needs attention 1 urgent, blocked, or overdue cases" [ref=e72] [cursor=pointer]:
+        - generic [ref=e73]: Needs attention
+        - strong [ref=e74]: "1"
+        - paragraph [ref=e75]: urgent, blocked, or overdue cases
+      - button "Welcome 3 New customer or account that still needs a first-touch review." [ref=e76] [cursor=pointer]:
+        - generic [ref=e77]: Welcome
+        - strong [ref=e78]: "3"
+        - paragraph [ref=e79]: New customer or account that still needs a first-touch review.
+      - button "Offer 29 Qualified lead reviewing pricing, fit, or account setup details." [ref=e80] [cursor=pointer]:
+        - generic [ref=e81]: Offer
+        - strong [ref=e82]: "29"
+        - paragraph [ref=e83]: Qualified lead reviewing pricing, fit, or account setup details.
+      - button "Contract Signed 29 Paid customer with app access or service agreement already in place." [ref=e84] [cursor=pointer]:
+        - generic [ref=e85]: Contract Signed
+        - strong [ref=e86]: "29"
+        - paragraph [ref=e87]: Paid customer with app access or service agreement already in place.
+      - button "DD214 / ITF 0 Working on service records, intent to file, or claim kickoff prerequisites." [ref=e88] [cursor=pointer]:
+        - generic [ref=e89]: DD214 / ITF
+        - strong [ref=e90]: "0"
+        - paragraph [ref=e91]: Working on service records, intent to file, or claim kickoff prerequisites.
+      - button "Records 75 Collecting, syncing, or organizing medical and military records." [ref=e92] [cursor=pointer]:
+        - generic [ref=e93]: Records
+        - strong [ref=e94]: "75"
+        - paragraph [ref=e95]: Collecting, syncing, or organizing medical and military records.
+      - button "Intake 0 Questionnaires, intake cleanup, and case prep are underway." [ref=e96] [cursor=pointer]:
+        - generic [ref=e97]: Intake
+        - strong [ref=e98]: "0"
+        - paragraph [ref=e99]: Questionnaires, intake cleanup, and case prep are underway.
+      - button "MDBQs 0 Mini-DBQs and condition-specific evidence prompts are being completed." [ref=e100] [cursor=pointer]:
+        - generic [ref=e101]: MDBQs
+        - strong [ref=e102]: "0"
+        - paragraph [ref=e103]: Mini-DBQs and condition-specific evidence prompts are being completed.
+      - button "Provider 1 Provider scheduling, evaluations, or follow-up medical documentation." [ref=e104] [cursor=pointer]:
+        - generic [ref=e105]: Provider
+        - strong [ref=e106]: "1"
+        - paragraph [ref=e107]: Provider scheduling, evaluations, or follow-up medical documentation.
+      - button "Evidence Packet 0 Assembling final packet, reports, and supporting materials." [ref=e108] [cursor=pointer]:
+        - generic [ref=e109]: Evidence Packet
+        - strong [ref=e110]: "0"
+        - paragraph [ref=e111]: Assembling final packet, reports, and supporting materials.
+      - button "Ready to Submit 0 Customer has what they need to submit through the VA or an accredited rep." [ref=e112] [cursor=pointer]:
+        - generic [ref=e113]: Ready to Submit
+        - strong [ref=e114]: "0"
+        - paragraph [ref=e115]: Customer has what they need to submit through the VA or an accredited rep.
+    - generic [ref=e116]:
+      - generic [ref=e117]:
+        - generic [ref=e118]:
+          - paragraph [ref=e119]: Queue filters
+          - heading "Work the customer list" [level=2] [ref=e120]
+          - paragraph [ref=e121]: Showing 137 customers sorted for action.
+        - generic [ref=e123]: 137 visible
+      - generic [ref=e124]:
+        - generic [ref=e125]:
+          - generic [ref=e126]: Search
+          - searchbox "Search" [ref=e127]
+        - generic [ref=e128]:
+          - generic [ref=e129]: View
+          - combobox "View" [ref=e130]:
+            - option "All stages" [selected]
+            - option "Needs attention"
+            - option "Welcome"
+            - option "Offer"
+            - option "Contract Signed"
+            - option "DD214 / ITF"
+            - option "Records"
+            - option "Intake"
+            - option "MDBQs"
+            - option "Provider"
+            - option "Evidence Packet"
+            - option "Ready to Submit"
+        - generic [ref=e131]:
+          - generic [ref=e132]: Owner
+          - combobox "Owner" [ref=e133]:
+            - option "All owners" [selected]
+            - option "Ops Lead"
+        - generic [ref=e134]:
+          - generic [ref=e135]: Status
+          - combobox "Status" [ref=e136]:
+            - option "All statuses" [selected]
+            - option "Active"
+            - option "Paused"
+            - option "Closed"
+        - generic [ref=e137]:
+          - generic [ref=e138]: Sort
+          - combobox "Sort" [ref=e139]:
+            - option "Needs attention first" [selected]
+            - option "Due date"
+            - option "Recently updated"
+            - option "Customer name"
+    - generic [ref=e140]:
+      - generic [ref=e141]:
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - paragraph [ref=e144]: Customer queue
+            - heading "Action list" [level=2] [ref=e145]
+            - paragraph [ref=e146]: The queue surfaces urgent, blocked, and due cases first so the team can work from top to bottom.
+          - generic [ref=e148]: 137 in queue
+        - generic [ref=e149]:
+          - 'button "Chris Veteran customer@example.com · Ops Lead Provider High Active No due date Paid 2 records Confirm psych eval scheduling and collect provider packet. SOP 0/11 Next SOP: Confirm fit and claim goals Last contact Mar 20, 2026 Waiting on psych consult Moved this case into provider scheduling after records review." [ref=e150] [cursor=pointer]':
+            - generic [ref=e151]:
+              - generic [ref=e152]:
+                - heading "Chris Veteran" [level=3] [ref=e153]
+                - paragraph [ref=e154]: customer@example.com · Ops Lead
+              - generic [ref=e155]:
+                - generic [ref=e156]: Provider
+                - generic [ref=e157]: High
+            - generic [ref=e158]:
+              - generic [ref=e159]: Active
+              - generic [ref=e160]: No due date
+              - generic [ref=e161]: Paid
+              - generic [ref=e162]: 2 records
+            - paragraph [ref=e163]: Confirm psych eval scheduling and collect provider packet.
+            - generic [ref=e166]: SOP 0/11
+            - generic [ref=e167]:
+              - generic [ref=e168]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e169]: Last contact Mar 20, 2026
+            - generic [ref=e171]: Waiting on psych consult
+            - paragraph [ref=e172]: Moved this case into provider scheduling after records review.
+          - 'button "Richard Ducat richducat@gmail.com · Unassigned Records Normal Active No due date Paid 1 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 hours ago" [ref=e173] [cursor=pointer]':
+            - generic [ref=e174]:
+              - generic [ref=e175]:
+                - heading "Richard Ducat" [level=3] [ref=e176]
+                - paragraph [ref=e177]: richducat@gmail.com · Unassigned
+              - generic [ref=e178]:
+                - generic [ref=e179]: Records
+                - generic [ref=e180]: Normal
+            - generic [ref=e181]:
+              - generic [ref=e182]: Active
+              - generic [ref=e183]: No due date
+              - generic [ref=e184]: Paid
+              - generic [ref=e185]: 1 records
+            - paragraph [ref=e186]: Confirm fit and claim goals
+            - generic [ref=e189]: SOP 0/11
+            - generic [ref=e190]:
+              - generic [ref=e191]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e192]: Updated 2 hours ago
+          - 'button "Richard Ducat test@eb28.co · Unassigned Offer Normal Active No due date 1 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 5 hours ago" [ref=e193] [cursor=pointer]':
+            - generic [ref=e194]:
+              - generic [ref=e195]:
+                - heading "Richard Ducat" [level=3] [ref=e196]
+                - paragraph [ref=e197]: test@eb28.co · Unassigned
+              - generic [ref=e198]:
+                - generic [ref=e199]: Offer
+                - generic [ref=e200]: Normal
+            - generic [ref=e201]:
+              - generic [ref=e202]: Active
+              - generic [ref=e203]: No due date
+              - generic [ref=e204]: 1 records
+            - paragraph [ref=e205]: Confirm fit and claim goals
+            - generic [ref=e208]: SOP 0/11
+            - generic [ref=e209]:
+              - generic [ref=e210]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e211]: Updated 5 hours ago
+          - 'button "Checkout View checkout-view-1773890960975@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e212] [cursor=pointer]':
+            - generic [ref=e213]:
+              - generic [ref=e214]:
+                - heading "Checkout View" [level=3] [ref=e215]
+                - paragraph [ref=e216]: checkout-view-1773890960975@example.com · Unassigned
+              - generic [ref=e217]:
+                - generic [ref=e218]: Contract Signed
+                - generic [ref=e219]: Normal
+            - generic [ref=e220]:
+              - generic [ref=e221]: Active
+              - generic [ref=e222]: No due date
+              - generic [ref=e223]: Paid
+            - paragraph [ref=e224]: Confirm fit and claim goals
+            - generic [ref=e227]: SOP 0/11
+            - generic [ref=e228]:
+              - generic [ref=e229]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e230]: Updated 2 days ago
+          - 'button "Checkout View checkout-view-1773890876236@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e231] [cursor=pointer]':
+            - generic [ref=e232]:
+              - generic [ref=e233]:
+                - heading "Checkout View" [level=3] [ref=e234]
+                - paragraph [ref=e235]: checkout-view-1773890876236@example.com · Unassigned
+              - generic [ref=e236]:
+                - generic [ref=e237]: Contract Signed
+                - generic [ref=e238]: Normal
+            - generic [ref=e239]:
+              - generic [ref=e240]: Active
+              - generic [ref=e241]: No due date
+              - generic [ref=e242]: Paid
+            - paragraph [ref=e243]: Confirm fit and claim goals
+            - generic [ref=e246]: SOP 0/11
+            - generic [ref=e247]:
+              - generic [ref=e248]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e249]: Updated 2 days ago
+          - 'button "Checkout Check checkout-check-1773890839348@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e250] [cursor=pointer]':
+            - generic [ref=e251]:
+              - generic [ref=e252]:
+                - heading "Checkout Check" [level=3] [ref=e253]
+                - paragraph [ref=e254]: checkout-check-1773890839348@example.com · Unassigned
+              - generic [ref=e255]:
+                - generic [ref=e256]: Contract Signed
+                - generic [ref=e257]: Normal
+            - generic [ref=e258]:
+              - generic [ref=e259]: Active
+              - generic [ref=e260]: No due date
+              - generic [ref=e261]: Paid
+            - paragraph [ref=e262]: Confirm fit and claim goals
+            - generic [ref=e265]: SOP 0/11
+            - generic [ref=e266]:
+              - generic [ref=e267]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e268]: Updated 2 days ago
+          - 'button "Checkout Check checkout-check-1773890778511@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e269] [cursor=pointer]':
+            - generic [ref=e270]:
+              - generic [ref=e271]:
+                - heading "Checkout Check" [level=3] [ref=e272]
+                - paragraph [ref=e273]: checkout-check-1773890778511@example.com · Unassigned
+              - generic [ref=e274]:
+                - generic [ref=e275]: Offer
+                - generic [ref=e276]: Normal
+            - generic [ref=e277]:
+              - generic [ref=e278]: Active
+              - generic [ref=e279]: No due date
+            - paragraph [ref=e280]: Confirm fit and claim goals
+            - generic [ref=e283]: SOP 0/11
+            - generic [ref=e284]:
+              - generic [ref=e285]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e286]: Updated 2 days ago
+          - 'button "Intake Check intake-check-1773890738710@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e287] [cursor=pointer]':
+            - generic [ref=e288]:
+              - generic [ref=e289]:
+                - heading "Intake Check" [level=3] [ref=e290]
+                - paragraph [ref=e291]: intake-check-1773890738710@example.com · Unassigned
+              - generic [ref=e292]:
+                - generic [ref=e293]: Contract Signed
+                - generic [ref=e294]: Normal
+            - generic [ref=e295]:
+              - generic [ref=e296]: Active
+              - generic [ref=e297]: No due date
+              - generic [ref=e298]: Paid
+            - paragraph [ref=e299]: Confirm fit and claim goals
+            - generic [ref=e302]: SOP 0/11
+            - generic [ref=e303]:
+              - generic [ref=e304]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e305]: Updated 2 days ago
+          - 'button "Contract Tester contract-1773890712534@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e306] [cursor=pointer]':
+            - generic [ref=e307]:
+              - generic [ref=e308]:
+                - heading "Contract Tester" [level=3] [ref=e309]
+                - paragraph [ref=e310]: contract-1773890712534@example.com · Unassigned
+              - generic [ref=e311]:
+                - generic [ref=e312]: Offer
+                - generic [ref=e313]: Normal
+            - generic [ref=e314]:
+              - generic [ref=e315]: Active
+              - generic [ref=e316]: No due date
+            - paragraph [ref=e317]: Confirm fit and claim goals
+            - generic [ref=e320]: SOP 0/11
+            - generic [ref=e321]:
+              - generic [ref=e322]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e323]: Updated 2 days ago
+          - 'button "Codex Tester codex-flow-1773890657469@example.com · Unassigned Records Normal Active No due date Paid 2 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e324] [cursor=pointer]':
+            - generic [ref=e325]:
+              - generic [ref=e326]:
+                - heading "Codex Tester" [level=3] [ref=e327]
+                - paragraph [ref=e328]: codex-flow-1773890657469@example.com · Unassigned
+              - generic [ref=e329]:
+                - generic [ref=e330]: Records
+                - generic [ref=e331]: Normal
+            - generic [ref=e332]:
+              - generic [ref=e333]: Active
+              - generic [ref=e334]: No due date
+              - generic [ref=e335]: Paid
+              - generic [ref=e336]: 2 records
+            - paragraph [ref=e337]: Confirm fit and claim goals
+            - generic [ref=e340]: SOP 0/11
+            - generic [ref=e341]:
+              - generic [ref=e342]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e343]: Updated 2 days ago
+          - 'button "Debug User debug-1773890583936@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e344] [cursor=pointer]':
+            - generic [ref=e345]:
+              - generic [ref=e346]:
+                - heading "Debug User" [level=3] [ref=e347]
+                - paragraph [ref=e348]: debug-1773890583936@example.com · Unassigned
+              - generic [ref=e349]:
+                - generic [ref=e350]: Contract Signed
+                - generic [ref=e351]: Normal
+            - generic [ref=e352]:
+              - generic [ref=e353]: Active
+              - generic [ref=e354]: No due date
+              - generic [ref=e355]: Paid
+            - paragraph [ref=e356]: Confirm fit and claim goals
+            - generic [ref=e359]: SOP 0/11
+            - generic [ref=e360]:
+              - generic [ref=e361]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e362]: Updated 2 days ago
+          - 'button "Codex Tester codex-flow-1773890541177@example.com · Unassigned Records Normal Active No due date Paid 2 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e363] [cursor=pointer]':
+            - generic [ref=e364]:
+              - generic [ref=e365]:
+                - heading "Codex Tester" [level=3] [ref=e366]
+                - paragraph [ref=e367]: codex-flow-1773890541177@example.com · Unassigned
+              - generic [ref=e368]:
+                - generic [ref=e369]: Records
+                - generic [ref=e370]: Normal
+            - generic [ref=e371]:
+              - generic [ref=e372]: Active
+              - generic [ref=e373]: No due date
+              - generic [ref=e374]: Paid
+              - generic [ref=e375]: 2 records
+            - paragraph [ref=e376]: Confirm fit and claim goals
+            - generic [ref=e379]: SOP 0/11
+            - generic [ref=e380]:
+              - generic [ref=e381]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e382]: Updated 2 days ago
+          - 'button "Codex Tester codex-flow-1773890465059@example.com · Unassigned Records Normal Active No due date Paid 2 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e383] [cursor=pointer]':
+            - generic [ref=e384]:
+              - generic [ref=e385]:
+                - heading "Codex Tester" [level=3] [ref=e386]
+                - paragraph [ref=e387]: codex-flow-1773890465059@example.com · Unassigned
+              - generic [ref=e388]:
+                - generic [ref=e389]: Records
+                - generic [ref=e390]: Normal
+            - generic [ref=e391]:
+              - generic [ref=e392]: Active
+              - generic [ref=e393]: No due date
+              - generic [ref=e394]: Paid
+              - generic [ref=e395]: 2 records
+            - paragraph [ref=e396]: Confirm fit and claim goals
+            - generic [ref=e399]: SOP 0/11
+            - generic [ref=e400]:
+              - generic [ref=e401]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e402]: Updated 2 days ago
+          - 'button "Probe User probe-1773890373774@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e403] [cursor=pointer]':
+            - generic [ref=e404]:
+              - generic [ref=e405]:
+                - heading "Probe User" [level=3] [ref=e406]
+                - paragraph [ref=e407]: probe-1773890373774@example.com · Unassigned
+              - generic [ref=e408]:
+                - generic [ref=e409]: Contract Signed
+                - generic [ref=e410]: Normal
+            - generic [ref=e411]:
+              - generic [ref=e412]: Active
+              - generic [ref=e413]: No due date
+              - generic [ref=e414]: Paid
+            - paragraph [ref=e415]: Confirm fit and claim goals
+            - generic [ref=e418]: SOP 0/11
+            - generic [ref=e419]:
+              - generic [ref=e420]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e421]: Updated 2 days ago
+          - 'button "Codex Tester codex-flow-1773890328705@example.com · Unassigned Records Normal Active No due date Paid 2 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e422] [cursor=pointer]':
+            - generic [ref=e423]:
+              - generic [ref=e424]:
+                - heading "Codex Tester" [level=3] [ref=e425]
+                - paragraph [ref=e426]: codex-flow-1773890328705@example.com · Unassigned
+              - generic [ref=e427]:
+                - generic [ref=e428]: Records
+                - generic [ref=e429]: Normal
+            - generic [ref=e430]:
+              - generic [ref=e431]: Active
+              - generic [ref=e432]: No due date
+              - generic [ref=e433]: Paid
+              - generic [ref=e434]: 2 records
+            - paragraph [ref=e435]: Confirm fit and claim goals
+            - generic [ref=e438]: SOP 0/11
+            - generic [ref=e439]:
+              - generic [ref=e440]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e441]: Updated 2 days ago
+          - 'button "Codex Tester codex-flow-1773890258196@example.com · Unassigned Records Normal Active No due date Paid 2 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e442] [cursor=pointer]':
+            - generic [ref=e443]:
+              - generic [ref=e444]:
+                - heading "Codex Tester" [level=3] [ref=e445]
+                - paragraph [ref=e446]: codex-flow-1773890258196@example.com · Unassigned
+              - generic [ref=e447]:
+                - generic [ref=e448]: Records
+                - generic [ref=e449]: Normal
+            - generic [ref=e450]:
+              - generic [ref=e451]: Active
+              - generic [ref=e452]: No due date
+              - generic [ref=e453]: Paid
+              - generic [ref=e454]: 2 records
+            - paragraph [ref=e455]: Confirm fit and claim goals
+            - generic [ref=e458]: SOP 0/11
+            - generic [ref=e459]:
+              - generic [ref=e460]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e461]: Updated 2 days ago
+          - 'button "Hold Veteran audit-hold-1773890117402@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e462] [cursor=pointer]':
+            - generic [ref=e463]:
+              - generic [ref=e464]:
+                - heading "Hold Veteran" [level=3] [ref=e465]
+                - paragraph [ref=e466]: audit-hold-1773890117402@example.com · Unassigned
+              - generic [ref=e467]:
+                - generic [ref=e468]: Records
+                - generic [ref=e469]: Normal
+            - generic [ref=e470]:
+              - generic [ref=e471]: Active
+              - generic [ref=e472]: No due date
+              - generic [ref=e473]: Paid
+              - generic [ref=e474]: 4 records
+            - paragraph [ref=e475]: Confirm fit and claim goals
+            - generic [ref=e478]: SOP 0/11
+            - generic [ref=e479]:
+              - generic [ref=e480]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e481]: Updated 2 days ago
+          - 'button "Decision Veteran audit-stage8_decision-1773890117402@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e482] [cursor=pointer]':
+            - generic [ref=e483]:
+              - generic [ref=e484]:
+                - heading "Decision Veteran" [level=3] [ref=e485]
+                - paragraph [ref=e486]: audit-stage8_decision-1773890117402@example.com · Unassigned
+              - generic [ref=e487]:
+                - generic [ref=e488]: Records
+                - generic [ref=e489]: Normal
+            - generic [ref=e490]:
+              - generic [ref=e491]: Active
+              - generic [ref=e492]: No due date
+              - generic [ref=e493]: Paid
+              - generic [ref=e494]: 4 records
+            - paragraph [ref=e495]: Confirm fit and claim goals
+            - generic [ref=e498]: SOP 0/11
+            - generic [ref=e499]:
+              - generic [ref=e500]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e501]: Updated 2 days ago
+          - 'button "Final Veteran audit-stage7_final-1773890117402@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e502] [cursor=pointer]':
+            - generic [ref=e503]:
+              - generic [ref=e504]:
+                - heading "Final Veteran" [level=3] [ref=e505]
+                - paragraph [ref=e506]: audit-stage7_final-1773890117402@example.com · Unassigned
+              - generic [ref=e507]:
+                - generic [ref=e508]: Records
+                - generic [ref=e509]: Normal
+            - generic [ref=e510]:
+              - generic [ref=e511]: Active
+              - generic [ref=e512]: No due date
+              - generic [ref=e513]: Paid
+              - generic [ref=e514]: 4 records
+            - paragraph [ref=e515]: Confirm fit and claim goals
+            - generic [ref=e518]: SOP 0/11
+            - generic [ref=e519]:
+              - generic [ref=e520]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e521]: Updated 2 days ago
+          - 'button "Provider Veteran audit-stage6_provider-1773890117402@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e522] [cursor=pointer]':
+            - generic [ref=e523]:
+              - generic [ref=e524]:
+                - heading "Provider Veteran" [level=3] [ref=e525]
+                - paragraph [ref=e526]: audit-stage6_provider-1773890117402@example.com · Unassigned
+              - generic [ref=e527]:
+                - generic [ref=e528]: Records
+                - generic [ref=e529]: Normal
+            - generic [ref=e530]:
+              - generic [ref=e531]: Active
+              - generic [ref=e532]: No due date
+              - generic [ref=e533]: Paid
+              - generic [ref=e534]: 4 records
+            - paragraph [ref=e535]: Confirm fit and claim goals
+            - generic [ref=e538]: SOP 0/11
+            - generic [ref=e539]:
+              - generic [ref=e540]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e541]: Updated 2 days ago
+          - 'button "Medical Veteran audit-stage5_medical-1773890117402@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e542] [cursor=pointer]':
+            - generic [ref=e543]:
+              - generic [ref=e544]:
+                - heading "Medical Veteran" [level=3] [ref=e545]
+                - paragraph [ref=e546]: audit-stage5_medical-1773890117402@example.com · Unassigned
+              - generic [ref=e547]:
+                - generic [ref=e548]: Records
+                - generic [ref=e549]: Normal
+            - generic [ref=e550]:
+              - generic [ref=e551]: Active
+              - generic [ref=e552]: No due date
+              - generic [ref=e553]: Paid
+              - generic [ref=e554]: 4 records
+            - paragraph [ref=e555]: Confirm fit and claim goals
+            - generic [ref=e558]: SOP 0/11
+            - generic [ref=e559]:
+              - generic [ref=e560]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e561]: Updated 2 days ago
+          - 'button "Review Veteran audit-stage4_review-1773890117402@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e562] [cursor=pointer]':
+            - generic [ref=e563]:
+              - generic [ref=e564]:
+                - heading "Review Veteran" [level=3] [ref=e565]
+                - paragraph [ref=e566]: audit-stage4_review-1773890117402@example.com · Unassigned
+              - generic [ref=e567]:
+                - generic [ref=e568]: Records
+                - generic [ref=e569]: Normal
+            - generic [ref=e570]:
+              - generic [ref=e571]: Active
+              - generic [ref=e572]: No due date
+              - generic [ref=e573]: Paid
+              - generic [ref=e574]: 4 records
+            - paragraph [ref=e575]: Confirm fit and claim goals
+            - generic [ref=e578]: SOP 0/11
+            - generic [ref=e579]:
+              - generic [ref=e580]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e581]: Updated 2 days ago
+          - 'button "Ready Veteran audit-stage3_ready-1773890117402@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e582] [cursor=pointer]':
+            - generic [ref=e583]:
+              - generic [ref=e584]:
+                - heading "Ready Veteran" [level=3] [ref=e585]
+                - paragraph [ref=e586]: audit-stage3_ready-1773890117402@example.com · Unassigned
+              - generic [ref=e587]:
+                - generic [ref=e588]: Records
+                - generic [ref=e589]: Normal
+            - generic [ref=e590]:
+              - generic [ref=e591]: Active
+              - generic [ref=e592]: No due date
+              - generic [ref=e593]: Paid
+              - generic [ref=e594]: 4 records
+            - paragraph [ref=e595]: Confirm fit and claim goals
+            - generic [ref=e598]: SOP 0/11
+            - generic [ref=e599]:
+              - generic [ref=e600]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e601]: Updated 2 days ago
+          - 'button "Records Veteran audit-stage2_records-1773890117402@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e602] [cursor=pointer]':
+            - generic [ref=e603]:
+              - generic [ref=e604]:
+                - heading "Records Veteran" [level=3] [ref=e605]
+                - paragraph [ref=e606]: audit-stage2_records-1773890117402@example.com · Unassigned
+              - generic [ref=e607]:
+                - generic [ref=e608]: Contract Signed
+                - generic [ref=e609]: Normal
+            - generic [ref=e610]:
+              - generic [ref=e611]: Active
+              - generic [ref=e612]: No due date
+              - generic [ref=e613]: Paid
+            - paragraph [ref=e614]: Confirm fit and claim goals
+            - generic [ref=e617]: SOP 0/11
+            - generic [ref=e618]:
+              - generic [ref=e619]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e620]: Updated 2 days ago
+          - 'button "Setup Veteran audit-stage1_setup-1773890117402@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e621] [cursor=pointer]':
+            - generic [ref=e622]:
+              - generic [ref=e623]:
+                - heading "Setup Veteran" [level=3] [ref=e624]
+                - paragraph [ref=e625]: audit-stage1_setup-1773890117402@example.com · Unassigned
+              - generic [ref=e626]:
+                - generic [ref=e627]: Contract Signed
+                - generic [ref=e628]: Normal
+            - generic [ref=e629]:
+              - generic [ref=e630]: Active
+              - generic [ref=e631]: No due date
+              - generic [ref=e632]: Paid
+            - paragraph [ref=e633]: Confirm fit and claim goals
+            - generic [ref=e636]: SOP 0/11
+            - generic [ref=e637]:
+              - generic [ref=e638]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e639]: Updated 2 days ago
+          - 'button "Free Veteran audit-free-1773890117402@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e640] [cursor=pointer]':
+            - generic [ref=e641]:
+              - generic [ref=e642]:
+                - heading "Free Veteran" [level=3] [ref=e643]
+                - paragraph [ref=e644]: audit-free-1773890117402@example.com · Unassigned
+              - generic [ref=e645]:
+                - generic [ref=e646]: Offer
+                - generic [ref=e647]: Normal
+            - generic [ref=e648]:
+              - generic [ref=e649]: Active
+              - generic [ref=e650]: No due date
+            - paragraph [ref=e651]: Confirm fit and claim goals
+            - generic [ref=e654]: SOP 0/11
+            - generic [ref=e655]:
+              - generic [ref=e656]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e657]: Updated 2 days ago
+          - 'button "codex-audit@example.com codex-audit@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e658] [cursor=pointer]':
+            - generic [ref=e659]:
+              - generic [ref=e660]:
+                - heading "codex-audit@example.com" [level=3] [ref=e661]
+                - paragraph [ref=e662]: codex-audit@example.com · Unassigned
+              - generic [ref=e663]:
+                - generic [ref=e664]: Offer
+                - generic [ref=e665]: Normal
+            - generic [ref=e666]:
+              - generic [ref=e667]: Active
+              - generic [ref=e668]: No due date
+            - paragraph [ref=e669]: Confirm fit and claim goals
+            - generic [ref=e672]: SOP 0/11
+            - generic [ref=e673]:
+              - generic [ref=e674]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e675]: Updated 2 days ago
+          - 'button "Codex Intake codex-intake-1773886454728@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e676] [cursor=pointer]':
+            - generic [ref=e677]:
+              - generic [ref=e678]:
+                - heading "Codex Intake" [level=3] [ref=e679]
+                - paragraph [ref=e680]: codex-intake-1773886454728@example.com · Unassigned
+              - generic [ref=e681]:
+                - generic [ref=e682]: Records
+                - generic [ref=e683]: Normal
+            - generic [ref=e684]:
+              - generic [ref=e685]: Active
+              - generic [ref=e686]: No due date
+              - generic [ref=e687]: Paid
+              - generic [ref=e688]: 4 records
+            - paragraph [ref=e689]: Confirm fit and claim goals
+            - generic [ref=e692]: SOP 0/11
+            - generic [ref=e693]:
+              - generic [ref=e694]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e695]: Updated 2 days ago
+          - 'button "Alex Veteran agreement-check-1773864360699@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e696] [cursor=pointer]':
+            - generic [ref=e697]:
+              - generic [ref=e698]:
+                - heading "Alex Veteran" [level=3] [ref=e699]
+                - paragraph [ref=e700]: agreement-check-1773864360699@example.com · Unassigned
+              - generic [ref=e701]:
+                - generic [ref=e702]: Contract Signed
+                - generic [ref=e703]: Normal
+            - generic [ref=e704]:
+              - generic [ref=e705]: Active
+              - generic [ref=e706]: No due date
+              - generic [ref=e707]: Paid
+            - paragraph [ref=e708]: Confirm fit and claim goals
+            - generic [ref=e711]: SOP 0/11
+            - generic [ref=e712]:
+              - generic [ref=e713]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e714]: Updated 2 days ago
+          - 'button "Alex Veteran agreement-debug-1773864243475@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e715] [cursor=pointer]':
+            - generic [ref=e716]:
+              - generic [ref=e717]:
+                - heading "Alex Veteran" [level=3] [ref=e718]
+                - paragraph [ref=e719]: agreement-debug-1773864243475@example.com · Unassigned
+              - generic [ref=e720]:
+                - generic [ref=e721]: Contract Signed
+                - generic [ref=e722]: Normal
+            - generic [ref=e723]:
+              - generic [ref=e724]: Active
+              - generic [ref=e725]: No due date
+              - generic [ref=e726]: Paid
+            - paragraph [ref=e727]: Confirm fit and claim goals
+            - generic [ref=e730]: SOP 0/11
+            - generic [ref=e731]:
+              - generic [ref=e732]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e733]: Updated 2 days ago
+          - 'button "Alex Veteran agreement-check-1773864217252@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e734] [cursor=pointer]':
+            - generic [ref=e735]:
+              - generic [ref=e736]:
+                - heading "Alex Veteran" [level=3] [ref=e737]
+                - paragraph [ref=e738]: agreement-check-1773864217252@example.com · Unassigned
+              - generic [ref=e739]:
+                - generic [ref=e740]: Contract Signed
+                - generic [ref=e741]: Normal
+            - generic [ref=e742]:
+              - generic [ref=e743]: Active
+              - generic [ref=e744]: No due date
+              - generic [ref=e745]: Paid
+            - paragraph [ref=e746]: Confirm fit and claim goals
+            - generic [ref=e749]: SOP 0/11
+            - generic [ref=e750]:
+              - generic [ref=e751]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e752]: Updated 2 days ago
+          - 'button "Alex Veteran agreement-check-1773864176533@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e753] [cursor=pointer]':
+            - generic [ref=e754]:
+              - generic [ref=e755]:
+                - heading "Alex Veteran" [level=3] [ref=e756]
+                - paragraph [ref=e757]: agreement-check-1773864176533@example.com · Unassigned
+              - generic [ref=e758]:
+                - generic [ref=e759]: Contract Signed
+                - generic [ref=e760]: Normal
+            - generic [ref=e761]:
+              - generic [ref=e762]: Active
+              - generic [ref=e763]: No due date
+              - generic [ref=e764]: Paid
+            - paragraph [ref=e765]: Confirm fit and claim goals
+            - generic [ref=e768]: SOP 0/11
+            - generic [ref=e769]:
+              - generic [ref=e770]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e771]: Updated 2 days ago
+          - 'button "Casey Veteran support-check-1773864175093@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e772] [cursor=pointer]':
+            - generic [ref=e773]:
+              - generic [ref=e774]:
+                - heading "Casey Veteran" [level=3] [ref=e775]
+                - paragraph [ref=e776]: support-check-1773864175093@example.com · Unassigned
+              - generic [ref=e777]:
+                - generic [ref=e778]: Offer
+                - generic [ref=e779]: Normal
+            - generic [ref=e780]:
+              - generic [ref=e781]: Active
+              - generic [ref=e782]: No due date
+            - paragraph [ref=e783]: Confirm fit and claim goals
+            - generic [ref=e786]: SOP 0/11
+            - generic [ref=e787]:
+              - generic [ref=e788]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e789]: Updated 2 days ago
+          - 'button "Alex Veteran agreement-test-1773864050951@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e790] [cursor=pointer]':
+            - generic [ref=e791]:
+              - generic [ref=e792]:
+                - heading "Alex Veteran" [level=3] [ref=e793]
+                - paragraph [ref=e794]: agreement-test-1773864050951@example.com · Unassigned
+              - generic [ref=e795]:
+                - generic [ref=e796]: Contract Signed
+                - generic [ref=e797]: Normal
+            - generic [ref=e798]:
+              - generic [ref=e799]: Active
+              - generic [ref=e800]: No due date
+              - generic [ref=e801]: Paid
+            - paragraph [ref=e802]: Confirm fit and claim goals
+            - generic [ref=e805]: SOP 0/11
+            - generic [ref=e806]:
+              - generic [ref=e807]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e808]: Updated 2 days ago
+          - 'button "Records Veteran audit-stage2_records-1773863257757@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e809] [cursor=pointer]':
+            - generic [ref=e810]:
+              - generic [ref=e811]:
+                - heading "Records Veteran" [level=3] [ref=e812]
+                - paragraph [ref=e813]: audit-stage2_records-1773863257757@example.com · Unassigned
+              - generic [ref=e814]:
+                - generic [ref=e815]: Contract Signed
+                - generic [ref=e816]: Normal
+            - generic [ref=e817]:
+              - generic [ref=e818]: Active
+              - generic [ref=e819]: No due date
+              - generic [ref=e820]: Paid
+            - paragraph [ref=e821]: Confirm fit and claim goals
+            - generic [ref=e824]: SOP 0/11
+            - generic [ref=e825]:
+              - generic [ref=e826]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e827]: Updated 2 days ago
+          - 'button "Hold Veteran audit-hold-1773863257757@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e828] [cursor=pointer]':
+            - generic [ref=e829]:
+              - generic [ref=e830]:
+                - heading "Hold Veteran" [level=3] [ref=e831]
+                - paragraph [ref=e832]: audit-hold-1773863257757@example.com · Unassigned
+              - generic [ref=e833]:
+                - generic [ref=e834]: Records
+                - generic [ref=e835]: Normal
+            - generic [ref=e836]:
+              - generic [ref=e837]: Active
+              - generic [ref=e838]: No due date
+              - generic [ref=e839]: Paid
+              - generic [ref=e840]: 4 records
+            - paragraph [ref=e841]: Confirm fit and claim goals
+            - generic [ref=e844]: SOP 0/11
+            - generic [ref=e845]:
+              - generic [ref=e846]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e847]: Updated 2 days ago
+          - 'button "Decision Veteran audit-stage8_decision-1773863257757@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e848] [cursor=pointer]':
+            - generic [ref=e849]:
+              - generic [ref=e850]:
+                - heading "Decision Veteran" [level=3] [ref=e851]
+                - paragraph [ref=e852]: audit-stage8_decision-1773863257757@example.com · Unassigned
+              - generic [ref=e853]:
+                - generic [ref=e854]: Records
+                - generic [ref=e855]: Normal
+            - generic [ref=e856]:
+              - generic [ref=e857]: Active
+              - generic [ref=e858]: No due date
+              - generic [ref=e859]: Paid
+              - generic [ref=e860]: 4 records
+            - paragraph [ref=e861]: Confirm fit and claim goals
+            - generic [ref=e864]: SOP 0/11
+            - generic [ref=e865]:
+              - generic [ref=e866]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e867]: Updated 2 days ago
+          - 'button "Final Veteran audit-stage7_final-1773863257757@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e868] [cursor=pointer]':
+            - generic [ref=e869]:
+              - generic [ref=e870]:
+                - heading "Final Veteran" [level=3] [ref=e871]
+                - paragraph [ref=e872]: audit-stage7_final-1773863257757@example.com · Unassigned
+              - generic [ref=e873]:
+                - generic [ref=e874]: Records
+                - generic [ref=e875]: Normal
+            - generic [ref=e876]:
+              - generic [ref=e877]: Active
+              - generic [ref=e878]: No due date
+              - generic [ref=e879]: Paid
+              - generic [ref=e880]: 4 records
+            - paragraph [ref=e881]: Confirm fit and claim goals
+            - generic [ref=e884]: SOP 0/11
+            - generic [ref=e885]:
+              - generic [ref=e886]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e887]: Updated 2 days ago
+          - 'button "Provider Veteran audit-stage6_provider-1773863257757@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e888] [cursor=pointer]':
+            - generic [ref=e889]:
+              - generic [ref=e890]:
+                - heading "Provider Veteran" [level=3] [ref=e891]
+                - paragraph [ref=e892]: audit-stage6_provider-1773863257757@example.com · Unassigned
+              - generic [ref=e893]:
+                - generic [ref=e894]: Records
+                - generic [ref=e895]: Normal
+            - generic [ref=e896]:
+              - generic [ref=e897]: Active
+              - generic [ref=e898]: No due date
+              - generic [ref=e899]: Paid
+              - generic [ref=e900]: 4 records
+            - paragraph [ref=e901]: Confirm fit and claim goals
+            - generic [ref=e904]: SOP 0/11
+            - generic [ref=e905]:
+              - generic [ref=e906]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e907]: Updated 2 days ago
+          - 'button "Medical Veteran audit-stage5_medical-1773863257757@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e908] [cursor=pointer]':
+            - generic [ref=e909]:
+              - generic [ref=e910]:
+                - heading "Medical Veteran" [level=3] [ref=e911]
+                - paragraph [ref=e912]: audit-stage5_medical-1773863257757@example.com · Unassigned
+              - generic [ref=e913]:
+                - generic [ref=e914]: Records
+                - generic [ref=e915]: Normal
+            - generic [ref=e916]:
+              - generic [ref=e917]: Active
+              - generic [ref=e918]: No due date
+              - generic [ref=e919]: Paid
+              - generic [ref=e920]: 4 records
+            - paragraph [ref=e921]: Confirm fit and claim goals
+            - generic [ref=e924]: SOP 0/11
+            - generic [ref=e925]:
+              - generic [ref=e926]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e927]: Updated 2 days ago
+          - 'button "Review Veteran audit-stage4_review-1773863257757@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e928] [cursor=pointer]':
+            - generic [ref=e929]:
+              - generic [ref=e930]:
+                - heading "Review Veteran" [level=3] [ref=e931]
+                - paragraph [ref=e932]: audit-stage4_review-1773863257757@example.com · Unassigned
+              - generic [ref=e933]:
+                - generic [ref=e934]: Records
+                - generic [ref=e935]: Normal
+            - generic [ref=e936]:
+              - generic [ref=e937]: Active
+              - generic [ref=e938]: No due date
+              - generic [ref=e939]: Paid
+              - generic [ref=e940]: 4 records
+            - paragraph [ref=e941]: Confirm fit and claim goals
+            - generic [ref=e944]: SOP 0/11
+            - generic [ref=e945]:
+              - generic [ref=e946]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e947]: Updated 2 days ago
+          - 'button "Ready Veteran audit-stage3_ready-1773863257757@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e948] [cursor=pointer]':
+            - generic [ref=e949]:
+              - generic [ref=e950]:
+                - heading "Ready Veteran" [level=3] [ref=e951]
+                - paragraph [ref=e952]: audit-stage3_ready-1773863257757@example.com · Unassigned
+              - generic [ref=e953]:
+                - generic [ref=e954]: Records
+                - generic [ref=e955]: Normal
+            - generic [ref=e956]:
+              - generic [ref=e957]: Active
+              - generic [ref=e958]: No due date
+              - generic [ref=e959]: Paid
+              - generic [ref=e960]: 4 records
+            - paragraph [ref=e961]: Confirm fit and claim goals
+            - generic [ref=e964]: SOP 0/11
+            - generic [ref=e965]:
+              - generic [ref=e966]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e967]: Updated 2 days ago
+          - 'button "Setup Veteran audit-stage1_setup-1773863257757@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e968] [cursor=pointer]':
+            - generic [ref=e969]:
+              - generic [ref=e970]:
+                - heading "Setup Veteran" [level=3] [ref=e971]
+                - paragraph [ref=e972]: audit-stage1_setup-1773863257757@example.com · Unassigned
+              - generic [ref=e973]:
+                - generic [ref=e974]: Contract Signed
+                - generic [ref=e975]: Normal
+            - generic [ref=e976]:
+              - generic [ref=e977]: Active
+              - generic [ref=e978]: No due date
+              - generic [ref=e979]: Paid
+            - paragraph [ref=e980]: Confirm fit and claim goals
+            - generic [ref=e983]: SOP 0/11
+            - generic [ref=e984]:
+              - generic [ref=e985]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e986]: Updated 2 days ago
+          - 'button "Free Veteran audit-free-1773863257757@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e987] [cursor=pointer]':
+            - generic [ref=e988]:
+              - generic [ref=e989]:
+                - heading "Free Veteran" [level=3] [ref=e990]
+                - paragraph [ref=e991]: audit-free-1773863257757@example.com · Unassigned
+              - generic [ref=e992]:
+                - generic [ref=e993]: Offer
+                - generic [ref=e994]: Normal
+            - generic [ref=e995]:
+              - generic [ref=e996]: Active
+              - generic [ref=e997]: No due date
+            - paragraph [ref=e998]: Confirm fit and claim goals
+            - generic [ref=e1001]: SOP 0/11
+            - generic [ref=e1002]:
+              - generic [ref=e1003]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1004]: Updated 2 days ago
+          - 'button "Hold Veteran debug-hold-1773863227467@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1005] [cursor=pointer]':
+            - generic [ref=e1006]:
+              - generic [ref=e1007]:
+                - heading "Hold Veteran" [level=3] [ref=e1008]
+                - paragraph [ref=e1009]: debug-hold-1773863227467@example.com · Unassigned
+              - generic [ref=e1010]:
+                - generic [ref=e1011]: Records
+                - generic [ref=e1012]: Normal
+            - generic [ref=e1013]:
+              - generic [ref=e1014]: Active
+              - generic [ref=e1015]: No due date
+              - generic [ref=e1016]: Paid
+              - generic [ref=e1017]: 4 records
+            - paragraph [ref=e1018]: Confirm fit and claim goals
+            - generic [ref=e1021]: SOP 0/11
+            - generic [ref=e1022]:
+              - generic [ref=e1023]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1024]: Updated 2 days ago
+          - 'button "Final Veteran audit-stage7_final-1773863141875@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1025] [cursor=pointer]':
+            - generic [ref=e1026]:
+              - generic [ref=e1027]:
+                - heading "Final Veteran" [level=3] [ref=e1028]
+                - paragraph [ref=e1029]: audit-stage7_final-1773863141875@example.com · Unassigned
+              - generic [ref=e1030]:
+                - generic [ref=e1031]: Records
+                - generic [ref=e1032]: Normal
+            - generic [ref=e1033]:
+              - generic [ref=e1034]: Active
+              - generic [ref=e1035]: No due date
+              - generic [ref=e1036]: Paid
+              - generic [ref=e1037]: 4 records
+            - paragraph [ref=e1038]: Confirm fit and claim goals
+            - generic [ref=e1041]: SOP 0/11
+            - generic [ref=e1042]:
+              - generic [ref=e1043]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1044]: Updated 2 days ago
+          - 'button "Records Veteran audit-stage2_records-1773863141875@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1045] [cursor=pointer]':
+            - generic [ref=e1046]:
+              - generic [ref=e1047]:
+                - heading "Records Veteran" [level=3] [ref=e1048]
+                - paragraph [ref=e1049]: audit-stage2_records-1773863141875@example.com · Unassigned
+              - generic [ref=e1050]:
+                - generic [ref=e1051]: Contract Signed
+                - generic [ref=e1052]: Normal
+            - generic [ref=e1053]:
+              - generic [ref=e1054]: Active
+              - generic [ref=e1055]: No due date
+              - generic [ref=e1056]: Paid
+            - paragraph [ref=e1057]: Confirm fit and claim goals
+            - generic [ref=e1060]: SOP 0/11
+            - generic [ref=e1061]:
+              - generic [ref=e1062]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1063]: Updated 2 days ago
+          - 'button "Hold Veteran audit-hold-1773863141875@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1064] [cursor=pointer]':
+            - generic [ref=e1065]:
+              - generic [ref=e1066]:
+                - heading "Hold Veteran" [level=3] [ref=e1067]
+                - paragraph [ref=e1068]: audit-hold-1773863141875@example.com · Unassigned
+              - generic [ref=e1069]:
+                - generic [ref=e1070]: Records
+                - generic [ref=e1071]: Normal
+            - generic [ref=e1072]:
+              - generic [ref=e1073]: Active
+              - generic [ref=e1074]: No due date
+              - generic [ref=e1075]: Paid
+              - generic [ref=e1076]: 4 records
+            - paragraph [ref=e1077]: Confirm fit and claim goals
+            - generic [ref=e1080]: SOP 0/11
+            - generic [ref=e1081]:
+              - generic [ref=e1082]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1083]: Updated 2 days ago
+          - 'button "Decision Veteran audit-stage8_decision-1773863141875@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1084] [cursor=pointer]':
+            - generic [ref=e1085]:
+              - generic [ref=e1086]:
+                - heading "Decision Veteran" [level=3] [ref=e1087]
+                - paragraph [ref=e1088]: audit-stage8_decision-1773863141875@example.com · Unassigned
+              - generic [ref=e1089]:
+                - generic [ref=e1090]: Records
+                - generic [ref=e1091]: Normal
+            - generic [ref=e1092]:
+              - generic [ref=e1093]: Active
+              - generic [ref=e1094]: No due date
+              - generic [ref=e1095]: Paid
+              - generic [ref=e1096]: 4 records
+            - paragraph [ref=e1097]: Confirm fit and claim goals
+            - generic [ref=e1100]: SOP 0/11
+            - generic [ref=e1101]:
+              - generic [ref=e1102]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1103]: Updated 2 days ago
+          - 'button "Provider Veteran audit-stage6_provider-1773863141875@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1104] [cursor=pointer]':
+            - generic [ref=e1105]:
+              - generic [ref=e1106]:
+                - heading "Provider Veteran" [level=3] [ref=e1107]
+                - paragraph [ref=e1108]: audit-stage6_provider-1773863141875@example.com · Unassigned
+              - generic [ref=e1109]:
+                - generic [ref=e1110]: Records
+                - generic [ref=e1111]: Normal
+            - generic [ref=e1112]:
+              - generic [ref=e1113]: Active
+              - generic [ref=e1114]: No due date
+              - generic [ref=e1115]: Paid
+              - generic [ref=e1116]: 4 records
+            - paragraph [ref=e1117]: Confirm fit and claim goals
+            - generic [ref=e1120]: SOP 0/11
+            - generic [ref=e1121]:
+              - generic [ref=e1122]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1123]: Updated 2 days ago
+          - 'button "Medical Veteran audit-stage5_medical-1773863141875@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1124] [cursor=pointer]':
+            - generic [ref=e1125]:
+              - generic [ref=e1126]:
+                - heading "Medical Veteran" [level=3] [ref=e1127]
+                - paragraph [ref=e1128]: audit-stage5_medical-1773863141875@example.com · Unassigned
+              - generic [ref=e1129]:
+                - generic [ref=e1130]: Records
+                - generic [ref=e1131]: Normal
+            - generic [ref=e1132]:
+              - generic [ref=e1133]: Active
+              - generic [ref=e1134]: No due date
+              - generic [ref=e1135]: Paid
+              - generic [ref=e1136]: 4 records
+            - paragraph [ref=e1137]: Confirm fit and claim goals
+            - generic [ref=e1140]: SOP 0/11
+            - generic [ref=e1141]:
+              - generic [ref=e1142]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1143]: Updated 2 days ago
+          - 'button "Review Veteran audit-stage4_review-1773863141875@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1144] [cursor=pointer]':
+            - generic [ref=e1145]:
+              - generic [ref=e1146]:
+                - heading "Review Veteran" [level=3] [ref=e1147]
+                - paragraph [ref=e1148]: audit-stage4_review-1773863141875@example.com · Unassigned
+              - generic [ref=e1149]:
+                - generic [ref=e1150]: Records
+                - generic [ref=e1151]: Normal
+            - generic [ref=e1152]:
+              - generic [ref=e1153]: Active
+              - generic [ref=e1154]: No due date
+              - generic [ref=e1155]: Paid
+              - generic [ref=e1156]: 4 records
+            - paragraph [ref=e1157]: Confirm fit and claim goals
+            - generic [ref=e1160]: SOP 0/11
+            - generic [ref=e1161]:
+              - generic [ref=e1162]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1163]: Updated 2 days ago
+          - 'button "Ready Veteran audit-stage3_ready-1773863141875@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1164] [cursor=pointer]':
+            - generic [ref=e1165]:
+              - generic [ref=e1166]:
+                - heading "Ready Veteran" [level=3] [ref=e1167]
+                - paragraph [ref=e1168]: audit-stage3_ready-1773863141875@example.com · Unassigned
+              - generic [ref=e1169]:
+                - generic [ref=e1170]: Records
+                - generic [ref=e1171]: Normal
+            - generic [ref=e1172]:
+              - generic [ref=e1173]: Active
+              - generic [ref=e1174]: No due date
+              - generic [ref=e1175]: Paid
+              - generic [ref=e1176]: 4 records
+            - paragraph [ref=e1177]: Confirm fit and claim goals
+            - generic [ref=e1180]: SOP 0/11
+            - generic [ref=e1181]:
+              - generic [ref=e1182]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1183]: Updated 2 days ago
+          - 'button "Setup Veteran audit-stage1_setup-1773863141875@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1184] [cursor=pointer]':
+            - generic [ref=e1185]:
+              - generic [ref=e1186]:
+                - heading "Setup Veteran" [level=3] [ref=e1187]
+                - paragraph [ref=e1188]: audit-stage1_setup-1773863141875@example.com · Unassigned
+              - generic [ref=e1189]:
+                - generic [ref=e1190]: Contract Signed
+                - generic [ref=e1191]: Normal
+            - generic [ref=e1192]:
+              - generic [ref=e1193]: Active
+              - generic [ref=e1194]: No due date
+              - generic [ref=e1195]: Paid
+            - paragraph [ref=e1196]: Confirm fit and claim goals
+            - generic [ref=e1199]: SOP 0/11
+            - generic [ref=e1200]:
+              - generic [ref=e1201]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1202]: Updated 2 days ago
+          - 'button "Free Veteran audit-free-1773863141875@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1203] [cursor=pointer]':
+            - generic [ref=e1204]:
+              - generic [ref=e1205]:
+                - heading "Free Veteran" [level=3] [ref=e1206]
+                - paragraph [ref=e1207]: audit-free-1773863141875@example.com · Unassigned
+              - generic [ref=e1208]:
+                - generic [ref=e1209]: Offer
+                - generic [ref=e1210]: Normal
+            - generic [ref=e1211]:
+              - generic [ref=e1212]: Active
+              - generic [ref=e1213]: No due date
+            - paragraph [ref=e1214]: Confirm fit and claim goals
+            - generic [ref=e1217]: SOP 0/11
+            - generic [ref=e1218]:
+              - generic [ref=e1219]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1220]: Updated 2 days ago
+          - 'button "Records Veteran audit-stage2_records-1773863081842@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1221] [cursor=pointer]':
+            - generic [ref=e1222]:
+              - generic [ref=e1223]:
+                - heading "Records Veteran" [level=3] [ref=e1224]
+                - paragraph [ref=e1225]: audit-stage2_records-1773863081842@example.com · Unassigned
+              - generic [ref=e1226]:
+                - generic [ref=e1227]: Contract Signed
+                - generic [ref=e1228]: Normal
+            - generic [ref=e1229]:
+              - generic [ref=e1230]: Active
+              - generic [ref=e1231]: No due date
+              - generic [ref=e1232]: Paid
+            - paragraph [ref=e1233]: Confirm fit and claim goals
+            - generic [ref=e1236]: SOP 0/11
+            - generic [ref=e1237]:
+              - generic [ref=e1238]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1239]: Updated 2 days ago
+          - 'button "Hold Veteran audit-hold-1773863081842@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1240] [cursor=pointer]':
+            - generic [ref=e1241]:
+              - generic [ref=e1242]:
+                - heading "Hold Veteran" [level=3] [ref=e1243]
+                - paragraph [ref=e1244]: audit-hold-1773863081842@example.com · Unassigned
+              - generic [ref=e1245]:
+                - generic [ref=e1246]: Records
+                - generic [ref=e1247]: Normal
+            - generic [ref=e1248]:
+              - generic [ref=e1249]: Active
+              - generic [ref=e1250]: No due date
+              - generic [ref=e1251]: Paid
+              - generic [ref=e1252]: 4 records
+            - paragraph [ref=e1253]: Confirm fit and claim goals
+            - generic [ref=e1256]: SOP 0/11
+            - generic [ref=e1257]:
+              - generic [ref=e1258]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1259]: Updated 2 days ago
+          - 'button "Decision Veteran audit-stage8_decision-1773863081842@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1260] [cursor=pointer]':
+            - generic [ref=e1261]:
+              - generic [ref=e1262]:
+                - heading "Decision Veteran" [level=3] [ref=e1263]
+                - paragraph [ref=e1264]: audit-stage8_decision-1773863081842@example.com · Unassigned
+              - generic [ref=e1265]:
+                - generic [ref=e1266]: Records
+                - generic [ref=e1267]: Normal
+            - generic [ref=e1268]:
+              - generic [ref=e1269]: Active
+              - generic [ref=e1270]: No due date
+              - generic [ref=e1271]: Paid
+              - generic [ref=e1272]: 4 records
+            - paragraph [ref=e1273]: Confirm fit and claim goals
+            - generic [ref=e1276]: SOP 0/11
+            - generic [ref=e1277]:
+              - generic [ref=e1278]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1279]: Updated 2 days ago
+          - 'button "Final Veteran audit-stage7_final-1773863081842@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1280] [cursor=pointer]':
+            - generic [ref=e1281]:
+              - generic [ref=e1282]:
+                - heading "Final Veteran" [level=3] [ref=e1283]
+                - paragraph [ref=e1284]: audit-stage7_final-1773863081842@example.com · Unassigned
+              - generic [ref=e1285]:
+                - generic [ref=e1286]: Records
+                - generic [ref=e1287]: Normal
+            - generic [ref=e1288]:
+              - generic [ref=e1289]: Active
+              - generic [ref=e1290]: No due date
+              - generic [ref=e1291]: Paid
+              - generic [ref=e1292]: 4 records
+            - paragraph [ref=e1293]: Confirm fit and claim goals
+            - generic [ref=e1296]: SOP 0/11
+            - generic [ref=e1297]:
+              - generic [ref=e1298]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1299]: Updated 2 days ago
+          - 'button "Provider Veteran audit-stage6_provider-1773863081842@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1300] [cursor=pointer]':
+            - generic [ref=e1301]:
+              - generic [ref=e1302]:
+                - heading "Provider Veteran" [level=3] [ref=e1303]
+                - paragraph [ref=e1304]: audit-stage6_provider-1773863081842@example.com · Unassigned
+              - generic [ref=e1305]:
+                - generic [ref=e1306]: Records
+                - generic [ref=e1307]: Normal
+            - generic [ref=e1308]:
+              - generic [ref=e1309]: Active
+              - generic [ref=e1310]: No due date
+              - generic [ref=e1311]: Paid
+              - generic [ref=e1312]: 4 records
+            - paragraph [ref=e1313]: Confirm fit and claim goals
+            - generic [ref=e1316]: SOP 0/11
+            - generic [ref=e1317]:
+              - generic [ref=e1318]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1319]: Updated 2 days ago
+          - 'button "Medical Veteran audit-stage5_medical-1773863081842@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1320] [cursor=pointer]':
+            - generic [ref=e1321]:
+              - generic [ref=e1322]:
+                - heading "Medical Veteran" [level=3] [ref=e1323]
+                - paragraph [ref=e1324]: audit-stage5_medical-1773863081842@example.com · Unassigned
+              - generic [ref=e1325]:
+                - generic [ref=e1326]: Records
+                - generic [ref=e1327]: Normal
+            - generic [ref=e1328]:
+              - generic [ref=e1329]: Active
+              - generic [ref=e1330]: No due date
+              - generic [ref=e1331]: Paid
+              - generic [ref=e1332]: 4 records
+            - paragraph [ref=e1333]: Confirm fit and claim goals
+            - generic [ref=e1336]: SOP 0/11
+            - generic [ref=e1337]:
+              - generic [ref=e1338]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1339]: Updated 2 days ago
+          - 'button "Review Veteran audit-stage4_review-1773863081842@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1340] [cursor=pointer]':
+            - generic [ref=e1341]:
+              - generic [ref=e1342]:
+                - heading "Review Veteran" [level=3] [ref=e1343]
+                - paragraph [ref=e1344]: audit-stage4_review-1773863081842@example.com · Unassigned
+              - generic [ref=e1345]:
+                - generic [ref=e1346]: Records
+                - generic [ref=e1347]: Normal
+            - generic [ref=e1348]:
+              - generic [ref=e1349]: Active
+              - generic [ref=e1350]: No due date
+              - generic [ref=e1351]: Paid
+              - generic [ref=e1352]: 4 records
+            - paragraph [ref=e1353]: Confirm fit and claim goals
+            - generic [ref=e1356]: SOP 0/11
+            - generic [ref=e1357]:
+              - generic [ref=e1358]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1359]: Updated 2 days ago
+          - 'button "Ready Veteran audit-stage3_ready-1773863081842@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1360] [cursor=pointer]':
+            - generic [ref=e1361]:
+              - generic [ref=e1362]:
+                - heading "Ready Veteran" [level=3] [ref=e1363]
+                - paragraph [ref=e1364]: audit-stage3_ready-1773863081842@example.com · Unassigned
+              - generic [ref=e1365]:
+                - generic [ref=e1366]: Records
+                - generic [ref=e1367]: Normal
+            - generic [ref=e1368]:
+              - generic [ref=e1369]: Active
+              - generic [ref=e1370]: No due date
+              - generic [ref=e1371]: Paid
+              - generic [ref=e1372]: 4 records
+            - paragraph [ref=e1373]: Confirm fit and claim goals
+            - generic [ref=e1376]: SOP 0/11
+            - generic [ref=e1377]:
+              - generic [ref=e1378]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1379]: Updated 2 days ago
+          - 'button "Setup Veteran audit-stage1_setup-1773863081842@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1380] [cursor=pointer]':
+            - generic [ref=e1381]:
+              - generic [ref=e1382]:
+                - heading "Setup Veteran" [level=3] [ref=e1383]
+                - paragraph [ref=e1384]: audit-stage1_setup-1773863081842@example.com · Unassigned
+              - generic [ref=e1385]:
+                - generic [ref=e1386]: Contract Signed
+                - generic [ref=e1387]: Normal
+            - generic [ref=e1388]:
+              - generic [ref=e1389]: Active
+              - generic [ref=e1390]: No due date
+              - generic [ref=e1391]: Paid
+            - paragraph [ref=e1392]: Confirm fit and claim goals
+            - generic [ref=e1395]: SOP 0/11
+            - generic [ref=e1396]:
+              - generic [ref=e1397]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1398]: Updated 2 days ago
+          - 'button "Free Veteran audit-free-1773863081842@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1399] [cursor=pointer]':
+            - generic [ref=e1400]:
+              - generic [ref=e1401]:
+                - heading "Free Veteran" [level=3] [ref=e1402]
+                - paragraph [ref=e1403]: audit-free-1773863081842@example.com · Unassigned
+              - generic [ref=e1404]:
+                - generic [ref=e1405]: Offer
+                - generic [ref=e1406]: Normal
+            - generic [ref=e1407]:
+              - generic [ref=e1408]: Active
+              - generic [ref=e1409]: No due date
+            - paragraph [ref=e1410]: Confirm fit and claim goals
+            - generic [ref=e1413]: SOP 0/11
+            - generic [ref=e1414]:
+              - generic [ref=e1415]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1416]: Updated 2 days ago
+          - 'button "Hold Veteran audit-hold-1773863062419@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1417] [cursor=pointer]':
+            - generic [ref=e1418]:
+              - generic [ref=e1419]:
+                - heading "Hold Veteran" [level=3] [ref=e1420]
+                - paragraph [ref=e1421]: audit-hold-1773863062419@example.com · Unassigned
+              - generic [ref=e1422]:
+                - generic [ref=e1423]: Records
+                - generic [ref=e1424]: Normal
+            - generic [ref=e1425]:
+              - generic [ref=e1426]: Active
+              - generic [ref=e1427]: No due date
+              - generic [ref=e1428]: Paid
+              - generic [ref=e1429]: 4 records
+            - paragraph [ref=e1430]: Confirm fit and claim goals
+            - generic [ref=e1433]: SOP 0/11
+            - generic [ref=e1434]:
+              - generic [ref=e1435]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1436]: Updated 2 days ago
+          - 'button "Decision Veteran audit-stage8_decision-1773863062419@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1437] [cursor=pointer]':
+            - generic [ref=e1438]:
+              - generic [ref=e1439]:
+                - heading "Decision Veteran" [level=3] [ref=e1440]
+                - paragraph [ref=e1441]: audit-stage8_decision-1773863062419@example.com · Unassigned
+              - generic [ref=e1442]:
+                - generic [ref=e1443]: Records
+                - generic [ref=e1444]: Normal
+            - generic [ref=e1445]:
+              - generic [ref=e1446]: Active
+              - generic [ref=e1447]: No due date
+              - generic [ref=e1448]: Paid
+              - generic [ref=e1449]: 4 records
+            - paragraph [ref=e1450]: Confirm fit and claim goals
+            - generic [ref=e1453]: SOP 0/11
+            - generic [ref=e1454]:
+              - generic [ref=e1455]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1456]: Updated 2 days ago
+          - 'button "Final Veteran audit-stage7_final-1773863062419@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1457] [cursor=pointer]':
+            - generic [ref=e1458]:
+              - generic [ref=e1459]:
+                - heading "Final Veteran" [level=3] [ref=e1460]
+                - paragraph [ref=e1461]: audit-stage7_final-1773863062419@example.com · Unassigned
+              - generic [ref=e1462]:
+                - generic [ref=e1463]: Records
+                - generic [ref=e1464]: Normal
+            - generic [ref=e1465]:
+              - generic [ref=e1466]: Active
+              - generic [ref=e1467]: No due date
+              - generic [ref=e1468]: Paid
+              - generic [ref=e1469]: 4 records
+            - paragraph [ref=e1470]: Confirm fit and claim goals
+            - generic [ref=e1473]: SOP 0/11
+            - generic [ref=e1474]:
+              - generic [ref=e1475]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1476]: Updated 2 days ago
+          - 'button "Provider Veteran audit-stage6_provider-1773863062419@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1477] [cursor=pointer]':
+            - generic [ref=e1478]:
+              - generic [ref=e1479]:
+                - heading "Provider Veteran" [level=3] [ref=e1480]
+                - paragraph [ref=e1481]: audit-stage6_provider-1773863062419@example.com · Unassigned
+              - generic [ref=e1482]:
+                - generic [ref=e1483]: Records
+                - generic [ref=e1484]: Normal
+            - generic [ref=e1485]:
+              - generic [ref=e1486]: Active
+              - generic [ref=e1487]: No due date
+              - generic [ref=e1488]: Paid
+              - generic [ref=e1489]: 4 records
+            - paragraph [ref=e1490]: Confirm fit and claim goals
+            - generic [ref=e1493]: SOP 0/11
+            - generic [ref=e1494]:
+              - generic [ref=e1495]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1496]: Updated 2 days ago
+          - 'button "Medical Veteran audit-stage5_medical-1773863062419@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1497] [cursor=pointer]':
+            - generic [ref=e1498]:
+              - generic [ref=e1499]:
+                - heading "Medical Veteran" [level=3] [ref=e1500]
+                - paragraph [ref=e1501]: audit-stage5_medical-1773863062419@example.com · Unassigned
+              - generic [ref=e1502]:
+                - generic [ref=e1503]: Records
+                - generic [ref=e1504]: Normal
+            - generic [ref=e1505]:
+              - generic [ref=e1506]: Active
+              - generic [ref=e1507]: No due date
+              - generic [ref=e1508]: Paid
+              - generic [ref=e1509]: 4 records
+            - paragraph [ref=e1510]: Confirm fit and claim goals
+            - generic [ref=e1513]: SOP 0/11
+            - generic [ref=e1514]:
+              - generic [ref=e1515]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1516]: Updated 2 days ago
+          - 'button "Review Veteran audit-stage4_review-1773863062419@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1517] [cursor=pointer]':
+            - generic [ref=e1518]:
+              - generic [ref=e1519]:
+                - heading "Review Veteran" [level=3] [ref=e1520]
+                - paragraph [ref=e1521]: audit-stage4_review-1773863062419@example.com · Unassigned
+              - generic [ref=e1522]:
+                - generic [ref=e1523]: Records
+                - generic [ref=e1524]: Normal
+            - generic [ref=e1525]:
+              - generic [ref=e1526]: Active
+              - generic [ref=e1527]: No due date
+              - generic [ref=e1528]: Paid
+              - generic [ref=e1529]: 4 records
+            - paragraph [ref=e1530]: Confirm fit and claim goals
+            - generic [ref=e1533]: SOP 0/11
+            - generic [ref=e1534]:
+              - generic [ref=e1535]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1536]: Updated 2 days ago
+          - 'button "Ready Veteran audit-stage3_ready-1773863062419@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1537] [cursor=pointer]':
+            - generic [ref=e1538]:
+              - generic [ref=e1539]:
+                - heading "Ready Veteran" [level=3] [ref=e1540]
+                - paragraph [ref=e1541]: audit-stage3_ready-1773863062419@example.com · Unassigned
+              - generic [ref=e1542]:
+                - generic [ref=e1543]: Records
+                - generic [ref=e1544]: Normal
+            - generic [ref=e1545]:
+              - generic [ref=e1546]: Active
+              - generic [ref=e1547]: No due date
+              - generic [ref=e1548]: Paid
+              - generic [ref=e1549]: 4 records
+            - paragraph [ref=e1550]: Confirm fit and claim goals
+            - generic [ref=e1553]: SOP 0/11
+            - generic [ref=e1554]:
+              - generic [ref=e1555]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1556]: Updated 2 days ago
+          - 'button "Records Veteran audit-stage2_records-1773863062419@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1557] [cursor=pointer]':
+            - generic [ref=e1558]:
+              - generic [ref=e1559]:
+                - heading "Records Veteran" [level=3] [ref=e1560]
+                - paragraph [ref=e1561]: audit-stage2_records-1773863062419@example.com · Unassigned
+              - generic [ref=e1562]:
+                - generic [ref=e1563]: Contract Signed
+                - generic [ref=e1564]: Normal
+            - generic [ref=e1565]:
+              - generic [ref=e1566]: Active
+              - generic [ref=e1567]: No due date
+              - generic [ref=e1568]: Paid
+            - paragraph [ref=e1569]: Confirm fit and claim goals
+            - generic [ref=e1572]: SOP 0/11
+            - generic [ref=e1573]:
+              - generic [ref=e1574]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1575]: Updated 2 days ago
+          - 'button "Setup Veteran audit-stage1_setup-1773863062419@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1576] [cursor=pointer]':
+            - generic [ref=e1577]:
+              - generic [ref=e1578]:
+                - heading "Setup Veteran" [level=3] [ref=e1579]
+                - paragraph [ref=e1580]: audit-stage1_setup-1773863062419@example.com · Unassigned
+              - generic [ref=e1581]:
+                - generic [ref=e1582]: Contract Signed
+                - generic [ref=e1583]: Normal
+            - generic [ref=e1584]:
+              - generic [ref=e1585]: Active
+              - generic [ref=e1586]: No due date
+              - generic [ref=e1587]: Paid
+            - paragraph [ref=e1588]: Confirm fit and claim goals
+            - generic [ref=e1591]: SOP 0/11
+            - generic [ref=e1592]:
+              - generic [ref=e1593]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1594]: Updated 2 days ago
+          - 'button "Free Veteran audit-free-1773863062419@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1595] [cursor=pointer]':
+            - generic [ref=e1596]:
+              - generic [ref=e1597]:
+                - heading "Free Veteran" [level=3] [ref=e1598]
+                - paragraph [ref=e1599]: audit-free-1773863062419@example.com · Unassigned
+              - generic [ref=e1600]:
+                - generic [ref=e1601]: Offer
+                - generic [ref=e1602]: Normal
+            - generic [ref=e1603]:
+              - generic [ref=e1604]: Active
+              - generic [ref=e1605]: No due date
+            - paragraph [ref=e1606]: Confirm fit and claim goals
+            - generic [ref=e1609]: SOP 0/11
+            - generic [ref=e1610]:
+              - generic [ref=e1611]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1612]: Updated 2 days ago
+          - 'button "Records Veteran audit-stage2_records-1773863012504@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1613] [cursor=pointer]':
+            - generic [ref=e1614]:
+              - generic [ref=e1615]:
+                - heading "Records Veteran" [level=3] [ref=e1616]
+                - paragraph [ref=e1617]: audit-stage2_records-1773863012504@example.com · Unassigned
+              - generic [ref=e1618]:
+                - generic [ref=e1619]: Contract Signed
+                - generic [ref=e1620]: Normal
+            - generic [ref=e1621]:
+              - generic [ref=e1622]: Active
+              - generic [ref=e1623]: No due date
+              - generic [ref=e1624]: Paid
+            - paragraph [ref=e1625]: Confirm fit and claim goals
+            - generic [ref=e1628]: SOP 0/11
+            - generic [ref=e1629]:
+              - generic [ref=e1630]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1631]: Updated 2 days ago
+          - 'button "Setup Veteran audit-stage1_setup-1773863012504@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1632] [cursor=pointer]':
+            - generic [ref=e1633]:
+              - generic [ref=e1634]:
+                - heading "Setup Veteran" [level=3] [ref=e1635]
+                - paragraph [ref=e1636]: audit-stage1_setup-1773863012504@example.com · Unassigned
+              - generic [ref=e1637]:
+                - generic [ref=e1638]: Contract Signed
+                - generic [ref=e1639]: Normal
+            - generic [ref=e1640]:
+              - generic [ref=e1641]: Active
+              - generic [ref=e1642]: No due date
+              - generic [ref=e1643]: Paid
+            - paragraph [ref=e1644]: Confirm fit and claim goals
+            - generic [ref=e1647]: SOP 0/11
+            - generic [ref=e1648]:
+              - generic [ref=e1649]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1650]: Updated 2 days ago
+          - 'button "Hold Veteran audit-hold-1773863012504@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1651] [cursor=pointer]':
+            - generic [ref=e1652]:
+              - generic [ref=e1653]:
+                - heading "Hold Veteran" [level=3] [ref=e1654]
+                - paragraph [ref=e1655]: audit-hold-1773863012504@example.com · Unassigned
+              - generic [ref=e1656]:
+                - generic [ref=e1657]: Records
+                - generic [ref=e1658]: Normal
+            - generic [ref=e1659]:
+              - generic [ref=e1660]: Active
+              - generic [ref=e1661]: No due date
+              - generic [ref=e1662]: Paid
+              - generic [ref=e1663]: 4 records
+            - paragraph [ref=e1664]: Confirm fit and claim goals
+            - generic [ref=e1667]: SOP 0/11
+            - generic [ref=e1668]:
+              - generic [ref=e1669]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1670]: Updated 2 days ago
+          - 'button "Decision Veteran audit-stage8_decision-1773863012504@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1671] [cursor=pointer]':
+            - generic [ref=e1672]:
+              - generic [ref=e1673]:
+                - heading "Decision Veteran" [level=3] [ref=e1674]
+                - paragraph [ref=e1675]: audit-stage8_decision-1773863012504@example.com · Unassigned
+              - generic [ref=e1676]:
+                - generic [ref=e1677]: Records
+                - generic [ref=e1678]: Normal
+            - generic [ref=e1679]:
+              - generic [ref=e1680]: Active
+              - generic [ref=e1681]: No due date
+              - generic [ref=e1682]: Paid
+              - generic [ref=e1683]: 4 records
+            - paragraph [ref=e1684]: Confirm fit and claim goals
+            - generic [ref=e1687]: SOP 0/11
+            - generic [ref=e1688]:
+              - generic [ref=e1689]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1690]: Updated 2 days ago
+          - 'button "Final Veteran audit-stage7_final-1773863012504@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1691] [cursor=pointer]':
+            - generic [ref=e1692]:
+              - generic [ref=e1693]:
+                - heading "Final Veteran" [level=3] [ref=e1694]
+                - paragraph [ref=e1695]: audit-stage7_final-1773863012504@example.com · Unassigned
+              - generic [ref=e1696]:
+                - generic [ref=e1697]: Records
+                - generic [ref=e1698]: Normal
+            - generic [ref=e1699]:
+              - generic [ref=e1700]: Active
+              - generic [ref=e1701]: No due date
+              - generic [ref=e1702]: Paid
+              - generic [ref=e1703]: 4 records
+            - paragraph [ref=e1704]: Confirm fit and claim goals
+            - generic [ref=e1707]: SOP 0/11
+            - generic [ref=e1708]:
+              - generic [ref=e1709]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1710]: Updated 2 days ago
+          - 'button "Provider Veteran audit-stage6_provider-1773863012504@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1711] [cursor=pointer]':
+            - generic [ref=e1712]:
+              - generic [ref=e1713]:
+                - heading "Provider Veteran" [level=3] [ref=e1714]
+                - paragraph [ref=e1715]: audit-stage6_provider-1773863012504@example.com · Unassigned
+              - generic [ref=e1716]:
+                - generic [ref=e1717]: Records
+                - generic [ref=e1718]: Normal
+            - generic [ref=e1719]:
+              - generic [ref=e1720]: Active
+              - generic [ref=e1721]: No due date
+              - generic [ref=e1722]: Paid
+              - generic [ref=e1723]: 4 records
+            - paragraph [ref=e1724]: Confirm fit and claim goals
+            - generic [ref=e1727]: SOP 0/11
+            - generic [ref=e1728]:
+              - generic [ref=e1729]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1730]: Updated 2 days ago
+          - 'button "Medical Veteran audit-stage5_medical-1773863012504@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1731] [cursor=pointer]':
+            - generic [ref=e1732]:
+              - generic [ref=e1733]:
+                - heading "Medical Veteran" [level=3] [ref=e1734]
+                - paragraph [ref=e1735]: audit-stage5_medical-1773863012504@example.com · Unassigned
+              - generic [ref=e1736]:
+                - generic [ref=e1737]: Records
+                - generic [ref=e1738]: Normal
+            - generic [ref=e1739]:
+              - generic [ref=e1740]: Active
+              - generic [ref=e1741]: No due date
+              - generic [ref=e1742]: Paid
+              - generic [ref=e1743]: 4 records
+            - paragraph [ref=e1744]: Confirm fit and claim goals
+            - generic [ref=e1747]: SOP 0/11
+            - generic [ref=e1748]:
+              - generic [ref=e1749]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1750]: Updated 2 days ago
+          - 'button "Review Veteran audit-stage4_review-1773863012504@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1751] [cursor=pointer]':
+            - generic [ref=e1752]:
+              - generic [ref=e1753]:
+                - heading "Review Veteran" [level=3] [ref=e1754]
+                - paragraph [ref=e1755]: audit-stage4_review-1773863012504@example.com · Unassigned
+              - generic [ref=e1756]:
+                - generic [ref=e1757]: Records
+                - generic [ref=e1758]: Normal
+            - generic [ref=e1759]:
+              - generic [ref=e1760]: Active
+              - generic [ref=e1761]: No due date
+              - generic [ref=e1762]: Paid
+              - generic [ref=e1763]: 4 records
+            - paragraph [ref=e1764]: Confirm fit and claim goals
+            - generic [ref=e1767]: SOP 0/11
+            - generic [ref=e1768]:
+              - generic [ref=e1769]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1770]: Updated 2 days ago
+          - 'button "Ready Veteran audit-stage3_ready-1773863012504@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1771] [cursor=pointer]':
+            - generic [ref=e1772]:
+              - generic [ref=e1773]:
+                - heading "Ready Veteran" [level=3] [ref=e1774]
+                - paragraph [ref=e1775]: audit-stage3_ready-1773863012504@example.com · Unassigned
+              - generic [ref=e1776]:
+                - generic [ref=e1777]: Records
+                - generic [ref=e1778]: Normal
+            - generic [ref=e1779]:
+              - generic [ref=e1780]: Active
+              - generic [ref=e1781]: No due date
+              - generic [ref=e1782]: Paid
+              - generic [ref=e1783]: 4 records
+            - paragraph [ref=e1784]: Confirm fit and claim goals
+            - generic [ref=e1787]: SOP 0/11
+            - generic [ref=e1788]:
+              - generic [ref=e1789]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1790]: Updated 2 days ago
+          - 'button "Free Veteran audit-free-1773863012504@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1791] [cursor=pointer]':
+            - generic [ref=e1792]:
+              - generic [ref=e1793]:
+                - heading "Free Veteran" [level=3] [ref=e1794]
+                - paragraph [ref=e1795]: audit-free-1773863012504@example.com · Unassigned
+              - generic [ref=e1796]:
+                - generic [ref=e1797]: Offer
+                - generic [ref=e1798]: Normal
+            - generic [ref=e1799]:
+              - generic [ref=e1800]: Active
+              - generic [ref=e1801]: No due date
+            - paragraph [ref=e1802]: Confirm fit and claim goals
+            - generic [ref=e1805]: SOP 0/11
+            - generic [ref=e1806]:
+              - generic [ref=e1807]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1808]: Updated 2 days ago
+          - 'button "Ready Veteran debug-stage3proper-1773862982782@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1809] [cursor=pointer]':
+            - generic [ref=e1810]:
+              - generic [ref=e1811]:
+                - heading "Ready Veteran" [level=3] [ref=e1812]
+                - paragraph [ref=e1813]: debug-stage3proper-1773862982782@example.com · Unassigned
+              - generic [ref=e1814]:
+                - generic [ref=e1815]: Records
+                - generic [ref=e1816]: Normal
+            - generic [ref=e1817]:
+              - generic [ref=e1818]: Active
+              - generic [ref=e1819]: No due date
+              - generic [ref=e1820]: Paid
+              - generic [ref=e1821]: 4 records
+            - paragraph [ref=e1822]: Confirm fit and claim goals
+            - generic [ref=e1825]: SOP 0/11
+            - generic [ref=e1826]:
+              - generic [ref=e1827]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1828]: Updated 2 days ago
+          - 'button "Ready Veteran debug-stage3-1773862948963@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1829] [cursor=pointer]':
+            - generic [ref=e1830]:
+              - generic [ref=e1831]:
+                - heading "Ready Veteran" [level=3] [ref=e1832]
+                - paragraph [ref=e1833]: debug-stage3-1773862948963@example.com · Unassigned
+              - generic [ref=e1834]:
+                - generic [ref=e1835]: Records
+                - generic [ref=e1836]: Normal
+            - generic [ref=e1837]:
+              - generic [ref=e1838]: Active
+              - generic [ref=e1839]: No due date
+              - generic [ref=e1840]: Paid
+              - generic [ref=e1841]: 4 records
+            - paragraph [ref=e1842]: Confirm fit and claim goals
+            - generic [ref=e1845]: SOP 0/11
+            - generic [ref=e1846]:
+              - generic [ref=e1847]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1848]: Updated 2 days ago
+          - 'button "Ready Veteran audit-stage3_ready-1773862868739@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1849] [cursor=pointer]':
+            - generic [ref=e1850]:
+              - generic [ref=e1851]:
+                - heading "Ready Veteran" [level=3] [ref=e1852]
+                - paragraph [ref=e1853]: audit-stage3_ready-1773862868739@example.com · Unassigned
+              - generic [ref=e1854]:
+                - generic [ref=e1855]: Records
+                - generic [ref=e1856]: Normal
+            - generic [ref=e1857]:
+              - generic [ref=e1858]: Active
+              - generic [ref=e1859]: No due date
+              - generic [ref=e1860]: Paid
+              - generic [ref=e1861]: 4 records
+            - paragraph [ref=e1862]: Confirm fit and claim goals
+            - generic [ref=e1865]: SOP 0/11
+            - generic [ref=e1866]:
+              - generic [ref=e1867]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1868]: Updated 2 days ago
+          - 'button "Hold Veteran audit-hold-1773862868739@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1869] [cursor=pointer]':
+            - generic [ref=e1870]:
+              - generic [ref=e1871]:
+                - heading "Hold Veteran" [level=3] [ref=e1872]
+                - paragraph [ref=e1873]: audit-hold-1773862868739@example.com · Unassigned
+              - generic [ref=e1874]:
+                - generic [ref=e1875]: Records
+                - generic [ref=e1876]: Normal
+            - generic [ref=e1877]:
+              - generic [ref=e1878]: Active
+              - generic [ref=e1879]: No due date
+              - generic [ref=e1880]: Paid
+              - generic [ref=e1881]: 4 records
+            - paragraph [ref=e1882]: Confirm fit and claim goals
+            - generic [ref=e1885]: SOP 0/11
+            - generic [ref=e1886]:
+              - generic [ref=e1887]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1888]: Updated 2 days ago
+          - 'button "Decision Veteran audit-stage8_decision-1773862868739@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1889] [cursor=pointer]':
+            - generic [ref=e1890]:
+              - generic [ref=e1891]:
+                - heading "Decision Veteran" [level=3] [ref=e1892]
+                - paragraph [ref=e1893]: audit-stage8_decision-1773862868739@example.com · Unassigned
+              - generic [ref=e1894]:
+                - generic [ref=e1895]: Records
+                - generic [ref=e1896]: Normal
+            - generic [ref=e1897]:
+              - generic [ref=e1898]: Active
+              - generic [ref=e1899]: No due date
+              - generic [ref=e1900]: Paid
+              - generic [ref=e1901]: 4 records
+            - paragraph [ref=e1902]: Confirm fit and claim goals
+            - generic [ref=e1905]: SOP 0/11
+            - generic [ref=e1906]:
+              - generic [ref=e1907]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1908]: Updated 2 days ago
+          - 'button "Final Veteran audit-stage7_final-1773862868739@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1909] [cursor=pointer]':
+            - generic [ref=e1910]:
+              - generic [ref=e1911]:
+                - heading "Final Veteran" [level=3] [ref=e1912]
+                - paragraph [ref=e1913]: audit-stage7_final-1773862868739@example.com · Unassigned
+              - generic [ref=e1914]:
+                - generic [ref=e1915]: Records
+                - generic [ref=e1916]: Normal
+            - generic [ref=e1917]:
+              - generic [ref=e1918]: Active
+              - generic [ref=e1919]: No due date
+              - generic [ref=e1920]: Paid
+              - generic [ref=e1921]: 4 records
+            - paragraph [ref=e1922]: Confirm fit and claim goals
+            - generic [ref=e1925]: SOP 0/11
+            - generic [ref=e1926]:
+              - generic [ref=e1927]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1928]: Updated 2 days ago
+          - 'button "Provider Veteran audit-stage6_provider-1773862868739@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1929] [cursor=pointer]':
+            - generic [ref=e1930]:
+              - generic [ref=e1931]:
+                - heading "Provider Veteran" [level=3] [ref=e1932]
+                - paragraph [ref=e1933]: audit-stage6_provider-1773862868739@example.com · Unassigned
+              - generic [ref=e1934]:
+                - generic [ref=e1935]: Records
+                - generic [ref=e1936]: Normal
+            - generic [ref=e1937]:
+              - generic [ref=e1938]: Active
+              - generic [ref=e1939]: No due date
+              - generic [ref=e1940]: Paid
+              - generic [ref=e1941]: 4 records
+            - paragraph [ref=e1942]: Confirm fit and claim goals
+            - generic [ref=e1945]: SOP 0/11
+            - generic [ref=e1946]:
+              - generic [ref=e1947]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1948]: Updated 2 days ago
+          - 'button "Medical Veteran audit-stage5_medical-1773862868739@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1949] [cursor=pointer]':
+            - generic [ref=e1950]:
+              - generic [ref=e1951]:
+                - heading "Medical Veteran" [level=3] [ref=e1952]
+                - paragraph [ref=e1953]: audit-stage5_medical-1773862868739@example.com · Unassigned
+              - generic [ref=e1954]:
+                - generic [ref=e1955]: Records
+                - generic [ref=e1956]: Normal
+            - generic [ref=e1957]:
+              - generic [ref=e1958]: Active
+              - generic [ref=e1959]: No due date
+              - generic [ref=e1960]: Paid
+              - generic [ref=e1961]: 4 records
+            - paragraph [ref=e1962]: Confirm fit and claim goals
+            - generic [ref=e1965]: SOP 0/11
+            - generic [ref=e1966]:
+              - generic [ref=e1967]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1968]: Updated 2 days ago
+          - 'button "Review Veteran audit-stage4_review-1773862868739@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1969] [cursor=pointer]':
+            - generic [ref=e1970]:
+              - generic [ref=e1971]:
+                - heading "Review Veteran" [level=3] [ref=e1972]
+                - paragraph [ref=e1973]: audit-stage4_review-1773862868739@example.com · Unassigned
+              - generic [ref=e1974]:
+                - generic [ref=e1975]: Records
+                - generic [ref=e1976]: Normal
+            - generic [ref=e1977]:
+              - generic [ref=e1978]: Active
+              - generic [ref=e1979]: No due date
+              - generic [ref=e1980]: Paid
+              - generic [ref=e1981]: 4 records
+            - paragraph [ref=e1982]: Confirm fit and claim goals
+            - generic [ref=e1985]: SOP 0/11
+            - generic [ref=e1986]:
+              - generic [ref=e1987]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e1988]: Updated 2 days ago
+          - 'button "Records Veteran audit-stage2_records-1773862868739@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e1989] [cursor=pointer]':
+            - generic [ref=e1990]:
+              - generic [ref=e1991]:
+                - heading "Records Veteran" [level=3] [ref=e1992]
+                - paragraph [ref=e1993]: audit-stage2_records-1773862868739@example.com · Unassigned
+              - generic [ref=e1994]:
+                - generic [ref=e1995]: Contract Signed
+                - generic [ref=e1996]: Normal
+            - generic [ref=e1997]:
+              - generic [ref=e1998]: Active
+              - generic [ref=e1999]: No due date
+              - generic [ref=e2000]: Paid
+            - paragraph [ref=e2001]: Confirm fit and claim goals
+            - generic [ref=e2004]: SOP 0/11
+            - generic [ref=e2005]:
+              - generic [ref=e2006]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2007]: Updated 2 days ago
+          - 'button "Setup Veteran audit-stage1_setup-1773862868739@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2008] [cursor=pointer]':
+            - generic [ref=e2009]:
+              - generic [ref=e2010]:
+                - heading "Setup Veteran" [level=3] [ref=e2011]
+                - paragraph [ref=e2012]: audit-stage1_setup-1773862868739@example.com · Unassigned
+              - generic [ref=e2013]:
+                - generic [ref=e2014]: Contract Signed
+                - generic [ref=e2015]: Normal
+            - generic [ref=e2016]:
+              - generic [ref=e2017]: Active
+              - generic [ref=e2018]: No due date
+              - generic [ref=e2019]: Paid
+            - paragraph [ref=e2020]: Confirm fit and claim goals
+            - generic [ref=e2023]: SOP 0/11
+            - generic [ref=e2024]:
+              - generic [ref=e2025]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2026]: Updated 2 days ago
+          - 'button "Free Veteran audit-free-1773862868739@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2027] [cursor=pointer]':
+            - generic [ref=e2028]:
+              - generic [ref=e2029]:
+                - heading "Free Veteran" [level=3] [ref=e2030]
+                - paragraph [ref=e2031]: audit-free-1773862868739@example.com · Unassigned
+              - generic [ref=e2032]:
+                - generic [ref=e2033]: Offer
+                - generic [ref=e2034]: Normal
+            - generic [ref=e2035]:
+              - generic [ref=e2036]: Active
+              - generic [ref=e2037]: No due date
+            - paragraph [ref=e2038]: Confirm fit and claim goals
+            - generic [ref=e2041]: SOP 0/11
+            - generic [ref=e2042]:
+              - generic [ref=e2043]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2044]: Updated 2 days ago
+          - 'button "Records Veteran audit-stage2_records-1773862691907@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2045] [cursor=pointer]':
+            - generic [ref=e2046]:
+              - generic [ref=e2047]:
+                - heading "Records Veteran" [level=3] [ref=e2048]
+                - paragraph [ref=e2049]: audit-stage2_records-1773862691907@example.com · Unassigned
+              - generic [ref=e2050]:
+                - generic [ref=e2051]: Contract Signed
+                - generic [ref=e2052]: Normal
+            - generic [ref=e2053]:
+              - generic [ref=e2054]: Active
+              - generic [ref=e2055]: No due date
+              - generic [ref=e2056]: Paid
+            - paragraph [ref=e2057]: Confirm fit and claim goals
+            - generic [ref=e2060]: SOP 0/11
+            - generic [ref=e2061]:
+              - generic [ref=e2062]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2063]: Updated 2 days ago
+          - 'button "Hold Veteran audit-hold-1773862691907@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2064] [cursor=pointer]':
+            - generic [ref=e2065]:
+              - generic [ref=e2066]:
+                - heading "Hold Veteran" [level=3] [ref=e2067]
+                - paragraph [ref=e2068]: audit-hold-1773862691907@example.com · Unassigned
+              - generic [ref=e2069]:
+                - generic [ref=e2070]: Records
+                - generic [ref=e2071]: Normal
+            - generic [ref=e2072]:
+              - generic [ref=e2073]: Active
+              - generic [ref=e2074]: No due date
+              - generic [ref=e2075]: Paid
+              - generic [ref=e2076]: 4 records
+            - paragraph [ref=e2077]: Confirm fit and claim goals
+            - generic [ref=e2080]: SOP 0/11
+            - generic [ref=e2081]:
+              - generic [ref=e2082]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2083]: Updated 2 days ago
+          - 'button "Decision Veteran audit-stage8_decision-1773862691907@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2084] [cursor=pointer]':
+            - generic [ref=e2085]:
+              - generic [ref=e2086]:
+                - heading "Decision Veteran" [level=3] [ref=e2087]
+                - paragraph [ref=e2088]: audit-stage8_decision-1773862691907@example.com · Unassigned
+              - generic [ref=e2089]:
+                - generic [ref=e2090]: Records
+                - generic [ref=e2091]: Normal
+            - generic [ref=e2092]:
+              - generic [ref=e2093]: Active
+              - generic [ref=e2094]: No due date
+              - generic [ref=e2095]: Paid
+              - generic [ref=e2096]: 4 records
+            - paragraph [ref=e2097]: Confirm fit and claim goals
+            - generic [ref=e2100]: SOP 0/11
+            - generic [ref=e2101]:
+              - generic [ref=e2102]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2103]: Updated 2 days ago
+          - 'button "Final Veteran audit-stage7_final-1773862691907@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2104] [cursor=pointer]':
+            - generic [ref=e2105]:
+              - generic [ref=e2106]:
+                - heading "Final Veteran" [level=3] [ref=e2107]
+                - paragraph [ref=e2108]: audit-stage7_final-1773862691907@example.com · Unassigned
+              - generic [ref=e2109]:
+                - generic [ref=e2110]: Records
+                - generic [ref=e2111]: Normal
+            - generic [ref=e2112]:
+              - generic [ref=e2113]: Active
+              - generic [ref=e2114]: No due date
+              - generic [ref=e2115]: Paid
+              - generic [ref=e2116]: 4 records
+            - paragraph [ref=e2117]: Confirm fit and claim goals
+            - generic [ref=e2120]: SOP 0/11
+            - generic [ref=e2121]:
+              - generic [ref=e2122]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2123]: Updated 2 days ago
+          - 'button "Provider Veteran audit-stage6_provider-1773862691907@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2124] [cursor=pointer]':
+            - generic [ref=e2125]:
+              - generic [ref=e2126]:
+                - heading "Provider Veteran" [level=3] [ref=e2127]
+                - paragraph [ref=e2128]: audit-stage6_provider-1773862691907@example.com · Unassigned
+              - generic [ref=e2129]:
+                - generic [ref=e2130]: Records
+                - generic [ref=e2131]: Normal
+            - generic [ref=e2132]:
+              - generic [ref=e2133]: Active
+              - generic [ref=e2134]: No due date
+              - generic [ref=e2135]: Paid
+              - generic [ref=e2136]: 4 records
+            - paragraph [ref=e2137]: Confirm fit and claim goals
+            - generic [ref=e2140]: SOP 0/11
+            - generic [ref=e2141]:
+              - generic [ref=e2142]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2143]: Updated 2 days ago
+          - 'button "Medical Veteran audit-stage5_medical-1773862691907@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2144] [cursor=pointer]':
+            - generic [ref=e2145]:
+              - generic [ref=e2146]:
+                - heading "Medical Veteran" [level=3] [ref=e2147]
+                - paragraph [ref=e2148]: audit-stage5_medical-1773862691907@example.com · Unassigned
+              - generic [ref=e2149]:
+                - generic [ref=e2150]: Records
+                - generic [ref=e2151]: Normal
+            - generic [ref=e2152]:
+              - generic [ref=e2153]: Active
+              - generic [ref=e2154]: No due date
+              - generic [ref=e2155]: Paid
+              - generic [ref=e2156]: 4 records
+            - paragraph [ref=e2157]: Confirm fit and claim goals
+            - generic [ref=e2160]: SOP 0/11
+            - generic [ref=e2161]:
+              - generic [ref=e2162]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2163]: Updated 2 days ago
+          - 'button "Review Veteran audit-stage4_review-1773862691907@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2164] [cursor=pointer]':
+            - generic [ref=e2165]:
+              - generic [ref=e2166]:
+                - heading "Review Veteran" [level=3] [ref=e2167]
+                - paragraph [ref=e2168]: audit-stage4_review-1773862691907@example.com · Unassigned
+              - generic [ref=e2169]:
+                - generic [ref=e2170]: Records
+                - generic [ref=e2171]: Normal
+            - generic [ref=e2172]:
+              - generic [ref=e2173]: Active
+              - generic [ref=e2174]: No due date
+              - generic [ref=e2175]: Paid
+              - generic [ref=e2176]: 4 records
+            - paragraph [ref=e2177]: Confirm fit and claim goals
+            - generic [ref=e2180]: SOP 0/11
+            - generic [ref=e2181]:
+              - generic [ref=e2182]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2183]: Updated 2 days ago
+          - 'button "Ready Veteran audit-stage3_ready-1773862691907@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2184] [cursor=pointer]':
+            - generic [ref=e2185]:
+              - generic [ref=e2186]:
+                - heading "Ready Veteran" [level=3] [ref=e2187]
+                - paragraph [ref=e2188]: audit-stage3_ready-1773862691907@example.com · Unassigned
+              - generic [ref=e2189]:
+                - generic [ref=e2190]: Records
+                - generic [ref=e2191]: Normal
+            - generic [ref=e2192]:
+              - generic [ref=e2193]: Active
+              - generic [ref=e2194]: No due date
+              - generic [ref=e2195]: Paid
+              - generic [ref=e2196]: 4 records
+            - paragraph [ref=e2197]: Confirm fit and claim goals
+            - generic [ref=e2200]: SOP 0/11
+            - generic [ref=e2201]:
+              - generic [ref=e2202]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2203]: Updated 2 days ago
+          - 'button "Setup Veteran audit-stage1_setup-1773862691907@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2204] [cursor=pointer]':
+            - generic [ref=e2205]:
+              - generic [ref=e2206]:
+                - heading "Setup Veteran" [level=3] [ref=e2207]
+                - paragraph [ref=e2208]: audit-stage1_setup-1773862691907@example.com · Unassigned
+              - generic [ref=e2209]:
+                - generic [ref=e2210]: Contract Signed
+                - generic [ref=e2211]: Normal
+            - generic [ref=e2212]:
+              - generic [ref=e2213]: Active
+              - generic [ref=e2214]: No due date
+              - generic [ref=e2215]: Paid
+            - paragraph [ref=e2216]: Confirm fit and claim goals
+            - generic [ref=e2219]: SOP 0/11
+            - generic [ref=e2220]:
+              - generic [ref=e2221]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2222]: Updated 2 days ago
+          - 'button "Free Veteran audit-free-1773862691907@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2223] [cursor=pointer]':
+            - generic [ref=e2224]:
+              - generic [ref=e2225]:
+                - heading "Free Veteran" [level=3] [ref=e2226]
+                - paragraph [ref=e2227]: audit-free-1773862691907@example.com · Unassigned
+              - generic [ref=e2228]:
+                - generic [ref=e2229]: Offer
+                - generic [ref=e2230]: Normal
+            - generic [ref=e2231]:
+              - generic [ref=e2232]: Active
+              - generic [ref=e2233]: No due date
+            - paragraph [ref=e2234]: Confirm fit and claim goals
+            - generic [ref=e2237]: SOP 0/11
+            - generic [ref=e2238]:
+              - generic [ref=e2239]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2240]: Updated 2 days ago
+          - 'button "Records Veteran audit-stage2_records-1773862626222@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2241] [cursor=pointer]':
+            - generic [ref=e2242]:
+              - generic [ref=e2243]:
+                - heading "Records Veteran" [level=3] [ref=e2244]
+                - paragraph [ref=e2245]: audit-stage2_records-1773862626222@example.com · Unassigned
+              - generic [ref=e2246]:
+                - generic [ref=e2247]: Contract Signed
+                - generic [ref=e2248]: Normal
+            - generic [ref=e2249]:
+              - generic [ref=e2250]: Active
+              - generic [ref=e2251]: No due date
+              - generic [ref=e2252]: Paid
+            - paragraph [ref=e2253]: Confirm fit and claim goals
+            - generic [ref=e2256]: SOP 0/11
+            - generic [ref=e2257]:
+              - generic [ref=e2258]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2259]: Updated 2 days ago
+          - 'button "Hold Veteran audit-hold-1773862626222@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2260] [cursor=pointer]':
+            - generic [ref=e2261]:
+              - generic [ref=e2262]:
+                - heading "Hold Veteran" [level=3] [ref=e2263]
+                - paragraph [ref=e2264]: audit-hold-1773862626222@example.com · Unassigned
+              - generic [ref=e2265]:
+                - generic [ref=e2266]: Records
+                - generic [ref=e2267]: Normal
+            - generic [ref=e2268]:
+              - generic [ref=e2269]: Active
+              - generic [ref=e2270]: No due date
+              - generic [ref=e2271]: Paid
+              - generic [ref=e2272]: 4 records
+            - paragraph [ref=e2273]: Confirm fit and claim goals
+            - generic [ref=e2276]: SOP 0/11
+            - generic [ref=e2277]:
+              - generic [ref=e2278]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2279]: Updated 2 days ago
+          - 'button "Decision Veteran audit-stage8_decision-1773862626222@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2280] [cursor=pointer]':
+            - generic [ref=e2281]:
+              - generic [ref=e2282]:
+                - heading "Decision Veteran" [level=3] [ref=e2283]
+                - paragraph [ref=e2284]: audit-stage8_decision-1773862626222@example.com · Unassigned
+              - generic [ref=e2285]:
+                - generic [ref=e2286]: Records
+                - generic [ref=e2287]: Normal
+            - generic [ref=e2288]:
+              - generic [ref=e2289]: Active
+              - generic [ref=e2290]: No due date
+              - generic [ref=e2291]: Paid
+              - generic [ref=e2292]: 4 records
+            - paragraph [ref=e2293]: Confirm fit and claim goals
+            - generic [ref=e2296]: SOP 0/11
+            - generic [ref=e2297]:
+              - generic [ref=e2298]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2299]: Updated 2 days ago
+          - 'button "Final Veteran audit-stage7_final-1773862626222@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2300] [cursor=pointer]':
+            - generic [ref=e2301]:
+              - generic [ref=e2302]:
+                - heading "Final Veteran" [level=3] [ref=e2303]
+                - paragraph [ref=e2304]: audit-stage7_final-1773862626222@example.com · Unassigned
+              - generic [ref=e2305]:
+                - generic [ref=e2306]: Records
+                - generic [ref=e2307]: Normal
+            - generic [ref=e2308]:
+              - generic [ref=e2309]: Active
+              - generic [ref=e2310]: No due date
+              - generic [ref=e2311]: Paid
+              - generic [ref=e2312]: 4 records
+            - paragraph [ref=e2313]: Confirm fit and claim goals
+            - generic [ref=e2316]: SOP 0/11
+            - generic [ref=e2317]:
+              - generic [ref=e2318]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2319]: Updated 2 days ago
+          - 'button "Provider Veteran audit-stage6_provider-1773862626222@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2320] [cursor=pointer]':
+            - generic [ref=e2321]:
+              - generic [ref=e2322]:
+                - heading "Provider Veteran" [level=3] [ref=e2323]
+                - paragraph [ref=e2324]: audit-stage6_provider-1773862626222@example.com · Unassigned
+              - generic [ref=e2325]:
+                - generic [ref=e2326]: Records
+                - generic [ref=e2327]: Normal
+            - generic [ref=e2328]:
+              - generic [ref=e2329]: Active
+              - generic [ref=e2330]: No due date
+              - generic [ref=e2331]: Paid
+              - generic [ref=e2332]: 4 records
+            - paragraph [ref=e2333]: Confirm fit and claim goals
+            - generic [ref=e2336]: SOP 0/11
+            - generic [ref=e2337]:
+              - generic [ref=e2338]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2339]: Updated 2 days ago
+          - 'button "Medical Veteran audit-stage5_medical-1773862626222@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2340] [cursor=pointer]':
+            - generic [ref=e2341]:
+              - generic [ref=e2342]:
+                - heading "Medical Veteran" [level=3] [ref=e2343]
+                - paragraph [ref=e2344]: audit-stage5_medical-1773862626222@example.com · Unassigned
+              - generic [ref=e2345]:
+                - generic [ref=e2346]: Records
+                - generic [ref=e2347]: Normal
+            - generic [ref=e2348]:
+              - generic [ref=e2349]: Active
+              - generic [ref=e2350]: No due date
+              - generic [ref=e2351]: Paid
+              - generic [ref=e2352]: 4 records
+            - paragraph [ref=e2353]: Confirm fit and claim goals
+            - generic [ref=e2356]: SOP 0/11
+            - generic [ref=e2357]:
+              - generic [ref=e2358]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2359]: Updated 2 days ago
+          - 'button "Review Veteran audit-stage4_review-1773862626222@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2360] [cursor=pointer]':
+            - generic [ref=e2361]:
+              - generic [ref=e2362]:
+                - heading "Review Veteran" [level=3] [ref=e2363]
+                - paragraph [ref=e2364]: audit-stage4_review-1773862626222@example.com · Unassigned
+              - generic [ref=e2365]:
+                - generic [ref=e2366]: Records
+                - generic [ref=e2367]: Normal
+            - generic [ref=e2368]:
+              - generic [ref=e2369]: Active
+              - generic [ref=e2370]: No due date
+              - generic [ref=e2371]: Paid
+              - generic [ref=e2372]: 4 records
+            - paragraph [ref=e2373]: Confirm fit and claim goals
+            - generic [ref=e2376]: SOP 0/11
+            - generic [ref=e2377]:
+              - generic [ref=e2378]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2379]: Updated 2 days ago
+          - 'button "Ready Veteran audit-stage3_ready-1773862626222@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2380] [cursor=pointer]':
+            - generic [ref=e2381]:
+              - generic [ref=e2382]:
+                - heading "Ready Veteran" [level=3] [ref=e2383]
+                - paragraph [ref=e2384]: audit-stage3_ready-1773862626222@example.com · Unassigned
+              - generic [ref=e2385]:
+                - generic [ref=e2386]: Records
+                - generic [ref=e2387]: Normal
+            - generic [ref=e2388]:
+              - generic [ref=e2389]: Active
+              - generic [ref=e2390]: No due date
+              - generic [ref=e2391]: Paid
+              - generic [ref=e2392]: 4 records
+            - paragraph [ref=e2393]: Confirm fit and claim goals
+            - generic [ref=e2396]: SOP 0/11
+            - generic [ref=e2397]:
+              - generic [ref=e2398]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2399]: Updated 2 days ago
+          - 'button "Setup Veteran audit-stage1_setup-1773862626222@example.com · Unassigned Contract Signed Normal Active No due date Paid Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2400] [cursor=pointer]':
+            - generic [ref=e2401]:
+              - generic [ref=e2402]:
+                - heading "Setup Veteran" [level=3] [ref=e2403]
+                - paragraph [ref=e2404]: audit-stage1_setup-1773862626222@example.com · Unassigned
+              - generic [ref=e2405]:
+                - generic [ref=e2406]: Contract Signed
+                - generic [ref=e2407]: Normal
+            - generic [ref=e2408]:
+              - generic [ref=e2409]: Active
+              - generic [ref=e2410]: No due date
+              - generic [ref=e2411]: Paid
+            - paragraph [ref=e2412]: Confirm fit and claim goals
+            - generic [ref=e2415]: SOP 0/11
+            - generic [ref=e2416]:
+              - generic [ref=e2417]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2418]: Updated 2 days ago
+          - 'button "Free Veteran audit-free-1773862626222@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2419] [cursor=pointer]':
+            - generic [ref=e2420]:
+              - generic [ref=e2421]:
+                - heading "Free Veteran" [level=3] [ref=e2422]
+                - paragraph [ref=e2423]: audit-free-1773862626222@example.com · Unassigned
+              - generic [ref=e2424]:
+                - generic [ref=e2425]: Offer
+                - generic [ref=e2426]: Normal
+            - generic [ref=e2427]:
+              - generic [ref=e2428]: Active
+              - generic [ref=e2429]: No due date
+            - paragraph [ref=e2430]: Confirm fit and claim goals
+            - generic [ref=e2433]: SOP 0/11
+            - generic [ref=e2434]:
+              - generic [ref=e2435]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2436]: Updated 2 days ago
+          - 'button "Paid Veteran codex-paid-1773856310730@example.com · Unassigned Records Normal Active No due date Paid 4 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2437] [cursor=pointer]':
+            - generic [ref=e2438]:
+              - generic [ref=e2439]:
+                - heading "Paid Veteran" [level=3] [ref=e2440]
+                - paragraph [ref=e2441]: codex-paid-1773856310730@example.com · Unassigned
+              - generic [ref=e2442]:
+                - generic [ref=e2443]: Records
+                - generic [ref=e2444]: Normal
+            - generic [ref=e2445]:
+              - generic [ref=e2446]: Active
+              - generic [ref=e2447]: No due date
+              - generic [ref=e2448]: Paid
+              - generic [ref=e2449]: 4 records
+            - paragraph [ref=e2450]: Confirm fit and claim goals
+            - generic [ref=e2453]: SOP 0/11
+            - generic [ref=e2454]:
+              - generic [ref=e2455]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2456]: Updated 2 days ago
+          - 'button "Free Veteran codex-free-1773856310730@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 2 days ago" [ref=e2457] [cursor=pointer]':
+            - generic [ref=e2458]:
+              - generic [ref=e2459]:
+                - heading "Free Veteran" [level=3] [ref=e2460]
+                - paragraph [ref=e2461]: codex-free-1773856310730@example.com · Unassigned
+              - generic [ref=e2462]:
+                - generic [ref=e2463]: Offer
+                - generic [ref=e2464]: Normal
+            - generic [ref=e2465]:
+              - generic [ref=e2466]: Active
+              - generic [ref=e2467]: No due date
+            - paragraph [ref=e2468]: Confirm fit and claim goals
+            - generic [ref=e2471]: SOP 0/11
+            - generic [ref=e2472]:
+              - generic [ref=e2473]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2474]: Updated 2 days ago
+          - 'button "Richard Ducat richardducat@me.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2475] [cursor=pointer]':
+            - generic [ref=e2476]:
+              - generic [ref=e2477]:
+                - heading "Richard Ducat" [level=3] [ref=e2478]
+                - paragraph [ref=e2479]: richardducat@me.com · Unassigned
+              - generic [ref=e2480]:
+                - generic [ref=e2481]: Offer
+                - generic [ref=e2482]: Normal
+            - generic [ref=e2483]:
+              - generic [ref=e2484]: Active
+              - generic [ref=e2485]: No due date
+            - paragraph [ref=e2486]: Confirm fit and claim goals
+            - generic [ref=e2489]: SOP 0/11
+            - generic [ref=e2490]:
+              - generic [ref=e2491]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2492]: Updated 3 days ago
+          - 'button "Taylor Veteran codex-prod-challenge-1773782053@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2493] [cursor=pointer]':
+            - generic [ref=e2494]:
+              - generic [ref=e2495]:
+                - heading "Taylor Veteran" [level=3] [ref=e2496]
+                - paragraph [ref=e2497]: codex-prod-challenge-1773782053@example.com · Unassigned
+              - generic [ref=e2498]:
+                - generic [ref=e2499]: Offer
+                - generic [ref=e2500]: Normal
+            - generic [ref=e2501]:
+              - generic [ref=e2502]: Active
+              - generic [ref=e2503]: No due date
+            - paragraph [ref=e2504]: Confirm fit and claim goals
+            - generic [ref=e2507]: SOP 0/11
+            - generic [ref=e2508]:
+              - generic [ref=e2509]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2510]: Updated 3 days ago
+          - 'button "Morgan Veteran codex-preview-challenge-1773781972@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2511] [cursor=pointer]':
+            - generic [ref=e2512]:
+              - generic [ref=e2513]:
+                - heading "Morgan Veteran" [level=3] [ref=e2514]
+                - paragraph [ref=e2515]: codex-preview-challenge-1773781972@example.com · Unassigned
+              - generic [ref=e2516]:
+                - generic [ref=e2517]: Offer
+                - generic [ref=e2518]: Normal
+            - generic [ref=e2519]:
+              - generic [ref=e2520]: Active
+              - generic [ref=e2521]: No due date
+            - paragraph [ref=e2522]: Confirm fit and claim goals
+            - generic [ref=e2525]: SOP 0/11
+            - generic [ref=e2526]:
+              - generic [ref=e2527]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2528]: Updated 3 days ago
+          - 'button "Jordan Veteran codex-challenge-reset-1773781619@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2529] [cursor=pointer]':
+            - generic [ref=e2530]:
+              - generic [ref=e2531]:
+                - heading "Jordan Veteran" [level=3] [ref=e2532]
+                - paragraph [ref=e2533]: codex-challenge-reset-1773781619@example.com · Unassigned
+              - generic [ref=e2534]:
+                - generic [ref=e2535]: Offer
+                - generic [ref=e2536]: Normal
+            - generic [ref=e2537]:
+              - generic [ref=e2538]: Active
+              - generic [ref=e2539]: No due date
+            - paragraph [ref=e2540]: Confirm fit and claim goals
+            - generic [ref=e2543]: SOP 0/11
+            - generic [ref=e2544]:
+              - generic [ref=e2545]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2546]: Updated 3 days ago
+          - 'button "Codex Preview codex-preview-reset-1773780997@example.com · Unassigned Welcome Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2547] [cursor=pointer]':
+            - generic [ref=e2548]:
+              - generic [ref=e2549]:
+                - heading "Codex Preview" [level=3] [ref=e2550]
+                - paragraph [ref=e2551]: codex-preview-reset-1773780997@example.com · Unassigned
+              - generic [ref=e2552]:
+                - generic [ref=e2553]: Welcome
+                - generic [ref=e2554]: Normal
+            - generic [ref=e2555]:
+              - generic [ref=e2556]: Active
+              - generic [ref=e2557]: No due date
+            - paragraph [ref=e2558]: Confirm fit and claim goals
+            - generic [ref=e2561]: SOP 0/11
+            - generic [ref=e2562]:
+              - generic [ref=e2563]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2564]: Updated 3 days ago
+          - 'button "Reset Test codex-reset-1773780425@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2565] [cursor=pointer]':
+            - generic [ref=e2566]:
+              - generic [ref=e2567]:
+                - heading "Reset Test" [level=3] [ref=e2568]
+                - paragraph [ref=e2569]: codex-reset-1773780425@example.com · Unassigned
+              - generic [ref=e2570]:
+                - generic [ref=e2571]: Offer
+                - generic [ref=e2572]: Normal
+            - generic [ref=e2573]:
+              - generic [ref=e2574]: Active
+              - generic [ref=e2575]: No due date
+            - paragraph [ref=e2576]: Confirm fit and claim goals
+            - generic [ref=e2579]: SOP 0/11
+            - generic [ref=e2580]:
+              - generic [ref=e2581]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2582]: Updated 3 days ago
+          - 'button "Codex Final codex-live3-1773773751@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2583] [cursor=pointer]':
+            - generic [ref=e2584]:
+              - generic [ref=e2585]:
+                - heading "Codex Final" [level=3] [ref=e2586]
+                - paragraph [ref=e2587]: codex-live3-1773773751@example.com · Unassigned
+              - generic [ref=e2588]:
+                - generic [ref=e2589]: Offer
+                - generic [ref=e2590]: Normal
+            - generic [ref=e2591]:
+              - generic [ref=e2592]: Active
+              - generic [ref=e2593]: No due date
+            - paragraph [ref=e2594]: Confirm fit and claim goals
+            - generic [ref=e2597]: SOP 0/11
+            - generic [ref=e2598]:
+              - generic [ref=e2599]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2600]: Updated 3 days ago
+          - 'button "Richard Ducat richducati@gmail.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2601] [cursor=pointer]':
+            - generic [ref=e2602]:
+              - generic [ref=e2603]:
+                - heading "Richard Ducat" [level=3] [ref=e2604]
+                - paragraph [ref=e2605]: richducati@gmail.com · Unassigned
+              - generic [ref=e2606]:
+                - generic [ref=e2607]: Offer
+                - generic [ref=e2608]: Normal
+            - generic [ref=e2609]:
+              - generic [ref=e2610]: Active
+              - generic [ref=e2611]: No due date
+            - paragraph [ref=e2612]: Confirm fit and claim goals
+            - generic [ref=e2615]: SOP 0/11
+            - generic [ref=e2616]:
+              - generic [ref=e2617]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2618]: Updated 3 days ago
+          - 'button "Codex API codex-api-1773773700@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2619] [cursor=pointer]':
+            - generic [ref=e2620]:
+              - generic [ref=e2621]:
+                - heading "Codex API" [level=3] [ref=e2622]
+                - paragraph [ref=e2623]: codex-api-1773773700@example.com · Unassigned
+              - generic [ref=e2624]:
+                - generic [ref=e2625]: Offer
+                - generic [ref=e2626]: Normal
+            - generic [ref=e2627]:
+              - generic [ref=e2628]: Active
+              - generic [ref=e2629]: No due date
+            - paragraph [ref=e2630]: Confirm fit and claim goals
+            - generic [ref=e2633]: SOP 0/11
+            - generic [ref=e2634]:
+              - generic [ref=e2635]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2636]: Updated 3 days ago
+          - 'button "Codex Verify codex-live2-1773772844@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2637] [cursor=pointer]':
+            - generic [ref=e2638]:
+              - generic [ref=e2639]:
+                - heading "Codex Verify" [level=3] [ref=e2640]
+                - paragraph [ref=e2641]: codex-live2-1773772844@example.com · Unassigned
+              - generic [ref=e2642]:
+                - generic [ref=e2643]: Offer
+                - generic [ref=e2644]: Normal
+            - generic [ref=e2645]:
+              - generic [ref=e2646]: Active
+              - generic [ref=e2647]: No due date
+            - paragraph [ref=e2648]: Confirm fit and claim goals
+            - generic [ref=e2651]: SOP 0/11
+            - generic [ref=e2652]:
+              - generic [ref=e2653]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2654]: Updated 3 days ago
+          - 'button "Codex Live codex-live-1773772636@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2655] [cursor=pointer]':
+            - generic [ref=e2656]:
+              - generic [ref=e2657]:
+                - heading "Codex Live" [level=3] [ref=e2658]
+                - paragraph [ref=e2659]: codex-live-1773772636@example.com · Unassigned
+              - generic [ref=e2660]:
+                - generic [ref=e2661]: Offer
+                - generic [ref=e2662]: Normal
+            - generic [ref=e2663]:
+              - generic [ref=e2664]: Active
+              - generic [ref=e2665]: No due date
+            - paragraph [ref=e2666]: Confirm fit and claim goals
+            - generic [ref=e2669]: SOP 0/11
+            - generic [ref=e2670]:
+              - generic [ref=e2671]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2672]: Updated 3 days ago
+          - 'button "Codex Smoke codex-clean-1773772196@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2673] [cursor=pointer]':
+            - generic [ref=e2674]:
+              - generic [ref=e2675]:
+                - heading "Codex Smoke" [level=3] [ref=e2676]
+                - paragraph [ref=e2677]: codex-clean-1773772196@example.com · Unassigned
+              - generic [ref=e2678]:
+                - generic [ref=e2679]: Offer
+                - generic [ref=e2680]: Normal
+            - generic [ref=e2681]:
+              - generic [ref=e2682]: Active
+              - generic [ref=e2683]: No due date
+            - paragraph [ref=e2684]: Confirm fit and claim goals
+            - generic [ref=e2687]: SOP 0/11
+            - generic [ref=e2688]:
+              - generic [ref=e2689]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2690]: Updated 3 days ago
+          - 'button "Codex Tester codex-onboarding-1773768599@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2691] [cursor=pointer]':
+            - generic [ref=e2692]:
+              - generic [ref=e2693]:
+                - heading "Codex Tester" [level=3] [ref=e2694]
+                - paragraph [ref=e2695]: codex-onboarding-1773768599@example.com · Unassigned
+              - generic [ref=e2696]:
+                - generic [ref=e2697]: Offer
+                - generic [ref=e2698]: Normal
+            - generic [ref=e2699]:
+              - generic [ref=e2700]: Active
+              - generic [ref=e2701]: No due date
+            - paragraph [ref=e2702]: Confirm fit and claim goals
+            - generic [ref=e2705]: SOP 0/11
+            - generic [ref=e2706]:
+              - generic [ref=e2707]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2708]: Updated 3 days ago
+          - 'button "Codex Verify codex-verify-1773765279@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2709] [cursor=pointer]':
+            - generic [ref=e2710]:
+              - generic [ref=e2711]:
+                - heading "Codex Verify" [level=3] [ref=e2712]
+                - paragraph [ref=e2713]: codex-verify-1773765279@example.com · Unassigned
+              - generic [ref=e2714]:
+                - generic [ref=e2715]: Offer
+                - generic [ref=e2716]: Normal
+            - generic [ref=e2717]:
+              - generic [ref=e2718]: Active
+              - generic [ref=e2719]: No due date
+            - paragraph [ref=e2720]: Confirm fit and claim goals
+            - generic [ref=e2723]: SOP 0/11
+            - generic [ref=e2724]:
+              - generic [ref=e2725]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2726]: Updated 3 days ago
+          - 'button "Codex Test codex-test@example.com · Unassigned Welcome Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 3 days ago" [ref=e2727] [cursor=pointer]':
+            - generic [ref=e2728]:
+              - generic [ref=e2729]:
+                - heading "Codex Test" [level=3] [ref=e2730]
+                - paragraph [ref=e2731]: codex-test@example.com · Unassigned
+              - generic [ref=e2732]:
+                - generic [ref=e2733]: Welcome
+                - generic [ref=e2734]: Normal
+            - generic [ref=e2735]:
+              - generic [ref=e2736]: Active
+              - generic [ref=e2737]: No due date
+            - paragraph [ref=e2738]: Confirm fit and claim goals
+            - generic [ref=e2741]: SOP 0/11
+            - generic [ref=e2742]:
+              - generic [ref=e2743]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2744]: Updated 3 days ago
+          - 'button "Codex Browser codex-browser-smoke-20260315-2323@example.com · Unassigned Offer Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 5 days ago" [ref=e2745] [cursor=pointer]':
+            - generic [ref=e2746]:
+              - generic [ref=e2747]:
+                - heading "Codex Browser" [level=3] [ref=e2748]
+                - paragraph [ref=e2749]: codex-browser-smoke-20260315-2323@example.com · Unassigned
+              - generic [ref=e2750]:
+                - generic [ref=e2751]: Offer
+                - generic [ref=e2752]: Normal
+            - generic [ref=e2753]:
+              - generic [ref=e2754]: Active
+              - generic [ref=e2755]: No due date
+            - paragraph [ref=e2756]: Confirm fit and claim goals
+            - generic [ref=e2759]: SOP 0/11
+            - generic [ref=e2760]:
+              - generic [ref=e2761]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2762]: Updated 5 days ago
+          - 'button "API Tester Updated api-1773092993@example.com · Unassigned Records Normal Active No due date Paid 1 records Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 11 days ago" [ref=e2763] [cursor=pointer]':
+            - generic [ref=e2764]:
+              - generic [ref=e2765]:
+                - heading "API Tester Updated" [level=3] [ref=e2766]
+                - paragraph [ref=e2767]: api-1773092993@example.com · Unassigned
+              - generic [ref=e2768]:
+                - generic [ref=e2769]: Records
+                - generic [ref=e2770]: Normal
+            - generic [ref=e2771]:
+              - generic [ref=e2772]: Active
+              - generic [ref=e2773]: No due date
+              - generic [ref=e2774]: Paid
+              - generic [ref=e2775]: 1 records
+            - paragraph [ref=e2776]: Confirm fit and claim goals
+            - generic [ref=e2779]: SOP 0/11
+            - generic [ref=e2780]:
+              - generic [ref=e2781]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2782]: Updated 11 days ago
+          - 'button "Redis Direct redis-direct-1773092954255@example.com · Unassigned Welcome Normal Active No due date Confirm fit and claim goals SOP 0/11 Next SOP: Confirm fit and claim goals Updated 11 days ago" [ref=e2783] [cursor=pointer]':
+            - generic [ref=e2784]:
+              - generic [ref=e2785]:
+                - heading "Redis Direct" [level=3] [ref=e2786]
+                - paragraph [ref=e2787]: redis-direct-1773092954255@example.com · Unassigned
+              - generic [ref=e2788]:
+                - generic [ref=e2789]: Welcome
+                - generic [ref=e2790]: Normal
+            - generic [ref=e2791]:
+              - generic [ref=e2792]: Active
+              - generic [ref=e2793]: No due date
+            - paragraph [ref=e2794]: Confirm fit and claim goals
+            - generic [ref=e2797]: SOP 0/11
+            - generic [ref=e2798]:
+              - generic [ref=e2799]: "Next SOP: Confirm fit and claim goals"
+              - generic [ref=e2800]: Updated 11 days ago
+      - complementary [ref=e2801]:
+        - generic [ref=e2802]:
+          - generic [ref=e2803]:
+            - generic [ref=e2804]:
+              - paragraph [ref=e2805]: Customer detail
+              - heading "Richard Ducat" [level=2] [ref=e2806]
+              - paragraph [ref=e2807]: richducat@gmail.com
+            - generic [ref=e2808]:
+              - generic [ref=e2809]: Records
+              - generic [ref=e2810]: Normal
+          - generic [ref=e2811]:
+            - article [ref=e2812]:
+              - generic [ref=e2813]: Next action
+              - heading "No next step captured yet" [level=3] [ref=e2814]
+              - paragraph [ref=e2815]: Every case should have one clear move the team can take next.
+            - article [ref=e2816]:
+              - generic [ref=e2817]: SOP focus
+              - heading "Confirm fit and claim goals" [level=3] [ref=e2818]
+              - paragraph [ref=e2819]: 0/11 steps complete · Collecting, syncing, or organizing medical and military records.
+            - article [ref=e2820]:
+              - generic [ref=e2821]: Case health
+              - heading "Unassigned owner" [level=3] [ref=e2822]
+              - paragraph [ref=e2823]: No due date · Active
+          - generic [ref=e2824]:
+            - article [ref=e2825]:
+              - generic [ref=e2826]: Lead ID
+              - strong [ref=e2827]: "6748611000012019010"
+              - paragraph [ref=e2828]: Created Mar 17, 2026
+            - article [ref=e2829]:
+              - generic [ref=e2830]: Records synced
+              - strong [ref=e2831]: 1/1
+              - paragraph [ref=e2832]: Synced to the TYFYS member file
+          - generic [ref=e2833]:
+            - generic [ref=e2834]: "17727660559"
+            - generic [ref=e2835]: Paid access
+            - generic [ref=e2836]: 60% current rating
+            - generic [ref=e2837]: new
+        - generic [ref=e2838]:
+          - heading "Pipeline controls" [level=3] [ref=e2839]
+          - paragraph [ref=e2840]: Update ownership, stage, deadlines, and blockers so the queue stays accurate for the next person who opens this case.
+          - generic [ref=e2841]:
+            - generic [ref=e2842]:
+              - generic [ref=e2843]: Stage
+              - combobox "Stage" [ref=e2844]:
+                - option "Welcome"
+                - option "Offer"
+                - option "Contract Signed"
+                - option "DD214 / ITF"
+                - option "Records" [selected]
+                - option "Intake"
+                - option "MDBQs"
+                - option "Provider"
+                - option "Evidence Packet"
+                - option "Ready to Submit"
+            - generic [ref=e2845]:
+              - generic [ref=e2846]: Owner
+              - textbox "Owner" [ref=e2847]:
+                - /placeholder: Assign a team owner
+            - generic [ref=e2848]:
+              - generic [ref=e2849]: Priority
+              - combobox "Priority" [ref=e2850]:
+                - option "Low"
+                - option "Normal" [selected]
+                - option "High"
+                - option "Urgent"
+            - generic [ref=e2851]:
+              - generic [ref=e2852]: Status
+              - combobox "Status" [ref=e2853]:
+                - option "Active" [selected]
+                - option "Paused"
+                - option "Closed"
+            - generic [ref=e2854]:
+              - generic [ref=e2855]: Due date
+              - textbox "Due date" [ref=e2856]
+            - generic [ref=e2857]:
+              - generic [ref=e2858]: Last contact
+              - textbox "Last contact" [ref=e2859]
+          - generic [ref=e2860]:
+            - generic [ref=e2861]: Next step
+            - textbox "Next step" [ref=e2862]:
+              - /placeholder: Write one concrete next action for the team.
+          - generic [ref=e2863]:
+            - generic [ref=e2864]:
+              - generic [ref=e2865]: Tags
+              - textbox "Tags" [ref=e2866]:
+                - /placeholder: records, priority, consult
+            - generic [ref=e2867]:
+              - generic [ref=e2868]: Blockers
+              - textbox "Blockers" [ref=e2869]:
+                - /placeholder: One blocker per line
+        - generic [ref=e2870]:
+          - generic [ref=e2871]:
+            - generic [ref=e2872]:
+              - heading "SOP checklist" [level=3] [ref=e2873]
+              - paragraph [ref=e2874]: The current stage is highlighted so the next required task stands out.
+            - generic [ref=e2875]: 0/11 complete
+          - generic [ref=e2876]:
+            - generic [ref=e2877]:
+              - checkbox "Confirm fit and claim goals Offer Open" [ref=e2878]
+              - generic [ref=e2879]:
+                - paragraph [ref=e2880]: Confirm fit and claim goals
+                - paragraph [ref=e2881]: Offer
+              - generic [ref=e2882]: Open
+            - generic [ref=e2883]:
+              - checkbox "Service agreement and deposit confirmed Contract Signed Open" [ref=e2884]
+              - generic [ref=e2885]:
+                - paragraph [ref=e2886]: Service agreement and deposit confirmed
+                - paragraph [ref=e2887]: Contract Signed
+              - generic [ref=e2888]: Open
+            - generic [ref=e2889]:
+              - checkbox "DD-214 verified DD214 / ITF Open" [ref=e2890]
+              - generic [ref=e2891]:
+                - paragraph [ref=e2892]: DD-214 verified
+                - paragraph [ref=e2893]: DD214 / ITF
+              - generic [ref=e2894]: Open
+            - generic [ref=e2895]:
+              - checkbox "Intent to File confirmed DD214 / ITF Open" [ref=e2896]
+              - generic [ref=e2897]:
+                - paragraph [ref=e2898]: Intent to File confirmed
+                - paragraph [ref=e2899]: DD214 / ITF
+              - generic [ref=e2900]: Open
+            - generic [ref=e2901]:
+              - checkbox "Core military and civilian records collected Records Current stage" [ref=e2902]
+              - generic [ref=e2903]:
+                - paragraph [ref=e2904]: Core military and civilian records collected
+                - paragraph [ref=e2905]: Records
+              - generic [ref=e2906]: Current stage
+            - generic [ref=e2907]:
+              - checkbox "Intake and questionnaires complete Intake Open" [ref=e2908]
+              - generic [ref=e2909]:
+                - paragraph [ref=e2910]: Intake and questionnaires complete
+                - paragraph [ref=e2911]: Intake
+              - generic [ref=e2912]: Open
+            - generic [ref=e2913]:
+              - checkbox "Mini-DBQs reviewed for all target conditions MDBQs Open" [ref=e2914]
+              - generic [ref=e2915]:
+                - paragraph [ref=e2916]: Mini-DBQs reviewed for all target conditions
+                - paragraph [ref=e2917]: MDBQs
+              - generic [ref=e2918]: Open
+            - generic [ref=e2919]:
+              - checkbox "Provider appointment booked Provider Open" [ref=e2920]
+              - generic [ref=e2921]:
+                - paragraph [ref=e2922]: Provider appointment booked
+                - paragraph [ref=e2923]: Provider
+              - generic [ref=e2924]: Open
+            - generic [ref=e2925]:
+              - checkbox "Provider reports or DBQs received Provider Open" [ref=e2926]
+              - generic [ref=e2927]:
+                - paragraph [ref=e2928]: Provider reports or DBQs received
+                - paragraph [ref=e2929]: Provider
+              - generic [ref=e2930]: Open
+            - generic [ref=e2931]:
+              - checkbox "Evidence packet assembled Evidence Packet Open" [ref=e2932]
+              - generic [ref=e2933]:
+                - paragraph [ref=e2934]: Evidence packet assembled
+                - paragraph [ref=e2935]: Evidence Packet
+              - generic [ref=e2936]: Open
+            - generic [ref=e2937]:
+              - checkbox "Customer is ready to submit Ready To Submit Open" [ref=e2938]
+              - generic [ref=e2939]:
+                - paragraph [ref=e2940]: Customer is ready to submit
+                - paragraph [ref=e2941]: Ready To Submit
+              - generic [ref=e2942]: Open
+        - generic [ref=e2943]:
+          - generic [ref=e2944]:
+            - heading "Internal notes" [level=3] [ref=e2945]
+            - generic [ref=e2946]: Updated 2 hours ago · Last login 2 days ago
+          - generic [ref=e2947]:
+            - generic [ref=e2948]: Add note
+            - textbox "Add note" [ref=e2949]:
+              - /placeholder: Capture the latest call, blocker, decision, or handoff note.
+          - paragraph [ref=e2952]: No private notes yet for this customer.
+        - button "Save CRM changes" [ref=e2954] [cursor=pointer]

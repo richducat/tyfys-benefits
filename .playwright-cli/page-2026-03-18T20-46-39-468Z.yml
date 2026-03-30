@@ -1,0 +1,251 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - img [ref=e8]
+        - generic [ref=e11]:
+          - heading "TYFYS" [level=1] [ref=e12]
+          - paragraph [ref=e13]: Veteran Claim Workspace
+      - button [ref=e819] [cursor=pointer]:
+        - img [ref=e820]
+    - navigation [ref=e14]:
+      - paragraph [ref=e15]: Main
+      - button "Claim Home" [ref=e16] [cursor=pointer]:
+        - img [ref=e17]
+        - text: Claim Home
+      - button "Care Team" [ref=e19] [cursor=pointer]:
+        - img [ref=e20]
+        - text: Care Team
+        - img [ref=e24]
+      - button "Messages 3" [ref=e27] [cursor=pointer]:
+        - img [ref=e28]
+        - text: Messages
+        - generic [ref=e30]: "3"
+      - button "Records Intake" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - text: Records Intake
+      - paragraph [ref=e35]: Tools
+      - button "Records Vault" [ref=e36] [cursor=pointer]:
+        - img [ref=e37]
+        - text: Records Vault
+      - button "VA Rating Calculator" [ref=e41] [cursor=pointer]:
+        - img [ref=e42]
+        - text: VA Rating Calculator
+      - button "PACT Act Guide" [ref=e44] [cursor=pointer]:
+        - img [ref=e45]
+        - text: PACT Act Guide
+      - button "Medical Opinion Draft" [ref=e47] [cursor=pointer]:
+        - img [ref=e48]
+        - text: Medical Opinion Draft
+        - img [ref=e51]
+      - button "Evidence Checklist" [ref=e54] [cursor=pointer]:
+        - img [ref=e55]
+        - text: Evidence Checklist
+      - button "Support Options" [ref=e59] [cursor=pointer]:
+        - img [ref=e60]
+        - text: Support Options
+      - paragraph [ref=e63]: Guidance
+      - button "Claim Guide" [ref=e64] [cursor=pointer]:
+        - img [ref=e65]
+        - text: Claim Guide
+      - button "Independent Doctor Support" [ref=e68]:
+        - img [ref=e69]
+        - text: Independent Doctor Support
+        - img [ref=e72]
+    - generic [ref=e75]:
+      - generic [ref=e78]: Full Access
+      - paragraph [ref=e79]: "ID: ARM-8821"
+  - generic [ref=e80]:
+    - banner [ref=e81]:
+      - generic [ref=e82]:
+        - button [ref=e823] [cursor=pointer]:
+          - img [ref=e824]
+        - generic [ref=e83]:
+          - paragraph [ref=e84]: Support options
+          - heading "Support Options" [level=2] [ref=e669]
+      - generic [ref=e87]:
+        - button "Log Out" [ref=e88] [cursor=pointer]:
+          - img [ref=e89]
+          - generic [ref=e92]: Log Out
+        - button "Ask Angela" [ref=e93] [cursor=pointer]:
+          - img [ref=e94]
+          - text: Ask Angela
+    - generic [ref=e97]:
+      - button "Next step Open Records Vault Records Review" [ref=e98] [cursor=pointer]:
+        - paragraph [ref=e99]: Next step
+        - paragraph [ref=e100]: Open Records Vault
+        - paragraph [ref=e101]: Records Review
+      - button "Claim Home" [ref=e102] [cursor=pointer]:
+        - img [ref=e105]
+        - paragraph [ref=e107]: Claim Home
+      - button "Records Intake" [ref=e108] [cursor=pointer]:
+        - img [ref=e111]
+        - paragraph [ref=e114]: Records Intake
+      - button "1 Records Vault" [ref=e115] [cursor=pointer]:
+        - generic [ref=e116]:
+          - img [ref=e118]
+          - generic [ref=e123]: "1"
+        - paragraph [ref=e124]: Records Vault
+      - button "3 Messages" [ref=e125] [cursor=pointer]:
+        - generic [ref=e126]:
+          - img [ref=e128]
+          - generic [ref=e130]:
+            - generic [ref=e131]: "3"
+            - img [ref=e132]
+        - paragraph [ref=e135]: Messages
+      - button "Support Options" [active] [ref=e136] [cursor=pointer]:
+        - img [ref=e139]
+        - paragraph [ref=e142]: Support Options
+    - main [ref=e143]:
+      - generic [ref=e671]:
+        - generic [ref=e673]:
+          - heading "Choose Your Access and Service Level" [level=2] [ref=e674]
+          - paragraph [ref=e675]: Start with the app by itself, then add TYFYS hands-on service only if you want it.
+        - generic [ref=e676]:
+          - heading "Average Time to Completion" [level=3] [ref=e677]:
+            - img [ref=e678]
+            - text: Average Time to Completion
+          - generic [ref=e681]:
+            - generic [ref=e683]:
+              - generic [ref=e684]: Self-Filing / VSO
+              - generic [ref=e685]: 12-18 Months
+            - generic [ref=e689]:
+              - generic [ref=e690]: TYFYS Specialist
+              - generic [ref=e691]: 5-8 Months
+        - generic [ref=e694]:
+          - generic [ref=e695]: RECOMMENDED
+          - generic [ref=e696]:
+            - generic [ref=e697]:
+              - heading "TYFYS Full App Access" [level=3] [ref=e698]
+              - paragraph [ref=e699]: Unlock every app feature without adding personalized TYFYS service.
+              - list [ref=e700]:
+                - listitem [ref=e701]:
+                  - img [ref=e702]
+                  - strong [ref=e705]: All app tools unlocked
+                  - text: in one place
+                - listitem [ref=e706]:
+                  - img [ref=e707]
+                  - strong [ref=e710]: Unlimited
+                  - text: Claim Guide and workflow access
+                - listitem [ref=e711]:
+                  - img [ref=e712]
+                  - strong [ref=e715]: Records uploads, vault, messages, and drafts
+                  - text: all unlocked
+                - listitem [ref=e716]:
+                  - img [ref=e717]
+                  - strong [ref=e720]: No one-on-one TYFYS service required
+            - generic [ref=e721]:
+              - paragraph [ref=e722]: $250/mo
+              - button "Unlock Full App Access" [ref=e723] [cursor=pointer]
+              - paragraph [ref=e724]: Personalized service is optional. You can add it below any time.
+        - generic [ref=e725]:
+          - generic [ref=e726]:
+            - generic [ref=e727]:
+              - paragraph [ref=e728]: Hands-on TYFYS service
+              - heading "Choose the service program to request if you want TYFYS personally involved" [level=3] [ref=e729]
+              - paragraph [ref=e730]: These are the updated TYFYS service-agreement prices. The app recommends the best fit from your tracked conditions, and you can keep that selection attached when you request hands-on service.
+            - generic [ref=e731]:
+              - paragraph [ref=e732]: Recommended service track
+              - paragraph [ref=e733]: PTSD and headaches with other conditions
+              - paragraph [ref=e734]: $2,750
+          - generic [ref=e735]:
+            - 'button "Standard: no PTSD or headaches $750 Best fit when your claim does not include PTSD, migraines, or chronic headaches." [ref=e736] [cursor=pointer]':
+              - generic [ref=e737]:
+                - paragraph [ref=e738]: "Standard: no PTSD or headaches"
+                - generic [ref=e739]: $750
+              - paragraph [ref=e740]: Best fit when your claim does not include PTSD, migraines, or chronic headaches.
+            - button "PTSD or headaches plus other conditions $1,750 Best fit when PTSD, migraines, or headaches are part of the file along with other conditions." [ref=e741] [cursor=pointer]:
+              - generic [ref=e742]:
+                - paragraph [ref=e743]: PTSD or headaches plus other conditions
+                - generic [ref=e744]: $1,750
+              - paragraph [ref=e745]: Best fit when PTSD, migraines, or headaches are part of the file along with other conditions.
+            - button "PTSD and headaches with other conditions $2,750 Best fit when both PTSD and headaches are in the file along with additional conditions. Selected Recommended" [ref=e746] [cursor=pointer]:
+              - generic [ref=e747]:
+                - paragraph [ref=e748]: PTSD and headaches with other conditions
+                - generic [ref=e749]: $2,750
+              - paragraph [ref=e750]: Best fit when both PTSD and headaches are in the file along with additional conditions.
+              - generic [ref=e751]:
+                - generic [ref=e752]: Selected
+                - generic [ref=e753]: Recommended
+          - paragraph [ref=e754]:
+            - text: If you stay on free tools or app-only access, non-member hands-on service pricing remains
+            - strong [ref=e755]: $3,500
+            - text: for standard files and
+            - strong [ref=e756]: $5,500
+            - text: for larger multi-claim support.
+        - generic [ref=e757]:
+          - generic [ref=e758]:
+            - paragraph [ref=e759]: Non-member hands-on service
+            - heading "If you want TYFYS to personally handle more of the process" [level=3] [ref=e760]
+          - generic [ref=e761]:
+            - generic [ref=e762]:
+              - generic [ref=e764]: ESSENTIAL
+              - heading "Standard Package" [level=3] [ref=e765]
+              - paragraph [ref=e767]: $3,500
+              - paragraph [ref=e768]: $500 Deposit + Monthly Plan
+              - paragraph [ref=e769]: This is the non-member price if you want hands-on TYFYS service without using the discounted member service pricing above.
+              - list [ref=e770]:
+                - listitem [ref=e771]:
+                  - img [ref=e773]
+                  - generic [ref=e776]:
+                    - text: Includes Up to
+                    - strong [ref=e777]: 3 Claims
+                - listitem [ref=e778]:
+                  - img [ref=e780]
+                  - generic [ref=e783]: Private Doctor Nexus Letter
+                - listitem [ref=e784]:
+                  - img [ref=e786]
+                  - generic [ref=e789]: DBQ Completion
+              - button "Request Hands-On Service" [ref=e790] [cursor=pointer]
+            - generic [ref=e791]:
+              - generic [ref=e793]: MAX VALUE
+              - heading "Multi-Claim Package" [level=3] [ref=e794]
+              - paragraph [ref=e796]: $5,500
+              - paragraph [ref=e797]: $500 Deposit + Monthly Plan
+              - paragraph [ref=e798]: Use this if you want TYFYS involved across a larger file and you are not using the member service pricing above.
+              - list [ref=e799]:
+                - listitem [ref=e800]:
+                  - img [ref=e802]
+                  - generic [ref=e804]:
+                    - text: Includes Up to
+                    - strong [ref=e805]: 7 Claims
+                - listitem [ref=e806]:
+                  - img [ref=e808]
+                  - generic [ref=e811]: Full Body Medical Review
+                - listitem [ref=e812]:
+                  - img [ref=e814]
+                  - generic [ref=e817]: Multiple Nexus Letters
+              - button "Request Hands-On Service" [ref=e818] [cursor=pointer]
+    - generic [ref=e826]:
+      - button "Home" [ref=e827] [cursor=pointer]:
+        - img [ref=e829]
+        - paragraph [ref=e831]: Home
+      - button "Upload" [ref=e832] [cursor=pointer]:
+        - img [ref=e834]
+        - paragraph [ref=e837]: Upload
+      - button "1 Vault" [ref=e838] [cursor=pointer]:
+        - generic [ref=e839]:
+          - img [ref=e840]
+          - generic [ref=e844]: "1"
+        - paragraph [ref=e845]: Vault
+      - button "3 Messages" [ref=e846] [cursor=pointer]:
+        - generic [ref=e847]:
+          - img [ref=e848]
+          - generic [ref=e850]: "3"
+        - paragraph [ref=e851]: Messages
+      - button "Support" [ref=e852] [cursor=pointer]:
+        - img [ref=e854]
+        - paragraph [ref=e857]: Support
+  - generic [ref=e645]:
+    - generic [ref=e646]:
+      - generic [ref=e647]:
+        - img [ref=e650]
+        - generic [ref=e654]:
+          - paragraph [ref=e655]: Angela - TYFYS Guide
+          - paragraph [ref=e656]: Online | Ready to help
+      - button [ref=e657] [cursor=pointer]:
+        - img [ref=e658]
+    - generic [ref=e663]:
+      - textbox "Ask Angela about your claim..." [ref=e664]
+      - button [disabled] [ref=e665]:
+        - img [ref=e666]

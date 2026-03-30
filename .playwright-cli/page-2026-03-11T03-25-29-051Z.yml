@@ -1,0 +1,179 @@
+- generic [ref=e4]:
+  - complementary [ref=e5]:
+    - img [ref=e8]
+    - navigation [ref=e10]:
+      - button "Dashboard" [ref=e11] [cursor=pointer]:
+        - img [ref=e12]
+        - generic [ref=e14]: Dashboard
+      - button "Subjects" [ref=e15] [cursor=pointer]:
+        - img [ref=e16]
+        - generic [ref=e21]: Subjects
+      - button "Messages" [ref=e22] [cursor=pointer]:
+        - img [ref=e23]
+        - generic [ref=e25]: Messages
+      - button "Protocol AI" [ref=e26] [cursor=pointer]:
+        - img [ref=e27]
+        - generic [ref=e30]: Protocol AI
+      - button "Audit" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e36]: Audit
+  - complementary [ref=e37]:
+    - generic [ref=e38]:
+      - paragraph [ref=e39]: Subject navigator
+      - generic [ref=e40]:
+        - img [ref=e41]
+        - textbox "Search subject, arm, or status" [ref=e44]
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - button "1074-A3A-201A Elizabeth Merrill Randomized" [ref=e47] [cursor=pointer]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - paragraph [ref=e50]: 1074-A3A-201A
+              - paragraph [ref=e51]: Elizabeth Merrill
+            - generic [ref=e52]: Randomized
+        - button "1088-B1C-204F Marcus Thomas Screening" [ref=e54] [cursor=pointer]:
+          - generic [ref=e55]:
+            - generic [ref=e56]:
+              - paragraph [ref=e57]: 1088-B1C-204F
+              - paragraph [ref=e58]: Marcus Thomas
+            - generic [ref=e59]: Screening
+      - generic [ref=e61]:
+        - paragraph [ref=e62]: Subject modules
+        - generic [ref=e63]:
+          - button "General" [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]: General
+            - img [ref=e66]
+          - button "Visits" [ref=e68] [cursor=pointer]:
+            - generic [ref=e69]: Visits
+            - img [ref=e70]
+          - button "Study Logs" [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]: Study Logs
+            - img [ref=e74]
+          - button "Adverse Events" [ref=e76] [cursor=pointer]:
+            - generic [ref=e77]: Adverse Events
+            - img [ref=e78]
+          - button "Medical Conditions" [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]: Medical Conditions
+            - img [ref=e82]
+          - button "Concomitant Medications" [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]: Concomitant Medications
+            - img [ref=e86]
+          - button "Protocol Deviations" [ref=e88] [cursor=pointer]:
+            - generic [ref=e89]: Protocol Deviations
+            - img [ref=e90]
+          - button "Allergies" [ref=e92] [cursor=pointer]:
+            - generic [ref=e93]: Allergies
+            - img [ref=e94]
+          - button "Surgical Conditions" [ref=e96] [cursor=pointer]:
+            - generic [ref=e97]: Surgical Conditions
+            - img [ref=e98]
+          - button "Emergency Contacts" [ref=e100] [cursor=pointer]:
+            - generic [ref=e101]: Emergency Contacts
+            - img [ref=e102]
+          - button "Progress Notes" [ref=e104] [cursor=pointer]:
+            - generic [ref=e105]: Progress Notes
+            - img [ref=e106]
+          - button "eDocs / Labs / Misc" [ref=e108] [cursor=pointer]:
+            - generic [ref=e109]: eDocs / Labs / Misc
+            - img [ref=e110]
+          - button "eDocs Audit Trail" [ref=e112] [cursor=pointer]:
+            - generic [ref=e113]: eDocs Audit Trail
+            - img [ref=e114]
+  - main [ref=e116]:
+    - generic [ref=e117]:
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - paragraph [ref=e120]: 230LE301
+          - paragraph [ref=e122]: V4.0 / eSource 27 Oct 2025
+        - heading "Marcus J Thomas" [level=2] [ref=e123]
+        - paragraph [ref=e124]: "Study arm: Part A (Screening) · Site: OpenDoor Clinical Research LLC"
+      - generic [ref=e125]:
+        - button "Monitor mode on" [ref=e126] [cursor=pointer]:
+          - generic [ref=e127]:
+            - img [ref=e128]
+            - text: Monitor mode on
+        - generic [ref=e131]:
+          - paragraph [ref=e132]: Connected account
+          - paragraph [ref=e133]: Richard Ducat
+        - button "Log out" [ref=e134] [cursor=pointer]:
+          - img [ref=e135]
+    - generic [ref=e139]:
+      - generic [ref=e141]:
+        - heading "Immutable audit trail" [level=3] [ref=e142]
+        - paragraph [ref=e143]: "Every subject action feeds the same ledger: visits, payments, logs, signatures, and notes."
+      - table [ref=e146]:
+        - rowgroup [ref=e147]:
+          - row "Time Actor Subject Action Trace" [ref=e148]:
+            - columnheader "Time" [ref=e149]
+            - columnheader "Actor" [ref=e150]
+            - columnheader "Subject" [ref=e151]
+            - columnheader "Action" [ref=e152]
+            - columnheader "Trace" [ref=e153]
+        - rowgroup [ref=e154]:
+          - row "2026-02-02 08:15:00 Daniel Burch 1074-A3A-201A Screening packet certified and attached to eDocs. AUD-78C1" [ref=e155]:
+            - cell "2026-02-02 08:15:00" [ref=e156]
+            - cell "Daniel Burch" [ref=e157]
+            - cell "1074-A3A-201A" [ref=e158]
+            - cell "Screening packet certified and attached to eDocs." [ref=e159]
+            - cell "AUD-78C1" [ref=e160]
+          - row "2026-02-02 09:02:00 System 1074-A3A-201A Baseline D1 visit window opened for stipend release queue. SYS-5A11" [ref=e161]:
+            - cell "2026-02-02 09:02:00" [ref=e162]
+            - cell "System" [ref=e163]
+            - cell "1074-A3A-201A" [ref=e164]
+            - cell "Baseline D1 visit window opened for stipend release queue." [ref=e165]
+            - cell "SYS-5A11" [ref=e166]
+  - region "Service disclaimer" [ref=e167]:
+    - generic [ref=e168]:
+      - paragraph [ref=e169]:
+        - strong [ref=e170]: "What we do:"
+        - text: We coordinate private medical evidence (DBQs and independent medical opinions) to support veterans' disability claims. We do not provide legal advice, representation, or submit VA claims.
+      - generic [ref=e171]:
+        - link "Services" [ref=e172] [cursor=pointer]:
+          - /url: services.html
+        - link "FAQs" [ref=e173] [cursor=pointer]:
+          - /url: faqs.html
+        - link "How It Works" [ref=e174] [cursor=pointer]:
+          - /url: how-it-works.html
+  - complementary [ref=e175]:
+    - generic [ref=e176]:
+      - generic [ref=e178]:
+        - heading "Subject snapshot" [level=3] [ref=e179]
+        - paragraph [ref=e180]: Live summary tied to the selected workbench subject.
+      - generic [ref=e182]:
+        - generic [ref=e183]:
+          - paragraph [ref=e184]: Current subject
+          - paragraph [ref=e185]: 1088-B1C-204F
+          - paragraph [ref=e186]: Marcus Thomas
+        - generic [ref=e187]:
+          - generic [ref=e188]:
+            - paragraph [ref=e189]: Status
+            - paragraph [ref=e190]: Screening
+          - generic [ref=e191]:
+            - paragraph [ref=e192]: Next visit
+            - paragraph [ref=e193]: 2026-02-18
+          - generic [ref=e194]:
+            - paragraph [ref=e195]: Released
+            - paragraph [ref=e196]: $0
+          - generic [ref=e197]:
+            - paragraph [ref=e198]: Pending payouts
+            - paragraph [ref=e199]: "1"
+    - generic [ref=e200]:
+      - generic [ref=e202]:
+        - heading "Action queue" [level=3] [ref=e203]
+        - paragraph [ref=e204]: Fast-glance blockers for the selected subject.
+      - generic [ref=e206]:
+        - generic [ref=e207]:
+          - img [ref=e208]
+          - generic [ref=e213]:
+            - paragraph [ref=e214]: Visit readiness
+            - paragraph [ref=e215]: Eligibility review is next in line.
+        - generic [ref=e216]:
+          - img [ref=e217]
+          - generic [ref=e221]:
+            - paragraph [ref=e222]: Signature queue
+            - paragraph [ref=e223]: 0 pending document(s).
+        - generic [ref=e224]:
+          - img [ref=e225]
+          - generic [ref=e228]:
+            - paragraph [ref=e229]: Payouts
+            - paragraph [ref=e230]: 0 stipend(s) ready to release.

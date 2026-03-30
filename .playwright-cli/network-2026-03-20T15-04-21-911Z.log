@@ -1,0 +1,3 @@
+[GET] http://localhost:4175/api/crm => [401] Unauthorized
+[POST] http://localhost:4175/api/auth-login => [400] Bad Request
+[GET] http://localhost:4175/api/crm => [200] OK

@@ -1,0 +1,20 @@
+[     482ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8000/api/auth-session:0
+[     482ms] [WARNING] Auth bootstrap skipped: Error: Request failed (404)
+    at Pe (http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:40619)
+    at async http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:45275 @ http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:23
+[  223125ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8000/api/auth-session:0
+[  223126ms] [WARNING] Auth bootstrap skipped: Error: Request failed (404)
+    at Pe (http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:40619)
+    at async http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:45275 @ http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:23
+[  244129ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8000/api/auth-session:0
+[  244130ms] [WARNING] Auth bootstrap skipped: Error: Request failed (404)
+    at Pe (http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:40619)
+    at async http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:45275 @ http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:23
+[  257223ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8000/api/auth-session:0
+[  257223ms] [WARNING] Auth bootstrap skipped: Error: Request failed (404)
+    at Pe (http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:40619)
+    at async http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:45275 @ http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:23
+[  288942ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://127.0.0.1:8000/api/auth-session:0
+[  288942ms] [WARNING] Auth bootstrap skipped: Error: Request failed (404)
+    at Pe (http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:40619)
+    at async http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:24:45275 @ http://127.0.0.1:8000/tyfys-platform/tyfys-platform-app.js:23

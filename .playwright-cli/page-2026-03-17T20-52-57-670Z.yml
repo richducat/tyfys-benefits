@@ -1,0 +1,60 @@
+- main [ref=e2]:
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - img [ref=e21]
+        - generic [ref=e24]:
+          - paragraph [ref=e25]: TYFYS Veteran Access
+          - paragraph [ref=e26]: Private claim support account
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - img [ref=e29]
+          - text: Secure login and saved progress
+        - heading "Log in or start your TYFYS account" [level=1] [ref=e32]
+        - paragraph [ref=e33]: If you already have a TYFYS login, sign in first. If you are new here, use the new-account button below and we will walk you through setup step by step.
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - img [ref=e36]
+          - paragraph [ref=e39]: Save your profile
+          - paragraph [ref=e40]: Keep your contact info and claim details on this device so you do not have to re-enter them.
+        - generic [ref=e41]:
+          - img [ref=e42]
+          - paragraph [ref=e45]: Resume your account
+          - paragraph [ref=e46]: Return to your records, rating work, and next steps where you left off.
+        - generic [ref=e47]:
+          - img [ref=e48]
+          - paragraph [ref=e51]: Come back without starting over
+          - paragraph [ref=e52]: Use one secure login on this device to reopen TYFYS and pick back up later.
+      - generic [ref=e53]:
+        - paragraph [ref=e54]: Saved on this device
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - img [ref=e58]
+            - paragraph [ref=e61]: Your secure TYFYS login for this device
+          - generic [ref=e62]:
+            - img [ref=e64]
+            - paragraph [ref=e67]: Your setup answers and contact details
+          - generic [ref=e68]:
+            - img [ref=e70]
+            - paragraph [ref=e73]: Your saved progress when you come back
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - paragraph [ref=e76]: Reset Password
+        - heading "Choose a new password" [level=2] [ref=e77]
+        - paragraph [ref=e78]: Choose a new password for your TYFYS account. Once it is saved, we will sign you back in automatically.
+      - generic [ref=e81]:
+        - generic [ref=e82]:
+          - paragraph [ref=e83]: Account email
+          - paragraph [ref=e84]: codex-reset-1773780425@example.com
+        - generic [ref=e85]:
+          - generic [ref=e86]: New password
+          - textbox "Create a new password" [ref=e87]: BrowserResetPass456
+        - generic [ref=e88]:
+          - generic [ref=e89]: Confirm new password
+          - textbox "Re-enter your new password" [active] [ref=e90]: BrowserResetPass456
+        - button "Save New Password and Sign In" [ref=e91] [cursor=pointer]:
+          - text: Save New Password and Sign In
+          - img [ref=e92]
+        - button "Back to Sign-In" [ref=e94] [cursor=pointer]:
+          - img [ref=e95]
+          - text: Back to Sign-In

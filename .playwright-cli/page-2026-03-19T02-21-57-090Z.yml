@@ -1,0 +1,304 @@
+- generic [ref=e3]:
+  - generic [ref=e11]:
+    - generic [ref=e13]:
+      - img [ref=e15]
+      - generic [ref=e18]:
+        - heading "TYFYS" [level=1] [ref=e19]
+        - paragraph [ref=e20]: Veteran Claim Workspace
+    - navigation [ref=e21]:
+      - paragraph [ref=e22]: Main
+      - button "Claim Home" [ref=e23] [cursor=pointer]:
+        - img [ref=e24]
+        - text: Claim Home
+      - button "Care Team" [ref=e26] [cursor=pointer]:
+        - img [ref=e27]
+        - text: Care Team
+        - img [ref=e31]
+      - button "Messages" [ref=e34] [cursor=pointer]:
+        - img [ref=e35]
+        - text: Messages
+        - img [ref=e37]
+      - button "Records Intake" [ref=e40] [cursor=pointer]:
+        - img [ref=e41]
+        - text: Records Intake
+      - paragraph [ref=e44]: Tools
+      - button "Records Vault" [ref=e45] [cursor=pointer]:
+        - img [ref=e46]
+        - text: Records Vault
+      - button "VA Rating Calculator" [ref=e50] [cursor=pointer]:
+        - img [ref=e51]
+        - text: VA Rating Calculator
+      - button "PACT Act Guide" [ref=e53] [cursor=pointer]:
+        - img [ref=e54]
+        - text: PACT Act Guide
+      - button "Medical Opinion Draft" [ref=e56] [cursor=pointer]:
+        - img [ref=e57]
+        - text: Medical Opinion Draft
+        - img [ref=e60]
+      - button "Evidence Checklist" [ref=e63] [cursor=pointer]:
+        - img [ref=e64]
+        - text: Evidence Checklist
+      - button "Support Options" [ref=e68] [cursor=pointer]:
+        - img [ref=e69]
+        - text: Support Options
+      - paragraph [ref=e72]: Guidance
+      - button "Claim Guide" [ref=e73] [cursor=pointer]:
+        - img [ref=e74]
+        - text: Claim Guide
+      - button "Independent Doctor Support" [ref=e77]:
+        - img [ref=e78]
+        - text: Independent Doctor Support
+        - img [ref=e81]
+    - generic [ref=e84]:
+      - generic [ref=e87]: Full Access
+      - paragraph [ref=e88]: "ID: ARM-8821"
+  - generic [ref=e89]:
+    - banner [ref=e90]:
+      - generic [ref=e92]:
+        - paragraph [ref=e93]: Records intake
+        - heading "Military Records Intake" [level=2] [ref=e94]
+        - paragraph [ref=e95]: Upload your service and VA records so TYFYS can review the right file first.
+      - generic [ref=e96]:
+        - generic [ref=e323]:
+          - button "Care Team" [ref=e324] [cursor=pointer]:
+            - img [ref=e325]
+            - text: Care Team
+          - button "Messages" [ref=e329] [cursor=pointer]:
+            - img [ref=e330]
+            - text: Messages
+        - button "codex-intake-1773886454728@example.com Log Out" [ref=e97] [cursor=pointer]:
+          - img [ref=e98]
+          - generic [ref=e101]: codex-intake-1773886454728@example.com
+          - generic [ref=e102]: Log Out
+        - button "Ask Angela" [ref=e103] [cursor=pointer]:
+          - img [ref=e104]
+          - text: Ask Angela
+    - generic [ref=e106]:
+      - generic [ref=e107]:
+        - button "Phase 1 Setup Complete" [ref=e108] [cursor=pointer]:
+          - paragraph [ref=e109]: Phase 1
+          - paragraph [ref=e110]: Setup
+          - paragraph [ref=e111]: Complete
+        - button "Phase 2 Records Current focus" [ref=e112] [cursor=pointer]:
+          - paragraph [ref=e113]: Phase 2
+          - paragraph [ref=e114]: Records
+          - paragraph [ref=e115]: Current focus
+        - button "Phase 3 Review Review the file and confirm the plan" [ref=e116] [cursor=pointer]:
+          - paragraph [ref=e117]: Phase 3
+          - paragraph [ref=e118]: Review
+          - paragraph [ref=e119]: Review the file and confirm the plan
+        - button "Phase 4 Medical Evidence planning and provider steps" [ref=e120] [cursor=pointer]:
+          - paragraph [ref=e121]: Phase 4
+          - paragraph [ref=e122]: Medical
+          - paragraph [ref=e123]: Evidence planning and provider steps
+        - button "Phase 5 Submit Final review and keep the result updated" [ref=e124] [cursor=pointer]:
+          - paragraph [ref=e125]: Phase 5
+          - paragraph [ref=e126]: Submit
+          - paragraph [ref=e127]: Final review and keep the result updated
+      - generic [ref=e128]:
+        - button "Next step Finish Guided Intake Ready for Review" [ref=e129] [cursor=pointer]:
+          - paragraph [ref=e130]: Next step
+          - paragraph [ref=e131]: Finish Guided Intake
+          - paragraph [ref=e132]: Ready for Review
+        - button "Claim Home" [ref=e133] [cursor=pointer]:
+          - img [ref=e136]
+          - paragraph [ref=e138]: Claim Home
+        - button "Records Intake" [ref=e139] [cursor=pointer]:
+          - img [ref=e142]
+          - paragraph [ref=e145]: Records Intake
+        - button "4 Records Vault" [ref=e146] [cursor=pointer]:
+          - generic [ref=e147]:
+            - img [ref=e149]
+            - generic [ref=e154]: "4"
+          - paragraph [ref=e155]: Records Vault
+        - button "Messages" [ref=e156] [cursor=pointer]:
+          - generic [ref=e157]:
+            - img [ref=e159]
+            - img [ref=e162]
+          - paragraph [ref=e165]: Messages
+        - button "Support Options" [ref=e166] [cursor=pointer]:
+          - img [ref=e169]
+          - paragraph [ref=e172]: Support Options
+    - main [ref=e173]:
+      - generic [ref=e175]:
+        - generic [ref=e177]:
+          - generic [ref=e178]:
+            - paragraph [ref=e179]: Start here after signup
+            - heading "Finish records intake first" [level=2] [ref=e180]
+            - paragraph [ref=e181]: Use this area to gather your DD-214, service treatment records, VA decisions, and private records first. Once those are uploaded, the rest of the app will be much easier to use.
+          - generic [ref=e182]:
+            - generic [ref=e183]:
+              - paragraph [ref=e184]: Records matched
+              - paragraph [ref=e185]: 5/5
+            - generic [ref=e186]:
+              - paragraph [ref=e187]: Sent to TYFYS file
+              - paragraph [ref=e188]: "4"
+        - generic [ref=e189]:
+          - generic [ref=e190]:
+            - generic [ref=e192]:
+              - generic [ref=e193]:
+                - paragraph [ref=e194]: Guided intake
+                - heading "Records intake assistant" [level=3] [ref=e195]
+                - paragraph [ref=e196]: Stay here first so you can hand over the key records before moving into calculators and drafting tools.
+              - generic [ref=e197]:
+                - paragraph [ref=e198]: TYFYS file
+                - paragraph [ref=e199]: Contacts
+            - iframe [ref=e204]:
+              - generic [active] [ref=f3e1]:
+                - generic [ref=f3e3]:
+                  - generic [ref=f3e9]:
+                    - generic [ref=f3e11]:
+                      - list [ref=f3e12]:
+                        - listitem [ref=f3e13]:
+                          - generic [ref=f3e14]:
+                            - generic [ref=f3e15]:
+                              - img "Document Collection Agent (TYFYS)" [ref=f3e16]
+                              - paragraph [ref=f3e17]: "Private PaperClip: Document Collection Assistant"
+                              - generic: Good response Bad response Copy
+                            - paragraph [ref=f3e20]: Private Paperclip reporting for duty, Commander! I'm here to assist you in collecting all the important documents you need for your VA claim. My mission includes helping you with the Intent to File, VA Benefits Summary Letter, C-File, Medical Records, Private Medical Records, and your DD-214. I'll provide links, phone numbers, and tips on filling out forms-whatever you need to make this process easier. Do you mind filling me in on what documents you already have? From there we can start working on getting everything else you need.
+                      - generic:
+                        - button "Jump to latest Jump to latest" [disabled]:
+                          - img "Jump to latest"
+                          - generic: Jump to latest
+                    - group [ref=f3e22]:
+                      - textbox "Type your question or let me know which document you need help with—I'm here to assist you every step of the way!" [ref=f3e23]
+                      - button "Send" [disabled] [ref=f3e24]:
+                        - img [ref=f3e25]
+                        - generic [ref=f3e27]: Send
+                    - link "Built on" [ref=f3e30] [cursor=pointer]:
+                      - /url: https://zapier.com/ai/chatbot?utm_source=zapier&utm_medium=referral&utm_campaign=zapier-gbl-pnua-link-interface_built_on_zapier_button
+                      - text: Built on
+                      - img [ref=f3e32]
+                  - region "Notifications alt+T"
+                - alert [ref=f3e41]
+          - generic [ref=e205]:
+            - generic [ref=e206]:
+              - generic [ref=e207]:
+                - generic [ref=e208]:
+                  - paragraph [ref=e209]: Required records
+                  - heading "Military records checklist" [level=3] [ref=e210]
+                - button "Return to Claim Home" [ref=e211] [cursor=pointer]
+              - generic [ref=e212]:
+                - 'button "DD-214 or separation paperwork Uploaded Upload this first so TYFYS can confirm your service dates and discharge details. On file: DD-214 · Not saved yet" [ref=e213] [cursor=pointer]':
+                  - generic [ref=e214]:
+                    - img [ref=e216]
+                    - generic [ref=e219]:
+                      - generic [ref=e220]:
+                        - paragraph [ref=e221]: DD-214 or separation paperwork
+                        - generic [ref=e222]: Uploaded
+                      - paragraph [ref=e223]: Upload this first so TYFYS can confirm your service dates and discharge details.
+                      - paragraph [ref=e224]: "On file: DD-214 · Not saved yet"
+                - 'button "Service treatment records Uploaded Military medical visits, profiles, sick call notes, and in-service diagnoses. On file: DD-214 · Not saved yet" [ref=e225] [cursor=pointer]':
+                  - generic [ref=e226]:
+                    - img [ref=e228]
+                    - generic [ref=e231]:
+                      - generic [ref=e232]:
+                        - paragraph [ref=e233]: Service treatment records
+                        - generic [ref=e234]: Uploaded
+                      - paragraph [ref=e235]: Military medical visits, profiles, sick call notes, and in-service diagnoses.
+                      - paragraph [ref=e236]: "On file: DD-214 · Not saved yet"
+                - 'button "Personnel or deployment records Uploaded Orders, deployments, duty assignments, awards, or records that show where and when key events happened during your service. On file: Service treatment records · Not saved yet" [ref=e237] [cursor=pointer]':
+                  - generic [ref=e238]:
+                    - img [ref=e240]
+                    - generic [ref=e243]:
+                      - generic [ref=e244]:
+                        - paragraph [ref=e245]: Personnel or deployment records
+                        - generic [ref=e246]: Uploaded
+                      - paragraph [ref=e247]: Orders, deployments, duty assignments, awards, or records that show where and when key events happened during your service.
+                      - paragraph [ref=e248]: "On file: Service treatment records · Not saved yet"
+                - 'button "VA records, rating decisions, or C-file pages Uploaded Blue Button exports, past rating decisions, and any VA claim documents you already have. On file: VA Blue Button records · Not saved yet" [ref=e249] [cursor=pointer]':
+                  - generic [ref=e250]:
+                    - img [ref=e252]
+                    - generic [ref=e255]:
+                      - generic [ref=e256]:
+                        - paragraph [ref=e257]: VA records, rating decisions, or C-file pages
+                        - generic [ref=e258]: Uploaded
+                      - paragraph [ref=e259]: Blue Button exports, past rating decisions, and any VA claim documents you already have.
+                      - paragraph [ref=e260]: "On file: VA Blue Button records · Not saved yet"
+                - 'button "Private medical records tied to claimed conditions Uploaded Civilian treatment notes, imaging, specialist letters, and other non-VA records tied to your claimed conditions. On file: Private mental health records · Not saved yet" [ref=e261] [cursor=pointer]':
+                  - generic [ref=e262]:
+                    - img [ref=e264]
+                    - generic [ref=e267]:
+                      - generic [ref=e268]:
+                        - paragraph [ref=e269]: Private medical records tied to claimed conditions
+                        - generic [ref=e270]: Uploaded
+                      - paragraph [ref=e271]: Civilian treatment notes, imaging, specialist letters, and other non-VA records tied to your claimed conditions.
+                      - paragraph [ref=e272]: "On file: Private mental health records · Not saved yet"
+            - generic [ref=e273]:
+              - generic [ref=e274]:
+                - generic [ref=e275]:
+                  - paragraph [ref=e276]: Upload records
+                  - heading "Record uploader" [level=3] [ref=e277]
+                - button "Open Records Vault" [ref=e278] [cursor=pointer]:
+                  - text: Open Records Vault
+                  - img [ref=e279]
+              - generic [ref=e281]:
+                - generic [ref=e282]:
+                  - text: Document title
+                  - textbox "DD-214 or service treatment records" [ref=e283]
+                - generic [ref=e284]:
+                  - text: Document type
+                  - combobox [ref=e285]:
+                    - option "DBQ"
+                    - option "Nexus Letter"
+                    - option "Private Medical Record" [selected]
+                    - option "Imaging"
+                    - option "Service Record"
+                    - option "Lay Statement"
+                    - option "Toxic Exposure Evidence"
+                    - option "Other"
+              - generic [ref=e286]:
+                - generic [ref=e287]:
+                  - text: Source
+                  - combobox [ref=e288]:
+                    - option "Phone capture" [selected]
+                    - option "VA Blue Button"
+                    - option "Private doctor"
+                    - option "Specialist office"
+                    - option "Service treatment record"
+                    - option "Buddy or spouse statement"
+                    - option "Manual note"
+                - generic [ref=e289]:
+                  - text: Condition
+                  - combobox [ref=e290]:
+                    - option "General claim record"
+                    - option "PTSD" [selected]
+                    - option "Major Depressive Disorder"
+                    - option "Anxiety Condition"
+                    - option "Migraines"
+                    - option "Peripheral Neuropathy"
+                    - option "TBI Residuals"
+                    - option "Lumbosacral (Back) Strain"
+                    - option "Cervical (Neck) Strain"
+                    - option "Knee Strain/Pain"
+                    - option "Plantar Fasciitis"
+                    - option "Sleep Apnea"
+                    - option "Asthma"
+                    - option "Sinusitis/Rhinitis"
+                    - option "Tinnitus"
+                    - option "Hearing Loss"
+                    - option "GERD"
+                    - option "IBS"
+              - generic [ref=e291]:
+                - text: Attach document
+                - button "Choose File" [ref=e292]
+                - paragraph [ref=e293]: Choose a PDF or photo. TYFYS will save the text it finds to your Records Vault and add it to your TYFYS file when available.
+              - generic [ref=e294]:
+                - text: Notes for TYFYS
+                - textbox "Anything TYFYS should know about this record." [ref=e295]
+              - generic [ref=e296]:
+                - button "Upload this record" [disabled] [ref=e297]
+                - button "Open Records Vault" [ref=e298] [cursor=pointer]
+  - generic [ref=e299]:
+    - generic [ref=e300]:
+      - generic [ref=e301]:
+        - img [ref=e304]
+        - generic [ref=e308]:
+          - paragraph [ref=e309]: Angela - TYFYS Guide
+          - paragraph [ref=e310]: Online | Ready to help
+      - button [ref=e311] [cursor=pointer]:
+        - img [ref=e312]
+    - generic [ref=e317]:
+      - textbox "Ask Angela about your claim..." [ref=e318]
+      - button [disabled] [ref=e319]:
+        - img [ref=e320]

@@ -1,0 +1,304 @@
+{
+  "users": {
+    "usr_a67a80b5-e890-4377-849f-a515507186cc": {
+      "userId": "usr_a67a80b5-e890-4377-849f-a515507186cc",
+      "email": "codex-1773065847@example.com",
+      "displayName": "Codex Tester Updated",
+      "leadId": "LEAD-999",
+      "passwordHash": "80557dab155ab821f4b9dc1348e8965530166821e3523349f1813516239cb7c054a91453d604cee3c2fa7a20f1ff694ee4fce54e24ecffa4b21024b1199b0549",
+      "passwordSalt": "af2f89ed08c8fc10475ac9a55bfe4565",
+      "createdAt": "2026-03-09T14:17:28.350Z",
+      "updatedAt": "2026-03-09T14:17:29.521Z",
+      "lastLoginAt": "",
+      "state": {
+        "version": 1,
+        "hasStarted": true,
+        "onboardingComplete": true,
+        "onboardingStep": 9,
+        "userProfile": {
+          "firstName": "Codex",
+          "lastName": "Tester",
+          "email": "codex-1773065847@example.com"
+        },
+        "activeView": "secure_comms",
+        "currentRating": 80,
+        "hasSpouse": true,
+        "childCount": 2,
+        "claimType": "increase",
+        "addedClaims": [
+          {
+            "name": "PTSD"
+          }
+        ],
+        "isMember": true,
+        "discountUnlocked": true,
+        "doctorPortalIntegrations": [
+          {
+            "name": "Portal"
+          }
+        ],
+        "secureThreads": [
+          {
+            "id": "thread-1",
+            "title": "Welcome",
+            "messages": []
+          }
+        ],
+        "selectedSecureThreadId": "thread-1",
+        "paymentState": {
+          "completed": true,
+          "planName": "premium",
+          "paidAt": "2026-03-09T00:00:00.000Z"
+        },
+        "dossier": [
+          {
+            "id": "doc-1"
+          }
+        ],
+        "zohoLeadId": "LEAD-999"
+      }
+    },
+    "usr_b394d304-7167-4100-9ea5-02991234ef9c": {
+      "userId": "usr_b394d304-7167-4100-9ea5-02991234ef9c",
+      "email": "ui-1773065959@example.com",
+      "displayName": "UI Tester",
+      "leadId": "",
+      "passwordHash": "6f579fd59e060c62c2c617dda052575b8899b127ccfdc3eafa991f586de0a4cb90fae03c57047ff981cf2569709d82527513c08814b3e356b810d1c41c216fc6",
+      "passwordSalt": "b9d10f011c9db8a5c71e3ea264507b3f",
+      "createdAt": "2026-03-09T14:22:15.253Z",
+      "updatedAt": "2026-03-09T14:22:35.841Z",
+      "lastLoginAt": "2026-03-09T14:22:35.840Z",
+      "state": {
+        "version": 1,
+        "savedAt": "2026-03-09T14:22:17.965Z",
+        "hasStarted": true,
+        "onboardingComplete": true,
+        "onboardingStep": 9,
+        "userProfile": {
+          "pain_categories": [
+            "Mental Health"
+          ],
+          "pain_points": [
+            "PTSD"
+          ],
+          "firstName": "UI",
+          "lastName": "Tester",
+          "email": "ui-1773065959@example.com",
+          "phone": "3212482805",
+          "zip": "32904",
+          "privateOrg": true,
+          "terms": true,
+          "vso_aware": true,
+          "attorney": false,
+          "appeal": false,
+          "discharge": true,
+          "branch": "Army",
+          "era": "Post-9/11",
+          "claims_pending": false
+        },
+        "activeView": "welcome_guide",
+        "currentRating": 0,
+        "hasSpouse": false,
+        "childCount": 0,
+        "claimType": "increase",
+        "addedClaims": [
+          {
+            "name": "PTSD",
+            "rating": null,
+            "dbq": "PTSD DBQ (21-0960P-2)",
+            "specialist": "Psychologist/Psychiatrist",
+            "type": "new",
+            "diagnosticCode": "9411",
+            "ratingRuleTitle": "General Rating Formula for Mental Disorders",
+            "ratingProfileId": "",
+            "ratingProfileLabel": "",
+            "sourceUrl": "https://www.ecfr.gov/current/title-38/chapter-I/part-4/section-4.130",
+            "sourceLabel": "38 CFR 4.130",
+            "ratingSummary": "Select the actual factual rating basis before using this claim in VA Math.",
+            "pendingFacts": true
+          }
+        ],
+        "isMember": false,
+        "discountUnlocked": false,
+        "doctorPortalIntegrations": [
+          {
+            "id": "athena",
+            "name": "athenahealth",
+            "category": "EHR + practice management",
+            "audience": "Private physician groups",
+            "sync": "Two-way schedule windows",
+            "status": "Ready",
+            "description": "Map TYFYS referrals and consult windows directly into physician calendars."
+          },
+          {
+            "id": "simplepractice",
+            "name": "SimplePractice",
+            "category": "Behavioral health",
+            "audience": "Psychs, therapists, counselors",
+            "sync": "Telehealth bookings + intake forms",
+            "status": "Ready",
+            "description": "Ideal for psych and therapy partners who need secure telehealth plus questionnaire handoff."
+          },
+          {
+            "id": "drchrono",
+            "name": "DrChrono",
+            "category": "Cloud EHR",
+            "audience": "Independent practices",
+            "sync": "Visit slots + chart prep",
+            "status": "Pilot",
+            "description": "Push next-available slots and pull appointment confirmations back into TYFYS."
+          },
+          {
+            "id": "ecw",
+            "name": "eClinicalWorks",
+            "category": "EHR + PM",
+            "audience": "Multi-location clinics",
+            "sync": "Calendar export + task routing",
+            "status": "Ready",
+            "description": "Support referral queues and follow-up reminders across larger private groups."
+          },
+          {
+            "id": "nextgen",
+            "name": "NextGen Office",
+            "category": "Practice management",
+            "audience": "Primary care + specialty",
+            "sync": "Calendar + patient routing",
+            "status": "Ready",
+            "description": "Surface open consult blocks and capture TYFYS handoff milestones."
+          },
+          {
+            "id": "therapynotes",
+            "name": "TherapyNotes",
+            "category": "Mental health PM",
+            "audience": "Psychologists and psychiatrists",
+            "sync": "Session schedule + intake packet",
+            "status": "Pilot",
+            "description": "Sync behavioral health sessions with TYFYS prep notes and reminders."
+          },
+          {
+            "id": "jane",
+            "name": "Jane",
+            "category": "Scheduling + reminders",
+            "audience": "Private wellness and rehab",
+            "sync": "Booking feed + follow-up reminders",
+            "status": "Pilot",
+            "description": "Strong fit for rehab and cash-pay specialty clinics that want clean intake handoff."
+          },
+          {
+            "id": "hubspot",
+            "name": "HubSpot CRM",
+            "category": "CRM routing",
+            "audience": "Concierge and referral ops",
+            "sync": "Lead-to-appointment routing",
+            "status": "Ready",
+            "description": "Useful for physician partners running referral intake through CRM before scheduling."
+          }
+        ],
+        "secureThreads": [
+          {
+            "id": "thread-ops",
+            "title": "TYFYS Care Ops",
+            "participants": "Scheduling, records, and intake routing",
+            "status": "TYFYS team",
+            "responseTime": "Replies within 1 business hour",
+            "unread": 0,
+            "lastTimestamp": "9:42 AM",
+            "lastMessage": "We pushed your packet to Dr. Miller and synced the prep visit.",
+            "autoReplySender": "TYFYS Care Ops",
+            "messages": [
+              {
+                "id": "thread-ops-1",
+                "sender": "TYFYS Care Ops",
+                "time": "8:55 AM",
+                "text": "Your uploaded evidence packet is complete enough for scheduling. We are routing it to the physician team now.",
+                "isCurrentUser": false
+              },
+              {
+                "id": "thread-ops-2",
+                "sender": "You",
+                "time": "9:11 AM",
+                "text": "Please keep my consults in late-morning or afternoon windows if possible.",
+                "isCurrentUser": true
+              },
+              {
+                "id": "thread-ops-3",
+                "sender": "TYFYS Care Ops",
+                "time": "9:42 AM",
+                "text": "We pushed your packet to Dr. Miller and synced the prep visit.",
+                "isCurrentUser": false
+              }
+            ]
+          },
+          {
+            "id": "thread-hallett",
+            "title": "Dr. Amanda Miller",
+            "participants": "Assigned physician partner",
+            "status": "Doctor direct",
+            "responseTime": "Replies the same business day",
+            "unread": 0,
+            "lastTimestamp": "Yesterday",
+            "lastMessage": "Please have your MRI report and medication list nearby for our visit.",
+            "autoReplySender": "Dr. Amanda Miller",
+            "messages": [
+              {
+                "id": "thread-hallett-1",
+                "sender": "Dr. Amanda Miller",
+                "time": "Yesterday",
+                "text": "I reviewed your claim packet. Please have your MRI report and medication list nearby for our visit.",
+                "isCurrentUser": false
+              }
+            ]
+          },
+          {
+            "id": "thread-behavioral",
+            "title": "Dr. Elise Warren + TYFYS",
+            "participants": "Behavioral health shared channel",
+            "status": "Shared care channel",
+            "responseTime": "Replies within 4 business hours",
+            "unread": 1,
+            "lastTimestamp": "8:15 AM",
+            "lastMessage": "Your anxiety and PTSD symptom tracker is attached for tomorrow's consult.",
+            "autoReplySender": "Dr. Elise Warren",
+            "messages": [
+              {
+                "id": "thread-behavioral-1",
+                "sender": "TYFYS Care Ops",
+                "time": "Yesterday",
+                "text": "We opened this shared thread so you can talk to TYFYS and your behavioral health doctor in one place.",
+                "isCurrentUser": false
+              },
+              {
+                "id": "thread-behavioral-2",
+                "sender": "Dr. Elise Warren",
+                "time": "8:15 AM",
+                "text": "Your anxiety and PTSD symptom tracker is attached for tomorrow's consult.",
+                "isCurrentUser": false
+              }
+            ]
+          }
+        ],
+        "selectedSecureThreadId": "thread-ops",
+        "paymentState": {
+          "completed": false,
+          "planName": "",
+          "paidAt": ""
+        },
+        "dossier": [],
+        "zohoLeadId": ""
+      }
+    }
+  },
+  "emailToUserId": {
+    "codex-1773065847@example.com": "usr_a67a80b5-e890-4377-849f-a515507186cc",
+    "ui-1773065959@example.com": "usr_b394d304-7167-4100-9ea5-02991234ef9c"
+  },
+  "sessions": {
+    "0a182050e66b9cb166bfae6790d23838a778eeade0c2eb62f3f0a47e73cc9561": {
+      "sessionId": "0a182050e66b9cb166bfae6790d23838a778eeade0c2eb62f3f0a47e73cc9561",
+      "userId": "usr_b394d304-7167-4100-9ea5-02991234ef9c",
+      "createdAt": "2026-03-09T14:22:35.842Z",
+      "updatedAt": "2026-03-09T14:22:35.842Z",
+      "expiresAt": 1775658155842
+    }
+  }
+}

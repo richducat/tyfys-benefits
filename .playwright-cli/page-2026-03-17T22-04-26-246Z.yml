@@ -1,0 +1,78 @@
+- main [ref=e2]:
+  - generic [ref=e9]:
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - img [ref=e13]
+        - generic [ref=e16]:
+          - paragraph [ref=e17]: TYFYS Veteran Access
+          - paragraph [ref=e18]: Private claim support account
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - img [ref=e21]
+          - text: Secure login and saved progress
+        - heading "Log in or start your TYFYS account" [level=1] [ref=e24]
+        - paragraph [ref=e25]: If you already have a TYFYS login, sign in first. If you are new here, use the new-account button below and we will walk you through setup step by step.
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - img [ref=e28]
+          - paragraph [ref=e31]: Save your profile
+          - paragraph [ref=e32]: Keep your contact info and claim details on this device so you do not have to re-enter them.
+        - generic [ref=e33]:
+          - img [ref=e34]
+          - paragraph [ref=e37]: Resume your account
+          - paragraph [ref=e38]: Return to your records, rating work, and next steps where you left off.
+        - generic [ref=e39]:
+          - img [ref=e40]
+          - paragraph [ref=e43]: Come back without starting over
+          - paragraph [ref=e44]: Use one secure login on this device to reopen TYFYS and pick back up later.
+      - generic [ref=e45]:
+        - paragraph [ref=e46]: Saved on this device
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - img [ref=e50]
+            - paragraph [ref=e53]: Your secure TYFYS login for this device
+          - generic [ref=e54]:
+            - img [ref=e56]
+            - paragraph [ref=e59]: Your setup answers and contact details
+          - generic [ref=e60]:
+            - img [ref=e62]
+            - paragraph [ref=e65]: Your saved progress when you come back
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - paragraph [ref=e68]: App Sign-In
+        - heading "Log in to continue" [level=2] [ref=e69]
+        - paragraph [ref=e70]: If you already have a TYFYS login, enter it here first. If you are new here, use the button below.
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - generic [ref=e74]: Email
+            - textbox "you@example.com" [ref=e75]: richard@thankyouforyourservice.co
+          - generic [ref=e76]:
+            - generic [ref=e77]:
+              - generic [ref=e78]: Password
+              - button "Forgot password?" [ref=e79] [cursor=pointer]
+            - textbox "Enter your TYFYS password" [ref=e80]
+          - generic [ref=e104]: Invalid email or password.
+          - button "Log In and Continue" [ref=e81] [cursor=pointer]:
+            - text: Log In and Continue
+            - img [ref=e107]
+          - paragraph [ref=e84]: TYFYS keeps this device signed in for up to 30 days so you can return to your saved account faster.
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - paragraph [ref=e87]: New to TYFYS?
+            - paragraph [ref=e88]: Need to create your account?
+            - paragraph [ref=e89]: Start here to save your contact details, create your login, and come back later without redoing setup.
+            - generic [ref=e90]:
+              - generic [ref=e91]:
+                - generic [ref=e92]: "1"
+                - paragraph [ref=e93]: Enter your name, email, phone number, and ZIP code.
+              - generic [ref=e94]:
+                - generic [ref=e95]: "2"
+                - paragraph [ref=e96]: Create the password you will use to come back to TYFYS.
+              - generic [ref=e97]:
+                - generic [ref=e98]: "3"
+                - paragraph [ref=e99]: Return later and log in without starting over.
+            - button "Click here if you're setting up a new account" [ref=e100] [cursor=pointer]:
+              - text: Click here if you're setting up a new account
+              - img [ref=e101]
+          - generic [ref=e103]: "Notice: TYFYS is a private company and not the VA. Your information is stored on this device so you can return and continue your account."

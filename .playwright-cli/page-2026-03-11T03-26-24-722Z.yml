@@ -1,0 +1,181 @@
+- generic [ref=e4]:
+  - complementary [ref=e5]:
+    - img [ref=e8]
+    - navigation [ref=e10]:
+      - button "Dashboard" [ref=e11] [cursor=pointer]:
+        - img [ref=e12]
+        - generic [ref=e14]: Dashboard
+      - button "Subjects" [ref=e15] [cursor=pointer]:
+        - img [ref=e16]
+        - generic [ref=e21]: Subjects
+      - button "Messages" [ref=e22] [cursor=pointer]:
+        - img [ref=e23]
+        - generic [ref=e25]: Messages
+      - button "Protocol AI" [ref=e26] [cursor=pointer]:
+        - img [ref=e27]
+        - generic [ref=e30]: Protocol AI
+      - button "Audit" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+        - generic [ref=e36]: Audit
+  - complementary [ref=e37]:
+    - generic [ref=e38]:
+      - paragraph [ref=e39]: Subject navigator
+      - generic [ref=e40]:
+        - img [ref=e41]
+        - textbox "Search subject, arm, or status" [ref=e44]
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - button "1074-A3A-201A Elizabeth Merrill Randomized" [ref=e47] [cursor=pointer]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - paragraph [ref=e50]: 1074-A3A-201A
+              - paragraph [ref=e51]: Elizabeth Merrill
+            - generic [ref=e1297]: Randomized
+        - button "1088-B1C-204F Marcus Thomas Screening" [ref=e54] [cursor=pointer]:
+          - generic [ref=e55]:
+            - generic [ref=e56]:
+              - paragraph [ref=e57]: 1088-B1C-204F
+              - paragraph [ref=e58]: Marcus Thomas
+            - generic [ref=e1299]: Screening
+      - generic [ref=e61]:
+        - paragraph [ref=e62]: Subject modules
+        - generic [ref=e63]:
+          - button "General" [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]: General
+            - img [ref=e66]
+          - button "Visits" [ref=e68] [cursor=pointer]:
+            - generic [ref=e69]: Visits
+            - img [ref=e70]
+          - button "Study Logs" [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]: Study Logs
+            - img [ref=e74]
+          - button "Adverse Events" [ref=e76] [cursor=pointer]:
+            - generic [ref=e77]: Adverse Events
+            - img [ref=e78]
+          - button "Medical Conditions" [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]: Medical Conditions
+            - img [ref=e82]
+          - button "Concomitant Medications" [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]: Concomitant Medications
+            - img [ref=e86]
+          - button "Protocol Deviations" [ref=e88] [cursor=pointer]:
+            - generic [ref=e89]: Protocol Deviations
+            - img [ref=e90]
+          - button "Allergies" [ref=e92] [cursor=pointer]:
+            - generic [ref=e93]: Allergies
+            - img [ref=e94]
+          - button "Surgical Conditions" [ref=e96] [cursor=pointer]:
+            - generic [ref=e97]: Surgical Conditions
+            - img [ref=e98]
+          - button "Emergency Contacts" [ref=e100] [cursor=pointer]:
+            - generic [ref=e101]: Emergency Contacts
+            - img [ref=e102]
+          - button "Progress Notes" [ref=e104] [cursor=pointer]:
+            - generic [ref=e105]: Progress Notes
+            - img [ref=e106]
+          - button "eDocs / Labs / Misc" [ref=e108] [cursor=pointer]:
+            - generic [ref=e109]: eDocs / Labs / Misc
+            - img [ref=e110]
+          - button "eDocs Audit Trail" [ref=e112] [cursor=pointer]:
+            - generic [ref=e113]: eDocs Audit Trail
+            - img [ref=e114]
+  - main [ref=e116]:
+    - generic [ref=e117]:
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - paragraph [ref=e120]: 230LE301
+          - paragraph [ref=e122]: V4.0 / eSource 27 Oct 2025
+        - heading "Elizabeth D Merrill" [level=2] [ref=e235]
+        - paragraph [ref=e124]: "Study arm: Part B (Phase 3) · Site: OpenDoor Clinical Research LLC"
+      - generic [ref=e125]:
+        - button "Monitor mode on" [ref=e126] [cursor=pointer]:
+          - generic [ref=e127]:
+            - img [ref=e128]
+            - text: Monitor mode on
+        - generic [ref=e131]:
+          - paragraph [ref=e132]: Connected account
+          - paragraph [ref=e133]: Richard Ducat
+        - button "Log out" [ref=e134] [cursor=pointer]:
+          - img [ref=e135]
+    - generic [ref=e1301]:
+      - generic [ref=e1303]:
+        - heading "eDocs audit trail" [level=3] [ref=e1304]
+        - paragraph [ref=e1305]: Subject-scoped document activity for certifications, signature routing, and packet changes.
+      - table [ref=e1308]:
+        - rowgroup [ref=e1309]:
+          - row "Time Actor Action Trace" [ref=e1310]:
+            - columnheader "Time" [ref=e1311]
+            - columnheader "Actor" [ref=e1312]
+            - columnheader "Action" [ref=e1313]
+            - columnheader "Trace" [ref=e1314]
+        - rowgroup [ref=e1315]:
+          - row "2026-03-11 03:26:20 Richard Ducat Downloaded redacted copy of Signed ICF v4.0. AUD-U9P5" [ref=e1316]:
+            - cell "2026-03-11 03:26:20" [ref=e1317]
+            - cell "Richard Ducat" [ref=e1318]
+            - cell "Downloaded redacted copy of Signed ICF v4.0." [ref=e1319]
+            - cell "AUD-U9P5" [ref=e1320]
+          - row "2026-03-11 03:26:02 Richard Ducat Signed ICF v4.0 updated with 2 bulk redaction term(s). AUD-IB4X" [ref=e1321]:
+            - cell "2026-03-11 03:26:02" [ref=e1322]
+            - cell "Richard Ducat" [ref=e1323]
+            - cell "Signed ICF v4.0 updated with 2 bulk redaction term(s)." [ref=e1324]
+            - cell "AUD-IB4X" [ref=e1325]
+          - row "2026-02-02 08:15:00 Daniel Burch Screening packet certified and attached to eDocs. AUD-78C1" [ref=e1326]:
+            - cell "2026-02-02 08:15:00" [ref=e1327]
+            - cell "Daniel Burch" [ref=e1328]
+            - cell "Screening packet certified and attached to eDocs." [ref=e1329]
+            - cell "AUD-78C1" [ref=e1330]
+  - region "Service disclaimer" [ref=e167]:
+    - generic [ref=e168]:
+      - paragraph [ref=e169]:
+        - strong [ref=e170]: "What we do:"
+        - text: We coordinate private medical evidence (DBQs and independent medical opinions) to support veterans' disability claims. We do not provide legal advice, representation, or submit VA claims.
+      - generic [ref=e171]:
+        - link "Services" [ref=e172] [cursor=pointer]:
+          - /url: services.html
+        - link "FAQs" [ref=e173] [cursor=pointer]:
+          - /url: faqs.html
+        - link "How It Works" [ref=e174] [cursor=pointer]:
+          - /url: how-it-works.html
+  - complementary [ref=e175]:
+    - generic [ref=e1331]:
+      - generic [ref=e1333]:
+        - heading "Subject snapshot" [level=3] [ref=e1334]
+        - paragraph [ref=e1335]: Live summary tied to the selected workbench subject.
+      - generic [ref=e1337]:
+        - generic [ref=e1338]:
+          - paragraph [ref=e1339]: Current subject
+          - paragraph [ref=e1340]: 1074-A3A-201A
+          - paragraph [ref=e1341]: Elizabeth Merrill
+        - generic [ref=e1342]:
+          - generic [ref=e1343]:
+            - paragraph [ref=e1344]: Status
+            - paragraph [ref=e1345]: Randomized
+          - generic [ref=e1346]:
+            - paragraph [ref=e1347]: Next visit
+            - paragraph [ref=e1348]: 2026-02-16
+          - generic [ref=e1349]:
+            - paragraph [ref=e1350]: Released
+            - paragraph [ref=e1351]: $150
+          - generic [ref=e1352]:
+            - paragraph [ref=e1353]: Pending payouts
+            - paragraph [ref=e1354]: "2"
+    - generic [ref=e1355]:
+      - generic [ref=e1357]:
+        - heading "Action queue" [level=3] [ref=e1358]
+        - paragraph [ref=e1359]: Fast-glance blockers for the selected subject.
+      - generic [ref=e1361]:
+        - generic [ref=e1362]:
+          - img [ref=e1363]
+          - generic [ref=e1368]:
+            - paragraph [ref=e1369]: Visit readiness
+            - paragraph [ref=e1370]: Baseline D1 -> Part B is next in line.
+        - generic [ref=e1371]:
+          - img [ref=e1372]
+          - generic [ref=e1376]:
+            - paragraph [ref=e1377]: Signature queue
+            - paragraph [ref=e1378]: 1 pending document(s).
+        - generic [ref=e1379]:
+          - img [ref=e1380]
+          - generic [ref=e1383]:
+            - paragraph [ref=e1384]: Payouts
+            - paragraph [ref=e1385]: 1 stipend(s) ready to release.

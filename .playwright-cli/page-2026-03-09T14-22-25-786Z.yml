@@ -1,0 +1,60 @@
+- main [ref=e2]:
+  - generic [ref=e703]:
+    - generic [ref=e704]:
+      - generic [ref=e705]:
+        - img [ref=e707]
+        - generic [ref=e710]:
+          - paragraph [ref=e711]: TYFYS App Access
+          - paragraph [ref=e712]: Private claim-planning workspace
+      - generic [ref=e713]:
+        - generic [ref=e714]:
+          - img [ref=e715]
+          - text: Secure login + saved progress
+        - heading "Welcome back to your TYFYS workspace" [level=1] [ref=e718]
+        - paragraph [ref=e719]: Sign in on this device to reopen your saved claim plan, uploaded materials, and next steps.
+      - generic [ref=e720]:
+        - generic [ref=e721]:
+          - img [ref=e722]
+          - paragraph [ref=e725]: Save your profile
+          - paragraph [ref=e726]: Keep your contact info and claim details on this device so you do not have to re-enter them.
+        - generic [ref=e727]:
+          - img [ref=e728]
+          - paragraph [ref=e731]: Resume your workspace
+          - paragraph [ref=e732]: Return to your tracker, drafts, and evidence plan where you left off.
+        - generic [ref=e733]:
+          - img [ref=e734]
+          - paragraph [ref=e737]: Stay ready to continue
+          - paragraph [ref=e738]: Use one login on this device to reopen TYFYS and pick back up later.
+      - generic [ref=e739]:
+        - paragraph [ref=e740]: Saved on this device
+        - generic [ref=e741]:
+          - generic [ref=e742]:
+            - img [ref=e744]
+            - paragraph [ref=e747]: Your saved profile and contact details
+          - generic [ref=e748]:
+            - img [ref=e750]
+            - paragraph [ref=e753]: Claim tracker progress and calculator inputs
+          - generic [ref=e754]:
+            - img [ref=e756]
+            - paragraph [ref=e759]: Dossier uploads and workspace drafts
+    - generic [ref=e760]:
+      - generic [ref=e761]:
+        - paragraph [ref=e762]: Returning User
+        - heading "Log in to continue" [level=2] [ref=e763]
+        - paragraph [ref=e764]: We found saved TYFYS progress on this device. Sign in to reopen it.
+      - generic [ref=e766]:
+        - generic [ref=e767]:
+          - paragraph [ref=e768]: Saved account
+          - paragraph [ref=e769]: UI Tester
+          - paragraph [ref=e770]: ui-1773065959@example.com
+        - generic [ref=e771]:
+          - generic [ref=e772]: Email
+          - textbox "you@example.com" [ref=e773]: ui-1773065959@example.com
+        - generic [ref=e774]:
+          - generic [ref=e775]: Password
+          - textbox "Enter your TYFYS password" [ref=e776]
+        - generic [ref=e777]: You signed out. Log back in on this device to continue where you left off.
+        - button "Log In and Resume" [ref=e778] [cursor=pointer]:
+          - text: Log In and Resume
+          - img [ref=e779]
+        - paragraph [ref=e781]: Your saved TYFYS session lasts 30 days on this device. Signing in restores your saved progress.

@@ -1,0 +1,343 @@
+- generic [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e6] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e8]
+        - generic [ref=e11]:
+          - generic [ref=e12]: Thank You For Your Service
+          - generic [ref=e13]: Veteran Owned & Operated
+      - generic [ref=e14]:
+        - link "Home" [ref=e15] [cursor=pointer]:
+          - /url: index.html
+        - link "About Us" [ref=e16] [cursor=pointer]:
+          - /url: about_us.html
+        - link "Our Team" [ref=e17] [cursor=pointer]:
+          - /url: mission_team.html
+        - link "Our Process" [ref=e18] [cursor=pointer]:
+          - /url: process.html
+        - button "VA Claims" [ref=e20] [cursor=pointer]:
+          - text: VA Claims
+          - img [ref=e21]
+        - button "Resources" [ref=e24] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e25]
+        - button "Cmd/Ctrl + K" [ref=e27] [cursor=pointer]:
+          - img [ref=e28]
+          - generic [ref=e31]: Cmd/Ctrl + K
+        - button "Accessibility" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+          - generic [ref=e40]: Accessibility
+        - link "Book Discovery Call" [ref=e41] [cursor=pointer]:
+          - /url: contact.html
+          - text: Book Discovery Call
+          - img [ref=e42]
+  - generic [ref=e48]:
+    - generic [ref=e49]:
+      - generic [ref=e54]: Telehealth Enabled • 50 States
+      - heading "Increase Your VA Disability Rating with Private Medical Evidence" [level=1] [ref=e55]
+      - paragraph [ref=e56]: Stop relying on the “wait and hope” strategy. We connect you with private doctors who create DBQs and medical nexus opinions that can significantly strengthen your VA disability claim. We charge a flat fee—no percentages taken from your backpay, and no hidden fees.
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - img [ref=e59]
+          - img [ref=e61]
+          - img [ref=e63]
+          - img [ref=e65]
+          - img [ref=e67]
+        - paragraph [ref=e69]: 100% Success Rate on Fully Developed Claims
+    - generic [ref=e70]:
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - generic [ref=e76]: TY
+            - generic [ref=e77]: Thank You For Your Service
+          - generic [ref=e78]: Step 3 of 7
+        - generic [ref=e81]:
+          - button "← Back" [ref=e369] [cursor=pointer]
+          - generic [ref=e402]:
+            - heading "What conditions are you looking to claim or increase?" [level=1] [ref=e403]
+            - paragraph [ref=e404]: Select all that apply. We find the 'hidden' high-value claims.
+            - generic [ref=e405]:
+              - button "Mental Health / PTSD" [active] [ref=e406] [cursor=pointer]:
+                - generic [ref=e407]: Mental Health / PTSD
+              - button "Back, Neck & Joints" [ref=e409] [cursor=pointer]:
+                - generic [ref=e410]: Back, Neck & Joints
+              - button "Tinnitus / Hearing" [ref=e412] [cursor=pointer]:
+                - generic [ref=e413]: Tinnitus / Hearing
+              - button "Sleep Apnea" [ref=e415] [cursor=pointer]:
+                - generic [ref=e416]: Sleep Apnea
+              - button "PACT Act / Toxic Exposure" [ref=e418] [cursor=pointer]:
+                - generic [ref=e419]: PACT Act / Toxic Exposure
+              - button "Secondary Conditions" [ref=e421] [cursor=pointer]:
+                - generic [ref=e422]: Secondary Conditions
+            - generic [ref=e425]:
+              - img "Freddy K" [ref=e427]
+              - generic [ref=e428]:
+                - generic [ref=e429]:
+                  - img [ref=e430]
+                  - img [ref=e432]
+                  - img [ref=e434]
+                  - img [ref=e436]
+                  - img [ref=e438]
+                - paragraph [ref=e440]: "\"These guys really care about Veterans. Rich spent 45 mins listening to my story. You don't normally get service like that these days.\""
+                - paragraph [ref=e441]: "- Freddy K, CA"
+            - button "Continue" [ref=e443] [cursor=pointer]:
+              - text: Continue
+              - img [ref=e444]
+        - generic [ref=e105]:
+          - generic [ref=e106]:
+            - generic [ref=e107]:
+              - generic [ref=e108]: 98%
+              - generic [ref=e109]: Success Rate
+            - generic [ref=e110]:
+              - generic [ref=e111]: 0%
+              - generic [ref=e112]: Fees on Backpay
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - img [ref=e115]
+              - text: HIPAA Aligned
+            - generic [ref=e118]:
+              - img [ref=e119]
+              - text: SDVOSB Certified
+      - generic [ref=e125]:
+        - img [ref=e127]
+        - generic [ref=e130]:
+          - paragraph [ref=e131]: The Cost of Waiting
+          - paragraph [ref=e132]: Delaying a claim or increase can mean months of lost, tax-free compensation. The exact impact depends on your rating, dependents, and current VA pay tables, but for many veterans the difference is hundreds of dollars per month.
+  - generic [ref=e134]:
+    - paragraph [ref=e135]: Recognized Standards of Excellence
+    - generic [ref=e136]:
+      - generic [ref=e137]:
+        - img [ref=e138]
+        - generic [ref=e141]:
+          - text: SDVOSB
+          - generic [ref=e142]: Service-Disabled Veteran-Owned
+      - generic [ref=e143]:
+        - img [ref=e144]
+        - generic [ref=e147]:
+          - text: HIPAA
+          - generic [ref=e148]: Aligned & Compliant
+      - generic [ref=e149]:
+        - img [ref=e150]
+        - generic [ref=e153]:
+          - text: 100% Success
+          - generic [ref=e154]: Fully Developed Claims
+      - generic [ref=e155]:
+        - img [ref=e156]
+        - generic [ref=e158]:
+          - text: Veteran Led
+          - generic [ref=e159]: Navy Captain Owned
+  - generic [ref=e161]:
+    - generic [ref=e162]:
+      - heading "Start With the Right Hub" [level=2] [ref=e163]
+      - paragraph [ref=e164]: Explore services, timeline expectations, and FAQs before your discovery call.
+    - generic [ref=e165]:
+      - link "Services Hub Review what is included, transparent pricing structure, and condition-specific pathways." [ref=e166] [cursor=pointer]:
+        - /url: services.html
+        - heading "Services Hub" [level=3] [ref=e167]
+        - paragraph [ref=e168]: Review what is included, transparent pricing structure, and condition-specific pathways.
+      - link "How It Works See a step-by-step timeline so you know what to expect from intake to evidence package." [ref=e169] [cursor=pointer]:
+        - /url: how-it-works.html
+        - heading "How It Works" [level=3] [ref=e170]
+        - paragraph [ref=e171]: See a step-by-step timeline so you know what to expect from intake to evidence package.
+      - link "FAQs Hub Get direct answers on documents, timelines, private evidence, and legal boundaries." [ref=e172] [cursor=pointer]:
+        - /url: faqs.html
+        - heading "FAQs Hub" [level=3] [ref=e173]
+        - paragraph [ref=e174]: Get direct answers on documents, timelines, private evidence, and legal boundaries.
+  - generic [ref=e176]:
+    - generic [ref=e177]:
+      - text: The Hard Truth
+      - heading "Why You Need a Nexus Letter & DBQ" [level=2] [ref=e178]
+      - paragraph [ref=e179]: You served honorably. You have the injuries. But the VA requires a Nexus Letter and a fully documented DBQ to prove Service Connection. Without them, your claim is dead on arrival.
+    - generic [ref=e180]:
+      - generic [ref=e181]:
+        - generic [ref=e182]:
+          - img [ref=e184]
+          - heading "The Attorney Trap" [level=3] [ref=e188]
+        - paragraph [ref=e189]:
+          - text: Lawyers typically take
+          - strong [ref=e190]: 20-33% of your backpay
+          - text: . Because they get paid from backpay, they are financially incentivized to drag your case out for years.
+        - generic [ref=e191]:
+          - img [ref=e192]
+          - generic [ref=e194]: We charge a flat fee. No percentages.
+      - generic [ref=e195]:
+        - generic [ref=e196]:
+          - img [ref=e198]
+          - heading "The VSO Limitation" [level=3] [ref=e200]
+        - paragraph [ref=e201]: VSOs are free and well-meaning, but they cannot write independent medical opinions. They rely on VA doctors (C&P exams) to rate you, and relying only on those exams is a big reason many claims are denied or underrated.
+        - generic [ref=e202]:
+          - img [ref=e203]
+          - generic [ref=e205]: We provide private medical opinions.
+      - generic [ref=e206]:
+        - generic [ref=e207]:
+          - img [ref=e209]
+          - heading "The \"Service Connection\" Gap" [level=3] [ref=e212]
+        - paragraph [ref=e213]:
+          - text: You have an injury now. You served then. But without a
+          - strong [ref=e214]: Nexus Letter
+          - text: linking the two medically, the VA assumes they are unrelated. This is the missing link for most veterans.
+        - generic [ref=e215]:
+          - img [ref=e216]
+          - generic [ref=e218]: We build the Nexus for you.
+  - generic [ref=e220]:
+    - generic [ref=e221]:
+      - heading "Fully Developed Claims vs. Standard Appeals" [level=2] [ref=e222]
+      - paragraph [ref=e223]: We don’t just submit forms. We help you build a strong, evidence-based file so the VA has what it needs to decide your claim. In some cases, solid existing medical evidence means the VA may decide it doesn’t need an additional C&P exam, but that decision is always up to the VA.
+    - generic [ref=e226]:
+      - generic [ref=e227]:
+        - generic [ref=e228]: "1"
+        - heading "Discovery" [level=3] [ref=e229]
+        - paragraph [ref=e230]: We "squeeze and drain" your records to find High Value claims you missed.
+      - generic [ref=e231]:
+        - generic [ref=e232]: "2"
+        - heading "Strategy" [level=3] [ref=e233]
+        - paragraph [ref=e234]: We create a Game Plan targeting specific conditions (PTSD, Back Pain, etc).
+      - generic [ref=e235]:
+        - generic [ref=e236]: "3"
+        - heading "Private Evidence" [level=3] [ref=e237]
+        - paragraph [ref=e238]: Our doctors write the Nexus Letters & DBQs needed to prove your claim.
+      - generic [ref=e239]:
+        - generic [ref=e240]: "4"
+        - heading "Submission" [level=3] [ref=e241]
+        - paragraph [ref=e242]: We help you submit your claim as a Fully Developed Claim with all available evidence up front. This approach can support faster VA review, but actual decision times are set by the VA and can vary from case to case.
+  - generic [ref=e244]:
+    - generic [ref=e245]:
+      - text: Real Results
+      - heading "Our 98% Success Rate Strategy" [level=2] [ref=e246]
+      - paragraph [ref=e247]: To date, we haven’t seen a client’s rating reduced based on a claim we helped document. Past results don’t guarantee future outcomes—only the VA can increase or decrease your rating under its rules.
+    - generic [ref=e248]:
+      - generic [ref=e249]:
+        - generic [ref=e250]:
+          - generic [ref=e251]: 30% to 70%
+          - generic [ref=e252]: Musculoskeletal
+        - paragraph [ref=e253]: "\"After 15 years at a 30% overall rating, I didn't think an increase was possible. The team helped me get medical documentation showing how my back had deteriorated, and the VA finally increased my rating. My only regret is not doing this years ago.\""
+        - generic [ref=e254]:
+          - generic [ref=e255]: JT
+          - generic [ref=e256]:
+            - paragraph [ref=e257]: James T.
+            - paragraph [ref=e258]: Back Pain Increase
+      - generic [ref=e259]:
+        - generic [ref=e260]:
+          - generic [ref=e261]: 30% to 70%
+          - generic [ref=e262]: Mental Health
+        - paragraph [ref=e263]: "\"I was rated at 30% for PTSD for 8 years even as my mental health kept getting worse. The psychologist they connected me with documented how it affected my work and relationships, and the VA increased my rating. The retroactive pay more than covered what I paid for their help.\""
+        - generic [ref=e264]:
+          - generic [ref=e265]: CL
+          - generic [ref=e266]:
+            - paragraph [ref=e267]: Christopher L.
+            - paragraph [ref=e268]: PTSD Increase
+      - generic [ref=e269]:
+        - generic [ref=e270]:
+          - generic [ref=e271]: 20% to 80%
+          - generic [ref=e272]: Secondary Conditions
+        - paragraph [ref=e273]: "\"For years I only had my back rated at 20%. The medical evaluation they arranged documented how my back condition led to hip, knee, and depression issues as secondary conditions, and the VA significantly increased my overall rating.\""
+        - generic [ref=e274]:
+          - generic [ref=e275]: KL
+          - generic [ref=e276]:
+            - paragraph [ref=e277]: Kevin L.
+            - paragraph [ref=e278]: Secondary Claims
+    - paragraph [ref=e279]: All disability ratings and effective dates are decided solely by the U.S. Department of Veterans Affairs under 38 C.F.R. Past client results do not guarantee similar outcomes.
+  - generic [ref=e281]:
+    - generic [ref=e282]:
+      - heading "Is This Right For You?" [level=2] [ref=e283]
+      - paragraph [ref=e284]: We don't accept every case. We partner with veterans where we identify a clear path to victory.
+    - generic [ref=e285]:
+      - generic [ref=e286]:
+        - generic [ref=e288]: "1"
+        - heading "Underrated Veterans" [level=3] [ref=e289]
+        - paragraph [ref=e290]: You have a rating, but it's too low. Your condition has worsened over time, but the VA hasn't acknowledged the severity in your medical records.
+      - generic [ref=e291]:
+        - generic [ref=e293]: "2"
+        - heading "Denied Service Connection" [level=3] [ref=e294]
+        - paragraph [ref=e295]: You have the injury and the service history, but the VA says they aren't linked. We use forensic medical reviews to find the proof they missed.
+      - generic [ref=e296]:
+        - generic [ref=e298]: "3"
+        - heading "High-Value Secondary Claims" [level=3] [ref=e299]
+        - paragraph [ref=e300]: Your back pain caused knee issues. Your tinnitus caused anxiety. We find the "hidden" claims that significantly boost your rating.
+  - generic [ref=e303]:
+    - heading "Stop Fighting Alone." [level=2] [ref=e304]
+    - paragraph [ref=e305]:
+      - text: Secure your financial future with a Fully Developed Claim.
+      - text: No percentages taken. No hidden costs. Just results.
+    - generic [ref=e306]:
+      - link "Book Discovery Call" [ref=e307] [cursor=pointer]:
+        - /url: contact.html
+        - text: Book Discovery Call
+        - img [ref=e308]
+      - link "Read The Briefing" [ref=e310] [cursor=pointer]:
+        - /url: education.html
+    - paragraph [ref=e311]: 100% Confidential. No commitment required.
+  - region "Service disclaimer" [ref=e312]:
+    - generic [ref=e313]:
+      - paragraph [ref=e314]:
+        - strong [ref=e315]: "What we do:"
+        - text: We coordinate private medical evidence (DBQs and independent medical opinions) to support veterans' disability claims. We do not provide legal advice, representation, or submit VA claims.
+      - generic [ref=e316]:
+        - link "Services" [ref=e317] [cursor=pointer]:
+          - /url: services.html
+        - link "FAQs" [ref=e318] [cursor=pointer]:
+          - /url: faqs.html
+        - link "How It Works" [ref=e319] [cursor=pointer]:
+          - /url: how-it-works.html
+  - contentinfo [ref=e320]:
+    - generic [ref=e321]:
+      - generic [ref=e322]:
+        - generic [ref=e323]:
+          - generic [ref=e324]:
+            - img [ref=e325]
+            - generic [ref=e327]: Thank You For Your Service
+          - paragraph [ref=e328]: We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+          - generic [ref=e329]:
+            - link [ref=e330] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e331]
+            - link [ref=e333] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e334]
+        - generic [ref=e338]:
+          - heading "Quick Links" [level=4] [ref=e339]
+          - list [ref=e340]:
+            - listitem [ref=e341]:
+              - link "Home" [ref=e342] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=e343]:
+              - link "About Us" [ref=e344] [cursor=pointer]:
+                - /url: about_us.html
+            - listitem [ref=e345]:
+              - link "Our Team" [ref=e346] [cursor=pointer]:
+                - /url: mission_team.html
+            - listitem [ref=e347]:
+              - link "Our Process" [ref=e348] [cursor=pointer]:
+                - /url: process.html
+            - listitem [ref=e349]:
+              - link "Intake" [ref=e350] [cursor=pointer]:
+                - /url: intake-portal.html
+            - listitem [ref=e351]:
+              - link "Briefing Room" [ref=e352] [cursor=pointer]:
+                - /url: education.html
+            - listitem [ref=e353]:
+              - link "Contact" [ref=e354] [cursor=pointer]:
+                - /url: contact.html
+        - generic [ref=e355]:
+          - heading "Contact" [level=4] [ref=e356]
+          - list [ref=e357]:
+            - listitem [ref=e358]:
+              - img [ref=e359]
+              - text: 11845 SW Bennington Cir
+              - text: Port Saint Lucie, FL 34987
+            - listitem [ref=e362]: support@thankyouforyourservice.co
+            - listitem [ref=e365]:
+              - img [ref=e366]
+              - text: 321-248-2805
+      - generic [ref=e368]: © 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+  - generic [ref=e397] [cursor=pointer]:
+    - emphasis [ref=e398]: 
+    - generic [ref=e399]:
+      - generic "We're offline" [ref=e400]
+      - paragraph [ref=e401]: Leave a message
+      - text: 
+    - text: 
+  - generic:
+    - generic:
+      - iframe

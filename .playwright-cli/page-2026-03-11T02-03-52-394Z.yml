@@ -1,0 +1,232 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - complementary [ref=e31]:
+        - img [ref=e34]
+        - navigation [ref=e36]:
+          - button "Dashboard" [ref=e37] [cursor=pointer]:
+            - img [ref=e38]
+            - generic [ref=e40]: Dashboard
+          - button "Subjects" [ref=e41] [cursor=pointer]:
+            - img [ref=e42]
+            - generic [ref=e47]: Subjects
+          - button "Messages" [ref=e48] [cursor=pointer]:
+            - img [ref=e49]
+            - generic [ref=e51]: Messages
+          - button "Protocol AI" [ref=e52] [cursor=pointer]:
+            - img [ref=e53]
+            - generic [ref=e56]: Protocol AI
+          - button "Audit" [ref=e57] [cursor=pointer]:
+            - img [ref=e58]
+            - generic [ref=e62]: Audit
+      - complementary [ref=e63]:
+        - generic [ref=e64]:
+          - paragraph [ref=e65]: Subject navigator
+          - generic [ref=e66]:
+            - img [ref=e67]
+            - textbox "Search subject, arm, or status" [ref=e70]
+        - generic [ref=e71]:
+          - generic [ref=e72]:
+            - button "1074-A3A-201A Elizabeth Merrill Randomized" [ref=e73] [cursor=pointer]:
+              - generic [ref=e74]:
+                - generic [ref=e75]:
+                  - paragraph [ref=e76]: 1074-A3A-201A
+                  - paragraph [ref=e77]: Elizabeth Merrill
+                - generic [ref=e473]: Randomized
+            - button "1088-B1C-204F Marcus Thomas Screening" [ref=e80] [cursor=pointer]:
+              - generic [ref=e81]:
+                - generic [ref=e82]:
+                  - paragraph [ref=e83]: 1088-B1C-204F
+                  - paragraph [ref=e84]: Marcus Thomas
+                - generic [ref=e475]: Screening
+          - generic [ref=e87]:
+            - paragraph [ref=e88]: Subject modules
+            - generic [ref=e89]:
+              - button "General" [ref=e90] [cursor=pointer]:
+                - generic [ref=e91]: General
+                - img [ref=e92]
+              - button "Visits" [ref=e94] [cursor=pointer]:
+                - generic [ref=e95]: Visits
+                - img [ref=e96]
+              - button "Study Logs" [ref=e98] [cursor=pointer]:
+                - generic [ref=e99]: Study Logs
+                - img [ref=e100]
+              - button "Medical Conditions" [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]: Medical Conditions
+                - img [ref=e104]
+              - button "Concomitant Medications" [ref=e106] [cursor=pointer]:
+                - generic [ref=e107]: Concomitant Medications
+                - img [ref=e108]
+              - button "Protocol Deviations" [ref=e110] [cursor=pointer]:
+                - generic [ref=e111]: Protocol Deviations
+                - img [ref=e112]
+              - button "Allergies" [ref=e114] [cursor=pointer]:
+                - generic [ref=e115]: Allergies
+                - img [ref=e116]
+              - button "Emergency Contacts" [ref=e118] [cursor=pointer]:
+                - generic [ref=e119]: Emergency Contacts
+                - img [ref=e120]
+              - button "Progress Notes" [ref=e122] [cursor=pointer]:
+                - generic [ref=e123]: Progress Notes
+                - img [ref=e124]
+              - button "eDocs / Labs / Misc" [ref=e126] [cursor=pointer]:
+                - generic [ref=e127]: eDocs / Labs / Misc
+                - img [ref=e128]
+      - main [ref=e130]:
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - generic [ref=e133]:
+              - paragraph [ref=e134]: 230LE301
+              - paragraph [ref=e136]: V4.0 / eSource 27 Oct 2025
+            - heading "Elizabeth D Merrill" [level=2] [ref=e137]
+            - paragraph [ref=e138]: "Study arm: Part B (Phase 3) · Site: OpenDoor Clinical Research LLC"
+          - generic [ref=e139]:
+            - button "Monitor mode off" [ref=e140] [cursor=pointer]:
+              - generic [ref=e141]:
+                - img [ref=e142]
+                - text: Monitor mode off
+            - generic [ref=e145]:
+              - paragraph [ref=e146]: Connected account
+              - paragraph [ref=e147]: Richard Ducat
+            - button "Log out" [ref=e148] [cursor=pointer]:
+              - img [ref=e149]
+        - generic [ref=e477]:
+          - generic [ref=e479]:
+            - heading "Visit workbench" [level=3] [ref=e480]
+            - paragraph [ref=e481]: Scheduling, QC, remote monitoring, and stipend flow copied into a subject-first clinic view.
+          - generic [ref=e483]:
+            - table [ref=e485]:
+              - rowgroup [ref=e486]:
+                - row "Visit Date EDC QC Status Subject Stipend" [ref=e487]:
+                  - columnheader "Visit" [ref=e488]
+                  - columnheader "Date" [ref=e489]
+                  - columnheader "EDC" [ref=e490]
+                  - columnheader "QC" [ref=e491]
+                  - columnheader "Status" [ref=e492]
+                  - columnheader "Subject Stipend" [ref=e493]
+              - rowgroup [ref=e494]:
+                - row "Screening -1 Part B (Phase 3) 2026-02-02 · 08:00 AM Completed Approved Completed Pay stipend Add general payment" [ref=e495] [cursor=pointer]:
+                  - cell "Screening -1 Part B (Phase 3)" [ref=e496]:
+                    - paragraph [ref=e497]: Screening -1
+                    - paragraph [ref=e498]: Part B (Phase 3)
+                  - cell "2026-02-02 · 08:00 AM" [ref=e499]
+                  - cell "Completed" [ref=e500]:
+                    - generic [ref=e501]: Completed
+                  - cell "Approved" [ref=e503]:
+                    - generic [ref=e504]: Approved
+                  - cell "Completed" [ref=e506]:
+                    - generic [ref=e507]: Completed
+                  - cell "Pay stipend Add general payment" [ref=e509]:
+                    - generic [ref=e510]:
+                      - button "Pay stipend" [ref=e511]
+                      - button "Add general payment" [ref=e512]
+                - row "Baseline D1 -> Part B Part B (Phase 3) 2026-02-16 · 05:00 AM Pending Pending Scheduled Pay stipend Add general payment" [ref=e513] [cursor=pointer]:
+                  - cell "Baseline D1 -> Part B Part B (Phase 3)" [ref=e514]:
+                    - paragraph [ref=e515]: Baseline D1 -> Part B
+                    - paragraph [ref=e516]: Part B (Phase 3)
+                  - cell "2026-02-16 · 05:00 AM" [ref=e517]
+                  - cell "Pending" [ref=e518]:
+                    - generic [ref=e519]: Pending
+                  - cell "Pending" [ref=e521]:
+                    - generic [ref=e522]: Pending
+                  - cell "Scheduled" [ref=e524]:
+                    - generic [ref=e525]: Scheduled
+                  - cell "Pay stipend Add general payment" [ref=e527]:
+                    - generic [ref=e528]:
+                      - button "Pay stipend" [ref=e529]
+                      - button "Add general payment" [ref=e530]
+                - row "Week 2 D15 +/- 2 Part B (Phase 3) 2026-03-01 · 08:30 AM Pending Pending Planned Pay stipend Add general payment" [ref=e531] [cursor=pointer]:
+                  - cell "Week 2 D15 +/- 2 Part B (Phase 3)" [ref=e532]:
+                    - paragraph [ref=e533]: Week 2 D15 +/- 2
+                    - paragraph [ref=e534]: Part B (Phase 3)
+                  - cell "2026-03-01 · 08:30 AM" [ref=e535]
+                  - cell "Pending" [ref=e536]:
+                    - generic [ref=e537]: Pending
+                  - cell "Pending" [ref=e539]:
+                    - generic [ref=e540]: Pending
+                  - cell "Planned" [ref=e542]:
+                    - generic [ref=e543]: Planned
+                  - cell "Pay stipend Add general payment" [ref=e545]:
+                    - generic [ref=e546]:
+                      - button "Pay stipend" [ref=e547]
+                      - button "Add general payment" [ref=e548]
+            - generic [ref=e549]:
+              - generic [ref=e550]:
+                - generic [ref=e551]:
+                  - paragraph [ref=e552]: Current visit
+                  - heading "Baseline D1 -> Part B" [level=4] [ref=e553]
+                - generic [ref=e554]: Scheduled
+              - generic [ref=e556]:
+                - generic [ref=e557]: Source verified
+                - checkbox "Source verified" [ref=e558]
+              - generic [ref=e559]:
+                - generic [ref=e560]: Remote monitoring enabled
+                - checkbox "Remote monitoring enabled" [checked] [ref=e561]
+              - generic [ref=e562]:
+                - text: Visit type
+                - combobox "Visit type" [ref=e563]:
+                  - option "On site" [selected]
+                  - option "Televisit"
+                  - option "Phone follow-up"
+              - generic [ref=e564]:
+                - text: Visit notes
+                - textbox "Visit notes" [ref=e565]: Window open. Needs source verification before final QC.
+              - generic [ref=e566]:
+                - button "Mark complete" [ref=e567] [cursor=pointer]
+                - button "Release stipend" [ref=e568] [cursor=pointer]
+      - complementary [ref=e265]:
+        - generic [ref=e569]:
+          - generic [ref=e571]:
+            - heading "Subject snapshot" [level=3] [ref=e572]
+            - paragraph [ref=e573]: Live summary tied to the selected workbench subject.
+          - generic [ref=e575]:
+            - generic [ref=e576]:
+              - paragraph [ref=e577]: Current subject
+              - paragraph [ref=e578]: 1074-A3A-201A
+              - paragraph [ref=e579]: Elizabeth Merrill
+            - generic [ref=e580]:
+              - generic [ref=e581]:
+                - paragraph [ref=e582]: Status
+                - paragraph [ref=e583]: Randomized
+              - generic [ref=e584]:
+                - paragraph [ref=e585]: Next visit
+                - paragraph [ref=e586]: 2026-02-16
+              - generic [ref=e587]:
+                - paragraph [ref=e588]: Released
+                - paragraph [ref=e589]: $225
+              - generic [ref=e590]:
+                - paragraph [ref=e591]: Pending payouts
+                - paragraph [ref=e592]: "1"
+        - generic [ref=e593]:
+          - generic [ref=e595]:
+            - heading "Action queue" [level=3] [ref=e596]
+            - paragraph [ref=e597]: Fast-glance blockers for the selected subject.
+          - generic [ref=e599]:
+            - generic [ref=e600]:
+              - img [ref=e601]
+              - generic [ref=e606]:
+                - paragraph [ref=e607]: Visit readiness
+                - paragraph [ref=e608]: Baseline D1 -> Part B is next in line.
+            - generic [ref=e609]:
+              - img [ref=e610]
+              - generic [ref=e614]:
+                - paragraph [ref=e615]: Signature queue
+                - paragraph [ref=e616]: 1 pending document(s).
+            - generic [ref=e617]:
+              - img [ref=e618]
+              - generic [ref=e621]:
+                - paragraph [ref=e622]: Payouts
+                - paragraph [ref=e623]: 0 stipend(s) ready to release.
+    - generic [ref=e625]: Stipend released.
+  - region "Service disclaimer" [ref=e23]:
+    - generic [ref=e24]:
+      - paragraph [ref=e25]:
+        - strong [ref=e26]: "What we do:"
+        - text: We coordinate private medical evidence (DBQs and independent medical opinions) to support veterans' disability claims. We do not provide legal advice, representation, or submit VA claims.
+      - generic [ref=e27]:
+        - link "Services" [ref=e28] [cursor=pointer]:
+          - /url: services.html
+        - link "FAQs" [ref=e29] [cursor=pointer]:
+          - /url: faqs.html
+        - link "How It Works" [ref=e30] [cursor=pointer]:
+          - /url: how-it-works.html

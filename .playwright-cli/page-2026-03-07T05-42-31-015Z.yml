@@ -1,0 +1,199 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e424]:
+    - generic [ref=e426]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e428] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e430]
+        - generic [ref=e433]:
+          - generic [ref=e434]: Thank You For Your Service
+          - generic [ref=e435]: Veteran Owned & Operated
+      - generic [ref=e436]:
+        - link "Home" [ref=e437] [cursor=pointer]:
+          - /url: index.html
+        - link "About Us" [ref=e438] [cursor=pointer]:
+          - /url: about_us.html
+        - link "Our Team" [ref=e439] [cursor=pointer]:
+          - /url: mission_team.html
+        - link "Our Process" [ref=e440] [cursor=pointer]:
+          - /url: process.html
+        - button "VA Claims" [ref=e442] [cursor=pointer]:
+          - text: VA Claims
+          - img [ref=e443]
+        - button "Resources" [ref=e446] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e447]
+        - button "Cmd/Ctrl + K" [ref=e449] [cursor=pointer]:
+          - img [ref=e450]
+          - generic [ref=e453]: Cmd/Ctrl + K
+        - button "Accessibility" [ref=e455] [cursor=pointer]:
+          - img [ref=e456]
+          - generic [ref=e462]: Accessibility
+        - link "Book Discovery Call" [ref=e463] [cursor=pointer]:
+          - /url: contact.html
+          - text: Book Discovery Call
+          - img [ref=e464]
+  - main [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e46]:
+        - generic [ref=e48]:
+          - img [ref=e50]
+          - generic [ref=e53]:
+            - heading "TYFYS" [level=1] [ref=e54]
+            - paragraph [ref=e55]: Veteran OS v2.0
+        - navigation [ref=e56]:
+          - paragraph [ref=e57]: Main
+          - button "Mission Control" [ref=e58] [cursor=pointer]:
+            - img [ref=e59]
+            - text: Mission Control
+          - button "Doctor Portal" [ref=e61] [cursor=pointer]:
+            - img [ref=e62]
+            - text: Doctor Portal
+          - button "Secure Comms 1" [ref=e66] [cursor=pointer]:
+            - img [ref=e67]
+            - text: Secure Comms
+            - generic [ref=e69]: "1"
+          - button "Intake Portal" [disabled] [ref=e70]:
+            - img [ref=e71]
+            - text: Intake Portal
+            - img [ref=e74]
+          - paragraph [ref=e77]: Tools
+          - button "Dossier Scanner" [ref=e78] [cursor=pointer]:
+            - img [ref=e79]
+            - text: Dossier Scanner
+          - button "VA Math" [ref=e83] [cursor=pointer]:
+            - img [ref=e84]
+            - text: VA Math
+          - button "PACT Act Explorer" [ref=e86] [cursor=pointer]:
+            - img [ref=e87]
+            - text: PACT Act Explorer
+          - button "Nexus Generator" [ref=e89] [cursor=pointer]:
+            - img [ref=e90]
+            - text: Nexus Generator
+          - button "Evidence Finder" [ref=e93] [cursor=pointer]:
+            - img [ref=e94]
+            - text: Evidence Finder
+          - button "Plans & Pricing" [ref=e98] [cursor=pointer]:
+            - img [ref=e99]
+            - text: Plans & Pricing
+          - paragraph [ref=e102]: Premium
+          - button "TYFYS Claims Bot" [ref=e103] [cursor=pointer]:
+            - img [ref=e104]
+            - text: TYFYS Claims Bot
+            - img [ref=e107]
+          - button "Private Specialist" [ref=e110]:
+            - img [ref=e111]
+            - text: Private Specialist
+            - img [ref=e114]
+        - generic [ref=e117]:
+          - generic [ref=e120]: Sales Ready
+          - paragraph [ref=e121]: "ID: VET-8821"
+          - button "Upgrade Now" [ref=e122] [cursor=pointer]
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - generic [ref=e126]:
+            - paragraph [ref=e127]: Encrypted Messaging
+            - heading "Secure Comms" [level=2] [ref=e779]
+            - paragraph [ref=e129]: Message TYFYS and assigned doctors from one shared inbox.
+          - generic [ref=e130]:
+            - button "Doctor Portal" [ref=e780] [cursor=pointer]:
+              - img [ref=e781]
+              - text: Doctor Portal
+            - button "Ask Angela" [ref=e141] [cursor=pointer]:
+              - img [ref=e142]
+              - text: Ask Angela
+        - main [ref=e144]:
+          - generic [ref=e785]:
+            - generic [ref=e787]:
+              - generic [ref=e788]:
+                - paragraph [ref=e789]: One inbox, shared care
+                - heading "Secure Comms" [level=2] [ref=e790]
+                - paragraph [ref=e791]: Message TYFYS care ops and your assigned doctors from one shared inbox. Each thread carries visit context, response expectations, and a clean running history of packet updates.
+              - generic [ref=e792]:
+                - generic [ref=e793]:
+                  - paragraph [ref=e794]: Active threads
+                  - paragraph [ref=e795]: "3"
+                - generic [ref=e796]:
+                  - paragraph [ref=e797]: Unread
+                  - paragraph [ref=e798]: "1"
+                - generic [ref=e799]:
+                  - paragraph [ref=e800]: Selected SLA
+                  - paragraph [ref=e801]: Replies the same business day
+            - generic [ref=e802]:
+              - complementary [ref=e803]:
+                - generic [ref=e804]:
+                  - paragraph [ref=e805]: Shared inbox
+                  - heading "Care channels" [level=3] [ref=e806]
+                - generic [ref=e807]:
+                  - button "TYFYS Care Ops Scheduling, records, and intake routing 9:42 AM We pushed your packet to Dr. Miller and synced the prep visit. TYFYS team Replies within 1 business hour" [ref=e808] [cursor=pointer]:
+                    - generic [ref=e809]:
+                      - generic [ref=e810]:
+                        - paragraph [ref=e811]: TYFYS Care Ops
+                        - paragraph [ref=e812]: Scheduling, records, and intake routing
+                      - paragraph [ref=e814]: 9:42 AM
+                    - paragraph [ref=e815]: We pushed your packet to Dr. Miller and synced the prep visit.
+                    - generic [ref=e816]:
+                      - generic [ref=e817]: TYFYS team
+                      - generic [ref=e818]: Replies within 1 business hour
+                  - button "Dr. Amanda Miller Assigned physician partner Yesterday Please have your MRI report and medication list nearby for our visit. Doctor direct Replies the same business day" [ref=e819] [cursor=pointer]:
+                    - generic [ref=e820]:
+                      - generic [ref=e821]:
+                        - paragraph [ref=e822]: Dr. Amanda Miller
+                        - paragraph [ref=e823]: Assigned physician partner
+                      - paragraph [ref=e825]: Yesterday
+                    - paragraph [ref=e826]: Please have your MRI report and medication list nearby for our visit.
+                    - generic [ref=e827]:
+                      - generic [ref=e828]: Doctor direct
+                      - generic [ref=e829]: Replies the same business day
+                  - button "Dr. Elise Warren + TYFYS Behavioral health shared channel 8:15 AM 1 Your anxiety and PTSD symptom tracker is attached for tomorrow's consult. Shared care channel Replies within 4 business hours" [ref=e830] [cursor=pointer]:
+                    - generic [ref=e831]:
+                      - generic [ref=e832]:
+                        - paragraph [ref=e833]: Dr. Elise Warren + TYFYS
+                        - paragraph [ref=e834]: Behavioral health shared channel
+                      - generic [ref=e835]:
+                        - paragraph [ref=e836]: 8:15 AM
+                        - generic [ref=e837]: "1"
+                    - paragraph [ref=e838]: Your anxiety and PTSD symptom tracker is attached for tomorrow's consult.
+                    - generic [ref=e839]:
+                      - generic [ref=e840]: Shared care channel
+                      - generic [ref=e841]: Replies within 4 business hours
+              - generic [ref=e842]:
+                - generic [ref=e843]:
+                  - generic [ref=e844]:
+                    - generic [ref=e845]:
+                      - generic [ref=e846]: Doctor direct
+                      - generic [ref=e847]: Replies the same business day
+                    - heading "Dr. Amanda Miller" [level=3] [ref=e848]
+                    - paragraph [ref=e849]: Assigned physician partner
+                  - button "Open Doctor Portal" [ref=e850] [cursor=pointer]
+                - generic [ref=e852]:
+                  - paragraph [ref=e854]: I reviewed your claim packet. Please have your MRI report and medication list nearby for our visit.
+                  - generic [ref=e855]: Dr. Amanda Miller • Yesterday
+                - generic [ref=e856]:
+                  - textbox "Message Dr. Amanda Miller..." [ref=e857]
+                  - button "Send" [ref=e858] [cursor=pointer]:
+                    - img [ref=e859]
+                    - text: Send
+      - generic [ref=e359]:
+        - generic [ref=e360]:
+          - generic [ref=e361]:
+            - img [ref=e364]
+            - generic [ref=e368]:
+              - paragraph [ref=e369]: Angela - Guide
+              - paragraph [ref=e370]: Online | Here for You
+          - button [ref=e371] [cursor=pointer]:
+            - img [ref=e372]
+        - generic [ref=e769]: It is wonderful to meet you, Richard. Your profile is all set. Welcome to your Mission Control.
+        - generic [ref=e377]:
+          - textbox "Ask Angela anything..." [ref=e378]
+          - button [disabled] [ref=e379]:
+            - img [ref=e380]
+  - generic [ref=e772] [cursor=pointer]:
+    - emphasis [ref=e773]: 
+    - generic [ref=e774]:
+      - generic "We're offline" [ref=e775]
+      - paragraph [ref=e776]: Leave a message
+      - text: 
+    - text: 
+  - generic:
+    - generic:
+      - iframe

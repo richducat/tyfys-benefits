@@ -1,0 +1,2 @@
+[    1180ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:4175/api/crm:0
+[   26570ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ http://localhost:4175/api/auth-login:0

@@ -1,0 +1,33 @@
+{
+  "name": "tyfys-mobile-shell",
+  "private": true,
+  "version": "1.0.0",
+  "description": "TYFYS mobile shell for iOS and Android using Capacitor",
+  "scripts": {
+    "build:web": "node scripts/build-mobile-web.mjs",
+    "build:crm": "node scripts/build-crm-web.mjs",
+    "android:add": "npm run build:web && npx cap add android",
+    "android:sync": "npm run build:web && npx cap sync android",
+    "android:open": "npx cap open android",
+    "android:build:debug": "npm run build:web && npx cap sync android && cd android && ./gradlew assembleDebug",
+    "ios:add": "npx cap add ios",
+    "ios:sync": "npm run build:web && npx cap sync ios",
+    "ios:open": "npx cap open ios",
+    "ios:build:nosign": "npm run build:web && npx cap sync ios && xcodebuild -workspace ios/App/App.xcworkspace -scheme App -configuration Debug -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/app": "^6.0.1",
+    "@capacitor/browser": "^6.0.1",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/filesystem": "^6.0.1",
+    "@capacitor/keyboard": "^6.0.1",
+    "@capacitor/share": "^6.0.1",
+    "@capacitor/status-bar": "^6.0.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/ios": "^6.1.2",
+    "esbuild": "^0.21.5"
+  }
+}

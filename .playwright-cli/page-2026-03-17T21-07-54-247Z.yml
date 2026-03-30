@@ -1,0 +1,76 @@
+- main [ref=e2]:
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - img [ref=e21]
+        - generic [ref=e24]:
+          - paragraph [ref=e25]: TYFYS Veteran Access
+          - paragraph [ref=e26]: Private claim support account
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - img [ref=e29]
+          - text: Secure login and saved progress
+        - heading "Log in or start your TYFYS account" [level=1] [ref=e32]
+        - paragraph [ref=e33]: If you already have a TYFYS login, sign in first. If you are new here, use the new-account button below and we will walk you through setup step by step.
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - img [ref=e36]
+          - paragraph [ref=e39]: Save your profile
+          - paragraph [ref=e40]: Keep your contact info and claim details on this device so you do not have to re-enter them.
+        - generic [ref=e41]:
+          - img [ref=e42]
+          - paragraph [ref=e45]: Resume your account
+          - paragraph [ref=e46]: Return to your records, rating work, and next steps where you left off.
+        - generic [ref=e47]:
+          - img [ref=e48]
+          - paragraph [ref=e51]: Come back without starting over
+          - paragraph [ref=e52]: Use one secure login on this device to reopen TYFYS and pick back up later.
+      - generic [ref=e53]:
+        - paragraph [ref=e54]: Saved on this device
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - img [ref=e58]
+            - paragraph [ref=e61]: Your secure TYFYS login for this device
+          - generic [ref=e62]:
+            - img [ref=e64]
+            - paragraph [ref=e67]: Your setup answers and contact details
+          - generic [ref=e68]:
+            - img [ref=e70]
+            - paragraph [ref=e73]: Your saved progress when you come back
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - paragraph [ref=e76]: Password Help
+        - heading "Reset your password" [level=2] [ref=e112]
+        - paragraph [ref=e78]: Use the email reset link if you can still reach the inbox on file. If not, verify the ZIP code, last name, and phone ending saved in your TYFYS profile.
+      - generic [ref=e113]:
+        - generic [ref=e114]:
+          - generic [ref=e115]: Use the same email you used to create your TYFYS account. If email delivery is available, we will send a secure reset link there.
+          - generic [ref=e116]:
+            - generic [ref=e117]: Account email
+            - textbox "you@example.com" [ref=e118]
+          - button "Email Me a Reset Link" [ref=e119] [cursor=pointer]:
+            - text: Email Me a Reset Link
+            - img [ref=e120]
+        - generic [ref=e125]: Or
+        - generic [ref=e126]:
+          - generic [ref=e127]: Cannot reach your email right now? Verify the details TYFYS already has on file and you can choose a new password immediately.
+          - generic [ref=e128]:
+            - generic [ref=e129]: Account email
+            - textbox "you@example.com" [ref=e130]
+          - generic [ref=e131]:
+            - generic [ref=e132]:
+              - generic [ref=e133]: ZIP code on file
+              - textbox "12345" [ref=e134]
+            - generic [ref=e135]:
+              - generic [ref=e136]: Phone ending
+              - textbox "Last 4 digits" [ref=e137]
+          - generic [ref=e138]:
+            - generic [ref=e139]: Last name on file
+            - textbox "Your last name" [ref=e140]
+          - button "Verify My Account Details" [ref=e141] [cursor=pointer]:
+            - text: Verify My Account Details
+            - img [ref=e142]
+        - generic [ref=e145]: TYFYS only opens the password screen when the account details match what is already saved for that member.
+        - button "Back to Sign-In" [ref=e146] [cursor=pointer]:
+          - img [ref=e147]
+          - text: Back to Sign-In

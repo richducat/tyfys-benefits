@@ -1,0 +1,183 @@
+- main [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - generic [ref=e10]: TY
+          - generic [ref=e11]:
+            - generic [ref=e12]: Thank You
+            - text: For Your Service
+        - generic [ref=e13]: Step 1/10
+      - generic [ref=e17]:
+        - heading "Before We Begin" [level=1] [ref=e18]
+        - generic [ref=e20]:
+          - paragraph [ref=e21]: Do you understand TYFYS is a private company and not the VA or a VSO?
+          - generic [ref=e22]:
+            - button "Yes" [ref=e23] [cursor=pointer]
+            - button "No" [ref=e24] [cursor=pointer]
+      - button "Next Step" [ref=e26] [cursor=pointer]:
+        - text: Next Step
+        - img [ref=e27]
+    - generic [ref=e29]:
+      - generic [ref=e31]:
+        - img [ref=e33]
+        - generic [ref=e36]:
+          - heading "TYFYS" [level=1] [ref=e37]
+          - paragraph [ref=e38]: Veteran Claim Workspace
+      - navigation [ref=e39]:
+        - paragraph [ref=e40]: Main
+        - button "Claim Home" [ref=e41] [cursor=pointer]:
+          - img [ref=e42]
+          - text: Claim Home
+        - button "Care Team" [ref=e44] [cursor=pointer]:
+          - img [ref=e45]
+          - text: Care Team
+        - button "Messages 1" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - text: Messages
+          - generic [ref=e52]: "1"
+        - button "Records Intake" [ref=e53] [cursor=pointer]:
+          - img [ref=e54]
+          - text: Records Intake
+        - paragraph [ref=e57]: Tools
+        - button "Records Vault" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - text: Records Vault
+        - button "VA Rating Calculator" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - text: VA Rating Calculator
+        - button "PACT Act Guide" [ref=e66] [cursor=pointer]:
+          - img [ref=e67]
+          - text: PACT Act Guide
+        - button "Medical Opinion Draft" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+          - text: Medical Opinion Draft
+        - button "Evidence Checklist" [ref=e73] [cursor=pointer]:
+          - img [ref=e74]
+          - text: Evidence Checklist
+        - button "Support Options" [ref=e78] [cursor=pointer]:
+          - img [ref=e79]
+          - text: Support Options
+        - paragraph [ref=e82]: Guided Support
+        - button "Claim Guide" [ref=e83] [cursor=pointer]:
+          - img [ref=e84]
+          - text: Claim Guide
+          - img [ref=e87]
+        - button "Independent Doctor Support" [ref=e90]:
+          - img [ref=e91]
+          - text: Independent Doctor Support
+          - img [ref=e94]
+      - generic [ref=e97]:
+        - generic [ref=e100]: Self-Guided
+        - paragraph [ref=e101]: "ID: VET-8821"
+        - button "Explore Support Options" [ref=e102] [cursor=pointer]
+    - generic [ref=e103]:
+      - generic [ref=e104]:
+        - generic [ref=e106]:
+          - paragraph [ref=e107]: Evidence checklist
+          - heading "Evidence Checklist" [level=2] [ref=e108]
+          - paragraph [ref=e109]: See the forms, records, and supporting documents tied to a condition.
+        - generic [ref=e110]:
+          - generic [ref=e111]:
+            - button "Care Team" [ref=e112] [cursor=pointer]:
+              - img [ref=e113]
+              - text: Care Team
+            - button "Messages 1" [ref=e117] [cursor=pointer]:
+              - img [ref=e118]
+              - text: Messages
+              - generic [ref=e120]: "1"
+          - button "Ask Angela" [ref=e121] [cursor=pointer]:
+            - img [ref=e122]
+            - text: Ask Angela
+      - main [ref=e124]:
+        - generic [ref=e126]:
+          - generic [ref=e127]:
+            - generic [ref=e128]:
+              - heading "Evidence Checklist" [level=2] [ref=e129]
+              - paragraph [ref=e130]: Choose a condition to see the main VA form and supporting records that usually matter.
+            - generic [ref=e131]: Free Tool
+          - generic [ref=e132]:
+            - generic [ref=e133]:
+              - generic [ref=e134]: "1"
+              - paragraph [ref=e135]: Choose condition
+              - img [ref=e137]
+            - generic [ref=e139]:
+              - generic [ref=e140]: "2"
+              - paragraph [ref=e141]: Review checklist
+              - img [ref=e143]
+            - generic [ref=e145]:
+              - generic [ref=e146]: "3"
+              - paragraph [ref=e147]: Gather records
+          - generic [ref=e148]:
+            - generic [ref=e149]: "I want help with:"
+            - combobox [ref=e150]:
+              - option "Select a condition..."
+              - option "PTSD" [selected]
+              - option "Major Depressive Disorder"
+              - option "Anxiety Condition"
+              - option "Migraines"
+              - option "Peripheral Neuropathy"
+              - option "TBI Residuals"
+              - option "Lumbosacral (Back) Strain"
+              - option "Cervical (Neck) Strain"
+              - option "Knee Strain/Pain"
+              - option "Plantar Fasciitis"
+              - option "Sleep Apnea"
+              - option "Asthma"
+              - option "Sinusitis/Rhinitis"
+              - option "Tinnitus"
+              - option "Hearing Loss"
+              - option "GERD"
+              - option "IBS"
+          - generic [ref=e175]:
+            - heading "What to gather" [level=3] [ref=e176]:
+              - img [ref=e177]
+              - text: What to gather
+            - list [ref=e180]:
+              - listitem [ref=e181]:
+                - generic [ref=e182]: DBQ
+                - generic [ref=e183]:
+                  - generic [ref=e184]:
+                    - generic [ref=e185]: PTSD DBQ (21-0960P-2)
+                    - button [ref=e187] [cursor=pointer]:
+                      - img [ref=e188]
+                  - text: Official VA Questionnaire.
+                - button "Ask TYFYS About This" [ref=e191] [cursor=pointer]
+              - listitem [ref=e192]:
+                - generic [ref=e193]: RECORD
+                - generic [ref=e194]:
+                  - generic [ref=e195]:
+                    - generic [ref=e196]: Stressors Statement (21-0781)
+                    - button [ref=e198] [cursor=pointer]:
+                      - img [ref=e199]
+                  - text: Supporting evidence.
+              - listitem [ref=e202]:
+                - generic [ref=e203]: RECORD
+                - generic [ref=e204]:
+                  - generic [ref=e205]:
+                    - generic [ref=e206]: Private Psychologist Nexus
+                    - button [ref=e208] [cursor=pointer]:
+                      - img [ref=e209]
+                  - text: Supporting evidence.
+              - listitem [ref=e212]:
+                - generic [ref=e213]: NEXUS
+                - generic [ref=e214]:
+                  - generic [ref=e215]:
+                    - generic [ref=e216]: Medical Opinion
+                    - button [ref=e218] [cursor=pointer]:
+                      - img [ref=e219]
+                  - text: Often important.
+                - button "Find an Independent Doctor" [ref=e222] [cursor=pointer]
+    - generic [ref=e151]:
+      - generic [ref=e152]:
+        - generic [ref=e153]:
+          - img [ref=e156]
+          - generic [ref=e160]:
+            - paragraph [ref=e161]: Angela - TYFYS Guide
+            - paragraph [ref=e162]: Online | Ready to help
+        - button [ref=e163] [cursor=pointer]:
+          - img [ref=e164]
+      - generic [ref=e169]:
+        - textbox "Ask Angela about your claim..." [ref=e170]
+        - button [disabled] [ref=e171]:
+          - img [ref=e172]

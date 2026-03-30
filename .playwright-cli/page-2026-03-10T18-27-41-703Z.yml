@@ -1,0 +1,28 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e6] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e8]
+        - generic [ref=e11]:
+          - generic [ref=e12]: Thank You For Your Service
+          - generic [ref=e13]: Veteran Owned & Operated
+      - generic [ref=e62]:
+        - button "Open command palette" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+        - button "Open navigation" [ref=e67] [cursor=pointer]:
+          - img [ref=e68]
+          - generic [ref=e69]: Menu
+  - main [ref=e44]:
+    - generic [ref=e48]:
+      - img [ref=e51]
+      - heading "Maximize Your VA Rating. Stop Leaving Money on the Table." [level=1] [ref=e54]:
+        - text: Maximize Your VA Rating.
+        - generic [ref=e55]: Stop Leaving Money on the Table.
+      - paragraph [ref=e56]: Get the Expert Strategy, Private Medical Evidence, and Tools you need to win your claim in months, not years.
+      - generic [ref=e57]:
+        - strong [ref=e58]: "NOTICE:"
+        - text: We are a private organization of medical and legal experts. We are not the VA.
+      - button "Initialize System" [ref=e59] [cursor=pointer]:
+        - text: Initialize System
+        - img [ref=e60]

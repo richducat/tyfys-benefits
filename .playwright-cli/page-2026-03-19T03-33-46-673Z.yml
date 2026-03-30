@@ -1,0 +1,267 @@
+- generic [ref=e111]:
+  - generic [ref=e113]:
+    - generic [ref=e115]:
+      - generic [ref=e116]:
+        - generic [ref=e117]: TY
+        - generic [ref=e118]:
+          - generic [ref=e119]: Thank You
+          - text: For Your Service
+      - generic [ref=e120]: Step 1/10
+    - generic [ref=e124]:
+      - heading "Before We Begin" [level=1] [ref=e125]
+      - generic [ref=e127]:
+        - paragraph [ref=e128]: Do you understand TYFYS is a private company and not the VA or a VSO?
+        - generic [ref=e129]:
+          - button "Yes" [ref=e130] [cursor=pointer]
+          - button "No" [ref=e131] [cursor=pointer]
+    - button "Next Step" [ref=e133] [cursor=pointer]:
+      - text: Next Step
+      - img [ref=e134]
+  - generic [ref=e136]:
+    - generic [ref=e138]:
+      - img [ref=e140]
+      - generic [ref=e143]:
+        - heading "TYFYS" [level=1] [ref=e144]
+        - paragraph [ref=e145]: Veteran Claim Workspace
+    - navigation [ref=e146]:
+      - paragraph [ref=e147]: Main
+      - button "Claim Home" [ref=e148] [cursor=pointer]:
+        - img [ref=e149]
+        - text: Claim Home
+      - button "Care Team" [ref=e151] [cursor=pointer]:
+        - img [ref=e152]
+        - text: Care Team
+      - button "Messages 1" [ref=e156] [cursor=pointer]:
+        - img [ref=e157]
+        - text: Messages
+        - generic [ref=e159]: "1"
+      - button "Records Intake" [ref=e160] [cursor=pointer]:
+        - img [ref=e161]
+        - text: Records Intake
+      - paragraph [ref=e164]: Tools
+      - button "Records Vault" [ref=e165] [cursor=pointer]:
+        - img [ref=e166]
+        - text: Records Vault
+      - button "VA Rating Calculator" [ref=e170] [cursor=pointer]:
+        - img [ref=e171]
+        - text: VA Rating Calculator
+      - button "PACT Act Guide" [ref=e173] [cursor=pointer]:
+        - img [ref=e174]
+        - text: PACT Act Guide
+      - button "Medical Opinion Draft" [ref=e176] [cursor=pointer]:
+        - img [ref=e177]
+        - text: Medical Opinion Draft
+      - button "Evidence Checklist" [ref=e180] [cursor=pointer]:
+        - img [ref=e181]
+        - text: Evidence Checklist
+      - button "Support Options" [ref=e185] [cursor=pointer]:
+        - img [ref=e186]
+        - text: Support Options
+      - paragraph [ref=e189]: Guided Support
+      - button "Claim Guide" [ref=e190] [cursor=pointer]:
+        - img [ref=e191]
+        - text: Claim Guide
+        - img [ref=e194]
+      - button "Independent Doctor Support" [ref=e197]:
+        - img [ref=e198]
+        - text: Independent Doctor Support
+        - img [ref=e201]
+    - generic [ref=e204]:
+      - generic [ref=e207]: Self-Guided
+      - paragraph [ref=e208]: "ID: VET-8821"
+      - button "Explore Support Options" [ref=e209] [cursor=pointer]
+  - generic [ref=e210]:
+    - banner [ref=e211]:
+      - generic [ref=e213]:
+        - paragraph [ref=e214]: Start here
+        - heading "Claim Home" [level=2] [ref=e215]
+        - paragraph [ref=e216]: Review your profile, records, ratings, and next steps in one place.
+      - generic [ref=e217]:
+        - generic [ref=e218]:
+          - button "Care Team" [ref=e219] [cursor=pointer]:
+            - img [ref=e220]
+            - text: Care Team
+          - button "Messages 1" [ref=e224] [cursor=pointer]:
+            - img [ref=e225]
+            - text: Messages
+            - generic [ref=e227]: "1"
+        - button "Ask Angela" [ref=e228] [cursor=pointer]:
+          - img [ref=e229]
+          - text: Ask Angela
+    - main [ref=e231]:
+      - generic [ref=e233]:
+        - generic [ref=e234]:
+          - button [ref=e235] [cursor=pointer]:
+            - img [ref=e236]
+          - generic [ref=e239]:
+            - img [ref=e242]
+            - generic [ref=e246]:
+              - heading "Veteran Profile" [level=1] [ref=e247]
+              - generic [ref=e248]:
+                - generic [ref=e249]:
+                  - paragraph [ref=e250]: Branch
+                  - paragraph [ref=e251]: "-"
+                - generic [ref=e252]:
+                  - paragraph [ref=e253]: Era
+                  - paragraph [ref=e254]: "-"
+                - generic [ref=e255]:
+                  - paragraph [ref=e256]: Rating
+                  - paragraph [ref=e257]: 0%
+                - generic [ref=e258]:
+                  - paragraph [ref=e259]: Discount
+                  - paragraph [ref=e260]: LOCKED
+        - button "Show Me Where To Start" [ref=e261] [cursor=pointer]:
+          - img [ref=e262]
+          - text: Show Me Where To Start
+        - generic [ref=e264]:
+          - button "0 saved Records Vault Upload records, read scanned text, and keep your evidence organized on this device." [ref=e265] [cursor=pointer]:
+            - generic [ref=e266]:
+              - img [ref=e268]
+              - generic [ref=e272]: 0 saved
+            - paragraph [ref=e273]: Records Vault
+            - paragraph [ref=e274]: Upload records, read scanned text, and keep your evidence organized on this device.
+          - button "0% VA Rating Calculator See combined-rating steps, exact rounding, and a path to 100%." [ref=e275] [cursor=pointer]:
+            - generic [ref=e276]:
+              - img [ref=e278]
+              - generic [ref=e280]: 0%
+            - paragraph [ref=e281]: VA Rating Calculator
+            - paragraph [ref=e282]: See combined-rating steps, exact rounding, and a path to 100%.
+          - button "Post-9/11 PACT Act Guide Check presumptive conditions by era and exposure track with official VA sources." [ref=e283] [cursor=pointer]:
+            - generic [ref=e284]:
+              - img [ref=e286]
+              - generic [ref=e288]: Post-9/11
+            - paragraph [ref=e289]: PACT Act Guide
+            - paragraph [ref=e290]: Check presumptive conditions by era and exposure track with official VA sources.
+          - button "0 records Medical Opinion Draft Organize the facts a doctor would need to write a medical opinion that connects your condition to service." [ref=e291] [cursor=pointer]:
+            - generic [ref=e292]:
+              - img [ref=e294]
+              - generic [ref=e297]: 0 records
+            - paragraph [ref=e298]: Medical Opinion Draft
+            - paragraph [ref=e299]: Organize the facts a doctor would need to write a medical opinion that connects your condition to service.
+        - generic [ref=e300]:
+          - button "Care team Care Team See your TYFYS contacts, provider appointments, and who is handling each part of your file. TYFYS contacts 2 Next appointment March 9, 2026 · 2:00 PM ET Pending follow-ups 0" [ref=e301] [cursor=pointer]:
+            - generic [ref=e302]:
+              - generic [ref=e303]:
+                - paragraph [ref=e304]: Care team
+                - heading "Care Team" [level=3] [ref=e305]
+                - paragraph [ref=e306]: See your TYFYS contacts, provider appointments, and who is handling each part of your file.
+              - img [ref=e308]
+            - generic [ref=e312]:
+              - generic [ref=e313]:
+                - paragraph [ref=e314]: TYFYS contacts
+                - paragraph [ref=e315]: "2"
+              - generic [ref=e316]:
+                - paragraph [ref=e317]: Next appointment
+                - paragraph [ref=e318]: March 9, 2026 · 2:00 PM ET
+              - generic [ref=e319]:
+                - paragraph [ref=e320]: Pending follow-ups
+                - paragraph [ref=e321]: "0"
+          - button "Shared inbox Messages Keep TYFYS and your assigned providers in one secure inbox with clear next steps and reply windows. TYFYS Support Team We shared your records with Dr. Miller and confirmed the prep visit. 9:42 AM Up to date Dr. Amanda Miller Please have your MRI report and medication list nearby for our visit. Yesterday Up to date Dr. Elise Warren and TYFYS Your anxiety and PTSD symptom tracker is attached for tomorrow's consult. 8:15 AM 1 new" [ref=e322] [cursor=pointer]:
+            - generic [ref=e323]:
+              - generic [ref=e324]:
+                - paragraph [ref=e325]: Shared inbox
+                - heading "Messages" [level=3] [ref=e326]
+                - paragraph [ref=e327]: Keep TYFYS and your assigned providers in one secure inbox with clear next steps and reply windows.
+              - img [ref=e329]
+            - generic [ref=e331]:
+              - generic [ref=e332]:
+                - generic [ref=e333]:
+                  - paragraph [ref=e334]: TYFYS Support Team
+                  - paragraph [ref=e335]: We shared your records with Dr. Miller and confirmed the prep visit.
+                - generic [ref=e336]:
+                  - paragraph [ref=e337]: 9:42 AM
+                  - paragraph [ref=e338]: Up to date
+              - generic [ref=e339]:
+                - generic [ref=e340]:
+                  - paragraph [ref=e341]: Dr. Amanda Miller
+                  - paragraph [ref=e342]: Please have your MRI report and medication list nearby for our visit.
+                - generic [ref=e343]:
+                  - paragraph [ref=e344]: Yesterday
+                  - paragraph [ref=e345]: Up to date
+              - generic [ref=e346]:
+                - generic [ref=e347]:
+                  - paragraph [ref=e348]: Dr. Elise Warren and TYFYS
+                  - paragraph [ref=e349]: Your anxiety and PTSD symptom tracker is attached for tomorrow's consult.
+                - generic [ref=e350]:
+                  - paragraph [ref=e351]: 8:15 AM
+                  - paragraph [ref=e352]: 1 new
+        - generic [ref=e353]:
+          - generic [ref=e354]:
+            - generic [ref=e355]:
+              - heading "Tracked Conditions" [level=3] [ref=e356]:
+                - img [ref=e357]
+                - text: Tracked Conditions
+              - button "Add condition" [ref=e360] [cursor=pointer]
+            - generic [ref=e361]:
+              - img [ref=e362]
+              - paragraph [ref=e366]: No conditions added yet.
+              - paragraph [ref=e367]: Add conditions to see rating guidance and supporting records.
+              - button "Start here" [ref=e368] [cursor=pointer]
+          - generic [ref=e369]:
+            - generic [ref=e371]:
+              - generic [ref=e372]:
+                - heading "Support Level" [level=3] [ref=e373]:
+                  - img [ref=e374]
+                  - text: Support Level
+                - generic [ref=e377]: Self-Guided
+              - paragraph [ref=e378]: Upgrade for guided Angela access, monthly consult support, and service discounts.
+              - button "Explore Guided Support ($250/mo)" [ref=e379] [cursor=pointer]
+            - generic [ref=e380]:
+              - heading "Next Steps" [level=3] [ref=e381]
+              - generic [ref=e382]:
+                - button "Start Records Intake" [ref=e383] [cursor=pointer]:
+                  - generic [ref=e384]:
+                    - img [ref=e386]
+                    - generic [ref=e389]: Start Records Intake
+                  - img [ref=e390]
+                - button "Open Records Vault" [ref=e392] [cursor=pointer]:
+                  - generic [ref=e393]:
+                    - img [ref=e395]
+                    - generic [ref=e399]: Open Records Vault
+                  - img [ref=e400]
+                - button "Check PACT Presumptives" [ref=e402] [cursor=pointer]:
+                  - generic [ref=e403]:
+                    - img [ref=e405]
+                    - generic [ref=e407]: Check PACT Presumptives
+                  - img [ref=e408]
+        - generic [ref=e410]:
+          - generic [ref=e411]:
+            - img [ref=e413]
+            - heading "Success Stories" [level=3] [ref=e415]:
+              - img [ref=e416]
+              - text: Success Stories
+            - generic [ref=e418]:
+              - generic [ref=e419]:
+                - paragraph [ref=e420]: "\"Now I'm at 70% with secondary conditions recognized. My only regret is not doing this sooner.\""
+                - paragraph [ref=e421]: "- James T."
+              - generic [ref=e422]:
+                - paragraph [ref=e423]: "\"Rating increased to 70% with back pay that covered the fee ten times over.\""
+                - paragraph [ref=e424]: "- Christopher L."
+          - generic [ref=e425]:
+            - heading "Why We Win" [level=3] [ref=e426]:
+              - img [ref=e427]
+              - text: Why We Win
+            - generic [ref=e430]:
+              - generic [ref=e431]:
+                - generic [ref=e433]: VS
+                - generic [ref=e434]:
+                  - paragraph [ref=e435]: Traditional VSO
+                  - paragraph [ref=e436]: Free forms, but often requires risky C&P exams.
+              - generic [ref=e438]:
+                - img [ref=e440]
+                - generic [ref=e442]:
+                  - paragraph [ref=e443]: The TYFYS Method
+                  - paragraph [ref=e444]: Private medical records and doctor opinion letters. This can strengthen the file before a C&P exam is even scheduled.
+  - generic [ref=e445]:
+    - generic [ref=e446]:
+      - generic [ref=e447]:
+        - img [ref=e450]
+        - generic [ref=e454]:
+          - paragraph [ref=e455]: Angela - TYFYS Guide
+          - paragraph [ref=e456]: Online | Ready to help
+      - button [ref=e457] [cursor=pointer]:
+        - img [ref=e458]
+    - generic [ref=e463]:
+      - textbox "Ask Angela about your claim..." [ref=e464]
+      - button [disabled] [ref=e465]:
+        - img [ref=e466]

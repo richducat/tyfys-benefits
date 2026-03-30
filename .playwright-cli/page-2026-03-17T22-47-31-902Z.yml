@@ -1,0 +1,76 @@
+- generic [ref=e16]:
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - img [ref=e20]
+      - generic [ref=e23]:
+        - paragraph [ref=e24]: TYFYS Veteran Access
+        - paragraph [ref=e25]: Private claim support account
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - img [ref=e28]
+        - text: Secure login and saved progress
+      - heading "Log in or start your TYFYS account" [level=1] [ref=e31]
+      - paragraph [ref=e32]: If you already have a TYFYS login, sign in first. If you are new here, use the new-account button below and we will walk you through setup step by step.
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - img [ref=e35]
+        - paragraph [ref=e38]: Save your profile
+        - paragraph [ref=e39]: Keep your contact info and claim details on this device so you do not have to re-enter them.
+      - generic [ref=e40]:
+        - img [ref=e41]
+        - paragraph [ref=e44]: Resume your account
+        - paragraph [ref=e45]: Return to your records, rating work, and next steps where you left off.
+      - generic [ref=e46]:
+        - img [ref=e47]
+        - paragraph [ref=e50]: Come back without starting over
+        - paragraph [ref=e51]: Use one secure login on this device to reopen TYFYS and pick back up later.
+    - generic [ref=e52]:
+      - paragraph [ref=e53]: Saved on this device
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - img [ref=e57]
+          - paragraph [ref=e60]: Your secure TYFYS login for this device
+        - generic [ref=e61]:
+          - img [ref=e63]
+          - paragraph [ref=e66]: Your setup answers and contact details
+        - generic [ref=e67]:
+          - img [ref=e69]
+          - paragraph [ref=e72]: Your saved progress when you come back
+  - generic [ref=e73]:
+    - generic [ref=e74]:
+      - paragraph [ref=e75]: App Sign-In
+      - heading "Log in to continue" [level=2] [ref=e76]
+      - paragraph [ref=e77]: If you already have a TYFYS login, enter it here first. If you are new here, use the button below.
+    - generic [ref=e78]:
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]: Email
+          - textbox "you@example.com" [ref=e82]
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - generic [ref=e85]: Password
+            - button "Forgot password?" [ref=e86] [cursor=pointer]
+          - textbox "Enter your TYFYS password" [ref=e87]
+        - button "Log In and Continue" [ref=e88] [cursor=pointer]:
+          - text: Log In and Continue
+          - img [ref=e89]
+        - paragraph [ref=e91]: TYFYS keeps this device signed in for up to 30 days so you can return to your saved account faster.
+      - generic [ref=e92]:
+        - generic [ref=e93]:
+          - paragraph [ref=e94]: New to TYFYS?
+          - paragraph [ref=e95]: Need to create your account?
+          - paragraph [ref=e96]: Start here to save your contact details, create your login, and come back later without redoing setup.
+          - generic [ref=e97]:
+            - generic [ref=e98]:
+              - generic [ref=e99]: "1"
+              - paragraph [ref=e100]: Enter your name, email, phone number, and ZIP code.
+            - generic [ref=e101]:
+              - generic [ref=e102]: "2"
+              - paragraph [ref=e103]: Create the password you will use to come back to TYFYS.
+            - generic [ref=e104]:
+              - generic [ref=e105]: "3"
+              - paragraph [ref=e106]: Return later and log in without starting over.
+          - button "Click here if you're setting up a new account" [ref=e107] [cursor=pointer]:
+            - text: Click here if you're setting up a new account
+            - img [ref=e108]
+        - generic [ref=e110]: "Notice: TYFYS is a private company and not the VA. Your information is stored on this device so you can return and continue your account."

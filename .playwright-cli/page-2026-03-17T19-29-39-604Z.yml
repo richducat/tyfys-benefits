@@ -1,0 +1,380 @@
+- main [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - generic [ref=e10]: TY
+          - generic [ref=e11]:
+            - generic [ref=e12]: Thank You
+            - text: For Your Service
+        - generic [ref=e13]: Step 1/10
+      - generic [ref=e17]:
+        - heading "Before We Begin" [level=1] [ref=e18]
+        - generic [ref=e20]:
+          - paragraph [ref=e21]: Do you understand TYFYS is a private company and not the VA or a VSO?
+          - generic [ref=e22]:
+            - button "Yes" [ref=e23] [cursor=pointer]
+            - button "No" [ref=e24] [cursor=pointer]
+      - button "Next Step" [ref=e26] [cursor=pointer]:
+        - text: Next Step
+        - img [ref=e27]
+    - generic [ref=e29]:
+      - generic [ref=e31]:
+        - img [ref=e33]
+        - generic [ref=e36]:
+          - heading "TYFYS" [level=1] [ref=e37]
+          - paragraph [ref=e38]: Veteran Claim Workspace
+      - navigation [ref=e39]:
+        - paragraph [ref=e40]: Main
+        - button "Claim Home" [ref=e41] [cursor=pointer]:
+          - img [ref=e42]
+          - text: Claim Home
+        - button "Care Team" [ref=e44] [cursor=pointer]:
+          - img [ref=e45]
+          - text: Care Team
+        - button "Messages 1" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - text: Messages
+          - generic [ref=e52]: "1"
+        - button "Records Intake" [ref=e53] [cursor=pointer]:
+          - img [ref=e54]
+          - text: Records Intake
+        - paragraph [ref=e57]: Tools
+        - button "Records Vault" [ref=e58] [cursor=pointer]:
+          - img [ref=e59]
+          - text: Records Vault
+        - button "VA Rating Calculator" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+          - text: VA Rating Calculator
+        - button "PACT Act Guide" [ref=e66] [cursor=pointer]:
+          - img [ref=e67]
+          - text: PACT Act Guide
+        - button "Medical Opinion Draft" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+          - text: Medical Opinion Draft
+        - button "Evidence Checklist" [ref=e73] [cursor=pointer]:
+          - img [ref=e74]
+          - text: Evidence Checklist
+        - button "Support Options" [ref=e78] [cursor=pointer]:
+          - img [ref=e79]
+          - text: Support Options
+        - paragraph [ref=e82]: Guided Support
+        - button "Claim Guide" [ref=e83] [cursor=pointer]:
+          - img [ref=e84]
+          - text: Claim Guide
+          - img [ref=e87]
+        - button "Independent Doctor Support" [ref=e90]:
+          - img [ref=e91]
+          - text: Independent Doctor Support
+          - img [ref=e94]
+      - generic [ref=e97]:
+        - generic [ref=e100]: Self-Guided
+        - paragraph [ref=e101]: "ID: VET-8821"
+        - button "Explore Support Options" [ref=e102] [cursor=pointer]
+    - generic [ref=e103]:
+      - generic [ref=e104]:
+        - generic [ref=e106]:
+          - paragraph [ref=e107]: Care team
+          - heading "Care Team" [level=2] [ref=e108]
+          - paragraph [ref=e109]: See your TYFYS contacts, provider appointments, and who owns each next step.
+        - generic [ref=e110]:
+          - button "Messages 1" [ref=e112] [cursor=pointer]:
+            - img [ref=e113]
+            - text: Messages
+            - generic [ref=e115]: "1"
+          - button "Ask Angela" [ref=e116] [cursor=pointer]:
+            - img [ref=e117]
+            - text: Ask Angela
+      - main [ref=e119]:
+        - generic [ref=e121]:
+          - generic [ref=e123]:
+            - generic [ref=e124]:
+              - paragraph [ref=e125]: Care team overview
+              - heading "Care Team" [level=2] [ref=e126]
+              - paragraph [ref=e127]: See who is helping with your file, when your next appointment is scheduled, and what the next step is.
+            - generic [ref=e128]:
+              - generic [ref=e129]:
+                - paragraph [ref=e130]: TYFYS contacts
+                - paragraph [ref=e131]: "2"
+              - generic [ref=e132]:
+                - paragraph [ref=e133]: Next appointment
+                - paragraph [ref=e134]: March 9, 2026 · 2:00 PM ET
+              - generic [ref=e135]:
+                - paragraph [ref=e136]: Pending follow-ups
+                - paragraph [ref=e137]: "0"
+          - generic [ref=e138]:
+            - generic [ref=e139]:
+              - generic [ref=e140]:
+                - generic [ref=e141]:
+                  - paragraph [ref=e142]: Your contacts
+                  - heading "Your TYFYS and provider contacts" [level=3] [ref=e143]
+                - button "Open messages" [ref=e144] [cursor=pointer]
+              - generic [ref=e145]:
+                - generic [ref=e147]:
+                  - generic [ref=e148]:
+                    - generic [ref=e149]:
+                      - generic [ref=e150]: TYFYS Team
+                      - generic [ref=e151]: Scheduling and records support
+                    - heading "TYFYS Support Team" [level=4] [ref=e152]
+                    - paragraph [ref=e153]: Appointment help, records review, follow-up reminders
+                    - paragraph [ref=e154]: Keeps your records, questionnaires, and appointments moving so you always know the next step.
+                    - generic [ref=e155]:
+                      - generic [ref=e156]: Appointments
+                      - generic [ref=e157]: Records delivery
+                      - generic [ref=e158]: Status updates
+                  - generic [ref=e159]:
+                    - generic [ref=e160]:
+                      - generic [ref=e161]:
+                        - img [ref=e162]
+                        - generic [ref=e165]:
+                          - paragraph [ref=e166]: Availability
+                          - paragraph [ref=e167]: Monday to Friday, 9:00 AM to 6:00 PM ET
+                      - generic [ref=e168]:
+                        - img [ref=e169]
+                        - generic [ref=e171]:
+                          - paragraph [ref=e172]: Next appointment
+                          - paragraph [ref=e173]: March 9, 2026 · 2:00 PM ET
+                      - generic [ref=e174]:
+                        - img [ref=e175]
+                        - generic [ref=e179]:
+                          - paragraph [ref=e180]: How they help
+                          - paragraph [ref=e181]: Keeps your appointments, records, and next steps on track
+                    - button "Message TYFYS" [ref=e182] [cursor=pointer]
+                - generic [ref=e184]:
+                  - generic [ref=e185]:
+                    - generic [ref=e186]:
+                      - generic [ref=e187]: Assigned Doctor
+                      - generic [ref=e188]: Review physician
+                    - heading "Dr. Amanda Miller" [level=4] [ref=e189]
+                    - paragraph [ref=e190]: Family medicine, DBQ prep, records review
+                    - paragraph [ref=e191]: Reviews your uploaded records, spots missing items, and prepares you for telehealth or in-person exams.
+                    - generic [ref=e192]:
+                      - generic [ref=e193]: Musculoskeletal
+                      - generic [ref=e194]: General medicine
+                      - generic [ref=e195]: Readiness review
+                  - generic [ref=e196]:
+                    - generic [ref=e197]:
+                      - generic [ref=e198]:
+                        - img [ref=e199]
+                        - generic [ref=e202]:
+                          - paragraph [ref=e203]: Availability
+                          - paragraph [ref=e204]: Tuesday and Thursday telehealth blocks
+                      - generic [ref=e205]:
+                        - img [ref=e206]
+                        - generic [ref=e208]:
+                          - paragraph [ref=e209]: Next appointment
+                          - paragraph [ref=e210]: March 10, 2026 · 10:30 AM ET
+                      - generic [ref=e211]:
+                        - img [ref=e212]
+                        - generic [ref=e216]:
+                          - paragraph [ref=e217]: How they help
+                          - paragraph [ref=e218]: Reviews records and helps prepare for exams or DBQs
+                    - button "Message this provider" [ref=e219] [cursor=pointer]
+                - generic [ref=e221]:
+                  - generic [ref=e222]:
+                    - generic [ref=e223]:
+                      - generic [ref=e224]: Assigned Doctor
+                      - generic [ref=e225]: Behavioral health physician
+                    - heading "Dr. Elise Warren" [level=4] [ref=e226]
+                    - paragraph [ref=e227]: Psychiatry, PTSD, anxiety, sleep disruption
+                    - paragraph [ref=e228]: Helps organize mental health history in plain language before a behavioral health evaluation.
+                    - generic [ref=e229]:
+                      - generic [ref=e230]: Mental health DBQs
+                      - generic [ref=e231]: PTSD narratives
+                      - generic [ref=e232]: Medication review
+                  - generic [ref=e233]:
+                    - generic [ref=e234]:
+                      - generic [ref=e235]:
+                        - img [ref=e236]
+                        - generic [ref=e239]:
+                          - paragraph [ref=e240]: Availability
+                          - paragraph [ref=e241]: Monday and Wednesday late-afternoon sessions
+                      - generic [ref=e242]:
+                        - img [ref=e243]
+                        - generic [ref=e245]:
+                          - paragraph [ref=e246]: Next appointment
+                          - paragraph [ref=e247]: March 11, 2026 · 4:15 PM ET
+                      - generic [ref=e248]:
+                        - img [ref=e249]
+                        - generic [ref=e253]:
+                          - paragraph [ref=e254]: How they help
+                          - paragraph [ref=e255]: Helps organize mental health records and upcoming visits
+                    - button "Message this provider" [ref=e256] [cursor=pointer]
+            - generic [ref=e257]:
+              - generic [ref=e258]:
+                - generic [ref=e259]:
+                  - heading "Upcoming appointments" [level=3] [ref=e260]
+                  - paragraph [ref=e261]: Review what is coming up and what each appointment is for.
+                - button "Message care team" [ref=e262] [cursor=pointer]
+              - generic [ref=e263]:
+                - generic [ref=e264]:
+                  - generic [ref=e265]:
+                    - generic [ref=e266]:
+                      - paragraph [ref=e267]: TYFYS team review
+                      - paragraph [ref=e268]: TYFYS records review
+                    - generic [ref=e269]: March 9, 2026 · 2:00 PM ET
+                  - paragraph [ref=e270]: Your uploaded records, questionnaires, and claim notes are reviewed so the right provider gets the right file.
+                  - generic [ref=e271]:
+                    - generic [ref=e272]: TYFYS Support Team
+                    - button "Open conversation" [ref=e273] [cursor=pointer]
+                - generic [ref=e274]:
+                  - generic [ref=e275]:
+                    - generic [ref=e276]:
+                      - paragraph [ref=e277]: Video consult
+                      - paragraph [ref=e278]: Telehealth prep visit
+                    - generic [ref=e279]: March 10, 2026 · 10:30 AM ET
+                  - paragraph [ref=e280]: Review your MRI, medication list, flare-ups, and the facts needed before a DBQ or medical opinion.
+                  - generic [ref=e281]:
+                    - generic [ref=e282]: Dr. Amanda Miller
+                    - button "Open conversation" [ref=e283] [cursor=pointer]
+                - generic [ref=e284]:
+                  - generic [ref=e285]:
+                    - generic [ref=e286]:
+                      - paragraph [ref=e287]: Video consult
+                      - paragraph [ref=e288]: Behavioral health consult
+                    - generic [ref=e289]: March 11, 2026 · 4:15 PM ET
+                  - paragraph [ref=e290]: Finalize PTSD and anxiety symptom history before the behavioral health questionnaire is completed.
+                  - generic [ref=e291]:
+                    - generic [ref=e292]: Dr. Elise Warren
+                    - button "Open conversation" [ref=e293] [cursor=pointer]
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - generic [ref=e296]:
+                - paragraph [ref=e297]: Provider coordination
+                - heading "If your doctor already has a patient system" [level=3] [ref=e298]
+                - paragraph [ref=e299]: If your doctor uses one of these systems, TYFYS can usually coordinate appointments and record requests with less back-and-forth. If you are not sure, pick the closest match and we can confirm it for you.
+              - generic [ref=e300]: 0 follow-up requests sent
+            - generic [ref=e301]:
+              - generic [ref=e302]:
+                - generic [ref=e303]:
+                  - generic [ref=e304]:
+                    - paragraph [ref=e305]: athenahealth
+                    - paragraph [ref=e306]: Doctor scheduling and records
+                  - generic [ref=e307]: Ready
+                - paragraph [ref=e308]: Helpful when your civilian doctor already uses athenahealth for appointments and chart notes.
+                - generic [ref=e309]:
+                  - generic [ref=e310]:
+                    - generic [ref=e311]: Best for
+                    - generic [ref=e312]: Private clinics
+                  - generic [ref=e313]:
+                    - generic [ref=e314]: What TYFYS can help with
+                    - generic [ref=e315]: Share appointments and record requests
+                - button "Ask TYFYS to coordinate" [ref=e316] [cursor=pointer]
+              - generic [ref=e317]:
+                - generic [ref=e318]:
+                  - generic [ref=e319]:
+                    - paragraph [ref=e320]: SimplePractice
+                    - paragraph [ref=e321]: Counseling and telehealth
+                  - generic [ref=e322]: Ready
+                - paragraph [ref=e323]: Useful when your mental health provider uses SimplePractice for visits and questionnaires.
+                - generic [ref=e324]:
+                  - generic [ref=e325]:
+                    - generic [ref=e326]: Best for
+                    - generic [ref=e327]: Therapists and psychiatry practices
+                  - generic [ref=e328]:
+                    - generic [ref=e329]: What TYFYS can help with
+                    - generic [ref=e330]: Share appointments and forms
+                - button "Ask TYFYS to coordinate" [ref=e331] [cursor=pointer]
+              - generic [ref=e332]:
+                - generic [ref=e333]:
+                  - generic [ref=e334]:
+                    - paragraph [ref=e335]: DrChrono
+                    - paragraph [ref=e336]: Doctor records
+                  - generic [ref=e337]: Pilot
+                - paragraph [ref=e338]: Helpful when a private clinic manages appointments and chart notes in DrChrono.
+                - generic [ref=e339]:
+                  - generic [ref=e340]:
+                    - generic [ref=e341]: Best for
+                    - generic [ref=e342]: Independent practices
+                  - generic [ref=e343]:
+                    - generic [ref=e344]: What TYFYS can help with
+                    - generic [ref=e345]: Share openings and visit updates
+                - button "Ask TYFYS to coordinate" [ref=e346] [cursor=pointer]
+              - generic [ref=e347]:
+                - generic [ref=e348]:
+                  - generic [ref=e349]:
+                    - paragraph [ref=e350]: eClinicalWorks
+                    - paragraph [ref=e351]: Clinic records
+                  - generic [ref=e352]: Ready
+                - paragraph [ref=e353]: Good for larger clinics that need TYFYS to coordinate records and follow-up across locations.
+                - generic [ref=e354]:
+                  - generic [ref=e355]:
+                    - generic [ref=e356]: Best for
+                    - generic [ref=e357]: Larger clinics
+                  - generic [ref=e358]:
+                    - generic [ref=e359]: What TYFYS can help with
+                    - generic [ref=e360]: Share referrals and follow-up tasks
+                - button "Ask TYFYS to coordinate" [ref=e361] [cursor=pointer]
+              - generic [ref=e362]:
+                - generic [ref=e363]:
+                  - generic [ref=e364]:
+                    - paragraph [ref=e365]: NextGen Office
+                    - paragraph [ref=e366]: Primary care and specialty records
+                  - generic [ref=e367]: Ready
+                - paragraph [ref=e368]: Useful when a private doctor handles consult scheduling and follow-up through NextGen Office.
+                - generic [ref=e369]:
+                  - generic [ref=e370]:
+                    - generic [ref=e371]: Best for
+                    - generic [ref=e372]: Private doctors
+                  - generic [ref=e373]:
+                    - generic [ref=e374]: What TYFYS can help with
+                    - generic [ref=e375]: Share consult openings and follow-up notes
+                - button "Ask TYFYS to coordinate" [ref=e376] [cursor=pointer]
+              - generic [ref=e377]:
+                - generic [ref=e378]:
+                  - generic [ref=e379]:
+                    - paragraph [ref=e380]: TherapyNotes
+                    - paragraph [ref=e381]: Mental health records
+                  - generic [ref=e382]: Pilot
+                - paragraph [ref=e383]: Helpful when your behavioral health provider uses TherapyNotes for appointments and paperwork.
+                - generic [ref=e384]:
+                  - generic [ref=e385]:
+                    - generic [ref=e386]: Best for
+                    - generic [ref=e387]: Psychologists and psychiatrists
+                  - generic [ref=e388]:
+                    - generic [ref=e389]: What TYFYS can help with
+                    - generic [ref=e390]: Share visit timing and prep notes
+                - button "Ask TYFYS to coordinate" [ref=e391] [cursor=pointer]
+              - generic [ref=e392]:
+                - generic [ref=e393]:
+                  - generic [ref=e394]:
+                    - paragraph [ref=e395]: Jane
+                    - paragraph [ref=e396]: Scheduling and reminders
+                  - generic [ref=e397]: Pilot
+                - paragraph [ref=e398]: Helpful if your rehab or specialty clinic schedules through Jane.
+                - generic [ref=e399]:
+                  - generic [ref=e400]:
+                    - generic [ref=e401]: Best for
+                    - generic [ref=e402]: Rehab and wellness clinics
+                  - generic [ref=e403]:
+                    - generic [ref=e404]: What TYFYS can help with
+                    - generic [ref=e405]: Share bookings and reminders
+                - button "Ask TYFYS to coordinate" [ref=e406] [cursor=pointer]
+              - generic [ref=e407]:
+                - generic [ref=e408]:
+                  - generic [ref=e409]:
+                    - paragraph [ref=e410]: HubSpot
+                    - paragraph [ref=e411]: Referral intake
+                  - generic [ref=e412]: Ready
+                - paragraph [ref=e413]: Useful when a clinic handles new-patient intake through a shared referral team.
+                - generic [ref=e414]:
+                  - generic [ref=e415]:
+                    - generic [ref=e416]: Best for
+                    - generic [ref=e417]: Front-desk and referral teams
+                  - generic [ref=e418]:
+                    - generic [ref=e419]: What TYFYS can help with
+                    - generic [ref=e420]: Share referral status and next steps
+                - button "Ask TYFYS to coordinate" [ref=e421] [cursor=pointer]
+    - generic [ref=e422]:
+      - generic [ref=e423]:
+        - generic [ref=e424]:
+          - img [ref=e427]
+          - generic [ref=e431]:
+            - paragraph [ref=e432]: Angela - TYFYS Guide
+            - paragraph [ref=e433]: Online | Ready to help
+        - button [ref=e434] [cursor=pointer]:
+          - img [ref=e435]
+      - generic [ref=e440]:
+        - textbox "Ask Angela about your claim..." [ref=e441]
+        - button [disabled] [ref=e442]:
+          - img [ref=e443]

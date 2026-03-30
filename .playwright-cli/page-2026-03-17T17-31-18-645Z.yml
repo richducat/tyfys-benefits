@@ -1,0 +1,76 @@
+- main [ref=e2]:
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - img [ref=e21]
+        - generic [ref=e24]:
+          - paragraph [ref=e25]: TYFYS App Access
+          - paragraph [ref=e26]: Private claim-planning workspace
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - img [ref=e29]
+          - text: Secure login + saved progress
+        - heading "Log in first, or start your new TYFYS setup" [level=1] [ref=e32]
+        - paragraph [ref=e33]: Use the login portal first if you already have a TYFYS account. If you are new here, the new-account button below will walk you into onboarding and save your progress on this device.
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - img [ref=e36]
+          - paragraph [ref=e39]: Save your profile
+          - paragraph [ref=e40]: Keep your contact info and claim details on this device so you do not have to re-enter them.
+        - generic [ref=e41]:
+          - img [ref=e42]
+          - paragraph [ref=e45]: Resume your workspace
+          - paragraph [ref=e46]: Return to your tracker, drafts, and evidence plan where you left off.
+        - generic [ref=e47]:
+          - img [ref=e48]
+          - paragraph [ref=e51]: Stay ready to continue
+          - paragraph [ref=e52]: Use one login on this device to reopen TYFYS and pick back up later.
+      - generic [ref=e53]:
+        - paragraph [ref=e54]: Saved on this device
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - img [ref=e58]
+            - paragraph [ref=e61]: Your secure TYFYS login for this device
+          - generic [ref=e62]:
+            - img [ref=e64]
+            - paragraph [ref=e67]: Your onboarding answers and contact details
+          - generic [ref=e68]:
+            - img [ref=e70]
+            - paragraph [ref=e73]: Your claim plan progress when you return
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - paragraph [ref=e76]: Returning User
+        - heading "Log in to continue" [level=2] [ref=e77]
+        - paragraph [ref=e78]: We found an existing TYFYS account for this flow. Sign in first so you do not create a duplicate.
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - generic [ref=e82]: Email
+            - textbox "you@example.com" [ref=e83]
+          - generic [ref=e84]:
+            - generic [ref=e85]: Password
+            - textbox "Enter your TYFYS password" [ref=e86]
+          - generic [ref=e87]: We found an existing TYFYS login for this email. Sign in to continue instead of creating a duplicate profile.
+          - button "Log In and Continue" [ref=e88] [cursor=pointer]:
+            - text: Log In and Continue
+            - img [ref=e89]
+          - paragraph [ref=e91]: TYFYS keeps this device signed in for up to 30 days so you can return to your saved workspace faster.
+        - generic [ref=e92]:
+          - generic [ref=e93]:
+            - paragraph [ref=e94]: New To TYFYS?
+            - paragraph [ref=e95]: Setting up a new account?
+            - paragraph [ref=e96]: Click below to start onboarding, save your contact details, and create the login you will use to come back later.
+            - generic [ref=e97]:
+              - generic [ref=e98]:
+                - generic [ref=e99]: "1"
+                - paragraph [ref=e100]: Enter your name, email, phone, and zip code.
+              - generic [ref=e101]:
+                - generic [ref=e102]: "2"
+                - paragraph [ref=e103]: Create the password that becomes your TYFYS login on this device.
+              - generic [ref=e104]:
+                - generic [ref=e105]: "3"
+                - paragraph [ref=e106]: Come back later and log in without starting over.
+            - button "Click here if you're setting up a new account" [ref=e107] [cursor=pointer]:
+              - text: Click here if you're setting up a new account
+              - img [ref=e108]
+          - generic [ref=e110]: "Notice: TYFYS is a private organization and not the VA. Your information is saved locally on this device so you can return and continue your workspace."

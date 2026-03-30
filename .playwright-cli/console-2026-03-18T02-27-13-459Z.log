@@ -1,0 +1,12 @@
+[     329ms] [WARNING] Wallet adapter "SolanaMobile" failed to initialize TypeError: Cannot read properties of undefined (reading 'set')
+    at new jde (http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:264:8777)
+    at new r3 (http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:264:9072)
+    at http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:274:30654
+    at l (http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:274:30537)
+    at http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:274:30633
+    at Object.useMemo (http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:39:23347)
+    at Ue.useMemo (http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:10:6223)
+    at Ape (http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:274:30491)
+    at Rb (http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:39:17018)
+    at ek (http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:41:44058) @ http://127.0.0.1:4173/assets/index-DNVJ-1zH.js:273
+[     376ms] [WARNING] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing. @ http://127.0.0.1:4173/tech-kombat/index.html:0

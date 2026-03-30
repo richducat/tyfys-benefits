@@ -1,0 +1,227 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e6] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e8]
+        - generic [ref=e11]:
+          - generic [ref=e12]: Thank You For Your Service
+          - generic [ref=e13]: Veteran Owned & Operated
+      - generic [ref=e14]:
+        - link "Home" [ref=e15] [cursor=pointer]:
+          - /url: index.html
+        - link "About Us" [ref=e16] [cursor=pointer]:
+          - /url: about_us.html
+        - link "Our Team" [ref=e17] [cursor=pointer]:
+          - /url: mission_team.html
+        - link "Our Process" [ref=e18] [cursor=pointer]:
+          - /url: process.html
+        - button "VA Claims" [ref=e20] [cursor=pointer]:
+          - text: VA Claims
+          - img [ref=e21]
+        - button "Resources" [ref=e24] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e25]
+        - button "Cmd/Ctrl + K" [ref=e27] [cursor=pointer]:
+          - img [ref=e28]
+          - generic [ref=e31]: Cmd/Ctrl + K
+        - button "Accessibility" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+          - generic [ref=e40]: Accessibility
+        - link "Book Discovery Call" [ref=e41] [cursor=pointer]:
+          - /url: contact.html
+          - text: Book Discovery Call
+          - img [ref=e42]
+  - generic [ref=e46]:
+    - generic [ref=e47]:
+      - heading "Book a Discovery Call for VA Disability Claim Support" [level=1] [ref=e48]
+      - paragraph [ref=e49]: Schedule a call with our team. We will review your service history and current claim status so you can decide whether private medical evidence support is the right fit.
+      - generic [ref=e50]:
+        - link "Services Hub" [ref=e51] [cursor=pointer]:
+          - /url: services.html
+        - link "How It Works" [ref=e52] [cursor=pointer]:
+          - /url: how-it-works.html
+        - link "FAQs Hub" [ref=e53] [cursor=pointer]:
+          - /url: faqs.html
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - img [ref=e57]
+          - generic [ref=e60]:
+            - heading "Headquarters" [level=3] [ref=e61]
+            - paragraph [ref=e62]:
+              - text: 11845 SW Bennington Cir,
+              - text: Port Saint Lucie, FL 34987
+        - generic [ref=e63]:
+          - img [ref=e65]
+          - generic [ref=e67]:
+            - heading "Phone" [level=3] [ref=e68]
+            - paragraph [ref=e69]: 321-248-2805
+            - paragraph [ref=e70]: Mon-Fri, 09:00 - 17:00 EST
+        - generic [ref=e71]:
+          - img [ref=e73]
+          - generic [ref=e76]:
+            - heading "Email" [level=3] [ref=e77]
+            - paragraph [ref=e78]: support@thankyouforyourservice.co
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - img [ref=e81]
+          - generic [ref=e84]: 100% Confidential
+        - paragraph [ref=e85]: Your information is secure. We are HIPAA aligned and never share your data with the VA without your permission.
+    - generic [ref=e88]:
+      - generic [ref=e90]:
+        - generic [ref=e94]:
+          - button "← Back" [ref=e252] [cursor=pointer]
+          - generic [ref=e281]:
+            - heading "What conditions are you looking to claim or increase?" [level=1] [ref=e282]
+            - paragraph [ref=e283]: Select all that apply. We find the 'hidden' high-value claims.
+            - generic [ref=e284]:
+              - button "Mental Health / PTSD" [ref=e285] [cursor=pointer]:
+                - generic [ref=e286]: Mental Health / PTSD
+              - button "Back, Neck & Joints" [ref=e288] [cursor=pointer]:
+                - generic [ref=e289]: Back, Neck & Joints
+              - button "Tinnitus / Hearing" [ref=e291] [cursor=pointer]:
+                - generic [ref=e292]: Tinnitus / Hearing
+              - button "Sleep Apnea" [ref=e294] [cursor=pointer]:
+                - generic [ref=e295]: Sleep Apnea
+              - button "PACT Act / Toxic Exposure" [ref=e297] [cursor=pointer]:
+                - generic [ref=e298]: PACT Act / Toxic Exposure
+              - button "Secondary Conditions" [ref=e300] [cursor=pointer]:
+                - generic [ref=e301]: Secondary Conditions
+            - generic [ref=e303]:
+              - img "Freddy K" [ref=e305]
+              - generic [ref=e306]:
+                - paragraph [ref=e307]: "\"These guys really care about Veterans. Rich spent 45 mins listening to my story. You don't normally get service like that these days.\""
+                - paragraph [ref=e308]: "- Freddy K, CA"
+            - button "Continue" [disabled] [ref=e310]:
+              - text: Continue
+              - img [ref=e311]
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - img [ref=e111]
+            - text: 256-bit Secure Encryption
+          - generic [ref=e114]:
+            - img [ref=e115]
+            - text: Privacy Protected
+      - generic [ref=e121]:
+        - generic [ref=e122]:
+          - generic [ref=e123]: Thank You For Your Service
+          - generic [ref=e124]: Veteran Owned & Operated
+        - generic [ref=e125]:
+          - generic [ref=e126]:
+            - generic [ref=e127]: 98%
+            - generic [ref=e128]: Success Rate
+          - generic [ref=e129]:
+            - generic [ref=e130]: 0%
+            - generic [ref=e131]: Fees on Backpay
+        - generic [ref=e132]:
+          - heading "Verified Success Stories" [level=3] [ref=e133]
+          - generic [ref=e134]:
+            - generic [ref=e135]:
+              - generic [ref=e136]:
+                - img [ref=e137]
+                - img [ref=e139]
+                - img [ref=e141]
+                - img [ref=e143]
+                - img [ref=e145]
+              - paragraph [ref=e147]: "\"After 15 years at 30% for my back, I didn't think an increase was possible. The team got me proper medical documentation showing deterioration. My only regret is not doing this years ago.\""
+              - generic [ref=e148]:
+                - generic [ref=e149]: Ja
+                - generic [ref=e150]:
+                  - generic [ref=e151]: James T.
+                  - generic [ref=e152]: U.S. Army Veteran
+            - generic [ref=e153]:
+              - generic [ref=e154]:
+                - img [ref=e155]
+                - img [ref=e157]
+                - img [ref=e159]
+                - img [ref=e161]
+                - img [ref=e163]
+              - paragraph [ref=e165]: "\"The psychologist they connected me with documented how PTSD affected my work. The back pay covered the fee ten times over. Life changing.\""
+              - generic [ref=e166]:
+                - generic [ref=e167]: Ch
+                - generic [ref=e168]:
+                  - generic [ref=e169]: Christopher L.
+                  - generic [ref=e170]: Marine Corps Veteran
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - img [ref=e173]
+                - img [ref=e175]
+                - img [ref=e177]
+                - img [ref=e179]
+                - img [ref=e181]
+              - paragraph [ref=e183]: "\"I only had my back rated at 20% for years. They found the secondary conditions (hip, knee, depression) that I didn't even know I could claim.\""
+              - generic [ref=e184]:
+                - generic [ref=e185]: Ke
+                - generic [ref=e186]:
+                  - generic [ref=e187]: Kevin L.
+                  - generic [ref=e188]: Navy Veteran
+        - generic [ref=e189]:
+          - generic [ref=e190]:
+            - img [ref=e191]
+            - generic [ref=e194]: HIPAA Aligned
+          - generic [ref=e195]:
+            - img [ref=e196]
+            - generic [ref=e201]: SDVOSB
+  - contentinfo [ref=e202]:
+    - generic [ref=e203]:
+      - generic [ref=e204]:
+        - generic [ref=e205]:
+          - generic [ref=e206]:
+            - img [ref=e207]
+            - generic [ref=e209]: Thank You For Your Service
+          - paragraph [ref=e210]: We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+          - generic [ref=e211]:
+            - link [ref=e212] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e213]
+            - link [ref=e215] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e216]
+        - generic [ref=e220]:
+          - heading "Quick Links" [level=4] [ref=e221]
+          - list [ref=e222]:
+            - listitem [ref=e223]:
+              - link "Home" [ref=e224] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=e225]:
+              - link "About Us" [ref=e226] [cursor=pointer]:
+                - /url: about_us.html
+            - listitem [ref=e227]:
+              - link "Mission" [ref=e228] [cursor=pointer]:
+                - /url: mission_team.html
+            - listitem [ref=e229]:
+              - link "Our Process" [ref=e230] [cursor=pointer]:
+                - /url: process.html
+            - listitem [ref=e231]:
+              - link "Intake" [ref=e232] [cursor=pointer]:
+                - /url: intake-portal.html
+            - listitem [ref=e233]:
+              - link "Briefing Room" [ref=e234] [cursor=pointer]:
+                - /url: education.html
+            - listitem [ref=e235]:
+              - link "Contact" [ref=e236] [cursor=pointer]:
+                - /url: contact.html
+        - generic [ref=e237]:
+          - heading "Contact" [level=4] [ref=e238]
+          - list [ref=e239]:
+            - listitem [ref=e240]:
+              - img [ref=e241]
+              - text: 11845 SW Bennington Cir
+              - text: Port Saint Lucie, FL 34987
+            - listitem [ref=e244]:
+              - img [ref=e245]
+              - text: support@thankyouforyourservice.co
+            - listitem [ref=e248]:
+              - img [ref=e249]
+              - text: 321-248-2805
+      - generic [ref=e251]: © 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+  - generic [ref=e276] [cursor=pointer]:
+    - emphasis [ref=e277]: 
+    - generic [ref=e278]:
+      - generic "We're offline" [ref=e279]
+      - paragraph [ref=e280]: Leave a message
+      - text: 
+    - text: 
+  - generic:
+    - generic:
+      - iframe

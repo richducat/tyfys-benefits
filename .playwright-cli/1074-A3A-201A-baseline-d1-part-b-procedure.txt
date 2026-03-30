@@ -1,0 +1,11 @@
+Study: 230LE301
+Subject: 1074-A3A-201A - Elizabeth Merrill
+Visit: Baseline D1 -> Part B
+Protocol: V4.0 / eSource 27 Oct 2025
+Date: 2026-02-16 05:00 AM
+Visit type: On site
+Source verified: No
+Remote monitoring: Enabled
+
+Notes:
+Window open. Needs source verification before final QC.

@@ -1,0 +1,11 @@
+[GET] http://127.0.0.1:4323/api/auth-google-config => [200] OK
+[GET] http://127.0.0.1:4323/api/auth-session => [200] OK
+[GET] http://127.0.0.1:4323/api/auth-google-config => [200] OK
+[GET] http://127.0.0.1:4323/api/auth-session => [200] OK
+[POST] https://document-collection-agent.zapier.app/api/proxy/interfaces/api/interfaces/v0/chatbots/cm5qukh6000j50hjogtr8a2bh/init => [200] 
+[GET] http://127.0.0.1:4323/api/auth-google-config => [200] OK
+[GET] http://127.0.0.1:4323/api/auth-session => [200] OK
+[POST] https://document-collection-agent.zapier.app/api/proxy/interfaces/api/interfaces/v0/chatbots/cm5qukh6000j50hjogtr8a2bh/init => [200] 
+[GET] http://127.0.0.1:4323/api/auth-google-config => [200] OK
+[GET] http://127.0.0.1:4323/api/auth-session => [200] OK
+[POST] https://document-collection-agent.zapier.app/api/proxy/interfaces/api/interfaces/v0/chatbots/cm5qukh6000j50hjogtr8a2bh/init => [200] 

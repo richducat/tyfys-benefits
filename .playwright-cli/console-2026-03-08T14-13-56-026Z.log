@@ -1,0 +1,1 @@
+[     180ms] [WARNING] Module "buffer" has been externalized for browser compatibility. Cannot access "buffer.Buffer" in client code. See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details. @ http://127.0.0.1:4174/node_modules/.vite/deps/chunk-XSGPCRDS.js?v=1df014b1:1791

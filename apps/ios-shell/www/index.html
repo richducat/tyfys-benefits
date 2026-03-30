@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>TYFYS</title>
+  <link rel="icon" href="data:," />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="tyfys-platform/app-tailwind.css" />
+
+  <script>
+    window.__TYFYS_APP_CONFIG__ = {
+      apiBase: "https://app.tyfys.net",
+      runtime: "capacitor-native"
+    };
+  </script>
+  <script>
+    (function () {
+      const protocol = String(window.location.protocol || "").toLowerCase();
+      if (protocol === "http:" || protocol === "https:") return;
+      const script = document.createElement("script");
+      script.src = "capacitor.js";
+      document.head.appendChild(script);
+    })();
+  </script>
+  <script defer src="tyfys-platform/vendor/react.production.min.js"></script>
+  <script defer src="tyfys-platform/vendor/react-dom.production.min.js"></script>
+
+  <style>
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      background: #f8fafc;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      padding-top: env(safe-area-inset-top);
+      padding-right: env(safe-area-inset-right);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      overscroll-behavior: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #root {
+      min-height: 100dvh;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen overflow-x-hidden" data-page="app" data-native-runtime="1">
+  <div id="root"></div>
+  <script src="tyfys-platform/tyfys-platform-app.js" defer></script>
+</body>
+</html>

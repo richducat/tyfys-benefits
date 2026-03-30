@@ -1,0 +1,224 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e6] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e8]
+        - generic [ref=e11]:
+          - generic [ref=e12]: Thank You For Your Service
+          - generic [ref=e13]: Veteran Owned & Operated
+      - generic [ref=e62]:
+        - button "Open command palette" [ref=e63] [cursor=pointer]:
+          - img [ref=e64]
+        - button "Open navigation" [ref=e67] [cursor=pointer]:
+          - img [ref=e68]
+          - generic [ref=e69]: Menu
+  - main [ref=e44]:
+    - generic [ref=e70]:
+      - generic [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - generic [ref=e76]: TY
+            - generic [ref=e77]:
+              - generic [ref=e78]: Thank You
+              - text: For Your Service
+          - generic [ref=e79]: Step 1/10
+        - generic [ref=e83]:
+          - heading "Welcome Aboard" [level=1] [ref=e84]
+          - generic [ref=e86]:
+            - paragraph [ref=e87]: Are you aware we are NOT the VA or a VSO?
+            - generic [ref=e88]:
+              - button "Yes" [ref=e89] [cursor=pointer]
+              - button "No" [ref=e90] [cursor=pointer]
+          - button "Next Step" [ref=e92] [cursor=pointer]:
+            - text: Next Step
+            - img [ref=e93]
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - img [ref=e99]
+            - generic [ref=e102]:
+              - heading "TYFYS" [level=1] [ref=e103]
+              - paragraph [ref=e104]: Veteran OS v2.0
+          - button [ref=e105] [cursor=pointer]:
+            - img [ref=e106]
+        - navigation [ref=e109]:
+          - paragraph [ref=e110]: Main
+          - button "Mission Control" [ref=e111] [cursor=pointer]:
+            - img [ref=e112]
+            - text: Mission Control
+          - button "Intake Portal" [disabled] [ref=e114]:
+            - img [ref=e115]
+            - text: Intake Portal
+            - img [ref=e118]
+          - paragraph [ref=e121]: Tools
+          - button "Dossier Scanner" [ref=e122] [cursor=pointer]:
+            - img [ref=e123]
+            - text: Dossier Scanner
+          - button "VA Math" [ref=e127] [cursor=pointer]:
+            - img [ref=e128]
+            - text: VA Math
+          - button "PACT Act Explorer" [ref=e130] [cursor=pointer]:
+            - img [ref=e131]
+            - text: PACT Act Explorer
+          - button "Nexus Generator" [ref=e133] [cursor=pointer]:
+            - img [ref=e134]
+            - text: Nexus Generator
+          - button "Evidence Finder" [ref=e137] [cursor=pointer]:
+            - img [ref=e138]
+            - text: Evidence Finder
+          - button "Plans & Pricing" [ref=e142] [cursor=pointer]:
+            - img [ref=e143]
+            - text: Plans & Pricing
+          - paragraph [ref=e146]: Premium
+          - button "TYFYS Claims Bot" [ref=e147] [cursor=pointer]:
+            - img [ref=e148]
+            - text: TYFYS Claims Bot
+            - img [ref=e151]
+          - button "Private Specialist" [ref=e154]:
+            - img [ref=e155]
+            - text: Private Specialist
+            - img [ref=e158]
+        - generic [ref=e161]:
+          - generic [ref=e164]: Sales Ready
+          - paragraph [ref=e165]: "ID: VET-8821"
+          - button "Upgrade Now" [ref=e166] [cursor=pointer]
+      - generic [ref=e167]:
+        - generic [ref=e168]:
+          - generic [ref=e169]:
+            - button [ref=e170] [cursor=pointer]:
+              - img [ref=e171]
+            - heading "Mission Control Profile" [level=2] [ref=e172]
+          - button "Ask Angela" [ref=e173] [cursor=pointer]:
+            - img [ref=e174]
+            - text: Ask Angela
+        - main [ref=e176]:
+          - generic [ref=e178]:
+            - generic [ref=e179]:
+              - button [ref=e180] [cursor=pointer]:
+                - img [ref=e181]
+              - generic [ref=e184]:
+                - img [ref=e187]
+                - generic [ref=e191]:
+                  - heading "Veteran Profile" [level=1] [ref=e192]
+                  - generic [ref=e193]:
+                    - generic [ref=e194]:
+                      - paragraph [ref=e195]: Branch
+                      - paragraph [ref=e196]: "-"
+                    - generic [ref=e197]:
+                      - paragraph [ref=e198]: Era
+                      - paragraph [ref=e199]: "-"
+                    - generic [ref=e200]:
+                      - paragraph [ref=e201]: Rating
+                      - paragraph [ref=e202]: 0%
+                    - generic [ref=e203]:
+                      - paragraph [ref=e204]: Discount
+                      - paragraph [ref=e205]: LOCKED
+            - button "Start Guided Tour with Angela" [ref=e206] [cursor=pointer]:
+              - img [ref=e207]
+              - text: Start Guided Tour with Angela
+            - generic [ref=e209]:
+              - button "0 saved Dossier Vault Scan, OCR-preview, and store evidence packets on this device." [ref=e210] [cursor=pointer]:
+                - generic [ref=e211]:
+                  - img [ref=e213]
+                  - generic [ref=e217]: 0 saved
+                - paragraph [ref=e218]: Dossier Vault
+                - paragraph [ref=e219]: Scan, OCR-preview, and store evidence packets on this device.
+              - button "0% VA Math See combined-rating steps, exact rounding, and a path to 100%." [ref=e220] [cursor=pointer]:
+                - generic [ref=e221]:
+                  - img [ref=e223]
+                  - generic [ref=e225]: 0%
+                - paragraph [ref=e226]: VA Math
+                - paragraph [ref=e227]: See combined-rating steps, exact rounding, and a path to 100%.
+              - button "Post-9/11 PACT Act Explorer Filter presumptives by era and exposure track with VA source links." [ref=e228] [cursor=pointer]:
+                - generic [ref=e229]:
+                  - img [ref=e231]
+                  - generic [ref=e233]: Post-9/11
+                - paragraph [ref=e234]: PACT Act Explorer
+                - paragraph [ref=e235]: Filter presumptives by era and exposure track with VA source links.
+              - button "0 docs Nexus Generator Draft clinician-ready medical opinion language from your claim facts." [ref=e236] [cursor=pointer]:
+                - generic [ref=e237]:
+                  - img [ref=e239]
+                  - generic [ref=e242]: 0 docs
+                - paragraph [ref=e243]: Nexus Generator
+                - paragraph [ref=e244]: Draft clinician-ready medical opinion language from your claim facts.
+            - generic [ref=e245]:
+              - generic [ref=e246]:
+                - generic [ref=e247]:
+                  - heading "Active Claims Tracker" [level=3] [ref=e248]:
+                    - img [ref=e249]
+                    - text: Active Claims Tracker
+                  - button "+ Add New" [ref=e252] [cursor=pointer]
+                - generic [ref=e253]:
+                  - img [ref=e254]
+                  - paragraph [ref=e258]: No claims being tracked.
+                  - paragraph [ref=e259]: Add conditions to see required evidence.
+                  - button "Start Tracking" [ref=e260] [cursor=pointer]
+              - generic [ref=e261]:
+                - generic [ref=e263]:
+                  - generic [ref=e264]:
+                    - heading "Access Level" [level=3] [ref=e265]:
+                      - img [ref=e266]
+                      - text: Access Level
+                    - generic [ref=e269]: Standard
+                  - paragraph [ref=e270]: Upgrade to unlock TYFYS Claims Assistant, 25% Service Discounts, and Monthly Consults.
+                  - button "Unlock Premium ($250/mo)" [ref=e271] [cursor=pointer]
+                - generic [ref=e272]:
+                  - heading "Next Steps" [level=3] [ref=e273]
+                  - generic [ref=e274]:
+                    - button "Pay to Unlock Intake Portal" [ref=e275] [cursor=pointer]:
+                      - generic [ref=e276]:
+                        - img [ref=e278]
+                        - generic [ref=e281]: Pay to Unlock Intake Portal
+                      - img [ref=e282]
+                    - button "Scan Into Dossier" [ref=e285] [cursor=pointer]:
+                      - generic [ref=e286]:
+                        - img [ref=e288]
+                        - generic [ref=e292]: Scan Into Dossier
+                      - img [ref=e293]
+                    - button "Check PACT Presumptives" [ref=e295] [cursor=pointer]:
+                      - generic [ref=e296]:
+                        - img [ref=e298]
+                        - generic [ref=e300]: Check PACT Presumptives
+                      - img [ref=e301]
+            - generic [ref=e303]:
+              - generic [ref=e304]:
+                - img [ref=e306]
+                - heading "Success Stories" [level=3] [ref=e308]:
+                  - img [ref=e309]
+                  - text: Success Stories
+                - generic [ref=e311]:
+                  - generic [ref=e312]:
+                    - paragraph [ref=e313]: "\"Now I'm at 70% with secondary conditions recognized. My only regret is not doing this sooner.\""
+                    - paragraph [ref=e314]: "- James T."
+                  - generic [ref=e315]:
+                    - paragraph [ref=e316]: "\"Rating increased to 70% with back pay that covered the fee ten times over.\""
+                    - paragraph [ref=e317]: "- Christopher L."
+              - generic [ref=e318]:
+                - heading "Why We Win" [level=3] [ref=e319]:
+                  - img [ref=e320]
+                  - text: Why We Win
+                - generic [ref=e323]:
+                  - generic [ref=e324]:
+                    - generic [ref=e326]: VS
+                    - generic [ref=e327]:
+                      - paragraph [ref=e328]: Traditional VSO
+                      - paragraph [ref=e329]: Free forms, but often requires risky C&P exams.
+                  - generic [ref=e331]:
+                    - img [ref=e333]
+                    - generic [ref=e335]:
+                      - paragraph [ref=e336]: The TYFYS Method
+                      - paragraph [ref=e337]: Private Medical Evidence & Nexus Letters. Often bypasses the C&P exam entirely.
+      - generic [ref=e338]:
+        - generic [ref=e339]:
+          - generic [ref=e340]:
+            - img [ref=e343]
+            - generic [ref=e347]:
+              - paragraph [ref=e348]: Angela - Guide
+              - paragraph [ref=e349]: Online | Here for You
+          - button [ref=e350] [cursor=pointer]:
+            - img [ref=e351]
+        - generic [ref=e356]:
+          - textbox "Ask Angela anything..." [ref=e357]
+          - button [disabled] [ref=e358]:
+            - img [ref=e359]

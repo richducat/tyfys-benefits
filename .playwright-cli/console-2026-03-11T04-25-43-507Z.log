@@ -1,0 +1,4 @@
+[     270ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://tyfys.net/apps/seo-sitewide.js:0
+[     627ms] [WARNING] cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation @ https://cdn.tailwindcss.com/:63
+[     841ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://tyfys.net/api/auth-session:0
+[   60978ms] [ERROR] Attestation check for Attribution Reporting on https://www.google-analytics.com failed. @ https://tyfys.net/clinic:0

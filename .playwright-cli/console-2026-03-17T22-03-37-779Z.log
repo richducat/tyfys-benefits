@@ -1,0 +1,3 @@
+[   12223ms] [ERROR] Attestation check for Attribution Reporting on https://www.google-analytics.com failed. @ https://tyfys.net/app.html:0
+[   19631ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://app.tyfys.net/api/auth-login:0
+[   46132ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://app.tyfys.net/api/auth-login:0

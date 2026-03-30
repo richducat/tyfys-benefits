@@ -1,0 +1,304 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e512]:
+    - generic [ref=e514]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e516] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e518]
+        - generic [ref=e521]:
+          - generic [ref=e522]: Thank You For Your Service
+          - generic [ref=e523]: Veteran Owned & Operated
+      - generic [ref=e524]:
+        - link "Home" [ref=e525] [cursor=pointer]:
+          - /url: index.html
+        - link "About Us" [ref=e526] [cursor=pointer]:
+          - /url: about_us.html
+        - link "Our Team" [ref=e527] [cursor=pointer]:
+          - /url: mission_team.html
+        - link "Our Process" [ref=e528] [cursor=pointer]:
+          - /url: process.html
+        - button "VA Claims" [ref=e530] [cursor=pointer]:
+          - text: VA Claims
+          - img [ref=e531]
+        - button "Resources" [ref=e534] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e535]
+        - button "Cmd/Ctrl + K" [ref=e537] [cursor=pointer]:
+          - img [ref=e538]
+          - generic [ref=e541]: Cmd/Ctrl + K
+        - button "Accessibility" [ref=e543] [cursor=pointer]:
+          - img [ref=e544]
+          - generic [ref=e550]: Accessibility
+        - link "Book Discovery Call" [ref=e551] [cursor=pointer]:
+          - /url: contact.html
+          - text: Book Discovery Call
+          - img [ref=e552]
+  - main [ref=e2]:
+    - generic [ref=e102]:
+      - generic [ref=e127]:
+        - generic [ref=e129]:
+          - img [ref=e131]
+          - generic [ref=e134]:
+            - heading "TYFYS" [level=1] [ref=e135]
+            - paragraph [ref=e136]: Veteran OS v2.0
+        - navigation [ref=e137]:
+          - paragraph [ref=e138]: Main
+          - button "Mission Control" [ref=e139] [cursor=pointer]:
+            - img [ref=e140]
+            - text: Mission Control
+          - button "Doctor Portal" [ref=e142] [cursor=pointer]:
+            - img [ref=e143]
+            - text: Doctor Portal
+          - button "Secure Comms 1" [ref=e147] [cursor=pointer]:
+            - img [ref=e148]
+            - text: Secure Comms
+            - generic [ref=e150]: "1"
+          - button "Intake Portal" [ref=e151] [cursor=pointer]:
+            - img [ref=e152]
+            - text: Intake Portal
+          - paragraph [ref=e155]: Tools
+          - button "Dossier Scanner" [ref=e156] [cursor=pointer]:
+            - img [ref=e157]
+            - text: Dossier Scanner
+          - button "VA Math" [ref=e161] [cursor=pointer]:
+            - img [ref=e162]
+            - text: VA Math
+          - button "PACT Act Explorer" [ref=e164] [cursor=pointer]:
+            - img [ref=e165]
+            - text: PACT Act Explorer
+          - button "Nexus Generator" [ref=e167] [cursor=pointer]:
+            - img [ref=e168]
+            - text: Nexus Generator
+          - button "Evidence Finder" [ref=e171] [cursor=pointer]:
+            - img [ref=e172]
+            - text: Evidence Finder
+          - button "Plans & Pricing" [ref=e176] [cursor=pointer]:
+            - img [ref=e177]
+            - text: Plans & Pricing
+          - paragraph [ref=e180]: Premium
+          - button "TYFYS Claims Bot" [ref=e181] [cursor=pointer]:
+            - img [ref=e182]
+            - text: TYFYS Claims Bot
+            - img [ref=e185]
+          - button "Private Specialist" [ref=e188]:
+            - img [ref=e189]
+            - text: Private Specialist
+            - img [ref=e192]
+        - generic [ref=e195]:
+          - generic [ref=e198]: Sales Ready
+          - paragraph [ref=e199]: "ID: ARM-8821"
+          - button "Upgrade Now" [ref=e200] [cursor=pointer]
+      - generic [ref=e201]:
+        - generic [ref=e202]:
+          - generic [ref=e204]:
+            - paragraph [ref=e205]: Client Intake
+            - heading "Military Records Intake" [level=2] [ref=e554]
+            - paragraph [ref=e207]: Collect military records, chat through intake, and sync uploads into Zoho.
+          - generic [ref=e208]:
+            - generic [ref=e209]:
+              - button "Doctor Portal" [ref=e210] [cursor=pointer]:
+                - img [ref=e211]
+                - text: Doctor Portal
+              - button "Secure Comms 1" [ref=e215] [cursor=pointer]:
+                - img [ref=e216]
+                - text: Secure Comms
+                - generic [ref=e218]: "1"
+            - button "Log Out" [ref=e555] [cursor=pointer]:
+              - img [ref=e556]
+              - generic [ref=e559]: Log Out
+            - button "Ask Angela" [ref=e219] [cursor=pointer]:
+              - img [ref=e220]
+              - text: Ask Angela
+        - main [ref=e222]:
+          - generic [ref=e560]:
+            - generic [ref=e562]:
+              - generic [ref=e563]:
+                - paragraph [ref=e564]: First Activity After Signup
+                - heading "Run Intake Before They Explore the Rest of the App" [level=2] [ref=e565]
+                - paragraph [ref=e566]: Use the embedded intake assistant to collect missing military records, then upload everything here so the source files are attached to the veteran's Zoho record immediately.
+              - generic [ref=e567]:
+                - generic [ref=e568]:
+                  - paragraph [ref=e569]: Records matched
+                  - paragraph [ref=e570]: 0/5
+                - generic [ref=e571]:
+                  - paragraph [ref=e572]: Zoho synced
+                  - paragraph [ref=e573]: "0"
+            - generic [ref=e574]:
+              - generic [ref=e575]:
+                - generic [ref=e577]:
+                  - generic [ref=e578]:
+                    - paragraph [ref=e579]: Embedded Assistant
+                    - heading "Intake chatbot" [level=3] [ref=e580]
+                    - paragraph [ref=e581]: This stays scoped to intake so the veteran can hand over military records before moving into the rest of TYFYS.
+                  - generic [ref=e582]:
+                    - paragraph [ref=e583]: Zoho target
+                    - paragraph [ref=e584]: CRM record pending
+                - iframe [ref=e589]:
+                  - generic [active] [ref=f2e1]:
+                    - generic [ref=f2e3]:
+                      - generic [ref=f2e12]:
+                        - generic [ref=f2e14]:
+                          - list [ref=f2e15]:
+                            - listitem [ref=f2e16]:
+                              - generic [ref=f2e17]:
+                                - generic [ref=f2e18]:
+                                  - img "Document Collection Agent (TYFYS)" [ref=f2e19]
+                                  - paragraph [ref=f2e20]: "Private PaperClip: Document Collection Assistant"
+                                  - generic: Good response Bad response Copy
+                                - paragraph [ref=f2e23]: Private Paperclip reporting for duty, Commander! I'm here to assist you in collecting all the important documents you need for your VA claim. My mission includes helping you with the Intent to File, VA Benefits Summary Letter, C-File, Medical Records, Private Medical Records, and your DD-214. I'll provide links, phone numbers, and tips on filling out forms-whatever you need to make this process easier. Do you mind filling me in on what documents you already have? From there we can start working on getting everything
+                          - generic:
+                            - button "Jump to latest Jump to latest" [disabled]:
+                              - img "Jump to latest"
+                              - generic: Jump to latest
+                        - group [ref=f2e25]:
+                          - textbox "Type your question or let me know which document you need help with—I'm here to assist you every step of the way!" [ref=f2e26]
+                          - button "Send" [disabled] [ref=f2e27]:
+                            - img [ref=f2e28]
+                            - generic [ref=f2e30]: Send
+                        - link "Built on" [ref=f2e33] [cursor=pointer]:
+                          - /url: https://zapier.com/ai/chatbot?utm_source=zapier&utm_medium=referral&utm_campaign=zapier-gbl-pnua-link-interface_built_on_zapier_button
+                          - text: Built on
+                          - img [ref=f2e35]
+                      - region "Notifications alt+T"
+                    - alert [ref=f2e44]
+              - generic [ref=e590]:
+                - generic [ref=e591]:
+                  - generic [ref=e592]:
+                    - generic [ref=e593]:
+                      - paragraph [ref=e594]: Required records
+                      - heading "Military records checklist" [level=3] [ref=e595]
+                    - button "Return to Dashboard" [ref=e596] [cursor=pointer]
+                  - generic [ref=e597]:
+                    - button "DD-214 or separation paperwork Needed Upload discharge paperwork so intake can verify service dates and character of discharge. Tap to prefill the uploader for this record type." [ref=e598] [cursor=pointer]:
+                      - generic [ref=e599]:
+                        - img [ref=e601]
+                        - generic [ref=e605]:
+                          - generic [ref=e606]:
+                            - paragraph [ref=e607]: DD-214 or separation paperwork
+                            - generic [ref=e608]: Needed
+                          - paragraph [ref=e609]: Upload discharge paperwork so intake can verify service dates and character of discharge.
+                          - paragraph [ref=e610]: Tap to prefill the uploader for this record type.
+                    - button "Service treatment records Needed Military medical visits, profiles, sick call notes, and in-service diagnoses. Tap to prefill the uploader for this record type." [ref=e611] [cursor=pointer]:
+                      - generic [ref=e612]:
+                        - img [ref=e614]
+                        - generic [ref=e618]:
+                          - generic [ref=e619]:
+                            - paragraph [ref=e620]: Service treatment records
+                            - generic [ref=e621]: Needed
+                          - paragraph [ref=e622]: Military medical visits, profiles, sick call notes, and in-service diagnoses.
+                          - paragraph [ref=e623]: Tap to prefill the uploader for this record type.
+                    - button "Personnel or deployment records Needed Orders, deployments, duty assignments, awards, or records that place the veteran where events happened. Tap to prefill the uploader for this record type." [ref=e624] [cursor=pointer]:
+                      - generic [ref=e625]:
+                        - img [ref=e627]
+                        - generic [ref=e631]:
+                          - generic [ref=e632]:
+                            - paragraph [ref=e633]: Personnel or deployment records
+                            - generic [ref=e634]: Needed
+                          - paragraph [ref=e635]: Orders, deployments, duty assignments, awards, or records that place the veteran where events happened.
+                          - paragraph [ref=e636]: Tap to prefill the uploader for this record type.
+                    - button "VA records, rating decisions, or C-file pages Needed Blue Button exports, prior rating decisions, and any VA-generated claim history. Tap to prefill the uploader for this record type." [ref=e637] [cursor=pointer]:
+                      - generic [ref=e638]:
+                        - img [ref=e640]
+                        - generic [ref=e644]:
+                          - generic [ref=e645]:
+                            - paragraph [ref=e646]: VA records, rating decisions, or C-file pages
+                            - generic [ref=e647]: Needed
+                          - paragraph [ref=e648]: Blue Button exports, prior rating decisions, and any VA-generated claim history.
+                          - paragraph [ref=e649]: Tap to prefill the uploader for this record type.
+                    - button "Private medical records tied to claimed conditions Needed Civilian treatment notes, imaging, specialist letters, and other non-VA evidence. Tap to prefill the uploader for this record type." [ref=e650] [cursor=pointer]:
+                      - generic [ref=e651]:
+                        - img [ref=e653]
+                        - generic [ref=e657]:
+                          - generic [ref=e658]:
+                            - paragraph [ref=e659]: Private medical records tied to claimed conditions
+                            - generic [ref=e660]: Needed
+                          - paragraph [ref=e661]: Civilian treatment notes, imaging, specialist letters, and other non-VA evidence.
+                          - paragraph [ref=e662]: Tap to prefill the uploader for this record type.
+                - generic [ref=e663]:
+                  - generic [ref=e664]:
+                    - generic [ref=e665]:
+                      - paragraph [ref=e666]: Upload and sync
+                      - heading "Record uploader" [level=3] [ref=e667]
+                    - button "Open Full Dossier" [ref=e668] [cursor=pointer]:
+                      - text: Open Full Dossier
+                      - img [ref=e669]
+                  - generic [ref=e671]:
+                    - generic [ref=e672]:
+                      - text: Document title
+                      - textbox "DD-214 or service treatment records" [ref=e673]
+                    - generic [ref=e674]:
+                      - text: Document type
+                      - combobox [ref=e675]:
+                        - option "DBQ"
+                        - option "Nexus Letter"
+                        - option "Private Medical Record" [selected]
+                        - option "Imaging"
+                        - option "Service Record"
+                        - option "Lay Statement"
+                        - option "Toxic Exposure Evidence"
+                        - option "Other"
+                  - generic [ref=e676]:
+                    - generic [ref=e677]:
+                      - text: Source
+                      - combobox [ref=e678]:
+                        - option "Phone capture" [selected]
+                        - option "VA Blue Button"
+                        - option "Private doctor"
+                        - option "Specialist office"
+                        - option "Service treatment record"
+                        - option "Buddy or spouse statement"
+                        - option "Manual note"
+                    - generic [ref=e679]:
+                      - text: Condition
+                      - combobox [ref=e680]:
+                        - option "General evidence"
+                        - option "PTSD" [selected]
+                        - option "Major Depressive Disorder"
+                        - option "Anxiety Condition"
+                        - option "Migraines"
+                        - option "Peripheral Neuropathy"
+                        - option "TBI Residuals"
+                        - option "Lumbosacral (Back) Strain"
+                        - option "Cervical (Neck) Strain"
+                        - option "Knee Strain/Pain"
+                        - option "Plantar Fasciitis"
+                        - option "Sleep Apnea"
+                        - option "Asthma"
+                        - option "Sinusitis/Rhinitis"
+                        - option "Tinnitus"
+                        - option "Hearing Loss"
+                        - option "GERD"
+                        - option "IBS"
+                  - generic [ref=e681]:
+                    - text: Attach document
+                    - button "Choose File" [ref=e682]
+                    - paragraph [ref=e683]: Choose a PDF or image. TYFYS will OCR it, save it in the Dossier, and attach the source file to Zoho.
+                  - generic [ref=e684]:
+                    - text: Capture notes
+                    - textbox "Anything the intake team should know about this file." [ref=e685]
+                  - generic [ref=e686]:
+                    - button "Upload, scan, and sync" [disabled] [ref=e687]
+                    - button "Review All Uploaded Records" [ref=e688] [cursor=pointer]
+      - generic [ref=e436]:
+        - generic [ref=e437]:
+          - generic [ref=e438]:
+            - img [ref=e441]
+            - generic [ref=e445]:
+              - paragraph [ref=e446]: Angela - Guide
+              - paragraph [ref=e447]: Online | Here for You
+          - button [ref=e448] [cursor=pointer]:
+            - img [ref=e449]
+        - generic [ref=e690]: It is wonderful to meet you, Codex. Your profile is all set. Welcome to your Mission Control.
+        - generic [ref=e454]:
+          - textbox "Ask Angela anything..." [ref=e455]
+          - button [disabled] [ref=e456]:
+            - img [ref=e457]
+  - generic [ref=e693] [cursor=pointer]:
+    - emphasis [ref=e694]: 
+    - generic [ref=e695]:
+      - generic "We're offline" [ref=e696]
+      - paragraph [ref=e697]: Leave a message
+      - text: 
+    - text: 
+  - generic:
+    - generic:
+      - iframe

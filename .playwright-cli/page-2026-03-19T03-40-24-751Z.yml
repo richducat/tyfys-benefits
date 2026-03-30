@@ -1,0 +1,529 @@
+- generic [ref=e125]:
+  - generic [ref=e127]:
+    - generic [ref=e129]:
+      - generic [ref=e130]:
+        - generic [ref=e131]: TY
+        - generic [ref=e132]:
+          - generic [ref=e133]: Thank You
+          - text: For Your Service
+      - generic [ref=e134]: Step 1/10
+    - generic [ref=e138]:
+      - generic [ref=e139]:
+        - paragraph [ref=e140]: Now
+        - paragraph [ref=e141]: Fit Check
+      - generic [ref=e142]:
+        - paragraph [ref=e143]: Next
+        - paragraph [ref=e144]: Service
+      - generic [ref=e145]:
+        - paragraph [ref=e146]: Next
+        - paragraph [ref=e147]: Conditions
+      - generic [ref=e148]:
+        - paragraph [ref=e149]: Next
+        - paragraph [ref=e150]: Account
+    - generic [ref=e152]:
+      - heading "Before We Begin" [level=1] [ref=e153]
+      - generic [ref=e155]:
+        - paragraph [ref=e156]: Do you understand TYFYS is a private company and not the VA or a VSO?
+        - generic [ref=e157]:
+          - button "Yes" [ref=e158] [cursor=pointer]
+          - button "No" [ref=e159] [cursor=pointer]
+    - button "Next Step" [ref=e161] [cursor=pointer]:
+      - text: Next Step
+      - img [ref=e162]
+  - generic [ref=e164]:
+    - generic [ref=e166]:
+      - img [ref=e168]
+      - generic [ref=e171]:
+        - heading "TYFYS" [level=1] [ref=e172]
+        - paragraph [ref=e173]: Veteran Claim Workspace
+    - navigation [ref=e174]:
+      - paragraph [ref=e175]: Main
+      - button "Claim Home" [ref=e176] [cursor=pointer]:
+        - img [ref=e177]
+        - text: Claim Home
+      - button "Care Team" [ref=e179] [cursor=pointer]:
+        - img [ref=e180]
+        - text: Care Team
+        - img [ref=e184]
+      - button "Messages" [ref=e187] [cursor=pointer]:
+        - img [ref=e188]
+        - text: Messages
+        - img [ref=e190]
+      - button "Records Intake" [ref=e193] [cursor=pointer]:
+        - img [ref=e194]
+        - text: Records Intake
+        - img [ref=e197]
+      - paragraph [ref=e200]: Tools
+      - button "Records Vault" [ref=e201] [cursor=pointer]:
+        - img [ref=e202]
+        - text: Records Vault
+      - button "VA Rating Calculator" [ref=e206] [cursor=pointer]:
+        - img [ref=e207]
+        - text: VA Rating Calculator
+      - button "PACT Act Guide" [ref=e209] [cursor=pointer]:
+        - img [ref=e210]
+        - text: PACT Act Guide
+      - button "Medical Opinion Draft" [ref=e212] [cursor=pointer]:
+        - img [ref=e213]
+        - text: Medical Opinion Draft
+        - img [ref=e216]
+      - button "Evidence Checklist" [ref=e219] [cursor=pointer]:
+        - img [ref=e220]
+        - text: Evidence Checklist
+      - button "Support Options" [ref=e224] [cursor=pointer]:
+        - img [ref=e225]
+        - text: Support Options
+      - paragraph [ref=e228]: Guidance
+      - button "Claim Guide" [ref=e229] [cursor=pointer]:
+        - img [ref=e230]
+        - text: Claim Guide
+        - img [ref=e233]
+      - button "Independent Doctor Support" [ref=e236]:
+        - img [ref=e237]
+        - text: Independent Doctor Support
+        - img [ref=e240]
+    - generic [ref=e243]:
+      - generic [ref=e246]: Free Tools
+      - paragraph [ref=e247]: "ID: VET-8821"
+      - button "Explore Support Options" [ref=e248] [cursor=pointer]
+  - generic [ref=e249]:
+    - banner [ref=e250]:
+      - generic [ref=e252]:
+        - paragraph [ref=e253]: Start here
+        - heading "Claim Home" [level=2] [ref=e254]
+        - paragraph [ref=e255]: Review your profile, records, ratings, and next steps in one place.
+      - generic [ref=e256]:
+        - generic [ref=e257]:
+          - button "Care Team" [ref=e258] [cursor=pointer]:
+            - img [ref=e259]
+            - text: Care Team
+          - button "Messages" [ref=e263] [cursor=pointer]:
+            - img [ref=e264]
+            - text: Messages
+        - button "Ask Angela" [ref=e266] [cursor=pointer]:
+          - img [ref=e267]
+          - text: Ask Angela
+    - generic [ref=e269]:
+      - generic [ref=e270]:
+        - button "Phase 1 Setup Upgrade to open" [ref=e271] [cursor=pointer]:
+          - paragraph [ref=e272]: Phase 1
+          - paragraph [ref=e273]: Setup
+          - paragraph [ref=e274]: Upgrade to open
+        - button "Phase 2 Records Upload documents and clear file gates" [ref=e275] [cursor=pointer]:
+          - paragraph [ref=e276]: Phase 2
+          - paragraph [ref=e277]: Records
+          - paragraph [ref=e278]: Upload documents and clear file gates
+        - button "Phase 3 Review Review the file and confirm the plan" [ref=e279] [cursor=pointer]:
+          - paragraph [ref=e280]: Phase 3
+          - paragraph [ref=e281]: Review
+          - paragraph [ref=e282]: Review the file and confirm the plan
+        - button "Phase 4 Medical Evidence planning and provider steps" [ref=e283] [cursor=pointer]:
+          - paragraph [ref=e284]: Phase 4
+          - paragraph [ref=e285]: Medical
+          - paragraph [ref=e286]: Evidence planning and provider steps
+        - button "Phase 5 Submit Final review and keep the result updated" [ref=e287] [cursor=pointer]:
+          - paragraph [ref=e288]: Phase 5
+          - paragraph [ref=e289]: Submit
+          - paragraph [ref=e290]: Final review and keep the result updated
+      - generic [ref=e291]:
+        - button "Next step Open Claim Home Guided Setup" [ref=e292] [cursor=pointer]:
+          - paragraph [ref=e293]: Next step
+          - paragraph [ref=e294]: Open Claim Home
+          - paragraph [ref=e295]: Guided Setup
+        - button "Claim Home" [ref=e296] [cursor=pointer]:
+          - img [ref=e299]
+          - paragraph [ref=e301]: Claim Home
+        - button "Records Intake" [ref=e302] [cursor=pointer]:
+          - generic [ref=e303]:
+            - img [ref=e305]
+            - img [ref=e309]
+          - paragraph [ref=e312]: Records Intake
+        - button "Records Vault" [ref=e313] [cursor=pointer]:
+          - img [ref=e316]
+          - paragraph [ref=e320]: Records Vault
+        - button "Messages" [ref=e321] [cursor=pointer]:
+          - generic [ref=e322]:
+            - img [ref=e324]
+            - img [ref=e327]
+          - paragraph [ref=e330]: Messages
+        - button "Support Options" [ref=e331] [cursor=pointer]:
+          - img [ref=e334]
+          - paragraph [ref=e337]: Support Options
+    - main [ref=e338]:
+      - generic [ref=e340]:
+        - generic [ref=e341]:
+          - button [ref=e342] [cursor=pointer]:
+            - img [ref=e343]
+          - generic [ref=e346]:
+            - img [ref=e349]
+            - generic [ref=e353]:
+              - heading "Veteran Profile" [level=1] [ref=e354]
+              - generic [ref=e355]:
+                - generic [ref=e356]:
+                  - paragraph [ref=e357]: Branch
+                  - paragraph [ref=e358]: "-"
+                - generic [ref=e359]:
+                  - paragraph [ref=e360]: Era
+                  - paragraph [ref=e361]: "-"
+                - generic [ref=e362]:
+                  - paragraph [ref=e363]: Rating
+                  - paragraph [ref=e364]: 0%
+                - generic [ref=e365]:
+                  - paragraph [ref=e366]: Program fit
+                  - paragraph [ref=e367]: PENDING
+        - button "Show Me Where To Start" [ref=e368] [cursor=pointer]:
+          - img [ref=e369]
+          - text: Show Me Where To Start
+        - generic [ref=e371]:
+          - generic [ref=e372]:
+            - generic [ref=e373]:
+              - generic [ref=e374]:
+                - paragraph [ref=e375]: Core workflow
+                - heading "The app now follows your claim flow" [level=2] [ref=e376]
+                - paragraph [ref=e377]: This tracker turns the claim process into a clear step-by-step journey. Free users keep the prep tools, and full-app-access members unlock every in-app workflow, upload path, draft tool, and follow-up workspace without needing one-on-one TYFYS service.
+              - generic [ref=e378]:
+                - generic [ref=e379]:
+                  - paragraph [ref=e380]: Claim readiness
+                  - generic [ref=e381]:
+                    - generic [ref=e382]:
+                      - img [ref=e383]
+                      - generic [ref=e386]: 0%
+                    - paragraph [ref=e387]: Based on your completed stages and records checklist.
+                - generic [ref=e388]:
+                  - paragraph [ref=e389]: Current phase
+                  - paragraph [ref=e390]: "Phase 1: Setup"
+                  - paragraph [ref=e391]: Account access and starter steps
+                - generic [ref=e392]:
+                  - paragraph [ref=e393]: Support tier
+                  - paragraph [ref=e394]: Free tools active
+                  - paragraph [ref=e395]: Free tools stay open while premium workflow areas stay locked.
+            - generic [ref=e396]:
+              - button "Phase 1 Setup Unlock full access to open this phase" [ref=e397] [cursor=pointer]:
+                - paragraph [ref=e398]: Phase 1
+                - paragraph [ref=e399]: Setup
+                - paragraph [ref=e400]: Unlock full access to open this phase
+              - button "Phase 2 Records Upload documents and clear file gates" [ref=e401] [cursor=pointer]:
+                - paragraph [ref=e402]: Phase 2
+                - paragraph [ref=e403]: Records
+                - paragraph [ref=e404]: Upload documents and clear file gates
+              - button "Phase 3 Review Review the file and confirm the plan" [ref=e405] [cursor=pointer]:
+                - paragraph [ref=e406]: Phase 3
+                - paragraph [ref=e407]: Review
+                - paragraph [ref=e408]: Review the file and confirm the plan
+              - button "Phase 4 Medical Evidence planning and provider steps" [ref=e409] [cursor=pointer]:
+                - paragraph [ref=e410]: Phase 4
+                - paragraph [ref=e411]: Medical
+                - paragraph [ref=e412]: Evidence planning and provider steps
+              - button "Phase 5 Submit Final review and keep the result updated" [ref=e413] [cursor=pointer]:
+                - paragraph [ref=e414]: Phase 5
+                - paragraph [ref=e415]: Submit
+                - paragraph [ref=e416]: Final review and keep the result updated
+            - generic [ref=e418]:
+              - button "Stage 1 Guided Setup Your support plan Upgrade Finish signup, choose guided support, add your starter documents, confirm payment, and book your intake call. Create your account Choose your support plan Add starter documents Open Claim Home" [ref=e419] [cursor=pointer]:
+                - generic [ref=e420]:
+                  - generic [ref=e421]:
+                    - paragraph [ref=e422]: Stage 1
+                    - generic [ref=e423]:
+                      - img [ref=e425]
+                      - generic [ref=e427]:
+                        - heading "Guided Setup" [level=3] [ref=e428]
+                        - paragraph [ref=e429]: Your support plan
+                  - generic [ref=e430]: Upgrade
+                - paragraph [ref=e431]: Finish signup, choose guided support, add your starter documents, confirm payment, and book your intake call.
+                - generic [ref=e432]:
+                  - generic [ref=e435]: Create your account
+                  - generic [ref=e438]: Choose your support plan
+                  - generic [ref=e441]: Add starter documents
+                - paragraph [ref=e442]: Open Claim Home
+              - button "Stage 2 Records Review Your file review Locked Upload your DD-214 or explain why it is missing, add your records, save your intake summary, and confirm your appointment. Upload DD-214 or explain why it is missing Add service, VA, and private records Save your intake summary Open Records Vault" [ref=e443] [cursor=pointer]:
+                - generic [ref=e444]:
+                  - generic [ref=e445]:
+                    - paragraph [ref=e446]: Stage 2
+                    - generic [ref=e447]:
+                      - img [ref=e449]
+                      - generic [ref=e452]:
+                        - heading "Records Review" [level=3] [ref=e453]
+                        - paragraph [ref=e454]: Your file review
+                  - generic [ref=e455]: Locked
+                - paragraph [ref=e456]: Upload your DD-214 or explain why it is missing, add your records, save your intake summary, and confirm your appointment.
+                - generic [ref=e457]:
+                  - generic [ref=e460]: Upload DD-214 or explain why it is missing
+                  - generic [ref=e463]: Add service, VA, and private records
+                  - generic [ref=e466]: Save your intake summary
+                - paragraph [ref=e467]: Open Records Vault
+              - button "Stage 3 Ready for Review Your intake checklist Locked Finish guided intake and mark your file ready before moving into your live review. Finish guided intake Mark your file ready Keep the next review locked until both are done Finish Guided Intake" [ref=e468] [cursor=pointer]:
+                - generic [ref=e469]:
+                  - generic [ref=e470]:
+                    - paragraph [ref=e471]: Stage 3
+                    - generic [ref=e472]:
+                      - img [ref=e474]
+                      - generic [ref=e477]:
+                        - heading "Ready for Review" [level=3] [ref=e478]
+                        - paragraph [ref=e479]: Your intake checklist
+                  - generic [ref=e480]: Locked
+                - paragraph [ref=e481]: Finish guided intake and mark your file ready before moving into your live review.
+                - generic [ref=e482]:
+                  - generic [ref=e485]: Finish guided intake
+                  - generic [ref=e488]: Mark your file ready
+                  - generic [ref=e491]: Keep the next review locked until both are done
+                - paragraph [ref=e492]: Finish Guided Intake
+              - button "Stage 4 Review Call Your care team Locked Review your records, confirm VA access, answer open questions, book your review call, and save the plan for the next step. Review records and VA.gov access Fill gaps and answer questions Book your review call Open Care Team" [ref=e493] [cursor=pointer]:
+                - generic [ref=e494]:
+                  - generic [ref=e495]:
+                    - paragraph [ref=e496]: Stage 4
+                    - generic [ref=e497]:
+                      - img [ref=e499]
+                      - generic [ref=e503]:
+                        - heading "Review Call" [level=3] [ref=e504]
+                        - paragraph [ref=e505]: Your care team
+                  - generic [ref=e506]: Locked
+                - paragraph [ref=e507]: Review your records, confirm VA access, answer open questions, book your review call, and save the plan for the next step.
+                - generic [ref=e508]:
+                  - generic [ref=e511]: Review records and VA.gov access
+                  - generic [ref=e514]: Fill gaps and answer questions
+                  - generic [ref=e517]: Book your review call
+                - paragraph [ref=e518]: Open Care Team
+              - button "Stage 5 Medical Review Medical support Locked Review whether your claim is ready to move forward, build the evidence plan, prepare DBQs, schedule specialty visits, and get ready for exams. Review claim readiness Save the result if more work is needed Build your evidence plan and DBQs Open Medical Opinion Draft" [ref=e519] [cursor=pointer]:
+                - generic [ref=e520]:
+                  - generic [ref=e521]:
+                    - paragraph [ref=e522]: Stage 5
+                    - generic [ref=e523]:
+                      - img [ref=e525]
+                      - generic [ref=e528]:
+                        - heading "Medical Review" [level=3] [ref=e529]
+                        - paragraph [ref=e530]: Medical support
+                  - generic [ref=e531]: Locked
+                - paragraph [ref=e532]: Review whether your claim is ready to move forward, build the evidence plan, prepare DBQs, schedule specialty visits, and get ready for exams.
+                - generic [ref=e533]:
+                  - generic [ref=e536]: Review claim readiness
+                  - generic [ref=e539]: Save the result if more work is needed
+                  - generic [ref=e542]: Build your evidence plan and DBQs
+                - paragraph [ref=e543]: Open Medical Opinion Draft
+              - button "Stage 6 Provider Follow-Up Appointments and records Locked Choose your provider path, send the packet or form, follow up, wait for records, and mark the file ready for the next step. Create your file packet Choose a provider path Send the provider packet or form Open Messages" [ref=e544] [cursor=pointer]:
+                - generic [ref=e545]:
+                  - generic [ref=e546]:
+                    - paragraph [ref=e547]: Stage 6
+                    - generic [ref=e548]:
+                      - img [ref=e550]
+                      - generic [ref=e552]:
+                        - heading "Provider Follow-Up" [level=3] [ref=e553]
+                        - paragraph [ref=e554]: Appointments and records
+                  - generic [ref=e555]: Locked
+                - paragraph [ref=e556]: Choose your provider path, send the packet or form, follow up, wait for records, and mark the file ready for the next step.
+                - generic [ref=e557]:
+                  - generic [ref=e560]: Create your file packet
+                  - generic [ref=e563]: Choose a provider path
+                  - generic [ref=e566]: Send the provider packet or form
+                - paragraph [ref=e567]: Open Messages
+              - button "Stage 7 Final Review & Submit Final preparation Locked Complete your final review call and go over the next steps in a clear, veteran-friendly way. Final review call Final review completed Go over next steps Open Claim Guide" [ref=e568] [cursor=pointer]:
+                - generic [ref=e569]:
+                  - generic [ref=e570]:
+                    - paragraph [ref=e571]: Stage 7
+                    - generic [ref=e572]:
+                      - img [ref=e574]
+                      - generic [ref=e577]:
+                        - heading "Final Review & Submit" [level=3] [ref=e578]
+                        - paragraph [ref=e579]: Final preparation
+                  - generic [ref=e580]: Locked
+                - paragraph [ref=e581]: Complete your final review call and go over the next steps in a clear, veteran-friendly way.
+                - generic [ref=e582]:
+                  - generic [ref=e585]: Final review call
+                  - generic [ref=e588]: Final review completed
+                  - generic [ref=e591]: Go over next steps
+                - paragraph [ref=e592]: Open Claim Guide
+              - button "Stage 8 Decision & Follow-up Your claim status Locked Save the latest result and keep everything organized for whatever comes next. Record your latest decision or update Save the follow-up inside the app Return to Claim Home" [ref=e593] [cursor=pointer]:
+                - generic [ref=e594]:
+                  - generic [ref=e595]:
+                    - paragraph [ref=e596]: Stage 8
+                    - generic [ref=e597]:
+                      - img [ref=e599]
+                      - generic [ref=e602]:
+                        - heading "Decision & Follow-up" [level=3] [ref=e603]
+                        - paragraph [ref=e604]: Your claim status
+                  - generic [ref=e605]: Locked
+                - paragraph [ref=e606]: Save the latest result and keep everything organized for whatever comes next.
+                - generic [ref=e607]:
+                  - generic [ref=e610]: Record your latest decision or update
+                  - generic [ref=e613]: Save the follow-up inside the app
+                - paragraph [ref=e614]: Return to Claim Home
+          - generic [ref=e615]:
+            - generic [ref=e616]:
+              - paragraph [ref=e617]: Full app access
+              - heading "Guided Setup" [level=3] [ref=e618]
+              - paragraph [ref=e619]: Finish signup, choose guided support, add your starter documents, confirm payment, and book your intake call.
+              - button "Unlock full app access" [ref=e620] [cursor=pointer]:
+                - text: Unlock full app access
+                - img [ref=e621]
+            - generic [ref=e623]:
+              - paragraph [ref=e624]: Free vs paid
+              - generic [ref=e625]:
+                - paragraph [ref=e626]:
+                  - strong [ref=e627]: "Free:"
+                  - text: Claim Home, VA Rating Calculator, PACT Act Guide, Evidence Checklist, and local document organization stay available so veterans can gather facts and see what they need.
+                - paragraph [ref=e628]:
+                  - strong [ref=e629]: "Full App Access:"
+                  - text: Records Intake, Medical Opinion Draft, Care Team workspace, secure messaging, provider follow-up tools, and final prep all unlock in the app. Hands-on TYFYS service is separate if you want us personally involved.
+        - generic [ref=e630]:
+          - button "0 saved Records Vault Upload records, read scanned text, and keep your evidence organized on this device." [ref=e631] [cursor=pointer]:
+            - generic [ref=e632]:
+              - img [ref=e634]
+              - generic [ref=e638]: 0 saved
+            - paragraph [ref=e639]: Records Vault
+            - paragraph [ref=e640]: Upload records, read scanned text, and keep your evidence organized on this device.
+          - button "0% VA Rating Calculator See combined-rating steps, exact rounding, and a path to 100%." [ref=e641] [cursor=pointer]:
+            - generic [ref=e642]:
+              - img [ref=e644]
+              - generic [ref=e646]: 0%
+            - paragraph [ref=e647]: VA Rating Calculator
+            - paragraph [ref=e648]: See combined-rating steps, exact rounding, and a path to 100%.
+          - button "Post-9/11 PACT Act Guide Check presumptive conditions by era and exposure track with official VA sources." [ref=e649] [cursor=pointer]:
+            - generic [ref=e650]:
+              - img [ref=e652]
+              - generic [ref=e654]: Post-9/11
+            - paragraph [ref=e655]: PACT Act Guide
+            - paragraph [ref=e656]: Check presumptive conditions by era and exposure track with official VA sources.
+          - button "0 records Medical Opinion Draft Premium Unlocks in the strategy stage so the app can walk the veteran through the flow in order." [ref=e657] [cursor=pointer]:
+            - generic [ref=e658]:
+              - img [ref=e660]
+              - generic [ref=e663]: 0 records
+            - generic [ref=e664]:
+              - paragraph [ref=e665]: Medical Opinion Draft
+              - generic [ref=e666]:
+                - img [ref=e667]
+                - text: Premium
+            - paragraph [ref=e670]: Unlocks in the strategy stage so the app can walk the veteran through the flow in order.
+        - generic [ref=e671]:
+          - button "Local care team Care Team Locked This opens after your file is marked ready and your review call begins. Planning profiles 2 Next planning step Pending TYFYS confirmation Local follow-ups 0" [ref=e672] [cursor=pointer]:
+            - generic [ref=e673]:
+              - generic [ref=e674]:
+                - paragraph [ref=e675]: Local care team
+                - generic [ref=e676]:
+                  - heading "Care Team" [level=3] [ref=e677]
+                  - generic [ref=e678]:
+                    - img [ref=e679]
+                    - text: Locked
+                - paragraph [ref=e682]: This opens after your file is marked ready and your review call begins.
+              - img [ref=e684]
+            - generic [ref=e688]:
+              - generic [ref=e689]:
+                - paragraph [ref=e690]: Planning profiles
+                - paragraph [ref=e691]: "2"
+              - generic [ref=e692]:
+                - paragraph [ref=e693]: Next planning step
+                - paragraph [ref=e694]: Pending TYFYS confirmation
+              - generic [ref=e695]:
+                - paragraph [ref=e696]: Local follow-ups
+                - paragraph [ref=e697]: "0"
+          - button "Local inbox Messages Locked This opens when the file reaches the provider and follow-up stage so the veteran stays on sequence. TYFYS Support Team Use this local thread to capture the next TYFYS follow-up you want to track. Preview ready Saved locally General medical planning profile Use this local thread to draft the questions and prep notes you want ready for a future review. Preview ready Saved locally Behavioral health planning profile Use this local thread to collect the PTSD and anxiety details you do not want to forget later. Preview ready Saved locally" [ref=e698] [cursor=pointer]:
+            - generic [ref=e699]:
+              - generic [ref=e700]:
+                - paragraph [ref=e701]: Local inbox
+                - generic [ref=e702]:
+                  - heading "Messages" [level=3] [ref=e703]
+                  - generic [ref=e704]:
+                    - img [ref=e705]
+                    - text: Locked
+                - paragraph [ref=e708]: This opens when the file reaches the provider and follow-up stage so the veteran stays on sequence.
+              - img [ref=e710]
+            - generic [ref=e712]:
+              - generic [ref=e713]:
+                - generic [ref=e714]:
+                  - paragraph [ref=e715]: TYFYS Support Team
+                  - paragraph [ref=e716]: Use this local thread to capture the next TYFYS follow-up you want to track.
+                - generic [ref=e717]:
+                  - paragraph [ref=e718]: Preview ready
+                  - paragraph [ref=e719]: Saved locally
+              - generic [ref=e720]:
+                - generic [ref=e721]:
+                  - paragraph [ref=e722]: General medical planning profile
+                  - paragraph [ref=e723]: Use this local thread to draft the questions and prep notes you want ready for a future review.
+                - generic [ref=e724]:
+                  - paragraph [ref=e725]: Preview ready
+                  - paragraph [ref=e726]: Saved locally
+              - generic [ref=e727]:
+                - generic [ref=e728]:
+                  - paragraph [ref=e729]: Behavioral health planning profile
+                  - paragraph [ref=e730]: Use this local thread to collect the PTSD and anxiety details you do not want to forget later.
+                - generic [ref=e731]:
+                  - paragraph [ref=e732]: Preview ready
+                  - paragraph [ref=e733]: Saved locally
+        - generic [ref=e734]:
+          - generic [ref=e735]:
+            - generic [ref=e736]:
+              - heading "Tracked Conditions" [level=3] [ref=e737]:
+                - img [ref=e738]
+                - text: Tracked Conditions
+              - button "Add condition" [ref=e741] [cursor=pointer]
+            - generic [ref=e742]:
+              - img [ref=e743]
+              - paragraph [ref=e747]: No conditions added yet.
+              - paragraph [ref=e748]: Add conditions to see rating guidance and supporting records.
+              - button "Start here" [ref=e749] [cursor=pointer]
+          - generic [ref=e750]:
+            - generic [ref=e752]:
+              - generic [ref=e753]:
+                - heading "App Access Level" [level=3] [ref=e754]:
+                  - img [ref=e755]
+                  - text: App Access Level
+                - generic [ref=e758]: Free
+              - paragraph [ref=e759]: Upgrade to unlock every TYFYS app feature. Personalized TYFYS service stays optional and separate.
+              - button "Unlock Full App Access ($250/mo)" [ref=e760] [cursor=pointer]
+            - generic [ref=e761]:
+              - heading "Next Steps" [level=3] [ref=e762]
+              - generic [ref=e763]:
+                - button "Start Records Intake" [ref=e764] [cursor=pointer]:
+                  - generic [ref=e765]:
+                    - img [ref=e767]
+                    - generic [ref=e770]: Start Records Intake
+                  - img [ref=e771]
+                - button "Open Records Vault" [ref=e773] [cursor=pointer]:
+                  - generic [ref=e774]:
+                    - img [ref=e776]
+                    - generic [ref=e780]: Open Records Vault
+                  - img [ref=e781]
+                - button "Check PACT Presumptives" [ref=e783] [cursor=pointer]:
+                  - generic [ref=e784]:
+                    - img [ref=e786]
+                    - generic [ref=e788]: Check PACT Presumptives
+                  - img [ref=e789]
+        - generic [ref=e791]:
+          - generic [ref=e792]:
+            - img [ref=e794]
+            - heading "Success Stories" [level=3] [ref=e796]:
+              - img [ref=e797]
+              - text: Success Stories
+            - generic [ref=e799]:
+              - generic [ref=e800]:
+                - paragraph [ref=e801]: "\"Now I'm at 70% with secondary conditions recognized. My only regret is not doing this sooner.\""
+                - paragraph [ref=e802]: "- James T."
+              - generic [ref=e803]:
+                - paragraph [ref=e804]: "\"Rating increased to 70% with back pay that covered the fee ten times over.\""
+                - paragraph [ref=e805]: "- Christopher L."
+          - generic [ref=e806]:
+            - heading "Why We Win" [level=3] [ref=e807]:
+              - img [ref=e808]
+              - text: Why We Win
+            - generic [ref=e811]:
+              - generic [ref=e812]:
+                - generic [ref=e814]: VS
+                - generic [ref=e815]:
+                  - paragraph [ref=e816]: Traditional VSO
+                  - paragraph [ref=e817]: Free forms, but often requires risky C&P exams.
+              - generic [ref=e819]:
+                - img [ref=e821]
+                - generic [ref=e823]:
+                  - paragraph [ref=e824]: The TYFYS Method
+                  - paragraph [ref=e825]: Private medical records and doctor opinion letters. This can strengthen the file before a C&P exam is even scheduled.
+  - generic [ref=e826]:
+    - generic [ref=e827]:
+      - generic [ref=e828]:
+        - img [ref=e831]
+        - generic [ref=e835]:
+          - paragraph [ref=e836]: Angela - TYFYS Guide
+          - paragraph [ref=e837]: Online | Ready to help
+      - button [ref=e838] [cursor=pointer]:
+        - img [ref=e839]
+    - generic [ref=e844]:
+      - textbox "Ask Angela about your claim..." [ref=e845]
+      - button [disabled] [ref=e846]:
+        - img [ref=e847]

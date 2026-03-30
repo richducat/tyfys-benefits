@@ -1,0 +1,345 @@
+- main [ref=e28]:
+  - generic [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: TYFYS CRM
+          - heading "One work queue for customers, SOP steps, and next actions." [level=1] [ref=e34]
+          - paragraph [ref=e35]: The CRM now centers on who needs attention, what the next step is, and which SOP task is blocking the case from moving forward.
+        - complementary [ref=e36]:
+          - generic [ref=e37]:
+            - paragraph [ref=e38]: Signed in
+            - heading "Richard" [level=2] [ref=e39]
+            - paragraph [ref=e40]: richard@thankyouforyourservice.co can manage live CRM data.
+          - generic [ref=e41]:
+            - generic [ref=e42]: Private workspace
+            - generic [ref=e43]: SOP tracking
+            - generic [ref=e44]: Live app data
+      - generic [ref=e45]:
+        - article [ref=e46]:
+          - generic [ref=e47]: Total customers
+          - strong [ref=e48]: "137"
+          - paragraph [ref=e49]: live customer records in the private queue
+        - article [ref=e50]:
+          - generic [ref=e51]: Needs attention
+          - strong [ref=e52]: "1"
+          - paragraph [ref=e53]: urgent, blocked, or overdue cases
+        - article [ref=e54]:
+          - generic [ref=e55]: Due this week
+          - strong [ref=e56]: "0"
+          - paragraph [ref=e57]: cases with upcoming deadlines
+        - article [ref=e58]:
+          - generic [ref=e59]: Records in flight
+          - strong [ref=e60]: "77"
+          - paragraph [ref=e61]: customers already collecting records
+        - article [ref=e62]:
+          - generic [ref=e63]: Ready to submit
+          - strong [ref=e64]: "0"
+          - paragraph [ref=e65]: files ready for the final handoff
+    - generic [ref=e67]:
+      - button "All visible 137 every result in the current queue" [ref=e68] [cursor=pointer]:
+        - generic [ref=e69]: All visible
+        - strong [ref=e70]: "137"
+        - paragraph [ref=e71]: every result in the current queue
+      - button "Needs attention 1 urgent, blocked, or overdue cases" [active] [ref=e72] [cursor=pointer]:
+        - generic [ref=e73]: Needs attention
+        - strong [ref=e74]: "1"
+        - paragraph [ref=e75]: urgent, blocked, or overdue cases
+      - button "Welcome 3 New customer or account that still needs a first-touch review." [ref=e76] [cursor=pointer]:
+        - generic [ref=e77]: Welcome
+        - strong [ref=e78]: "3"
+        - paragraph [ref=e79]: New customer or account that still needs a first-touch review.
+      - button "Offer 29 Qualified lead reviewing pricing, fit, or account setup details." [ref=e80] [cursor=pointer]:
+        - generic [ref=e81]: Offer
+        - strong [ref=e82]: "29"
+        - paragraph [ref=e83]: Qualified lead reviewing pricing, fit, or account setup details.
+      - button "Contract Signed 29 Paid customer with app access or service agreement already in place." [ref=e84] [cursor=pointer]:
+        - generic [ref=e85]: Contract Signed
+        - strong [ref=e86]: "29"
+        - paragraph [ref=e87]: Paid customer with app access or service agreement already in place.
+      - button "DD214 / ITF 0 Working on service records, intent to file, or claim kickoff prerequisites." [ref=e88] [cursor=pointer]:
+        - generic [ref=e89]: DD214 / ITF
+        - strong [ref=e90]: "0"
+        - paragraph [ref=e91]: Working on service records, intent to file, or claim kickoff prerequisites.
+      - button "Records 75 Collecting, syncing, or organizing medical and military records." [ref=e92] [cursor=pointer]:
+        - generic [ref=e93]: Records
+        - strong [ref=e94]: "75"
+        - paragraph [ref=e95]: Collecting, syncing, or organizing medical and military records.
+      - button "Intake 0 Questionnaires, intake cleanup, and case prep are underway." [ref=e96] [cursor=pointer]:
+        - generic [ref=e97]: Intake
+        - strong [ref=e98]: "0"
+        - paragraph [ref=e99]: Questionnaires, intake cleanup, and case prep are underway.
+      - button "MDBQs 0 Mini-DBQs and condition-specific evidence prompts are being completed." [ref=e100] [cursor=pointer]:
+        - generic [ref=e101]: MDBQs
+        - strong [ref=e102]: "0"
+        - paragraph [ref=e103]: Mini-DBQs and condition-specific evidence prompts are being completed.
+      - button "Provider 1 Provider scheduling, evaluations, or follow-up medical documentation." [ref=e104] [cursor=pointer]:
+        - generic [ref=e105]: Provider
+        - strong [ref=e106]: "1"
+        - paragraph [ref=e107]: Provider scheduling, evaluations, or follow-up medical documentation.
+      - button "Evidence Packet 0 Assembling final packet, reports, and supporting materials." [ref=e108] [cursor=pointer]:
+        - generic [ref=e109]: Evidence Packet
+        - strong [ref=e110]: "0"
+        - paragraph [ref=e111]: Assembling final packet, reports, and supporting materials.
+      - button "Ready to Submit 0 Customer has what they need to submit through the VA or an accredited rep." [ref=e112] [cursor=pointer]:
+        - generic [ref=e113]: Ready to Submit
+        - strong [ref=e114]: "0"
+        - paragraph [ref=e115]: Customer has what they need to submit through the VA or an accredited rep.
+    - generic [ref=e116]:
+      - generic [ref=e117]:
+        - generic [ref=e118]:
+          - paragraph [ref=e119]: Queue filters
+          - heading "Work the customer list" [level=2] [ref=e120]
+          - paragraph [ref=e121]: Showing 1 customer sorted for action.
+        - generic [ref=e122]:
+          - generic [ref=e123]: 1 visible
+          - button "Clear filters" [ref=e2955] [cursor=pointer]
+      - generic [ref=e124]:
+        - generic [ref=e125]:
+          - generic [ref=e126]: Search
+          - searchbox "Search" [ref=e127]
+        - generic [ref=e128]:
+          - generic [ref=e129]: View
+          - combobox "View" [ref=e130]:
+            - option "All stages"
+            - option "Needs attention" [selected]
+            - option "Welcome"
+            - option "Offer"
+            - option "Contract Signed"
+            - option "DD214 / ITF"
+            - option "Records"
+            - option "Intake"
+            - option "MDBQs"
+            - option "Provider"
+            - option "Evidence Packet"
+            - option "Ready to Submit"
+        - generic [ref=e131]:
+          - generic [ref=e132]: Owner
+          - combobox "Owner" [ref=e133]:
+            - option "All owners" [selected]
+            - option "Ops Lead"
+        - generic [ref=e134]:
+          - generic [ref=e135]: Status
+          - combobox "Status" [ref=e136]:
+            - option "All statuses" [selected]
+            - option "Active"
+            - option "Paused"
+            - option "Closed"
+        - generic [ref=e137]:
+          - generic [ref=e138]: Sort
+          - combobox "Sort" [ref=e139]:
+            - option "Needs attention first" [selected]
+            - option "Due date"
+            - option "Recently updated"
+            - option "Customer name"
+    - generic [ref=e140]:
+      - generic [ref=e141]:
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - paragraph [ref=e144]: Customer queue
+            - heading "Action list" [level=2] [ref=e145]
+            - paragraph [ref=e146]: The queue surfaces urgent, blocked, and due cases first so the team can work from top to bottom.
+          - generic [ref=e147]:
+            - generic [ref=e148]: 1 in queue
+            - button "Clear filters" [ref=e2956] [cursor=pointer]
+        - 'button "Chris Veteran customer@example.com · Ops Lead Provider High Active No due date Paid 2 records Confirm psych eval scheduling and collect provider packet. SOP 0/11 Next SOP: Confirm fit and claim goals Last contact Mar 20, 2026 Waiting on psych consult Moved this case into provider scheduling after records review." [ref=e150] [cursor=pointer]':
+          - generic [ref=e151]:
+            - generic [ref=e152]:
+              - heading "Chris Veteran" [level=3] [ref=e153]
+              - paragraph [ref=e154]: customer@example.com · Ops Lead
+            - generic [ref=e155]:
+              - generic [ref=e156]: Provider
+              - generic [ref=e157]: High
+          - generic [ref=e158]:
+            - generic [ref=e159]: Active
+            - generic [ref=e160]: No due date
+            - generic [ref=e161]: Paid
+            - generic [ref=e162]: 2 records
+          - paragraph [ref=e163]: Confirm psych eval scheduling and collect provider packet.
+          - generic [ref=e166]: SOP 0/11
+          - generic [ref=e167]:
+            - generic [ref=e168]: "Next SOP: Confirm fit and claim goals"
+            - generic [ref=e169]: Last contact Mar 20, 2026
+          - generic [ref=e171]: Waiting on psych consult
+          - paragraph [ref=e172]: Moved this case into provider scheduling after records review.
+      - complementary [ref=e2801]:
+        - generic [ref=e2802]:
+          - generic [ref=e2803]:
+            - generic [ref=e2804]:
+              - paragraph [ref=e2805]: Customer detail
+              - heading "Chris Veteran" [level=2] [ref=e2957]
+              - paragraph [ref=e2807]: customer@example.com
+            - generic [ref=e2808]:
+              - generic [ref=e2809]: Provider
+              - generic [ref=e2810]: High
+          - generic [ref=e2811]:
+            - article [ref=e2812]:
+              - generic [ref=e2813]: Next action
+              - heading "Confirm psych eval scheduling and collect provider packet." [level=3] [ref=e2958]
+              - paragraph [ref=e2815]: Every case should have one clear move the team can take next.
+            - article [ref=e2816]:
+              - generic [ref=e2817]: SOP focus
+              - heading "Confirm fit and claim goals" [level=3] [ref=e2818]
+              - paragraph [ref=e2819]: 0/11 steps complete · Provider scheduling, evaluations, or follow-up medical documentation.
+            - article [ref=e2820]:
+              - generic [ref=e2821]: Case health
+              - heading "Ops Lead" [level=3] [ref=e2959]
+              - paragraph [ref=e2823]: No due date · Active · 1 blocker
+          - generic [ref=e2824]:
+            - article [ref=e2825]:
+              - generic [ref=e2826]: Lead ID
+              - strong [ref=e2827]: lead_demo_001
+              - paragraph [ref=e2828]: Created Mar 20, 2026
+            - article [ref=e2829]:
+              - generic [ref=e2830]: Records synced
+              - strong [ref=e2831]: 2/2
+              - paragraph [ref=e2832]: Synced to the TYFYS member file
+          - generic [ref=e2833]:
+            - generic [ref=e2834]: 555-123-4567
+            - generic [ref=e2835]: Paid access
+            - generic [ref=e2836]: 70% current rating
+            - generic [ref=e2837]: Increase
+        - generic [ref=e2838]:
+          - heading "Pipeline controls" [level=3] [ref=e2839]
+          - paragraph [ref=e2840]: Update ownership, stage, deadlines, and blockers so the queue stays accurate for the next person who opens this case.
+          - generic [ref=e2841]:
+            - generic [ref=e2842]:
+              - generic [ref=e2843]: Stage
+              - combobox "Stage" [ref=e2844]:
+                - option "Welcome"
+                - option "Offer"
+                - option "Contract Signed"
+                - option "DD214 / ITF"
+                - option "Records"
+                - option "Intake"
+                - option "MDBQs"
+                - option "Provider" [selected]
+                - option "Evidence Packet"
+                - option "Ready to Submit"
+            - generic [ref=e2845]:
+              - generic [ref=e2846]: Owner
+              - textbox "Owner" [ref=e2847]:
+                - /placeholder: Assign a team owner
+                - text: Ops Lead
+            - generic [ref=e2848]:
+              - generic [ref=e2849]: Priority
+              - combobox "Priority" [ref=e2850]:
+                - option "Low"
+                - option "Normal"
+                - option "High" [selected]
+                - option "Urgent"
+            - generic [ref=e2851]:
+              - generic [ref=e2852]: Status
+              - combobox "Status" [ref=e2853]:
+                - option "Active" [selected]
+                - option "Paused"
+                - option "Closed"
+            - generic [ref=e2854]:
+              - generic [ref=e2855]: Due date
+              - textbox "Due date" [ref=e2856]
+            - generic [ref=e2857]:
+              - generic [ref=e2858]: Last contact
+              - textbox "Last contact" [ref=e2859]: 2026-03-20
+          - generic [ref=e2860]:
+            - generic [ref=e2861]: Next step
+            - textbox "Next step" [ref=e2862]:
+              - /placeholder: Write one concrete next action for the team.
+              - text: Confirm psych eval scheduling and collect provider packet.
+          - generic [ref=e2863]:
+            - generic [ref=e2864]:
+              - generic [ref=e2865]: Tags
+              - textbox "Tags" [ref=e2866]:
+                - /placeholder: records, priority, consult
+                - text: ptsd, priority
+            - generic [ref=e2867]:
+              - generic [ref=e2868]: Blockers
+              - textbox "Blockers" [ref=e2869]:
+                - /placeholder: One blocker per line
+                - text: Waiting on psych consult
+        - generic [ref=e2870]:
+          - generic [ref=e2871]:
+            - generic [ref=e2872]:
+              - heading "SOP checklist" [level=3] [ref=e2873]
+              - paragraph [ref=e2874]: The current stage is highlighted so the next required task stands out.
+            - generic [ref=e2875]: 0/11 complete
+          - generic [ref=e2876]:
+            - generic [ref=e2877]:
+              - checkbox "Confirm fit and claim goals Offer Open" [ref=e2878]
+              - generic [ref=e2879]:
+                - paragraph [ref=e2880]: Confirm fit and claim goals
+                - paragraph [ref=e2881]: Offer
+              - generic [ref=e2882]: Open
+            - generic [ref=e2883]:
+              - checkbox "Service agreement and deposit confirmed Contract Signed Open" [ref=e2884]
+              - generic [ref=e2885]:
+                - paragraph [ref=e2886]: Service agreement and deposit confirmed
+                - paragraph [ref=e2887]: Contract Signed
+              - generic [ref=e2888]: Open
+            - generic [ref=e2889]:
+              - checkbox "DD-214 verified DD214 / ITF Open" [ref=e2890]
+              - generic [ref=e2891]:
+                - paragraph [ref=e2892]: DD-214 verified
+                - paragraph [ref=e2893]: DD214 / ITF
+              - generic [ref=e2894]: Open
+            - generic [ref=e2895]:
+              - checkbox "Intent to File confirmed DD214 / ITF Open" [ref=e2896]
+              - generic [ref=e2897]:
+                - paragraph [ref=e2898]: Intent to File confirmed
+                - paragraph [ref=e2899]: DD214 / ITF
+              - generic [ref=e2900]: Open
+            - generic [ref=e2901]:
+              - checkbox "Core military and civilian records collected Records Open" [ref=e2960]
+              - generic [ref=e2903]:
+                - paragraph [ref=e2904]: Core military and civilian records collected
+                - paragraph [ref=e2905]: Records
+              - generic [ref=e2906]: Open
+            - generic [ref=e2907]:
+              - checkbox "Intake and questionnaires complete Intake Open" [ref=e2908]
+              - generic [ref=e2909]:
+                - paragraph [ref=e2910]: Intake and questionnaires complete
+                - paragraph [ref=e2911]: Intake
+              - generic [ref=e2912]: Open
+            - generic [ref=e2913]:
+              - checkbox "Mini-DBQs reviewed for all target conditions MDBQs Open" [ref=e2914]
+              - generic [ref=e2915]:
+                - paragraph [ref=e2916]: Mini-DBQs reviewed for all target conditions
+                - paragraph [ref=e2917]: MDBQs
+              - generic [ref=e2918]: Open
+            - generic [ref=e2919]:
+              - checkbox "Provider appointment booked Provider Current stage" [ref=e2961]
+              - generic [ref=e2921]:
+                - paragraph [ref=e2922]: Provider appointment booked
+                - paragraph [ref=e2923]: Provider
+              - generic [ref=e2924]: Current stage
+            - generic [ref=e2925]:
+              - checkbox "Provider reports or DBQs received Provider Current stage" [ref=e2962]
+              - generic [ref=e2927]:
+                - paragraph [ref=e2928]: Provider reports or DBQs received
+                - paragraph [ref=e2929]: Provider
+              - generic [ref=e2930]: Current stage
+            - generic [ref=e2931]:
+              - checkbox "Evidence packet assembled Evidence Packet Open" [ref=e2932]
+              - generic [ref=e2933]:
+                - paragraph [ref=e2934]: Evidence packet assembled
+                - paragraph [ref=e2935]: Evidence Packet
+              - generic [ref=e2936]: Open
+            - generic [ref=e2937]:
+              - checkbox "Customer is ready to submit Ready To Submit Open" [ref=e2938]
+              - generic [ref=e2939]:
+                - paragraph [ref=e2940]: Customer is ready to submit
+                - paragraph [ref=e2941]: Ready To Submit
+              - generic [ref=e2942]: Open
+        - generic [ref=e2943]:
+          - generic [ref=e2944]:
+            - heading "Internal notes" [level=3] [ref=e2945]
+            - generic [ref=e2946]: Updated 5 hours ago · Last login No recent activity
+          - generic [ref=e2947]:
+            - generic [ref=e2948]: Add note
+            - textbox "Add note" [ref=e2949]:
+              - /placeholder: Capture the latest call, blocker, decision, or handoff note.
+          - article [ref=e2963]:
+            - generic [ref=e2964]:
+              - strong [ref=e2965]: Ops Lead
+              - generic [ref=e2966]: Mar 20, 2026, 11:04 AM
+            - paragraph [ref=e2967]: Moved this case into provider scheduling after records review.
+        - button "Save CRM changes" [ref=e2954] [cursor=pointer]

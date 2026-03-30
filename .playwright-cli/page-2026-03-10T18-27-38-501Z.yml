@@ -1,0 +1,47 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e6] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e8]
+        - generic [ref=e11]:
+          - generic [ref=e12]: Thank You For Your Service
+          - generic [ref=e13]: Veteran Owned & Operated
+      - generic [ref=e14]:
+        - link "Home" [ref=e15] [cursor=pointer]:
+          - /url: index.html
+        - link "About Us" [ref=e16] [cursor=pointer]:
+          - /url: about_us.html
+        - link "Our Team" [ref=e17] [cursor=pointer]:
+          - /url: mission_team.html
+        - link "Our Process" [ref=e18] [cursor=pointer]:
+          - /url: process.html
+        - button "VA Claims" [ref=e20] [cursor=pointer]:
+          - text: VA Claims
+          - img [ref=e21]
+        - button "Resources" [ref=e24] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e25]
+        - button "Cmd/Ctrl + K" [ref=e27] [cursor=pointer]:
+          - img [ref=e28]
+          - generic [ref=e31]: Cmd/Ctrl + K
+        - button "Accessibility" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+          - generic [ref=e40]: Accessibility
+        - link "Book Discovery Call" [ref=e41] [cursor=pointer]:
+          - /url: contact.html
+          - text: Book Discovery Call
+          - img [ref=e42]
+  - main [ref=e44]:
+    - generic [ref=e48]:
+      - img [ref=e51]
+      - heading "Maximize Your VA Rating. Stop Leaving Money on the Table." [level=1] [ref=e54]:
+        - text: Maximize Your VA Rating.
+        - generic [ref=e55]: Stop Leaving Money on the Table.
+      - paragraph [ref=e56]: Get the Expert Strategy, Private Medical Evidence, and Tools you need to win your claim in months, not years.
+      - generic [ref=e57]:
+        - strong [ref=e58]: "NOTICE:"
+        - text: We are a private organization of medical and legal experts. We are not the VA.
+      - button "Initialize System" [ref=e59] [cursor=pointer]:
+        - text: Initialize System
+        - img [ref=e60]

@@ -1,0 +1,16 @@
+PACKET HEADER
+Signed ICF v4.0 for [REDACTED] (1074-A3A-201A) was uploaded by Daniel Burch on 2026-02-02 08:14.
+[REDACTED] is enrolled at OpenDoor Clinical Research LLC under protocol V4.0 / eSource 27 Oct 2025. Current packet status is Certified with Signed signature state.
+
+PARTICIPANT IDENTIFIERS
+Participant name: [REDACTED]. DOB: 1970-02-24. Email: ann[REDACTED]70@yahoo.com. Phone: (772) 555-0120.
+Randomization and arm details: 1074-A3A-201A, Part B (Phase 3). James [REDACTED] (Spouse) can be reached at (772) 555-0144 and j[REDACTED]@example.com.
+
+CLINICAL AND SOURCE SUMMARY
+[REDACTED] reviewed the informed consent packet with Daniel Burch and acknowledged the study protocol, risks, and signature requirements for 230LE301.
+Documented conditions for [REDACTED] include Cutaneous lupus flare pattern (High); Chronic fatigue (Moderate). Current medications include Hydroxychloroquine 200 mg BID; Prednisone 10 mg PRN. Allergy record: Penicillin (Hives); Latex (Skin irritation).
+
+OPERATIONAL NOTES
+Most recent progress note for Elizabeth: Participant arrived on time, confirmed kit accountability, and tolerated specimen draw without escalation.
+Next visit Baseline D1 -> Part B is scheduled for 2026-02-16 at 05:00 AM. Stipend status is Ready and source verification is pending.
+Latest completed or scheduled packet activity references Screening -1. Visit notes: Screening packet complete. Labs and demographics verified.

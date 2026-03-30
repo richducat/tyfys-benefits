@@ -1,0 +1,297 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Thank You For Your Service Veteran Owned & Operated" [ref=e6] [cursor=pointer]:
+        - /url: index.html
+        - img [ref=e8]
+        - generic [ref=e11]:
+          - generic [ref=e12]: Thank You For Your Service
+          - generic [ref=e13]: Veteran Owned & Operated
+      - generic [ref=e14]:
+        - link "Home" [ref=e15] [cursor=pointer]:
+          - /url: index.html
+        - link "About Us" [ref=e16] [cursor=pointer]:
+          - /url: about_us.html
+        - link "Our Team" [ref=e17] [cursor=pointer]:
+          - /url: mission_team.html
+        - link "Our Process" [ref=e18] [cursor=pointer]:
+          - /url: process.html
+        - button "VA Claims" [ref=e20] [cursor=pointer]:
+          - text: VA Claims
+          - img [ref=e21]
+        - button "Resources" [ref=e24] [cursor=pointer]:
+          - text: Resources
+          - img [ref=e25]
+        - button "Cmd/Ctrl + K" [ref=e27] [cursor=pointer]:
+          - img [ref=e28]
+          - generic [ref=e31]: Cmd/Ctrl + K
+        - button "Accessibility" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+          - generic [ref=e40]: Accessibility
+        - link "Book Discovery Call" [ref=e41] [cursor=pointer]:
+          - /url: contact.html
+          - text: Book Discovery Call
+          - img [ref=e42]
+  - generic [ref=e46]:
+    - generic [ref=e47]:
+      - heading "Book a Discovery Call for VA Disability Claim Support" [level=1] [ref=e48]
+      - paragraph [ref=e49]: Schedule a call with our team. We will review your service history and current claim status so you can decide whether private medical evidence support is the right fit.
+      - generic [ref=e50]:
+        - link "Services Hub" [ref=e51] [cursor=pointer]:
+          - /url: services.html
+        - link "How It Works" [ref=e52] [cursor=pointer]:
+          - /url: how-it-works.html
+        - link "FAQs Hub" [ref=e53] [cursor=pointer]:
+          - /url: faqs.html
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - img [ref=e57]
+          - generic [ref=e60]:
+            - heading "Headquarters" [level=3] [ref=e61]
+            - paragraph [ref=e62]:
+              - text: 11845 SW Bennington Cir,
+              - text: Port Saint Lucie, FL 34987
+        - generic [ref=e63]:
+          - img [ref=e65]
+          - generic [ref=e67]:
+            - heading "Phone" [level=3] [ref=e68]
+            - paragraph [ref=e69]: 321-248-2805
+            - paragraph [ref=e70]: Mon-Fri, 09:00 - 17:00 EST
+        - generic [ref=e71]:
+          - img [ref=e73]
+          - generic [ref=e76]:
+            - heading "Email" [level=3] [ref=e77]
+            - paragraph [ref=e78]: support@thankyouforyourservice.co
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - img [ref=e81]
+          - generic [ref=e84]: 100% Confidential
+        - paragraph [ref=e85]: Your information is secure. We are HIPAA aligned and never share your data with the VA without your permission.
+    - generic [ref=e88]:
+      - generic [ref=e90]:
+        - generic [ref=e354]:
+          - generic [ref=e355]:
+            - generic [ref=e356]: Online Now
+            - generic [ref=e360]: 3 Specialists Available
+          - heading "Start Your New Claim Right." [level=1] [ref=e361]
+          - paragraph [ref=e362]: Your profile matches our criteria for a Fully Developed Claim strategy. Enter your details to book your Free Discovery Call.
+          - generic [ref=e363]:
+            - textbox [ref=e364]
+            - generic [ref=e365]:
+              - generic [ref=e366]:
+                - generic [ref=e367]: First Name
+                - generic [ref=e368]:
+                  - img [ref=e369]
+                  - textbox "John" [ref=e372]
+              - generic [ref=e373]:
+                - generic [ref=e374]: Last Name
+                - generic [ref=e375]:
+                  - img [ref=e376]
+                  - textbox "Doe" [ref=e379]
+            - generic [ref=e380]:
+              - generic [ref=e381]:
+                - generic [ref=e382]: Email Address
+                - generic [ref=e383]:
+                  - img [ref=e384]
+                  - textbox "john@example.com" [ref=e387]
+              - generic [ref=e388]:
+                - generic [ref=e389]: Phone Number
+                - generic [ref=e390]:
+                  - img [ref=e391]
+                  - textbox "(555) 123-4567" [ref=e393]
+            - generic [ref=e394]:
+              - generic [ref=e395]:
+                - generic [ref=e396]: Zip Code
+                - generic [ref=e397]:
+                  - img [ref=e398]
+                  - textbox "12345" [ref=e401]
+              - generic [ref=e402]:
+                - generic [ref=e403]: Best Time To Contact
+                - generic [ref=e404]:
+                  - img [ref=e405]
+                  - combobox [ref=e408]:
+                    - option "Morning (9AM - 12PM)" [selected]
+                    - option "Afternoon (12PM - 4PM)"
+                    - option "Evening (4PM - 7PM)"
+                    - option "Anytime"
+            - generic [ref=e409]:
+              - generic [ref=e410]: Best Form Of Contact
+              - generic [ref=e411]:
+                - generic [ref=e412] [cursor=pointer]:
+                  - checkbox "Text" [ref=e413]
+                  - text: Text
+                - generic [ref=e414] [cursor=pointer]:
+                  - checkbox "Email" [ref=e415]
+                  - text: Email
+                - generic [ref=e416] [cursor=pointer]:
+                  - checkbox "Phone" [ref=e417]
+                  - text: Phone
+            - separator [ref=e418]
+            - generic [ref=e419]:
+              - heading "Before You Submit:" [level=4] [ref=e420]
+              - paragraph [ref=e421]:
+                - text: By hitting submit you recognize that we are a
+                - strong [ref=e422]: private organization
+                - text: that works with United States Veterans looking to file a Disability claim with the Veterans Administration.
+              - generic [ref=e423] [cursor=pointer]:
+                - checkbox "I understand and wish to continue" [ref=e424]
+                - generic [ref=e426]: I understand & wish to continue
+            - generic [ref=e427]:
+              - generic [ref=e428] [cursor=pointer]:
+                - checkbox "Confirm you've read our terms and service." [ref=e429]
+                - generic [ref=e430]:
+                  - text: Confirm you've read our
+                  - link "terms and service" [ref=e431]:
+                    - /url: sms-terms.html
+                  - text: .
+              - generic [ref=e432] [cursor=pointer]:
+                - checkbox "By checking this box, you consent to receive text messages from Thank You For Your Service." [ref=e433]
+                - generic [ref=e434]: By checking this box, you consent to receive text messages from Thank You For Your Service.
+            - generic [ref=e435]:
+              - paragraph [ref=e436]: Choose a contact method and check all 3 consent boxes to enable Continue.
+              - button "CONTINUE" [disabled] [ref=e437]:
+                - text: CONTINUE
+                - img [ref=e438]
+              - generic [ref=e440]:
+                - generic [ref=e441]:
+                  - img "William" [ref=e443]
+                  - generic [ref=e444]:
+                    - paragraph [ref=e445]: "\"The free consultation really helped educate me... I was able to take the next steps with confidence.\""
+                    - paragraph [ref=e446]: "- William R, NC"
+                - generic [ref=e447]:
+                  - strong [ref=e448]: "*WE ONLY HIRE AMERICAN."
+                  - text: We are American owned & Operated. Your Free Benefits Evaluation is done over the phone with a
+                  - strong [ref=e449]: live U.S. Representative.
+                - paragraph [ref=e450]:
+                  - strong [ref=e451]: "SMS CONSENT POLICY:"
+                  - text: By submitting your phone number, you agree to receive texts and calls about your VA benefits evaluation. Message and data rates may apply. Reply STOP to opt-out. Consent is not a condition of service.
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - img [ref=e111]
+            - text: 256-bit Secure Encryption
+          - generic [ref=e114]:
+            - img [ref=e115]
+            - text: Privacy Protected
+      - generic [ref=e121]:
+        - generic [ref=e122]:
+          - generic [ref=e123]: Thank You For Your Service
+          - generic [ref=e124]: Veteran Owned & Operated
+        - generic [ref=e125]:
+          - generic [ref=e126]:
+            - generic [ref=e127]: 98%
+            - generic [ref=e128]: Success Rate
+          - generic [ref=e129]:
+            - generic [ref=e130]: 0%
+            - generic [ref=e131]: Fees on Backpay
+        - generic [ref=e132]:
+          - heading "Verified Success Stories" [level=3] [ref=e133]
+          - generic [ref=e134]:
+            - generic [ref=e135]:
+              - generic [ref=e136]:
+                - img [ref=e137]
+                - img [ref=e139]
+                - img [ref=e141]
+                - img [ref=e143]
+                - img [ref=e145]
+              - paragraph [ref=e147]: "\"After 15 years at 30% for my back, I didn't think an increase was possible. The team got me proper medical documentation showing deterioration. My only regret is not doing this years ago.\""
+              - generic [ref=e148]:
+                - generic [ref=e149]: Ja
+                - generic [ref=e150]:
+                  - generic [ref=e151]: James T.
+                  - generic [ref=e152]: U.S. Army Veteran
+            - generic [ref=e153]:
+              - generic [ref=e154]:
+                - img [ref=e155]
+                - img [ref=e157]
+                - img [ref=e159]
+                - img [ref=e161]
+                - img [ref=e163]
+              - paragraph [ref=e165]: "\"The psychologist they connected me with documented how PTSD affected my work. The back pay covered the fee ten times over. Life changing.\""
+              - generic [ref=e166]:
+                - generic [ref=e167]: Ch
+                - generic [ref=e168]:
+                  - generic [ref=e169]: Christopher L.
+                  - generic [ref=e170]: Marine Corps Veteran
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - img [ref=e173]
+                - img [ref=e175]
+                - img [ref=e177]
+                - img [ref=e179]
+                - img [ref=e181]
+              - paragraph [ref=e183]: "\"I only had my back rated at 20% for years. They found the secondary conditions (hip, knee, depression) that I didn't even know I could claim.\""
+              - generic [ref=e184]:
+                - generic [ref=e185]: Ke
+                - generic [ref=e186]:
+                  - generic [ref=e187]: Kevin L.
+                  - generic [ref=e188]: Navy Veteran
+        - generic [ref=e189]:
+          - generic [ref=e190]:
+            - img [ref=e191]
+            - generic [ref=e194]: HIPAA Aligned
+          - generic [ref=e195]:
+            - img [ref=e196]
+            - generic [ref=e201]: SDVOSB
+  - contentinfo [ref=e202]:
+    - generic [ref=e203]:
+      - generic [ref=e204]:
+        - generic [ref=e205]:
+          - generic [ref=e206]:
+            - img [ref=e207]
+            - generic [ref=e209]: Thank You For Your Service
+          - paragraph [ref=e210]: We are a private, paid service not affiliated with the U.S. Department of Veterans Affairs. Our mission is to provide high-quality medical evidence to assist veterans in their claims.
+          - generic [ref=e211]:
+            - link [ref=e212] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e213]
+            - link [ref=e215] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e216]
+        - generic [ref=e220]:
+          - heading "Quick Links" [level=4] [ref=e221]
+          - list [ref=e222]:
+            - listitem [ref=e223]:
+              - link "Home" [ref=e224] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=e225]:
+              - link "About Us" [ref=e226] [cursor=pointer]:
+                - /url: about_us.html
+            - listitem [ref=e227]:
+              - link "Mission" [ref=e228] [cursor=pointer]:
+                - /url: mission_team.html
+            - listitem [ref=e229]:
+              - link "Our Process" [ref=e230] [cursor=pointer]:
+                - /url: process.html
+            - listitem [ref=e231]:
+              - link "Intake" [ref=e232] [cursor=pointer]:
+                - /url: intake-portal.html
+            - listitem [ref=e233]:
+              - link "Briefing Room" [ref=e234] [cursor=pointer]:
+                - /url: education.html
+            - listitem [ref=e235]:
+              - link "Contact" [ref=e236] [cursor=pointer]:
+                - /url: contact.html
+        - generic [ref=e237]:
+          - heading "Contact" [level=4] [ref=e238]
+          - list [ref=e239]:
+            - listitem [ref=e240]:
+              - img [ref=e241]
+              - text: 11845 SW Bennington Cir
+              - text: Port Saint Lucie, FL 34987
+            - listitem [ref=e244]:
+              - img [ref=e245]
+              - text: support@thankyouforyourservice.co
+            - listitem [ref=e248]:
+              - img [ref=e249]
+              - text: 321-248-2805
+      - generic [ref=e251]: © 2025 Thank You For Your Service. All rights reserved. | HIPAA Aligned | Veteran Owned
+  - generic [ref=e276] [cursor=pointer]:
+    - emphasis [ref=e277]: 
+    - generic [ref=e278]:
+      - generic "We're offline" [ref=e279]
+      - paragraph [ref=e280]: Leave a message
+      - text: 
+    - text: 
+  - generic:
+    - generic:
+      - iframe

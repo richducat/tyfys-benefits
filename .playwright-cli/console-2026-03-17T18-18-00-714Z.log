@@ -1,0 +1,13 @@
+[     365ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://tyfys.net/apps/seo-sitewide.js:0
+[     625ms] [WARNING] cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation @ https://cdn.tailwindcss.com/:63
+[    1196ms] [ERROR] Access to fetch at 'https://app.tyfys.net/api/auth-session' from origin 'https://tyfys.net' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'. @ https://tyfys.net/app.html:0
+[    1196ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://app.tyfys.net/api/auth-session:0
+[    1196ms] [WARNING] Auth bootstrap skipped: TypeError: Failed to fetch
+    at et (https://tyfys.net/tyfys-platform/tyfys-platform-app.js:24:37042)
+    at https://tyfys.net/tyfys-platform/tyfys-platform-app.js:24:40686
+    at https://tyfys.net/tyfys-platform/tyfys-platform-app.js:24:40881
+    at Id (https://tyfys.net/tyfys-platform/vendor/react-dom.production.min.js:165:137)
+    at Xb (https://tyfys.net/tyfys-platform/vendor/react-dom.production.min.js:200:284)
+    at https://tyfys.net/tyfys-platform/vendor/react-dom.production.min.js:197:106
+    at S (https://tyfys.net/tyfys-platform/vendor/react.production.min.js:17:25)
+    at MessagePort.U (https://tyfys.net/tyfys-platform/vendor/react.production.min.js:21:229) @ https://tyfys.net/tyfys-platform/tyfys-platform-app.js:23

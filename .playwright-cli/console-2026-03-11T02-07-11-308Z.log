@@ -1,0 +1,7 @@
+[   17803ms] [WARNING] cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation @ https://cdn.tailwindcss.com/:63
+[   63832ms] [ERROR] Failed to load resource: net::ERR_NETWORK_CHANGED @ https://www.googletagmanager.com/gtag/js?id=G-L1PEBFCV9Q:0
+[   63832ms] [ERROR] Failed to load resource: net::ERR_NETWORK_CHANGED @ https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js:0
+[   63874ms] ReferenceError: ReactDOM is not defined
+    at http://127.0.0.1:4173/apps/clinic-app.js:1040:3
+    at http://127.0.0.1:4173/apps/clinic-app.js:1041:3
+[   67790ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4173/logo.png:0

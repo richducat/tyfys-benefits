@@ -1,0 +1,249 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - complementary [ref=e31]:
+      - img [ref=e34]
+      - navigation [ref=e36]:
+        - button "Dashboard" [ref=e37] [cursor=pointer]:
+          - img [ref=e38]
+          - generic [ref=e40]: Dashboard
+        - button "Subjects" [ref=e41] [cursor=pointer]:
+          - img [ref=e42]
+          - generic [ref=e47]: Subjects
+        - button "Messages" [ref=e48] [cursor=pointer]:
+          - img [ref=e49]
+          - generic [ref=e51]: Messages
+        - button "Protocol AI" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+          - generic [ref=e56]: Protocol AI
+        - button "Audit" [ref=e57] [cursor=pointer]:
+          - img [ref=e58]
+          - generic [ref=e62]: Audit
+    - complementary [ref=e63]:
+      - generic [ref=e64]:
+        - paragraph [ref=e65]: Subject navigator
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - textbox "Search subject, arm, or status" [active] [ref=e70]
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - button "1074-A3A-201A Elizabeth Merrill Randomized" [ref=e73] [cursor=pointer]:
+            - generic [ref=e74]:
+              - generic [ref=e75]:
+                - paragraph [ref=e76]: 1074-A3A-201A
+                - paragraph [ref=e77]: Elizabeth Merrill
+              - generic [ref=e78]: Randomized
+          - button "1088-B1C-204F Marcus Thomas Screening" [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]:
+              - generic [ref=e82]:
+                - paragraph [ref=e83]: 1088-B1C-204F
+                - paragraph [ref=e84]: Marcus Thomas
+              - generic [ref=e85]: Screening
+        - generic [ref=e87]:
+          - paragraph [ref=e88]: Subject modules
+          - generic [ref=e89]:
+            - button "General" [ref=e90] [cursor=pointer]:
+              - generic [ref=e91]: General
+              - img [ref=e92]
+            - button "Visits" [ref=e94] [cursor=pointer]:
+              - generic [ref=e95]: Visits
+              - img [ref=e96]
+            - button "Study Logs" [ref=e98] [cursor=pointer]:
+              - generic [ref=e99]: Study Logs
+              - img [ref=e100]
+            - button "Adverse Events" [ref=e102] [cursor=pointer]:
+              - generic [ref=e103]: Adverse Events
+              - img [ref=e104]
+            - button "Medical Conditions" [ref=e106] [cursor=pointer]:
+              - generic [ref=e107]: Medical Conditions
+              - img [ref=e108]
+            - button "Concomitant Medications" [ref=e110] [cursor=pointer]:
+              - generic [ref=e111]: Concomitant Medications
+              - img [ref=e112]
+            - button "Protocol Deviations" [ref=e114] [cursor=pointer]:
+              - generic [ref=e115]: Protocol Deviations
+              - img [ref=e116]
+            - button "Allergies" [ref=e118] [cursor=pointer]:
+              - generic [ref=e119]: Allergies
+              - img [ref=e120]
+            - button "Surgical Conditions" [ref=e122] [cursor=pointer]:
+              - generic [ref=e123]: Surgical Conditions
+              - img [ref=e124]
+            - button "Emergency Contacts" [ref=e126] [cursor=pointer]:
+              - generic [ref=e127]: Emergency Contacts
+              - img [ref=e128]
+            - button "Progress Notes" [ref=e130] [cursor=pointer]:
+              - generic [ref=e131]: Progress Notes
+              - img [ref=e132]
+            - button "eDocs / Labs / Misc" [ref=e134] [cursor=pointer]:
+              - generic [ref=e135]: eDocs / Labs / Misc
+              - img [ref=e136]
+            - button "eDocs Audit Trail" [ref=e138] [cursor=pointer]:
+              - generic [ref=e139]: eDocs Audit Trail
+              - img [ref=e140]
+    - main [ref=e142]:
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - generic [ref=e145]:
+            - paragraph [ref=e146]: 230LE301
+            - paragraph [ref=e148]: V4.0 / eSource 27 Oct 2025
+          - heading "Elizabeth D Merrill" [level=2] [ref=e149]
+          - paragraph [ref=e150]: "Study arm: Part B (Phase 3) · Site: OpenDoor Clinical Research LLC"
+        - generic [ref=e151]:
+          - button "Monitor mode on" [ref=e152] [cursor=pointer]:
+            - generic [ref=e153]:
+              - img [ref=e154]
+              - text: Monitor mode on
+          - generic [ref=e157]:
+            - paragraph [ref=e158]: Connected account
+            - paragraph [ref=e159]: Richard Ducat
+          - button "Log out" [ref=e160] [cursor=pointer]:
+            - img [ref=e161]
+      - generic [ref=e165]:
+        - generic [ref=e166]:
+          - generic [ref=e167]:
+            - paragraph [ref=e168]: Active subjects
+            - paragraph [ref=e169]: "2"
+          - generic [ref=e170]:
+            - paragraph [ref=e171]: Visits in queue
+            - paragraph [ref=e172]: "3"
+          - generic [ref=e173]:
+            - paragraph [ref=e174]: Pending payouts
+            - paragraph [ref=e175]: "3"
+          - generic [ref=e176]:
+            - paragraph [ref=e177]: Total released
+            - paragraph [ref=e178]: $150
+        - generic [ref=e179]:
+          - generic [ref=e180]:
+            - generic [ref=e182]:
+              - heading "Visit queue" [level=3] [ref=e183]
+              - paragraph [ref=e184]: "Matches the second-half visit grid workflow: site team, QC, payout, and sponsor readiness."
+            - table [ref=e187]:
+              - rowgroup [ref=e188]:
+                - row "Subject Visit Date Status Stipend" [ref=e189]:
+                  - columnheader "Subject" [ref=e190]
+                  - columnheader "Visit" [ref=e191]
+                  - columnheader "Date" [ref=e192]
+                  - columnheader "Status" [ref=e193]
+                  - columnheader "Stipend" [ref=e194]
+              - rowgroup [ref=e195]:
+                - row "1074-A3A-201A Baseline D1 -> Part B Elizabeth Merrill 2026-02-16 at 05:00 AM Scheduled Ready" [ref=e196]:
+                  - cell "1074-A3A-201A" [ref=e197]
+                  - cell "Baseline D1 -> Part B Elizabeth Merrill" [ref=e198]:
+                    - paragraph [ref=e199]: Baseline D1 -> Part B
+                    - paragraph [ref=e200]: Elizabeth Merrill
+                  - cell "2026-02-16 at 05:00 AM" [ref=e201]:
+                    - text: 2026-02-16
+                    - generic [ref=e202]: at 05:00 AM
+                  - cell "Scheduled" [ref=e203]:
+                    - generic [ref=e204]: Scheduled
+                  - cell "Ready" [ref=e206]:
+                    - generic [ref=e207]: Ready
+                - row "1074-A3A-201A Week 2 D15 +/- 2 Elizabeth Merrill 2026-03-01 at 08:30 AM Planned Pending" [ref=e209]:
+                  - cell "1074-A3A-201A" [ref=e210]
+                  - cell "Week 2 D15 +/- 2 Elizabeth Merrill" [ref=e211]:
+                    - paragraph [ref=e212]: Week 2 D15 +/- 2
+                    - paragraph [ref=e213]: Elizabeth Merrill
+                  - cell "2026-03-01 at 08:30 AM" [ref=e214]:
+                    - text: 2026-03-01
+                    - generic [ref=e215]: at 08:30 AM
+                  - cell "Planned" [ref=e216]:
+                    - generic [ref=e217]: Planned
+                  - cell "Pending" [ref=e219]:
+                    - generic [ref=e220]: Pending
+                - row "1088-B1C-204F Eligibility review Marcus Thomas 2026-02-18 at 10:00 AM Scheduled Pending" [ref=e222]:
+                  - cell "1088-B1C-204F" [ref=e223]
+                  - cell "Eligibility review Marcus Thomas" [ref=e224]:
+                    - paragraph [ref=e225]: Eligibility review
+                    - paragraph [ref=e226]: Marcus Thomas
+                  - cell "2026-02-18 at 10:00 AM" [ref=e227]:
+                    - text: 2026-02-18
+                    - generic [ref=e228]: at 10:00 AM
+                  - cell "Scheduled" [ref=e229]:
+                    - generic [ref=e230]: Scheduled
+                  - cell "Pending" [ref=e232]:
+                    - generic [ref=e233]: Pending
+          - generic [ref=e235]:
+            - generic [ref=e236]:
+              - generic [ref=e238]:
+                - heading "Packet blockers" [level=3] [ref=e239]
+                - paragraph [ref=e240]: Logs, signatures, and payout items still blocking sponsor-ready packets.
+              - generic [ref=e242]:
+                - generic [ref=e244]:
+                  - generic [ref=e245]:
+                    - paragraph [ref=e246]: Delegation Worksheet
+                    - paragraph [ref=e247]: 1074-A3A-201A · Study Startup
+                  - generic [ref=e248]: In Review
+                - generic [ref=e251]:
+                  - generic [ref=e252]:
+                    - paragraph [ref=e253]: Concomitant Medication Review
+                    - paragraph [ref=e254]: 1074-A3A-201A · Medical
+                  - generic [ref=e255]: Needs Follow-Up
+                - generic [ref=e258]:
+                  - generic [ref=e259]:
+                    - paragraph [ref=e260]: Eligibility Review
+                    - paragraph [ref=e261]: 1088-B1C-204F · Screening
+                  - generic [ref=e262]: In Review
+            - generic [ref=e264]:
+              - generic [ref=e266]:
+                - heading "Signature queue" [level=3] [ref=e267]
+                - paragraph [ref=e268]: Documents waiting for PI or certified-copy completion.
+              - generic [ref=e271]:
+                - generic [ref=e272]:
+                  - paragraph [ref=e273]: Lab Requisition Packet
+                  - paragraph [ref=e274]: 1074-A3A-201A
+                - generic [ref=e275]: Pending Signature
+    - complementary [ref=e277]:
+      - generic [ref=e278]:
+        - generic [ref=e280]:
+          - heading "Subject snapshot" [level=3] [ref=e281]
+          - paragraph [ref=e282]: Live summary tied to the selected workbench subject.
+        - generic [ref=e284]:
+          - generic [ref=e285]:
+            - paragraph [ref=e286]: Current subject
+            - paragraph [ref=e287]: 1074-A3A-201A
+            - paragraph [ref=e288]: Elizabeth Merrill
+          - generic [ref=e289]:
+            - generic [ref=e290]:
+              - paragraph [ref=e291]: Status
+              - paragraph [ref=e292]: Randomized
+            - generic [ref=e293]:
+              - paragraph [ref=e294]: Next visit
+              - paragraph [ref=e295]: 2026-02-16
+            - generic [ref=e296]:
+              - paragraph [ref=e297]: Released
+              - paragraph [ref=e298]: $150
+            - generic [ref=e299]:
+              - paragraph [ref=e300]: Pending payouts
+              - paragraph [ref=e301]: "2"
+      - generic [ref=e302]:
+        - generic [ref=e304]:
+          - heading "Action queue" [level=3] [ref=e305]
+          - paragraph [ref=e306]: Fast-glance blockers for the selected subject.
+        - generic [ref=e308]:
+          - generic [ref=e309]:
+            - img [ref=e310]
+            - generic [ref=e315]:
+              - paragraph [ref=e316]: Visit readiness
+              - paragraph [ref=e317]: Baseline D1 -> Part B is next in line.
+          - generic [ref=e318]:
+            - img [ref=e319]
+            - generic [ref=e323]:
+              - paragraph [ref=e324]: Signature queue
+              - paragraph [ref=e325]: 1 pending document(s).
+          - generic [ref=e326]:
+            - img [ref=e327]
+            - generic [ref=e330]:
+              - paragraph [ref=e331]: Payouts
+              - paragraph [ref=e332]: 1 stipend(s) ready to release.
+  - region "Service disclaimer" [ref=e23]:
+    - generic [ref=e24]:
+      - paragraph [ref=e25]:
+        - strong [ref=e26]: "What we do:"
+        - text: We coordinate private medical evidence (DBQs and independent medical opinions) to support veterans' disability claims. We do not provide legal advice, representation, or submit VA claims.
+      - generic [ref=e27]:
+        - link "Services" [ref=e28] [cursor=pointer]:
+          - /url: services.html
+        - link "FAQs" [ref=e29] [cursor=pointer]:
+          - /url: faqs.html
+        - link "How It Works" [ref=e30] [cursor=pointer]:
+          - /url: how-it-works.html

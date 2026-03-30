@@ -1,0 +1,59 @@
+- generic [ref=e422]:
+  - generic [ref=e423]:
+    - generic [ref=e424]:
+      - img [ref=e426]
+      - generic [ref=e429]:
+        - paragraph [ref=e430]: TYFYS App Access
+        - paragraph [ref=e431]: Private claim-planning workspace
+    - generic [ref=e432]:
+      - generic [ref=e433]:
+        - img [ref=e434]
+        - text: Secure login + saved progress
+      - heading "Resume your TYFYS setup" [level=1] [ref=e437]
+      - paragraph [ref=e438]: Your onboarding progress is saved on this device. Sign in to continue from where you left off.
+    - generic [ref=e439]:
+      - generic [ref=e440]:
+        - img [ref=e441]
+        - paragraph [ref=e444]: Save your profile
+        - paragraph [ref=e445]: Keep your contact info and claim details on this device so you do not have to re-enter them.
+      - generic [ref=e446]:
+        - img [ref=e447]
+        - paragraph [ref=e450]: Resume your workspace
+        - paragraph [ref=e451]: Return to your tracker, drafts, and evidence plan where you left off.
+      - generic [ref=e452]:
+        - img [ref=e453]
+        - paragraph [ref=e456]: Stay ready to continue
+        - paragraph [ref=e457]: Use one login on this device to reopen TYFYS and pick back up later.
+    - generic [ref=e458]:
+      - paragraph [ref=e459]: Saved on this device
+      - generic [ref=e460]:
+        - generic [ref=e461]:
+          - img [ref=e463]
+          - paragraph [ref=e466]: Your saved contact details
+        - generic [ref=e467]:
+          - img [ref=e469]
+          - paragraph [ref=e472]: Your onboarding step and answers so far
+        - generic [ref=e473]:
+          - img [ref=e475]
+          - paragraph [ref=e478]: The login you will use to come back later
+  - generic [ref=e479]:
+    - generic [ref=e480]:
+      - paragraph [ref=e481]: Returning User
+      - heading "Log in to continue" [level=2] [ref=e482]
+      - paragraph [ref=e483]: Your setup is already saved on this device. Sign in to finish onboarding.
+    - generic [ref=e485]:
+      - generic [ref=e486]:
+        - paragraph [ref=e487]: Saved account
+        - paragraph [ref=e488]: Codex Verify
+        - paragraph [ref=e489]: codex-verify-1773765279@example.com
+      - generic [ref=e490]:
+        - generic [ref=e491]: Email
+        - textbox "you@example.com" [ref=e492]: codex-verify-1773765279@example.com
+      - generic [ref=e493]:
+        - generic [ref=e494]: Password
+        - textbox "Enter your TYFYS password" [ref=e495]
+      - generic [ref=e496]: Account already exists for this email
+      - button "Log In and Resume" [ref=e497] [cursor=pointer]:
+        - text: Log In and Resume
+        - img [ref=e498]
+      - paragraph [ref=e500]: Your saved TYFYS session lasts 30 days on this device. Signing in restores your saved progress.

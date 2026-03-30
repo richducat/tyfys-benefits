@@ -1,0 +1,4 @@
+Total messages: 4 (Errors: 1, Warnings: 3)
+Returning 1 messages for level "error"
+
+[ERROR] Attestation check for Attribution Reporting on https://www.google-analytics.com failed. @ http://127.0.0.1:4173/clinic.html:0

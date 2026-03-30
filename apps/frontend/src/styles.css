@@ -76,7 +76,7 @@ button {
   gap: 6px;
 }
 
-button:not(.ghost),
+button:not(.ghost):not(#lead-form-root button),
 .button-link.primary {
   background: #1a6bff;
   color: white;

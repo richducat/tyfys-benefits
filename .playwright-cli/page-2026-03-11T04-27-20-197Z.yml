@@ -1,0 +1,299 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - complementary [ref=e23]:
+      - img [ref=e26]
+      - navigation [ref=e28]:
+        - button "Dashboard" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e32]: Dashboard
+        - button "Subjects" [ref=e33] [cursor=pointer]:
+          - img [ref=e34]
+          - generic [ref=e39]: Subjects
+        - button "Messages" [ref=e40] [cursor=pointer]:
+          - img [ref=e41]
+          - generic [ref=e43]: Messages
+        - button "Protocol AI" [ref=e44] [cursor=pointer]:
+          - img [ref=e45]
+          - generic [ref=e48]: Protocol AI
+        - button "Audit" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - generic [ref=e54]: Audit
+    - complementary [ref=e55]:
+      - generic [ref=e56]:
+        - paragraph [ref=e57]: Subject navigator
+        - generic [ref=e58]:
+          - img [ref=e59]
+          - textbox "Search subject, arm, or status" [ref=e62]
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - button "1074-A3A-201A Elizabeth Merrill Randomized" [ref=e65] [cursor=pointer]:
+            - generic [ref=e66]:
+              - generic [ref=e67]:
+                - paragraph [ref=e68]: 1074-A3A-201A
+                - paragraph [ref=e69]: Elizabeth Merrill
+              - generic [ref=e463]: Randomized
+          - button "1088-B1C-204F Marcus Thomas Screening" [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]:
+              - generic [ref=e74]:
+                - paragraph [ref=e75]: 1088-B1C-204F
+                - paragraph [ref=e76]: Marcus Thomas
+              - generic [ref=e465]: Screening
+        - generic [ref=e79]:
+          - paragraph [ref=e80]: Subject modules
+          - generic [ref=e81]:
+            - button "General" [ref=e82] [cursor=pointer]:
+              - generic [ref=e83]: General
+              - img [ref=e84]
+            - button "Visits" [ref=e86] [cursor=pointer]:
+              - generic [ref=e87]: Visits
+              - img [ref=e88]
+            - button "Study Logs" [ref=e90] [cursor=pointer]:
+              - generic [ref=e91]: Study Logs
+              - img [ref=e92]
+            - button "Adverse Events" [ref=e94] [cursor=pointer]:
+              - generic [ref=e95]: Adverse Events
+              - img [ref=e96]
+            - button "Medical Conditions" [ref=e98] [cursor=pointer]:
+              - generic [ref=e99]: Medical Conditions
+              - img [ref=e100]
+            - button "Concomitant Medications" [ref=e102] [cursor=pointer]:
+              - generic [ref=e103]: Concomitant Medications
+              - img [ref=e104]
+            - button "Protocol Deviations" [ref=e106] [cursor=pointer]:
+              - generic [ref=e107]: Protocol Deviations
+              - img [ref=e108]
+            - button "Allergies" [ref=e110] [cursor=pointer]:
+              - generic [ref=e111]: Allergies
+              - img [ref=e112]
+            - button "Surgical Conditions" [ref=e114] [cursor=pointer]:
+              - generic [ref=e115]: Surgical Conditions
+              - img [ref=e116]
+            - button "Emergency Contacts" [ref=e118] [cursor=pointer]:
+              - generic [ref=e119]: Emergency Contacts
+              - img [ref=e120]
+            - button "Progress Notes" [ref=e122] [cursor=pointer]:
+              - generic [ref=e123]: Progress Notes
+              - img [ref=e124]
+            - button "eDocs / Labs / Misc" [ref=e126] [cursor=pointer]:
+              - generic [ref=e127]: eDocs / Labs / Misc
+              - img [ref=e128]
+            - button "eDocs Audit Trail" [ref=e130] [cursor=pointer]:
+              - generic [ref=e131]: eDocs Audit Trail
+              - img [ref=e132]
+    - main [ref=e134]:
+      - generic [ref=e135]:
+        - generic [ref=e136]:
+          - generic [ref=e137]:
+            - paragraph [ref=e138]: 230LE301
+            - paragraph [ref=e140]: V4.0 / eSource 27 Oct 2025
+          - heading "Elizabeth D Merrill" [level=2] [ref=e141]
+          - paragraph [ref=e142]: "Study arm: Part B (Phase 3) · Site: OpenDoor Clinical Research LLC"
+        - generic [ref=e143]:
+          - button "Monitor mode off" [ref=e144] [cursor=pointer]:
+            - generic [ref=e145]:
+              - img [ref=e146]
+              - text: Monitor mode off
+          - generic [ref=e149]:
+            - paragraph [ref=e150]: Connected account
+            - paragraph [ref=e151]: Richard Ducat
+          - button "Log out" [ref=e152] [cursor=pointer]:
+            - img [ref=e153]
+      - generic [ref=e467]:
+        - generic [ref=e469]:
+          - heading "eDocs / labs / misc" [level=3] [ref=e470]
+          - paragraph [ref=e471]: Certified-copy and signature controls are wired into the clinic packet, not mocked.
+        - table [ref=e474]:
+          - rowgroup [ref=e475]:
+            - row "Document Category Signature Expiration Uploaded By Actions" [ref=e476]:
+              - columnheader "Document" [ref=e477]
+              - columnheader "Category" [ref=e478]
+              - columnheader "Signature" [ref=e479]
+              - columnheader "Expiration" [ref=e480]
+              - columnheader "Uploaded By" [ref=e481]
+              - columnheader "Actions" [ref=e482]
+          - rowgroup [ref=e483]:
+            - row "Signed ICF v4.0 Certified Consent Signed 2027-02-02 Daniel Burch Open Certify Request signature" [ref=e484]:
+              - cell "Signed ICF v4.0 Certified" [ref=e485]:
+                - paragraph [ref=e486]: Signed ICF v4.0
+                - paragraph [ref=e487]: Certified
+              - cell "Consent" [ref=e488]
+              - cell "Signed" [ref=e489]:
+                - generic [ref=e490]: Signed
+              - cell "2027-02-02" [ref=e492]
+              - cell "Daniel Burch" [ref=e493]
+              - cell "Open Certify Request signature" [ref=e494]:
+                - generic [ref=e495]:
+                  - button "Open" [ref=e496] [cursor=pointer]
+                  - button "Certify" [disabled] [ref=e497]
+                  - button "Request signature" [disabled] [ref=e498]
+            - row "Insurance Card Scan Uploaded Identity Not Required None Site Front Desk Open Certify Request signature" [ref=e499]:
+              - cell "Insurance Card Scan Uploaded" [ref=e500]:
+                - paragraph [ref=e501]: Insurance Card Scan
+                - paragraph [ref=e502]: Uploaded
+              - cell "Identity" [ref=e503]
+              - cell "Not Required" [ref=e504]:
+                - generic [ref=e505]: Not Required
+              - cell "None" [ref=e507]
+              - cell "Site Front Desk" [ref=e508]
+              - cell "Open Certify Request signature" [ref=e509]:
+                - generic [ref=e510]:
+                  - button "Open" [ref=e511] [cursor=pointer]
+                  - button "Certify" [ref=e512] [cursor=pointer]
+                  - button "Request signature" [disabled] [ref=e513]
+            - row "Lab Requisition Packet Pending signature Labs Awaiting PI None Richard Ducat Open Certify Request signature" [ref=e514]:
+              - cell "Lab Requisition Packet Pending signature" [ref=e515]:
+                - paragraph [ref=e516]: Lab Requisition Packet
+                - paragraph [ref=e517]: Pending signature
+              - cell "Labs" [ref=e518]
+              - cell "Awaiting PI" [ref=e519]:
+                - generic [ref=e520]: Awaiting PI
+              - cell "None" [ref=e522]
+              - cell "Richard Ducat" [ref=e523]
+              - cell "Open Certify Request signature" [ref=e524]:
+                - generic [ref=e525]:
+                  - button "Open" [ref=e526] [cursor=pointer]
+                  - button "Certify" [disabled] [ref=e527]
+                  - button "Request signature" [disabled] [ref=e528]
+            - row "Week 2 Source Worksheet Uploaded Source Needs Signature None Daniel Burch Open Certify Request signature" [ref=e529]:
+              - cell "Week 2 Source Worksheet Uploaded" [ref=e530]:
+                - paragraph [ref=e531]: Week 2 Source Worksheet
+                - paragraph [ref=e532]: Uploaded
+              - cell "Source" [ref=e533]
+              - cell "Needs Signature" [ref=e534]:
+                - generic [ref=e535]: Needs Signature
+              - cell "None" [ref=e537]
+              - cell "Daniel Burch" [ref=e538]
+              - cell "Open Certify Request signature" [ref=e539]:
+                - generic [ref=e540]:
+                  - button "Open" [ref=e541] [cursor=pointer]
+                  - button "Certify" [disabled] [ref=e542]
+                  - button "Request signature" [ref=e543] [cursor=pointer]
+    - complementary [ref=e269]:
+      - generic [ref=e544]:
+        - generic [ref=e546]:
+          - heading "Subject snapshot" [level=3] [ref=e547]
+          - paragraph [ref=e548]: Live summary tied to the selected workbench subject.
+        - generic [ref=e550]:
+          - generic [ref=e551]:
+            - paragraph [ref=e552]: Current subject
+            - paragraph [ref=e553]: 1074-A3A-201A
+            - paragraph [ref=e554]: Elizabeth Merrill
+          - generic [ref=e555]:
+            - generic [ref=e556]:
+              - paragraph [ref=e557]: Status
+              - paragraph [ref=e558]: Randomized
+            - generic [ref=e559]:
+              - paragraph [ref=e560]: Next visit
+              - paragraph [ref=e561]: 2026-02-16
+            - generic [ref=e562]:
+              - paragraph [ref=e563]: Released
+              - paragraph [ref=e564]: $150
+            - generic [ref=e565]:
+              - paragraph [ref=e566]: Pending payouts
+              - paragraph [ref=e567]: "2"
+      - generic [ref=e568]:
+        - generic [ref=e570]:
+          - heading "Action queue" [level=3] [ref=e571]
+          - paragraph [ref=e572]: Fast-glance blockers for the selected subject.
+        - generic [ref=e574]:
+          - generic [ref=e575]:
+            - img [ref=e576]
+            - generic [ref=e581]:
+              - paragraph [ref=e582]: Visit readiness
+              - paragraph [ref=e583]: Baseline D1 -> Part B is next in line.
+          - generic [ref=e584]:
+            - img [ref=e585]
+            - generic [ref=e589]:
+              - paragraph [ref=e590]: Signature queue
+              - paragraph [ref=e591]: 1 pending document(s).
+          - generic [ref=e592]:
+            - img [ref=e593]
+            - generic [ref=e596]:
+              - paragraph [ref=e597]: Payouts
+              - paragraph [ref=e598]: 1 stipend(s) ready to release.
+  - generic [ref=e600]:
+    - generic [ref=e601]:
+      - generic [ref=e602]:
+        - paragraph [ref=e603]: TYFYS eDocs Preview
+        - heading "Signed ICF v4.0" [level=3] [ref=e604]
+        - paragraph [ref=e605]: 1074-A3A-201A · Elizabeth Merrill
+      - button "Close document preview" [ref=e606] [cursor=pointer]:
+        - img [ref=e607]
+    - generic [ref=e610]:
+      - generic [ref=e611]:
+        - generic [ref=e612]:
+          - generic [ref=e613]:
+            - paragraph [ref=e614]: Category
+            - paragraph [ref=e615]: Consent
+          - generic [ref=e616]:
+            - paragraph [ref=e617]: Signature
+            - generic [ref=e619]: Signed
+          - generic [ref=e621]:
+            - paragraph [ref=e622]: Packet status
+            - paragraph [ref=e623]: Certified
+          - generic [ref=e624]:
+            - paragraph [ref=e625]: Expiration
+            - paragraph [ref=e626]: 2027-02-02
+        - generic [ref=e627]:
+          - paragraph [ref=e628]: Saved redactions
+          - paragraph [ref=e629]: "0"
+          - paragraph [ref=e630]: Terms or phrases stored with this document.
+        - generic [ref=e631]:
+          - paragraph [ref=e632]: Auto-blackout hits
+          - paragraph [ref=e633]: "0"
+          - paragraph [ref=e634]: Case-insensitive matches across the preview.
+      - generic [ref=e635]:
+        - generic [ref=e636]:
+          - generic [ref=e637]:
+            - generic [ref=e638]:
+              - paragraph [ref=e639]: Bulk redaction
+              - heading "Auto blackout terms" [level=4] [ref=e640]
+            - img [ref=e641]
+          - paragraph [ref=e644]: Type one or more words, phrases, sentences, or names. Every matching occurrence in this document preview is blacked out in bulk and saved with the document.
+          - generic [ref=e645]:
+            - textbox "Elizabeth Merrill Merrill annmerrill70@yahoo.com" [ref=e646]:
+              - /placeholder: "Elizabeth Merrill\nMerrill\nannmerrill70@yahoo.com"
+            - button "Redact all matches" [ref=e647] [cursor=pointer]
+          - generic [ref=e648]:
+            - paragraph [ref=e649]: Quick add
+            - generic [ref=e650]:
+              - button "Elizabeth D Merrill" [ref=e651] [cursor=pointer]
+              - button "Elizabeth" [ref=e652] [cursor=pointer]
+              - button "Merrill" [ref=e653] [cursor=pointer]
+              - button "annmerrill70@yahoo.com" [ref=e654] [cursor=pointer]
+              - button "(772) 555-0120" [ref=e655] [cursor=pointer]
+          - generic [ref=e656]:
+            - button "Download redacted copy" [disabled] [ref=e657]
+            - button "Clear all" [disabled] [ref=e658]
+          - generic [ref=e659]:
+            - paragraph [ref=e660]: Active rules
+            - paragraph [ref=e661]: No redaction rules saved yet.
+        - generic [ref=e662]:
+          - generic [ref=e663]:
+            - generic [ref=e664]:
+              - paragraph [ref=e665]: Document body
+              - paragraph [ref=e666]: Terms are matched case-insensitively across the full preview.
+            - generic [ref=e667]: 0 active term(s)
+          - generic [ref=e668]:
+            - generic [ref=e669]:
+              - paragraph [ref=e670]: Packet header
+              - generic [ref=e671]:
+                - paragraph [ref=e672]: Signed ICF v4.0 for Elizabeth D Merrill (1074-A3A-201A) was uploaded by Daniel Burch on 2026-02-02 08:14.
+                - paragraph [ref=e673]: Elizabeth D Merrill is enrolled at OpenDoor Clinical Research LLC under protocol V4.0 / eSource 27 Oct 2025. Current packet status is Certified with Signed signature state.
+            - generic [ref=e674]:
+              - paragraph [ref=e675]: Participant identifiers
+              - generic [ref=e676]:
+                - paragraph [ref=e677]: "Participant name: Elizabeth D Merrill. DOB: 1970-02-24. Email: annmerrill70@yahoo.com. Phone: (772) 555-0120."
+                - paragraph [ref=e678]: "Randomization and arm details: 1074-A3A-201A, Part B (Phase 3). James Merrill (Spouse) can be reached at (772) 555-0144 and jmerrill@example.com."
+            - generic [ref=e679]:
+              - paragraph [ref=e680]: Clinical and source summary
+              - generic [ref=e681]:
+                - paragraph [ref=e682]: Elizabeth D Merrill reviewed the informed consent packet with Daniel Burch and acknowledged the study protocol, risks, and signature requirements for 230LE301.
+                - paragraph [ref=e683]: "Documented conditions for Merrill include Cutaneous lupus flare pattern (High); Chronic fatigue (Moderate). Current medications include Hydroxychloroquine 200 mg BID; Prednisone 10 mg PRN. Allergy record: Penicillin (Hives); Latex (Skin irritation)."
+            - generic [ref=e684]:
+              - paragraph [ref=e685]: Operational notes
+              - generic [ref=e686]:
+                - paragraph [ref=e687]: "Most recent progress note for Elizabeth: Participant arrived on time, confirmed kit accountability, and tolerated specimen draw without escalation."
+                - paragraph [ref=e688]: Next visit Baseline D1 -> Part B is scheduled for 2026-02-16 at 05:00 AM. Stipend status is Ready and source verification is pending.
+                - paragraph [ref=e689]: "Latest completed or scheduled packet activity references Screening -1. Visit notes: Screening packet complete. Labs and demographics verified."
+  - generic [ref=e690]: Document preview opened.

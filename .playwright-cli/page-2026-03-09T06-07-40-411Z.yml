@@ -1,0 +1,13 @@
+- main [ref=e2]:
+  - generic [ref=e6]:
+    - img [ref=e9]
+    - heading "Maximize Your VA Rating. Stop Leaving Money on the Table." [level=1] [ref=e12]:
+      - text: Maximize Your VA Rating.
+      - generic [ref=e13]: Stop Leaving Money on the Table.
+    - paragraph [ref=e14]: Get the Expert Strategy, Private Medical Evidence, and Tools you need to win your claim in months, not years.
+    - generic [ref=e15]:
+      - strong [ref=e16]: "NOTICE:"
+      - text: We are a private organization of medical and legal experts. We are not the VA.
+    - button "Initialize System" [ref=e17] [cursor=pointer]:
+      - text: Initialize System
+      - img [ref=e18]

@@ -1,0 +1,282 @@
+- generic [ref=e96]:
+  - generic [ref=e98]:
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e101]:
+          - generic [ref=e102]: TY
+          - generic [ref=e103]:
+            - generic [ref=e104]: Thank You
+            - text: For Your Service
+        - generic [ref=e105]: Step 2/10
+      - generic [ref=e454]:
+        - img [ref=e456]
+        - generic [ref=e460]: We need to make sure we're the right fit for your specific legal situation.
+    - generic [ref=e109]:
+      - heading "Qualification Check" [level=1] [ref=e461]
+      - generic [ref=e111]:
+        - generic [ref=e462]:
+          - paragraph [ref=e463]: Are you currently working with an accredited attorney?
+          - generic [ref=e464]:
+            - button "Yes" [ref=e465] [cursor=pointer]
+            - button "No" [ref=e466] [cursor=pointer]
+        - generic [ref=e467]:
+          - paragraph [ref=e468]: Do you have an active appeal with a BVA Judge?
+          - generic [ref=e469]:
+            - button "Yes" [ref=e470] [cursor=pointer]
+            - button "No" [ref=e471] [cursor=pointer]
+        - generic [ref=e472]:
+          - paragraph [ref=e473]: Was your discharge Honorable or General Under Honorable?
+          - generic [ref=e474]:
+            - button "Yes" [ref=e475] [cursor=pointer]
+            - button "No" [ref=e476] [cursor=pointer]
+    - button "Next Step" [active] [ref=e118] [cursor=pointer]:
+      - text: Next Step
+      - img [ref=e119]
+  - generic [ref=e121]:
+    - generic [ref=e123]:
+      - img [ref=e125]
+      - generic [ref=e128]:
+        - heading "TYFYS" [level=1] [ref=e129]
+        - paragraph [ref=e130]: Veteran OS v2.0
+    - navigation [ref=e131]:
+      - paragraph [ref=e132]: Main
+      - button "Mission Control" [ref=e133] [cursor=pointer]:
+        - img [ref=e134]
+        - text: Mission Control
+      - button "Doctor Portal" [ref=e136] [cursor=pointer]:
+        - img [ref=e137]
+        - text: Doctor Portal
+      - button "Secure Comms 1" [ref=e141] [cursor=pointer]:
+        - img [ref=e142]
+        - text: Secure Comms
+        - generic [ref=e144]: "1"
+      - button "Intake Portal" [ref=e145] [cursor=pointer]:
+        - img [ref=e146]
+        - text: Intake Portal
+      - paragraph [ref=e149]: Tools
+      - button "Dossier Scanner" [ref=e150] [cursor=pointer]:
+        - img [ref=e151]
+        - text: Dossier Scanner
+      - button "VA Math" [ref=e155] [cursor=pointer]:
+        - img [ref=e156]
+        - text: VA Math
+      - button "PACT Act Explorer" [ref=e158] [cursor=pointer]:
+        - img [ref=e159]
+        - text: PACT Act Explorer
+      - button "Nexus Generator" [ref=e161] [cursor=pointer]:
+        - img [ref=e162]
+        - text: Nexus Generator
+      - button "Evidence Finder" [ref=e165] [cursor=pointer]:
+        - img [ref=e166]
+        - text: Evidence Finder
+      - button "Plans & Pricing" [ref=e170] [cursor=pointer]:
+        - img [ref=e171]
+        - text: Plans & Pricing
+      - paragraph [ref=e174]: Premium
+      - button "TYFYS Claims Bot" [ref=e175] [cursor=pointer]:
+        - img [ref=e176]
+        - text: TYFYS Claims Bot
+        - img [ref=e179]
+      - button "Private Specialist" [ref=e182]:
+        - img [ref=e183]
+        - text: Private Specialist
+        - img [ref=e186]
+    - generic [ref=e189]:
+      - generic [ref=e192]: Sales Ready
+      - paragraph [ref=e193]: "ID: VET-8821"
+      - button "Upgrade Now" [ref=e194] [cursor=pointer]
+  - generic [ref=e195]:
+    - banner [ref=e196]:
+      - generic [ref=e198]:
+        - paragraph [ref=e199]: Dashboard
+        - heading "Mission Control" [level=2] [ref=e200]
+        - paragraph [ref=e201]: Track claims, care coordination, and next actions from one place.
+      - generic [ref=e202]:
+        - generic [ref=e203]:
+          - button "Doctor Portal" [ref=e204] [cursor=pointer]:
+            - img [ref=e205]
+            - text: Doctor Portal
+          - button "Secure Comms 1" [ref=e209] [cursor=pointer]:
+            - img [ref=e210]
+            - text: Secure Comms
+            - generic [ref=e212]: "1"
+        - button "Ask Angela" [ref=e213] [cursor=pointer]:
+          - img [ref=e214]
+          - text: Ask Angela
+    - main [ref=e216]:
+      - generic [ref=e218]:
+        - generic [ref=e219]:
+          - button [ref=e220] [cursor=pointer]:
+            - img [ref=e221]
+          - generic [ref=e224]:
+            - img [ref=e227]
+            - generic [ref=e231]:
+              - heading "Veteran Profile" [level=1] [ref=e232]
+              - generic [ref=e233]:
+                - generic [ref=e234]:
+                  - paragraph [ref=e235]: Branch
+                  - paragraph [ref=e236]: "-"
+                - generic [ref=e237]:
+                  - paragraph [ref=e238]: Era
+                  - paragraph [ref=e239]: "-"
+                - generic [ref=e240]:
+                  - paragraph [ref=e241]: Rating
+                  - paragraph [ref=e242]: 0%
+                - generic [ref=e243]:
+                  - paragraph [ref=e244]: Discount
+                  - paragraph [ref=e245]: LOCKED
+        - button "Start Guided Tour with Angela" [ref=e246] [cursor=pointer]:
+          - img [ref=e247]
+          - text: Start Guided Tour with Angela
+        - generic [ref=e249]:
+          - button "0 saved Dossier Vault Scan, extract text, and store evidence packets on this device." [ref=e250] [cursor=pointer]:
+            - generic [ref=e251]:
+              - img [ref=e253]
+              - generic [ref=e257]: 0 saved
+            - paragraph [ref=e258]: Dossier Vault
+            - paragraph [ref=e259]: Scan, extract text, and store evidence packets on this device.
+          - button "0% VA Math See combined-rating steps, exact rounding, and a path to 100%." [ref=e260] [cursor=pointer]:
+            - generic [ref=e261]:
+              - img [ref=e263]
+              - generic [ref=e265]: 0%
+            - paragraph [ref=e266]: VA Math
+            - paragraph [ref=e267]: See combined-rating steps, exact rounding, and a path to 100%.
+          - button "Post-9/11 PACT Act Explorer Filter presumptives by era and exposure track with VA source links." [ref=e268] [cursor=pointer]:
+            - generic [ref=e269]:
+              - img [ref=e271]
+              - generic [ref=e273]: Post-9/11
+            - paragraph [ref=e274]: PACT Act Explorer
+            - paragraph [ref=e275]: Filter presumptives by era and exposure track with VA source links.
+          - button "0 docs Nexus Generator Draft clinician-ready medical opinion language from your claim facts." [ref=e276] [cursor=pointer]:
+            - generic [ref=e277]:
+              - img [ref=e279]
+              - generic [ref=e282]: 0 docs
+            - paragraph [ref=e283]: Nexus Generator
+            - paragraph [ref=e284]: Draft clinician-ready medical opinion language from your claim facts.
+        - generic [ref=e285]:
+          - button "Care coordination Doctor Portal View the delegation-style directory for TYFYS care ops and assigned doctors, with visit context and system handoff status. Assigned doctors 2 Next visit March 9, 2026 · 2:00 PM ET Sync requests 0" [ref=e286] [cursor=pointer]:
+            - generic [ref=e287]:
+              - generic [ref=e288]:
+                - paragraph [ref=e289]: Care coordination
+                - heading "Doctor Portal" [level=3] [ref=e290]
+                - paragraph [ref=e291]: View the delegation-style directory for TYFYS care ops and assigned doctors, with visit context and system handoff status.
+              - img [ref=e293]
+            - generic [ref=e297]:
+              - generic [ref=e298]:
+                - paragraph [ref=e299]: Assigned doctors
+                - paragraph [ref=e300]: "2"
+              - generic [ref=e301]:
+                - paragraph [ref=e302]: Next visit
+                - paragraph [ref=e303]: March 9, 2026 · 2:00 PM ET
+              - generic [ref=e304]:
+                - paragraph [ref=e305]: Sync requests
+                - paragraph [ref=e306]: "0"
+          - button "Shared inbox Secure Comms Keep TYFYS and your assigned doctors in one encrypted messaging workspace, with thread-level visit prep and response expectations. TYFYS Care Ops We pushed your packet to Dr. Miller and synced the prep visit. 9:42 AM Up to date Dr. Amanda Miller Please have your MRI report and medication list nearby for our visit. Yesterday Up to date Dr. Elise Warren + TYFYS Your anxiety and PTSD symptom tracker is attached for tomorrow's consult. 8:15 AM 1 new" [ref=e307] [cursor=pointer]:
+            - generic [ref=e308]:
+              - generic [ref=e309]:
+                - paragraph [ref=e310]: Shared inbox
+                - heading "Secure Comms" [level=3] [ref=e311]
+                - paragraph [ref=e312]: Keep TYFYS and your assigned doctors in one encrypted messaging workspace, with thread-level visit prep and response expectations.
+              - img [ref=e314]
+            - generic [ref=e316]:
+              - generic [ref=e317]:
+                - generic [ref=e318]:
+                  - paragraph [ref=e319]: TYFYS Care Ops
+                  - paragraph [ref=e320]: We pushed your packet to Dr. Miller and synced the prep visit.
+                - generic [ref=e321]:
+                  - paragraph [ref=e322]: 9:42 AM
+                  - paragraph [ref=e323]: Up to date
+              - generic [ref=e324]:
+                - generic [ref=e325]:
+                  - paragraph [ref=e326]: Dr. Amanda Miller
+                  - paragraph [ref=e327]: Please have your MRI report and medication list nearby for our visit.
+                - generic [ref=e328]:
+                  - paragraph [ref=e329]: Yesterday
+                  - paragraph [ref=e330]: Up to date
+              - generic [ref=e331]:
+                - generic [ref=e332]:
+                  - paragraph [ref=e333]: Dr. Elise Warren + TYFYS
+                  - paragraph [ref=e334]: Your anxiety and PTSD symptom tracker is attached for tomorrow's consult.
+                - generic [ref=e335]:
+                  - paragraph [ref=e336]: 8:15 AM
+                  - paragraph [ref=e337]: 1 new
+        - generic [ref=e338]:
+          - generic [ref=e339]:
+            - generic [ref=e340]:
+              - heading "Active Claims Tracker" [level=3] [ref=e341]:
+                - img [ref=e342]
+                - text: Active Claims Tracker
+              - button "+ Add New" [ref=e345] [cursor=pointer]
+            - generic [ref=e346]:
+              - img [ref=e347]
+              - paragraph [ref=e351]: No claims being tracked.
+              - paragraph [ref=e352]: Add conditions to see required evidence.
+              - button "Start Tracking" [ref=e353] [cursor=pointer]
+          - generic [ref=e354]:
+            - generic [ref=e356]:
+              - generic [ref=e357]:
+                - heading "Access Level" [level=3] [ref=e358]:
+                  - img [ref=e359]
+                  - text: Access Level
+                - generic [ref=e362]: Standard
+              - paragraph [ref=e363]: Upgrade to unlock TYFYS Claims Assistant, 25% Service Discounts, and Monthly Consults.
+              - button "Unlock Premium ($250/mo)" [ref=e364] [cursor=pointer]
+            - generic [ref=e365]:
+              - heading "Next Steps" [level=3] [ref=e366]
+              - generic [ref=e367]:
+                - button "Start Intake Workspace" [ref=e368] [cursor=pointer]:
+                  - generic [ref=e369]:
+                    - img [ref=e371]
+                    - generic [ref=e374]: Start Intake Workspace
+                  - img [ref=e375]
+                - button "Scan Into Dossier" [ref=e377] [cursor=pointer]:
+                  - generic [ref=e378]:
+                    - img [ref=e380]
+                    - generic [ref=e384]: Scan Into Dossier
+                  - img [ref=e385]
+                - button "Check PACT Presumptives" [ref=e387] [cursor=pointer]:
+                  - generic [ref=e388]:
+                    - img [ref=e390]
+                    - generic [ref=e392]: Check PACT Presumptives
+                  - img [ref=e393]
+        - generic [ref=e395]:
+          - generic [ref=e396]:
+            - img [ref=e398]
+            - heading "Success Stories" [level=3] [ref=e400]:
+              - img [ref=e401]
+              - text: Success Stories
+            - generic [ref=e403]:
+              - generic [ref=e404]:
+                - paragraph [ref=e405]: "\"Now I'm at 70% with secondary conditions recognized. My only regret is not doing this sooner.\""
+                - paragraph [ref=e406]: "- James T."
+              - generic [ref=e407]:
+                - paragraph [ref=e408]: "\"Rating increased to 70% with back pay that covered the fee ten times over.\""
+                - paragraph [ref=e409]: "- Christopher L."
+          - generic [ref=e410]:
+            - heading "Why We Win" [level=3] [ref=e411]:
+              - img [ref=e412]
+              - text: Why We Win
+            - generic [ref=e415]:
+              - generic [ref=e416]:
+                - generic [ref=e418]: VS
+                - generic [ref=e419]:
+                  - paragraph [ref=e420]: Traditional VSO
+                  - paragraph [ref=e421]: Free forms, but often requires risky C&P exams.
+              - generic [ref=e423]:
+                - img [ref=e425]
+                - generic [ref=e427]:
+                  - paragraph [ref=e428]: The TYFYS Method
+                  - paragraph [ref=e429]: Private Medical Evidence & Nexus Letters. Often bypasses the C&P exam entirely.
+  - generic [ref=e430]:
+    - generic [ref=e431]:
+      - generic [ref=e432]:
+        - img [ref=e435]
+        - generic [ref=e439]:
+          - paragraph [ref=e440]: Angela - Guide
+          - paragraph [ref=e441]: Online | Here for You
+      - button [ref=e442] [cursor=pointer]:
+        - img [ref=e443]
+    - generic [ref=e448]:
+      - textbox "Ask Angela anything..." [ref=e449]
+      - button [disabled] [ref=e450]:
+        - img [ref=e451]

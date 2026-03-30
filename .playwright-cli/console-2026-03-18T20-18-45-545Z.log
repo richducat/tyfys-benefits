@@ -1,0 +1,12 @@
+[  110747ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://app.tyfys.net/api/auth-state:0
+[  110748ms] [WARNING] Remote auth state sync skipped: Error: Authentication required.
+    at ce (http://127.0.0.1:4174/tyfys-platform/tyfys-platform-app.js:23:71125)
+    at async http://127.0.0.1:4174/tyfys-platform/tyfys-platform-app.js:23:79979 @ http://127.0.0.1:4174/tyfys-platform/tyfys-platform-app.js:22
+[  207836ms] [WARNING] libpng error: IDAT: CRC error @ https://cdn.jsdelivr.net/npm/tesseract.js-core@v5.1.1/tesseract-core-simd-lstm.wasm.js:30
+[  207836ms] [WARNING] missing function: setThrew @ https://cdn.jsdelivr.net/npm/tesseract.js-core@v5.1.1/tesseract-core-simd-lstm.wasm.js:74
+[  207836ms] [WARNING] Aborted(-1) @ https://cdn.jsdelivr.net/npm/tesseract.js-core@v5.1.1/tesseract-core-simd-lstm.wasm.js:13
+[  207838ms] Uncaught Error: RuntimeError: Aborted(-1). Build with -sASSERTIONS for more info.
+    at <anonymous> (https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js:1:42005)
+    at t.onmessage (https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js:1:58624)
+[  207837ms] [ERROR] Document scan failed: RuntimeError: Aborted(-1). Build with -sASSERTIONS for more info. @ http://127.0.0.1:4174/tyfys-platform/tyfys-platform-app.js:22
+[  274988ms] [ERROR] Failed to load resource: the server responded with a status of 500 () @ https://app.tyfys.net/api/zoho-upload-record:0
