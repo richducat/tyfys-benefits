@@ -356,6 +356,70 @@ const getRuntimeConfig = () => {
   return config && typeof config === "object" ? config : {};
 };
 
+const SOP_PHASES = [
+  { id: 1, title: 'Account Setup', label: 'Setup', desc: 'Securely upload DD-214 and activate membership.' },
+  { id: 2, title: 'Admin Prep', label: 'Prep', desc: 'Our team is reviewing your files to prepare your strategy.' },
+  { id: 3, title: 'Strategy & Intake', label: 'Strategy', desc: '1-on-1 strategy session to lock in your claims.' },
+  { id: 4, title: 'Exams & Medical', label: 'Medical', desc: 'Attending C&P exams and finalizing the nexus letters.' }
+];
+
+const deriveSopPhase = (paymentState, dossier, nextDoctorVisit) => {
+  const dossierItems = Array.isArray(dossier) ? dossier : [];
+  const hasDd214 = dossierItems.some(item => getDossierLookupText(item).includes("dd214") || getDossierLookupText(item).includes("dd-214"));
+  const hasPaid = paymentState?.completed || paymentState?.planName;
+
+  if (!hasPaid || !hasDd214) return 1; // Phase 1: Setup
+  if (nextDoctorVisit) return 4; // Phase 4: Medical
+
+  return 2; // Default to Prep if paid and DD214 uploaded
+};
+
+function SopSwimlaneTracker({ currentPhase, onPhaseClick, Icons }) {
+  const activeStageInfo = SOP_PHASES.find((p) => p.id === currentPhase) || SOP_PHASES[0];
+
+  return (
+    <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200 mb-6">
+      <div className="flex justify-between relative overflow-hidden mb-6 mt-2">
+        <div className="absolute top-1/2 left-0 h-1 bg-slate-100 w-full -z-10 mt-[-2px]" />
+        <div
+          className="absolute top-1/2 left-0 h-1 bg-blue-500 -z-10 mt-[-2px] transition-all duration-1000"
+          style={{ width: `${((currentPhase - 1) / (SOP_PHASES.length - 1)) * 100}%` }}
+        />
+        {SOP_PHASES.map((stage) => {
+          const isPast = stage.id < currentPhase;
+          const isCurrent = stage.id === currentPhase;
+          return (
+            <div key={stage.id} onClick={() => onPhaseClick && onPhaseClick(stage.id)} className="flex flex-col items-center gap-2 cursor-pointer z-10 group w-1/4">
+              <div
+                className={`w-10 h-10 rounded-full flex items-center justify-center border-4 transition-all ${
+                  isCurrent
+                    ? 'bg-blue-600 border-blue-100 shadow-md scale-110 text-white'
+                    : isPast
+                    ? 'bg-blue-500 border-white text-white'
+                    : 'bg-white border-slate-100 text-slate-300 group-hover:border-blue-200'
+                }`}
+              >
+                {isPast ? <Icons.Check className="w-5 h-5" /> : <span className="font-bold text-sm">{stage.id}</span>}
+              </div>
+              <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center ${isCurrent ? 'text-blue-700' : isPast ? 'text-slate-700' : 'text-slate-400'}`}>
+                {stage.label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 flex items-start gap-3">
+        <div className="bg-blue-100 text-blue-700 p-2 rounded-lg shrink-0">
+          <Icons.Info className="w-5 h-5" />
+        </div>
+        <div>
+          <h4 className="font-bold text-slate-800 text-sm mb-1">{activeStageInfo.title}</h4>
+          <p className="text-sm text-slate-600 leading-relaxed">{activeStageInfo.desc}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
 const getCapacitorBridge = () => {
   const bridge = window.Capacitor;
   return bridge && typeof bridge === "object" ? bridge : null;
@@ -777,6 +841,13 @@ const Icons = {
       <line x1="16" y1="13" x2="8" y2="13"></line>
       <line x1="16" y1="17" x2="8" y2="17"></line>
       <polyline points="10 9 9 9 8 9"></polyline>
+    </IconWrapper>
+  ),
+  Upload: (p) => (
+    <IconWrapper {...p}>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="17 8 12 3 7 8"></polyline>
+      <line x1="12" y1="3" x2="12" y2="15"></line>
     </IconWrapper>
   ),
   CheckCircle: (p) => (
@@ -2597,7 +2668,7 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
         .map((value) => value.trim());
       if (!allowedValues.includes(honeypotValue)) {
         console.log("Spam detected: Honeypot filled");
-        return false; // Silently fail
+        // Removed silent fail to prevent blocking real users using browser autofill
       }
     }
 
@@ -2606,7 +2677,7 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
     const timeElapsed = Date.now() - startTime;
     if (timeElapsed < 2000) {
       console.log("Spam detected: Submission too fast");
-      return false; // Silently fail
+      // Removed silent fail to prevent blocking real users who autofill very fast
     }
 
     if (part === 1) {
@@ -2649,7 +2720,32 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
     }
   };
 
-  const hasExistingAccountError = /already exists/i.test(String(submitError || ""));
+  const hasExistingAccountError = /already exists|existing tyfys login/i.test(String(submitError || ""));
+
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  const isEmailValid = localData.email && emailRegex.test(localData.email);
+  const isPhoneValid = localData.phone && localData.phone.length >= 10;
+  const isZipValid = localData.zip && localData.zip.length >= 5;
+  const isPasswordValid = localData.appPassword && localData.appPassword.length >= 8;
+  const isConfirmValid = isPasswordValid && localData.confirmPassword === localData.appPassword;
+
+  const getInputStyle = (error, isValid) =>
+    `w-full p-3.5 sm:p-4 rounded-xl border-2 transition-all duration-300 ease-out focus:ring-4 outline-none text-base sm:text-lg font-medium bg-white/70 backdrop-blur-sm ${
+      error
+        ? "border-red-400 focus:border-red-500 focus:ring-red-500/20"
+        : isValid
+        ? "border-green-400 focus:border-green-500 focus:ring-green-500/20"
+        : "border-slate-200/70 hover:border-slate-300 focus:border-blue-500 focus:ring-blue-500/20"
+    }`;
+
+  const renderCheckmark = (isValid) => {
+    if (!isValid) return null;
+    return (
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 text-green-500 pointer-events-none animate-fadeIn">
+        <Icons.CheckCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+      </div>
+    );
+  };
 
   return (
     <div className="animate-fadeIn w-full space-y-5 sm:space-y-6">
@@ -2667,139 +2763,146 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
 
       {part === 1 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-bold text-slate-700 mb-1">First Name</label>
-            <input
-              name="firstName"
-              value={localData.firstName || ""}
-              onChange={handleChange}
-              autoComplete="given-name"
-              className={`w-full p-3.5 sm:p-4 rounded-xl border-2 ${errors.firstName ? "border-red-500" : "border-slate-200"} focus:border-blue-600 outline-none text-base sm:text-lg font-medium bg-slate-50`}
-              placeholder="John"
-            />
-            {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
-          </div>
-          <div>
-            <label className="block text-sm font-bold text-slate-700 mb-1">Last Name</label>
-            <input
-              name="lastName"
-              value={localData.lastName || ""}
-              onChange={handleChange}
-              autoComplete="family-name"
-              className={`w-full p-3.5 sm:p-4 rounded-xl border-2 ${errors.lastName ? "border-red-500" : "border-slate-200"} focus:border-blue-600 outline-none text-base sm:text-lg font-medium bg-slate-50`}
-              placeholder="Doe"
-            />
-            {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
-          </div>
+            <div className="relative animate-[slideUp_0.4s_ease-out_forwards] opacity-0" style={{ animationDelay: '0ms' }}>
+              <label className="block text-sm font-bold text-slate-700 mb-1">First Name</label>
+              <div className="relative">
+                <input
+                  name="firstName"
+                  value={localData.firstName || ""}
+                  onChange={handleChange}
+                  autoComplete="given-name"
+                  className={getInputStyle(errors.firstName, !!localData.firstName)}
+                  placeholder="John"
+                />
+                {renderCheckmark(!!localData.firstName && !errors.firstName)}
+              </div>
+              {errors.firstName && <p className="text-red-500 text-xs mt-1 animate-fadeIn">{errors.firstName}</p>}
+            </div>
+            <div className="relative animate-[slideUp_0.4s_ease-out_forwards] opacity-0" style={{ animationDelay: '100ms' }}>
+              <label className="block text-sm font-bold text-slate-700 mb-1">Last Name</label>
+              <div className="relative">
+                <input
+                  name="lastName"
+                  value={localData.lastName || ""}
+                  onChange={handleChange}
+                  autoComplete="family-name"
+                  className={getInputStyle(errors.lastName, !!localData.lastName)}
+                  placeholder="Doe"
+                />
+                {renderCheckmark(!!localData.lastName && !errors.lastName)}
+              </div>
+              {errors.lastName && <p className="text-red-500 text-xs mt-1 animate-fadeIn">{errors.lastName}</p>}
+            </div>
         </div>
       )}
 
       {part === 2 && (
         <>
-          <div>
+          <div className="relative animate-[slideUp_0.4s_ease-out_forwards] opacity-0" style={{ animationDelay: '0ms' }}>
             <label className="block text-sm font-bold text-slate-700 mb-1">Email Address</label>
-            <input
-              name="email"
-              type="email"
-              value={localData.email || ""}
-              onChange={handleChange}
-              autoComplete="email"
-              className={`w-full p-3.5 sm:p-4 rounded-xl border-2 ${errors.email ? "border-red-500" : "border-slate-200"} focus:border-blue-600 outline-none text-base sm:text-lg font-medium bg-slate-50`}
-              placeholder="john@example.com"
-            />
-            <div className="flex gap-2 mt-2 flex-wrap">
-              <button
-                onClick={() => handleEmailQuickFill("@gmail.com")}
-                className="px-3 py-2 bg-slate-100 hover:bg-blue-100 text-slate-600 hover:text-blue-600 text-xs font-bold rounded-lg border border-slate-200 transition-colors"
-              >
-                @gmail.com
-              </button>
-              <button
-                onClick={() => handleEmailQuickFill("@yahoo.com")}
-                className="px-3 py-2 bg-slate-100 hover:bg-blue-100 text-slate-600 hover:text-blue-600 text-xs font-bold rounded-lg border border-slate-200 transition-colors"
-              >
-                @yahoo.com
-              </button>
-              <button
-                onClick={() => handleEmailQuickFill("@aol.com")}
-                className="px-3 py-2 bg-slate-100 hover:bg-blue-100 text-slate-600 hover:text-blue-600 text-xs font-bold rounded-lg border border-slate-200 transition-colors"
-              >
-                @aol.com
-              </button>
-              <button
-                onClick={() => handleEmailQuickFill(".mil")}
-                className="px-3 py-2 bg-slate-100 hover:bg-blue-100 text-slate-600 hover:text-blue-600 text-xs font-bold rounded-lg border border-slate-200 transition-colors"
-              >
-                .mil
-              </button>
+            <div className="relative">
+              <input
+                name="email"
+                type="email"
+                value={localData.email || ""}
+                onChange={handleChange}
+                autoComplete="email"
+                className={getInputStyle(errors.email, isEmailValid)}
+                placeholder="john@example.com"
+              />
+              {renderCheckmark(isEmailValid && !errors.email)}
             </div>
-            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+            <div className="flex gap-2 mt-3 flex-wrap">
+              {["@gmail.com", "@yahoo.com", "@aol.com", ".mil"].map((domain) => (
+                <button
+                  key={domain}
+                  onClick={() => handleEmailQuickFill(domain)}
+                  className="px-4 py-1.5 rounded-full bg-blue-50/70 text-blue-700 font-semibold text-xs hover:bg-blue-100 hover:scale-105 active:scale-95 transition-all outline-none focus:ring-2 focus:ring-blue-400/50 border border-blue-200/50"
+                  type="button"
+                >
+                  {domain}
+                </button>
+              ))}
+            </div>
+            {errors.email && <p className="text-red-500 text-xs mt-1 animate-fadeIn">{errors.email}</p>}
           </div>
 
-          <div>
+          <div className="relative animate-[slideUp_0.4s_ease-out_forwards] opacity-0" style={{ animationDelay: '100ms' }}>
             <label className="block text-sm font-bold text-slate-700 mb-1">Phone Number</label>
-            <input
-              name="phone"
-              type="tel"
-              value={localData.phone || ""}
-              onChange={handleChange}
-              autoComplete="tel"
-              className={`w-full p-3.5 sm:p-4 rounded-xl border-2 ${errors.phone ? "border-red-500" : "border-slate-200"} focus:border-blue-600 outline-none text-base sm:text-lg font-medium bg-slate-50`}
-              placeholder="(555) 123-4567"
-            />
-            {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+            <div className="relative">
+              <input
+                name="phone"
+                type="tel"
+                value={localData.phone || ""}
+                onChange={handleChange}
+                autoComplete="tel"
+                className={getInputStyle(errors.phone, isPhoneValid)}
+                placeholder="(555) 123-4567"
+              />
+              {renderCheckmark(isPhoneValid && !errors.phone)}
+            </div>
+            {errors.phone && <p className="text-red-500 text-xs mt-1 animate-fadeIn">{errors.phone}</p>}
           </div>
         </>
       )}
 
       {part === 3 && (
         <>
-          <div>
+          <div className="relative animate-[slideUp_0.4s_ease-out_forwards] opacity-0" style={{ animationDelay: '0ms' }}>
             <label className="block text-sm font-bold text-slate-700 mb-1">Zip Code</label>
-            <input
-              name="zip"
-              value={localData.zip || ""}
-              onChange={handleChange}
-              maxLength={5}
-              autoComplete="postal-code"
-              className={`w-full p-3.5 sm:p-4 rounded-xl border-2 ${errors.zip ? "border-red-500" : "border-slate-200"} focus:border-blue-600 outline-none text-base sm:text-lg font-medium bg-slate-50`}
-              placeholder="12345"
-            />
-            {errors.zip && <p className="text-red-500 text-xs mt-1">{errors.zip}</p>}
+            <div className="relative">
+              <input
+                name="zip"
+                value={localData.zip || ""}
+                onChange={handleChange}
+                maxLength={5}
+                autoComplete="postal-code"
+                className={getInputStyle(errors.zip, isZipValid)}
+                placeholder="12345"
+              />
+              {renderCheckmark(isZipValid && !errors.zip)}
+            </div>
+            {errors.zip && <p className="text-red-500 text-xs mt-1 animate-fadeIn">{errors.zip}</p>}
           </div>
 
-          <div className="bg-white p-4 rounded-xl border border-slate-200 space-y-4 shadow-sm">
+          <div className="bg-white/80 p-5 rounded-xl border border-slate-200/80 space-y-5 shadow-sm backdrop-blur-md relative animate-[slideUp_0.4s_ease-out_forwards] opacity-0" style={{ animationDelay: '100ms' }}>
             <div>
-              <p className="text-sm font-bold text-slate-700">Create your TYFYS login</p>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-base font-bold text-slate-800">Create your TYFYS login</p>
+              <p className="text-sm text-slate-500 mt-1">
                 This password lets you come back to your account on this device without starting over.
               </p>
             </div>
-            <div>
+            <div className="relative">
               <label className="block text-sm font-bold text-slate-700 mb-1">Password</label>
-              <input
-                name="appPassword"
-                type="password"
-                value={localData.appPassword || ""}
-                onChange={handleChange}
-                autoComplete="new-password"
-                className={`w-full p-3.5 sm:p-4 rounded-xl border-2 ${errors.appPassword ? "border-red-500" : "border-slate-200"} focus:border-blue-600 outline-none text-base sm:text-lg font-medium bg-slate-50`}
-                placeholder="At least 8 characters"
-              />
-              {errors.appPassword && <p className="text-red-500 text-xs mt-1">{errors.appPassword}</p>}
+              <div className="relative">
+                <input
+                  name="appPassword"
+                  type="password"
+                  value={localData.appPassword || ""}
+                  onChange={handleChange}
+                  autoComplete="new-password"
+                  className={getInputStyle(errors.appPassword, isPasswordValid)}
+                  placeholder="At least 8 characters"
+                />
+                {renderCheckmark(isPasswordValid && !errors.appPassword)}
+              </div>
+              {errors.appPassword && <p className="text-red-500 text-xs mt-1 animate-fadeIn">{errors.appPassword}</p>}
             </div>
-            <div>
+            <div className="relative">
               <label className="block text-sm font-bold text-slate-700 mb-1">Confirm Password</label>
-              <input
-                name="confirmPassword"
-                type="password"
-                value={localData.confirmPassword || ""}
-                onChange={handleChange}
-                autoComplete="new-password"
-                className={`w-full p-3.5 sm:p-4 rounded-xl border-2 ${errors.confirmPassword ? "border-red-500" : "border-slate-200"} focus:border-blue-600 outline-none text-base sm:text-lg font-medium bg-slate-50`}
-                placeholder="Re-enter your password"
-              />
-              {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
+              <div className="relative">
+                <input
+                  name="confirmPassword"
+                  type="password"
+                  value={localData.confirmPassword || ""}
+                  onChange={handleChange}
+                  autoComplete="new-password"
+                  className={getInputStyle(errors.confirmPassword, isConfirmValid)}
+                  placeholder="Re-enter your password"
+                />
+                {renderCheckmark(isConfirmValid && !errors.confirmPassword)}
+              </div>
+              {errors.confirmPassword && <p className="text-red-500 text-xs mt-1 animate-fadeIn">{errors.confirmPassword}</p>}
             </div>
           </div>
 
@@ -2857,6 +2960,16 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
           {isSubmitting ? "Creating Your Account..." : part === 3 ? "Create My Account" : "Continue"}{" "}
           {!isSubmitting && <Icons.ChevronRight className="w-6 h-6 stroke-[3px]" />}
         </button>
+
+        {(part === 2 || part === 3) && (
+          <button
+            type="button"
+            onClick={onReturnToLogin}
+            className="text-sm font-bold text-slate-500 hover:text-blue-600 transition-colors underline decoration-slate-300 hover:decoration-blue-400 mt-1 pb-2"
+          >
+            Already have an account? Sign in
+          </button>
+        )}
 
         {submitError && (
           <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -3864,7 +3977,7 @@ function TYFYSPlatform() {
   const scannerFileInputRef = useRef(null);
   const onboardingScrollRef = useRef(null);
   const isApplyingRemoteStateRef = useRef(false);
-  const hasExistingAccountStatus = /already exists/i.test(String(authStatusMessage || ""));
+  const hasExistingAccountStatus = /already exists|existing tyfys login/i.test(String(authStatusMessage || ""));
   const hasKnownAccount =
     Boolean(authAccount) || onboardingComplete || hasExistingAccountStatus || hasLeadPrefillAccount;
   const isAccessBootstrapping = isAuthBootstrapping || isLeadPrefillAccountLookupPending;
@@ -4355,10 +4468,12 @@ function TYFYSPlatform() {
     };
   }, []);
 
+  const hasAutoSavedRef = useRef(false);
   useEffect(() => {
-    if (!initialAutostart || hasStarted) return;
-    saveHasStarted();
-  }, [hasStarted, initialAutostart]);
+    if (!initialAutostart || hasAutoSavedRef.current) return;
+    hasAutoSavedRef.current = true;
+    if (!loadHasStarted()) saveHasStarted();
+  }, [initialAutostart]);
 
   useEffect(() => {
     if (!nativeAppRuntime) return undefined;
@@ -4939,6 +5054,7 @@ function TYFYSPlatform() {
     setUserProfile(mergedProfile);
 
     if (ONBOARDING_STEPS[onboardingStep]?.type === "contact_form_part3" && mergedProfile.email && appPassword) {
+      setIsAuthSubmitting(true);
       try {
         await createClientLogin({
           email: mergedProfile.email,
@@ -4952,9 +5068,15 @@ function TYFYSPlatform() {
             "We found an existing TYFYS login for this email. Sign in to continue instead of creating a duplicate account."
           );
           returnToAccessLanding();
+        } else {
+          setAuthStatusMessage(
+            error?.message || "An error occurred while creating your account. Please try again."
+          );
         }
+        setIsAuthSubmitting(false);
         return;
       }
+      setIsAuthSubmitting(false);
     }
 
     void syncZohoSignup(mergedProfile);
@@ -6221,7 +6343,7 @@ function TYFYSPlatform() {
                 </button>
               )}
             </div>
-            {isAuthenticated && authAccount?.email && (
+            {isAuthenticated && authAccount?.email ? (
               <button
                 onClick={handleClientLogout}
                 className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-3 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-900"
@@ -6229,6 +6351,17 @@ function TYFYSPlatform() {
                 <Icons.Lock className="w-4 h-4" />
                 <span className="hidden lg:inline">{authAccount.email}</span>
                 <span>Log Out</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setHasStarted(false);
+                  clearHasStarted();
+                }}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-blue-400 hover:text-blue-700 shadow-sm bg-white"
+              >
+                <Icons.User className="w-4 h-4" />
+                <span>Sign In</span>
               </button>
             )}
             {!isBotOpen && (
@@ -6306,68 +6439,95 @@ function TYFYSPlatform() {
                   <Icons.MessageSquare className="w-6 h-6" /> Show Me Where To Start
                 </button>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-                  <button
-                    onClick={() => setActiveView("dossier")}
-                    className="bg-white text-left rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-blue-300 hover:-translate-y-0.5 transition-all"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center">
-                        <Icons.Database className="w-5 h-5" />
-                      </div>
-                      <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded-full">
-                        {dossierCounts.total} saved
-                      </span>
+                {/* SOP SWIMLANE TRACKER */}
+                <SopSwimlaneTracker 
+                  currentPhase={deriveSopPhase(paymentState, dossier, nextDoctorVisit)} 
+                  Icons={Icons} 
+                  onPhaseClick={null} 
+                />
+
+                {deriveSopPhase(paymentState, dossier, nextDoctorVisit) === 1 ? (
+                  <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-6 mb-6 shadow-sm flex items-start gap-4">
+                    <div className="bg-red-100 text-red-600 p-3 rounded-full shrink-0">
+                      <Icons.AlertTriangle className="w-6 h-6" />
                     </div>
-                    <p className="font-bold text-slate-900">Records Vault</p>
-                    <p className="text-sm text-slate-500 mt-1">Upload records, read scanned text, and keep your evidence organized on this device.</p>
-                  </button>
-                  <button
-                    onClick={() => setActiveView("calculator")}
-                    className="bg-white text-left rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-green-300 hover:-translate-y-0.5 transition-all"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-11 h-11 rounded-2xl bg-green-50 text-green-700 flex items-center justify-center">
-                        <Icons.Calculator className="w-5 h-5" />
-                      </div>
-                      <span className="text-xs font-bold text-green-700 bg-green-50 px-2 py-1 rounded-full">
-                        {calculation.afterRating || currentRating}%
-                      </span>
+                    <div>
+                      <h3 className="text-xl font-black text-red-900 mb-2">Requires DD-214 Upload</h3>
+                      <p className="text-red-700 font-medium mb-4">
+                        Your account is in Phase 1 (Account Setup). We cannot begin building your medical strategy until your DD-214 is securely uploaded to your Records Vault.
+                      </p>
+                      <button
+                        onClick={() => setActiveView("dossier")}
+                        className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl shadow-sm transition-colors flex items-center gap-2"
+                      >
+                        <Icons.Upload className="w-5 h-5" /> Open Records Vault
+                      </button>
                     </div>
-                    <p className="font-bold text-slate-900">VA Rating Calculator</p>
-                    <p className="text-sm text-slate-500 mt-1">See combined-rating steps, exact rounding, and a path to 100%.</p>
-                  </button>
-                  <button
-                    onClick={() => setActiveView("pact_explorer")}
-                    className="bg-white text-left rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-orange-300 hover:-translate-y-0.5 transition-all"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-11 h-11 rounded-2xl bg-orange-50 text-orange-700 flex items-center justify-center">
-                        <Icons.Zap className="w-5 h-5" />
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                    <button
+                      onClick={() => setActiveView("dossier")}
+                      className="bg-white text-left rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-blue-300 hover:-translate-y-0.5 transition-all"
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center">
+                          <Icons.Database className="w-5 h-5" />
+                        </div>
+                        <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded-full">
+                          {dossierCounts.total} saved
+                        </span>
                       </div>
-                      <span className="text-xs font-bold text-orange-700 bg-orange-50 px-2 py-1 rounded-full">
-                        {pactEra}
-                      </span>
-                    </div>
-                    <p className="font-bold text-slate-900">PACT Act Guide</p>
-                    <p className="text-sm text-slate-500 mt-1">Check presumptive conditions by era and exposure track with official VA sources.</p>
-                  </button>
-                  <button
-                    onClick={() => setActiveView("nexus_generator")}
-                    className="bg-white text-left rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-violet-300 hover:-translate-y-0.5 transition-all"
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-11 h-11 rounded-2xl bg-violet-50 text-violet-700 flex items-center justify-center">
-                        <Icons.Quote className="w-5 h-5" />
+                      <p className="font-bold text-slate-900">Records Vault</p>
+                      <p className="text-sm text-slate-500 mt-1">Upload records, read scanned text, and keep your evidence organized on this device.</p>
+                    </button>
+                    <button
+                      onClick={() => setActiveView("calculator")}
+                      className="bg-white text-left rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-green-300 hover:-translate-y-0.5 transition-all"
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-11 h-11 rounded-2xl bg-green-50 text-green-700 flex items-center justify-center">
+                          <Icons.Calculator className="w-5 h-5" />
+                        </div>
+                        <span className="text-xs font-bold text-green-700 bg-green-50 px-2 py-1 rounded-full">
+                          {calculation.afterRating || currentRating}%
+                        </span>
                       </div>
-                      <span className="text-xs font-bold text-violet-700 bg-violet-50 px-2 py-1 rounded-full">
-                        {matchingNexusDocs.length} records
-                      </span>
-                    </div>
-                    <p className="font-bold text-slate-900">Medical Opinion Draft</p>
-                    <p className="text-sm text-slate-500 mt-1">Organize the facts a doctor would need to write a medical opinion that connects your condition to service.</p>
-                  </button>
-                </div>
+                      <p className="font-bold text-slate-900">VA Rating Calculator</p>
+                      <p className="text-sm text-slate-500 mt-1">See combined-rating steps, exact rounding, and a path to 100%.</p>
+                    </button>
+                    <button
+                      onClick={() => setActiveView("pact_explorer")}
+                      className="bg-white text-left rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-orange-300 hover:-translate-y-0.5 transition-all"
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-11 h-11 rounded-2xl bg-orange-50 text-orange-700 flex items-center justify-center">
+                          <Icons.Zap className="w-5 h-5" />
+                        </div>
+                        <span className="text-xs font-bold text-orange-700 bg-orange-50 px-2 py-1 rounded-full">
+                          {pactEra}
+                        </span>
+                      </div>
+                      <p className="font-bold text-slate-900">PACT Act Guide</p>
+                      <p className="text-sm text-slate-500 mt-1">Check presumptive conditions by era and exposure track with official VA sources.</p>
+                    </button>
+                    <button
+                      onClick={() => setActiveView("nexus_generator")}
+                      className="bg-white text-left rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-violet-300 hover:-translate-y-0.5 transition-all"
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-11 h-11 rounded-2xl bg-violet-50 text-violet-700 flex items-center justify-center">
+                          <Icons.Quote className="w-5 h-5" />
+                        </div>
+                        <span className="text-xs font-bold text-violet-700 bg-violet-50 px-2 py-1 rounded-full">
+                          {matchingNexusDocs.length} records
+                        </span>
+                      </div>
+                      <p className="font-bold text-slate-900">Medical Opinion Draft</p>
+                      <p className="text-sm text-slate-500 mt-1">Organize the facts a doctor would need to write a medical opinion.</p>
+                    </button>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-1 xl:grid-cols-[1.05fr,0.95fr] gap-6">
                   <button

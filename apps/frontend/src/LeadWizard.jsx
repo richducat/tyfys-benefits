@@ -558,19 +558,26 @@ function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswer
         onSubmit({ ...values, claimReason, consent: consentState });
     };
 
+    const getInputStyle = (error) => 
+        `w-full min-w-0 rounded-xl border-2 font-medium text-slate-900 outline-none transition-all duration-300 ease-out focus:ring-4 focus:ring-blue-500/20 bg-white/70 backdrop-blur-sm focus:bg-white ${
+            error 
+            ? 'border-red-400 focus:border-red-500 bg-red-50/50' 
+            : 'border-slate-200/70 hover:border-slate-300 focus:border-blue-500'
+        }`;
+
     return (
-        <div className="text-left">
+        <div className="text-left animate-fadeIn">
             <h1 className="text-3xl font-bold text-slate-900 mb-2">{getDynamicHeader()}</h1>
             <p className="text-slate-500 text-lg mb-8">{data.subtext}</p>
 
             <form onSubmit={handleLocalSubmit} className="space-y-4" noValidate>
                 <div className="relative min-w-0 group">
-                    <label className="mb-1.5 block text-sm font-bold text-slate-700 leading-snug">What is your primary reason for wanting to file a VA claim?</label>
+                    <label className="mb-1.5 block text-sm font-bold text-slate-700 leading-snug transition-colors group-focus-within:text-blue-600">What is your primary reason for wanting to file a VA claim?</label>
                     <textarea
                         name="claimReason"
                         required
                         rows={3}
-                        className={`w-full min-w-0 rounded-xl border-2 px-4 py-3.5 font-medium text-slate-900 outline-none transition-all ${errors.claimReason ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`}
+                        className={`${getInputStyle(errors.claimReason)} px-4 py-3.5`}
                         placeholder="Example: I want to increase my rating for PTSD and back pain."
                     />
                     {errors.claimReason && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.claimReason}</p>}
@@ -578,18 +585,18 @@ function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswer
 
                 <div className="grid gap-4" style={responsiveFieldGridStyle}>
                     <div className="relative min-w-0 group">
-                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">First Name</label>
+                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight transition-colors group-focus-within:text-blue-600">First Name</label>
                         <div className="relative min-w-0">
-                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
-                            <input name="firstName" required type="text" className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.firstName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`} placeholder="John" />
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-transform duration-300 group-focus-within:scale-110" size={18} />
+                            <input name="firstName" required type="text" className={`${getInputStyle(errors.firstName)} py-3.5 pl-11 pr-4`} placeholder="John" />
                         </div>
                         {errors.firstName && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.firstName}</p>}
                     </div>
                     <div className="relative min-w-0 group">
-                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Last Name</label>
+                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight transition-colors group-focus-within:text-blue-600">Last Name</label>
                         <div className="relative min-w-0">
-                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
-                            <input name="lastName" required type="text" className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.lastName ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`} placeholder="Doe" />
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-transform duration-300 group-focus-within:scale-110" size={18} />
+                            <input name="lastName" required type="text" className={`${getInputStyle(errors.lastName)} py-3.5 pl-11 pr-4`} placeholder="Doe" />
                         </div>
                         {errors.lastName && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.lastName}</p>}
                     </div>
@@ -597,18 +604,18 @@ function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswer
 
                 <div className="grid gap-4" style={responsiveFieldGridStyle}>
                      <div className="relative min-w-0 group">
-                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Email Address</label>
+                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight transition-colors group-focus-within:text-blue-600">Email Address</label>
                         <div className="relative min-w-0">
-                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
-                            <input name="email" required type="email" className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.email ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`} placeholder="john@example.com" />
+                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-transform duration-300 group-focus-within:scale-110" size={18} />
+                            <input name="email" required type="email" className={`${getInputStyle(errors.email)} py-3.5 pl-11 pr-4`} placeholder="john@example.com" />
                         </div>
                         {errors.email && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.email}</p>}
                     </div>
                     <div className="relative min-w-0 group">
-                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Phone Number</label>
+                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight transition-colors group-focus-within:text-blue-600">Phone Number</label>
                         <div className="relative min-w-0">
-                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
-                            <input name="phone" required type="tel" className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.phone ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`} placeholder="(555) 123-4567" onInput={(e) => {
+                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-transform duration-300 group-focus-within:scale-110" size={18} />
+                            <input name="phone" required type="tel" className={`${getInputStyle(errors.phone)} py-3.5 pl-11 pr-4`} placeholder="(555) 123-4567" onInput={(e) => {
                                 let v = e.target.value.replace(/\D/g, '');
                                 if (v.length > 10 && v.startsWith('1')) v = v.substring(1);
                                 if (v.length > 10) v = v.slice(0, 10);
@@ -623,10 +630,10 @@ function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswer
 
                 <div className="grid gap-4" style={responsiveFieldGridStyle}>
                     <div className="relative min-w-0 group">
-                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Date Of Birth</label>
+                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight transition-colors group-focus-within:text-blue-600">Date Of Birth</label>
                         <div className="relative min-w-0">
-                            <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
-                            <input name="dob" required type="date" className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.dob ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`} />
+                            <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-transform duration-300 group-focus-within:scale-110" size={18} />
+                            <input name="dob" required type="date" className={`${getInputStyle(errors.dob)} py-3.5 pl-11 pr-4`} />
                         </div>
                         {errors.dob && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.dob}</p>}
                     </div>
@@ -634,10 +641,10 @@ function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswer
 
                 <div className="grid gap-4" style={responsiveFieldGridStyle}>
                     <div className="relative min-w-0 group">
-                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Branch Of Service</label>
+                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight transition-colors group-focus-within:text-blue-600">Branch Of Service</label>
                         <div className="relative min-w-0">
-                            <ShieldCheck className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
-                            <select name="branch" required defaultValue="" className={`w-full min-w-0 appearance-none rounded-xl border-2 py-3.5 pl-11 pr-10 font-medium text-slate-900 outline-none transition-all ${errors.branch ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`}>
+                            <ShieldCheck className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-transform duration-300 group-focus-within:scale-110" size={18} />
+                            <select name="branch" required defaultValue="" className={`${getInputStyle(errors.branch)} appearance-none py-3.5 pl-11 pr-10`}>
                                 <option value="" disabled>Select your branch</option>
                                 <option value="Army">Army</option>
                                 <option value="Navy">Navy</option>
@@ -650,24 +657,24 @@ function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswer
                         {errors.branch && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.branch}</p>}
                     </div>
                     <div className="relative min-w-0 group">
-                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Zip Code</label>
+                        <label className="ml-1 mb-1.5 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight transition-colors group-focus-within:text-blue-600">Zip Code</label>
                         <div className="relative min-w-0">
-                            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={18} />
-                            <input name="zipCode" required type="text" maxLength={5} className={`w-full min-w-0 rounded-xl border-2 py-3.5 pl-11 pr-4 font-medium text-slate-900 outline-none transition-all ${errors.zipCode ? 'border-red-500 bg-red-50' : 'border-slate-200 bg-slate-50'} focus:border-blue-600 focus:bg-white`} placeholder="12345" />
+                            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-transform duration-300 group-focus-within:scale-110" size={18} />
+                            <input name="zipCode" required type="text" maxLength={5} className={`${getInputStyle(errors.zipCode)} py-3.5 pl-11 pr-4`} placeholder="12345" />
                         </div>
                         {errors.zipCode && <p className="text-red-500 text-xs mt-1 ml-1 font-medium flex items-center gap-1"><AlertCircle size={10}/> {errors.zipCode}</p>}
                     </div>
                 </div>
 
-                <div className="py-2">
+                <div className="py-2 animate-fadeIn" style={{ animationDelay: '100ms' }}>
                     <label className="ml-1 mb-2 block text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 leading-tight">Best Form Of Contact</label>
                     <div className="flex flex-wrap gap-3">
                         {[ ['text', 'Text'], ['email', 'Email'], ['phone', 'Phone'] ].map(([method, label]) => {
                             const isSelected = consentState.bestContact[method];
                             return (
-                                <button key={method} type="button" onClick={() => handleContactMethodChange(method)} className={`flex items-center gap-2 rounded-lg border px-3 py-2 font-medium text-sm transition-colors ${isSelected ? 'border-blue-600 bg-blue-50 text-blue-700 shadow-sm' : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'}`}>
+                                <button key={method} type="button" onClick={() => handleContactMethodChange(method)} className={`flex items-center gap-2 rounded-xl border px-3 py-2 font-medium text-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${isSelected ? 'border-blue-600 bg-blue-50 text-blue-700 shadow-md shadow-blue-500/10' : 'border-slate-200 bg-white/70 backdrop-blur-sm text-slate-700 hover:border-slate-300'}`}>
                                     <span className={`flex h-4 w-4 items-center justify-center rounded border transition-colors ${isSelected ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
-                                        {isSelected && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
+                                        {isSelected && <span className="h-1.5 w-1.5 rounded-full bg-white animate-fadeIn" />}
                                     </span>
                                     {label}
                                 </button>
@@ -676,34 +683,34 @@ function ContactStep({ data, onSubmit, isSubmitting, submitError, previousAnswer
                     </div>
                 </div>
 
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 text-xs">
+                <div className="bg-white/70 backdrop-blur-sm p-4 rounded-xl border border-slate-200/70 mb-4 text-xs transition-colors hover:border-slate-300 group">
                     <h4 className="font-bold text-slate-900 uppercase mb-2">Before You Submit:</h4>
                     <p className="text-slate-600 mb-3 leading-relaxed">By hitting submit you recognize that we are a <strong className="text-slate-900">private organization</strong> that works with United States Veterans looking to file a Disability claim with the Veterans Administration.</p>
-                    <label className="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-100 transition-colors">
+                    <label className="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50/50 transition-colors">
                         <input type="checkbox" checked={consentState.privateOrg} onChange={() => handleConsentChange('privateOrg')} className="sr-only" />
-                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${consentState.privateOrg ? 'border-blue-600 bg-blue-600' : 'border-slate-300 bg-white'}`}>
-                            {consentState.privateOrg && <CheckCircle2 size={12} className="text-white" />}
+                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${consentState.privateOrg ? 'border-blue-600 bg-blue-600 scale-110' : 'border-slate-300 bg-white'}`}>
+                            {consentState.privateOrg && <CheckCircle2 size={12} className="text-white animate-fadeIn" />}
                         </div>
-                        <span className={`font-bold uppercase ${consentState.privateOrg ? 'text-blue-700' : 'text-slate-500'}`}>I understand & wish to continue</span>
+                        <span className={`font-bold uppercase transition-colors duration-300 ${consentState.privateOrg ? 'text-blue-700' : 'text-slate-500 group-hover:text-slate-700'}`}>I understand & wish to continue</span>
                     </label>
                 </div>
 
-                <div className="space-y-3">
-                    <label className="flex items-start gap-3 cursor-pointer">
-                        <input type="checkbox" checked={consentState.terms} onChange={() => handleConsentChange('terms')} className="mt-1 w-4 h-4 rounded border-slate-300 text-blue-600" />
-                        <span className="text-xs text-slate-600">Confirm you've read our <a href="sms-terms.html" target="_blank" className="text-blue-600 underline">terms and service</a>.</span>
+                <div className="space-y-3 bg-white/40 p-4 rounded-xl backdrop-blur-sm border border-slate-100">
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                        <input type="checkbox" checked={consentState.terms} onChange={() => handleConsentChange('terms')} className="mt-1 w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/30 transition-shadow" />
+                        <span className="text-xs text-slate-600 group-hover:text-slate-800 transition-colors">Confirm you've read our <a href="sms-terms.html" target="_blank" className="text-blue-600 underline">terms and service</a>.</span>
                     </label>
-                    <label className="flex items-start gap-3 cursor-pointer">
-                        <input type="checkbox" checked={consentState.sms} onChange={() => handleConsentChange('sms')} className="mt-1 w-4 h-4 rounded border-slate-300 text-blue-600" />
-                        <span className="text-xs text-slate-600">By checking this box, you consent to receive text messages from Thank You For Your Service.</span>
+                    <label className="flex items-start gap-3 cursor-pointer group">
+                        <input type="checkbox" checked={consentState.sms} onChange={() => handleConsentChange('sms')} className="mt-1 w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/30 transition-shadow" />
+                        <span className="text-xs text-slate-600 group-hover:text-slate-800 transition-colors">By checking this box, you consent to receive text messages from Thank You For Your Service.</span>
                     </label>
                 </div>
 
-                <div className="pt-4">
-                    <button type="submit" disabled={!canSubmit} className="w-full bg-green-500 hover:bg-green-600 text-white font-bold text-xl py-4 rounded-xl shadow-lg transition-all hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed border-b-4 border-green-700 active:border-b-0 active:mt-1 flex items-center justify-center gap-2">
-                        {isSubmitting ? 'Processing...' : <>CONTINUE <ArrowRight /></>}
+                <div className="pt-4 pb-2">
+                    <button type="submit" disabled={!canSubmit} className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold text-xl py-4 rounded-xl shadow-lg shadow-green-500/30 transition-all duration-300 hover:scale-[1.02] hover:shadow-green-500/40 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 border-b-4 border-green-700 active:border-b-0 active:translate-y-[4px] flex items-center justify-center gap-2 group">
+                        {isSubmitting ? 'Processing...' : <>CONTINUE <ArrowRight className="transition-transform group-hover:translate-x-1" /></>}
                     </button>
-                    {submitError && <p className="mt-3 text-sm font-semibold text-red-600">{submitError}</p>}
+                    {submitError && <p className="mt-4 text-sm font-semibold text-red-600 bg-red-50/80 p-3 rounded-lg border border-red-200 flex items-center gap-2 animate-fadeIn"><AlertCircle size={16}/> {submitError}</p>}
                 </div>
             </form>
         </div>
