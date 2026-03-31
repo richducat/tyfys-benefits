@@ -15,6 +15,10 @@ const APP_STATE_VERSION = 1;
 const MOBILE_APP_API_BASE = "https://app.tyfys.net";
 const STATIC_APP_HOSTS = new Set(["tyfys.net", "www.tyfys.net"]);
 const LIVE_APP_API_HOSTS = new Set(["app.tyfys.net", "www.app.tyfys.net"]);
+const TYFYS_SITE_BASE_URL = "https://tyfys.net";
+const APP_SUPPORT_URL = `${TYFYS_SITE_BASE_URL}/app-support.html`;
+const APP_PRIVACY_URL = `${TYFYS_SITE_BASE_URL}/privacy.html`;
+const APP_ACCOUNT_DELETION_URL = `${TYFYS_SITE_BASE_URL}/account-deletion.html`;
 const DEFAULT_PAYMENT_STATE = {
   completed: false,
   planName: "",
@@ -508,6 +512,35 @@ const shareTextPayload = async ({ title, text, dialogTitle }) => {
 
   return false;
 };
+
+function AccountSupportLinks() {
+  const links = [
+    { label: "App Support", url: APP_SUPPORT_URL },
+    { label: "Privacy Policy", url: APP_PRIVACY_URL },
+    { label: "Delete Account", url: APP_ACCOUNT_DELETION_URL }
+  ];
+
+  return (
+    <div className="mt-4 rounded-2xl border border-slate-200 bg-white px-4 py-4">
+      <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">Need help?</p>
+      <p className="mt-2 text-sm leading-6 text-slate-600">
+        Support, privacy details, and account deletion instructions are available directly from TYFYS.
+      </p>
+      <div className="mt-4 flex flex-wrap gap-3">
+        {links.map((link) => (
+          <button
+            key={link.url}
+            type="button"
+            onClick={() => openExternalUrl(link.url)}
+            className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50"
+          >
+            {link.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const createLocalId = (prefix) => `${prefix}-${Date.now()}-${Math.floor(Math.random() * 100000)}`;
 
@@ -3614,6 +3647,8 @@ function AccessLanding({
                     <span className="font-black text-slate-900">Notice:</span> TYFYS is a private company and not the VA. Your information is stored on this device so you can return and continue your account.
                   </div>
                 </div>
+
+                <AccountSupportLinks />
               </div>
             </section>
           </div>
