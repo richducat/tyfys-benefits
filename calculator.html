@@ -8,7 +8,7 @@
     name="description"
     content="Use TYFYS's advanced VA rating calculator to model combined ratings, exact VA math rounding, compensation impact, and your path to 100%."
   >
-  <meta http-equiv="refresh" content="0; url=/app-shell.html?tool=calculator">
+  <meta http-equiv="refresh" content="0; url=/app-coming-soon.html?source=calculator-page">
   <link rel="canonical" href="https://tyfys.net/calculator.html">
   <style>
     html,
@@ -37,14 +37,19 @@
     }
   </style>
   <script>
-    window.location.replace("/app-shell.html?tool=calculator");
+    (function () {
+      const hostname = String(window.location.hostname || "").toLowerCase();
+      const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
+      const target = isLocalRuntime ? "/app-shell.html?tool=calculator" : "/app-coming-soon.html?source=calculator-page";
+      window.location.replace(target);
+    })();
   </script>
 </head>
 <body>
   <main>
-    <h1>Opening the TYFYS VA Rating Calculator</h1>
-    <p>You are being redirected to the advanced calculator used in the TYFYS app.</p>
-    <p>If the calculator does not open automatically, <a href="/app-shell.html?tool=calculator">continue here</a>.</p>
+    <h1>Opening the TYFYS app update page</h1>
+    <p>You are being redirected to the latest TYFYS app status page.</p>
+    <p>If nothing happens, <a href="/app-coming-soon.html?source=calculator-page">continue here</a>.</p>
   </main>
 </body>
 </html>

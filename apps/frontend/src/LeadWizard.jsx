@@ -22,11 +22,12 @@ import {
 } from './demoIcons';
 
 const LEAD_PREFILL_KEY = 'tyfys.leadPrefill';
-const APP_REDIRECT_URL = 'https://app.tyfys.net/?autostart=1&source=homepage';
+const THANK_YOU_REDIRECT_URL = 'https://tyfys.net/assessment-thank-you.html?source=homepage-lead';
 
 const baseSteps = [
     {
         id: 'status',
+        intro: 'Get started by answering a few questions below',
         question: "First things first, are you currently a Veteran?",
         subtext: "We specialize in helping those who have served.",
         type: 'choice',
@@ -319,7 +320,7 @@ export function LeadWizard() {
             }
 
             setIsSuccess(true);
-            window.location.href = APP_REDIRECT_URL;
+            window.location.href = THANK_YOU_REDIRECT_URL;
         } catch (error) {
             console.error("Error submitting homepage lead", error);
             setSubmitError("We could not submit your request right now. Please try again or call 321-248-2805.");
@@ -427,6 +428,16 @@ function QuestionStep({ data, onNext, formData, toggleCondition, toggleDocument 
 
     return (
         <div className="text-left">
+            {data.intro && (
+                <div className="mb-4 rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50 via-white to-blue-50 px-4 py-3 shadow-sm shadow-amber-100/70">
+                    <div className="flex items-center gap-3">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-400 text-slate-900 shadow-sm">
+                            <Star size={16} fill="currentColor" />
+                        </div>
+                        <p className="text-sm font-black leading-tight text-slate-900 sm:text-[15px]">{data.intro}</p>
+                    </div>
+                </div>
+            )}
             <h1 className="text-2xl font-bold text-slate-900 mb-2 leading-tight">{data.question}</h1>
             <p className="text-slate-500 text-sm mb-6">{data.subtext}</p>
             <div className="space-y-2">
@@ -735,7 +746,7 @@ function SuccessView({ formData }) {
                     <p className="font-bold text-slate-900 mb-2 flex items-center gap-1.5"><ClipboardList size={14} className="text-green-600"/> Prep for your Call:</p>
                     <ul className="space-y-2">{getChecklistItems().map((item, i) => (<li key={i} className="flex items-start gap-1.5"><span className="text-blue-600 font-bold">•</span><span>Locate your <strong>{item}</strong>.</span></li>))}</ul>
                 </div>
-                <a href="https://tyfys.net/assessment-thank-you.html" className="block w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-all text-sm">Next Steps: Document Prep Page</a>
+                <a href="https://tyfys.net/assessment-thank-you.html?source=homepage-lead" className="block w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-all text-sm">Next Steps: Document Prep Page</a>
             </div>
         </div>
     );

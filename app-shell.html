@@ -3,18 +3,32 @@
 <head>
   <script>
     (function () {
+      const appComingSoonUrl = "https://tyfys.net/app-coming-soon.html";
       const hostname = String(window.location.hostname || "").toLowerCase();
-      const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
+      const protocol = String(window.location.protocol || "").toLowerCase();
+      const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1" || protocol === "file:";
+      
       const isStandaloneAppHost =
         hostname === "app.tyfys.net" ||
         hostname === "www.app.tyfys.net" ||
         hostname === "api.tyfys.net" ||
         hostname === "www.api.tyfys.net";
-      if (!isLocalRuntime && isStandaloneAppHost && window.location.pathname === "/app-shell.html") {
-        const cleanUrl = new URL("/", window.location.origin);
-        cleanUrl.search = window.location.search;
-        cleanUrl.hash = window.location.hash;
-        window.history.replaceState(null, "", cleanUrl.toString());
+      if (isLocalRuntime) return;
+
+      const current = new URL(window.location.href);
+      const shouldRedirect =
+        isStandaloneAppHost ||
+        current.pathname === "/app-shell.html";
+
+      if (shouldRedirect) {
+        const target = new URL(
+          isStandaloneAppHost ? appComingSoonUrl : "/app-coming-soon.html",
+          current.href
+        );
+        target.search = current.search;
+        target.hash = current.hash;
+        if (!target.searchParams.has("source")) target.searchParams.set("source", "app-shell");
+        window.location.replace(target.toString());
       }
     })();
   </script>
