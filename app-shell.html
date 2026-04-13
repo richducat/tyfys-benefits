@@ -5,7 +5,11 @@
     (function () {
       const hostname = String(window.location.hostname || "").toLowerCase();
       const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
-      const isStandaloneAppHost = hostname === "app.tyfys.net" || hostname === "www.app.tyfys.net";
+      const isStandaloneAppHost =
+        hostname === "app.tyfys.net" ||
+        hostname === "www.app.tyfys.net" ||
+        hostname === "api.tyfys.net" ||
+        hostname === "www.api.tyfys.net";
       if (!isLocalRuntime && isStandaloneAppHost && window.location.pathname === "/app-shell.html") {
         const cleanUrl = new URL("/", window.location.origin);
         cleanUrl.search = window.location.search;
@@ -55,7 +59,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700;900&display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="/tyfys-platform/app-tailwind.css">
+  <link rel="stylesheet" href="/tyfys-platform/app-tailwind.css?v=14">
 
   <script>
     (function () {
@@ -64,11 +68,13 @@
       const isStandaloneAppHost =
         hostname === "app.tyfys.net" ||
         hostname === "www.app.tyfys.net" ||
+        hostname === "api.tyfys.net" ||
+        hostname === "www.api.tyfys.net" ||
         hostname.endsWith(".vercel.app") ||
         hostname.endsWith(".vercel-dns.com");
 
       window.__TYFYS_APP_CONFIG__ = {
-        apiBase: isLocalRuntime || isStandaloneAppHost ? "" : "https://app.tyfys.net",
+        apiBase: isLocalRuntime || isStandaloneAppHost ? "" : "https://api.tyfys.net",
         runtime: "web"
       };
     })();
@@ -160,6 +166,6 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen overflow-x-hidden" data-page="app-shell" data-app-host="standalone">
   <div id="root"></div>
-  <script src="/tyfys-platform/tyfys-platform-app.js?v=10" defer></script>
+  <script src="/tyfys-platform/tyfys-platform-app.js?v=15" defer></script>
 </body>
 </html>
