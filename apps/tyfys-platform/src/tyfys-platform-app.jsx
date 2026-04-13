@@ -12,13 +12,152 @@ const APP_STATE_STORAGE_KEY = "tyfys.appState.v1";
 const APP_AUTH_STORAGE_KEY = "tyfys.appAuth.v1";
 const APP_SESSION_TOKEN_KEY = "tyfys.appSessionToken.v1";
 const APP_STATE_VERSION = 1;
-const MOBILE_APP_API_BASE = "https://app.tyfys.net";
+const MOBILE_APP_API_BASE = "https://api.tyfys.net";
 const STATIC_APP_HOSTS = new Set(["tyfys.net", "www.tyfys.net"]);
-const LIVE_APP_API_HOSTS = new Set(["app.tyfys.net", "www.app.tyfys.net"]);
+const LIVE_APP_API_HOSTS = new Set([
+  "app.tyfys.net",
+  "www.app.tyfys.net",
+  "api.tyfys.net",
+  "www.api.tyfys.net",
+  "skill-deploy-k4kb5ahy8d-codex-agent-deploys.vercel.app"
+]);
 const TYFYS_SITE_BASE_URL = "https://tyfys.net";
 const APP_SUPPORT_URL = `${TYFYS_SITE_BASE_URL}/app-support.html`;
 const APP_PRIVACY_URL = `${TYFYS_SITE_BASE_URL}/privacy.html`;
 const APP_ACCOUNT_DELETION_URL = `${TYFYS_SITE_BASE_URL}/account-deletion.html`;
+const EMPTY_PAYMENT_STATE = { completed: false, planName: "", paidAt: "" };
+const PUBLIC_TOOL_VIEWS = new Set(["calculator"]);
+const ACCESS_LANDING_LOGO_URL = "tyfys-platform/tyfys-email-logo.png";
+const PUBLIC_CALCULATOR_WIZARD_STEPS = [
+  { id: 1, key: "baseline", label: "Baseline", helper: "Start with your current VA situation." },
+  { id: 2, key: "condition", label: "Add Condition", helper: "Choose what you want to model." },
+  { id: 3, key: "rating", label: "Rate It", helper: "Pick the exact VA rating basis." },
+  { id: 4, key: "review", label: "Review Estimate", helper: "Confirm the draft before adding it." },
+  { id: 5, key: "results", label: "Next Step", helper: "See your projected result and next move." }
+];
+const PUBLIC_CALCULATOR_QUICK_STARTS = [
+  { label: "PTSD", condition: "PTSD" },
+  { label: "Migraines", condition: "Migraines" },
+  { label: "Back Strain", condition: "Lumbosacral (Back) Strain" },
+  { label: "Sleep Apnea", condition: "Sleep Apnea" },
+  { label: "Tinnitus", condition: "Tinnitus" }
+];
+const ACTIVATION_VALUE_MAX = 3500;
+const ACTIVATION_CONDITION_OPTIONS = [
+  {
+    id: "mental_health",
+    label: "PTSD / anxiety / depression",
+    helper: "Stress, mood, panic, anger, or trauma-related symptoms",
+    icon: "ShieldCheck",
+    conditions: ["PTSD", "Major Depressive Disorder", "Anxiety Condition"]
+  },
+  {
+    id: "migraines",
+    label: "Migraines / headaches",
+    helper: "Recurring headaches, light sensitivity, or migraine attacks",
+    icon: "Zap",
+    conditions: ["Migraines"]
+  },
+  {
+    id: "nerve_pain",
+    label: "Numbness / nerve pain / TBI symptoms",
+    helper: "Tingling, radiating pain, memory, or head injury symptoms",
+    icon: "Activity",
+    conditions: ["Peripheral Neuropathy", "TBI Residuals"]
+  },
+  {
+    id: "ortho",
+    label: "Back / neck / joint pain",
+    helper: "Pain, stiffness, instability, or limited motion",
+    icon: "Activity",
+    conditions: ["Lumbosacral (Back) Strain", "Cervical (Neck) Strain", "Knee Strain/Pain"]
+  },
+  {
+    id: "sleep_breathing",
+    label: "Sleep / breathing / sinus issues",
+    helper: "Sleep apnea, asthma, sinusitis, or rhinitis symptoms",
+    icon: "Stethoscope",
+    conditions: ["Sleep Apnea", "Asthma", "Sinusitis/Rhinitis"]
+  },
+  {
+    id: "hearing",
+    label: "Hearing loss / tinnitus",
+    helper: "Ringing in the ears, hearing loss, or noise exposure symptoms",
+    icon: "AlertTriangle",
+    conditions: ["Tinnitus", "Hearing Loss"]
+  },
+  {
+    id: "digestive",
+    label: "GERD / IBS / digestive issues",
+    helper: "Reflux, stomach problems, or bowel issues",
+    icon: "FileText",
+    conditions: ["GERD", "IBS"]
+  },
+  {
+    id: "other_condition",
+    label: "Other condition or exposure",
+    helper: "Hernia, kidney disease, long COVID, toxic exposure, or another issue not listed above",
+    icon: "Star",
+    conditions: ["Additional condition review"]
+  }
+];
+const ACTIVATION_DOCUMENT_OPTIONS = [
+  {
+    id: "dd214",
+    label: "DD-214 or separation papers",
+    helper: "Service verification and discharge paperwork",
+    icon: "FileText"
+  },
+  {
+    id: "service_treatment_records",
+    label: "Service treatment records",
+    helper: "Military medical visits, sick call notes, or deployment treatment records",
+    icon: "Archive"
+  },
+  {
+    id: "va_decision",
+    label: "VA decision or denial letter",
+    helper: "Past claim decisions, ratings, or denial notices",
+    icon: "FileUp"
+  },
+  {
+    id: "va_medical_records",
+    label: "VA medical records",
+    helper: "Blue Button records, VA appointments, or treatment notes",
+    icon: "BookOpen"
+  },
+  {
+    id: "private_medical_records",
+    label: "Private medical records",
+    helper: "Civilian doctor visits, diagnoses, imaging, or specialist notes",
+    icon: "Stethoscope"
+  },
+  {
+    id: "lay_statements",
+    label: "Personal or buddy statements",
+    helper: "Statements from you, family, coworkers, or fellow service members",
+    icon: "Users"
+  },
+  {
+    id: "specialty_testing",
+    label: "Sleep study, imaging, or specialty testing",
+    helper: "CPAP study, MRI, CT, EMG, audiogram, or pulmonary testing",
+    icon: "Activity"
+  },
+  {
+    id: "none_yet",
+    label: "I don't have documents yet",
+    helper: "You can still begin claim research now",
+    icon: "Clock"
+  }
+];
+const ACTIVATION_DEFAULT_STATE = {
+  entryIntent: "",
+  complianceAcknowledged: false,
+  conditions: [],
+  documents: [],
+  selectedPlan: ""
+};
 const DEFAULT_PAYMENT_STATE = {
   completed: false,
   planName: "",
@@ -231,6 +370,11 @@ const clearLeadPrefill = () => {
 
 const mapLeadPrefillToProfile = (leadPrefill) => {
   if (!leadPrefill || typeof leadPrefill !== "object") return {};
+  const leadRating = leadPrefill.rating;
+  const normalizedLeadRating =
+    leadRating !== "" && leadRating !== null && leadRating !== undefined && Number.isFinite(Number(leadRating))
+      ? Number(leadRating)
+      : "";
 
   return {
     firstName: leadPrefill.firstName || "",
@@ -239,7 +383,7 @@ const mapLeadPrefillToProfile = (leadPrefill) => {
     phone: leadPrefill.phone || "",
     zip: leadPrefill.zip || "",
     branch: leadPrefill.branch || "",
-    rating: Number(leadPrefill.rating || 0),
+    rating: normalizedLeadRating,
     pain_categories: mapLeadCategories(leadPrefill.conditions),
     privateOrg: Boolean(leadPrefill.privateOrg),
     terms: Boolean(leadPrefill.terms)
@@ -304,6 +448,14 @@ const sanitizeUserProfile = (profile) => {
 
 const createBaseUserProfile = (prefill = {}, overrides = {}) =>
   sanitizeUserProfile({
+    isVeteran: undefined,
+    attorney: undefined,
+    appeal: undefined,
+    discharge: undefined,
+    filedClaimBefore: undefined,
+    deniedConditions: undefined,
+    currentlyRated: undefined,
+    claims_pending: undefined,
     pain_categories: [],
     pain_points: [],
     firstName: "",
@@ -311,11 +463,101 @@ const createBaseUserProfile = (prefill = {}, overrides = {}) =>
     email: "",
     phone: "",
     zip: "",
+    branch: "",
+    era: "",
+    rating: "",
     privateOrg: false,
     terms: false,
     ...prefill,
     ...overrides
   });
+
+const hasNumericAnswer = (value) => value !== "" && value !== null && value !== undefined && Number.isFinite(Number(value));
+
+const normalizeActivationFlow = (value = {}) => {
+  const conditionIds = new Set(ACTIVATION_CONDITION_OPTIONS.map((option) => option.id));
+  const documentIds = new Set(ACTIVATION_DOCUMENT_OPTIONS.map((option) => option.id));
+  const nextConditions = Array.isArray(value?.conditions)
+    ? value.conditions.filter((item, index, source) => conditionIds.has(item) && source.indexOf(item) === index)
+    : [];
+  const nextDocuments = Array.isArray(value?.documents)
+    ? value.documents.filter((item, index, source) => documentIds.has(item) && source.indexOf(item) === index)
+    : [];
+
+  return {
+    entryIntent: value?.entryIntent === "research" ? "research" : value?.entryIntent === "claim" ? "claim" : "",
+    complianceAcknowledged: Boolean(value?.complianceAcknowledged),
+    conditions: nextConditions,
+    documents: nextDocuments,
+    selectedPlan: String(value?.selectedPlan || "").trim()
+  };
+};
+
+const getActivationStartStep = ({ complianceAcknowledged = false, isAuthenticated = false } = {}) =>
+  isAuthenticated || complianceAcknowledged ? 1 : 0;
+
+const toggleActivationListValue = (currentList, value) => {
+  const nextList = Array.isArray(currentList) ? currentList : [];
+  return nextList.includes(value) ? nextList.filter((item) => item !== value) : [...nextList, value];
+};
+
+const toggleActivationDocumentValue = (currentList, value) => {
+  const nextList = Array.isArray(currentList) ? currentList : [];
+
+  if (value === "none_yet") {
+    return nextList.includes("none_yet") ? [] : ["none_yet"];
+  }
+
+  const withoutNone = nextList.filter((item) => item !== "none_yet");
+  return withoutNone.includes(value)
+    ? withoutNone.filter((item) => item !== value)
+    : [...withoutNone, value];
+};
+
+const buildActivationResults = (conditionIds = [], documentIds = [], profile = {}) => {
+  const selectedConditions = ACTIVATION_CONDITION_OPTIONS.filter((option) => conditionIds.includes(option.id));
+  const flattenedConditions = [...new Set(selectedConditions.flatMap((option) => option.conditions))];
+  const evidence = new Set();
+  const selectedDocumentIds = new Set(Array.isArray(documentIds) ? documentIds : []);
+
+  if (!selectedDocumentIds.has("dd214")) {
+    evidence.add("DD-214 or other service verification");
+  }
+  if (!selectedDocumentIds.has("service_treatment_records")) {
+    evidence.add("Service treatment records or deployment medical notes");
+  }
+  if (!selectedDocumentIds.has("va_decision")) {
+    evidence.add("VA decision letter or prior rating paperwork");
+  }
+  if (profile?.deniedConditions) {
+    evidence.add("Prior denial letters or claim decision history");
+  }
+  if (profile?.claims_pending) {
+    evidence.add("A list of any currently pending claims and their status");
+  }
+  if (!selectedDocumentIds.has("va_medical_records") && !selectedDocumentIds.has("private_medical_records")) {
+    evidence.add("Current diagnosis or treatment notes");
+  }
+  if (!selectedDocumentIds.has("lay_statements")) {
+    evidence.add("Personal statement or buddy statement describing symptoms and functional impact");
+  }
+  if (
+    selectedConditions.some((option) => option.id === "sleep_breathing" || option.id === "nerve_pain" || option.id === "hearing") &&
+    !selectedDocumentIds.has("specialty_testing")
+  ) {
+    evidence.add("Relevant testing such as a sleep study, MRI/CT, EMG, or audiogram");
+  }
+
+  flattenedConditions.forEach((conditionName) => {
+    const conditionData = findConditionData(conditionName);
+    (conditionData?.docs || []).forEach((item) => evidence.add(item));
+  });
+
+  return {
+    conditions: flattenedConditions.length ? flattenedConditions : ["Service-connected condition review"],
+    evidence: evidence.size ? [...evidence] : ["Current diagnosis or treatment notes"]
+  };
+};
 
 const loadPersistedAppState = () => {
   const stored = loadStoredJson(APP_STATE_STORAGE_KEY, null);
@@ -335,6 +577,16 @@ const loadAuthAccount = () => loadStoredJson(APP_AUTH_STORAGE_KEY, null);
 
 const saveAuthAccount = (account) => {
   saveStoredJson(APP_AUTH_STORAGE_KEY, account);
+};
+
+const getRequestedPublicTool = () => {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const tool = String(params.get("tool") || "").trim().toLowerCase();
+    return PUBLIC_TOOL_VIEWS.has(tool) ? tool : "";
+  } catch (error) {
+    return "";
+  }
 };
 
 const loadAppSessionToken = () => {
@@ -361,10 +613,10 @@ const getRuntimeConfig = () => {
 };
 
 const SOP_PHASES = [
-  { id: 1, title: 'Account Setup', label: 'Setup', desc: 'Securely upload DD-214 and activate membership.' },
-  { id: 2, title: 'Admin Prep', label: 'Prep', desc: 'Our team is reviewing your files to prepare your strategy.' },
-  { id: 3, title: 'Strategy & Intake', label: 'Strategy', desc: '1-on-1 strategy session to lock in your claims.' },
-  { id: 4, title: 'Exams & Medical', label: 'Medical', desc: 'Attending C&P exams and finalizing the nexus letters.' }
+  { id: 1, title: 'Account Setup', label: 'Setup', desc: 'Securely upload DD-214 and set up your TYFYS workspace.' },
+  { id: 2, title: 'Admin Prep', label: 'Prep', desc: 'Our team is reviewing your file to organize the next step.' },
+  { id: 3, title: 'Strategy & Intake', label: 'Strategy', desc: 'TYFYS is organizing your intake and claim plan.' },
+  { id: 4, title: 'Exams & Medical', label: 'Medical', desc: 'Collecting exams, records, and medical opinion support.' }
 ];
 
 const deriveSopPhase = (paymentState, dossier, nextDoctorVisit) => {
@@ -2230,6 +2482,37 @@ const getConditionRuleNotes = (conditionName, profileId = "") => {
 
 const getClaimIdentityKey = (claim) => `${claim.name}::${claim.ratingProfileId || ""}`;
 
+const findConditionCategoryName = (conditionName) =>
+  Object.keys(DISABILITY_DATA).find((category) => DISABILITY_DATA[category].some((condition) => condition.name === conditionName)) || "";
+
+const createPublicCalculatorDraft = (claimType = "increase") => ({
+  category: "",
+  condition: "",
+  ratingProfileId: "",
+  rating: "",
+  claimType
+});
+
+const createPublicCalculatorDraftValidation = () => ({
+  baselineReady: true,
+  conditionReady: false,
+  ratingReady: false,
+  reviewReady: false,
+  needsCategory: true,
+  needsCondition: true,
+  needsProfile: false,
+  needsRating: true,
+  blockedMessage: "",
+  checklist: ["Choose a category and a condition to begin."]
+});
+
+const getClaimTypeLabel = (claimType) => (claimType === "new" ? "New condition" : "Increase claim");
+
+const getClaimTypeSummary = (claimType) =>
+  claimType === "new"
+    ? "Use this when the VA has never rated this condition before."
+    : "Use this when the VA already rates the condition and it has gotten worse.";
+
 const getClaimConflict = (claims, conditionName, profileId = "") => {
   const rule = getConditionRule(conditionName);
   if (!rule) return null;
@@ -2516,116 +2799,290 @@ const buildNexusDraft = (form, dossierItems) => {
 // --- ONBOARDING CONFIG ---
 const ONBOARDING_STEPS = [
   {
-    id: "welcome",
-    title: "Before We Begin",
-    questions: [
-      {
-        id: "vso_aware",
-        label: "Do you understand TYFYS is a private company and not the VA or a VSO?",
-        guideText:
-          "Before we start, please confirm you understand TYFYS is a private Veteran-led company. We help you organize records, evidence, and next steps, but we are not the VA.",
-        type: "boolean",
-        footerInfo: (
-          <div className="flex gap-4 items-center bg-blue-50 p-4 rounded-xl border border-blue-100 mt-6 shadow-sm">
-            <div className="bg-white p-2 rounded-full text-blue-600">
-              <Icons.Users className="w-5 h-5" />
-            </div>
-            <p className="text-sm text-slate-700 leading-snug">
-              <strong>Did you know?</strong> We are Veteran Owned & Operated. We understand your journey.
-            </p>
-          </div>
-        )
-      }
-    ]
+    id: "compliance",
+    type: "compliance",
+    title: "Before You Continue",
+    primaryActionLabel: "I Understand",
+    guideText: "Please review this before the claim research flow begins.",
+    badge: "Required"
   },
   {
-    id: "qualification",
-    title: "A Few Quick Eligibility Questions",
-    questions: [
-      { id: "attorney", label: "Are you currently working with an accredited attorney?", type: "boolean" },
-      { id: "appeal", label: "Do you have an active appeal with a BVA Judge?", type: "boolean" },
-      {
-        id: "discharge",
-        label: "Was your discharge Honorable or General Under Honorable?",
-        type: "boolean"
-      }
+    id: "veteran_status",
+    type: "question",
+    questionType: "boolean",
+    field: "isVeteran",
+    title: "Are you the veteran on this claim?",
+    subtitle: "We use this to understand whether you are the veteran or helping someone else navigate the claim.",
+    guideText: "One clear question at a time so onboarding stays simple.",
+    badge: "Profile Start",
+    guide: {
+      title: "Start With Clarity",
+      content: "We begin by identifying whether this claim is for you or whether you are helping someone else. That keeps the rest of the intake language easy to follow."
+    },
+    trueLabel: "Yes, I am",
+    falseLabel: "No, I'm helping",
+    primaryActionLabel: "Continue"
+  },
+  {
+    id: "attorney_status",
+    type: "question",
+    questionType: "boolean",
+    field: "attorney",
+    title: "Are you currently working with an accredited attorney?",
+    subtitle: "This helps TYFYS understand what support path makes sense before research begins.",
+    guideText: "We keep this separate so each answer is easy to understand.",
+    badge: "Representation Check",
+    guide: {
+      title: "Support Path Check",
+      content: "We ask this early because an attorney can affect who should be leading next steps, records requests, and evidence planning."
+    },
+    trueLabel: "Yes",
+    falseLabel: "No",
+    primaryActionLabel: "Continue"
+  },
+  {
+    id: "appeal_status",
+    type: "question",
+    questionType: "boolean",
+    field: "appeal",
+    title: "Do you have an active appeal with a BVA Judge?",
+    subtitle: "Appeals can change the timing and type of guidance we surface next.",
+    guideText: "TYFYS uses this to frame your next steps correctly.",
+    badge: "Legal Check",
+    guide: {
+      title: "Timing Matters",
+      content: "An active appeal can affect whether it makes sense to build new evidence now or wait for the current decision track to finish first."
+    },
+    trueLabel: "Yes",
+    falseLabel: "No",
+    primaryActionLabel: "Continue"
+  },
+  {
+    id: "discharge_status",
+    type: "question",
+    questionType: "boolean",
+    field: "discharge",
+    title: "Was your discharge Honorable or General Under Honorable?",
+    subtitle: "Discharge status affects which claim paths are most relevant.",
+    guideText: "A quick eligibility check now helps prevent confusion later.",
+    badge: "Eligibility Check",
+    guide: {
+      title: "Eligibility First",
+      content: "We verify discharge status upfront because it shapes which benefit paths are realistic and what follow-up questions matter most."
+    },
+    trueLabel: "Yes",
+    falseLabel: "No",
+    primaryActionLabel: "Continue"
+  },
+  {
+    id: "filed_claim_before",
+    type: "question",
+    questionType: "boolean",
+    field: "filedClaimBefore",
+    title: "Have you filed a VA claim in the past?",
+    subtitle: "Claim history changes the research path, especially if past decisions or old evidence already exist.",
+    guideText: "This helps us know whether to start from scratch or build on an earlier claim file.",
+    badge: "Claim History",
+    guide: {
+      title: "Prior Claims Matter",
+      content: "If you have filed before, TYFYS can look for decision letters, older ratings, and gaps in the evidence that may still matter now."
+    },
+    trueLabel: "Yes, I have",
+    falseLabel: "No, this is my first time",
+    primaryActionLabel: "Continue"
+  },
+  {
+    id: "denied_conditions",
+    type: "question",
+    questionType: "boolean",
+    field: "deniedConditions",
+    title: "Have any conditions ever been denied by the VA?",
+    subtitle: "Denied conditions usually mean we need to focus harder on nexus, records, and missing evidence.",
+    guideText: "This is one of the fastest ways to spot where your case may need stronger documentation.",
+    badge: "Evidence Gap",
+    valueAdd: 400,
+    guide: {
+      title: "Denied Does Not Mean Dead End",
+      content: "A past denial often tells us exactly where the case was weak before. That can be useful because it shows what evidence needs to be stronger this time."
+    },
+    trueLabel: "Yes, at least one was denied",
+    falseLabel: "No",
+    primaryActionLabel: "Continue"
+  },
+  {
+    id: "branch",
+    type: "question",
+    questionType: "select",
+    field: "branch",
+    title: "Which branch did you serve in?",
+    subtitle: "Your branch helps TYFYS tailor records guidance and service-specific context.",
+    guideText: "Short answers now make the dashboard feel much more personal later.",
+    badge: "Service History",
+    guide: {
+      title: "Branch Context",
+      content: "Branch-specific service history helps TYFYS frame the right records requests and the kinds of exposures or duties that may matter."
+    },
+    options: [
+      { value: "Army", label: "Army", desc: "Ground service, deployments, training, and musculoskeletal wear", icon: "ShieldCheck" },
+      { value: "Navy", label: "Navy", desc: "Shipboard, sea duty, hearing, and respiratory exposure patterns", icon: "ShieldCheck" },
+      { value: "Marines", label: "Marines", desc: "High physical demand, training wear, and deployment exposure", icon: "ShieldCheck" },
+      { value: "Air Force", label: "Air Force", desc: "Flightline, maintenance, and specialty duty pathways", icon: "ShieldCheck" },
+      { value: "Coast Guard", label: "Coast Guard", desc: "Maritime service and operational exposure review", icon: "ShieldCheck" },
+      { value: "Space Force", label: "Space Force", desc: "Modern service context and records alignment", icon: "ShieldCheck" }
     ],
-    guideText: "These questions help us make sure TYFYS is the right fit and point you to the safest next step."
+    primaryActionLabel: "Continue"
   },
   {
-    id: "service",
-    title: "Your Service History",
-    questions: [
-      {
-        id: "branch",
-        label: "Which Branch did you serve in?",
-        type: "select",
-        options: ["Army", "Navy", "Marines", "Air Force", "Coast Guard", "Space Force"]
-      },
-      { id: "era", label: "Service Era", type: "select", options: ["Post-9/11", "Gulf War", "Peacetime", "Vietnam", "Korea"] }
+    id: "era",
+    type: "question",
+    questionType: "select",
+    field: "era",
+    title: "Which service era best matches you?",
+    subtitle: "This helps us surface the right presumptive and evidence pathways.",
+    guideText: "Era is one of the fastest ways to point TYFYS at the right claim rules.",
+    badge: "Presumptive Eligible",
+    valueAdd: 500,
+    guide: {
+      title: "Strategic Advantage",
+      content: "Service era can unlock specific presumptive or exposure-based pathways. It often changes how much evidence you need to prove service connection.",
+      tip: "If you served during a major exposure era, this answer can change the whole claim strategy."
+    },
+    options: [
+      { value: "Post-9/11", label: "Post-9/11", desc: "September 11, 2001 to present", icon: "ShieldCheck" },
+      { value: "Gulf War", label: "Gulf War", desc: "August 1990 through September 2001", icon: "ShieldCheck" },
+      { value: "UN Peacekeeping", label: "UN Peacekeeping / Bosnia / Somalia", desc: "1990s deployments and related exposure review", icon: "ShieldCheck" },
+      { value: "Peacetime", label: "Peacetime / Other", desc: "Between major conflicts or another service window", icon: "User" },
+      { value: "Vietnam", label: "Vietnam", desc: "Agent Orange era pathways", icon: "ShieldCheck" },
+      { value: "Korea", label: "Korea", desc: "Earlier service-era review", icon: "ShieldCheck" }
     ],
-    guideText: "Your branch and service era help us surface the records, exposures, and presumptive paths most likely to matter."
+    primaryActionLabel: "Continue"
   },
   {
-    id: "status",
-    title: "Your Current VA Status",
-    questions: [
-      { id: "rating", label: "What is your current VA Rating?", type: "slider" },
-      { id: "claims_pending", label: "Do you have any claims currently pending?", type: "boolean" }
-    ],
-    guideText: "Your current rating helps us show the right calculator guidance and compensation estimate."
+    id: "currently_rated",
+    type: "question",
+    questionType: "boolean",
+    field: "currentlyRated",
+    title: "Are you currently rated by the VA?",
+    subtitle: "We ask this first so the next rating question matches your situation cleanly.",
+    guideText: "This keeps the claim math and next-step guidance grounded in your current status.",
+    badge: "Case Baseline",
+    guide: {
+      title: "Know Your Starting Point",
+      content: "Your current rating changes the strategy. A first-time claim looks very different from trying to move an existing rating higher."
+    },
+    trueLabel: "Yes, I am rated",
+    falseLabel: "No, not yet",
+    primaryActionLabel: "Continue"
   },
   {
-    id: "pain_category",
-    title: "Conditions To Review",
-    questions: [
-      {
-        id: "pain_categories",
-        label: "Select ALL body systems affecting you:",
-        type: "multi_select",
-        options: Object.keys(DISABILITY_DATA)
-      }
-    ],
-    guideText: "Choose the body systems you want help organizing so we can build the right evidence checklist."
+    id: "current_rating",
+    type: "question",
+    questionType: "rating",
+    field: "rating",
+    title: "What is your current VA rating?",
+    subtitle: "If you are not currently rated yet, choose 0% so TYFYS starts from the right baseline.",
+    guideText: "We use your current rating to personalize calculators, evidence priorities, and coaching guidance.",
+    badge: "High Value Gap",
+    valueAdd: 1200,
+    guide: {
+      title: "The Rating Gap",
+      content: "Moving from one rating level to the next changes monthly compensation, and the jump to higher ratings is often where better evidence matters most.",
+      tip: "This is one of the biggest inputs in the value model because it shapes how much room there is to grow."
+    },
+    primaryActionLabel: "Continue"
   },
   {
-    id: "pain_specific",
-    title: "Specific Conditions",
-    questions: [
-      {
-        id: "pain_points",
-        label: "Select ALL specific diagnoses you want to discuss:",
-        type: "dynamic_multi_select"
-      }
-    ],
-    guideText: "Now choose the specific conditions you want this account to track."
-  },
-  // --- CONTACT & PROFILE SECTION ---
-  {
-    id: "contact_name",
-    title: "Your Name",
-    type: "contact_form_part1",
-    guideText: "Tell us whose account we are setting up so your progress stays attached to the right Veteran."
-  },
-  {
-    id: "contact_info",
-    title: "How To Reach You",
-    type: "contact_form_part2",
-    guideText: "We will use this email and phone number for account access, updates, and next-step reminders."
+    id: "claims_pending",
+    type: "question",
+    questionType: "boolean",
+    field: "claims_pending",
+    title: "Do you have any claims currently pending?",
+    subtitle: "Pending claims can affect which next steps are safest to take right now.",
+    guideText: "One more quick status check before we move into the research flow.",
+    badge: "Status Check",
+    valueAdd: 250,
+    guide: {
+      title: "Avoid Crossed Wires",
+      content: "Pending claims change timing, evidence strategy, and how carefully TYFYS should sequence your next move."
+    },
+    trueLabel: "Yes",
+    falseLabel: "No",
+    primaryActionLabel: "Continue"
   },
   {
-    id: "final_details",
-    title: "Finish Setting Up Your Account",
-    type: "contact_form_part3",
-    guideText: "Add your ZIP code and create the password you will use to come back to your TYFYS account."
+    id: "conditions",
+    type: "selection",
+    title: "What do you want to research today?",
+    subtitle: "Tap every condition or symptom you want TYFYS to review first.",
+    primaryActionLabel: "Continue",
+    guideText: "Start simple. Pick the issues that matter most right now and we will suggest the likely claim paths.",
+    badge: "Multi-Claim Strategy",
+    valueAdd: 300,
+    guide: {
+      title: "Start With What Hurts Most",
+      content: "We do not need your whole life story on page one. Pick the conditions that matter most now, and TYFYS can expand into the deeper strategy after that."
+    }
   },
   {
-    id: "analyzing",
-    type: "loading",
-    duration: 2000,
-    text: "Preparing your TYFYS account..."
+    id: "documents",
+    type: "selection",
+    title: "What documents do you already have?",
+    subtitle: "Tap everything you can access today. You can always add more later.",
+    primaryActionLabel: "See My Results",
+    guideText: "We use this to show the fastest evidence path without overwhelming you.",
+    badge: "Evidence Strategy",
+    guide: {
+      title: "Evidence Is the Leverage",
+      content: "The documents you already have determine how fast TYFYS can move and where the missing evidence gaps are likely to be."
+    }
+  },
+  {
+    id: "results",
+    type: "results",
+    title: "Your TYFYS claim research summary",
+    primaryActionLabel: "View Next Step",
+    guideText: "Here is the first-pass research view based on the information you shared.",
+    badge: "Strategy Summary"
+  },
+  {
+    id: "support",
+    type: "monetization",
+    title: "Choose how you want to move forward",
+    guideText: "Start with a simple next step now, then let TYFYS help you go deeper during coaching.",
+    badge: "Next Step"
   }
 ];
+
+const calculateActivationPotentialValue = (profile = {}, activationFlow = {}) => {
+  let total = 0;
+  if (profile?.era) total += 500;
+  if (hasNumericAnswer(profile?.rating)) {
+    total += Number(profile.rating) >= 90 ? 1800 : 1200;
+  }
+  if (Array.isArray(activationFlow?.conditions) && activationFlow.conditions.length) {
+    total += activationFlow.conditions.length * 300;
+  }
+  if (profile?.deniedConditions) total += 400;
+  if (profile?.claims_pending) total += 250;
+  return total;
+};
+
+const buildActivationSignals = (profile = {}, activationFlow = {}) => {
+  const signals = [];
+  if (profile?.era) signals.push("Service Era Identified");
+  if (Array.isArray(activationFlow?.conditions) && activationFlow.conditions.length > 1) {
+    signals.push("Multi-Claim Strategy");
+  }
+  if (profile?.deniedConditions) signals.push("Prior Denial Review");
+  if (hasNumericAnswer(profile?.rating) && Number(profile.rating) < 90) {
+    signals.push("High Growth Potential");
+  }
+  if (Array.isArray(activationFlow?.documents) && activationFlow.documents.includes("none_yet")) {
+    signals.push("Evidence Gap");
+  }
+  if (profile?.claims_pending) signals.push("Pending Claim Status");
+  return signals.slice(0, 4);
+};
 
 // --- SUB-COMPONENTS ---
 
@@ -3034,6 +3491,466 @@ function ContactStep({ onNext, initialData, part, submitError, isSubmitting, onC
   );
 }
 
+function ActivationOptionCard({ option, selected, onClick }) {
+  const IconComponent = option?.icon && Icons[option.icon] ? Icons[option.icon] : null;
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`group relative w-full rounded-[1.75rem] border-2 p-5 text-left shadow-sm transition-all duration-200 ${
+        selected
+          ? "z-10 scale-[1.01] border-blue-600 bg-blue-50 shadow-blue-100"
+          : "border-slate-200 bg-white hover:border-blue-300 hover:bg-slate-50 hover:shadow-md"
+      }`}
+    >
+      <div className="flex items-start gap-4">
+        {IconComponent && (
+          <div
+            className={`rounded-2xl p-3 transition-colors ${
+              selected
+                ? "bg-blue-600 text-white"
+                : "bg-slate-100 text-slate-400 group-hover:bg-blue-100 group-hover:text-blue-600"
+            }`}
+          >
+            <IconComponent className="h-6 w-6" />
+          </div>
+        )}
+        <div className="min-w-0 flex-1">
+          <div className="flex items-start justify-between gap-3">
+            <h3 className={`text-lg font-black leading-tight ${selected ? "text-blue-950" : "text-slate-900"}`}>
+              {option.label}
+            </h3>
+            <div
+              className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border ${
+                selected ? "border-blue-600 bg-blue-600 text-white" : "border-slate-300 bg-white text-transparent"
+              }`}
+            >
+              <Icons.Check className="h-4 w-4" />
+            </div>
+          </div>
+          {option.desc && (
+            <p className={`mt-2 text-sm leading-6 ${selected ? "text-blue-800" : "text-slate-500"}`}>{option.desc}</p>
+          )}
+          {option.helper && (
+            <p className={`mt-2 text-sm leading-6 ${selected ? "text-blue-800" : "text-slate-500"}`}>{option.helper}</p>
+          )}
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function ActivationSliderInput({ value, onChange, disabled = false }) {
+  return (
+    <div className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="relative py-6">
+        <div className="relative h-4 rounded-full bg-slate-200">
+          <div
+            className="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-blue-400 via-blue-500 to-slate-900 transition-all duration-300"
+            style={{ width: `${Math.max(0, Math.min(Number(value) || 0, 100))}%` }}
+          ></div>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            step="10"
+            value={value}
+            disabled={disabled}
+            onChange={(event) => onChange(Number(event.target.value))}
+            className="absolute left-0 top-0 h-full w-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
+          />
+          {[0, 20, 40, 60, 80, 100].map((tick) => (
+            <div
+              key={tick}
+              className="absolute top-7 -translate-x-1/2 text-xs font-black tracking-wide text-slate-400"
+              style={{ left: `${tick}%` }}
+            >
+              {tick}%
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="pt-8 text-center">
+        <p className="text-xs font-black uppercase tracking-[0.3em] text-slate-500">Current rating</p>
+        <p className="mt-3 text-6xl font-black tracking-tight text-slate-900">
+          {Number(value) || 0}
+          <span className="text-2xl text-slate-400">%</span>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ActivationInsightSidebar({ step, potentialValue, signals }) {
+  const widthPercent = Math.min((potentialValue / ACTIVATION_VALUE_MAX) * 100, 100);
+
+  return (
+    <div className="flex h-full flex-col overflow-hidden border-l border-slate-800 bg-slate-950 text-slate-300 shadow-2xl">
+      <div className="border-b border-slate-800 bg-slate-900/70 p-6">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-slate-500">Potential value</p>
+          <div className="rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-emerald-300">
+            Live
+          </div>
+        </div>
+        <div className="mt-4 flex items-end gap-2">
+          <p className="text-4xl font-black text-white">+${potentialValue.toLocaleString()}</p>
+          <p className="pb-1 text-sm font-semibold text-slate-500">/mo potential</p>
+        </div>
+        <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-800">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-emerald-400 via-blue-500 to-yellow-400 transition-all duration-700"
+            style={{ width: `${widthPercent}%` }}
+          ></div>
+        </div>
+        <p className="mt-3 text-sm leading-6 text-slate-400">
+          This running estimate updates as the intake reveals rating opportunity, claim complexity, and missing evidence.
+        </p>
+      </div>
+
+      <div className="flex-1 space-y-6 overflow-y-auto p-6">
+        {!!signals.length && (
+          <div className="rounded-[1.5rem] border border-slate-800 bg-slate-900/70 p-5">
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">Signals</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {signals.map((signal) => (
+                <span
+                  key={signal}
+                  className="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-bold text-blue-200"
+                >
+                  {signal}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {step?.guide && (
+          <div className="rounded-[1.5rem] border border-slate-800 bg-slate-900/70 p-5">
+            <div className="flex items-center gap-2">
+              <Icons.Info className="h-4 w-4 text-blue-300" />
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-200">{step.guide.title || "Mission intel"}</p>
+            </div>
+            <p className="mt-4 text-sm leading-7 text-slate-300">{step.guide.content}</p>
+            {step.guide.tip && (
+              <div className="mt-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm font-semibold leading-6 text-emerald-100">
+                {step.guide.tip}
+              </div>
+            )}
+          </div>
+        )}
+
+        {step?.badge && (
+          <div className="rounded-[1.5rem] border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 p-5">
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">Current step</p>
+            <p className="mt-3 text-xl font-black text-white">{step.badge}</p>
+            <p className="mt-2 text-sm leading-6 text-slate-400">
+              The intake keeps things simple upfront and adds complexity only after your path is clear.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ActivationMobileSummary({ potentialValue, signals }) {
+  return (
+    <div className="mb-6 rounded-[1.75rem] border border-slate-200 bg-slate-950 p-5 text-white shadow-xl lg:hidden">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-400">Potential value</p>
+        <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-emerald-300">
+          Live
+        </span>
+      </div>
+      <p className="mt-3 text-3xl font-black">+${potentialValue.toLocaleString()}<span className="text-base text-slate-400">/mo</span></p>
+      {!!signals.length && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {signals.map((signal) => (
+            <span key={signal} className="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-[11px] font-bold text-blue-100">
+              {signal}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ActivationQuestionStep({ step, value, onAnswer, isAnswered, currentRating, forceZeroRating }) {
+  const optionCards =
+    Array.isArray(step.options)
+      ? step.options.map((option) => {
+          if (typeof option === "string") {
+            return { value: option, label: option };
+          }
+          return {
+            value: option.value ?? option.id ?? option.label,
+            label: option.label,
+            desc: option.desc,
+            helper: option.helper,
+            icon: option.icon
+          };
+        })
+      : [];
+
+  const booleanOptions = [
+    {
+      value: true,
+      label: step.trueLabel || "Yes",
+      desc: step.trueDescription || "",
+      icon: step.trueIcon || "CheckCircle"
+    },
+    {
+      value: false,
+      label: step.falseLabel || "No",
+      desc: step.falseDescription || "",
+      icon: step.falseIcon || "AlertTriangle"
+    }
+  ];
+
+  return (
+    <div className="animate-fadeIn w-full space-y-6">
+      <div>
+        {step.badge && <p className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">{step.badge}</p>}
+        <h1 className="mt-3 text-3xl font-black leading-tight text-slate-900 sm:text-4xl">{step.title}</h1>
+        {step.subtitle && <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">{step.subtitle}</p>}
+      </div>
+
+      {step.questionType === "boolean" && (
+        <div className="grid gap-4">
+          {booleanOptions.map((option) => (
+            <ActivationOptionCard
+              key={String(option.value)}
+              option={option}
+              selected={value === option.value}
+              onClick={() => onAnswer(option.value)}
+            />
+          ))}
+        </div>
+      )}
+
+      {step.questionType === "select" && (
+        <div className="grid gap-4">
+          {optionCards.map((option) => (
+            <ActivationOptionCard
+              key={String(option.value)}
+              option={option}
+              selected={value === option.value}
+              onClick={() => onAnswer(option.value)}
+            />
+          ))}
+        </div>
+      )}
+
+      {step.questionType === "rating" && (
+        <>
+          <ActivationSliderInput
+            value={forceZeroRating ? 0 : currentRating}
+            disabled={forceZeroRating}
+            onChange={(nextValue) => onAnswer(nextValue)}
+          />
+          {forceZeroRating && (
+            <div className="rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4 text-sm font-semibold leading-6 text-blue-900">
+              You selected that you are not currently rated, so TYFYS is using a 0% starting point for the strategy.
+            </div>
+          )}
+          {!forceZeroRating && (
+            <div className="rounded-[1.5rem] border border-slate-200 bg-white px-5 py-4 shadow-sm">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">Selected rating</p>
+              <p className="mt-2 text-4xl font-black text-slate-900">{isAnswered ? `${currentRating}%` : "--"}</p>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+function ActivationSelectionStep({ step, options, selectedValues, onToggle, emptyHint }) {
+  return (
+    <div className="animate-fadeIn w-full space-y-6">
+      <div>
+        {step.badge && <p className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">{step.badge}</p>}
+        <h1 className="mt-3 text-3xl font-black leading-tight text-slate-900 sm:text-4xl">{step.title}</h1>
+        <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">{step.subtitle}</p>
+      </div>
+
+      <div className="grid gap-4">
+        {options.map((option) => {
+          const isSelected = selectedValues.includes(option.id);
+          return (
+            <ActivationOptionCard
+              key={option.id}
+              option={option}
+              selected={isSelected}
+              onClick={() => onToggle(option.id)}
+            />
+          );
+        })}
+      </div>
+
+      {emptyHint && !selectedValues.length && (
+        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900">
+          {emptyHint}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ActivationResultsStep({ entryIntent, results }) {
+  const nativeAppRuntime = isNativeAppRuntime();
+  const entryLabel = entryIntent === "research" ? "Claim Research" : "Claim Start";
+
+  return (
+    <div className="animate-fadeIn w-full space-y-6">
+      <div>
+        <p className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">{entryLabel}</p>
+        <h1 className="mt-3 text-3xl font-black leading-tight text-slate-900 sm:text-4xl">Your TYFYS claim research summary</h1>
+        <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          This is a simple first-pass research view so you can see where to start before the process gets more detailed.
+        </p>
+      </div>
+
+      <section className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+        <p className="text-xs font-black uppercase tracking-[0.28em] text-slate-500">Section 1</p>
+        <h2 className="mt-3 text-2xl font-black text-slate-900">Based on your answers, you may qualify for:</h2>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          {results.conditions.map((condition) => (
+            <div key={condition} className="rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4">
+              <p className="text-base font-black text-blue-900">{condition}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+        <p className="text-xs font-black uppercase tracking-[0.28em] text-slate-500">Section 2</p>
+        <h2 className="mt-3 text-2xl font-black text-slate-900">You may need the following evidence:</h2>
+        <div className="mt-5 space-y-3">
+          {results.evidence.map((item) => (
+            <div key={item} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+              <div className="mt-0.5 rounded-full bg-emerald-100 p-1.5 text-emerald-700">
+                <Icons.CheckCircle className="h-4 w-4" />
+              </div>
+              <p className="text-sm font-semibold leading-6 text-slate-700 sm:text-base">{item}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {nativeAppRuntime && (
+        <div className="rounded-[1.5rem] border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold leading-6 text-amber-900">
+          This summary is an informational planning tool only. It is not medical advice, legal advice, or a VA eligibility determination.
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ActivationSupportStep({ isCheckoutLoading, onSelectSelfServe, onSelectFullSupport }) {
+  const nativeAppRuntime = isNativeAppRuntime();
+  return (
+    <div className="animate-fadeIn w-full space-y-6">
+      <div>
+        <p className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">Next Step</p>
+        <h1 className="mt-3 text-3xl font-black leading-tight text-slate-900 sm:text-4xl">Choose how you want to move forward</h1>
+        <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+          Start simple now, then let TYFYS guide the next layer of support when you are ready.
+        </p>
+      </div>
+
+      <div className="grid gap-4">
+        <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.28em] text-slate-500">Option 1</p>
+              <h2 className="mt-2 text-2xl font-black text-slate-900">Self-Serve</h2>
+              <p className="mt-2 text-base font-semibold text-slate-600">
+                {nativeAppRuntime
+                  ? "Keep your results in the app and continue building records at your own pace."
+                  : "Around $250 with a 30-minute coaching session"}
+              </p>
+            </div>
+            {nativeAppRuntime ? (
+              <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-emerald-900">
+                <p className="text-xs font-black uppercase tracking-[0.24em] text-emerald-700">In-app path</p>
+                <p className="mt-1 text-lg font-black">Continue now</p>
+              </div>
+            ) : (
+              <div className="rounded-2xl bg-slate-900 px-4 py-3 text-white">
+                <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-300">Starting tier</p>
+                <p className="mt-1 text-2xl font-black">$250</p>
+              </div>
+            )}
+          </div>
+          <div className="mt-5 space-y-3 text-sm font-semibold text-slate-600">
+            <p>
+              {nativeAppRuntime
+                ? "Best if you want to keep working through claim research, records intake, and planning tools in TYFYS."
+                : "Fastest way to begin guided claim research without a long intake."}
+            </p>
+            <p>
+              {nativeAppRuntime
+                ? "You can always request a guided support review later once your file is more complete."
+                : "Includes a focused coaching call so TYFYS can map your next move clearly."}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onSelectSelfServe}
+            disabled={isCheckoutLoading}
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-5 py-4 text-lg font-black text-slate-900 transition-colors hover:border-blue-300 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            {isCheckoutLoading ? "Redirecting..." : nativeAppRuntime ? "Continue in TYFYS" : "Choose Self-Serve"}
+            {!isCheckoutLoading && <Icons.ChevronRight className="h-5 w-5 text-blue-600" />}
+          </button>
+        </div>
+
+        <div className="rounded-[2rem] border-2 border-blue-600 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 p-6 text-white shadow-xl">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.28em] text-blue-200">Option 2</p>
+              <h2 className="mt-2 text-2xl font-black">Full Support</h2>
+              <p className="mt-2 text-base font-semibold text-blue-100">
+                {nativeAppRuntime
+                  ? "Request a guided support review from the TYFYS team."
+                  : "Monthly plan with medical coordination services"}
+              </p>
+            </div>
+            <div className="rounded-2xl bg-white/10 px-4 py-3">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-200">Primary goal</p>
+              <p className="mt-1 text-lg font-black">{nativeAppRuntime ? "Team review" : "Hands-on support"}</p>
+            </div>
+          </div>
+          <div className="mt-5 space-y-3 text-sm font-semibold leading-6 text-blue-100">
+            <p>
+              {nativeAppRuntime
+                ? "Use this when you want TYFYS to review your file, explain support options, and recommend next steps directly."
+                : "Best fit if you want TYFYS to help coordinate records, evidence, and medical support with you."}
+            </p>
+            <p>
+              {nativeAppRuntime
+                ? "Support details are handled directly by the TYFYS team after they review your claim situation."
+                : "This path is built for veterans who want less friction and clearer next steps from day one."}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onSelectFullSupport}
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-4 text-lg font-black text-blue-950 transition-colors hover:bg-blue-50"
+          >
+            {nativeAppRuntime ? "Request TYFYS Review" : "Choose Full Support"}
+            <Icons.ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AccessLanding({
   hasSavedAccount,
   hasKnownAccount,
@@ -3053,11 +3970,13 @@ function AccessLanding({
   onVerifyPasswordResetAccount,
   onCompletePasswordReset,
   onClearPasswordReset,
-  onCreateAccount
+  onStartClaim,
+  onStartResearch
 }) {
+  const nativeAppRuntime = isNativeAppRuntime();
   const [email, setEmail] = useState(accountEmail || "");
   const [password, setPassword] = useState("");
-  const [mode, setMode] = useState(() => (resetToken ? "complete" : "login"));
+  const [mode, setMode] = useState(() => (resetToken ? "complete" : "home"));
   const [resetEmail, setResetEmail] = useState(accountEmail || "");
   const [resetZip, setResetZip] = useState("");
   const [resetLastName, setResetLastName] = useState("");
@@ -3082,8 +4001,13 @@ function AccessLanding({
       setMode("complete");
       return;
     }
-    setMode((currentMode) => (currentMode === "complete" ? "login" : currentMode));
+    setMode((currentMode) => (currentMode === "complete" ? "home" : currentMode));
   }, [resetToken]);
+
+  const closeMemberPanel = () => {
+    if (resetToken) onClearPasswordReset();
+    setMode("home");
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -3114,29 +4038,12 @@ function AccessLanding({
     setConfirmNewPassword("");
   };
 
-  const heroTitle = hasSavedAccount
-    ? onboardingComplete
-      ? "Welcome back to your TYFYS account"
-      : "Finish setting up your TYFYS account"
-    : "Log in or start your TYFYS account";
-  const heroBody = hasSavedAccount
-    ? onboardingComplete
-      ? "Sign in on this device to reopen your saved profile, uploaded records, and next steps."
-      : "Your setup progress is saved on this device. Sign in to continue where you left off."
-    : "If you already have a TYFYS login, sign in first. If you are new here, use the new-account button below and we will walk you through setup step by step.";
-  const savedItems = hasSavedAccount
-    ? onboardingComplete
-      ? ["Your saved profile and contact details", "Your rating calculator progress and notes", "Your uploaded records and saved drafts"]
-      : ["Your saved contact details", "Your current setup step and answers so far", "The login you will use to come back later"]
-    : ["Your secure TYFYS login for this device", "Your setup answers and contact details", "Your saved progress when you come back"];
   const panelLabel =
     mode === "request"
       ? "Password Help"
       : mode === "complete"
         ? "Reset Password"
-        : hasKnownAccount
-          ? "Returning User"
-          : "App Sign-In";
+        : "Member Access";
   const panelTitle =
     mode === "request"
       ? "Reset your password"
@@ -3146,7 +4053,7 @@ function AccessLanding({
           : resetVerification?.valid
             ? "Choose a new password"
             : "Request a new reset link"
-        : "Log in to continue";
+        : "Log in to your dashboard";
   const panelBody =
     mode === "request"
       ? "Use the email reset link if you can still reach the inbox on file. If not, verify the ZIP code, last name, and phone ending saved in your TYFYS profile."
@@ -3157,10 +4064,8 @@ function AccessLanding({
             ? "Choose a new password for your TYFYS account. Once it is saved, we will sign you back in automatically."
             : resetVerification?.error || "This reset link is no longer valid. Request a fresh reset email below."
         : hasKnownAccount
-          ? onboardingComplete
-            ? "We found saved TYFYS progress on this device. Sign in to reopen it."
-            : "We found an existing TYFYS account for this email. Sign in first so you do not create a duplicate."
-          : "If you already have a TYFYS login, enter it here first. If you are new here, use the button below.";
+          ? "Use your TYFYS member email and password to reopen your dashboard."
+          : "Enter your TYFYS member login to continue to the dashboard.";
   const resetStatusTone =
     resetStatus?.type === "error"
       ? "border-red-200 bg-red-50 text-red-700"
@@ -3168,8 +4073,8 @@ function AccessLanding({
         ? "border-emerald-200 bg-emerald-50 text-emerald-700"
         : "border-slate-200 bg-slate-50 text-slate-600";
   const resetPasswordsMatch = newPassword === confirmNewPassword;
-  const showNewAccountCard = mode === "login";
-  const googleEnabled = Boolean(googleAuth?.enabled && googleAuth?.clientId);
+  const googleEnabled = !nativeAppRuntime && Boolean(googleAuth?.enabled && googleAuth?.clientId);
+  const showMemberPanel = mode !== "home";
 
   useEffect(() => {
     if (mode !== "login" || !googleEnabled || !googleButtonRef.current) {
@@ -3226,77 +4131,68 @@ function AccessLanding({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.2),_transparent_38%),radial-gradient(circle_at_bottom_right,_rgba(234,179,8,0.16),_transparent_34%)]"></div>
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
 
-        <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-6xl items-center px-5 py-8 sm:px-8 lg:px-10">
-          <div className="grid w-full gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-            <section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur sm:p-8 lg:p-10">
-              <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-yellow-500 text-slate-950 shadow-xl">
-                  <Icons.ShieldCheck className="h-8 w-8" />
-                </div>
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.3em] text-slate-300">TYFYS Veteran Access</p>
-                  <p className="text-sm text-slate-400">Private claim support account</p>
-                </div>
-              </div>
+        <div className="relative z-10 flex min-h-[100dvh] items-center justify-center px-5 py-8 sm:px-8">
+          <div className={`mx-auto w-full max-w-xl transition-opacity ${showMemberPanel ? "pointer-events-none opacity-30" : ""}`}>
+            <section className="rounded-[2rem] border border-white/40 bg-white px-6 py-8 text-center text-slate-900 shadow-2xl sm:px-8 sm:py-10">
+              <img
+                src={ACCESS_LANDING_LOGO_URL}
+                alt="Thank You For Your Service"
+                className="mx-auto w-full max-w-lg"
+              />
 
-              <div className="mt-8 max-w-2xl">
-                <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/25 bg-blue-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-blue-100">
-                  <Icons.LockSmall className="h-4 w-4" />
-                  Secure login and saved progress
-                </div>
-                <h1 className="mt-5 text-4xl font-black leading-tight text-white sm:text-5xl">
-                  {heroTitle}
-                </h1>
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-200">{heroBody}</p>
-              </div>
+              <div className="mt-8 grid gap-3">
+                <button
+                  type="button"
+                  onClick={onStartClaim}
+                  className="flex w-full items-center justify-center gap-3 rounded-2xl bg-blue-600 px-5 py-4 text-lg font-black text-white shadow-xl transition-colors hover:bg-blue-500"
+                >
+                  Start Your Claim Now
+                  <Icons.ChevronRight className="h-6 w-6" />
+                </button>
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
-                  <Icons.User className="h-6 w-6 text-yellow-300" />
-                  <p className="mt-3 text-sm font-black text-white">Save your profile</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
-                    Keep your contact info and claim details on this device so you do not have to re-enter them.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
-                  <Icons.FileText className="h-6 w-6 text-blue-300" />
-                  <p className="mt-3 text-sm font-black text-white">Resume your account</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
-                    Return to your records, rating work, and next steps where you left off.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
-                  <Icons.CheckCircle className="h-6 w-6 text-emerald-300" />
-                  <p className="mt-3 text-sm font-black text-white">Come back without starting over</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
-                    Use one secure login on this device to reopen TYFYS and pick back up later.
-                  </p>
-                </div>
-              </div>
+                <button
+                  type="button"
+                  onClick={onStartResearch}
+                  className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-300 bg-white px-5 py-4 text-lg font-black text-slate-900 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50"
+                >
+                  Claim Research
+                  <Icons.ChevronRight className="h-6 w-6 text-blue-600" />
+                </button>
 
-              <div className="mt-8 rounded-[1.5rem] border border-white/10 bg-slate-950/40 p-5">
-                <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-400">Saved on this device</p>
-                <div className="mt-4 space-y-3">
-                  {savedItems.map((item) => (
-                    <div key={item} className="flex items-start gap-3">
-                      <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-300">
-                        <Icons.CheckCircle className="h-4 w-4" />
-                      </div>
-                      <p className="text-sm leading-6 text-slate-200">{item}</p>
-                    </div>
-                  ))}
-                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPassword("");
+                    setResetEmail(accountEmail || "");
+                    setMode("login");
+                  }}
+                  className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-300 bg-slate-50 px-5 py-4 text-lg font-black text-slate-900 shadow-sm transition-colors hover:border-slate-400 hover:bg-white"
+                >
+                  I'm Already a Member - Go to Dashboard
+                  <Icons.ArrowRight className="h-5 w-5 text-slate-500" />
+                </button>
               </div>
             </section>
+          </div>
 
-            <section className="overflow-hidden rounded-[2rem] border border-white/40 bg-white text-slate-900 shadow-2xl">
-              <div className="border-b border-slate-200 px-6 py-6 sm:px-8 sm:py-8">
-                <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">{panelLabel}</p>
-                <h2 className="mt-3 text-3xl font-black text-slate-900">{panelTitle}</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{panelBody}</p>
-              </div>
+          {showMemberPanel && (
+            <section className="absolute inset-0 z-20 flex items-center justify-center px-5 py-8 sm:px-8">
+              <div className="w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/40 bg-white text-slate-900 shadow-2xl">
+                <div className="relative border-b border-slate-200 px-6 py-6 sm:px-8 sm:py-8">
+                  <button
+                    type="button"
+                    onClick={closeMemberPanel}
+                    className="absolute right-4 top-4 rounded-full border border-slate-200 bg-white p-2 text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-700"
+                    aria-label="Close member access"
+                  >
+                    <Icons.X className="h-5 w-5" />
+                  </button>
+                  <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">{panelLabel}</p>
+                  <h2 className="mt-3 text-3xl font-black text-slate-900">{panelTitle}</h2>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{panelBody}</p>
+                </div>
 
-              <div className="px-6 py-6 sm:px-8 sm:py-8">
+                <div className="max-h-[100dvh] overflow-y-auto px-6 py-6 sm:px-8 sm:py-8">
                 {mode === "login" && (
                   <form onSubmit={handleSubmit} className="space-y-5">
                     {googleEnabled && (
@@ -3383,9 +4279,14 @@ function AccessLanding({
                       {isSubmitting ? "Signing In..." : "Log In and Continue"}
                       {!isSubmitting && <Icons.ChevronRight className="h-5 w-5" />}
                     </button>
-                    <p className="text-xs leading-5 text-slate-500">
-                      TYFYS keeps this device signed in for up to 30 days so you can return to your saved account faster.
-                    </p>
+                    <button
+                      type="button"
+                      onClick={closeMemberPanel}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-black text-slate-700 transition-colors hover:border-slate-400"
+                    >
+                      <Icons.ChevronLeft className="h-5 w-5" />
+                      Back to Home
+                    </button>
                   </form>
                 )}
 
@@ -3610,55 +4511,62 @@ function AccessLanding({
                     )}
                   </div>
                 )}
-
-                <div className={`mt-6 border-t border-slate-200 pt-6 ${showNewAccountCard ? "" : "hidden"}`}>
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                    <p className="text-xs font-black uppercase tracking-[0.24em] text-slate-500">New to TYFYS?</p>
-                    <p className="mt-2 text-lg font-black text-slate-900">Need to create your account?</p>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">
-                      Start here to save your contact details, create your login, and come back later without redoing setup.
-                    </p>
-                    <div className="mt-4 space-y-3">
-                      <div className="flex items-start gap-3">
-                        <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">1</div>
-                        <p className="text-sm leading-6 text-slate-600">Enter your name, email, phone number, and ZIP code.</p>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">2</div>
-                        <p className="text-sm leading-6 text-slate-600">Create the password you will use to come back to TYFYS.</p>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">3</div>
-                        <p className="text-sm leading-6 text-slate-600">Return later and log in without starting over.</p>
-                      </div>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={onCreateAccount}
-                      className="mt-5 flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 px-5 py-4 text-lg font-black text-white shadow-xl transition-transform hover:-translate-y-0.5"
-                    >
-                      Click here if you're setting up a new account
-                      <Icons.ChevronRight className="h-6 w-6" />
-                    </button>
-                  </div>
-
-                  <div className="mt-4 rounded-2xl border border-yellow-200 bg-yellow-50 px-4 py-4 text-sm leading-6 text-slate-700">
-                    <span className="font-black text-slate-900">Notice:</span> TYFYS is a private company and not the VA. Your information is stored on this device so you can return and continue your account.
-                  </div>
                 </div>
-
-                <AccountSupportLinks />
               </div>
             </section>
-          </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-function SpecialistModal({ onClose, discountUnlocked, isMember }) {
+function SpecialistModal({
+  onClose,
+  onJoinMembership,
+  onViewSupportOptions,
+  onBookDiscoveryCall,
+  discountUnlocked,
+  isMember,
+  isCheckoutLoading = false
+}) {
+  const nativeAppRuntime = isNativeAppRuntime();
+
+  if (nativeAppRuntime) {
+    return (
+      <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 relative animate-fadeIn border border-blue-200">
+          <button onClick={onClose} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+            <Icons.X className="w-6 h-6" />
+          </button>
+
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white shadow-lg">
+              <Icons.Stethoscope className="w-8 h-8 text-blue-600" />
+            </div>
+            <h3 className="text-2xl font-black text-slate-900">Request TYFYS Review</h3>
+            <p className="mt-2 text-slate-600 font-medium">
+              TYFYS can review your file, explain support options, and recommend the best next step directly.
+            </p>
+          </div>
+
+          <div className="space-y-3 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm font-semibold leading-6 text-slate-700">
+            <p>1. Continue uploading your DD-214, treatment records, and prior VA decisions.</p>
+            <p>2. TYFYS reviews your intake answers and records to understand where evidence may be missing.</p>
+            <p>3. The team follows up with guided support options that fit your claim situation.</p>
+          </div>
+
+          <button
+            onClick={onClose}
+            className="mt-6 w-full rounded-xl bg-blue-600 py-3 text-sm font-black text-white transition-colors hover:bg-blue-700"
+          >
+            Continue in TYFYS
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 relative animate-fadeIn border-2 border-yellow-500">
@@ -3700,10 +4608,16 @@ function SpecialistModal({ onClose, discountUnlocked, isMember }) {
             </div>
             <p className="text-xs text-blue-600 font-bold mb-2">Save $450 instantly (25% OFF)</p>
             {!isMember && (
-              <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors">
-                Join Membership & Save
+              <button
+                type="button"
+                onClick={onJoinMembership}
+                disabled={isCheckoutLoading}
+                className="w-full py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed text-white text-xs font-bold rounded-lg transition-colors"
+              >
+                {isCheckoutLoading ? "Redirecting..." : "Join Membership & Save"}
               </button>
             )}
+            {isMember && <p className="text-xs text-blue-700 font-bold">Membership pricing is already active on this account.</p>}
           </div>
 
           {/* Package Option */}
@@ -3722,8 +4636,19 @@ function SpecialistModal({ onClose, discountUnlocked, isMember }) {
             <p className="text-xs text-slate-300 leading-tight mb-3">
               Medical opinion letters are <strong>INCLUDED</strong> in our Standard and Multi-Claim packages.
             </p>
-            <button className="w-full py-2 bg-yellow-500 hover:bg-yellow-400 text-slate-900 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+            <button
+              type="button"
+              onClick={onViewSupportOptions}
+              className="w-full py-2 bg-yellow-500 hover:bg-yellow-400 text-slate-900 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2"
+            >
               View Support Options <Icons.ArrowRight className="w-3 h-3" />
+            </button>
+            <button
+              type="button"
+              onClick={onBookDiscoveryCall}
+              className="mt-3 w-full py-2 border border-yellow-400/50 text-yellow-200 text-xs font-bold rounded-lg hover:bg-yellow-500/10 transition-colors"
+            >
+              Book Discovery Call
             </button>
           </div>
         </div>
@@ -3800,16 +4725,17 @@ function ProfileEditModal({ userProfile, onClose, onSave }) {
 
 // --- MAIN COMPONENT ---
 function TYFYSPlatform() {
-  const leadPrefill = loadLeadPrefill();
-  const persistedAppStateRef = useRef(loadPersistedAppState());
-  const persistedAuthAccountRef = useRef(loadAuthAccount());
+  const requestedPublicTool = getRequestedPublicTool();
+  const publicCalculatorMode = requestedPublicTool === "calculator";
+  const leadPrefill = publicCalculatorMode ? null : loadLeadPrefill();
+  const persistedAppStateRef = useRef(publicCalculatorMode ? null : loadPersistedAppState());
+  const persistedAuthAccountRef = useRef(publicCalculatorMode ? null : loadAuthAccount());
   const nativeAppRuntime = isNativeAppRuntime();
   const persistedAppState = persistedAppStateRef.current;
   const persistedAuthAccount = persistedAuthAccountRef.current;
   const hasLeadPrefill = Boolean(
     leadPrefill && (leadPrefill.firstName || leadPrefill.lastName || leadPrefill.email || leadPrefill.phone)
   );
-  const prefilledContactStep = ONBOARDING_STEPS.findIndex((step) => step.id === "contact_name");
   const prefilledProfile = mapLeadPrefillToProfile(leadPrefill);
   const leadPrefillEmail = normalizeEmail(prefilledProfile.email || leadPrefill?.email || "");
   const initialResetToken = (() => {
@@ -3830,29 +4756,35 @@ function TYFYSPlatform() {
     }
   })();
   const storedUserProfile = sanitizeUserProfile(persistedAppState?.userProfile || {});
+  const initialActivationFlow = normalizeActivationFlow(persistedAppState?.activationFlow || ACTIVATION_DEFAULT_STATE);
+  const minimumOnboardingStep = getActivationStartStep({ complianceAcknowledged: initialActivationFlow.complianceAcknowledged });
   const initialOnboardingStep =
     Number.isFinite(persistedAppState?.onboardingStep) && persistedAppState.onboardingStep >= 0 && persistedAppState.onboardingStep < ONBOARDING_STEPS.length
-      ? persistedAppState.onboardingStep
-      : hasLeadPrefill && prefilledContactStep >= 0
-        ? prefilledContactStep
-        : 0;
+      ? Math.max(persistedAppState.onboardingStep, minimumOnboardingStep)
+      : minimumOnboardingStep;
   const storedCurrentRating = Number(persistedAppState?.currentRating);
-  const initialCurrentRating = Number.isFinite(storedCurrentRating)
+  const initialCurrentRating = hasNumericAnswer(persistedAppState?.currentRating)
     ? storedCurrentRating
-    : Number(storedUserProfile.rating || prefilledProfile.rating || 0);
+    : hasNumericAnswer(storedUserProfile.rating)
+      ? Number(storedUserProfile.rating)
+      : hasNumericAnswer(prefilledProfile.rating)
+        ? Number(prefilledProfile.rating)
+        : 0;
   const initialUserProfile = createBaseUserProfile(prefilledProfile, storedUserProfile);
 
   // STATE
   const [hasStarted, setHasStarted] = useState(() =>
-    Boolean(initialAutostart || persistedAppState?.hasStarted || loadHasStarted())
+    Boolean(publicCalculatorMode || initialAutostart || persistedAppState?.hasStarted || loadHasStarted())
   );
+  const [hasDismissedAccessLanding, setHasDismissedAccessLanding] = useState(publicCalculatorMode);
   const [onboardingComplete, setOnboardingComplete] = useState(() => Boolean(persistedAppState?.onboardingComplete));
   const [onboardingStep, setOnboardingStep] = useState(initialOnboardingStep);
   const [intakeStarted, setIntakeStarted] = useState(() => Boolean(persistedAppState?.intakeStarted));
+  const [activationFlow, setActivationFlow] = useState(initialActivationFlow);
   const [userProfile, setUserProfile] = useState(initialUserProfile);
-  const [activeView, setActiveView] = useState(persistedAppState?.activeView || "welcome_guide");
-  const [paymentState, setPaymentState] = useState(() => loadPaymentState());
-  const [zohoLeadId, setZohoLeadId] = useState(() => loadZohoLeadId());
+  const [activeView, setActiveView] = useState(publicCalculatorMode ? "calculator" : persistedAppState?.activeView || "welcome_guide");
+  const [paymentState, setPaymentState] = useState(() => (publicCalculatorMode ? EMPTY_PAYMENT_STATE : loadPaymentState()));
+  const [zohoLeadId, setZohoLeadId] = useState(() => (publicCalculatorMode ? "" : loadZohoLeadId()));
   const [zohoCrmModule, setZohoCrmModule] = useState(() => persistedAppState?.zohoCrmModule || "");
   const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
   const [isMember, setIsMember] = useState(() => Boolean(persistedAppState?.isMember));
@@ -3901,13 +4833,13 @@ function TYFYSPlatform() {
   const [secureMessageInput, setSecureMessageInput] = useState("");
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [authAccount, setAuthAccount] = useState(() => persistedAuthAccount);
+  const [authAccount, setAuthAccount] = useState(() => (publicCalculatorMode ? null : persistedAuthAccount));
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAuthBootstrapping, setIsAuthBootstrapping] = useState(true);
+  const [isAuthBootstrapping, setIsAuthBootstrapping] = useState(() => !publicCalculatorMode);
   const [authStatusMessage, setAuthStatusMessage] = useState("");
   const [isAuthSubmitting, setIsAuthSubmitting] = useState(false);
   const [googleAuthConfig, setGoogleAuthConfig] = useState({
-    loading: true,
+    loading: !publicCalculatorMode,
     enabled: false,
     clientId: "",
     error: ""
@@ -3916,7 +4848,7 @@ function TYFYSPlatform() {
   const [passwordResetStatus, setPasswordResetStatus] = useState({ type: "", message: "" });
   const [isPasswordResetSubmitting, setIsPasswordResetSubmitting] = useState(false);
   const [passwordResetVerification, setPasswordResetVerification] = useState(() => ({
-    checking: Boolean(initialResetToken),
+    checking: Boolean(!publicCalculatorMode && initialResetToken),
     valid: false,
     email: "",
     error: "",
@@ -3924,7 +4856,7 @@ function TYFYSPlatform() {
   }));
   const [hasLeadPrefillAccount, setHasLeadPrefillAccount] = useState(false);
   const [isLeadPrefillAccountLookupPending, setIsLeadPrefillAccountLookupPending] = useState(
-    () => Boolean(hasLeadPrefill && leadPrefillEmail && !persistedAuthAccount)
+    () => Boolean(!publicCalculatorMode && hasLeadPrefill && leadPrefillEmail && !persistedAuthAccount)
   );
   // Updated Bot Intro
   const [aiBotMessages, setAiBotMessages] = useState([
@@ -3936,7 +4868,7 @@ function TYFYSPlatform() {
   const [aiBotInput, setAiBotInput] = useState("");
   const [dailyQuestionCount, setDailyQuestionCount] = useState(0);
   const [docWizardCondition, setDocWizardCondition] = useState("");
-  const [dossier, setDossier] = useState(() => loadDossier());
+  const [dossier, setDossier] = useState(() => (publicCalculatorMode ? [] : loadDossier()));
   const [scannerForm, setScannerForm] = useState({
     title: "",
     condition: prefilledProfile.pain_points?.[0] || "",
@@ -3978,6 +4910,14 @@ function TYFYSPlatform() {
   const [nexusCopied, setNexusCopied] = useState(false);
 
   const [expandCalcHelp, setExpandCalcHelp] = useState(false);
+  const [calculatorWizardStep, setCalculatorWizardStep] = useState(1);
+  const [draftClaim, setDraftClaim] = useState(() => createPublicCalculatorDraft(persistedAppState?.claimType || "increase"));
+  const [draftClaimValidation, setDraftClaimValidation] = useState(() => createPublicCalculatorDraftValidation());
+  const [hasCompletedFirstEstimate, setHasCompletedFirstEstimate] = useState(() =>
+    Array.isArray(persistedAppState?.addedClaims) ? persistedAppState.addedClaims.length > 0 : false
+  );
+  const [expandCalcBreakdown, setExpandCalcBreakdown] = useState(false);
+  const [expandCalcAdvancedInsights, setExpandCalcAdvancedInsights] = useState(false);
   const hasPaid = paymentState.completed;
   const selectedConditionRule = getConditionRule(selectedCondition);
   const selectedRatingContext = getConditionRatingContext(selectedCondition, selectedRatingProfileId);
@@ -3988,18 +4928,43 @@ function TYFYSPlatform() {
   const selectedConditionNeedsProfile = selectedConditionRule?.mode === "profiles" && !selectedRatingProfileId;
   const hasSelectedRatingOption =
     newRatingInput !== "" && selectedRatingOptions.some((option) => option.value === Number(newRatingInput));
+  const publicCalculatorQuickStarts = PUBLIC_CALCULATOR_QUICK_STARTS.map((item) => ({
+    ...item,
+    category: findConditionCategoryName(item.condition)
+  })).filter((item) => item.category);
   const intakeChecklist = INTAKE_RECORD_REQUIREMENTS.map((requirement) => ({
     ...requirement,
     matchedItem: dossier.find((item) => dossierMatchesIntakeRequirement(item, requirement)) || null
   }));
   const intakeCompletedCount = intakeChecklist.filter((item) => item.matchedItem).length;
   const syncedDossierCount = dossier.filter((item) => item?.crmSync?.status === "synced").length;
+  const activationResults = buildActivationResults(activationFlow.conditions, activationFlow.documents, userProfile);
+  const onboardingPotentialValue = calculateActivationPotentialValue(userProfile, activationFlow);
+  const onboardingSignals = buildActivationSignals(userProfile, activationFlow);
+  const onboardingConditionsSelected = activationFlow.conditions.length > 0;
+  const onboardingDocumentsSelected = activationFlow.documents.length > 0;
 
-  const startSystem = () => {
+  const startSystem = (entryIntent = "claim") => {
+    setHasDismissedAccessLanding(true);
     setHasStarted(true);
     saveHasStarted();
+    setOnboardingComplete(false);
+    setOnboardingStep(
+      getActivationStartStep({
+        complianceAcknowledged: activationFlow.complianceAcknowledged,
+        isAuthenticated
+      })
+    );
+    setActivationFlow((prev) =>
+      normalizeActivationFlow({
+        ...prev,
+        entryIntent,
+        selectedPlan: ""
+      })
+    );
   };
   const returnToAccessLanding = () => {
+    setHasDismissedAccessLanding(false);
     setHasStarted(false);
     clearHasStarted();
     window.location.reload();
@@ -4014,15 +4979,37 @@ function TYFYSPlatform() {
   const onboardingScrollRef = useRef(null);
   const isApplyingRemoteStateRef = useRef(false);
   const hasExistingAccountStatus = /already exists|existing tyfys login/i.test(String(authStatusMessage || ""));
-  const hasKnownAccount =
-    Boolean(authAccount) || onboardingComplete || hasExistingAccountStatus || hasLeadPrefillAccount;
-  const isAccessBootstrapping = isAuthBootstrapping || isLeadPrefillAccountLookupPending;
+  const hasMemberAccount =
+    Boolean(authAccount) || hasExistingAccountStatus || hasLeadPrefillAccount;
+  const hasKnownAccount = hasMemberAccount || onboardingComplete;
+  const isAccessBootstrapping = !publicCalculatorMode && (isAuthBootstrapping || isLeadPrefillAccountLookupPending);
   const showAccessLanding =
-    Boolean(passwordResetToken) || (!isAccessBootstrapping && !isAuthenticated && (!hasStarted || onboardingComplete || hasKnownAccount));
+    !publicCalculatorMode &&
+    (Boolean(passwordResetToken) ||
+      (!isAccessBootstrapping && !isAuthenticated && !hasDismissedAccessLanding && (!hasStarted || hasKnownAccount)));
   const currentOnboardingStep = ONBOARDING_STEPS[onboardingStep];
-  const isContactOnboardingStep = currentOnboardingStep?.type?.startsWith("contact_form");
-  const isLoadingOnboardingStep = currentOnboardingStep?.type === "loading";
-  const shouldShowOnboardingFooter = !isContactOnboardingStep && !isLoadingOnboardingStep;
+  const isQuestionOnboardingStep = currentOnboardingStep?.type === "question";
+  const isComplianceOnboardingStep = currentOnboardingStep?.type === "compliance";
+  const isResultsOnboardingStep = currentOnboardingStep?.type === "results";
+  const isMonetizationOnboardingStep = currentOnboardingStep?.type === "monetization";
+  const shouldShowOnboardingFooter = isQuestionOnboardingStep || currentOnboardingStep?.type === "selection" || isResultsOnboardingStep;
+  const currentQuestionValue = isQuestionOnboardingStep ? userProfile[currentOnboardingStep.field] : undefined;
+  const isCurrentOnboardingStepComplete = (() => {
+    if (!currentOnboardingStep) return false;
+    if (isQuestionOnboardingStep) {
+      if (currentOnboardingStep.questionType === "boolean") {
+        return typeof currentQuestionValue === "boolean";
+      }
+      if (currentOnboardingStep.questionType === "rating") {
+        return hasNumericAnswer(userProfile[currentOnboardingStep.field]);
+      }
+      return Boolean(currentQuestionValue);
+    }
+    if (currentOnboardingStep.id === "conditions") return onboardingConditionsSelected;
+    if (currentOnboardingStep.id === "documents") return onboardingDocumentsSelected;
+    if (isResultsOnboardingStep) return true;
+    return false;
+  })();
 
   const normalizePaymentState = (value) => ({
     completed: Boolean(value?.completed),
@@ -4034,6 +5021,7 @@ function TYFYSPlatform() {
     const fallbackUserProfile = createBaseUserProfile(prefilledProfile, overrides.userProfile);
     const fallbackRating = Number(overrides.currentRating ?? fallbackUserProfile.rating ?? prefilledProfile.rating ?? 0);
     const fallbackLeadId = String(overrides.zohoLeadId ?? "").trim();
+    const fallbackActivationFlow = normalizeActivationFlow(overrides.activationFlow ?? ACTIVATION_DEFAULT_STATE);
 
     return {
       hasStarted: Boolean(overrides.hasStarted),
@@ -4043,10 +5031,12 @@ function TYFYSPlatform() {
         Number.isFinite(overrides.onboardingStep) &&
         overrides.onboardingStep >= 0 &&
         overrides.onboardingStep < ONBOARDING_STEPS.length
-          ? overrides.onboardingStep
-          : hasLeadPrefill && prefilledContactStep >= 0
-            ? prefilledContactStep
-            : 0,
+          ? Math.max(
+              overrides.onboardingStep,
+              getActivationStartStep({ complianceAcknowledged: fallbackActivationFlow.complianceAcknowledged })
+            )
+          : getActivationStartStep({ complianceAcknowledged: fallbackActivationFlow.complianceAcknowledged }),
+      activationFlow: fallbackActivationFlow,
       userProfile: fallbackUserProfile,
       activeView: overrides.activeView || "welcome_guide",
       currentRating: Number.isFinite(fallbackRating) ? fallbackRating : 0,
@@ -4082,6 +5072,7 @@ function TYFYSPlatform() {
       onboardingComplete: Boolean(overrides.onboardingComplete ?? onboardingComplete),
       intakeStarted: Boolean(overrides.intakeStarted ?? intakeStarted),
       onboardingStep: Number.isFinite(overrides.onboardingStep) ? overrides.onboardingStep : onboardingStep,
+      activationFlow: normalizeActivationFlow(overrides.activationFlow ?? activationFlow),
       userProfile: nextUserProfile,
       activeView: overrides.activeView ?? activeView,
       currentRating: Number.isFinite(Number(overrides.currentRating))
@@ -4170,8 +5161,15 @@ function TYFYSPlatform() {
       nextSnapshot.onboardingStep >= 0 &&
       nextSnapshot.onboardingStep < ONBOARDING_STEPS.length
     ) {
-      setOnboardingStep(nextSnapshot.onboardingStep);
+      const nextActivationFlow = normalizeActivationFlow(nextSnapshot.activationFlow);
+      setOnboardingStep(
+        Math.max(
+          nextSnapshot.onboardingStep,
+          getActivationStartStep({ complianceAcknowledged: nextActivationFlow.complianceAcknowledged })
+        )
+      );
     }
+    setActivationFlow(normalizeActivationFlow(nextSnapshot.activationFlow));
     setUserProfile(createBaseUserProfile(prefilledProfile, nextSnapshot.userProfile));
     setActiveView(nextSnapshot.activeView);
     setCurrentRating(Number.isFinite(Number(nextSnapshot.currentRating)) ? Number(nextSnapshot.currentRating) : 0);
@@ -4385,6 +5383,7 @@ function TYFYSPlatform() {
       saveAuthHint(payload.account);
       saveAppSessionToken(payload.sessionToken || loadAppSessionToken());
       setIsAuthenticated(true);
+      setHasDismissedAccessLanding(false);
       setAuthStatusMessage("");
       applyPersistedSnapshot(payload.appState, payload.account);
       return payload;
@@ -4469,6 +5468,7 @@ function TYFYSPlatform() {
       saveAuthHint(payload.account);
       saveAppSessionToken(payload.sessionToken || loadAppSessionToken());
       setIsAuthenticated(true);
+      setHasDismissedAccessLanding(false);
       setHasStarted(true);
       saveHasStarted();
       setAuthStatusMessage("");
@@ -4489,11 +5489,22 @@ function TYFYSPlatform() {
     }
     saveAppSessionToken("");
     setIsAuthenticated(false);
+    setHasDismissedAccessLanding(false);
     setIsSidebarOpen(false);
     setAuthStatusMessage("You signed out. Log back in on this device to continue where you left off.");
   };
 
   useEffect(() => {
+    if (publicCalculatorMode) {
+      setGoogleAuthConfig({
+        loading: false,
+        enabled: false,
+        clientId: "",
+        error: ""
+      });
+      return undefined;
+    }
+
     let canceled = false;
 
     requestAppJson("/api/auth-google-config")
@@ -4519,7 +5530,7 @@ function TYFYSPlatform() {
     return () => {
       canceled = true;
     };
-  }, []);
+  }, [publicCalculatorMode]);
 
   const hasAutoSavedRef = useRef(false);
   useEffect(() => {
@@ -4648,21 +5659,74 @@ function TYFYSPlatform() {
     );
   }, [selectedCondition, selectedConditionRule, selectedRatingOptions, selectedRatingProfileId]);
   useEffect(() => {
-    savePaymentState(paymentState);
-  }, [paymentState]);
+    setDraftClaim({
+      category: selectedCategory,
+      condition: selectedCondition,
+      ratingProfileId: selectedRatingProfileId,
+      rating: newRatingInput,
+      claimType
+    });
+  }, [claimType, newRatingInput, selectedCategory, selectedCondition, selectedRatingProfileId]);
   useEffect(() => {
+    const checklist = [];
+    if (!selectedCategory) checklist.push("Choose a category first.");
+    if (selectedCategory && !selectedCondition) checklist.push("Choose a condition from that category.");
+    if (selectedConditionNeedsProfile) checklist.push("This condition needs an exact rating basis before you can pick a percentage.");
+    if (selectedConditionBlockedMessage) checklist.push(selectedConditionBlockedMessage);
+    if (selectedCondition && !selectedConditionBlockedMessage && !selectedConditionNeedsProfile && !hasSelectedRatingOption) {
+      checklist.push("Choose a supported VA percentage before adding this condition.");
+    }
+
+    setDraftClaimValidation({
+      baselineReady: true,
+      conditionReady: Boolean(selectedCategory && selectedCondition),
+      ratingReady: Boolean(
+        selectedCondition && !selectedConditionBlockedMessage && !selectedConditionNeedsProfile && hasSelectedRatingOption
+      ),
+      reviewReady: Boolean(
+        selectedCategory && selectedCondition && !selectedConditionBlockedMessage && !selectedConditionNeedsProfile && hasSelectedRatingOption
+      ),
+      needsCategory: !selectedCategory,
+      needsCondition: !selectedCondition,
+      needsProfile: selectedConditionNeedsProfile,
+      needsRating:
+        Boolean(selectedCondition) && !selectedConditionBlockedMessage && !selectedConditionNeedsProfile && !hasSelectedRatingOption,
+      blockedMessage: selectedConditionBlockedMessage,
+      checklist: checklist.length ? checklist : ["Ready to add this condition to your estimate."]
+    });
+  }, [
+    hasSelectedRatingOption,
+    selectedCategory,
+    selectedCondition,
+    selectedConditionBlockedMessage,
+    selectedConditionNeedsProfile
+  ]);
+  useEffect(() => {
+    if (!addedClaims.length) {
+      if (hasCompletedFirstEstimate) setHasCompletedFirstEstimate(false);
+      if (calculatorWizardStep === 5) setCalculatorWizardStep(1);
+      return;
+    }
+    if (!hasCompletedFirstEstimate) setHasCompletedFirstEstimate(true);
+  }, [addedClaims.length, calculatorWizardStep, hasCompletedFirstEstimate]);
+  useEffect(() => {
+    if (publicCalculatorMode) return;
+    savePaymentState(paymentState);
+  }, [paymentState, publicCalculatorMode]);
+  useEffect(() => {
+    if (publicCalculatorMode) return;
     saveDossier(dossier);
-  }, [dossier]);
+  }, [dossier, publicCalculatorMode]);
   useEffect(() => {
     if (activeView === "intake_portal" && !intakeStarted) {
       setIntakeStarted(true);
     }
   }, [activeView, intakeStarted]);
   useEffect(() => {
-    if (!onboardingComplete || intakeStarted || dossier.length > 0) return;
+    if (!onboardingComplete || intakeStarted || dossier.length > 0 || activationFlow.selectedPlan) return;
     setActiveView("intake_portal");
     setIntakeStarted(true);
-  }, [dossier.length, intakeStarted, onboardingComplete]);
+  }, [activationFlow.selectedPlan, dossier.length, intakeStarted, onboardingComplete]);
   useEffect(() => {
     if (activeView !== "intake_portal" || isZapierEmbedReady) return;
     let canceled = false;
@@ -4683,16 +5747,19 @@ function TYFYSPlatform() {
     };
   }, [activeView, isZapierEmbedReady]);
   useEffect(() => {
+    if (publicCalculatorMode) return;
     if (!hasStarted && (isAuthenticated || onboardingComplete)) {
       setHasStarted(true);
       saveHasStarted();
     }
-  }, [hasStarted, isAuthenticated, onboardingComplete]);
+  }, [hasStarted, isAuthenticated, onboardingComplete, publicCalculatorMode]);
   useEffect(() => {
+    if (publicCalculatorMode) return;
     savePersistedAppState(buildAppStateSnapshot());
   }, [
     activeView,
     addedClaims,
+    activationFlow,
     childCount,
     claimType,
     currentRating,
@@ -4710,9 +5777,15 @@ function TYFYSPlatform() {
     selectedSecureThreadId,
     userProfile,
     zohoCrmModule,
-    zohoLeadId
+    zohoLeadId,
+    publicCalculatorMode
   ]);
   useEffect(() => {
+    if (publicCalculatorMode) {
+      setIsAuthBootstrapping(false);
+      return undefined;
+    }
+
     let canceled = false;
 
     const bootstrapAuth = async () => {
@@ -4743,7 +5816,7 @@ function TYFYSPlatform() {
     return () => {
       canceled = true;
     };
-  }, []);
+  }, [publicCalculatorMode]);
   useEffect(() => {
     if (!passwordResetToken) {
       setPasswordResetVerification({
@@ -4795,6 +5868,12 @@ function TYFYSPlatform() {
     };
   }, [passwordResetToken]);
   useEffect(() => {
+    if (publicCalculatorMode) {
+      setHasLeadPrefillAccount(false);
+      setIsLeadPrefillAccountLookupPending(false);
+      return undefined;
+    }
+
     if (isAuthBootstrapping) return undefined;
 
     if (!hasLeadPrefill || !leadPrefillEmail || onboardingComplete || isAuthenticated) {
@@ -4806,6 +5885,7 @@ function TYFYSPlatform() {
     if (authAccount?.email && normalizeEmail(authAccount.email) === leadPrefillEmail) {
       setHasLeadPrefillAccount(true);
       setIsLeadPrefillAccountLookupPending(false);
+      setHasDismissedAccessLanding(false);
       setHasStarted(false);
       clearHasStarted();
       return undefined;
@@ -4824,6 +5904,7 @@ function TYFYSPlatform() {
           setAuthStatusMessage(
             "We found an existing TYFYS login for this email. Sign in to continue instead of creating a duplicate profile."
           );
+          setHasDismissedAccessLanding(false);
           setHasStarted(false);
           clearHasStarted();
           return;
@@ -4859,10 +5940,11 @@ function TYFYSPlatform() {
     isAuthenticated,
     isAuthBootstrapping,
     leadPrefillEmail,
-    onboardingComplete
+    onboardingComplete,
+    publicCalculatorMode
   ]);
   useEffect(() => {
-    if (!isAuthenticated || isAuthBootstrapping || isApplyingRemoteStateRef.current) return;
+    if (publicCalculatorMode || !isAuthenticated || isAuthBootstrapping || isApplyingRemoteStateRef.current) return;
 
     const timeoutId = window.setTimeout(async () => {
       try {
@@ -4891,6 +5973,7 @@ function TYFYSPlatform() {
   }, [
     activeView,
     addedClaims,
+    activationFlow,
     authAccount?.email,
     authAccount?.leadId,
     childCount,
@@ -4912,7 +5995,8 @@ function TYFYSPlatform() {
     selectedSecureThreadId,
     userProfile,
     zohoCrmModule,
-    zohoLeadId
+    zohoLeadId,
+    publicCalculatorMode
   ]);
   useEffect(() => {
     if (!addedClaims.length) return;
@@ -5088,6 +6172,41 @@ function TYFYSPlatform() {
 
   // Onboarding Handlers
   const handleOnboardingAnswer = (qid, value) => {
+    if (qid === "activationConditions") {
+      setActivationFlow((prev) => ({
+        ...prev,
+        conditions: toggleActivationListValue(prev.conditions, value)
+      }));
+      return;
+    }
+
+    if (qid === "activationDocuments") {
+      setActivationFlow((prev) => ({
+        ...prev,
+        documents: toggleActivationDocumentValue(prev.documents, value)
+      }));
+      return;
+    }
+
+    if (qid === "currentlyRated") {
+      setUserProfile((prev) => ({
+        ...prev,
+        currentlyRated: value,
+        rating: value === false ? 0 : prev.currentlyRated === false ? "" : prev.rating
+      }));
+      if (value === false) {
+        setCurrentRating(0);
+      }
+      return;
+    }
+
+    if (qid === "rating") {
+      const numericValue = Number(value);
+      setUserProfile((prev) => ({ ...prev, rating: numericValue }));
+      setCurrentRating(numericValue);
+      return;
+    }
+
     setUserProfile((prev) => {
       const newData = { ...prev };
       if (Array.isArray(newData[qid])) {
@@ -5098,86 +6217,138 @@ function TYFYSPlatform() {
       }
       return newData;
     });
-    if (qid === "rating") setCurrentRating(Number(value));
   };
 
-  const handleContactSubmit = async (contactData) => {
-    const { appPassword, confirmPassword, ...profileData } = contactData || {};
-    const mergedProfile = sanitizeUserProfile({ ...userProfile, ...profileData });
-    setUserProfile(mergedProfile);
-
-    if (ONBOARDING_STEPS[onboardingStep]?.type === "contact_form_part3" && mergedProfile.email && appPassword) {
-      setIsAuthSubmitting(true);
-      try {
-        await createClientLogin({
-          email: mergedProfile.email,
-          password: appPassword,
-          userProfile: mergedProfile,
-          appState: createPersistedSnapshot({ userProfile: mergedProfile })
-        });
-      } catch (error) {
-        if (/already exists/i.test(String(error?.message || ""))) {
-          setAuthStatusMessage(
-            "We found an existing TYFYS login for this email. Sign in to continue instead of creating a duplicate account."
-          );
-          returnToAccessLanding();
-        } else {
-          setAuthStatusMessage(
-            error?.message || "An error occurred while creating your account. Please try again."
-          );
-        }
-        setIsAuthSubmitting(false);
-        return;
-      }
-      setIsAuthSubmitting(false);
-    }
-
-    void syncZohoSignup(mergedProfile);
-    setOnboardingStep((prev) => prev + 1);
+  const acknowledgeCompliance = () => {
+    setActivationFlow((prev) => ({
+      ...prev,
+      complianceAcknowledged: true
+    }));
+    setOnboardingStep((prev) => Math.min(prev + 1, ONBOARDING_STEPS.length - 1));
   };
 
   const nextOnboardingStep = () => {
+    if (!isCurrentOnboardingStepComplete) {
+      return;
+    }
+
     if (onboardingStep < ONBOARDING_STEPS.length - 1) {
       setOnboardingStep((prev) => prev + 1);
-    } else {
-      completeOnboarding();
     }
   };
 
-  const completeOnboarding = () => {
+  const previousOnboardingStep = () => {
+    if (onboardingStep <= 0) return;
+    setOnboardingStep((prev) => Math.max(prev - 1, 0));
+  };
+
+  const completeOnboarding = ({ nextView = "welcome_guide", selectedPlan = "", message = "" } = {}) => {
+    const suggestedClaims = activationResults.conditions
+      .map((conditionName) => buildSuggestedClaim(conditionName))
+      .filter(Boolean);
+
     setOnboardingComplete(true);
+    setIntakeStarted(nextView === "intake_portal");
+    setActiveView(nextView);
+    setActivationFlow((prev) => ({
+      ...prev,
+      complianceAcknowledged: prev.complianceAcknowledged || isAuthenticated,
+      selectedPlan
+    }));
     clearLeadPrefill();
     void syncZohoSignup(userProfile);
-    if (userProfile.pain_points && userProfile.pain_points.length > 0) {
-      const newClaims = [];
-      userProfile.pain_points.forEach((point) => {
-        Object.values(DISABILITY_DATA).forEach((catList) => {
-          const condition = catList.find((c) => c.name === point);
-          if (condition) newClaims.push(buildSuggestedClaim(condition.name));
-        });
+    setAddedClaims((prev) => {
+      const merged = [...prev];
+      suggestedClaims.forEach((claim) => {
+        if (!merged.some((existing) => getClaimIdentityKey(existing) === getClaimIdentityKey(claim))) {
+          merged.push(claim);
+        }
       });
-      setAddedClaims((prev) => {
-        const merged = [...prev];
-        newClaims.forEach((claim) => {
-          if (!merged.some((existing) => getClaimIdentityKey(existing) === getClaimIdentityKey(claim))) {
-            merged.push(claim);
-          }
-        });
-        return merged;
-      });
-    }
+      return merged;
+    });
     if (!botMemory.current.hasWelcomed) {
-      // Updated welcome message
       setTimeout(
         () =>
           addMessage(
             "bot",
-            `Your account is ready, ${userProfile.firstName || userProfile.branch || "Veteran"}. Start in Records Intake to upload your key records, then use Claim Home to track the rest of your next steps.`
+            message ||
+              `Your TYFYS dashboard is ready. Start with the conditions and evidence we surfaced, then use Claim Home to track your next steps.`
           ),
         500
       );
       botMemory.current.hasWelcomed = true;
     }
+  };
+
+  const chooseSelfServePlan = () => {
+    if (nativeAppRuntime) {
+      completeOnboarding({
+        nextView: "welcome_guide",
+        selectedPlan: "Self-Guided Research",
+        message:
+          "Your TYFYS dashboard is ready. We saved your research summary and opened the next-step workspace so you can keep building your file in the app."
+      });
+      return;
+    }
+
+    completeOnboarding({
+      nextView: "welcome_guide",
+      selectedPlan: "Self-Serve Coaching",
+      message:
+        "Your TYFYS dashboard is ready. We saved your research summary and opened the next-step workspace while we start your self-serve coaching path."
+    });
+    startSecureCheckout({
+      planName: "Self-Serve Coaching",
+      planCode: "250_monthly",
+      unlockPremium: true
+    });
+  };
+
+  const chooseFullSupportPlan = () => {
+    if (nativeAppRuntime) {
+      completeOnboarding({
+        nextView: "strategy",
+        selectedPlan: "Guided Support Review",
+        message:
+          "Your TYFYS dashboard is ready. We saved your results and opened guided support next steps so TYFYS can review your file with you."
+      });
+      setShowSpecialistModal(true);
+      setIsBotOpen(true);
+      addMessage(
+        "bot",
+        "TYFYS saved your results and opened guided support next steps. Keep building your records in the app and the team can review your file with you."
+      );
+      return;
+    }
+
+    completeOnboarding({
+      nextView: "strategy",
+      selectedPlan: "Full Support Monthly Plan",
+      message:
+        "Your TYFYS dashboard is ready. We saved your results and opened support options so you can move straight into the full-support path."
+    });
+    startSecureCheckout({
+      planName: "Full Support Monthly Plan"
+    });
+  };
+
+  const handleSpecialistMembership = () => {
+    setShowSpecialistModal(false);
+    startSecureCheckout({
+      planName: "Premium Membership",
+      planCode: "250_monthly",
+      unlockPremium: true
+    });
+  };
+
+  const handleSpecialistSupportOptions = () => {
+    setShowSpecialistModal(false);
+    setActiveView("strategy");
+  };
+
+  const handleSpecialistDiscoveryCall = () => {
+    setShowSpecialistModal(false);
+    void openExternalUrl(`${TYFYS_SITE_BASE_URL}/contact.html`);
   };
 
   const handleProfileSave = (newData) => {
@@ -5216,7 +6387,9 @@ function TYFYSPlatform() {
       setIsBotOpen(true);
       addMessage(
         "bot",
-        `This ${planName} checkout is handled by a TYFYS specialist. Use "Book Discovery Call" and we will finish enrollment with you directly.`
+        nativeAppRuntime
+          ? `TYFYS saved your ${planName} request. Keep building your file in the app and the team can review support options with you directly.`
+          : `This ${planName} checkout is handled by a TYFYS specialist. Use "Book Discovery Call" and we will finish enrollment with you directly.`
       );
       return;
     }
@@ -5226,7 +6399,9 @@ function TYFYSPlatform() {
       setIsBotOpen(true);
       addMessage(
         "bot",
-        "Online checkout is not enabled on this site version yet. Use \"Book Discovery Call\" and we will finish enrollment with you directly."
+        nativeAppRuntime
+          ? "TYFYS will review support options with you directly in the mobile app after they look at your file."
+          : "Online checkout is not enabled on this site version yet. Use \"Book Discovery Call\" and we will finish enrollment with you directly."
       );
       return;
     }
@@ -5236,7 +6411,7 @@ function TYFYSPlatform() {
       setIsBotOpen(true);
       addMessage(
         "bot",
-        "Plan activation is handled by the TYFYS team in the mobile app. Use \"Book Discovery Call\" and we will finish enrollment with you directly."
+        "TYFYS will review support options with you directly inside the mobile workflow after they look at your file."
       );
       return;
     }
@@ -5290,7 +6465,9 @@ function TYFYSPlatform() {
       setIsBotOpen(true);
       addMessage(
         "bot",
-        "Secure checkout is temporarily unavailable. Please book a discovery call and we will complete enrollment manually."
+        nativeAppRuntime
+          ? "Support requests are temporarily unavailable right now. Keep working in TYFYS and the team can follow up once your file is reviewed."
+          : "Secure checkout is temporarily unavailable. Please book a discovery call and we will complete enrollment manually."
       );
     }
   };
@@ -5335,7 +6512,9 @@ function TYFYSPlatform() {
       else if (text.includes("cost") || text.includes("price"))
         addMessage(
           "bot",
-          "TYFYS membership is $250 per month. Full-service packages start at $3,500 for up to three claims and $5,500 for larger multi-claim support. We can also talk through payment plans."
+          nativeAppRuntime
+            ? "Support options are reviewed directly with the TYFYS team in the mobile app after they look at your file and records."
+            : "TYFYS membership is $250 per month. Full-service packages start at $3,500 for up to three claims and $5,500 for larger multi-claim support. We can also talk through payment plans."
         );
       else
         addMessage(
@@ -5349,7 +6528,7 @@ function TYFYSPlatform() {
   const handleAiBotSend = (e) => {
     e.preventDefault();
     if (!aiBotInput.trim()) return;
-    if (!isMember && dailyQuestionCount >= 3) {
+    if (!nativeAppRuntime && !isMember && dailyQuestionCount >= 3) {
       setAiBotMessages((prev) => [
         ...prev,
         { sender: "user", text: aiBotInput },
@@ -5364,7 +6543,9 @@ function TYFYSPlatform() {
     setAiBotMessages((prev) => [...prev, { sender: "user", text: aiBotInput }]);
     const query = aiBotInput;
     setAiBotInput("");
-    setDailyQuestionCount((prev) => prev + 1);
+    if (!nativeAppRuntime) {
+      setDailyQuestionCount((prev) => prev + 1);
+    }
     setTimeout(() => {
       let response =
         "I can help you organize the next step. Good records and clear facts usually make the rest of the claim process easier to follow.";
@@ -5382,25 +6563,25 @@ function TYFYSPlatform() {
   };
 
   const addClaim = () => {
-    if (!selectedCategory || !selectedCondition) return;
+    if (!selectedCategory || !selectedCondition) return false;
     if (selectedConditionRule?.mode === "measurement_required") {
       setCalculatorNotice({ type: "warning", text: selectedConditionRule.lockedMessage });
-      return;
+      return false;
     }
     if (selectedConditionNeedsProfile) {
       setCalculatorNotice({ type: "warning", text: "Select the exact VA rating basis before adding this condition." });
-      return;
+      return false;
     }
     if (!hasSelectedRatingOption) {
       setCalculatorNotice({ type: "warning", text: "Pick a supported rating from the official VA schedule first." });
-      return;
+      return false;
     }
 
     const selectedRatingValue = Number(newRatingInput);
     const selectedRatingOption = selectedRatingOptions.find((option) => option.value === selectedRatingValue);
     if (!selectedRatingContext || !selectedRatingOption) {
       setCalculatorNotice({ type: "warning", text: "Pick a supported rating from the official VA schedule first." });
-      return;
+      return false;
     }
 
     const claimsForConflict =
@@ -5408,7 +6589,7 @@ function TYFYSPlatform() {
     const claimConflict = getClaimConflict(claimsForConflict, selectedCondition, selectedRatingProfileId);
     if (claimConflict) {
       setCalculatorNotice({ type: "warning", text: claimConflict.message });
-      return;
+      return false;
     }
 
     const conditionData = DISABILITY_DATA[selectedCategory].find((c) => c.name === selectedCondition);
@@ -5455,12 +6636,102 @@ function TYFYSPlatform() {
     setSelectedCondition("");
     setSelectedRatingProfileId("");
     setEditingClaimIndex(null);
+    return true;
   };
   const removeClaim = (idx) => {
     const newClaims = [...addedClaims];
     newClaims.splice(idx, 1);
     setAddedClaims(newClaims);
     setEditingClaimIndex(null);
+  };
+
+  const resetPublicCalculatorDraft = ({ nextClaimType = claimType, keepCategory = false } = {}) => {
+    setSelectedCategory(keepCategory ? selectedCategory : "");
+    setSelectedCondition("");
+    setSelectedRatingProfileId("");
+    setNewRatingInput("");
+    setClaimType(nextClaimType);
+    setEditingClaimIndex(null);
+    setCalculatorNotice(null);
+  };
+
+  const loadClaimIntoCalculatorDraft = (claim, idx) => {
+    const nextCategory = findConditionCategoryName(claim.name);
+    setSelectedCategory(nextCategory);
+    setSelectedCondition(claim.name);
+    setSelectedRatingProfileId(claim.ratingProfileId || "");
+    setNewRatingInput(isClaimRatingSelected(claim.rating) ? String(claim.rating) : "");
+    setClaimType(claim.type || "increase");
+    setEditingClaimIndex(idx);
+    setCalculatorNotice(null);
+  };
+
+  const handlePublicCalculatorQuickStart = (conditionName) => {
+    const nextCategory = findConditionCategoryName(conditionName);
+    if (!nextCategory) return;
+    setSelectedCategory(nextCategory);
+    setSelectedCondition(conditionName);
+    setSelectedRatingProfileId("");
+    setCalculatorNotice(null);
+    setCalculatorWizardStep(3);
+  };
+
+  const handlePublicCalculatorEditClaim = (claim, idx) => {
+    loadClaimIntoCalculatorDraft(claim, idx);
+    setCalculatorWizardStep(4);
+  };
+
+  const goToPublicCalculatorStep = (nextStep) => {
+    const clampedStep = Math.min(Math.max(Number(nextStep) || 1, 1), PUBLIC_CALCULATOR_WIZARD_STEPS.length);
+    setCalculatorWizardStep(clampedStep);
+  };
+
+  const handlePublicCalculatorBack = () => {
+    if (calculatorWizardStep <= 1) return;
+    if (calculatorWizardStep === 5 && !addedClaims.length) {
+      setCalculatorWizardStep(4);
+      return;
+    }
+    setCalculatorWizardStep((prev) => Math.max(prev - 1, 1));
+  };
+
+  const handlePublicCalculatorContinue = () => {
+    if (calculatorWizardStep === 1) {
+      setCalculatorWizardStep(2);
+      return;
+    }
+    if (calculatorWizardStep === 2) {
+      if (!draftClaimValidation.conditionReady) {
+        setCalculatorNotice({ type: "warning", text: draftClaimValidation.checklist[0] });
+        return;
+      }
+      setCalculatorWizardStep(3);
+      return;
+    }
+    if (calculatorWizardStep === 3) {
+      if (draftClaimValidation.blockedMessage) {
+        setCalculatorNotice({ type: "warning", text: draftClaimValidation.blockedMessage });
+        return;
+      }
+      if (!draftClaimValidation.ratingReady) {
+        setCalculatorNotice({ type: "warning", text: draftClaimValidation.checklist[0] });
+        return;
+      }
+      setCalculatorWizardStep(4);
+      return;
+    }
+    if (calculatorWizardStep === 4) {
+      const didAddClaim = addClaim();
+      if (didAddClaim) {
+        setCalculatorWizardStep(5);
+        setHasCompletedFirstEstimate(true);
+      }
+    }
+  };
+
+  const startAnotherPublicCalculatorCondition = () => {
+    resetPublicCalculatorDraft();
+    setCalculatorWizardStep(2);
   };
 
   const applyIntakeRequirementPreset = (requirement) => {
@@ -5854,8 +7125,10 @@ function TYFYSPlatform() {
       },
       strategy: {
         eyebrow: "Support options",
-        title: "Support Options",
-        subtitle: "Compare TYFYS membership and full-service claim support."
+        title: nativeAppRuntime ? "Support Review" : "Support Options",
+        subtitle: nativeAppRuntime
+          ? "Continue using TYFYS tools in the app or request a direct file review from the TYFYS team."
+          : "Compare TYFYS membership and full-service claim support."
       },
       intake_portal: {
         eyebrow: "Records intake",
@@ -5863,9 +7136,11 @@ function TYFYSPlatform() {
         subtitle: "Upload your service and VA records so TYFYS can review the right file first."
       },
       ai_claims: {
-        eyebrow: "Guided support",
+        eyebrow: nativeAppRuntime ? "Claim guidance" : "Guided support",
         title: "Claim Guide",
-        subtitle: "Ask Angela where to start, what records matter, and what tool to use next."
+        subtitle: nativeAppRuntime
+          ? "Ask TYFYS where to start, which records matter, and what tool to use next."
+          : "Ask Angela where to start, what records matter, and what tool to use next."
       }
     }[activeView] || {
       eyebrow: "TYFYS App",
@@ -5882,14 +7157,17 @@ function TYFYSPlatform() {
   }, [onboardingComplete, onboardingStep, completeOnboarding]);
 
   useEffect(() => {
-    document.body.classList.toggle("onboarding-active", !onboardingComplete || showAccessLanding);
+    document.body.classList.toggle(
+      "onboarding-active",
+      !publicCalculatorMode && (((!onboardingComplete && !isAuthenticated) || showAccessLanding))
+    );
     return () => {
       document.body.classList.remove("onboarding-active");
     };
-  }, [onboardingComplete, showAccessLanding]);
+  }, [isAuthenticated, onboardingComplete, showAccessLanding, publicCalculatorMode]);
 
   useEffect(() => {
-    if (onboardingComplete) return;
+    if (publicCalculatorMode || onboardingComplete || isAuthenticated) return;
 
     const scrollContainer = onboardingScrollRef.current;
     if (!scrollContainer) return;
@@ -5899,7 +7177,11 @@ function TYFYSPlatform() {
     });
 
     return () => window.cancelAnimationFrame(frameId);
-  }, [onboardingComplete, onboardingStep]);
+  }, [isAuthenticated, onboardingComplete, onboardingStep, publicCalculatorMode]);
+
+  useEffect(() => {
+    document.title = publicCalculatorMode ? "TYFYS VA Rating Calculator" : "TYFYS App";
+  }, [publicCalculatorMode]);
 
   useEffect(() => {
     if (!selectedSecureThreadId) return;
@@ -5949,234 +7231,1105 @@ function TYFYSPlatform() {
         onVerifyPasswordResetAccount={handlePasswordResetAccountVerification}
         onCompletePasswordReset={handlePasswordResetComplete}
         onClearPasswordReset={clearPasswordResetQuery}
-        onCreateAccount={() => {
+        onStartClaim={() => {
           setAuthStatusMessage("");
           clearPasswordResetQuery();
-          startSystem();
+          startSystem("claim");
+        }}
+        onStartResearch={() => {
+          setAuthStatusMessage("");
+          clearPasswordResetQuery();
+          startSystem("research");
         }}
       />
     );
   }
 
+  const currentWizardStepMeta = PUBLIC_CALCULATOR_WIZARD_STEPS[calculatorWizardStep - 1] || PUBLIC_CALCULATOR_WIZARD_STEPS[0];
+  const publicResultsReady = addedClaims.length > 0;
+  const selectedDraftRatingOption =
+    newRatingInput !== "" ? selectedRatingOptions.find((option) => option.value === Number(newRatingInput)) || null : null;
+  const publicWizardPrimaryDisabled =
+    calculatorWizardStep === 1
+      ? false
+      : calculatorWizardStep === 2
+        ? !draftClaimValidation.conditionReady
+        : calculatorWizardStep === 3
+          ? !draftClaimValidation.ratingReady
+          : calculatorWizardStep === 4
+            ? !draftClaimValidation.reviewReady
+            : false;
+  const publicWizardPrimaryLabel =
+    calculatorWizardStep === 4
+      ? editingClaimIndex !== null
+        ? "Update condition"
+        : "Add condition"
+      : "Continue";
+
+  const renderPublicCalculatorClaimsList = (title, subtitle, emptyTitle, emptyCopy) => (
+    <section className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h3 className="text-xl font-black text-slate-900">{title}</h3>
+          <p className="text-sm text-slate-500">{subtitle}</p>
+        </div>
+        <span className="text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
+          {addedClaims.length} condition{addedClaims.length === 1 ? "" : "s"}
+        </span>
+      </div>
+
+      {!addedClaims.length ? (
+        <div className="mt-5 rounded-[1.5rem] border border-dashed border-slate-200 bg-slate-50 p-8 text-center">
+          <Icons.Calculator className="mx-auto h-10 w-10 text-slate-300" />
+          <p className="mt-3 font-bold text-slate-800">{emptyTitle}</p>
+          <p className="mt-2 text-sm text-slate-500">{emptyCopy}</p>
+        </div>
+      ) : (
+        <div className="mt-5 space-y-3">
+          {addedClaims.map((claim, idx) => (
+            <div
+              key={`${claim.name}-${claim.ratingProfileId || "base"}-${idx}`}
+              className="rounded-[1.5rem] border border-slate-200 bg-slate-50/70 p-4"
+            >
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span
+                      className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider ${
+                        claim.type === "new" ? "bg-blue-100 text-blue-700" : "bg-green-100 text-green-700"
+                      }`}
+                    >
+                      {getClaimTypeLabel(claim.type)}
+                    </span>
+                    <span
+                      className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider ${
+                        isClaimRatingSelected(claim.rating)
+                          ? "bg-white text-slate-700 ring-1 ring-slate-200"
+                          : "bg-amber-100 text-amber-800"
+                      }`}
+                    >
+                      {formatClaimRating(claim.rating)}
+                    </span>
+                    {claim.diagnosticCode && (
+                      <span className="rounded-full bg-white px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-600 ring-1 ring-slate-200">
+                        DC {claim.diagnosticCode}
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-3 text-lg font-bold text-slate-900">{claim.name}</p>
+                  <p className="text-sm text-slate-500">{claim.dbq}</p>
+                  {claim.ratingProfileLabel && <p className="mt-1 text-sm text-slate-500">{claim.ratingProfileLabel}</p>}
+                  {claim.ratingSummary && <p className="mt-3 text-sm leading-relaxed text-slate-700">{claim.ratingSummary}</p>}
+                </div>
+                <div className="flex items-center gap-2 sm:pl-4">
+                  <button
+                    type="button"
+                    onClick={() => handlePublicCalculatorEditClaim(claim, idx)}
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-900"
+                  >
+                    <Icons.Edit className="h-4 w-4" />
+                    <span>Edit</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => removeClaim(idx)}
+                    aria-label={`Remove ${claim.name}`}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-500 transition-colors hover:border-red-200 hover:text-red-600"
+                  >
+                    <Icons.Trash className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+
+  const renderPublicCalculatorWizard = () => (
+    <div className="space-y-6 animate-fadeIn">
+      <section className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-6 py-7 text-white shadow-2xl md:px-8 md:py-9">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(34,197,94,0.22),_transparent_38%),radial-gradient(circle_at_bottom_left,_rgba(59,130,246,0.18),_transparent_34%)]" />
+        <div className="relative">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.24em] text-slate-200">
+              Public calculator
+            </span>
+            <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.24em] text-emerald-200">
+              {hasCompletedFirstEstimate ? "Estimate ready" : "About 2 minutes"}
+            </span>
+          </div>
+          <div className="mt-5 max-w-3xl">
+            <h2 className="text-3xl font-black tracking-tight text-white md:text-4xl">Estimate your projected VA rating in a few steps.</h2>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
+              Start with your current rating, add one condition at a time, and see how the official VA math changes your projected result.
+            </p>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3 text-sm">
+            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-slate-200">
+              <p className="font-bold text-white">What this does</p>
+              <p className="mt-1 text-slate-300">Models condition-specific VA percentages and combined-rating math.</p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-slate-200">
+              <p className="font-bold text-white">First step</p>
+              <p className="mt-1 text-slate-300">Enter your current rating and household details, then pick a condition.</p>
+            </div>
+          </div>
+          <p className="mt-6 text-sm font-medium text-emerald-100">
+            Uses official VA combined-rating rules and current compensation tables.
+          </p>
+          <button
+            type="button"
+            onClick={() => setExpandCalcHelp((prev) => !prev)}
+            className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-white transition-colors hover:text-emerald-200"
+          >
+            <Icons.Info className="h-4 w-4" />
+            <span>{expandCalcHelp ? "Hide how TYFYS calculates this" : "How TYFYS calculates this"}</span>
+          </button>
+          {expandCalcHelp && (
+            <div className="mt-4 rounded-[1.5rem] border border-white/10 bg-white/5 p-5 text-sm text-slate-200">
+              <ul className="space-y-2">
+                <li>Each added percentage applies to the remaining healthy efficiency, not the original 100%.</li>
+                <li>The VA rounds after each step, then rounds to the nearest 10% at the end.</li>
+                <li>Some conditions need an exact diagnostic basis or official measurements before the VA assigns a percentage.</li>
+              </ul>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <a href={COMBINED_RATINGS_SOURCE_URL} target="_blank" rel="noreferrer" className="font-bold text-emerald-200 hover:text-emerald-100">
+                  38 CFR 4.25
+                </a>
+                <a href={PYRAMIDING_SOURCE_URL} target="_blank" rel="noreferrer" className="font-bold text-emerald-200 hover:text-emerald-100">
+                  38 CFR 4.14
+                </a>
+                <a
+                  href={VA_COMPENSATION_SOURCE_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-bold text-emerald-200 hover:text-emerald-100"
+                >
+                  VA compensation rates
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {publicResultsReady && (
+        <section className="sticky top-4 z-20 rounded-[1.5rem] border border-slate-200 bg-white/95 p-4 shadow-lg backdrop-blur">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Estimate summary</p>
+              <p className="mt-1 text-sm text-slate-600">Your draft updates live as you add or edit conditions.</p>
+            </div>
+            <div className="grid grid-cols-3 gap-3 sm:w-auto">
+              <div className="rounded-2xl bg-slate-900 px-4 py-3 text-white">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Current</p>
+                <p className="mt-1 text-xl font-black">{currentRating}%</p>
+              </div>
+              <div className="rounded-2xl bg-emerald-50 px-4 py-3 text-emerald-950 ring-1 ring-emerald-100">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Projected</p>
+                <p className="mt-1 text-xl font-black">{calculation.afterRating || currentRating}%</p>
+              </div>
+              <div className="rounded-2xl bg-blue-50 px-4 py-3 text-blue-950 ring-1 ring-blue-100">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-blue-700">Monthly increase</p>
+                <p className="mt-1 text-xl font-black">+{formatMoney(calculation.diffMonthly)}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {calculatorNotice && (
+        <div
+          className={`rounded-[1.5rem] border p-4 text-sm ${
+            calculatorNotice.type === "success"
+              ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+              : "border-amber-200 bg-amber-50 text-amber-900"
+          }`}
+        >
+          {calculatorNotice.text}
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="space-y-6 pb-24 md:pb-0">
+          <section className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm md:p-7">
+            <div className="overflow-x-auto pb-2">
+              <div className="flex min-w-max gap-3">
+                {PUBLIC_CALCULATOR_WIZARD_STEPS.map((step) => {
+                  const isActive = step.id === calculatorWizardStep;
+                  const isComplete = step.id < calculatorWizardStep || (step.id === 5 && publicResultsReady);
+                  const isClickable = step.id < calculatorWizardStep || (step.id === 5 && publicResultsReady);
+                  return (
+                    <button
+                      key={step.key}
+                      type="button"
+                      disabled={!isClickable}
+                      onClick={() => goToPublicCalculatorStep(step.id)}
+                      className={`rounded-[1.25rem] border px-4 py-3 text-left transition ${
+                        isActive
+                          ? "border-slate-900 bg-slate-900 text-white"
+                          : isComplete
+                            ? "border-slate-200 bg-slate-50 text-slate-900 hover:border-slate-300"
+                            : "border-slate-200 bg-white text-slate-400"
+                      } ${isClickable ? "" : "cursor-default"}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-black ${
+                            isActive
+                              ? "bg-white text-slate-900"
+                              : isComplete
+                                ? "bg-emerald-100 text-emerald-700"
+                                : "bg-slate-100 text-slate-400"
+                          }`}
+                        >
+                          {isComplete && !isActive ? <Icons.Check className="h-4 w-4" /> : step.id}
+                        </span>
+                        <div>
+                          <p className="text-sm font-black">{step.label}</p>
+                          <p className={`text-xs ${isActive ? "text-slate-300" : isComplete ? "text-slate-500" : "text-slate-400"}`}>{step.helper}</p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="mt-7">
+              <div className="mb-6">
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Step {currentWizardStepMeta.id}</p>
+                <h3 className="mt-2 text-2xl font-black text-slate-900">{currentWizardStepMeta.label}</h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">{currentWizardStepMeta.helper}</p>
+              </div>
+
+              {calculatorWizardStep === 1 && (
+                <div className="space-y-5">
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <div>
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Current rating</label>
+                      <select
+                        value={currentRating}
+                        onChange={(e) => setCurrentRating(parseInt(e.target.value, 10))}
+                        className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
+                      >
+                        {RATING_OPTIONS.map((rating) => (
+                          <option key={rating} value={rating}>
+                            {rating}%
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Spouse</label>
+                      <select
+                        value={hasSpouse ? "yes" : "no"}
+                        onChange={(e) => setHasSpouse(e.target.value === "yes")}
+                        className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
+                      >
+                        <option value="no">No spouse</option>
+                        <option value="yes">Has spouse</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Children under 18</label>
+                      <select
+                        value={childCount}
+                        onChange={(e) => setChildCount(parseInt(e.target.value, 10))}
+                        className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
+                      >
+                        {[0, 1, 2, 3, 4, 5].map((count) => (
+                          <option key={count} value={count}>
+                            {count}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-blue-100 bg-blue-50 p-5 text-sm text-blue-950">
+                    <p className="font-bold">What happens next</p>
+                    <p className="mt-2 leading-relaxed">
+                      After this baseline, you’ll pick one condition, choose the exact VA-supported rating, and then review the projected change before it is added.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {calculatorWizardStep === 2 && (
+                <div className="space-y-5">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Quick start</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {publicCalculatorQuickStarts.map((item) => (
+                        <button
+                          key={item.condition}
+                          type="button"
+                          onClick={() => handlePublicCalculatorQuickStart(item.condition)}
+                          className={`rounded-full border px-4 py-2 text-sm font-bold transition ${
+                            selectedCondition === item.condition
+                              ? "border-slate-900 bg-slate-900 text-white"
+                              : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300"
+                          }`}
+                        >
+                          {item.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div>
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Category</label>
+                      <select
+                        value={selectedCategory}
+                        onChange={(e) => {
+                          setSelectedCategory(e.target.value);
+                          setSelectedCondition("");
+                          setSelectedRatingProfileId("");
+                          setNewRatingInput("");
+                          setCalculatorNotice(null);
+                        }}
+                        className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
+                      >
+                        <option value="">Choose a category...</option>
+                        {Object.keys(DISABILITY_DATA).map((category) => (
+                          <option key={category} value={category}>
+                            {category}
+                          </option>
+                        ))}
+                      </select>
+                      <p className="mt-2 text-sm text-slate-500">
+                        {draftClaimValidation.needsCategory ? "Choose a category first." : "Category selected."}
+                      </p>
+                    </div>
+                    <div>
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Condition</label>
+                      <select
+                        value={selectedCondition}
+                        onChange={(e) => {
+                          setSelectedCondition(e.target.value);
+                          setSelectedRatingProfileId("");
+                          setCalculatorNotice(null);
+                        }}
+                        disabled={!selectedCategory}
+                        className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 disabled:bg-slate-100 disabled:text-slate-400"
+                      >
+                        <option value="">{selectedCategory ? "Choose a condition..." : "Choose a category first"}</option>
+                        {selectedCategory &&
+                          DISABILITY_DATA[selectedCategory].map((condition) => (
+                            <option key={condition.name} value={condition.name}>
+                              {condition.name}
+                            </option>
+                          ))}
+                      </select>
+                      <p className="mt-2 text-sm text-slate-500">
+                        {!selectedCategory
+                          ? "Choose a category first."
+                          : draftClaimValidation.needsCondition
+                            ? "Choose the condition you want to model."
+                            : "Condition selected."}
+                      </p>
+                    </div>
+                  </div>
+                  {selectedConditionRule && (
+                    <div className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-5">
+                      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Selected condition</p>
+                          <h4 className="mt-2 text-lg font-black text-slate-900">{selectedCondition}</h4>
+                          <p className="mt-1 text-sm text-slate-600">{selectedConditionRule.ruleTitle}</p>
+                        </div>
+                        <a
+                          href={selectedConditionRule.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-sm font-bold text-blue-700 hover:text-blue-800"
+                        >
+                          Open official source
+                        </a>
+                      </div>
+                      <div className="mt-4 space-y-2 text-sm text-slate-600">
+                        {selectedConditionRule.mode === "profiles" && (
+                          <p>This condition needs an exact rating basis before TYFYS can show the allowed percentages.</p>
+                        )}
+                        {selectedConditionRule.mode === "measurement_required" && (
+                          <p>{selectedConditionRule.lockedMessage}</p>
+                        )}
+                        {selectedConditionRule.notes?.slice(0, 2).map((note) => (
+                          <p key={note}>{note}</p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {calculatorWizardStep === 3 && (
+                <div className="space-y-5">
+                  {!selectedCondition ? (
+                    <div className="rounded-[1.5rem] border border-dashed border-slate-200 bg-slate-50 p-8 text-center">
+                      <p className="font-bold text-slate-800">Choose a condition first.</p>
+                      <p className="mt-2 text-sm text-slate-500">Go back one step and pick the condition you want to model.</p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-5">
+                        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                          <div>
+                            <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Rating rule</p>
+                            <h4 className="mt-2 text-lg font-black text-slate-900">{selectedCondition}</h4>
+                            <p className="mt-1 text-sm text-slate-600">
+                              {selectedRatingContext?.label || selectedConditionRule?.ruleTitle}
+                            </p>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            <span className="rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-600 ring-1 ring-slate-200">
+                              DC {selectedRatingContext?.diagnosticCode || selectedConditionRule?.diagnosticCode || "Varies"}
+                            </span>
+                            {(selectedRatingContext?.sourceUrl || selectedConditionRule?.sourceUrl) && (
+                              <a
+                                href={selectedRatingContext?.sourceUrl || selectedConditionRule?.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-blue-700 ring-1 ring-blue-100"
+                              >
+                                Open source
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {selectedConditionRule?.mode === "profiles" && (
+                        <div>
+                          <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Rating basis</label>
+                          <select
+                            value={selectedRatingProfileId}
+                            onChange={(e) => {
+                              setSelectedRatingProfileId(e.target.value);
+                              setCalculatorNotice(null);
+                            }}
+                            className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3"
+                          >
+                            <option value="">Select the exact VA rating basis...</option>
+                            {selectedConditionRule.profiles.map((profile) => (
+                              <option key={profile.id} value={profile.id}>
+                                {profile.label}
+                              </option>
+                            ))}
+                          </select>
+                          <p className="mt-2 text-sm text-slate-500">
+                            {selectedConditionNeedsProfile
+                              ? "This condition needs an exact rating basis."
+                              : "Rating basis selected."}
+                          </p>
+                        </div>
+                      )}
+
+                      {draftClaimValidation.blockedMessage ? (
+                        <div className="rounded-[1.5rem] border border-amber-200 bg-amber-50 p-5 text-amber-950">
+                          <p className="font-bold">This tool will not guess this percentage.</p>
+                          <p className="mt-2 text-sm leading-relaxed">{draftClaimValidation.blockedMessage}</p>
+                          {(selectedConditionRule?.sourceUrl || selectedRatingContext?.sourceUrl) && (
+                            <a
+                              href={selectedConditionRule?.sourceUrl || selectedRatingContext?.sourceUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-amber-900 hover:text-amber-700"
+                            >
+                              <Icons.ArrowRight className="h-4 w-4" />
+                              <span>Open the official rating source</span>
+                            </a>
+                          )}
+                        </div>
+                      ) : (
+                        <>
+                          <div>
+                            <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Rating to model</label>
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              {selectedRatingOptions.length ? (
+                                selectedRatingOptions.map((option) => {
+                                  const isSelected = newRatingInput !== "" && Number(newRatingInput) === option.value;
+                                  return (
+                                    <button
+                                      key={option.value}
+                                      type="button"
+                                      onClick={() => setNewRatingInput(String(option.value))}
+                                      className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                                        isSelected
+                                          ? "bg-slate-900 text-white"
+                                          : "bg-slate-50 text-slate-700 ring-1 ring-slate-200 hover:bg-slate-100"
+                                      }`}
+                                    >
+                                      {option.value}%
+                                    </button>
+                                  );
+                                })
+                              ) : (
+                                <p className="text-sm text-slate-500">Select a rating basis to unlock the allowed VA percentages.</p>
+                              )}
+                            </div>
+                            <p className="mt-2 text-sm text-slate-500">
+                              {draftClaimValidation.needsProfile
+                                ? "This condition needs an exact rating basis."
+                                : draftClaimValidation.needsRating
+                                  ? "Choose a supported VA percentage before you continue."
+                                  : "Percentage selected."}
+                            </p>
+                          </div>
+                          <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5">
+                            <p className="text-xs font-bold uppercase tracking-wider text-slate-500">What this rating means</p>
+                            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                              {selectedDraftRatingOption?.summary || "Pick one of the supported rating levels above."}
+                            </p>
+                          </div>
+                        </>
+                      )}
+
+                      <div className="space-y-2 text-sm text-slate-600">
+                        {selectedConditionNotes.map((note) => (
+                          <p key={note}>{note}</p>
+                        ))}
+                        {selectedConditionRule?.exclusivityMessage && (
+                          <p className="font-medium text-amber-800">{selectedConditionRule.exclusivityMessage}</p>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+
+              {calculatorWizardStep === 4 && (
+                <div className="space-y-5">
+                  <div className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-5">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-600 ring-1 ring-slate-200">
+                        {draftClaim.category || "Choose a category"}
+                      </span>
+                      <span
+                        className={`rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider ${
+                          draftClaim.claimType === "new" ? "bg-blue-100 text-blue-700" : "bg-green-100 text-green-700"
+                        }`}
+                      >
+                        {getClaimTypeLabel(draftClaim.claimType)}
+                      </span>
+                      {selectedConditionRule?.diagnosticCode && (
+                        <span className="rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-600 ring-1 ring-slate-200">
+                          DC {selectedRatingContext?.diagnosticCode || selectedConditionRule.diagnosticCode}
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="mt-4 text-xl font-black text-slate-900">
+                      {draftClaim.condition || "Choose the condition you want to add"}
+                    </h4>
+                    <p className="mt-2 text-sm text-slate-600">{getClaimTypeSummary(draftClaim.claimType)}</p>
+                    {selectedRatingContext?.label && <p className="mt-3 text-sm text-slate-600">Rating basis: {selectedRatingContext.label}</p>}
+                    <div className="mt-4 grid gap-4 md:grid-cols-2">
+                      <div className="rounded-[1.25rem] bg-white p-4 ring-1 ring-slate-200">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Rating to model</p>
+                        <p className="mt-2 text-2xl font-black text-slate-900">
+                          {hasSelectedRatingOption ? `${draftClaim.rating}%` : "Needs rating"}
+                        </p>
+                      </div>
+                      <div className="rounded-[1.25rem] bg-white p-4 ring-1 ring-slate-200">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Readiness</p>
+                        <ul className="mt-2 space-y-2 text-sm text-slate-700">
+                          {draftClaimValidation.checklist.map((item) => (
+                            <li key={item} className="flex gap-2">
+                              <span className="mt-0.5 text-slate-400">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                    {selectedDraftRatingOption?.summary && (
+                      <div className="mt-4 rounded-[1.25rem] border border-slate-200 bg-white p-4">
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Rating summary</p>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-700">{selectedDraftRatingOption.summary}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5">
+                    <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Claim status</p>
+                    <div className="mt-3 grid gap-3 md:grid-cols-2">
+                      <button
+                        type="button"
+                        onClick={() => setClaimType("increase")}
+                        className={`rounded-[1.25rem] border p-4 text-left transition ${
+                          claimType === "increase" ? "border-green-300 bg-green-50" : "border-slate-200 hover:border-slate-300"
+                        }`}
+                      >
+                        <p className="font-bold text-slate-900">Increase claim</p>
+                        <p className="mt-2 text-sm text-slate-600">Already service connected and worse now.</p>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setClaimType("new")}
+                        className={`rounded-[1.25rem] border p-4 text-left transition ${
+                          claimType === "new" ? "border-blue-300 bg-blue-50" : "border-slate-200 hover:border-slate-300"
+                        }`}
+                      >
+                        <p className="font-bold text-slate-900">New condition</p>
+                        <p className="mt-2 text-sm text-slate-600">The VA has never rated this condition before.</p>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {calculatorWizardStep === 5 && (
+                <div className="space-y-6">
+                  <div className="rounded-[1.75rem] bg-slate-900 p-6 text-white">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Projected result</p>
+                    <div className="mt-4 grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+                      <div>
+                        <h4 className="text-3xl font-black md:text-4xl">{calculation.afterRating || currentRating}% projected rating</h4>
+                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">
+                          This estimate uses the conditions you added and the official combined-rating method. It is most useful for understanding direction and rough compensation impact before you file.
+                        </p>
+                      </div>
+                      <div className="rounded-[1.5rem] bg-white/10 p-4">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-300">Monthly increase</p>
+                        <p className="mt-2 text-3xl font-black text-white">+{formatMoney(calculation.diffMonthly)}</p>
+                      </div>
+                    </div>
+                    <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                      <button
+                        type="button"
+                        onClick={startAnotherPublicCalculatorCondition}
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-white/15"
+                      >
+                        <Icons.Plus className="h-4 w-4" />
+                        <span>Add another condition</span>
+                      </button>
+                      <a
+                        href={`${TYFYS_SITE_BASE_URL}/contact.html`}
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-yellow-500 px-5 py-3 text-sm font-bold text-slate-950 transition-colors hover:bg-yellow-400"
+                      >
+                        <Icons.ArrowRight className="h-4 w-4" />
+                        <span>Talk Through My Results</span>
+                      </a>
+                      <a
+                        href={`${TYFYS_SITE_BASE_URL}/contact.html`}
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-white/15"
+                      >
+                        <Icons.Calendar className="h-4 w-4" />
+                        <span>Book a Call</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <div className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-5">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Current</p>
+                      <p className="mt-2 text-3xl font-black text-slate-900">{currentRating}%</p>
+                    </div>
+                    <div className="rounded-[1.5rem] border border-emerald-100 bg-emerald-50 p-5">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Projected</p>
+                      <p className="mt-2 text-3xl font-black text-emerald-950">{calculation.afterRating || currentRating}%</p>
+                    </div>
+                    <div className="rounded-[1.5rem] border border-blue-100 bg-blue-50 p-5">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-blue-700">Five-year value</p>
+                      <p className="mt-2 text-3xl font-black text-blue-950">{formatMoney(calculation.diff5Year)}</p>
+                    </div>
+                  </div>
+
+                  {renderPublicCalculatorClaimsList(
+                    "Conditions in this estimate",
+                    "Edit or remove any condition, then the projection will update automatically.",
+                    "No conditions added yet.",
+                    "Add a condition to generate a projected result."
+                  )}
+
+                  <section className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">
+                    <button
+                      type="button"
+                      onClick={() => setExpandCalcBreakdown((prev) => !prev)}
+                      className="flex w-full items-center justify-between gap-4 text-left"
+                    >
+                      <div>
+                        <h3 className="text-xl font-black text-slate-900">See the calculation</h3>
+                        <p className="mt-1 text-sm text-slate-500">Expand the exact VA math sequence used in this estimate.</p>
+                      </div>
+                      <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-600">
+                        {expandCalcBreakdown ? "Hide" : "Show"}
+                      </span>
+                    </button>
+                    {expandCalcBreakdown && (
+                      <div className="mt-5 space-y-3">
+                        {!vaMathDetail.steps.length ? (
+                          <p className="text-sm text-slate-500">Add at least one condition with a supported percentage to see the rating sequence.</p>
+                        ) : (
+                          vaMathDetail.steps.map((step, idx) => (
+                            <div key={step.id} className="rounded-[1.25rem] border border-slate-200 bg-slate-50 p-4">
+                              <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                                <p className="font-bold text-slate-900">Step {idx + 1}: add {step.rating}%</p>
+                                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                                  rounds to {step.roundedCombined}%
+                                </span>
+                              </div>
+                              <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                                Starting combined rating <strong>{step.beforeCombined}%</strong> leaves <strong>{step.remainingEfficiency}%</strong> healthy efficiency. Applying {step.rating}% to that remainder adds <strong>{step.exactIncrease.toFixed(1)} points</strong>, which rounds to <strong>{step.roundedCombined}%</strong>.
+                              </p>
+                            </div>
+                          ))
+                        )}
+                      </div>
+                    )}
+                  </section>
+
+                  <section className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">
+                    <button
+                      type="button"
+                      onClick={() => setExpandCalcAdvancedInsights((prev) => !prev)}
+                      className="flex w-full items-center justify-between gap-4 text-left"
+                    >
+                      <div>
+                        <h3 className="text-xl font-black text-slate-900">Advanced insight</h3>
+                        <p className="mt-1 text-sm text-slate-500">Compensation snapshot and path-to-100 guidance for this scenario.</p>
+                      </div>
+                      <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-600">
+                        {expandCalcAdvancedInsights ? "Hide" : "Show"}
+                      </span>
+                    </button>
+                    {expandCalcAdvancedInsights && (
+                      <div className="mt-5 space-y-5">
+                        <div className="grid gap-4 md:grid-cols-2">
+                          <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50 p-4">
+                            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Monthly change</p>
+                            <p className="mt-2 text-3xl font-black text-slate-900">+{formatMoney(calculation.diffMonthly)}</p>
+                          </div>
+                          <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50 p-4">
+                            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Current ceiling</p>
+                            <p className="mt-2 text-3xl font-black text-slate-900">{pathTo100Guide.currentCombined}%</p>
+                          </div>
+                        </div>
+                        <div className="grid gap-4 md:grid-cols-2">
+                          <div className="rounded-[1.25rem] border border-slate-200 p-4">
+                            <p className="font-bold text-slate-900">Single-claim path</p>
+                            <p className="mt-2 text-sm text-slate-600">
+                              {pathTo100Guide.singleStep
+                                ? `One additional ${pathTo100Guide.singleStep[0]}% rating would push this scenario to 100%.`
+                                : "No single supported condition rating in this tool reaches 100% from this scenario."}
+                            </p>
+                          </div>
+                          <div className="rounded-[1.25rem] border border-slate-200 p-4">
+                            <p className="font-bold text-slate-900">Two-claim path</p>
+                            <p className="mt-2 text-sm text-slate-600">
+                              {pathTo100Guide.doubleStep
+                                ? `A pair like ${pathTo100Guide.doubleStep[0]}% + ${pathTo100Guide.doubleStep[1]}% would get this scenario to 100%.`
+                                : "No simple two-claim combination was found from the supported ratings in this tool."}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="rounded-[1.25rem] border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950">
+                          <p className="font-bold">Important limitation</p>
+                          <p className="mt-2 leading-relaxed">
+                            If your existing VA rating already includes many individual conditions, this estimate can overstate or understate the exact path because it starts from your rounded current percentage.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </section>
+                </div>
+              )}
+            </div>
+
+            {calculatorWizardStep < 5 && (
+              <div className="mt-8 hidden items-center justify-between gap-3 md:flex">
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handlePublicCalculatorBack}
+                    disabled={calculatorWizardStep === 1}
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    <Icons.ChevronLeft className="h-4 w-4" />
+                    <span>Back</span>
+                  </button>
+                  {publicResultsReady && (
+                    <button
+                      type="button"
+                      onClick={() => setCalculatorWizardStep(5)}
+                      className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-900"
+                    >
+                      <Icons.Calculator className="h-4 w-4" />
+                      <span>See results</span>
+                    </button>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={handlePublicCalculatorContinue}
+                  disabled={publicWizardPrimaryDisabled}
+                  className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {calculatorWizardStep === 4 ? <Icons.Plus className="h-4 w-4" /> : <Icons.ChevronRight className="h-4 w-4" />}
+                  <span>{publicWizardPrimaryLabel}</span>
+                </button>
+              </div>
+            )}
+          </section>
+
+          {calculatorWizardStep === 4 &&
+            renderPublicCalculatorClaimsList(
+              "Existing conditions in your estimate",
+              "You can edit or remove any condition before you add the next one.",
+              "No conditions added yet.",
+              "Once you add a condition, it will appear here for review."
+            )}
+        </div>
+
+        <aside className="hidden xl:block">
+          <div className="sticky top-6 space-y-4">
+            <section className="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm">
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Progress</p>
+              <p className="mt-2 text-lg font-black text-slate-900">Step {calculatorWizardStep} of {PUBLIC_CALCULATOR_WIZARD_STEPS.length}</p>
+              <p className="mt-2 text-sm text-slate-500">{currentWizardStepMeta.helper}</p>
+            </section>
+            <section className="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm">
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Draft status</p>
+              <ul className="mt-3 space-y-2 text-sm text-slate-700">
+                {draftClaimValidation.checklist.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="mt-0.5 text-slate-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+            <section className="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm">
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-slate-400">Estimate</p>
+              <div className="mt-3 space-y-3">
+                <div className="rounded-[1.25rem] bg-slate-50 p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Current</p>
+                  <p className="mt-1 text-2xl font-black text-slate-900">{currentRating}%</p>
+                </div>
+                <div className="rounded-[1.25rem] bg-emerald-50 p-4 ring-1 ring-emerald-100">
+                  <p className="text-xs font-bold uppercase tracking-wider text-emerald-700">Projected</p>
+                  <p className="mt-1 text-2xl font-black text-emerald-950">{calculation.afterRating || currentRating}%</p>
+                </div>
+                <div className="rounded-[1.25rem] bg-blue-50 p-4 ring-1 ring-blue-100">
+                  <p className="text-xs font-bold uppercase tracking-wider text-blue-700">Monthly increase</p>
+                  <p className="mt-1 text-2xl font-black text-blue-950">+{formatMoney(calculation.diffMonthly)}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </aside>
+      </div>
+
+      {calculatorWizardStep < 5 && (
+        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 p-4 shadow-[0_-12px_30px_rgba(15,23,42,0.08)] backdrop-blur md:hidden">
+          <div className="mx-auto flex max-w-7xl items-center gap-3">
+            <button
+              type="button"
+              onClick={handlePublicCalculatorBack}
+              disabled={calculatorWizardStep === 1}
+              className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-700 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              <Icons.ChevronLeft className="h-5 w-5" />
+            </button>
+            {publicResultsReady && (
+              <button
+                type="button"
+                onClick={() => setCalculatorWizardStep(5)}
+                className="inline-flex items-center justify-center rounded-full border border-slate-300 px-4 py-3 text-sm font-bold text-slate-700"
+              >
+                See results
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={handlePublicCalculatorContinue}
+              disabled={publicWizardPrimaryDisabled}
+              className="inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {calculatorWizardStep === 4 ? <Icons.Plus className="h-4 w-4" /> : <Icons.ChevronRight className="h-4 w-4" />}
+              <span>{publicWizardPrimaryLabel}</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="flex min-h-[100dvh] md:h-screen bg-slate-50 font-sans overflow-x-hidden md:overflow-hidden relative">
       {/* Sidebar Overlay for Mobile */}
-      {isSidebarOpen && (
+      {!publicCalculatorMode && isSidebarOpen && (
         <div className="fixed inset-0 bg-black/50 z-20 md:hidden" onClick={() => setIsSidebarOpen(false)}></div>
       )}
 
       {/* NEW ONBOARDING MODAL */}
-      {!onboardingComplete && (
-        <div className="fixed inset-0 z-[60] bg-slate-900/95 flex flex-col items-stretch sm:items-center justify-end md:justify-center p-0 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-lg bg-white rounded-none sm:rounded-3xl shadow-2xl overflow-hidden relative border-0 sm:border border-slate-200 min-h-[100dvh] sm:min-h-0 max-h-[100dvh] sm:max-h-[calc(100dvh-1rem)] flex flex-col my-0 sm:my-2">
-            {/* Header */}
-            <div className="p-4 sm:p-6 bg-slate-900 flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-yellow-500 rounded flex items-center justify-center text-slate-900 font-black text-lg shadow-md">
-                    TY
+      {!publicCalculatorMode && !onboardingComplete && !isAuthenticated && (
+        <div className="fixed inset-0 z-[60] overflow-y-auto bg-slate-950/95 p-0 sm:p-4">
+          <div className="mx-auto flex min-h-[100dvh] w-full max-w-6xl overflow-hidden bg-white shadow-2xl sm:my-4 sm:min-h-0 sm:rounded-[2rem] sm:border sm:border-slate-200">
+            <div className="flex min-h-[100dvh] w-full flex-col lg:min-h-[760px] lg:flex-row">
+              <div className="flex min-w-0 flex-1 flex-col">
+                <div className="bg-slate-950 px-5 py-5 sm:px-7">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex min-w-0 items-center gap-3">
+                      {!isComplianceOnboardingStep && onboardingStep > 0 && (
+                        <button
+                          type="button"
+                          onClick={previousOnboardingStep}
+                          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10"
+                        >
+                          <Icons.ChevronLeft className="h-5 w-5" />
+                        </button>
+                      )}
+                      <img
+                        src={ACCESS_LANDING_LOGO_URL}
+                        alt="Thank You For Your Service"
+                        className="h-auto w-44 max-w-[65%] sm:w-56"
+                      />
+                    </div>
+                    <div className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-black uppercase tracking-[0.24em] text-white">
+                      Step {Math.min(onboardingStep + 1, ONBOARDING_STEPS.length)}/{ONBOARDING_STEPS.length}
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-bold text-white text-lg sm:text-xl block leading-none">Thank You</span>
-                    <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">For Your Service</span>
-                  </div>
+                  {currentOnboardingStep?.guideText && (
+                    <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-300 sm:text-base">{currentOnboardingStep.guideText}</p>
+                  )}
                 </div>
-                <div className="text-xs sm:text-sm text-slate-400 font-medium bg-slate-800 px-2.5 sm:px-3 py-1.5 rounded-md">
-                  Step {onboardingStep + 1}/{ONBOARDING_STEPS.length}
+
+                <div className="h-2 w-full bg-slate-200">
+                  <div
+                    className="h-2 bg-yellow-500 transition-all duration-500 ease-out"
+                    style={{ width: `${((onboardingStep + 1) / ONBOARDING_STEPS.length) * 100}%` }}
+                  ></div>
                 </div>
-              </div>
 
-              {/* Guide Bubble */}
-              {ONBOARDING_STEPS[onboardingStep].guideText && (
-                <div className="flex gap-3 sm:gap-4 mt-2 animate-slide-up">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center flex-shrink-0 relative">
-                    <Icons.User size={20} className="text-blue-600 w-5 h-5 sm:w-6 sm:h-6" />
-                    <div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-slate-900"></div>
-                  </div>
-                  <div className="chat-bubble p-3.5 sm:p-4 rounded-tr-xl rounded-b-xl text-sm sm:text-base text-slate-700 shadow-sm flex-1 leading-relaxed border border-slate-200 bg-white">
-                    {ONBOARDING_STEPS[onboardingStep].guideText}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="w-full bg-slate-100 h-2">
-              <div
-                className="bg-yellow-500 h-2 transition-all duration-500 ease-out"
-                style={{ width: `${((onboardingStep + 1) / ONBOARDING_STEPS.length) * 100}%` }}
-              ></div>
-            </div>
-
-            <div
-              ref={onboardingScrollRef}
-              className={`p-4 sm:p-6 md:p-10 bg-slate-50 min-h-0 flex-1 overflow-y-auto ${isLoadingOnboardingStep ? "flex flex-col justify-center" : "flex flex-col justify-start"} pb-24 sm:pb-28 md:pb-10`}
-              style={{
-                paddingBottom: isContactOnboardingStep
-                  ? "max(6rem, env(safe-area-inset-bottom) + 4.5rem)"
-                  : "max(1rem, env(safe-area-inset-bottom) + 0.75rem)",
-                WebkitOverflowScrolling: "touch"
-              }}
-            >
-              {isLoadingOnboardingStep ? (
-                <LoadingStep text={currentOnboardingStep.text} />
-              ) : isContactOnboardingStep ? (
-                <ContactStep
-                  onNext={handleContactSubmit}
-                  initialData={userProfile}
-                  part={parseInt(currentOnboardingStep.type.split("part")[1], 10)}
-                  submitError={authStatusMessage}
-                  isSubmitting={isAuthSubmitting}
-                  onClearSubmitError={() => setAuthStatusMessage("")}
-                  onReturnToLogin={returnToAccessLanding}
-                />
-              ) : (
-                <div className="animate-fadeIn w-full">
-                  <h1 className="text-2xl sm:text-3xl font-black text-slate-900 mb-5 sm:mb-6 leading-tight">
-                    {currentOnboardingStep.title}
-                  </h1>
-
-                  <div className="space-y-4">
-                    {currentOnboardingStep.questions.map((q) => {
-                      // Dynamic Options Logic
-                      let optionsToRender = q.options;
-                      if (q.type === "dynamic_multi_select") {
-                        const categories = userProfile.pain_categories || [];
-                        optionsToRender =
-                          categories.length > 0
-                            ? categories.flatMap((cat) =>
-                              DISABILITY_DATA[cat]
-                                ? DISABILITY_DATA[cat].map((c) => ({ label: c.name, value: c.name }))
-                                : []
-                            )
-                            : [{ label: "Please select a category first", value: "" }];
-                      } else if (q.type === "select" || q.type === "multi_select") {
-                        if (typeof q.options[0] === "string") {
-                          optionsToRender = q.options.map((o) => ({ label: o, value: o }));
-                        }
-                        if (q.id === "pain_categories") {
-                          optionsToRender = q.options.map((o) => ({ label: o, value: o }));
-                        }
-                      }
-                      const useCompactOptionGrid = q.id === "branch" || q.id === "era";
-
-                      return (
-                        <div key={q.id}>
-                          <p className="text-base sm:text-lg font-bold text-slate-700 mb-3">{q.label}</p>
-
-                          {q.type === "boolean" && (
-                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                              <button
-                                type="button"
-                                onClick={() => handleOnboardingAnswer(q.id, true)}
-                                className={`flex-1 min-h-14 py-4 rounded-xl border-2 text-base sm:text-lg font-bold transition-all ${userProfile[q.id] === true ? "border-blue-600 bg-blue-50 text-blue-900" : "border-slate-200 bg-white text-slate-500 hover:border-blue-400"}`}
-                              >
-                                Yes
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => handleOnboardingAnswer(q.id, false)}
-                                className={`flex-1 min-h-14 py-4 rounded-xl border-2 text-base sm:text-lg font-bold transition-all ${userProfile[q.id] === false ? "border-blue-600 bg-blue-50 text-blue-900" : "border-slate-200 bg-white text-slate-500 hover:border-blue-400"}`}
-                              >
-                                No
-                              </button>
-                            </div>
-                          )}
-
-                          {q.type === "slider" && (
-                            <div className="w-full py-6 sm:py-8 bg-white rounded-2xl border border-slate-200 mb-4 px-4 sm:px-6 text-center shadow-sm">
-                              <span className="text-5xl sm:text-6xl font-black text-blue-900">{currentRating}%</span>
-                              <div className="relative h-12 flex items-center mt-4">
-                                <input
-                                  type="range"
-                                  min="0"
-                                  max="100"
-                                  step="10"
-                                  value={currentRating}
-                                  onChange={(e) => handleOnboardingAnswer(q.id, e.target.value)}
-                                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-30"
-                                />
-                                <div className="w-full h-3 bg-slate-200 rounded-full overflow-hidden relative">
-                                  <div className="h-full bg-blue-600 transition-all" style={{ width: `${currentRating}%` }}></div>
-                                </div>
-                                <div
-                                  className="absolute w-8 h-8 bg-white border-4 border-yellow-500 rounded-full shadow-lg pointer-events-none transition-all"
-                                  style={{ left: `calc(${currentRating}% - 16px)` }}
-                                ></div>
-                              </div>
-                            </div>
-                          )}
-
-                          {(q.type === "select" || q.type === "multi_select" || q.type === "dynamic_multi_select") && (
-                            <div
-                              className={
-                                useCompactOptionGrid
-                                  ? "grid grid-cols-2 gap-3 max-h-none overflow-visible custom-scrollbar"
-                                  : "grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-none sm:max-h-64 overflow-visible sm:overflow-y-auto sm:pr-2 custom-scrollbar"
-                              }
-                            >
-                              {optionsToRender &&
-                                optionsToRender.map((opt) => {
-                                  const isSelected = q.type.includes("multi")
-                                    ? userProfile[q.id] && userProfile[q.id].includes(opt.value)
-                                    : userProfile[q.id] === opt.value;
-                                  return (
-                                    <button
-                                      key={opt.value}
-                                      type="button"
-                                      onClick={() => handleOnboardingAnswer(q.id, opt.value)}
-                                      className={`w-full relative p-4 min-h-14 rounded-xl border-2 text-left transition-all flex items-center justify-between group ${isSelected ? "border-blue-600 bg-blue-50 shadow-sm" : "border-slate-200 bg-white hover:border-blue-400"}`}
-                                    >
-                                      <span className={`font-bold ${isSelected ? "text-blue-900" : "text-slate-600"}`}>
-                                        {opt.label}
-                                      </span>
-                                      {isSelected && (
-                                        <div className="bg-blue-600 text-white rounded-full p-1">
-                                          <Icons.CheckCircle className="w-4 h-4" />
-                                        </div>
-                                      )}
-                                    </button>
-                                  );
-                                })}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {ONBOARDING_STEPS[onboardingStep].footerInfo}
-
-                </div>
-              )}
-            </div>
-
-            {shouldShowOnboardingFooter && (
-              <div
-                className="border-t border-slate-200 bg-white p-4 sm:px-6"
-                style={{
-                  paddingTop: "1rem",
-                  paddingBottom: "max(1rem, env(safe-area-inset-bottom) + 0.5rem)",
-                  boxShadow: "0 -12px 24px rgba(15, 23, 42, 0.06)"
-                }}
-              >
-                <button
-                  onClick={nextOnboardingStep}
-                  disabled={currentOnboardingStep.id === "contact_details"}
-                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-slate-900 font-black text-lg sm:text-xl py-4 rounded-xl shadow-lg transition-all hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 border-b-4 border-yellow-600 active:border-b-0 active:mt-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                <div
+                  ref={onboardingScrollRef}
+                  className={`flex-1 overflow-y-auto bg-slate-50 px-5 py-6 sm:px-7 sm:py-8 ${
+                    isComplianceOnboardingStep ? "flex items-center" : ""
+                  }`}
+                  style={{
+                    paddingBottom: shouldShowOnboardingFooter
+                      ? "max(7rem, env(safe-area-inset-bottom) + 5rem)"
+                      : "max(1.5rem, env(safe-area-inset-bottom) + 1rem)",
+                    WebkitOverflowScrolling: "touch"
+                  }}
                 >
-                  {onboardingStep === ONBOARDING_STEPS.length - 1 ? "Complete Setup" : "Next Step"} <Icons.ChevronRight className="w-6 h-6 stroke-[3px]" />
-                </button>
+                  {!isComplianceOnboardingStep && (
+                    <ActivationMobileSummary potentialValue={onboardingPotentialValue} signals={onboardingSignals} />
+                  )}
+
+                  {isComplianceOnboardingStep ? (
+                    <div className="w-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                      <p className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">Required</p>
+                      <h1 className="mt-4 text-3xl font-black leading-tight text-slate-900 sm:text-4xl">Before You Continue</h1>
+                      <div className="mt-6 space-y-5 text-base leading-7 text-slate-600 sm:text-lg">
+                        <p>
+                          Thank you for choosing Thank You For Your Service. We support you in preparing medical evidence for your VA claim.
+                        </p>
+                        <p>
+                          We are not a VSO, law firm, or the VA. We do not file or submit claims on your behalf.
+                        </p>
+                        <p>
+                          No payment is required to begin. All research within this app is provided for informational purposes only.
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={acknowledgeCompliance}
+                        className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 px-5 py-4 text-lg font-black text-white shadow-xl transition-colors hover:bg-blue-500"
+                      >
+                        I Understand
+                        <Icons.ChevronRight className="h-5 w-5" />
+                      </button>
+                    </div>
+                  ) : isQuestionOnboardingStep ? (
+                    <ActivationQuestionStep
+                      step={currentOnboardingStep}
+                      value={currentQuestionValue}
+                      currentRating={currentRating}
+                      isAnswered={isCurrentOnboardingStepComplete}
+                      forceZeroRating={currentOnboardingStep?.id === "current_rating" && userProfile.currentlyRated === false}
+                      onAnswer={(value) => handleOnboardingAnswer(currentOnboardingStep.field, value)}
+                    />
+                  ) : currentOnboardingStep?.id === "conditions" ? (
+                    <ActivationSelectionStep
+                      step={currentOnboardingStep}
+                      options={ACTIVATION_CONDITION_OPTIONS}
+                      selectedValues={activationFlow.conditions}
+                      onToggle={(value) => handleOnboardingAnswer("activationConditions", value)}
+                      emptyHint="Select at least one condition or symptom so TYFYS can build your research summary."
+                    />
+                  ) : currentOnboardingStep?.id === "documents" ? (
+                    <ActivationSelectionStep
+                      step={currentOnboardingStep}
+                      options={ACTIVATION_DOCUMENT_OPTIONS}
+                      selectedValues={activationFlow.documents}
+                      onToggle={(value) => handleOnboardingAnswer("activationDocuments", value)}
+                      emptyHint="Select at least one option, even if you do not have documents yet."
+                    />
+                  ) : isResultsOnboardingStep ? (
+                    <ActivationResultsStep entryIntent={activationFlow.entryIntent} results={activationResults} />
+                  ) : isMonetizationOnboardingStep ? (
+                    <ActivationSupportStep
+                      isCheckoutLoading={isCheckoutLoading}
+                      onSelectSelfServe={chooseSelfServePlan}
+                      onSelectFullSupport={chooseFullSupportPlan}
+                    />
+                  ) : null}
+                </div>
+
+                {shouldShowOnboardingFooter && (
+                  <div
+                    className="border-t border-slate-200 bg-white px-5 py-4 sm:px-7"
+                    style={{
+                      paddingBottom: "max(1rem, env(safe-area-inset-bottom) + 0.5rem)",
+                      boxShadow: "0 -12px 24px rgba(15, 23, 42, 0.06)"
+                    }}
+                  >
+                    <div className="flex gap-3">
+                      {onboardingStep > 0 && (
+                        <button
+                          type="button"
+                          onClick={previousOnboardingStep}
+                          className="flex items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-5 py-4 text-base font-black text-slate-900 transition-colors hover:border-blue-300 hover:bg-blue-50"
+                        >
+                          <Icons.ChevronLeft className="h-5 w-5" />
+                          Back
+                        </button>
+                      )}
+                      <button
+                        type="button"
+                        onClick={nextOnboardingStep}
+                        disabled={!isCurrentOnboardingStepComplete}
+                        className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-yellow-400 px-5 py-4 text-lg font-black text-slate-900 shadow-lg transition-colors hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        {currentOnboardingStep?.primaryActionLabel || "Continue"}
+                        <Icons.ChevronRight className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+
+              <div className="hidden w-[360px] lg:block">
+                <ActivationInsightSidebar
+                  step={currentOnboardingStep}
+                  potentialValue={onboardingPotentialValue}
+                  signals={onboardingSignals}
+                />
+              </div>
+            </div>
           </div>
         </div>
       )}
 
       {/* DISCOUNT MODAL */}
-      {showDiscountModal && (
+      {showDiscountModal && !nativeAppRuntime && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 relative animate-fadeIn">
-            <button onClick={() => setShowDiscountModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+            <button type="button" onClick={() => setShowDiscountModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
               <Icons.X className="w-6 h-6" />
             </button>
             {!discountUnlocked ? (
@@ -6199,16 +8352,17 @@ function TYFYSPlatform() {
                             : "Can you start the process within 48 hours?"}
                       </p>
                       <div className="flex gap-2">
-                        <button className="flex-1 py-2 border border-slate-300 bg-white rounded hover:border-blue-500 hover:text-blue-600 text-sm font-medium">
+                        <button type="button" className="flex-1 py-2 border border-slate-300 bg-white rounded hover:border-blue-500 hover:text-blue-600 text-sm font-medium">
                           Yes
                         </button>
-                        <button className="flex-1 py-2 border border-slate-300 bg-white rounded hover:border-blue-500 hover:text-blue-600 text-sm font-medium">
+                        <button type="button" className="flex-1 py-2 border border-slate-300 bg-white rounded hover:border-blue-500 hover:text-blue-600 text-sm font-medium">
                           No
                         </button>
                       </div>
                     </div>
                   ))}
                   <button
+                    type="button"
                     onClick={() => {
                       setDiscountUnlocked(true);
                       addMessage("bot", "Qualification confirmed. I've applied the 10% discount code to your profile.");
@@ -6228,7 +8382,7 @@ function TYFYSPlatform() {
                 <p className="text-slate-600 mb-8 text-lg">
                   Code <strong>VET10</strong> applied successfully.
                 </p>
-                <button onClick={() => setShowDiscountModal(false)} className="bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-800 transition-colors">
+                <button type="button" onClick={() => setShowDiscountModal(false)} className="bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-800 transition-colors">
                   Return to Dashboard
                 </button>
               </div>
@@ -6238,12 +8392,23 @@ function TYFYSPlatform() {
       )}
 
       {/* SPECIALIST MODAL */}
-      {showSpecialistModal && <SpecialistModal onClose={() => setShowSpecialistModal(false)} discountUnlocked={discountUnlocked} isMember={isMember} />}
+      {showSpecialistModal && (
+        <SpecialistModal
+          onClose={() => setShowSpecialistModal(false)}
+          onJoinMembership={handleSpecialistMembership}
+          onViewSupportOptions={handleSpecialistSupportOptions}
+          onBookDiscoveryCall={handleSpecialistDiscoveryCall}
+          discountUnlocked={discountUnlocked}
+          isMember={isMember}
+          isCheckoutLoading={isCheckoutLoading}
+        />
+      )}
 
       {/* PROFILE EDIT MODAL */}
       {showProfileEdit && <ProfileEditModal userProfile={userProfile} onClose={() => setShowProfileEdit(false)} onSave={handleProfileSave} />}
 
       {/* SIDEBAR NAVIGATION */}
+      {!publicCalculatorMode && (
       <div
         className={`fixed inset-y-0 left-0 w-72 bg-slate-900 text-white flex flex-col shadow-2xl z-30 transform transition-transform duration-300 md:relative md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
@@ -6330,103 +8495,150 @@ function TYFYSPlatform() {
             onClick={() => setActiveView("strategy")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "strategy" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.TrendingUp className="w-5 h-5" /> Support Options
+            <Icons.TrendingUp className="w-5 h-5" /> {nativeAppRuntime ? "Support Review" : "Support Options"}
           </button>
 
-          <p className="px-4 py-2 mt-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Guided Support</p>
+          <p className="px-4 py-2 mt-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+            {nativeAppRuntime ? "TYFYS Review" : "Guided Support"}
+          </p>
           <button
             onClick={() => setActiveView("ai_claims")}
             className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${activeView === "ai_claims" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:bg-slate-800 hover:text-white"}`}
           >
-            <Icons.Bot className="w-5 h-5" /> Claim Guide {isMember ? "" : <Icons.Lock className="w-3 h-3 ml-auto opacity-50" />}
+            <Icons.Bot className="w-5 h-5" /> Claim Guide {!nativeAppRuntime && !isMember ? <Icons.Lock className="w-3 h-3 ml-auto opacity-50" /> : null}
           </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all cursor-not-allowed opacity-60">
-            <Icons.User className="w-5 h-5" /> Independent Doctor Support <Icons.Lock className="w-3 h-3 ml-auto" />
+          <button
+            type="button"
+            onClick={() => {
+              if (nativeAppRuntime) setActiveView("strategy");
+            }}
+            className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all ${
+              nativeAppRuntime
+                ? activeView === "strategy"
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                : "text-slate-400 hover:bg-slate-800 hover:text-white cursor-not-allowed opacity-60"
+            }`}
+          >
+            <Icons.User className="w-5 h-5" /> {nativeAppRuntime ? "TYFYS Review Request" : "Independent Doctor Support"}
+            {!nativeAppRuntime ? <Icons.Lock className="w-3 h-3 ml-auto" /> : null}
           </button>
         </nav>
         <div className="p-4 bg-slate-800 m-4 rounded-xl border border-slate-700">
           <div className="flex items-center gap-3 mb-2">
-            <div className={`w-2 h-2 rounded-full ${isMember ? "bg-blue-400" : "bg-green-400 animate-pulse"}`}></div>
-            <span className="text-xs font-bold text-white uppercase">{isMember ? "Guided" : "Self-Guided"}</span>
+            <div className={`w-2 h-2 rounded-full ${nativeAppRuntime ? "bg-blue-400" : isMember ? "bg-blue-400" : "bg-green-400 animate-pulse"}`}></div>
+            <span className="text-xs font-bold text-white uppercase">{nativeAppRuntime ? "Active" : isMember ? "Guided" : "Self-Guided"}</span>
           </div>
           <p className="text-xs text-slate-400 mb-3">ID: {userProfile.branch?.substring(0, 3).toUpperCase() || "VET"}-8821</p>
-          {!isMember && (
-            <button onClick={() => setActiveView("strategy")} className="w-full py-2 bg-yellow-500 hover:bg-yellow-400 text-slate-900 text-xs font-bold rounded-lg transition-colors">
-              Explore Support Options
+          {(!isMember || nativeAppRuntime) && (
+            <button
+              type="button"
+              onClick={() => setActiveView("strategy")}
+              className="w-full py-2 bg-yellow-500 hover:bg-yellow-400 text-slate-900 text-xs font-bold rounded-lg transition-colors"
+            >
+              {nativeAppRuntime ? "Open Support Review" : "Explore Support Options"}
             </button>
           )}
         </div>
       </div>
+      )}
 
       {/* MAIN CONTENT AREA */}
       <div className="flex-1 flex flex-col relative w-full h-full overflow-hidden bg-slate-50">
         {/* Header */}
-        <header className="min-h-[5rem] bg-white border-b border-slate-200 flex justify-between items-center px-6 py-4 z-10 shrink-0 gap-4">
-          <div className="flex items-center gap-4">
-            <button onClick={() => setIsSidebarOpen(true)} className="md:hidden text-slate-500">
-              <Icons.Menu className="w-6 h-6" />
-            </button>
-            <div className="min-w-0">
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">{headerMeta.eyebrow}</p>
-              <h2 className="text-lg font-bold text-slate-800 truncate">{headerMeta.title}</h2>
-              <p className="hidden lg:block text-sm text-slate-500 truncate">{headerMeta.subtitle}</p>
+        {publicCalculatorMode ? (
+          <header className="min-h-[5rem] bg-slate-950 text-white border-b border-slate-800 flex justify-between items-center px-4 py-4 sm:px-6 z-10 shrink-0 gap-4">
+            <div className="flex items-center gap-4 min-w-0">
+              <img
+                src={ACCESS_LANDING_LOGO_URL}
+                alt="Thank You For Your Service"
+                className="h-auto w-44 max-w-[65%] sm:w-56"
+              />
+              <div className="hidden md:block min-w-0">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">Public tool</p>
+                <h2 className="text-lg font-bold text-white truncate">VA Rating Calculator</h2>
+                <p className="text-sm text-slate-300 truncate">Guided estimate using TYFYS condition-based VA math.</p>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="hidden xl:flex items-center gap-2">
-              {activeView !== "doctor_portal" && (
+            <div className="flex items-center gap-3 shrink-0">
+              <a
+                href={`${TYFYS_SITE_BASE_URL}/`}
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-white/15"
+              >
+                <Icons.Home className="w-4 h-4" />
+                <span>Home</span>
+              </a>
+            </div>
+          </header>
+        ) : (
+          <header className="min-h-[5rem] bg-white border-b border-slate-200 flex justify-between items-center px-6 py-4 z-10 shrink-0 gap-4">
+            <div className="flex items-center gap-4">
+              <button onClick={() => setIsSidebarOpen(true)} className="md:hidden text-slate-500">
+                <Icons.Menu className="w-6 h-6" />
+              </button>
+              <div className="min-w-0">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400">{headerMeta.eyebrow}</p>
+                <h2 className="text-lg font-bold text-slate-800 truncate">{headerMeta.title}</h2>
+                <p className="hidden lg:block text-sm text-slate-500 truncate">{headerMeta.subtitle}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="hidden xl:flex items-center gap-2">
+                {activeView !== "doctor_portal" && (
+                  <button
+                    onClick={() => setActiveView("doctor_portal")}
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-bold hover:border-blue-400 hover:text-blue-700 transition-colors"
+                  >
+                    <Icons.Stethoscope className="w-4 h-4" /> Care Team
+                  </button>
+                )}
+                {activeView !== "secure_comms" && (
+                  <button
+                    onClick={() => setActiveView("secure_comms")}
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-bold hover:border-blue-400 hover:text-blue-700 transition-colors"
+                  >
+                    <Icons.MessageSquare className="w-4 h-4" /> Messages
+                    {secureUnreadCount > 0 && (
+                      <span className="min-w-[1.35rem] px-1.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold text-center">
+                        {secureUnreadCount}
+                      </span>
+                    )}
+                  </button>
+                )}
+              </div>
+              {isAuthenticated && authAccount?.email ? (
                 <button
-                  onClick={() => setActiveView("doctor_portal")}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-bold hover:border-blue-400 hover:text-blue-700 transition-colors"
+                  onClick={handleClientLogout}
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-3 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-900"
                 >
-                  <Icons.Stethoscope className="w-4 h-4" /> Care Team
+                  <Icons.Lock className="w-4 h-4" />
+                  <span className="hidden lg:inline">{authAccount.email}</span>
+                  <span>Log Out</span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setHasDismissedAccessLanding(false);
+                    setHasStarted(false);
+                    clearHasStarted();
+                  }}
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-blue-400 hover:text-blue-700 shadow-sm bg-white"
+                >
+                  <Icons.User className="w-4 h-4" />
+                  <span>Sign In</span>
                 </button>
               )}
-              {activeView !== "secure_comms" && (
+              {!isBotOpen && (
                 <button
-                  onClick={() => setActiveView("secure_comms")}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-bold hover:border-blue-400 hover:text-blue-700 transition-colors"
+                  onClick={() => setIsBotOpen(true)}
+                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow-md transition-all"
                 >
-                  <Icons.MessageSquare className="w-4 h-4" /> Messages
-                  {secureUnreadCount > 0 && (
-                    <span className="min-w-[1.35rem] px-1.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold text-center">
-                      {secureUnreadCount}
-                    </span>
-                  )}
+                  <Icons.MessageSquare className="w-4 h-4" /> Ask Angela
                 </button>
               )}
             </div>
-            {isAuthenticated && authAccount?.email ? (
-              <button
-                onClick={handleClientLogout}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-3 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-slate-400 hover:text-slate-900"
-              >
-                <Icons.Lock className="w-4 h-4" />
-                <span className="hidden lg:inline">{authAccount.email}</span>
-                <span>Log Out</span>
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setHasStarted(false);
-                  clearHasStarted();
-                }}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-blue-400 hover:text-blue-700 shadow-sm bg-white"
-              >
-                <Icons.User className="w-4 h-4" />
-                <span>Sign In</span>
-              </button>
-            )}
-            {!isBotOpen && (
-              <button
-                onClick={() => setIsBotOpen(true)}
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium shadow-md transition-all"
-              >
-                <Icons.MessageSquare className="w-4 h-4" /> Ask Angela
-              </button>
-            )}
-          </div>
-        </header>
+          </header>
+        )}
 
         <main className="flex-1 overflow-y-auto p-4 md:p-8 relative">
           <div className="max-w-7xl mx-auto pb-24 md:pb-0">
@@ -6475,9 +8687,13 @@ function TYFYSPlatform() {
                           <p className="text-[10px] text-blue-400 uppercase font-bold tracking-wider mb-1">Rating</p>
                           <p className="font-black text-blue-900 text-xl">{currentRating}%</p>
                         </div>
-                        <div className="bg-green-50 p-3 rounded-xl border border-green-100">
-                          <p className="text-[10px] text-green-600 uppercase font-bold tracking-wider mb-1">Discount</p>
-                          <p className="font-bold text-green-800 text-sm">{discountUnlocked ? "ACTIVE" : "LOCKED"}</p>
+                        <div className={`p-3 rounded-xl border ${nativeAppRuntime ? "bg-green-50 border-green-100" : "bg-green-50 border-green-100"}`}>
+                          <p className={`text-[10px] uppercase font-bold tracking-wider mb-1 ${nativeAppRuntime ? "text-green-600" : "text-green-600"}`}>
+                            {nativeAppRuntime ? "Review" : "Discount"}
+                          </p>
+                          <p className={`font-bold text-sm ${nativeAppRuntime ? "text-green-800" : "text-green-800"}`}>
+                            {nativeAppRuntime ? "AVAILABLE" : discountUnlocked ? "ACTIVE" : "LOCKED"}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -6752,31 +8968,45 @@ function TYFYSPlatform() {
                   <div className="space-y-6">
                     {/* Membership Card */}
                     <div
-                      className={`p-6 rounded-2xl border relative overflow-hidden ${isMember ? "bg-slate-900 text-white border-slate-800" : "bg-white border-slate-200 text-slate-800 shadow-sm"}`}
+                      className={`p-6 rounded-2xl border relative overflow-hidden ${
+                        nativeAppRuntime
+                          ? "bg-white border-slate-200 text-slate-800 shadow-sm"
+                          : isMember
+                            ? "bg-slate-900 text-white border-slate-800"
+                            : "bg-white border-slate-200 text-slate-800 shadow-sm"
+                      }`}
                     >
                       <div className="relative z-10">
                         <div className="flex justify-between items-start mb-4">
                           <h3 className="font-bold flex items-center gap-2">
-                            <Icons.ShieldCheck className={`w-5 h-5 ${isMember ? "text-green-400" : "text-slate-400"}`} /> Support
+                            <Icons.ShieldCheck className={`w-5 h-5 ${nativeAppRuntime ? "text-blue-600" : isMember ? "text-green-400" : "text-slate-400"}`} /> Support
                             Level
                           </h3>
                           <span
-                            className={`text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider ${isMember ? "bg-green-500/20 text-green-400" : "bg-slate-100 text-slate-500"}`}
+                            className={`text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider ${
+                              nativeAppRuntime
+                                ? "bg-blue-50 text-blue-700"
+                                : isMember
+                                  ? "bg-green-500/20 text-green-400"
+                                  : "bg-slate-100 text-slate-500"
+                            }`}
                           >
-                            {isMember ? "Guided" : "Self-Guided"}
+                            {nativeAppRuntime ? "Available" : isMember ? "Guided" : "Self-Guided"}
                           </span>
                         </div>
-                        <p className={`text-sm mb-6 ${isMember ? "text-slate-400" : "text-slate-500"}`}>
-                          {isMember
-                            ? "You have guided access to Angela, monthly consult support, and service discounts."
-                            : "Upgrade for guided Angela access, monthly consult support, and service discounts."}
+                        <p className={`text-sm mb-6 ${isMember && !nativeAppRuntime ? "text-slate-400" : "text-slate-500"}`}>
+                          {nativeAppRuntime
+                            ? "Use TYFYS tools in the app, keep building your records, and request a direct file review whenever you want the team to look deeper."
+                            : isMember
+                              ? "You have guided access to Angela, monthly consult support, and service discounts."
+                              : "Upgrade for guided Angela access, monthly consult support, and service discounts."}
                         </p>
-                        {!isMember && (
+                        {(!isMember || nativeAppRuntime) && (
                           <button
                             onClick={() => setActiveView("strategy")}
                             className="w-full py-3 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-800 transition-colors text-sm"
                           >
-                            Explore Guided Support ($250/mo)
+                            {nativeAppRuntime ? "Open Support Review" : "Explore Guided Support ($250/mo)"}
                           </button>
                         )}
                       </div>
@@ -7510,7 +9740,7 @@ function TYFYSPlatform() {
               </div>
             )}
 
-            {activeView === "calculator" && (
+            {activeView === "calculator" && (publicCalculatorMode ? renderPublicCalculatorWizard() : (
               <div className="space-y-6 animate-fadeIn">
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                   <div className="flex flex-col lg:flex-row justify-between gap-6">
@@ -7923,18 +10153,20 @@ function TYFYSPlatform() {
                           <h3 className="text-xl font-bold text-slate-900">How the calculator works</h3>
                           <p className="text-sm text-slate-500">Every added condition reduces the remaining healthy efficiency, not the original 100%.</p>
                         </div>
-                        <button
-                          onClick={() => {
-                            setIsBotOpen(true);
-                            addMessage(
-                              "bot",
-                              "Here is the key rule: every new percentage is applied to what remains efficient, not to the original 100 percent. That is why VA math feels smaller with each step."
-                            );
-                          }}
-                          className="text-xs font-bold text-blue-700 hover:text-blue-800"
-                        >
-                          Ask Angela
-                        </button>
+                        {!publicCalculatorMode && (
+                          <button
+                            onClick={() => {
+                              setIsBotOpen(true);
+                              addMessage(
+                                "bot",
+                                "Here is the key rule: every new percentage is applied to what remains efficient, not to the original 100 percent. That is why VA math feels smaller with each step."
+                              );
+                            }}
+                            className="text-xs font-bold text-blue-700 hover:text-blue-800"
+                          >
+                            Ask Angela
+                          </button>
+                        )}
                       </div>
                       {!vaMathDetail.steps.length ? (
                         <p className="text-sm text-slate-500">Add at least one condition with a supported percentage to see the exact rating sequence.</p>
@@ -8021,7 +10253,7 @@ function TYFYSPlatform() {
                   </div>
                 </div>
               </div>
-            )}
+            ))}
 
             {activeView === "pact_explorer" && (
               <div className="space-y-6 animate-fadeIn">
@@ -8450,7 +10682,7 @@ function TYFYSPlatform() {
                                 setIsBotOpen(true);
                                 addMessage(
                                   "bot",
-                                  "If you want help gathering or reviewing this DBQ, open Support Options and we can walk you through the next step."
+                                  `If you want help gathering or reviewing this DBQ, open ${nativeAppRuntime ? "Support Review" : "Support Options"} and we can walk you through the next step.`
                                 );
                               }}
                               className="text-xs bg-slate-50 text-blue-600 font-bold px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-blue-50 transition-colors whitespace-nowrap self-center"
@@ -8506,10 +10738,16 @@ function TYFYSPlatform() {
                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
                   <div className="flex flex-col md:flex-row justify-between items-center mb-8">
                     <div>
-                      <h2 className="text-2xl font-bold text-slate-900">Choose Your Level of Support</h2>
-                      <p className="text-slate-500 text-lg">Select how much help you want from TYFYS.</p>
+                      <h2 className="text-2xl font-bold text-slate-900">
+                        {nativeAppRuntime ? "Choose Your Next TYFYS Step" : "Choose Your Level of Support"}
+                      </h2>
+                      <p className="text-slate-500 text-lg">
+                        {nativeAppRuntime
+                          ? "Continue using claim tools in the app or ask the TYFYS team to review your file directly."
+                          : "Select how much help you want from TYFYS."}
+                      </p>
                     </div>
-                    {!discountUnlocked && !isMember && (
+                    {!nativeAppRuntime && !discountUnlocked && !isMember && (
                       <button
                         onClick={() => setShowDiscountModal(true)}
                         className="mt-4 md:mt-0 bg-green-100 hover:bg-green-200 text-green-800 px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition-colors"
@@ -8520,7 +10758,8 @@ function TYFYSPlatform() {
                   </div>
 
                   {/* TIMELINE COMPARISON */}
-                  <div className="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-200">
+                  {!nativeAppRuntime && (
+                    <div className="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-200">
                     <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
                         <Icons.Clock className="w-5 h-5 text-blue-600" /> Average Time to Completion
                     </h3>
@@ -8544,162 +10783,244 @@ function TYFYSPlatform() {
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="mb-10 border-2 border-blue-500 bg-gradient-to-r from-slate-900 to-blue-900 rounded-2xl p-8 text-white relative overflow-hidden shadow-2xl">
-                    <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-bl-xl tracking-wider">
-                      RECOMMENDED
                     </div>
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
-                      <div>
-                        <h3 className="text-3xl font-bold mb-4">Premium Membership</h3>
-                        <p className="text-blue-200 mb-6 text-lg">Hands-on support, faster navigation, and ongoing guidance.</p>
-                        <ul className="space-y-3 text-blue-50 font-medium">
-                          <li className="flex items-center gap-3">
-                            <Icons.Clock className="w-5 h-5 text-green-400" /> Save 7-10 months of waiting (Avg)
-                          </li>
-                          <li className="flex items-center gap-3">
-                            <Icons.CheckCircle className="w-5 h-5 text-green-400" /> <strong>Unlimited</strong> Claim Guide access
-                          </li>
-                          <li className="flex items-center gap-3">
-                            <Icons.CheckCircle className="w-5 h-5 text-green-400" /> <strong>1 Free 30-min Consult</strong> / Month
-                          </li>
-                          <li className="flex items-center gap-3">
-                            <Icons.CheckCircle className="w-5 h-5 text-green-400" /> <strong>25% OFF</strong> Professional Services
-                          </li>
-                        </ul>
+                  )}
+
+                  {nativeAppRuntime ? (
+                    <div className="space-y-8">
+                      <div className="mb-10 border-2 border-blue-500 bg-gradient-to-r from-slate-900 to-blue-900 rounded-2xl p-8 text-white relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-bl-xl tracking-wider">
+                          IN-APP NEXT STEP
+                        </div>
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+                          <div>
+                            <h3 className="text-3xl font-bold mb-4">TYFYS Review</h3>
+                          <p className="text-blue-200 mb-6 text-lg">TYFYS can review your file and explain the best support path directly.</p>
+                            <ul className="space-y-3 text-blue-50 font-medium">
+                              <li className="flex items-center gap-3">
+                                <Icons.CheckCircle className="w-5 h-5 text-green-400" /> Continue building your records in TYFYS first
+                              </li>
+                              <li className="flex items-center gap-3">
+                                <Icons.CheckCircle className="w-5 h-5 text-green-400" /> Get guided next-step recommendations from the TYFYS team
+                              </li>
+                              <li className="flex items-center gap-3">
+                                <Icons.CheckCircle className="w-5 h-5 text-green-400" /> Review support options after your file is evaluated
+                              </li>
+                            </ul>
+                          </div>
+                          <div className="text-center md:text-right bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20">
+                            <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-200">App Store safe</p>
+                            <p className="mt-2 text-2xl font-black">No in-app purchase flow</p>
+                            <button
+                              onClick={() => setShowSpecialistModal(true)}
+                              className="mt-4 w-full bg-white text-blue-900 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
+                            >
+                              Request TYFYS Review
+                            </button>
+                            <p className="mt-3 text-xs text-blue-100 max-w-xs ml-auto">
+                              TYFYS will review your file and discuss support options directly after you continue building your records.
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-center md:text-right bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20">
-                        <p className="text-5xl font-extrabold mb-1">
-                          $250<span className="text-xl font-normal text-blue-200">/mo</span>
-                        </p>
-                        <button
-                          onClick={() => {
-                            startSecureCheckout({
-                              planName: "Premium Membership",
-                              planCode: "250_monthly",
-                              unlockPremium: true
-                            });
-                          }}
-                          disabled={isCheckoutLoading}
-                          className="w-full bg-white text-blue-900 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
-                        >
-                          {isCheckoutLoading
-                            ? "Redirecting..."
-                            : nativeAppRuntime
-                              ? "Talk to TYFYS About Membership"
-                              : "Join Premium"}
-                        </button>
-                        {nativeAppRuntime && (
-                          <p className="mt-3 text-xs text-blue-100 max-w-xs ml-auto">
-                            TYFYS activates memberships in the mobile app so your support plan stays active in both the mobile app and website.
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="border border-slate-200 bg-white rounded-2xl p-8 shadow-sm">
+                          <span className="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-700">
+                            Keep going in app
+                          </span>
+                          <h3 className="mt-4 text-2xl font-bold text-slate-900">Continue in TYFYS</h3>
+                          <p className="mt-3 text-sm leading-6 text-slate-600">
+                            Best if you want to keep uploading records, checking evidence gaps, and organizing your file before asking for hands-on support.
                           </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* HIGHLY STYLED STANDARD PACKAGE CARD */}
-                    <div className="border border-slate-700 bg-gradient-to-br from-slate-800 to-gray-900 rounded-2xl p-8 shadow-xl text-white relative overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-slate-400 to-slate-600"></div>
-                      <span className="absolute top-4 right-4 bg-slate-700/50 backdrop-blur-sm border border-slate-600 text-slate-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        ESSENTIAL
-                      </span>
-                      <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Standard Package</h3>
-                      <div className="flex items-baseline gap-3 mb-2">
-                        <p className="text-4xl font-extrabold text-white tracking-tight">
-                          ${isMember ? "2,625" : discountUnlocked ? "3,150" : "3,500"}
-                        </p>
-                        {(discountUnlocked || isMember) && <span className="text-lg text-slate-400 line-through font-medium opacity-70">$3,500</span>}
-                      </div>
-                      <p className="text-sm text-slate-300 font-bold mb-8 uppercase tracking-wide opacity-90">$500 Deposit + Monthly Plan</p>
+                          <ul className="mt-6 space-y-3 text-sm font-semibold text-slate-700">
+                            <li className="flex items-center gap-3">
+                              <Icons.CheckCircle className="w-4 h-4 text-emerald-500" /> Records Vault and intake tools stay open
+                            </li>
+                            <li className="flex items-center gap-3">
+                              <Icons.CheckCircle className="w-4 h-4 text-emerald-500" /> Claim research summary stays saved to your dashboard
+                            </li>
+                          </ul>
+                          <button
+                            onClick={() => setActiveView("intake_portal")}
+                            className="mt-6 w-full rounded-xl border border-slate-300 bg-white py-4 font-bold text-slate-900 transition-colors hover:border-blue-300 hover:bg-blue-50"
+                          >
+                            Continue Records Intake
+                          </button>
+                        </div>
 
-                      <ul className="space-y-4 mb-8 text-slate-200 font-medium">
-                        <li className="flex items-center gap-3">
-                          <div className="bg-slate-700/50 p-1.5 rounded-full">
-                            <Icons.CheckCircle className="w-4 h-4 text-slate-300" />
-                          </div>
-                          <span>
-                            Includes Up to <strong>3 Claims</strong>
+                        <div className="border border-blue-200 bg-blue-50 rounded-2xl p-8 shadow-sm">
+                          <span className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-700">
+                            TYFYS review
                           </span>
-                        </li>
-                        <li className="flex items-center gap-3">
-                          <div className="bg-slate-700/50 p-1.5 rounded-full">
-                            <Icons.CheckCircle className="w-4 h-4 text-slate-300" />
-                          </div>
-                          <span>Private Doctor Nexus Letter</span>
-                        </li>
-                        <li className="flex items-center gap-3">
-                          <div className="bg-slate-700/50 p-1.5 rounded-full">
-                            <Icons.CheckCircle className="w-4 h-4 text-slate-300" />
-                          </div>
-                          <span>DBQ Completion</span>
-                        </li>
-                      </ul>
-                      <button
-                        onClick={() => {
-                          startSecureCheckout({
-                            planName: "Standard Package"
-                          });
-                        }}
-                        disabled={isCheckoutLoading}
-                        className="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-slate-200 transition-all shadow-lg"
-                      >
-                        {isCheckoutLoading ? "Redirecting..." : "Request This Plan"}
-                      </button>
+                          <h3 className="mt-4 text-2xl font-bold text-slate-900">Talk With TYFYS</h3>
+                          <p className="mt-3 text-sm leading-6 text-slate-700">
+                            Use this when you want the TYFYS team to review your file, explain what evidence matters most, and recommend the next support step.
+                          </p>
+                          <ul className="mt-6 space-y-3 text-sm font-semibold text-slate-700">
+                            <li className="flex items-center gap-3">
+                              <Icons.CheckCircle className="w-4 h-4 text-blue-600" /> File review based on your current records and intake answers
+                            </li>
+                            <li className="flex items-center gap-3">
+                              <Icons.CheckCircle className="w-4 h-4 text-blue-600" /> Support path discussed directly with the TYFYS team
+                            </li>
+                          </ul>
+                          <button
+                            onClick={() => setShowSpecialistModal(true)}
+                            className="mt-6 w-full rounded-xl bg-blue-600 py-4 font-bold text-white transition-colors hover:bg-blue-700"
+                          >
+                            Request TYFYS Review
+                          </button>
+                        </div>
+                      </div>
                     </div>
-
-                    {/* HIGHLY STYLED MULTI-CLAIM PACKAGE CARD */}
-                    <div className="border border-blue-900 bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 rounded-2xl p-8 shadow-2xl text-white relative overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ring-1 ring-blue-500/30">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
-                      <div className="absolute -right-12 top-6 bg-yellow-500 text-blue-900 text-xs font-bold px-12 py-1 rotate-45 shadow-lg z-10">
-                        MAX VALUE
-                      </div>
-
-                      <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Multi-Claim Package</h3>
-                      <div className="flex items-baseline gap-3 mb-2">
-                        <p className="text-4xl font-extrabold text-white tracking-tight">
-                          ${isMember ? "4,125" : discountUnlocked ? "4,950" : "5,500"}
-                        </p>
-                        {(discountUnlocked || isMember) && <span className="text-lg text-blue-300 line-through font-medium opacity-70">$5,500</span>}
-                      </div>
-                      <p className="text-sm text-blue-200 font-bold mb-8 uppercase tracking-wide opacity-90">$500 Deposit + Monthly Plan</p>
-
-                      <ul className="space-y-4 mb-8 text-blue-50 font-medium">
-                        <li className="flex items-center gap-3">
-                          <div className="bg-blue-800/50 p-1.5 rounded-full">
-                            <Icons.Star className="w-4 h-4 text-yellow-400" />
+                  ) : (
+                    <>
+                      <div className="mb-10 border-2 border-blue-500 bg-gradient-to-r from-slate-900 to-blue-900 rounded-2xl p-8 text-white relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-bl-xl tracking-wider">
+                          RECOMMENDED
+                        </div>
+                        <div className="flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+                          <div>
+                            <h3 className="text-3xl font-bold mb-4">Premium Membership</h3>
+                            <p className="text-blue-200 mb-6 text-lg">Hands-on support, faster navigation, and ongoing guidance.</p>
+                            <ul className="space-y-3 text-blue-50 font-medium">
+                              <li className="flex items-center gap-3">
+                                <Icons.Clock className="w-5 h-5 text-green-400" /> Save 7-10 months of waiting (Avg)
+                              </li>
+                              <li className="flex items-center gap-3">
+                                <Icons.CheckCircle className="w-5 h-5 text-green-400" /> <strong>Unlimited</strong> Claim Guide access
+                              </li>
+                              <li className="flex items-center gap-3">
+                                <Icons.CheckCircle className="w-5 h-5 text-green-400" /> <strong>1 Free 30-min Consult</strong> / Month
+                              </li>
+                              <li className="flex items-center gap-3">
+                                <Icons.CheckCircle className="w-5 h-5 text-green-400" /> <strong>25% OFF</strong> Professional Services
+                              </li>
+                            </ul>
                           </div>
-                          <span className="text-white">
-                            Includes Up to <strong>7 Claims</strong>
+                          <div className="text-center md:text-right bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20">
+                            <p className="text-5xl font-extrabold mb-1">
+                              $250<span className="text-xl font-normal text-blue-200">/mo</span>
+                            </p>
+                            <button
+                              onClick={() => {
+                                startSecureCheckout({
+                                  planName: "Premium Membership",
+                                  planCode: "250_monthly",
+                                  unlockPremium: true
+                                });
+                              }}
+                              disabled={isCheckoutLoading}
+                              className="w-full bg-white text-blue-900 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
+                            >
+                              {isCheckoutLoading ? "Redirecting..." : "Join Premium"}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="border border-slate-700 bg-gradient-to-br from-slate-800 to-gray-900 rounded-2xl p-8 shadow-xl text-white relative overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
+                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-slate-400 to-slate-600"></div>
+                          <span className="absolute top-4 right-4 bg-slate-700/50 backdrop-blur-sm border border-slate-600 text-slate-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            ESSENTIAL
                           </span>
-                        </li>
-                        <li className="flex items-center gap-3">
-                          <div className="bg-blue-800/50 p-1.5 rounded-full">
-                            <Icons.CheckCircle className="w-4 h-4 text-blue-300" />
+                          <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Standard Package</h3>
+                          <div className="flex items-baseline gap-3 mb-2">
+                            <p className="text-4xl font-extrabold text-white tracking-tight">
+                              ${isMember ? "2,625" : discountUnlocked ? "3,150" : "3,500"}
+                            </p>
+                            {(discountUnlocked || isMember) && <span className="text-lg text-slate-400 line-through font-medium opacity-70">$3,500</span>}
                           </div>
-                          <span>Full Body Medical Review</span>
-                        </li>
-                        <li className="flex items-center gap-3">
-                          <div className="bg-blue-800/50 p-1.5 rounded-full">
-                            <Icons.CheckCircle className="w-4 h-4 text-blue-300" />
+                          <p className="text-sm text-slate-300 font-bold mb-8 uppercase tracking-wide opacity-90">$500 Deposit + Monthly Plan</p>
+
+                          <ul className="space-y-4 mb-8 text-slate-200 font-medium">
+                            <li className="flex items-center gap-3">
+                              <div className="bg-slate-700/50 p-1.5 rounded-full">
+                                <Icons.CheckCircle className="w-4 h-4 text-slate-300" />
+                              </div>
+                              <span>
+                                Includes Up to <strong>3 Claims</strong>
+                              </span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                              <div className="bg-slate-700/50 p-1.5 rounded-full">
+                                <Icons.CheckCircle className="w-4 h-4 text-slate-300" />
+                              </div>
+                              <span>Private Doctor Nexus Letter</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                              <div className="bg-slate-700/50 p-1.5 rounded-full">
+                                <Icons.CheckCircle className="w-4 h-4 text-slate-300" />
+                              </div>
+                              <span>DBQ Completion</span>
+                            </li>
+                          </ul>
+                          <button
+                            onClick={() => {
+                              startSecureCheckout({
+                                planName: "Standard Package"
+                              });
+                            }}
+                            disabled={isCheckoutLoading}
+                            className="w-full py-4 bg-white text-slate-900 rounded-xl font-bold hover:bg-slate-200 transition-all shadow-lg"
+                          >
+                            {isCheckoutLoading ? "Redirecting..." : "Request This Plan"}
+                          </button>
+                        </div>
+
+                        <div className="border border-blue-900 bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 rounded-2xl p-8 shadow-2xl text-white relative overflow-hidden transform hover:-translate-y-1 transition-all duration-300 ring-1 ring-blue-500/30">
+                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
+                          <div className="absolute -right-12 top-6 bg-yellow-500 text-blue-900 text-xs font-bold px-12 py-1 rotate-45 shadow-lg z-10">
+                            MAX VALUE
                           </div>
-                          <span>Multiple Nexus Letters</span>
-                        </li>
-                      </ul>
-                      <button
-                        onClick={() => {
-                          startSecureCheckout({
-                            planName: "Multi-Claim Package"
-                          });
-                        }}
-                        disabled={isCheckoutLoading}
-                        className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-900/50"
-                      >
-                        {isCheckoutLoading ? "Redirecting..." : "Request This Plan"}
-                      </button>
-                    </div>
-                  </div>
+
+                          <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Multi-Claim Package</h3>
+                          <div className="flex items-baseline gap-3 mb-2">
+                            <p className="text-4xl font-extrabold text-white tracking-tight">
+                              ${isMember ? "4,125" : discountUnlocked ? "4,950" : "5,500"}
+                            </p>
+                            {(discountUnlocked || isMember) && <span className="text-lg text-blue-300 line-through font-medium opacity-70">$5,500</span>}
+                          </div>
+                          <p className="text-sm text-blue-200 font-bold mb-8 uppercase tracking-wide opacity-90">$500 Deposit + Monthly Plan</p>
+
+                          <ul className="space-y-4 mb-8 text-blue-50 font-medium">
+                            <li className="flex items-center gap-3">
+                              <div className="bg-blue-800/50 p-1.5 rounded-full">
+                                <Icons.Star className="w-4 h-4 text-yellow-400" />
+                              </div>
+                              <span className="text-white">
+                                Includes Up to <strong>7 Claims</strong>
+                              </span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                              <div className="bg-blue-800/50 p-1.5 rounded-full">
+                                <Icons.CheckCircle className="w-4 h-4 text-blue-300" />
+                              </div>
+                              <span>Full Body Medical Review</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                              <div className="bg-blue-800/50 p-1.5 rounded-full">
+                                <Icons.CheckCircle className="w-4 h-4 text-blue-300" />
+                              </div>
+                              <span>Multiple Nexus Letters</span>
+                            </li>
+                          </ul>
+                          <button
+                            onClick={() => {
+                              startSecureCheckout({
+                                planName: "Multi-Claim Package"
+                              });
+                            }}
+                            disabled={isCheckoutLoading}
+                            className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-900/50"
+                          >
+                            {isCheckoutLoading ? "Redirecting..." : "Request This Plan"}
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             )}
@@ -8739,7 +11060,9 @@ function TYFYSPlatform() {
                     <div className="border-b border-slate-200 p-6">
                       <div className="flex items-center justify-between gap-4">
                         <div>
-                          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">Guided intake</p>
+                          <p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+                            {nativeAppRuntime ? "Records intake" : "Guided intake"}
+                          </p>
                           <h3 className="mt-2 text-2xl font-black text-slate-900">Records intake assistant</h3>
                           <p className="mt-2 text-sm leading-6 text-slate-500">
                             Stay here first so you can hand over the key records before moving into calculators and drafting tools.
@@ -9034,7 +11357,7 @@ function TYFYSPlatform() {
                     <h3 className="font-bold">Claim Guide</h3>
                   </div>
                   <div className="text-xs bg-white/10 px-2 py-1 rounded">
-                    {isMember ? "Unlimited guidance" : `${3 - dailyQuestionCount} guided questions left`}
+                    {nativeAppRuntime ? "Available in app" : isMember ? "Unlimited guidance" : `${3 - dailyQuestionCount} guided questions left`}
                   </div>
                 </div>
                 <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
@@ -9049,7 +11372,8 @@ function TYFYSPlatform() {
                   ))}
                 </div>
                 <form onSubmit={handleAiBotSend} className="p-4 bg-white border-t border-slate-200 relative">
-                  {!isMember &&
+                  {!nativeAppRuntime &&
+                    !isMember &&
                     dailyQuestionCount >= 3 && (
                       <div className="absolute inset-0 bg-white/90 z-10 flex flex-col items-center justify-center text-center p-4">
                         <Icons.Lock className="w-6 h-6 text-slate-400 mb-2" />
