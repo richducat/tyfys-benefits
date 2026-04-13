@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta
+    name="description"
+    content="The TYFYS app is getting its next release ready. Book a discovery call or return to the TYFYS homepage while we finish the launch."
+  >
+  <link rel="canonical" href="https://tyfys.net/app-coming-soon.html">
+  <title>TYFYS App Coming Soon</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --navy-950: #081120;
+      --navy-900: #0f172a;
+      --navy-700: #1d4ed8;
+      --sky-100: #e0f2fe;
+      --gold-400: #fbbf24;
+      --gold-500: #f59e0b;
+      --slate-100: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-600: #475569;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at top right, rgba(251, 191, 36, 0.22), transparent 28rem),
+        radial-gradient(circle at left center, rgba(59, 130, 246, 0.2), transparent 32rem),
+        linear-gradient(160deg, var(--navy-950), var(--navy-900));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+
+    .shell {
+      width: min(960px, 100%);
+      border: 1px solid rgba(226, 232, 240, 0.12);
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.82);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 80px rgba(2, 6, 23, 0.45);
+    }
+
+    .hero {
+      display: grid;
+      gap: 32px;
+      padding: 36px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-400);
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.18);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--gold-400);
+      box-shadow: 0 0 14px rgba(251, 191, 36, 0.65);
+    }
+
+    h1 {
+      margin: 18px 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.25rem, 5vw, 4.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    .lede {
+      max-width: 40rem;
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: rgba(226, 232, 240, 0.88);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.08);
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.96rem;
+      color: var(--white);
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(226, 232, 240, 0.78);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      color: var(--navy-950);
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      box-shadow: 0 18px 30px rgba(245, 158, 11, 0.28);
+    }
+
+    .button-secondary {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(226, 232, 240, 0.18);
+    }
+
+    .footer-note {
+      padding: 0 36px 36px;
+      color: rgba(203, 213, 225, 0.8);
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+
+    .footer-note a {
+      color: #93c5fd;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px;
+      }
+
+      .hero,
+      .footer-note {
+        padding: 24px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">TYFYS App Update</span>
+        <h1>The TYFYS app is coming soon.</h1>
+        <p class="lede">
+          We are finishing the next release of the TYFYS veteran workspace now. While we wrap that up,
+          you can still talk with our team, book a discovery call, and submit your information through the main site.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <strong>Need help right away?</strong>
+          <p>Book a discovery call and our team will walk you through the next best move for your claim.</p>
+        </article>
+        <article class="card">
+          <strong>Already submitted your info?</strong>
+          <p>Use the assessment thank-you page for prep steps while our intake team reviews your request.</p>
+        </article>
+        <article class="card">
+          <strong>Want the latest updates?</strong>
+          <p>Return to the homepage and complete the lead form. We will follow up as the next app release goes live.</p>
+        </article>
+      </div>
+
+      <div class="actions">
+        <a class="button button-primary" href="https://tyfys.net/contact.html">Book Discovery Call</a>
+        <a class="button button-secondary" href="https://tyfys.net/">Return to Homepage</a>
+        <a class="button button-secondary" href="https://tyfys.net/assessment-thank-you.html">See Thank-You Page</a>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      Questions right now? Call <a href="tel:3212482805">321-248-2805</a> or email
+      <a href="mailto:support@tyfys.net">support@tyfys.net</a>.
+    </p>
+  </main>
+</body>
+</html>

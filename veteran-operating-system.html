@@ -6,11 +6,21 @@
     <title>TYFYS Redirect</title>
     <script>
       (function () {
+        const appComingSoonUrl = "https://tyfys.net/app-coming-soon.html";
         const hostname = String(window.location.hostname || "").toLowerCase();
         const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
-        const target = new URL(isLocalRuntime ? "/app-shell.html" : "https://app.tyfys.net/", window.location.href);
+        const isBackendHost =
+          hostname === "app.tyfys.net" ||
+          hostname === "www.app.tyfys.net" ||
+          hostname === "api.tyfys.net" ||
+          hostname === "www.api.tyfys.net";
+        const target = new URL(
+          isLocalRuntime ? "/app-shell.html" : isBackendHost ? appComingSoonUrl : "/app-coming-soon.html",
+          window.location.href
+        );
         const current = new URL(window.location.href);
         current.searchParams.forEach((value, key) => target.searchParams.set(key, value));
+        if (!target.searchParams.has("source")) target.searchParams.set("source", "veteran-operating-system");
         window.location.replace(target.toString());
       })();
     </script>
@@ -37,9 +47,9 @@
 </head>
 <body>
     <main>
-        <h1>Opening TYFYS</h1>
-        <p>You are being redirected to the standalone TYFYS app.</p>
-        <p>If nothing happens, <a href="https://app.tyfys.net/">continue to app.tyfys.net</a>.</p>
+        <h1>Opening TYFYS App Update</h1>
+        <p>You are being redirected to the latest TYFYS app status page.</p>
+        <p>If nothing happens, <a href="https://tyfys.net/app-coming-soon.html">continue to the TYFYS app update page</a>.</p>
     </main>
 </body>
 </html>

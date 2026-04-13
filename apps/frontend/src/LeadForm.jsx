@@ -436,7 +436,7 @@ export function SuccessView({ formData }) {
                     <p className="font-bold text-slate-900 mb-2 flex items-center gap-1.5"><ClipboardList size={14} className="text-green-600"/> Prep for your Call:</p>
                     <ul className="space-y-2 ml-1">{checklistItems.map((item, index) => (<li key={index} className="flex items-start gap-1.5"><span className="text-blue-600 font-bold mt-0.5">•</span><span>Locate your <strong>{item}</strong>.</span></li>))}</ul>
                 </div>
-                <a href="https://tyfys.net/assessment-thank-you.html" className="block w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-all shadow-lg text-sm">Next Steps: Document Prep Page</a>
+                <a href="https://tyfys.net/assessment-thank-you.html?source=homepage-lead" className="block w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-all shadow-lg text-sm">Next Steps: Document Prep Page</a>
             </div>
         </div>
     );
