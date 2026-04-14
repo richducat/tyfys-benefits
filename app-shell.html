@@ -16,9 +16,13 @@
       if (isLocalRuntime) return;
 
       const current = new URL(window.location.href);
+      const requestedTool = String(current.searchParams.get("tool") || "").trim().toLowerCase();
+      const isPublicCalculatorRequest =
+        current.pathname === "/app-shell.html" &&
+        requestedTool === "calculator";
       const shouldRedirect =
         isStandaloneAppHost ||
-        current.pathname === "/app-shell.html";
+        (current.pathname === "/app-shell.html" && !isPublicCalculatorRequest);
 
       if (shouldRedirect) {
         const target = new URL(
