@@ -12,9 +12,9 @@
       '<strong class="font-semibold">What we do:</strong> We coordinate private medical evidence (DBQs and independent medical opinions) to support veterans\' disability claims. We do not provide legal advice, representation, or submit VA claims.' +
       '</p>' +
       '<div class="mt-3 flex flex-wrap gap-3 text-sm">' +
-      '<a href="services.html" class="text-navy-800 underline hover:text-navy-700">Services</a>' +
-      '<a href="faqs.html" class="text-navy-800 underline hover:text-navy-700">FAQs</a>' +
-      '<a href="how-it-works.html" class="text-navy-800 underline hover:text-navy-700">How It Works</a>' +
+      '<a href="/services" class="text-navy-800 underline hover:text-navy-700">Services</a>' +
+      '<a href="/faqs" class="text-navy-800 underline hover:text-navy-700">FAQs</a>' +
+      '<a href="/how-it-works" class="text-navy-800 underline hover:text-navy-700">How It Works</a>' +
       '</div>' +
       '</div>';
 

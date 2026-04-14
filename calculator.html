@@ -1,55 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TYFYS VA Rating Calculator</title>
-  <meta
-    name="description"
-    content="Use TYFYS's advanced VA rating calculator to model combined ratings, exact VA math rounding, compensation impact, and your path to 100%."
-  >
-  <meta http-equiv="refresh" content="0; url=/app-shell.html?tool=calculator">
-  <link rel="canonical" href="https://tyfys.net/calculator.html">
-  <style>
-    html,
-    body {
-      margin: 0;
-      min-height: 100%;
-      background: #020617;
-      color: #f8fafc;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    body {
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      text-align: center;
-    }
-
-    main {
-      max-width: 40rem;
-    }
-
-    a {
-      color: #facc15;
-      font-weight: 700;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEO START -->
+  <title>VA Rating Calculator | Estimate VA Math and Compensation | TYFYS</title>
+  <meta name="description" content="Use the TYFYS VA rating calculator landing page to estimate combined ratings, compensation changes, and the path from your current rating toward 100%." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://tyfys.net/calculator" />
+  <meta property="og:title" content="VA Rating Calculator | Estimate VA Math and Compensation | TYFYS" />
+  <meta property="og:description" content="Use the TYFYS VA rating calculator landing page to estimate combined ratings, compensation changes, and the path from your current rating toward 100%." />
+  <meta property="og:url" content="https://tyfys.net/calculator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tyfys.net/logo.png" />
+  <meta property="og:site_name" content="TYFYS" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VA Rating Calculator | Estimate VA Math and Compensation | TYFYS" />
+  <meta name="twitter:description" content="Use the TYFYS VA rating calculator landing page to estimate combined ratings, compensation changes, and the path from your current rating toward 100%." />
+  <meta name="twitter:image" content="https://tyfys.net/logo.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "TYFYS",
+    "url": "https://tyfys.net",
+    "image": "https://tyfys.net/logo.png",
+    "telephone": "321-248-2805",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "11845 SW Bennington Cir",
+      "addressLocality": "Port Saint Lucie",
+      "addressRegion": "FL",
+      "postalCode": "34987",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "United States"
+    },
+    "description": "Use the TYFYS VA rating calculator landing page to estimate combined ratings, compensation changes, and the path from your current rating toward 100%."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://tyfys.net/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "VA Rating Calculator",
+        "item": "https://tyfys.net/calculator"
+      }
+    ]
+  }
+  </script>
+<!-- SEO END -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1PEBFCV9Q"></script>
   <script>
-    (function () {
-      const hostname = String(window.location.hostname || "").toLowerCase();
-      const isLocalRuntime = hostname === "localhost" || hostname === "127.0.0.1";
-      const target = "/app-shell.html?tool=calculator";
-      window.location.replace(target);
-    })();
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-L1PEBFCV9Q");
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 900: "#0f172a", 800: "#1e3a8a", 700: "#2d4a9e" },
+            gold: { 500: "#f59e0b", 600: "#d97706" }
+          }
+        }
+      }
+    };
   </script>
 </head>
-<body>
+<body class="bg-slate-100 text-slate-900 antialiased">
+  <header class="bg-navy-900 text-white border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-3">
+        <img src="logo.png" alt="TYFYS logo" class="h-10 w-10 rounded" />
+        <span class="font-semibold text-lg">TYFYS</span>
+      </a>
+      <nav class="flex items-center gap-4 text-sm font-semibold">
+        <a href="/private-medical-evidence" class="hover:underline">Private Medical Evidence</a>
+        <a href="/comparison" class="hover:underline">Compare Claim Paths</a>
+        <a href="/blog" class="hover:underline">Blog</a>
+        <a href="/contact" class="px-4 py-2 rounded-lg bg-gold-500 text-slate-900 hover:bg-amber-400 transition">Book Call</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <h1>Opening the TYFYS VA Rating Calculator</h1>
-    <p>You are being redirected to the live calculator on the TYFYS website.</p>
-    <p>If nothing happens, <a href="/app-shell.html?tool=calculator">continue here</a>.</p>
+    <section class="bg-white border-b border-slate-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] items-center">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">National VA Claim Planning Tool</p>
+          <h1 class="mt-4 text-4xl sm:text-5xl font-bold text-navy-900 leading-tight">VA Rating Calculator</h1>
+          <p class="mt-6 text-lg text-slate-700 max-w-2xl">
+            Estimate combined ratings, monthly compensation impact, and the distance between your current rating and the next milestone. Use the calculator first, then plan the evidence you still need.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="/app-shell.html?tool=calculator" class="inline-flex items-center rounded-lg bg-navy-900 text-white px-5 py-3 font-semibold hover:bg-navy-800 transition">
+              Open the Live Calculator
+            </a>
+            <a href="/private-medical-evidence" class="inline-flex items-center rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-900 hover:border-slate-400 transition">
+              Plan the Evidence Strategy
+            </a>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">What the calculator helps you see</p>
+          <ul class="mt-5 space-y-3 text-slate-700">
+            <li class="rounded-lg border border-slate-200 bg-white px-4 py-3">Exact VA math-style combined rating estimates</li>
+            <li class="rounded-lg border border-slate-200 bg-white px-4 py-3">Compensation differences between your current and target rating</li>
+            <li class="rounded-lg border border-slate-200 bg-white px-4 py-3">Which evidence gaps are keeping you from the next increase</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid gap-6 md:grid-cols-3">
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-xl font-bold text-navy-900">Step 1: Model your current rating</h2>
+          <p class="mt-3 text-slate-700">See how the VA combines multiple conditions and rounds compensation outcomes.</p>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-xl font-bold text-navy-900">Step 2: Find the missing evidence</h2>
+          <p class="mt-3 text-slate-700">Compare your current documentation with the evidence typically needed for the next rating milestone.</p>
+        </article>
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-xl font-bold text-navy-900">Step 3: Turn the math into a plan</h2>
+          <p class="mt-3 text-slate-700">Use the result to decide whether you need records, a DBQ, a nexus letter, or a different claim path.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="bg-white border-y border-slate-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-6 lg:grid-cols-[1fr_1fr]">
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Good companion reads</p>
+          <ul class="mt-5 space-y-3 text-slate-700">
+            <li><a href="/va-math-explained" class="underline decoration-slate-300 underline-offset-4 hover:text-navy-800 transition">VA Math Explained</a></li>
+            <li><a href="/private-medical-evidence" class="underline decoration-slate-300 underline-offset-4 hover:text-navy-800 transition">Private Medical Evidence for VA Claims</a></li>
+            <li><a href="/what-is-a-dbq" class="underline decoration-slate-300 underline-offset-4 hover:text-navy-800 transition">What Is a DBQ?</a></li>
+            <li><a href="/comparison" class="underline decoration-slate-300 underline-offset-4 hover:text-navy-800 transition">Compare VSOs, lawyers, and private medical evidence</a></li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Official references</p>
+          <ul class="mt-5 space-y-3 text-slate-700">
+            <li><a href="https://www.va.gov/disability/" class="underline decoration-slate-300 underline-offset-4 hover:text-navy-800 transition" rel="nofollow">VA disability compensation overview</a></li>
+            <li><a href="https://www.va.gov/disability/how-to-file-claim/" class="underline decoration-slate-300 underline-offset-4 hover:text-navy-800 transition" rel="nofollow">How to file a VA disability claim</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+        <h2 class="text-2xl font-bold text-navy-900">Calculator FAQ</h2>
+        <div class="mt-6 space-y-4">
+          <details class="rounded-xl border border-slate-200 bg-slate-50 p-5" open>
+            <summary class="cursor-pointer font-semibold text-slate-900">Does the calculator replace official VA decisions?</summary>
+            <p class="mt-3 text-slate-700">No. The calculator is a planning tool. Only the VA assigns final disability ratings and effective dates.</p>
+          </details>
+          <details class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <summary class="cursor-pointer font-semibold text-slate-900">Can this show why I am stuck below 100%?</summary>
+            <p class="mt-3 text-slate-700">Yes. It helps show how close you are to the next rating threshold so you can focus on the evidence gaps with the biggest impact.</p>
+          </details>
+          <details class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <summary class="cursor-pointer font-semibold text-slate-900">What should I do after I use the calculator?</summary>
+            <p class="mt-3 text-slate-700">Review your results, compare them to your current medical documentation, and then decide whether you need records, a DBQ, a nexus letter, or a new claim strategy.</p>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-sm">
+      <p>TYFYS coordinates private medical evidence, including DBQs and independent medical opinions, to support veterans disability claims. TYFYS does not provide legal advice, representation, or file VA claims.</p>
+    </div>
+  </footer>
+
+  <script src="apps/seo-sitewide.js"></script>
 </body>
 </html>
