@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- SEO START -->
+  <title>TYFYS Member Login Redirect</title>
+  <meta name="description" content="This refreshed sign-in link bypasses older cached login screens that can trigger a blank Google popup." />
+  <meta name="robots" content="noindex,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://tyfys.net/member-login" />
+  <meta property="og:title" content="TYFYS Member Login Redirect" />
+  <meta property="og:description" content="This refreshed sign-in link bypasses older cached login screens that can trigger a blank Google popup." />
+  <meta property="og:url" content="https://tyfys.net/member-login" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tyfys.net/logo.png" />
+  <meta property="og:site_name" content="TYFYS" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TYFYS Member Login Redirect" />
+  <meta name="twitter:description" content="This refreshed sign-in link bypasses older cached login screens that can trigger a blank Google popup." />
+  <meta name="twitter:image" content="https://tyfys.net/logo.png" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18096513216"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18096513216');
+  </script>
+<!-- SEO END -->
+<script>
+    (function () {
+      const current = new URL(window.location.href);
+      const target = new URL("https://app.tyfys.net/");
+      current.searchParams.forEach((value, key) => target.searchParams.set(key, value));
+      target.searchParams.set("fresh_login", "20260415");
+      if (!target.searchParams.has("source")) target.searchParams.set("source", "member-login-page");
+      target.hash = current.hash;
+      window.location.replace(target.toString());
+    })();
+  </script>
+  <style>
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    main {
+      max-width: 36rem;
+    }
+
+    a {
+      color: #93c5fd;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Opening TYFYS Member Login</h1>
+    <p>This refreshed sign-in link bypasses older cached login screens that can trigger a blank Google popup.</p>
+    <p>If nothing happens, <a href="https://app.tyfys.net/?fresh_login=20260415&source=member-login-page">open the refreshed TYFYS member login</a>.</p>
+  </main>
+</body>
+</html>

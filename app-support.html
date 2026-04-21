@@ -18,6 +18,14 @@
   <meta name="twitter:title" content="TYFYS App Support" />
   <meta name="twitter:description" content="Official support page for the TYFYS mobile app, including account help, privacy links, and account deletion instructions." />
   <meta name="twitter:image" content="https://tyfys.net/logo.png" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18096513216"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18096513216');
+  </script>
 <!-- SEO END -->
 <link rel="icon" type="image/png" href="logo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -77,6 +85,18 @@
         <p class="text-slate-700 leading-7">
           Start from the TYFYS sign-in screen if you need to reset your password. If you cannot access the email address on file or you believe your account was created under the wrong email, contact TYFYS support and include your full name, the best callback number, and the email address tied to your account if known.
         </p>
+        <div class="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+          <p class="text-sm font-semibold text-amber-900">Blank Google popup?</p>
+          <p class="mt-2 text-sm leading-7 text-amber-900">
+            Use the refreshed member login below. It opens the current TYFYS sign-in screen and bypasses older cached login pages that can still try to launch Google sign-in.
+          </p>
+          <a
+            href="/member-login.html"
+            class="mt-4 inline-flex items-center rounded-lg bg-navy-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-navy-800"
+          >
+            Open Refreshed Member Login
+          </a>
+        </div>
       </section>
 
       <section class="mt-10 space-y-4">
