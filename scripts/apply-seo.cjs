@@ -375,6 +375,15 @@ function buildSeoBlock(filename, entry, fallback) {
 
   return [
     "<!-- SEO START -->",
+    "  <!-- Google tag (gtag.js) -->",
+    '  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18096513216"></script>',
+    "  <script>",
+    "    window.dataLayer = window.dataLayer || [];",
+    "    function gtag(){dataLayer.push(arguments);}",
+    "    gtag('js', new Date());",
+    "",
+    "    gtag('config', 'AW-18096513216');",
+    "  </script>",
     `  <title>${escapeHtml(title)}</title>`,
     `  <meta name="description" content="${escapeHtml(clampDescription(description))}" />`,
     `  <meta name="robots" content="${robots}" />`,
@@ -390,15 +399,6 @@ function buildSeoBlock(filename, entry, fallback) {
     `  <meta name="twitter:description" content="${escapeHtml(clampDescription(description))}" />`,
     `  <meta name="twitter:image" content="${absoluteUrl(DEFAULT_OG_IMAGE)}" />`,
     schemaBlock,
-    "  <!-- Google tag (gtag.js) -->",
-    '  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18096513216"></script>',
-    "  <script>",
-    "    window.dataLayer = window.dataLayer || [];",
-    "    function gtag(){dataLayer.push(arguments);}",
-    "    gtag('js', new Date());",
-    "",
-    "    gtag('config', 'AW-18096513216');",
-    "  </script>",
     "<!-- SEO END -->",
   ]
     .filter(Boolean)
