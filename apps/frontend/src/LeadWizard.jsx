@@ -138,6 +138,7 @@ export function LeadWizard() {
     const [currentStep, setCurrentStep] = useState(0);
     const [formData, setFormData] = useState({ conditions: [], documents: [] });
     const [gclid, setGclid] = useState("");
+    const [utms, setUtms] = useState({ source: "", medium: "", campaign: "", term: "", content: "" });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [submitError, setSubmitError] = useState('');
@@ -145,6 +146,7 @@ export function LeadWizard() {
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
+        
         const gclidParam = params.get('gclid') || params.get('GCLID');
         const storedGclid = localStorage.getItem('gclid');
         const finalGclid = gclidParam || storedGclid || "";
@@ -153,6 +155,27 @@ export function LeadWizard() {
             setGclid(finalGclid);
             if (gclidParam) localStorage.setItem('gclid', gclidParam);
         }
+
+        const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+        const currentUtms = {};
+        
+        utmKeys.forEach(key => {
+            const val = params.get(key);
+            if (val) {
+                currentUtms[key] = val;
+                localStorage.setItem(key, val);
+            } else {
+                currentUtms[key] = localStorage.getItem(key) || "";
+            }
+        });
+
+        setUtms({
+            source: currentUtms.utm_source,
+            medium: currentUtms.utm_medium,
+            campaign: currentUtms.utm_campaign,
+            term: currentUtms.utm_term,
+            content: currentUtms.utm_content
+        });
     }, []);
 
     useEffect(() => {
@@ -283,6 +306,11 @@ export function LeadWizard() {
             "Best time to Contact": contactData.bestTime || "",
             "Best Form of Contact": contactMethods.join(', ') || "",
             "GCLID": gclid || "",
+            "UTM Source": utms.source || "",
+            "UTM Medium": utms.medium || "",
+            "UTM Campaign": utms.campaign || "",
+            "UTM Term": utms.term || "",
+            "UTM Content": utms.content || "",
             "Are You Currently A Veteran": formData.status === 'veteran' ? 'Yes' : 'No',
             "Rating Percentage": `${formData.rating || 0}%`,
             "Conditions looking to claim for": formData.conditions?.join(', ') || "",
@@ -319,6 +347,30 @@ export function LeadWizard() {
                 localStorage.setItem(LEAD_PREFILL_KEY, JSON.stringify(leadPrefill));
             } catch (storageError) {
                 console.error('Unable to save lead prefill payload', storageError);
+            }
+
+            try {
+                // Send Enhanced Conversion Data to Google Ads if gtag exists
+                if (typeof window.gtag === 'function') {
+                    window.gtag('set', 'user_data', {
+                        "email": contactData.email || "",
+                        "phone_number": contactData.phone || "",
+                        "address": {
+                            "first_name": formattedFirstName,
+                            "last_name": formattedLastName,
+                            "postal_code": contactData.zipCode || ""
+                        }
+                    });
+                    
+                    window.gtag('event', 'generate_lead', {
+                        event_category: 'Lead',
+                        event_label: 'Homepage Wizard Form Submission',
+                        value: 1.0,
+                        currency: 'USD'
+                    });
+                }
+            } catch (gtagError) {
+                console.error("Error sending data to Google Ads:", gtagError);
             }
 
             setIsSuccess(true);
