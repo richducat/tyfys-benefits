@@ -653,7 +653,7 @@ struct DossierView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Share with Digital Sync customer portal")
                         .font(.headline)
-                    Text("Uploads intake, selected conditions, record list, and any records you choose to send to the staff portal.")
+                    Text("While on, your intake, selected conditions, record list, and imported documents sync to the staff portal automatically whenever they change. Turn off anytime to stop sharing.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -709,7 +709,7 @@ struct DossierView: View {
         } header: {
             Text("Customer portal sync")
         } footer: {
-            Text("VA.gov login data is never uploaded. Upload Imported Records sends every dossier record that has not been uploaded before; each record is sent once.")
+            Text("VA.gov login data is never uploaded. With sharing on, imported records upload automatically; each record is sent only once. Use these buttons to sync or upload on demand.")
         }
     }
 

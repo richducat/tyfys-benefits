@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var vaultStore: VaultStore
+    @Environment(\.scenePhase) private var scenePhase
     @StateObject private var appState = TYFYSAppState()
     @State private var selectedTab = RootTab.initial
     @AppStorage("digitalSync.vaDocFinder.onboardingCompleted") private var onboardingCompleted = false
@@ -58,6 +60,26 @@ struct ContentView: View {
             }
         }
         .environmentObject(appState)
+        // Keep the customer portal in sync automatically (when sharing is on):
+        // on every workspace change, whenever documents change (also uploading
+        // new ones), and each time the app returns to the foreground.
+        .onChange(of: appState.profile) { _, _ in
+            appState.autoSync(vaultItems: vaultStore.items)
+        }
+        .onChange(of: appState.supportConversation) { _, _ in
+            appState.autoSync(vaultItems: vaultStore.items)
+        }
+        .onChange(of: appState.ratingLines) { _, _ in
+            appState.autoSync(vaultItems: vaultStore.items)
+        }
+        .onChange(of: vaultStore.items) { _, newItems in
+            appState.autoSync(vaultItems: newItems)
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                appState.autoSync(vaultItems: vaultStore.items)
+            }
+        }
     }
 }
 

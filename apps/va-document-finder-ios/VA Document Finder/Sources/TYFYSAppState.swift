@@ -229,6 +229,11 @@ final class TYFYSAppState: ObservableObject {
 
     private let storageKey = "digitalSync.vaDocFinder.workspace.snapshot"
 
+    // Auto-sync bookkeeping. Kept in memory: a fresh launch triggers one
+    // foreground sync, which is harmless.
+    private var autoSyncTask: Task<Void, Never>?
+    private var lastSyncedFingerprint: String?
+
     init() {
         let storedData = UserDefaults.standard.data(forKey: storageKey)
         if let storedData,
@@ -417,6 +422,104 @@ final class TYFYSAppState: ObservableObject {
             customerSyncError = "Customer portal sync failed. \(error.localizedDescription)"
         }
         customerSyncIsRunning = false
+    }
+
+    /// A stable fingerprint of everything that gets synced. When it hasn't
+    /// changed since the last successful sync, an auto-sync is skipped
+    /// entirely — that's what keeps idle usage from touching the server.
+    private func syncFingerprint(vaultItems: [VaultItem]) -> String {
+        func tri(_ value: Bool?) -> String { value.map { $0 ? "y" : "n" } ?? "-" }
+        var parts: [String] = [
+            profile.isIntakeSubmitted ? "1" : "0",
+            // The actual answer values, not a count — flipping a yes/no answer
+            // must change the fingerprint so the correction actually syncs.
+            tri(profile.isVeteran), tri(profile.hasAttorney), tri(profile.hasActiveAppeal),
+            tri(profile.eligibleDischarge), tri(profile.filedBefore), tri(profile.deniedBefore),
+            tri(profile.hasPendingClaims),
+            profile.branch,
+            profile.era,
+            String(profile.currentRating),
+            String(combinedRating),
+            profile.selectedConditions.sorted().joined(separator: "|"),
+            profile.selectedDocuments.sorted().joined(separator: "|"),
+            profile.selectedConditionDetails
+                .sorted { $0.key < $1.key }
+                .map { "\($0.key)=\($0.value.sorted().joined(separator: ","))" }
+                .joined(separator: ";"),
+            supportConversation.contactName,
+            supportConversation.contactEmail,
+            supportConversation.contactPhone,
+        ]
+        parts.append(contentsOf: vaultItems.map { "\($0.id.uuidString):\($0.title)" }.sorted())
+        return parts.joined(separator: "␟")
+    }
+
+    /// Debounced automatic sync. Safe to call on every change and on
+    /// foreground: it coalesces bursts, skips the network entirely when
+    /// consent is off or nothing changed, and never runs two syncs at once.
+    /// Any imported documents not yet uploaded are always flushed afterward
+    /// (a cheap no-op when there are none), so a coalesced change can't strand
+    /// a just-imported file.
+    func autoSync(vaultItems: [VaultItem]) {
+        guard profile.customerSyncConsent, supportConversation.hasReachableContact else { return }
+
+        autoSyncTask?.cancel()
+        autoSyncTask = Task { [weak self] in
+            // Coalesce rapid changes (e.g. typing, multi-file import) into one
+            // request a few seconds after things settle.
+            try? await Task.sleep(for: .seconds(3))
+            guard let self, !Task.isCancelled else { return }
+            // Don't race an in-flight sync; the unchanged fingerprint means the
+            // next trigger (or foreground) retries.
+            if self.customerSyncIsRunning { return }
+
+            let fingerprint = self.syncFingerprint(vaultItems: vaultItems)
+            if fingerprint != self.lastSyncedFingerprint {
+                await self.syncCustomerWorkspace(vaultItems: vaultItems)
+                if self.customerSyncError == nil {
+                    self.lastSyncedFingerprint = fingerprint
+                }
+            }
+
+            // Flush any records that still haven't reached the portal.
+            await self.autoUploadRecords(vaultItems: vaultItems)
+        }
+    }
+
+    /// Uploads any imported records not yet sent to the portal. Deduplicated
+    /// via `uploadedRecordIds`, so re-triggering never re-sends a file.
+    func autoUploadRecords(vaultItems: [VaultItem]) async {
+        guard profile.customerSyncConsent,
+              !profile.customerClientId.isEmpty,
+              !profile.customerClientToken.isEmpty else { return }
+
+        let pending = vaultItems.filter { !profile.uploadedRecordIds.contains($0.id.uuidString) }
+        guard !pending.isEmpty else { return }
+
+        for item in pending {
+            do {
+                _ = try await CustomerSyncService.uploadDocument(
+                    clientId: profile.customerClientId,
+                    clientToken: profile.customerClientToken,
+                    item: item,
+                    fileURL: vaultFileURL(for: item)
+                )
+                profile.uploadedRecordIds.append(item.id.uuidString)
+            } catch {
+                // Leave un-uploaded records for the next attempt; don't spam.
+                break
+            }
+        }
+    }
+
+    /// Resolves a vault item's on-disk URL the same way VaultStore does, so
+    /// auto-upload can read the file without a VaultStore reference.
+    private func vaultFileURL(for item: VaultItem) -> URL {
+        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Digital Sync", isDirectory: true)
+            .appendingPathComponent("VA Document Finder", isDirectory: true)
+            .appendingPathComponent("Imported Documents", isDirectory: true)
+            .appendingPathComponent(item.storedFilename)
     }
 
     var combinedRating: Int {
