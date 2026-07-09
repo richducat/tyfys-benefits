@@ -1,0 +1,12 @@
+{
+  "name": "va-document-finder-ios",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Native SwiftUI iOS app for VA Doc Finder by Digital Sync",
+  "scripts": {
+    "ios:generate": "xcodegen generate",
+    "ios:build:nosign": "xcodegen generate && xcodebuild -project 'VA Document Finder.xcodeproj' -scheme 'VA Document Finder' -configuration Debug -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO build",
+    "ios:release:dry": "node scripts/release-ios-va-document-finder.mjs --dry-run",
+    "ios:launch": "node scripts/release-ios-va-document-finder.mjs --upload"
+  }
+}
