@@ -113,12 +113,12 @@ const DEFAULT_SUBJECTS = [
     subjectNumber: "1074-A3A-201A",
     studyId: "230LE301",
     protocolVersion: "V4.0 / eSource 27 Oct 2025",
-    firstName: "Elizabeth",
-    middleInitial: "D",
-    lastName: "Merrill",
-    initials: "EDM",
+    firstName: "Pat",
+    middleInitial: "Q",
+    lastName: "Sample",
+    initials: "PQS",
     gender: "F",
-    dob: "1970-02-24",
+    dob: "1985-01-15",
     email: "participant@example.com",
     phone: "(772) 555-0120",
     site: "OpenDoor Clinical Research LLC",
@@ -181,7 +181,7 @@ const DEFAULT_SUBJECTS = [
       { id: "surgery-2", procedure: "Right knee arthroscopy", date: "2021-05-02", outcome: "Recovered with intermittent pain", status: "Historical" }
     ],
     contacts: [
-      { id: "contact-1", name: "James Merrill", relation: "Spouse", phone: "(772) 555-0144", email: "jmerrill@example.com" },
+      { id: "contact-1", name: "James Sample", relation: "Spouse", phone: "(772) 555-0144", email: "jmerrill@example.com" },
       { id: "contact-2", name: "Angela Brooks", relation: "Emergency contact", phone: "(772) 555-0188", email: "abrooks@example.com" }
     ],
     progressNotes: [
@@ -2487,7 +2487,7 @@ function App() {
                     <textarea
                       value={redactionDraft}
                       onChange={(event) => setRedactionDraft(event.target.value)}
-                      placeholder={`Elizabeth Merrill\nMerrill\nparticipant@example.com`}
+                      placeholder={`Pat Sample\nSample\nparticipant@example.com`}
                       className="w-full min-h-[150px] rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-slate-400"
                     />
                     <button

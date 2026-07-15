@@ -5,3 +5,7 @@ npm-debug.log*
 pnpm-lock.yaml
 .vercel
 output/
+
+# Ephemeral browser-automation artifacts — never commit (captured live form data once)
+.playwright-cli/
+.playwright-mcp/
